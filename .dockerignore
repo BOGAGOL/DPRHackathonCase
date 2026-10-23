@@ -1,0 +1,11 @@
+.git
+.env*
+.local
+.venv
+**/node_modules
+**/.next
+**/__pycache__
+evidence
+**/*.sql
+**/*.dump
+**/*.key

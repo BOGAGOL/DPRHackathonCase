@@ -1,0 +1,10 @@
+{
+  "backup_seconds": 0.321737700025551,
+  "restore_seconds": 0.6749765999848023,
+  "scope": "logical pg_dump + independent AES-256-GCM",
+  "encrypted_bytes": 1011450,
+  "restored_database": "dpr_restore_2d9b5ef22948",
+  "restored_records": 734,
+  "all_fields_decrypt": true,
+  "tamper_rejected": true
+}

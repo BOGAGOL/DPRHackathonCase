@@ -1,0 +1,31 @@
+{
+  "status": "TESTED",
+  "checks": {
+    "runtime_identity": true,
+    "member_read": true,
+    "member_delete_denied": true,
+    "member_insert_denied": true,
+    "audit_update_denied": true,
+    "audit_delete_denied": true,
+    "import_metadata_denied": true,
+    "no_superuser_or_ddl_roles": true,
+    "no_schema_creation": true,
+    "encrypted_field_count": true,
+    "logical_dump_no_sensitive_canaries": true,
+    "logical_dump_no_keys": true,
+    "independent_parser_equality": true,
+    "live_unauthenticated_denied": true,
+    "live_login_public": true,
+    "live_role_public": true,
+    "live_postgres_injection_literal": true,
+    "live_login_operator": true,
+    "live_role_operator": true,
+    "live_login_staff": true,
+    "live_role_staff": true,
+    "live_login_admin": true,
+    "live_role_admin": true,
+    "repository_no_current_secrets": true,
+    "git_ignores_env": true
+  },
+  "scope": "PostgreSQL lab + live FastAPI, synthetic canaries only. Physical file/WAL encryption not assessed."
+}

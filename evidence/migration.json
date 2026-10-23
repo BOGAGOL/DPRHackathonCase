@@ -1,0 +1,9 @@
+{
+  "records": 734,
+  "columns": 29,
+  "logical_equality": true,
+  "blind_index": true,
+  "source_sha256": "db06d995061caafef62c919cc1908bce8abc73d05f21bffe1ad6e22865084ff9",
+  "status": "TESTED",
+  "engine": "postgresql"
+}

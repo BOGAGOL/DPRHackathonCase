@@ -1,0 +1,5 @@
+# HTTPS example, replace domain and use a reachable ACME setup. Not enabled in local Compose.
+{$APP_DOMAIN} {
+    header Strict-Transport-Security "max-age=31536000"
+    reverse_proxy web:3000
+}
