@@ -1,0 +1,36 @@
+# Rahasia
+.env
+*.env
+!.env.example
+*.key
+*.pem
+openbao-init*.json
+
+# Data panitia dan hasil
+sql/baseline/02_data.sql
+anggota_dummy.sql
+dummy_palmerah.zip
+*.dump
+*.backup
+*.sql.gz
+*.enc
+results/*
+!results/README.md
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Node (untuk web teman)
+node_modules/
+dist/
+build/
+
+# Editor/OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
