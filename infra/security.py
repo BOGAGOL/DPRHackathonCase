@@ -20,6 +20,8 @@ def external_directory(value: str | None) -> Path:
 
 
 def secure_directory(directory: Path) -> Path:
+    # Validate each child too: an existing junction/symlink may point into Git.
+    directory = external_directory(str(directory))
     directory.mkdir(mode=0o700, parents=True, exist_ok=True)
     if os.name == "nt":
         # A new DACL removes inherited AND existing grants. No secret in arguments.
