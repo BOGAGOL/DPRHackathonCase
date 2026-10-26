@@ -1,0 +1,132 @@
+{
+  "status": "PASSED",
+  "database": "baseline_100k",
+  "rows_requested": 100000,
+  "seed": 42,
+  "replicate_anomalies": true,
+  "created_at_utc": "2026-10-26T16:22:50.293471+00:00",
+  "generator_version": "1.0.0",
+  "code_commit": "b76958b2775dcce4f2c31790d8da5f99e6ee0e30",
+  "datagen_worktree_dirty": false,
+  "targets_commit": "e7fd5e31d94abd95a3f00d7ae7ed9a448af26649",
+  "targets_committed_at_wib": "2026-10-26T23:07:44+07:00",
+  "validation": {
+    "passed": true,
+    "row_count": 100000,
+    "groups": {
+      "source": 734,
+      "synthetic": 99266
+    },
+    "source_preserved": true,
+    "duplicate_or_null_counts": {},
+    "synthetic_format_violations": {},
+    "synthetic_relation_violations": {},
+    "distributions": {
+      "jenis_kelamin": {
+        "categories": 2,
+        "max_count_deviation": 3.2397820163459983,
+        "within_one_source_cycle": true
+      },
+      "tempat_lahir": {
+        "categories": 5,
+        "max_count_deviation": 9.196185286102263,
+        "within_one_source_cycle": true
+      },
+      "pekerjaan_terakhir": {
+        "categories": 6,
+        "max_count_deviation": 4.5749318801081245,
+        "within_one_source_cycle": true
+      },
+      "status_kawin": {
+        "categories": 2,
+        "max_count_deviation": 6.0,
+        "within_one_source_cycle": true
+      },
+      "agama": {
+        "categories": 7,
+        "max_count_deviation": 4.5749318801081245,
+        "within_one_source_cycle": true
+      },
+      "nama_bank": {
+        "categories": 4,
+        "max_count_deviation": 7.956403269756265,
+        "within_one_source_cycle": true
+      },
+      "nama_kppn": {
+        "categories": 5,
+        "max_count_deviation": 8.452316076294665,
+        "within_one_source_cycle": true
+      },
+      "jumlah_anak": {
+        "categories": 4,
+        "max_count_deviation": 8.419618528612773,
+        "within_one_source_cycle": true
+      }
+    },
+    "anomalies": {
+      "source": {
+        "null": 367,
+        "bank_nonmodal": 724,
+        "adult": 235,
+        "before_birth": 42,
+        "under_17": 90
+      },
+      "synthetic": {
+        "null": 49639,
+        "bank_nonmodal": 97913,
+        "adult": 31772,
+        "under_17": 12173,
+        "before_birth": 5682
+      }
+    },
+    "anomaly_policy_valid": true,
+    "anomaly_count_deviations": {
+      "before_birth": 1.9291553133516572,
+      "under_17": 1.419618528610954,
+      "bank_nonmodal": 0.6021798365109134
+    },
+    "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+    "source_checksum_sha256": "5113038953aea9383f600de725b4267ecbf93de47c2a603a68bde6ad7e5c17e8",
+    "matches_recorded_baseline": true,
+    "source_database_unchanged": true
+  },
+  "baseline_checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+  "roles": {
+    "passed": true,
+    "checks": {
+      "bench_identity": true,
+      "bench_read_count": true,
+      "bench_no_schema_ddl": true,
+      "bench_no_delete": true,
+      "bench_select_allowed": true,
+      "bench_insert_allowed": true,
+      "bench_update_allowed": true,
+      "bench_delete_denied": true,
+      "bench_truncate_denied": true,
+      "bench_identity_sequence_allowed": true,
+      "scanner_select_allowed": true,
+      "scanner_insert_denied": true,
+      "scanner_update_denied": true,
+      "scanner_delete_denied": true,
+      "scanner_truncate_denied": true,
+      "bench_no_source_select": true
+    },
+    "scope": "Data privileges; PUBLIC CONNECT on other databases is not modified"
+  },
+  "snapshot": {
+    "format": "pg_dump_custom",
+    "client": "pg-dpr/pg_dump18",
+    "outside_repository": true,
+    "bytes": 14996532,
+    "sha256": "f4fe7cf671360e0316a0c55a3da48345a6794fcffe40889741a42a0594d7f33f",
+    "created_at_utc": "2026-10-26T16:24:49.794454+00:00",
+    "archive_list_validated": true
+  },
+  "source_observation": {
+    "marriages_before_17_calendar": 132,
+    "marriages_before_birth": 42,
+    "project_context_before_17": 131,
+    "convention": "marriage date < birth date + 17 calendar years; source preserved"
+  },
+  "postgresql_version": "18.6 (Debian 18.6-1.pgdg13+2)"
+}
