@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "wheel_sha256": "4b6e457673d5f04f0504006e09335ae9cdc8eeadde15e87a247d2f02677434ce",
+  "checks": {
+    "runtime_only_archive": true,
+    "isolated_wheel_import_and_roundtrip": true
+  },
+  "checked_at_utc": "2026-10-26T16:27:00.777953+00:00"
+}
