@@ -1,0 +1,474 @@
+{
+  "derived_from": [
+    {
+      "table": "public.anggota",
+      "source": "nama",
+      "column": "nama_lengkap",
+      "relation": "equal",
+      "a": "nama",
+      "b": "nama_lengkap",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama",
+      "column": "nama_tanpa_gelar",
+      "relation": "equal",
+      "a": "nama",
+      "b": "nama_tanpa_gelar",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama",
+      "column": "email",
+      "relation": "a_prefix_b",
+      "a": "nama",
+      "b": "email",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama",
+      "column": "nama_rekening",
+      "relation": "b_prefix_a",
+      "a": "nama",
+      "b": "nama_rekening",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama",
+      "column": "pengguna",
+      "relation": "a_in_b",
+      "a": "nama",
+      "b": "pengguna",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_lengkap",
+      "column": "nama_tanpa_gelar",
+      "relation": "equal",
+      "a": "nama_lengkap",
+      "b": "nama_tanpa_gelar",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_lengkap",
+      "column": "email",
+      "relation": "a_prefix_b",
+      "a": "nama_lengkap",
+      "b": "email",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_lengkap",
+      "column": "nama_rekening",
+      "relation": "b_prefix_a",
+      "a": "nama_lengkap",
+      "b": "nama_rekening",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_lengkap",
+      "column": "pengguna",
+      "relation": "a_in_b",
+      "a": "nama_lengkap",
+      "b": "pengguna",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_tanpa_gelar",
+      "column": "email",
+      "relation": "a_prefix_b",
+      "a": "nama_tanpa_gelar",
+      "b": "email",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_rekening",
+      "column": "nama_tanpa_gelar",
+      "relation": "b_prefix_a",
+      "a": "nama_tanpa_gelar",
+      "b": "nama_rekening",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_tanpa_gelar",
+      "column": "pengguna",
+      "relation": "a_in_b",
+      "a": "nama_tanpa_gelar",
+      "b": "pengguna",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "tempat_lahir",
+      "column": "alamat_daerah",
+      "relation": "a_in_b",
+      "a": "tempat_lahir",
+      "b": "alamat_daerah",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_rekening",
+      "column": "email",
+      "relation": "b_prefix_a",
+      "a": "email",
+      "b": "nama_rekening",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_rekening",
+      "column": "pengguna",
+      "relation": "a_in_b",
+      "a": "nama_rekening",
+      "b": "pengguna",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    }
+  ],
+  "dependencies": [
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "id",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "nama",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "nama_lengkap",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "nama_tanpa_gelar",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "jenis_kelamin",
+      "consistent_group_ratio": 0.9888888888888889,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "tempat_lahir",
+      "consistent_group_ratio": 0.9888888888888889,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "tanggal_lahir",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "no_ktp",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "pekerjaan_terakhir",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "alamat_jakarta",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "telpon_jakarta",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "alamat_daerah",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "telpon_daerah",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "handphone",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "email",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "ruangan",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "status_kawin",
+      "consistent_group_ratio": 1.0,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "presence_iff_category",
+      "source": "status_kawin",
+      "target": "tanggal_pernikahan",
+      "category_masked": "<1 huruf>",
+      "ratio": 1.0,
+      "compared_rows": 734
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "jumlah_anak",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "jumlah_tanggungan",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "jumlah_jiwa",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "rekening",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "nama_rekening",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "npwp",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "nama_kppn",
+      "consistent_group_ratio": 0.9861111111111112,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "nip_kppn",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "nama_bank",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "kode_bank",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "pengguna",
+      "consistent_group_ratio": 0.9833333333333333,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "tanggal_pernikahan",
+      "target": "agama",
+      "consistent_group_ratio": 0.9861111111111112,
+      "groups": 360
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "jumlah_tanggungan",
+      "target": "status_kawin",
+      "consistent_group_ratio": 1.0,
+      "groups": 5
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "jumlah_jiwa",
+      "target": "status_kawin",
+      "consistent_group_ratio": 1.0,
+      "groups": 5
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "jumlah_tanggungan",
+      "target": "jumlah_anak",
+      "consistent_group_ratio": 1.0,
+      "groups": 5
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "jumlah_jiwa",
+      "target": "jumlah_anak",
+      "consistent_group_ratio": 1.0,
+      "groups": 5
+    },
+    {
+      "table": "public.anggota",
+      "kind": "arithmetic_offset",
+      "source": "jumlah_tanggungan",
+      "target": "jumlah_jiwa",
+      "offset": "1",
+      "ratio": 1.0,
+      "compared_rows": 734
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "jumlah_tanggungan",
+      "target": "jumlah_jiwa",
+      "consistent_group_ratio": 1.0,
+      "groups": 5
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "jumlah_jiwa",
+      "target": "jumlah_tanggungan",
+      "consistent_group_ratio": 1.0,
+      "groups": 5
+    }
+  ],
+  "join_candidates": [],
+  "join_pairs_checked": 0,
+  "join_limit_reached": false,
+  "scope": "sample; correlations are candidates requiring human review",
+  "foreign_keys": []
+}

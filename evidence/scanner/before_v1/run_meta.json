@@ -1,0 +1,39 @@
+{
+  "label": "before",
+  "timestamp": "2026-10-24T09:20:16.076033+00:00",
+  "scanner_version": "1.0.0",
+  "source": {
+    "mode": "db",
+    "host": "127.0.0.1",
+    "port": "5433",
+    "database": "postgres",
+    "table_counts": {
+      "public.anggota": {
+        "total_rows": 734,
+        "sample_rows": 734
+      }
+    },
+    "environment_factors": {
+      "volume": 3,
+      "exposure": 5,
+      "impact": 5,
+      "recovery": 5
+    },
+    "quasi_limits": {
+      "max_quasi_candidates": 12,
+      "max_combinations": 300
+    }
+  },
+  "sample_limit_per_table": 1000,
+  "duration_seconds": 7.91,
+  "method": "combined",
+  "review_state": "raw_before_human_review",
+  "inventory_columns": 30,
+  "table_counts": {
+    "public.anggota": {
+      "total_rows": 734,
+      "sample_rows": 734
+    }
+  },
+  "privacy": "Only masked samples and aggregate features are exported."
+}
