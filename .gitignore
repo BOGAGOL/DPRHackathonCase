@@ -20,3 +20,28 @@ __pycache__/
 test-results/
 playwright-report/
 evidence/raw/
+# Rahasia
+*.env
+openbao-init*.json
+
+# Data panitia dan hasil
+sql/baseline/02_data.sql
+anggota_dummy.sql
+dummy_palmerah.zip
+*.sql.gz
+*.enc
+results/*
+!results/README.md
+# Python
+venv/
+# Node (untuk web teman)
+dist/
+build/
+# Editor/OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+_incoming/
+docs/reference/
+results/

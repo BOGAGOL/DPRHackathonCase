@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>Inventaris kandidat data pribadi</title>
+<style>
+body{font:15px system-ui,sans-serif;margin:2rem;color:#182230;background:#fafbff}h1,h2{color:#15365a}
+.scroll{overflow:auto;border:1px solid #bcc8d5}table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:.55rem;text-align:left;border:1px solid #c6cdd8;vertical-align:top}th{background:#15365a;color:white}
+td{overflow-wrap:anywhere}td.reason{white-space:normal;min-width:14rem}
+.summary{table-layout:fixed}.summary th,.summary td{overflow-wrap:anywhere}
+@page{size:A4 landscape;margin:10mm}
+@media print{
+body{margin:0;background:white;font-size:9pt}h1{font-size:16pt}h2{font-size:12pt;break-after:avoid}
+.scroll{overflow:visible;border:0}table{table-layout:fixed;width:100%;font-size:6pt}
+thead{display:table-header-group}tfoot{display:table-footer-group}tr{break-inside:avoid;page-break-inside:avoid}
+th,td{padding:2mm 1mm;white-space:normal;overflow-wrap:anywhere;min-width:0!important}
+.summary{font-size:9pt}.detail{font-size:4.5pt}.detail td.reason{min-width:0}
+.detail-section{break-before:page}pre{font-size:7pt}a{color:inherit;text-decoration:none}
+}
+.P0{background:#ffd5d5}.P1{background:#ffe4c4}.P2{background:#fff5c9}.P3{background:#e2f4e6}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#edf1f8;padding:1rem}a{color:#17518a}
+</style></head><body>
+<h1>Inventaris kandidat data pribadi</h1>
+<p>Label {{ meta.label }} · {{ meta.timestamp }} · versi {{ meta.scanner_version }} · metode {{ meta.method }}</p>
+<p>Hasil mentah sebelum verifikasi manusia. Confidence rendah tetap perlu diperiksa. Relasi adalah kandidat dari sampel; k-anonymity memakai seluruh sumber terstruktur. Semua contoh termasking.</p>
+<h2 id="summary">Ringkasan kolom</h2><div class="scroll"><table class="summary"><thead><tr>
+{% for field in ['column', 'detected_type', 'pdp_class', 'priority', 'triage', 'recommendation', 'consistent_protection_with'] %}<th>{{ field }}</th>{% endfor %}
+</tr></thead><tbody>{% for row in inventory %}<tr class="{{ row.priority }}">{% for field in ['column', 'detected_type', 'pdp_class', 'priority', 'triage', 'recommendation', 'consistent_protection_with'] %}<td>{{ row[field] }}</td>{% endfor %}</tr>{% endfor %}</tbody></table></div>
+<p><a href="#inventory">Inventaris</a> · <a href="#review">Perlu tinjauan</a> · <a href="#relations">Relasi</a> · <a href="#anonymity">K-anonymity</a></p>
+<h2 id="inventory" class="detail-section">Inventaris</h2><div class="scroll"><table class="detail"><thead><tr>{% for f in fields %}<th>{{ f }}</th>{% endfor %}</tr></thead>
+<tbody>{% for row in inventory %}<tr class="{{ row.priority }}">{% for f in fields %}<td{% if f == 'reason' %} class="reason"{% endif %}>{{ row[f] }}</td>{% endfor %}</tr>{% endfor %}</tbody></table></div>
+<h2 id="review">Perlu tinjauan manusia ({{ review|length }})</h2>
+<ul>{% for row in review %}<li>{{ row.table }}.{{ row.column }} — {{ row.detected_type }} ({{ row.confidence }}): {{ row.reason }}</li>{% else %}<li>Tidak ada kandidat needs_review; low_confidence tetap tercantum di inventaris.</li>{% endfor %}</ul>
+<h2 id="relations">Relasi dan risiko turunan</h2><p>Melindungi kolom sumber saja tidak cukup. Tinjau minimisasi duplikat, turunan, dan akses pada semua jalur.</p><pre>{{ relations|tojson(indent=2) }}</pre>
+<h2 id="anonymity">K-anonymity</h2><p>Maksimal 15 kombinasi minimal, diurutkan 1, 2, lalu 3 kolom; superset dari kombinasi yang sudah unik ≥95% disembunyikan. Semua {{ anonymity_total }} kombinasi tetap tersedia di k_anonymity.json.</p><div class="scroll"><table id="k-anonymity-table"><thead><tr><th>Tabel</th><th>Kombinasi</th><th>Unik (k=1)</th><th>Total</th><th>k minimum</th><th>Cakupan</th></tr></thead>
+<tbody>{% for row in anonymity %}<tr><td>{{ row.table }}</td><td>{{ row.columns|join(' + ') }}</td><td>{{ row.unique_rows }}</td><td>{{ row.total_rows }}</td><td>{{ row.k_min }}</td><td>{{ row.scope }}</td></tr>{% endfor %}</tbody></table></div>
+{% if findings %}<h2>Temuan teks bebas</h2><table><thead><tr><th>File</th><th>Baris</th><th>Jenis</th><th>Contoh termasking</th></tr></thead><tbody>{% for f in findings %}<tr><td>{{ f.file }}</td><td>{{ f.line }}</td><td>{{ f.detected_type }}</td><td>{{ f.sample_masked }}</td></tr>{% endfor %}</tbody></table>{% endif %}
+<h2>Metadata</h2><pre>{{ meta|tojson(indent=2) }}</pre></body></html>
