@@ -1,0 +1,4084 @@
+[
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_lahir",
+      "agama"
+    ],
+    "total_rows": 734,
+    "unique_rows": 734,
+    "k_min": 1,
+    "groups": 734,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_lahir",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 734,
+    "k_min": 1,
+    "groups": 734,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_lahir",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 734,
+    "k_min": 1,
+    "groups": 734,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "tanggal_pernikahan",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 734,
+    "k_min": 1,
+    "groups": 734,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "tanggal_pernikahan",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 734,
+    "k_min": 1,
+    "groups": 734,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "agama",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 734,
+    "k_min": 1,
+    "groups": 734,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "pekerjaan_terakhir",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 734,
+    "k_min": 1,
+    "groups": 734,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "pekerjaan_terakhir",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 734,
+    "k_min": 1,
+    "groups": 734,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "pekerjaan_terakhir",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 734,
+    "k_min": 1,
+    "groups": 734,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 734,
+    "k_min": 1,
+    "groups": 734,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "pekerjaan_terakhir",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 734,
+    "k_min": 1,
+    "groups": 734,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "jumlah_anak",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 734,
+    "k_min": 1,
+    "groups": 734,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "jumlah_tanggungan",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 734,
+    "k_min": 1,
+    "groups": 734,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "jumlah_jiwa",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 734,
+    "k_min": 1,
+    "groups": 734,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_lahir",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 732,
+    "k_min": 1,
+    "groups": 733,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "tanggal_pernikahan",
+      "agama"
+    ],
+    "total_rows": 734,
+    "unique_rows": 732,
+    "k_min": 1,
+    "groups": 733,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "tanggal_pernikahan",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 732,
+    "k_min": 1,
+    "groups": 733,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "status_kawin",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 732,
+    "k_min": 1,
+    "groups": 733,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "status_kawin",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 732,
+    "k_min": 1,
+    "groups": 733,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "agama",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 732,
+    "k_min": 1,
+    "groups": 733,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "agama",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 732,
+    "k_min": 1,
+    "groups": 733,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "agama",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 732,
+    "k_min": 1,
+    "groups": 733,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "agama",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 732,
+    "k_min": 1,
+    "groups": 733,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "jumlah_anak",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 732,
+    "k_min": 1,
+    "groups": 733,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "jumlah_tanggungan",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 732,
+    "k_min": 1,
+    "groups": 733,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "jumlah_jiwa",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 732,
+    "k_min": 1,
+    "groups": 733,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "nama_kppn",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 732,
+    "k_min": 1,
+    "groups": 733,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tempat_lahir",
+      "tanggal_lahir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 730,
+    "k_min": 1,
+    "groups": 732,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_lahir",
+      "tanggal_pernikahan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 730,
+    "k_min": 1,
+    "groups": 732,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_lahir",
+      "agama"
+    ],
+    "total_rows": 734,
+    "unique_rows": 730,
+    "k_min": 1,
+    "groups": 732,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_lahir",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 730,
+    "k_min": 1,
+    "groups": 732,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_lahir",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 730,
+    "k_min": 1,
+    "groups": 732,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_lahir",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 730,
+    "k_min": 1,
+    "groups": 732,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_lahir",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 730,
+    "k_min": 1,
+    "groups": 732,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_lahir",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 730,
+    "k_min": 1,
+    "groups": 732,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_lahir",
+      "tanggal_pernikahan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 730,
+    "k_min": 1,
+    "groups": 732,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_lahir",
+      "status_kawin"
+    ],
+    "total_rows": 734,
+    "unique_rows": 730,
+    "k_min": 1,
+    "groups": 732,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_lahir",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 730,
+    "k_min": 1,
+    "groups": 732,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_lahir",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 730,
+    "k_min": 1,
+    "groups": 732,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_lahir",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 730,
+    "k_min": 1,
+    "groups": 732,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "status_kawin",
+      "agama"
+    ],
+    "total_rows": 734,
+    "unique_rows": 730,
+    "k_min": 1,
+    "groups": 732,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "status_kawin",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 730,
+    "k_min": 1,
+    "groups": 732,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "agama",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 730,
+    "k_min": 1,
+    "groups": 732,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "agama"
+    ],
+    "total_rows": 734,
+    "unique_rows": 728,
+    "k_min": 1,
+    "groups": 731,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 728,
+    "k_min": 1,
+    "groups": 731,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_lahir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "tanggal_pernikahan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_lahir",
+      "status_kawin"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_lahir",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "tanggal_pernikahan",
+      "status_kawin"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "tanggal_pernikahan",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "tanggal_pernikahan",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "tanggal_pernikahan",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "status_kawin",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "status_kawin",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "status_kawin",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "jumlah_anak",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "jumlah_anak",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "jumlah_tanggungan",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 726,
+    "k_min": 1,
+    "groups": 730,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 724,
+    "k_min": 1,
+    "groups": 729,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir",
+      "status_kawin"
+    ],
+    "total_rows": 734,
+    "unique_rows": 720,
+    "k_min": 1,
+    "groups": 727,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_lahir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 716,
+    "k_min": 1,
+    "groups": 725,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_lahir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 700,
+    "k_min": 1,
+    "groups": 717,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 373,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 368,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 368,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 368,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_pernikahan",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 379,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_pernikahan",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 369,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_pernikahan",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 369,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_pernikahan",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 369,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_pernikahan",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 377,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_pernikahan",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 375,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_pernikahan",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 397,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_pernikahan",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 372,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_pernikahan",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 372,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_pernikahan",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 372,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_pernikahan",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 392,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "status_kawin",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 373,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "status_kawin",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 368,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "status_kawin",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 368,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "status_kawin",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 368,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "agama",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 409,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "agama",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 374,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "agama",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 374,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "agama",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 374,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "agama",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 402,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "agama",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 395,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "pekerjaan_terakhir",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 373,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "pekerjaan_terakhir",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 373,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "pekerjaan_terakhir",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 373,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 397,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "pekerjaan_terakhir",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 391,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "jumlah_anak",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 368,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "jumlah_anak",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 368,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "jumlah_anak",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 372,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "jumlah_anak",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 371,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "jumlah_tanggungan",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 368,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "jumlah_tanggungan",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 372,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "jumlah_tanggungan",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 371,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "jumlah_jiwa",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 372,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "jumlah_jiwa",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 371,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "nama_kppn",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 367,
+    "k_min": 1,
+    "groups": 387,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "agama"
+    ],
+    "total_rows": 734,
+    "unique_rows": 365,
+    "k_min": 1,
+    "groups": 373,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 365,
+    "k_min": 1,
+    "groups": 370,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tempat_lahir",
+      "tanggal_pernikahan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 365,
+    "k_min": 1,
+    "groups": 376,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_pernikahan",
+      "agama"
+    ],
+    "total_rows": 734,
+    "unique_rows": 365,
+    "k_min": 1,
+    "groups": 380,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_pernikahan",
+      "agama"
+    ],
+    "total_rows": 734,
+    "unique_rows": 365,
+    "k_min": 1,
+    "groups": 401,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_pernikahan",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 365,
+    "k_min": 1,
+    "groups": 386,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "status_kawin",
+      "agama"
+    ],
+    "total_rows": 734,
+    "unique_rows": 365,
+    "k_min": 1,
+    "groups": 373,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "status_kawin",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 365,
+    "k_min": 1,
+    "groups": 370,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 363,
+    "k_min": 1,
+    "groups": 370,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "status_kawin",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 363,
+    "k_min": 1,
+    "groups": 370,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_pernikahan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 361,
+    "k_min": 1,
+    "groups": 366,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_pernikahan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 361,
+    "k_min": 1,
+    "groups": 369,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tanggal_pernikahan",
+      "status_kawin"
+    ],
+    "total_rows": 734,
+    "unique_rows": 361,
+    "k_min": 1,
+    "groups": 366,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "tanggal_pernikahan",
+      "status_kawin"
+    ],
+    "total_rows": 734,
+    "unique_rows": 361,
+    "k_min": 1,
+    "groups": 369,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 354,
+    "k_min": 1,
+    "groups": 361,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tanggal_pernikahan",
+      "status_kawin"
+    ],
+    "total_rows": 734,
+    "unique_rows": 354,
+    "k_min": 1,
+    "groups": 361,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "pekerjaan_terakhir",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 39,
+    "k_min": 1,
+    "groups": 192,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "pekerjaan_terakhir",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 39,
+    "k_min": 1,
+    "groups": 192,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "agama",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 29,
+    "k_min": 1,
+    "groups": 169,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "agama",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 29,
+    "k_min": 1,
+    "groups": 169,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "pekerjaan_terakhir",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 27,
+    "k_min": 1,
+    "groups": 155,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "jumlah_tanggungan",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 26,
+    "k_min": 1,
+    "groups": 168,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "jumlah_jiwa",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 26,
+    "k_min": 1,
+    "groups": 168,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "agama",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 25,
+    "k_min": 1,
+    "groups": 203,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 24,
+    "k_min": 1,
+    "groups": 206,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "jumlah_tanggungan",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 23,
+    "k_min": 1,
+    "groups": 147,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "jumlah_jiwa",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 23,
+    "k_min": 1,
+    "groups": 147,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "agama",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 21,
+    "k_min": 1,
+    "groups": 135,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "jumlah_anak",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 18,
+    "k_min": 1,
+    "groups": 134,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "pekerjaan_terakhir",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 17,
+    "k_min": 1,
+    "groups": 143,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "pekerjaan_terakhir",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 17,
+    "k_min": 1,
+    "groups": 143,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "jumlah_anak",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 15,
+    "k_min": 1,
+    "groups": 117,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "pekerjaan_terakhir",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 13,
+    "k_min": 1,
+    "groups": 116,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "jumlah_tanggungan",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 13,
+    "k_min": 1,
+    "groups": 134,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "jumlah_jiwa",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 13,
+    "k_min": 1,
+    "groups": 134,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "jumlah_tanggungan",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 12,
+    "k_min": 1,
+    "groups": 119,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "jumlah_jiwa",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 12,
+    "k_min": 1,
+    "groups": 119,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "agama",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 11,
+    "k_min": 1,
+    "groups": 174,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "jumlah_tanggungan",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 10,
+    "k_min": 1,
+    "groups": 122,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "jumlah_jiwa",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 10,
+    "k_min": 1,
+    "groups": 122,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "jumlah_anak",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 10,
+    "k_min": 1,
+    "groups": 107,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "jumlah_anak",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 9,
+    "k_min": 1,
+    "groups": 99,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "jumlah_anak",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 8,
+    "k_min": 1,
+    "groups": 95,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "pekerjaan_terakhir",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 7,
+    "k_min": 1,
+    "groups": 168,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 5,
+    "k_min": 1,
+    "groups": 149,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "jumlah_tanggungan",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 5,
+    "k_min": 1,
+    "groups": 99,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "jumlah_jiwa",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 5,
+    "k_min": 1,
+    "groups": 99,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_tanggungan",
+      "nama_kppn",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 5,
+    "k_min": 1,
+    "groups": 98,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_jiwa",
+      "nama_kppn",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 5,
+    "k_min": 1,
+    "groups": 98,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "agama",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 4,
+    "k_min": 1,
+    "groups": 140,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "nama_kppn",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 4,
+    "k_min": 1,
+    "groups": 140,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_anak",
+      "nama_kppn",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 4,
+    "k_min": 1,
+    "groups": 79,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "jumlah_anak",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 3,
+    "k_min": 1,
+    "groups": 80,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "nama_kppn",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 3,
+    "k_min": 1,
+    "groups": 120,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "pekerjaan_terakhir",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 2,
+    "k_min": 1,
+    "groups": 120,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "agama",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 2,
+    "groups": 56,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "agama",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 2,
+    "groups": 70,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "agama",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 2,
+    "groups": 70,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "nama_kppn",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 2,
+    "groups": 100,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "agama",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 3,
+    "groups": 84,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "pekerjaan_terakhir",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 3,
+    "groups": 48,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "pekerjaan_terakhir",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 3,
+    "groups": 60,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "pekerjaan_terakhir",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 3,
+    "groups": 60,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "status_kawin",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 3,
+    "groups": 60,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "agama",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 3,
+    "groups": 84,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tempat_lahir",
+      "agama"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 4,
+    "groups": 70,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tempat_lahir",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 4,
+    "groups": 60,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "agama",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 4,
+    "groups": 70,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tempat_lahir",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 5,
+    "groups": 40,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tempat_lahir",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 5,
+    "groups": 50,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tempat_lahir",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 5,
+    "groups": 50,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tempat_lahir",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 5,
+    "groups": 50,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 5,
+    "groups": 60,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "status_kawin",
+      "agama"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 5,
+    "groups": 70,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "agama",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 5,
+    "groups": 70,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "agama",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 5,
+    "groups": 56,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 28,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 35,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 35,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 30,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 30,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "jumlah_anak",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 40,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "jumlah_tanggungan",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 50,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "jumlah_jiwa",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 50,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "agama",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 35,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "agama",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 35,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "agama",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 35,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "pekerjaan_terakhir",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 30,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "pekerjaan_terakhir",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 30,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "pekerjaan_terakhir",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 30,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 60,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "jumlah_anak",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 35,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "jumlah_anak",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 35,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "jumlah_tanggungan",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 35,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "jumlah_anak",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 30,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "jumlah_anak",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 30,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "jumlah_tanggungan",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 6,
+    "groups": 30,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "agama",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 7,
+    "groups": 56,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "jumlah_anak",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 7,
+    "groups": 32,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "jumlah_tanggungan",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 7,
+    "groups": 40,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "jumlah_jiwa",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 7,
+    "groups": 40,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "pekerjaan_terakhir",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 8,
+    "groups": 48,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "nama_kppn",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 8,
+    "groups": 40,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "status_kawin",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 8,
+    "groups": 50,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "pekerjaan_terakhir",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 8,
+    "groups": 48,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 9,
+    "groups": 42,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 10,
+    "groups": 35,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 10,
+    "groups": 24,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "nama_kppn",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 10,
+    "groups": 40,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tempat_lahir",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 11,
+    "groups": 40,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 20,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 25,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 25,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_anak",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 20,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_tanggungan",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 25,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_jiwa",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 25,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "status_kawin",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 25,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "status_kawin",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 25,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "status_kawin",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 25,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "status_kawin",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 40,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "jumlah_anak",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 25,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "jumlah_anak",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 25,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "jumlah_tanggungan",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 25,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "jumlah_anak",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 25,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "jumlah_tanggungan",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 25,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "jumlah_jiwa",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 25,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_anak",
+      "jumlah_tanggungan",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 25,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_anak",
+      "jumlah_jiwa",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 25,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_tanggungan",
+      "jumlah_jiwa",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 12,
+    "groups": 25,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "agama"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 13,
+    "groups": 35,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 13,
+    "groups": 30,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_anak",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 14,
+    "groups": 16,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_tanggungan",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 14,
+    "groups": 20,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_jiwa",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 14,
+    "groups": 20,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "jumlah_anak",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 14,
+    "groups": 20,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "jumlah_tanggungan",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 14,
+    "groups": 20,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "jumlah_jiwa",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 14,
+    "groups": 20,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_anak",
+      "jumlah_tanggungan",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 14,
+    "groups": 20,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_anak",
+      "jumlah_jiwa",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 14,
+    "groups": 20,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_tanggungan",
+      "jumlah_jiwa",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 14,
+    "groups": 20,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 16,
+    "groups": 28,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 16,
+    "groups": 30,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 17,
+    "groups": 25,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "status_kawin",
+      "agama"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 19,
+    "groups": 28,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 20,
+    "groups": 24,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "nama_kppn",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 22,
+    "groups": 20,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "status_kawin",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 23,
+    "groups": 24,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "status_kawin",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 25,
+    "groups": 20,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tempat_lahir",
+      "status_kawin"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 27,
+    "groups": 20,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 28,
+    "groups": 20,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "status_kawin",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 40,
+    "groups": 16,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 41,
+    "groups": 10,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 41,
+    "groups": 10,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "status_kawin",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 41,
+    "groups": 10,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "status_kawin",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 41,
+    "groups": 10,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "status_kawin",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 41,
+    "groups": 10,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "jumlah_anak",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 41,
+    "groups": 10,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "jumlah_anak",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 41,
+    "groups": 10,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "jumlah_tanggungan",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 41,
+    "groups": 10,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 42,
+    "groups": 8,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "agama"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 43,
+    "groups": 14,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "agama"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 45,
+    "groups": 14,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 51,
+    "groups": 12,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 52,
+    "groups": 12,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 55,
+    "groups": 10,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "tempat_lahir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 58,
+    "groups": 10,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir",
+      "status_kawin"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 63,
+    "groups": 10,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 63,
+    "groups": 10,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 80,
+    "groups": 8,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 82,
+    "groups": 8,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 87,
+    "groups": 4,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 87,
+    "groups": 5,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 87,
+    "groups": 5,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "jumlah_anak"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 87,
+    "groups": 5,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 87,
+    "groups": 5,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 87,
+    "groups": 5,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_anak",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 87,
+    "groups": 5,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_anak",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 87,
+    "groups": 5,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_tanggungan",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 87,
+    "groups": 5,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "jumlah_anak",
+      "jumlah_tanggungan"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 87,
+    "groups": 5,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "jumlah_anak",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 87,
+    "groups": 5,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin",
+      "jumlah_tanggungan",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 87,
+    "groups": 5,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jumlah_anak",
+      "jumlah_tanggungan",
+      "jumlah_jiwa"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 87,
+    "groups": 5,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "agama"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 94,
+    "groups": 7,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 106,
+    "groups": 6,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "nama_kppn"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 127,
+    "groups": 5,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "tempat_lahir"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 137,
+    "groups": 5,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "nama_bank"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 167,
+    "groups": 4,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "status_kawin"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 181,
+    "groups": 4,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 366,
+    "groups": 2,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "status_kawin"
+    ],
+    "total_rows": 734,
+    "unique_rows": 0,
+    "k_min": 367,
+    "groups": 2,
+    "scope": "full_database_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  }
+]
