@@ -1,0 +1,4 @@
+# Assumptions for the competition baseline; confirm these with the system owner.
+volume: 3
+exposure: 5
+recovery: 5

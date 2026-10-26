@@ -1,0 +1,26 @@
+# Assumptions for this case: public officials' names are already public.
+# Review these per-type factors with the system owner; they do not establish
+# that a field may be disclosed to every analyst.
+default: {sensitivity: 3, impact: 3}
+types:
+  nik: {sensitivity: 5, impact: 5}
+  rekening: {sensitivity: 5, impact: 5}
+  npwp: {sensitivity: 5, impact: 5}
+  kesehatan: {sensitivity: 5, impact: 5}
+  biometrik: {sensitivity: 5, impact: 5}
+  genetika: {sensitivity: 5, impact: 5}
+  kejahatan: {sensitivity: 5, impact: 5}
+  password: {sensitivity: 5, impact: 5}
+  alamat: {sensitivity: 4, impact: 4}
+  telepon: {sensitivity: 4, impact: 4}
+  email: {sensitivity: 4, impact: 4}
+  tanggal_lahir: {sensitivity: 3, impact: 3}
+  tanggal_pernikahan: {sensitivity: 3, impact: 3}
+  tempat_lahir: {sensitivity: 3, impact: 3}
+  agama: {sensitivity: 3, impact: 3}
+  keluarga: {sensitivity: 3, impact: 3}
+  status_perkawinan: {sensitivity: 3, impact: 3}
+  nama: {sensitivity: 2, impact: 2}
+  identifier_lain: {sensitivity: 4, impact: 4}
+  kategori: {sensitivity: 1, impact: 1}
+  operasional: {sensitivity: 1, impact: 1}
