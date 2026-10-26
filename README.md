@@ -2,7 +2,7 @@
 
 Aplikasi layanan Next.js + FastAPI untuk melihat, mencari, dan memperbarui data anggota sesuai hak akses. Ini prototipe hackathon dengan dataset sintetis, bukan situs resmi DPR atau Privacy Scanner. Kode scanner/artefak Task 1 di luar checkout tidak diubah.
 
-Sudah dijalankan pada Windows: PostgreSQL baseline/protected terpisah, import **734 × 29** tanpa perubahan nilai, autentikasi, role/record/field authorization, AES-256-GCM, blind lookup, edit kontak, audit, browser flows, backup/restore, dan benchmark tiga pengulangan termasuk **10.000 record sintetis baru**. Status dan evidence rinci ada di [PROGRESS.md](PROGRESS.md) dan [evidence/README.md](evidence/README.md). Docker Compose tervalidasi konfigurasinya; container runtime belum diuji karena Docker Engine tidak aktif. Live OpenBao dan TLS deployment: **NOT TESTED**.
+Sudah dijalankan pada Windows: PostgreSQL baseline/protected terpisah, import **734 × 29** tanpa perubahan nilai, autentikasi, role/record/field authorization, AES-256-GCM, blind lookup, edit kontak, audit, browser flows, backup/restore, dan benchmark tiga pengulangan termasuk **10.000 record sintetis baru**. Status dan evidence rinci ada di [PROGRESS.md](docs/legacy-md_zhafif/PROGRESS.md) dan [evidence/README.md](docs/legacy-md_zhafif/evidence/README.md). Docker Compose tervalidasi konfigurasinya; container runtime belum diuji karena Docker Engine tidak aktif. Live OpenBao dan TLS deployment: **NOT TESTED**.
 
 ## Jalankan lab lokal (Windows / PowerShell)
 
@@ -42,7 +42,7 @@ docker compose --profile lab --profile tools run --rm tools scripts/manage.py pr
 docker compose up --build -d api web
 ```
 
-`api` memakai `app_user`, tanpa kredensial owner/baseline. `tools` adalah CLI terpisah untuk operasi privileged, source mount read-only, tidak ada route scanner/baseline. Baseline hanya aktif dengan profile lab dan network berbeda. Port DB hanya loopback. Compose ini development HTTP/local AES; pengaturan HTTPS/TLS/Transit dijelaskan dalam [runbook](docs/OPERATIONS.md). Jangan menggunakan `docker compose down -v` untuk menghentikan lab yang datanya perlu disimpan.
+`api` memakai `app_user`, tanpa kredensial owner/baseline. `tools` adalah CLI terpisah untuk operasi privileged, source mount read-only, tidak ada route scanner/baseline. Baseline hanya aktif dengan profile lab dan network berbeda. Port DB hanya loopback. Compose ini development HTTP/local AES; pengaturan HTTPS/TLS/Transit dijelaskan dalam [runbook](docs/legacy-md_zhafif/docs/OPERATIONS.md). Jangan menggunakan `docker compose down -v` untuk menghentikan lab yang datanya perlu disimpan.
 
 ## Pengujian dan reproduksi evidence
 
@@ -74,10 +74,10 @@ Runner mengukur workload DB read/write 80/20, concurrency 1, output bisnis konta
 - `apps/web`: App Router, TypeScript, Tailwind, komponen Button pola shadcn/Radix, React Hook Form, Zod, browser tests.
 - `apps/api`: FastAPI, Pydantic, SQLAlchemy, Alembic, Argon2id, CryptoProvider, explicit DTO/policy.
 - `scripts`: konfigurasi, DB lab, import/provision/grants, verification, rekey, backup/restore, benchmark.
-- `docs`: [arsitektur](docs/ARCHITECTURE.md), [operasional](docs/OPERATIONS.md), [ancaman & batas kontrol](docs/SECURITY.md), [skenario demo](docs/DEMO.md), [kinerja](docs/PERFORMANCE.md).
-- [DECISIONS.md](DECISIONS.md): keputusan, termasuk PostgreSQL sesuai permintaan dan perbedaan ketentuan dua PDF panitia. Tidak mengklaim semua persyaratan MySQL dipenuhi PostgreSQL.
+- `docs`: [arsitektur](docs/legacy-md_zhafif/docs/ARCHITECTURE.md), [operasional](docs/legacy-md_zhafif/docs/OPERATIONS.md), [ancaman & batas kontrol](docs/legacy-md_zhafif/docs/SECURITY.md), [skenario demo](docs/legacy-md_zhafif/docs/DEMO.md), [kinerja](docs/legacy-md_zhafif/docs/PERFORMANCE.md).
+- [DECISIONS.md](docs/legacy-md_zhafif/DECISIONS.md): keputusan, termasuk PostgreSQL sesuai permintaan dan perbedaan ketentuan dua PDF panitia. Tidak mengklaim semua persyaratan MySQL dipenuhi PostgreSQL.
 
-`ENCRYPTION_KEYS`, `BLIND_INDEX_KEY`, credential DB, password dan backup recovery key tidak boleh masuk Git, dump, log, browser storage, atau laporan. Simpan recovery key terpisah dari ciphertext sebelum deployment. Lihat [batas keamanan](docs/SECURITY.md): tidak ada klaim production-ready, full disk encryption, live Transit/TLS, RLS, MFA, retensi otomatis atau audit anti-DBA.
+`ENCRYPTION_KEYS`, `BLIND_INDEX_KEY`, credential DB, password dan backup recovery key tidak boleh masuk Git, dump, log, browser storage, atau laporan. Simpan recovery key terpisah dari ciphertext sebelum deployment. Lihat [batas keamanan](docs/legacy-md_zhafif/docs/SECURITY.md): tidak ada klaim production-ready, full disk encryption, live Transit/TLS, RLS, MFA, retensi otomatis atau audit anti-DBA.
 
 Referensi teknis utama: [Next.js App Router](https://nextjs.org/docs/app), [FastAPI](https://fastapi.tiangolo.com/), [SQLAlchemy](https://docs.sqlalchemy.org/en/20/), [cryptography AESGCM](https://cryptography.io/en/latest/hazmat/primitives/aead/), [OpenBao Transit API](https://openbao.org/api-docs/secret/transit/). Dependensi langsung dipin; lockfile frontend menyertakan transitif. Kode mengikuti LICENSE MIT yang sudah ada. Dataset panitia tidak didistribusikan dan tetap mengikuti ketentuan kompetisi.
 

@@ -1,3 +1,10 @@
+## Urutan baca wajib
+1. docs/PROJECT_CONTEXT.md (konteks lomba dan keputusan final)
+2. docs/contracts/CONTRACT.md (aturan teknis mengikat)
+3. docs/TEAM_PLAN.md (pembagian dan jadwal)
+4. Prompt modul di docs/ai-prompts/
+Abaikan docs/legacy-md_zhafif/ kecuali diminta secara eksplisit; isinya bukan acuan.
+
 # Aturan untuk agen AI (Codex / Claude Code) di repo ini
 
 Proyek: Final Hackathon DPR RI 2026, Pelindungan Data Pribadi. Baca dulu `docs/contracts/CONTRACT.md`.
