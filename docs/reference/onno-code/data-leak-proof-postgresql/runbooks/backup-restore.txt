@@ -1,0 +1,19 @@
+RUNBOOK BACKUP-RESTORE
+
+BACKUP
+1. Jalankan pg_dump/pg_basebackup sesuai RPO.
+2. Hitung checksum.
+3. Enkripsi menggunakan penerima yang disetujui.
+4. Simpan katalog: waktu, cluster, versi, key dependency, retensi.
+5. Pisahkan kunci backup dari backup.
+
+RESTORE DRILL
+1. Verifikasi checksum dan buka enkripsi ke direktori sementara terbatas.
+2. Pulihkan PostgreSQL dan WAL bila menggunakan PITR.
+3. Pulihkan OpenBao dan mekanisme seal.
+4. Validasi policy, versi format, dan versi kunci.
+5. Dekripsi sampel berizin; uji blind index, RLS, dan kueri bisnis.
+6. Catat RPO aktual, RTO aktual, record gagal, dan bukti.
+
+Backup belum terbukti sebelum restore drill berhasil bersama kunci dan aplikasi.
+

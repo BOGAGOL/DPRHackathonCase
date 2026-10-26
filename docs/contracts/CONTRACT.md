@@ -159,3 +159,5 @@ test yang mendekripsi vector ini (terutama jika backend bukan Python).
 | `scanner/` | C |
 | `evidence/` (hasil mesin, sebagian di-.gitignore) | semua, lewat skrip |
 | `docs/` | semua, laporan dikoordinasikan C |
+
+docs/reference/ = rujukan pihak ketiga, dikecualikan dari scan dan evidence

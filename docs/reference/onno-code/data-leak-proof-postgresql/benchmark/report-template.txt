@@ -1,0 +1,12 @@
+LAPORAN BENCHMARK BEFORE-AFTER
+
+1. Identitas: test ID, tanggal, penguji, commit paket.
+2. Lingkungan: CPU, RAM, storage, OS, PostgreSQL, Python, OpenBao.
+3. Dataset: jumlah baris, seed, tenant, ukuran plaintext/protected.
+4. Beban: skrip, rasio baca/tulis, clients, threads, warm-up, durasi.
+5. Hasil: TPS, p50, p95, p99, error, CPU, memori, I/O, jaringan, WAL.
+6. Security gain: ancaman yang dikurangi dan tidak dikurangi.
+7. Performance cost: perubahan absolut/persentase dan sumber dominan.
+8. Keputusan: DITERIMA / OPTIMASI / UJI ULANG / DITOLAK.
+9. Batas kesimpulan: kondisi yang mencegah generalisasi hasil.
+

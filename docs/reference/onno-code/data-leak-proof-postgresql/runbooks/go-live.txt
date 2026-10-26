@@ -1,0 +1,31 @@
+CHECKLIST GO-LIVE
+
+DATA
+[ ] Inventaris, klasifikasi, pemilik, retensi, dan salinan lengkap.
+[ ] Nonproduksi memakai data sintetis.
+[ ] Dump protected lulus plaintext scan.
+
+POSTGRESQL
+[ ] Role aplikasi bukan owner/superuser dan tanpa BYPASSRLS.
+[ ] Tanpa pg_read/write_server_files atau pg_execute_server_program.
+[ ] PUBLIC, search_path, extension, pg_hba.conf, dan firewall diaudit.
+[ ] TLS wajib; client verify-full; SCRAM-SHA-256.
+[ ] RLS diuji dengan role aplikasi nyata dan uji negatif.
+
+KRIPTOGRAFI DAN OPENBAO
+[ ] AES-GCM, nonce unik, AAD, key version, tamper test.
+[ ] Kunci AES dan HMAC berbeda serta berada di luar PostgreSQL.
+[ ] Workload policy minimum; root token tidak dipakai aplikasi.
+[ ] Rotasi, rewrap, seal/recovery, dan OpenBao-down diuji.
+
+MIGRASI DAN PERFORMA
+[ ] Migrator idempoten; batch, retry, pause/resume, rekonsiliasi.
+[ ] Baseline dan protected benchmark mencatat p50/p95/p99, error,
+    CPU, I/O, jaringan, WAL, ukuran, dan data mentah.
+
+BACKUP DAN INSIDEN
+[ ] Backup terenkripsi, checksum, restore drill, RTO/RPO.
+[ ] Kunci lama tersedia sesuai retensi backup.
+[ ] Runbook kebocoran data dan kebocoran kunci diuji.
+[ ] Setiap kontrol memiliki pemilik, bukti, ambang gagal, dan respons.
+

@@ -43,5 +43,6 @@ build/
 .DS_Store
 Thumbs.db
 _incoming/
-docs/reference/
 results/
+
+!docs/reference/onno-code/**/*.sql

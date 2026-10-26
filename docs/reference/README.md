@@ -1,0 +1,1 @@
+Kode pendamping buku Onno W. Purbo, Data Leak-Proof: Teknik Proteksi Data di PostgreSQL agar Kebocoran Tidak Berarti Apa-Apa (2026), diterima dari panitia Hackathon DPR RI 2026. Disimpan hanya sebagai rujukan internal tim. BUKAN karya tim; lisensi mengikuti pemilik asli. Jangan diubah. Dikecualikan dari scan rahasia/plaintext dan dari paket lampiran juri kecuali dengan atribusi.

@@ -1,0 +1,20 @@
+RUNBOOK ROTASI KUNCI
+
+PRE-CHECK
+[ ] Aplikasi membaca beberapa versi kunci.
+[ ] Backup dan ciphertext versi lama dipetakan.
+[ ] Rewrap/enkripsi ulang, pause/resume, dan rollback diuji.
+[ ] Audit OpenBao aktif.
+
+LANGKAH
+1. Rotasi Transit key; jangan hapus versi lama.
+2. Uji encrypt/decrypt data sintetis dengan versi baru.
+3. Arahkan seluruh enkripsi baru ke versi terbaru.
+4. Jalankan rewrap/enkripsi ulang per batch.
+5. Validasi dan catat kemajuan per versi.
+6. Lakukan restore drill backup lama.
+7. Batasi versi lama hanya setelah seluruh dependensi selesai.
+
+CATATAN
+Rotasi tidak menarik kembali plaintext yang sudah diperoleh penyerang.
+

@@ -1,0 +1,11 @@
+title = "Juara1onno secret scan exclusions"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Third-party book reference and archived early documentation; excluded by team policy"
+paths = [
+  '^docs/reference/',
+  '^docs/legacy-md_zhafif/',
+]
