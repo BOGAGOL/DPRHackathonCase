@@ -1,0 +1,41 @@
+{
+    "status":  "PASSED",
+    "tested_merge_commit":  "58974188e7be13916f9836e5baf46a49a0d6549d",
+    "main_before_merge":  "392b1ac9cb5c6dfa3a138911696575a85268ed0c",
+    "feature_before_merge":  "1dc485f543690ae19447896edbf00fb86519ad5a",
+    "incoming_commits":  [
+                             "392b1ac9cb5c6dfa3a138911696575a85268ed0c Merge branch \u0027main\u0027 of https://github.com/BOGAGOL/juara1onno into feat/crypto-infra-tls",
+                             "549e6db7525e888c9d0222432a2ad3bb0b7282f0 test(infra): verify TLS Transit AAD policies and restart against real containers",
+                             "7beddd52e216639f97bdbf563eaa6881162aaf9a feat(infra): bootstrap Transit with manual unseal and expiring policy tokens",
+                             "70cbc1f1c1393563345b390fd00d490357d1bebc feat(infra): add TLS OpenBao and isolated PostgreSQL 18 compose"
+                         ],
+    "conflicts":  [
+
+                  ],
+    "tests":  {
+                  "datagen":  {
+                                  "tests":  25,
+                                  "passed":  25,
+                                  "skipped":  0,
+                                  "failures":  0,
+                                  "errors":  0,
+                                  "command":  "datagen/.venv/Scripts/python.exe -m pytest datagen/tests -q --junitxml=results/integration/main-datagen-tests.xml"
+                              },
+                  "scanner":  {
+                                  "tests":  128,
+                                  "passed":  127,
+                                  "skipped":  1,
+                                  "failures":  0,
+                                  "errors":  0,
+                                  "skips":  [
+                                                {
+                                                    "test":  "test_read_only_snapshot",
+                                                    "reason":  "SCANNER_TEST_DATABASE_URL belum diatur"
+                                                }
+                                            ],
+                                  "command":  "scanner/.venv/Scripts/python.exe -m pytest scanner/tests -q --junitxml=results/integration/main-scanner-tests.xml"
+                              }
+              },
+    "benchmark_run":  false,
+    "timestamp_wib":  "2026-10-26T23:40:03+07:00"
+}
