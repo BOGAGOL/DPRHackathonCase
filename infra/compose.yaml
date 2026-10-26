@@ -1,0 +1,73 @@
+name: dpr-infra
+
+services:
+  openbao:
+    image: openbao/openbao:2.5.5
+    restart: unless-stopped
+    command: [server, -config=/openbao/config/openbao.hcl]
+    environment:
+      BAO_ADDR: https://127.0.0.1:8200
+      BAO_CACERT: /openbao/tls/ca.crt
+    ports:
+      - "127.0.0.1:${DPR_OPENBAO_PORT:-8200}:8200"
+    volumes:
+      - openbao_data:/openbao/file
+      - type: bind
+        source: ./openbao/openbao.hcl
+        target: /openbao/config/openbao.hcl
+        read_only: true
+        bind: {create_host_path: false}
+      # Never mount the CA signing key or bootstrap/root material into the server.
+      - type: bind
+        source: ${DPR_SECRETS_DIR:?Set external DPR_SECRETS_DIR}/tls/ca.crt
+        target: /openbao/tls/ca.crt
+        read_only: true
+        bind: {create_host_path: false}
+      - type: bind
+        source: ${DPR_SECRETS_DIR:?Set external DPR_SECRETS_DIR}/tls/server.crt
+        target: /openbao/tls/server.crt
+        read_only: true
+        bind: {create_host_path: false}
+      - type: bind
+        source: ${DPR_SECRETS_DIR:?Set external DPR_SECRETS_DIR}/tls/server.key
+        target: /openbao/tls/server.key
+        read_only: true
+        bind: {create_host_path: false}
+    healthcheck:
+      # Initialized + unsealed only. CLI verifies the CA and host name.
+      test: [CMD, bao, status]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+    networks: [key_plane]
+
+  postgres:
+    # Optional isolated database. Existing pg-dpr on 5433 remains untouched.
+    profiles: [new-postgres]
+    image: postgres:18
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: dpr_bootstrap
+      POSTGRES_DB: dpr_lab
+      POSTGRES_PASSWORD: ${DPR_POSTGRES_PASSWORD:-}
+      POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256
+    ports:
+      - "127.0.0.1:${DPR_POSTGRES_PORT:-5434}:5432"
+    volumes:
+      # PG18 image stores versioned PGDATA below /var/lib/postgresql.
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: [CMD, pg_isready, -U, dpr_bootstrap, -d, dpr_lab]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [data_plane]
+
+networks:
+  key_plane: {internal: true}
+  data_plane: {internal: true}
+
+volumes:
+  openbao_data: {}
+  postgres_data: {}
