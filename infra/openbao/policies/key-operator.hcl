@@ -21,3 +21,4 @@ path "transit/keys/search-hmac/config" {
 }
 path "auth/token/lookup-self" { capabilities = ["read"] }
 path "auth/token/revoke-self" { capabilities = ["update"] }
+path "sys/capabilities-self" { capabilities = ["update"] }

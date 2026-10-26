@@ -65,8 +65,9 @@ services:
     networks: [data_plane]
 
 networks:
-  key_plane: {internal: true}
-  data_plane: {internal: true}
+  # Separate bridges; host-published loopback ports must be reachable on Docker Desktop.
+  key_plane: {}
+  data_plane: {}
 
 volumes:
   openbao_data: {}

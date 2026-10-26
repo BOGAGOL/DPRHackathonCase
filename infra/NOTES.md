@@ -15,6 +15,9 @@ tahap lanjutan; backup.sh yang meninggalkan plaintext tidak digunakan di jalur i
   Versi ini sudah menghapus dukungan mlock; konfigurasi disable_mlock=false dari
   kebiasaan Vault lama ditolak server. Tidak memakai konfigurasi/capability itu.
   Lindungi swap host secara terpisah; tidak mengklaim memori terkunci.
+  Uji Docker Desktop 28.0.4 juga menemukan internal:true membuat publish port
+  tidak tersedia dari host. Memakai dua bridge terpisah dengan publish loopback;
+  egress container belum difilter. Jangan mengklaim network ini air-gapped.
 - TLS wajib; CA lokal self-signed menandatangani sertifikat server 30 hari.
   CA/private keys dan sertifikat berada di DPR_SECRETS_DIR di luar repo.
   DACL Windows hanya memberi akses operator saat ini; POSIX memakai 0700/0600.
@@ -64,3 +67,54 @@ proteksi file eksklusif/ACL, dan isolasi konfigurasi Compose.
 - Perintah revoke-migration mencabut token migrasi yang aktif setelah cek policy.
   Tidak ada token statis dalam kode. Admin API memverifikasi TLS dan menolak HTTP,
   origin berisi kredensial, proxy env dan redirect. Pesan error tidak berisi body.
+
+## associated_data pada OpenBao 2.5.5
+
+Status source: tersedia pada encrypt/decrypt di tag 2.5.5, bukan hanya dokumentasi
+`next`. `context` adalah konteks derivasi key dan bukan pengganti AAD. Key di
+bootstrap memakai derived=false. HTTP probe menggunakan **associated_data**
+berisi base64 AAD. Desain field tetap AES-256-GCM lokal dengan DEK PII/FIN per
+record dan AAD persis kontrak; dukungan AAD Transit bukan prasyarat format field.
+
+Sumber primer yang diperiksa:
+
+- [Release 2.5.5](https://github.com/openbao/openbao/releases/tag/v2.5.5)
+- [Encrypt source 2.5.5](https://github.com/openbao/openbao/blob/v2.5.5/builtin/logical/transit/path_encrypt.go)
+- [Decrypt source 2.5.5](https://github.com/openbao/openbao/blob/v2.5.5/builtin/logical/transit/path_decrypt.go)
+- [Key creation source 2.5.5](https://github.com/openbao/openbao/blob/v2.5.5/builtin/logical/transit/path_keys.go)
+
+Temuan integrasi: search-hmac harus diberi **key_size=32 (byte)** eksplisit saat
+create. Default 0 pada versi ini menyebabkan respons 500, sehingga tidak boleh
+mengandalkan default server. Kunci HMAC tidak diekspor; layanan memakai /hmac.
+
+Verifier menolak identitas/root policy yang salah sebelum menjalankan probe.
+Probe penolakan parameter sensitif memakai nilai false agar tidak mengaktifkan
+export/backup/delete bila ACL ternyata salah. Rotasi sebenarnya hanya diuji di
+instance disposable. Larangan rotate, penerbitan token, dan export diperiksa via
+sys/capabilities-self agar verifikasi pada policy yang drift tidak merotasi key,
+menerbitkan token tanpa pemilik, atau mengambil material key. Semua policy diberi
+hak introspeksi capability milik token sendiri; bukan introspeksi token lain.
+Larangan decrypt/encrypt/HMAC/datakey diuji dengan request langsung dan input
+sintetis. Token/DEK/plaintext/ciphertext tidak masuk evidence.
+
+## Hasil verifikasi akhir (26 Oktober 2026)
+
+- Commit TLS/Compose: 10 test infra lulus; gabungan aplikasi + infra 42 lulus,
+  1 skip dataset panitia. Commit bootstrap: gabungan 60 lulus, 1 skip.
+- Perintah akhir: `$env:DPR_INFRA_INTEGRATION='1'; .\.venv\Scripts\python.exe -m
+  pytest tests infra/tests -q --tb=short --junitxml=evidence/infra/tests.xml`.
+  Hasil: **65 lulus, 1 skip** (dataset panitia tidak didistribusikan), 1 warning
+  deprecation Starlette dari dependensi aplikasi lama. Tidak mengubah aplikasi B.
+- `evidence/infra/integration.json`: **60 pemeriksaan lulus**, OpenBao **2.5.5**,
+  PostgreSQL **18.6** (server_version_num 180006). AAD roundtrip sukses; AAD salah
+  dan AAD hilang keduanya HTTP 400. CA salah/HTTP ditolak, policy/TTL sesuai,
+  pencabutan migrasi berhasil, rotate/rewrap/config berhasil, restart memerlukan
+  unseal lagi dan key tetap bekerja, revokasi root tidak mencabut token orphan.
+- Semua container/volume integration acak sudah dibersihkan. Container lab utama
+  `dpr-infra-openbao-1` disiapkan dengan CA eksternal dan endpoint HTTPS yang
+  terverifikasi; **belum initialized dan masih sealed**. Init/unseal manual di
+  README adalah langkah operator, bukan auto-unseal oleh service/Compose.
+  CA lab berada pada DPR_SECRETS_DIR di luar checkout, bukan di Git.
+- Scope selesai: implementasi dan pengujian Tahap 1. Toolkit field AEAD/AAD dan
+  backup streaming yang mengoreksi celah referensi adalah Tahap 2 dan Tahap 5;
+  belum diimplementasikan di pekerjaan Tahap 1 ini dan tidak diklaim selesai.

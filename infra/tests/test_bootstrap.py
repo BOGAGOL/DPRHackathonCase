@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 from unittest.mock import Mock
 from urllib.error import HTTPError, URLError
+import warnings
 
 import pytest
 
@@ -96,6 +97,21 @@ def test_unseal_and_revoke_require_manual_share_and_correct_policy():
     api.request.assert_called_with("/auth/token/revoke-self", {}, token=token)
 
 
+def test_unseal_never_falls_back_to_visible_input(monkeypatch):
+    monkeypatch.setattr(init.sys.stdin, "isatty", lambda: False)
+    with pytest.raises(ValueError):
+        init.read_unseal_share()
+    monkeypatch.setattr(init.sys.stdin, "isatty", lambda: True)
+    share = os.urandom(32).hex()
+    monkeypatch.setattr(init.getpass, "getpass", lambda _: share)
+    assert init.read_unseal_share() == share
+    def unavailable(_):
+        warnings.warn("No hidden input", init.getpass.GetPassWarning)
+    monkeypatch.setattr(init.getpass, "getpass", unavailable)
+    with pytest.raises(ValueError):
+        init.read_unseal_share()
+
+
 def test_issue_tokens_have_bounded_ttl_and_no_default_policy(tmp_path):
     api = Mock()
     api.request.side_effect = [{"auth": {"client_token": os.urandom(16).hex()}} for _ in init.POLICIES]
@@ -141,6 +157,8 @@ def test_configure_keys_policies_and_safe_reentry():
         assert len(policy_calls) == 4
         created = [c for c in api.request.call_args_list if c.args[0].startswith("/transit/keys/") and len(c.args) > 1]
         assert len(created) == (0 if existing else 3)
+        if not existing:
+            assert next(c.args[1] for c in created if c.args[0].endswith("search-hmac"))["key_size"] == 32
     for kwargs in ({"sealed": True}, {"existing": True, "unsafe": True}, {"existing": True, "wrong_mount": True}):
         with pytest.raises(ValueError):
             init.configure(configured_api(**kwargs), "")
@@ -155,7 +173,7 @@ def test_cli_dispatch_redacts_material(command, tmp_path, monkeypatch, capsys):
     token = os.urandom(16).hex()
     monkeypatch.setenv("OPENBAO_TOKEN", token)
     monkeypatch.setattr("sys.argv", ["init", command])
-    monkeypatch.setattr(init.getpass, "getpass", lambda _: os.urandom(32).hex())
+    monkeypatch.setattr(init, "read_unseal_share", lambda: os.urandom(32).hex())
     for name in ("initialize", "configure", "issue_tokens", "revoke_migration"):
         monkeypatch.setattr(init, name, Mock())
     monkeypatch.setattr(init, "unseal", Mock(return_value={"sealed": False}))

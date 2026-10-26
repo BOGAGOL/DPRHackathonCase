@@ -6,7 +6,9 @@ import getpass
 import json
 import os
 from pathlib import Path
+import sys
 import uuid
+import warnings
 
 from infra.openbao.api import BaoAPI, BaoError, from_environment
 from infra.security import external_directory, secure_directory
@@ -41,6 +43,18 @@ def unseal(api: BaoAPI, key: str) -> dict:
     return api.request("/sys/unseal", {"key": key})
 
 
+def read_unseal_share() -> str:
+    if not sys.stdin.isatty():
+        raise ValueError("Unseal requires an interactive terminal with hidden input")
+    with warnings.catch_warnings():
+        # getpass must never fall back to echoed stdin on a terminal without no-echo.
+        warnings.simplefilter("error", getpass.GetPassWarning)
+        try:
+            return getpass.getpass("Unseal share (hidden; one custodian per invocation): ")
+        except getpass.GetPassWarning:
+            raise ValueError("Hidden input unavailable; unseal aborted") from None
+
+
 def configure(api: BaoAPI, token: str) -> None:
     if api.request("/sys/seal-status")["sealed"]:
         raise ValueError("Unseal manually before configuring Transit")
@@ -59,6 +73,7 @@ def configure(api: BaoAPI, token: str) -> None:
             api.request(f"/transit/keys/{name}", {
                 "type": key_type, "derived": False, "exportable": False,
                 "allow_plaintext_backup": False,
+                **({"key_size": 32} if key_type == "hmac" else {}),
             }, token=token)
             key = api.request(f"/transit/keys/{name}", token=token)["data"]
         if (key["type"] != key_type or key["derived"] or key["exportable"]
@@ -108,7 +123,7 @@ def main() -> None:
             initialize(api, directory)
             print("Initialization saved to external openbao/init-material.json; server remains sealed.")
         elif args.command == "unseal":
-            state = unseal(api, getpass.getpass("Unseal share (hidden; one custodian per invocation): "))
+            state = unseal(api, read_unseal_share())
             print(json.dumps({"sealed": state["sealed"], "progress": state.get("progress", 0)}))
         elif args.command == "revoke-migration":
             revoke_migration(api, os.environ["OPENBAO_TOKEN"])

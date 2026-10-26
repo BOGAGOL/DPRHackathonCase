@@ -8,3 +8,4 @@ path "transit/hmac/search-hmac" { capabilities = ["update"] }
 path "transit/hmac/search-hmac/sha2-256" { capabilities = ["update"] }
 path "auth/token/lookup-self" { capabilities = ["read"] }
 path "auth/token/revoke-self" { capabilities = ["update"] }
+path "sys/capabilities-self" { capabilities = ["update"] }

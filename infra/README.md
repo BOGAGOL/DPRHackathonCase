@@ -30,7 +30,9 @@ $env:OPENBAO_TOKEN = $material.root_token
 $material = $null
 try {
   .\.venv\Scripts\python.exe -m infra.openbao.init configure
+  if ($LASTEXITCODE -ne 0) { throw 'Konfigurasi OpenBao gagal; jangan menerbitkan token.' }
   .\.venv\Scripts\python.exe -m infra.openbao.init issue --ttl-seconds 3600
+  if ($LASTEXITCODE -ne 0) { throw 'Penerbitan token gagal; periksa material eksternal.' }
 } finally {
   Remove-Item Env:OPENBAO_TOKEN -ErrorAction SilentlyContinue
 }
@@ -79,3 +81,43 @@ Lihat [NOTES.md](NOTES.md) untuk keputusan dan batas klaim.
 ```powershell
 .\.venv\Scripts\python.exe -m pytest infra/tests -q
 ```
+
+Uji container nyata (Docker aktif, image PostgreSQL 18/OpenBao akan diunduh bila
+belum ada). Uji membuat project/volume acak, memakai data sintetis dalam memori,
+lalu menghapus hanya resource uji tersebut. Tidak menyentuh `pg-dpr` atau volume
+`dpr-infra`. Recovery material uji berada di temporary directory di luar repo.
+
+```powershell
+$env:DPR_INFRA_INTEGRATION = '1'
+.\.venv\Scripts\python.exe -m pytest infra/tests/test_integration.py -q
+Remove-Item Env:DPR_INFRA_INTEGRATION
+```
+
+Hasil mesin ke `evidence/infra/integration.json`: AAD cocok/salah/hilang, ACL,
+TTL, revokasi, rotate/rewrap/config, TLS/CA, restart + unseal ulang, PostgreSQL 18.
+
+Untuk memeriksa OpenBao lab yang sudah di-bootstrap, muat empat token workload
+terbaru ke env verifikasi (tidak memakai root):
+
+```powershell
+$policies = 'svc-app', 'svc-migration', 'svc-verify', 'key-operator'
+try {
+  foreach ($policy in $policies) {
+    $file = Get-ChildItem -LiteralPath (Join-Path $env:DPR_SECRETS_DIR 'openbao\tokens') -Filter "$policy-*.json" | Sort-Object Name | Select-Object -Last 1
+    $name = 'OPENBAO_' + $policy.ToUpper().Replace('-', '_') + '_TOKEN'
+    [Environment]::SetEnvironmentVariable($name, (Get-Content -LiteralPath $file.FullName -Raw | ConvertFrom-Json).auth.client_token, 'Process')
+  }
+  .\.venv\Scripts\python.exe -m infra.openbao.verify
+} finally {
+  foreach ($policy in $policies) {
+    $name = 'OPENBAO_' + $policy.ToUpper().Replace('-', '_') + '_TOKEN'
+    [Environment]::SetEnvironmentVariable($name, $null, 'Process')
+  }
+}
+```
+
+Verifier menulis `evidence/infra/openbao.json` dan exit nonzero saat gagal.
+Verifier membuat ciphertext/datakey/HMAC sintetis dan rewrap, tanpa rotasi key
+lab. Uji rotasi/config sebenarnya hanya dijalankan di container disposable.
+Jalankan sebelum mencabut token migrasi; token kadaluarsa memerlukan penerbitan
+ulang manual. Materi rahasia tidak ditulis ke evidence.
