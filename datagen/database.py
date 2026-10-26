@@ -203,12 +203,21 @@ def provision(name):
             raise ValueError("Existing benchmark role has unexpected memberships")
     with psycopg.connect(**bench) as conn:
         checks = {"bench_identity": conn.execute("SELECT current_user").fetchone()[0] == "bench_user",
-                  "bench_select": conn.execute("SELECT count(*) FROM public.anggota").fetchone()[0] > 0,
+                  "bench_read_count": conn.execute("SELECT count(*) FROM public.anggota").fetchone()[0] > 0,
                   "bench_no_schema_ddl": not conn.execute("SELECT has_schema_privilege(current_user,'public','CREATE')").fetchone()[0],
                   "bench_no_delete": not conn.execute("SELECT has_table_privilege(current_user,'public.anggota','DELETE')").fetchone()[0]}
+        for privilege in ("SELECT", "INSERT", "UPDATE", "DELETE", "TRUNCATE"):
+            expected = privilege in {"SELECT", "INSERT", "UPDATE"}
+            label = "bench_" + privilege.lower() + ("_allowed" if expected else "_denied")
+            checks[label] = conn.execute("SELECT has_table_privilege(current_user,%s,%s)",
+                                         ("public.anggota", privilege)).fetchone()[0] == expected
+        checks["bench_identity_sequence_allowed"] = conn.execute(
+            "SELECT has_sequence_privilege(current_user,pg_get_serial_sequence(%s,%s),'USAGE')",
+            ("public.anggota", "id")).fetchone()[0]
     with psycopg.connect(**parameters(name)) as conn:
         for privilege in ("SELECT", "INSERT", "UPDATE", "DELETE", "TRUNCATE"):
-            checks["scanner_" + privilege.lower()] = conn.execute(
+            label = "scanner_" + privilege.lower() + ("_allowed" if privilege == "SELECT" else "_denied")
+            checks[label] = conn.execute(
                 "SELECT has_table_privilege(%s,%s,%s)", ("scanner_user", "public.anggota", privilege)).fetchone()[0] == (privilege == "SELECT")
     # Verify no data privileges were introduced on the original DB, without changing its ACL.
     with psycopg.connect(**parameters("postgres")) as conn:

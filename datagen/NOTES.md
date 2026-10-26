@@ -69,3 +69,21 @@ Target telah disahkan pada commit yang tercatat di `evidence/targets_commit.json
   Dataset checksum agregat dan snapshot checksum bukan pengganti autentikasi backup protected.
 - Hasil test/generation/provision/snapshot yang benar-benar dijalankan dirujuk melalui evidence.
   Belum ada klaim benchmark, migrasi protected, restore, atau evaluasi scanner pada langkah ini.
+
+## Hasil langkah 2 yang dijalankan
+
+- PostgreSQL aktual: 18.6; `baseline_100k` dibuat seed 42, total 100.000 (734 sumber + 99.266 tambahan).
+  Validasi penuh dan validasi ulang lulus: sumber tidak berubah, checksum baseline cocok, tidak ada
+  duplicate/NULL pada identifier unik, pelanggaran format atau relasi tambahan.
+- Source mempunyai 42 tanggal pernikahan sebelum lahir; dengan batas kalender ulang tahun ke-17,
+  total 132 sebelum usia 17 (90 setelah lahir + 42 sebelum lahir). PROJECT_CONTEXT menyebut 131;
+  query independen PostgreSQL `tanggal_pernikahan < tanggal_lahir + interval '17 years'` menghasilkan
+  132. Angka tidak dipaksa cocok; catat perbedaan konvensi batas usia ini, sumber tetap dipertahankan.
+- Role bench_user berhasil autentikasi, grant minimum dan larangan sumber/DDL diperiksa;
+  scanner_user SELECT-only baseline diperiksa. Semua nilai boolean pada `roles.checks` berarti
+  assertion lulus, dengan label `_allowed`/`_denied` menjelaskan hak yang diuji.
+- Snapshot custom di luar repo berukuran 14.996.532 byte; header PGDMP dan `pg_restore --list`
+  dari container diverifikasi. Ini validasi format archive, **belum** drill restore langkah 3.
+- Suite datagen: 25 test lulus; ringkasan mesin `evidence/datasets/datagen-tests.json`, raw JUnit lokal
+  `results/datagen/unit-tests.xml`. Hasil dataset/role/snapshot ada di
+  `evidence/datasets/baseline_100k.json`.

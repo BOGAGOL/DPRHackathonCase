@@ -151,12 +151,14 @@ def test_provision_uses_scram_and_keeps_source_read_only(environment, monkeypatc
     admin, bench, scanner_check, original = (connection() for _ in range(4))
     admin.execute.return_value.fetchone.side_effect = [None, (1,), (0,)]
     admin.pgconn.encrypt_password.return_value = secrets.token_bytes(24).hex().encode()
-    bench.execute.return_value.fetchone.side_effect = [("bench_user",), (200,), (False,), (False,)]
+    bench.execute.return_value.fetchone.side_effect = [("bench_user",), (200,), (False,), (False,),
+        (True,), (True,), (True,), (False,), (False,), (True,)]
     scanner_check.execute.return_value.fetchone.side_effect = [(True,), (False,), (False,), (False,), (False,)]
     original.execute.return_value.fetchone.return_value = (False,)
     monkeypatch.setattr(db.psycopg, "connect", MagicMock(side_effect=[admin, bench, scanner_check, original]))
     result = db.provision("baseline_test")
     assert result["passed"]
+    assert result["checks"]["bench_insert_allowed"] and result["checks"]["scanner_insert_denied"]
     assert admin.pgconn.encrypt_password.call_args.args[-1] == b"scram-sha-256"
     assert "READ ONLY" in original.execute.call_args_list[0].args[0]
     assert all("GRANT" not in str(c) and "REVOKE" not in str(c) for c in original.execute.call_args_list)
