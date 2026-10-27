@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "scope": "benchmark laptop OpenBao bootstrap; no root in runtime",
+  "checked_at_utc": "2026-10-27T17:16:42.477653+00:00",
+  "tokens": {
+    "svc-migration": {
+      "policies": [
+        "svc-migration"
+      ],
+      "ttl_seconds": 14400,
+      "renewable": false
+    },
+    "svc-app": {
+      "policies": [
+        "svc-app"
+      ],
+      "ttl_seconds": 14400,
+      "renewable": false
+    }
+  },
+  "secrets_directory": "C:\\dev\\dpr-private\\openbao"
+}

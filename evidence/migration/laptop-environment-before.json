@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "scope": "benchmark laptop pg-dpr; before protected_100k migration",
+  "checked_at_utc": "2026-10-27T17:15:09.381575+00:00",
+  "free_disk_bytes": 64905105408,
+  "sources": {
+    "postgres": {
+      "rows": 734,
+      "size_bytes": 8640191,
+      "postmaster_started": "2026-10-27 11:21:01.585948+00",
+      "database_oid": 5,
+      "table_oid": 16385,
+      "relfilenode": 16385,
+      "inserted": 0,
+      "updated": 0,
+      "deleted": 0
+    },
+    "baseline_100k": {
+      "rows": 100000,
+      "size_bytes": 104732351,
+      "postmaster_started": "2026-10-27 11:21:01.585948+00",
+      "database_oid": 32768,
+      "table_oid": 32770,
+      "relfilenode": 32770,
+      "inserted": 0,
+      "updated": 0,
+      "deleted": 0
+    },
+    "baseline_1m": {
+      "rows": 1000000,
+      "size_bytes": 825194175,
+      "postmaster_started": "2026-10-27 11:21:01.585948+00",
+      "database_oid": 33000,
+      "table_oid": 33002,
+      "relfilenode": 33002,
+      "inserted": 222301,
+      "updated": 320756,
+      "deleted": 0
+    }
+  }
+}

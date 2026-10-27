@@ -1,0 +1,34 @@
+{
+    "status":  "BLOCKED",
+    "checked_at_utc":  "2026-10-27T16:56:35.2567032+00:00",
+    "branch":  "main",
+    "main_commit":  "5ab5248f499bae988fefebb774e7ed8e62e8cd87",
+    "requested_module_a_commit":  "0360af8",
+    "module_a_commit_in_main":  true,
+    "saved_feature_commit":  "fbeff98c1748a24db1b759afa41f54e589cbaf7d",
+    "inventory_preserved_in_stash":  "preserve local inventory before protected_100k migration",
+    "stopped_at_step":  1,
+    "blocker":  "enable_tls.py prepends hostnossl reject for all users on baseline_100k and baseline_1m; bench_user/scanner_user have no exceptions",
+    "script":  "infra/postgres/enable_tls.py",
+    "requirements":  {
+                         "protected_application_tls":  true,
+                         "baseline_non_tls_roles":  [
+                                                        "bench_user",
+                                                        "scanner_user"
+                                                    ],
+                         "baseline_non_tls_databases":  [
+                                                            "baseline_100k",
+                                                            "baseline_1m"
+                                                        ]
+                     },
+    "root_dependencies_installed":  false,
+    "tls_apply_executed":  false,
+    "openbao_started":  false,
+    "secret_material_created":  false,
+    "migration_executed":  false,
+    "benchmark_executed":  false,
+    "databases_modified_by_this_preflight":  false,
+    "reused_other_laptop_validation_as_local_result":  false,
+    "evidence_scope":  "static source-code audit only; existing validation-protected_100k.json belongs to upstream work, not a local migration",
+    "next_requirement":  "Revise A TLS updater and tests to preserve scoped baseline non-TLS access before applying"
+}

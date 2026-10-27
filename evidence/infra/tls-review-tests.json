@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "scope": "isolated module test processes avoid duplicate conftest registration and scripts/benchmark.py shadowing",
+  "modules": {
+    "datagen": {
+      "passed": true,
+      "counts": {
+        "passed": 25,
+        "skipped": 0,
+        "failed": 0
+      },
+      "seconds": 2.619,
+      "command": "python -m pytest --import-mode=importlib datagen/tests -q --tb=short"
+    },
+    "scanner": {
+      "passed": true,
+      "counts": {
+        "passed": 193,
+        "skipped": 1,
+        "failed": 0
+      },
+      "seconds": 7.508,
+      "command": "python -m pytest --import-mode=importlib scanner/tests -q --tb=short"
+    },
+    "benchmark": {
+      "passed": true,
+      "counts": {
+        "passed": 25,
+        "skipped": 0,
+        "failed": 0
+      },
+      "seconds": 4.392,
+      "command": "python -m pytest --import-mode=importlib benchmark/tests -q --tb=short"
+    },
+    "verify": {
+      "passed": true,
+      "counts": {
+        "passed": 3,
+        "skipped": 0,
+        "failed": 0
+      },
+      "seconds": 1.444,
+      "command": "python -m pytest --import-mode=importlib verify/tests -q --tb=short"
+    }
+  },
+  "owned_modules_suite": {
+    "passed": true,
+    "counts": {
+      "passed": 261,
+      "skipped": 7
+    },
+    "seconds": 25.83,
+    "command": "python -m pytest infra/tests infra/rotation/tests toolkit/tests policy/tests migration/tests scripts/backup/tests -q --tb=short"
+  },
+  "tls_backup_rotation_integration": {
+    "passed": true,
+    "tests": 3,
+    "seconds": 103.87,
+    "command": "Set DPR_POSTGRES_TLS_INTEGRATION=DPR_BACKUP_INTEGRATION=DPR_ROTATION_INTEGRATION=1; python -m pytest --import-mode=importlib infra/tests/test_postgres_tls_integration.py scripts/backup/tests/test_integration.py infra/rotation/tests/test_integration.py -q --tb=short",
+    "scope": "disposable containers, invented rows; includes TLS controls (a)-(d), strict bootstrap, backup and rotation compatibility"
+  },
+  "collection_note": "Combined cross-module collection conflicts on duplicate conftest registration/import names; module C tests run in isolated subprocesses with importlib. No module C test code changed."
+}

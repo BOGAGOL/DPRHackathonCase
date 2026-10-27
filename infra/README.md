@@ -85,6 +85,54 @@ tidak recreate/restart container, dan tidak menjalankan migrasi. Sertifikat dan
 key server dipasang di volume data yang sudah ada, lalu ALTER SYSTEM + reload.
 Snapshot rollback dan CA/key privat berada di DPR_SECRETS_DIR di luar repo.
 Client memakai `sslmode=verify-full` dan CA yang sama.
+
+### TLS dan pengecualian baseline benchmark (28 Oktober 2026)
+
+`baseline_100k` / `baseline_1m` adalah kondisi **awal** eksperimen B-P-P-B yang
+sudah diukur tanpa TLS. Untuk menjaga kondisi pengukuran yang sama, hanya
+`bench_user` dan `scanner_user` boleh non-TLS dari **satu IP klien** yang dilihat
+PostgreSQL. Ini pengecualian benchmark, bukan konfigurasi aplikasi produksi.
+`protected_734`, `protected_100k` dan `protected_1m` tetap menolak non-TLS untuk
+semua role, termasuk bench/scanner; role lain juga tetap ditolak non-TLS ke baseline.
+
+Sesudah baseline/role tersedia, muat password existing melalui environment
+`DPR_BENCH_USER_PASSWORD`, `DPR_SCANNER_USER_PASSWORD` dan `DPR_APP_USER_PASSWORD`.
+Scanner/app juga dapat memakai credential DPAPI existing di DPR_SECRETS_DIR.
+Jangan merotasi password atau menuliskannya di argv/history untuk menjalankan uji ini.
+
+```powershell
+# Otomatis mendeteksi alamat NAT Docker melalui koneksi bench dengan verify-full.
+$env:DPR_BASELINE_CLIENT_ADDRESS = 'auto'
+python -m infra.postgres.enable_tls apply
+python -m infra.postgres.enable_tls verify
+# Atau berikan IP literal yang benar-benar dilihat server (contoh saja):
+python -m infra.postgres.enable_tls apply --baseline-client-address 192.168.65.1
+```
+
+Alamat tidak dipatok ke 172.17.0.1. IPv4 dibatasi /32 dan IPv6 /128; subnet, /0,
+hostname, scope id, alamat multicast/unspecified dan injeksi konfigurasi ditolak.
+HBA memakai **hostnossl** SCRAM sebelum reject umum, sehingga aturan autentikasi
+TLS yang lama tetap berlaku. Jangan menambahkan aturan `trust` atau `all` untuk
+mengatasi masalah alamat. Port Docker proyek tetap dipublikasikan di loopback
+`127.0.0.1:5433`; alamat NAT bukan pengganti password/role atau isolasi jaringan.
+
+Default tanpa opsi: pemasangan TLS baru tetap ketat tanpa membutuhkan role benchmark;
+pengecualian terkelola yang sudah terpasang dipertahankan. Untuk alamat Docker yang
+berubah, jalankan ulang `auto` atau berikan alamat baru. Untuk menutup pengecualian:
+
+```powershell
+python -m infra.postgres.enable_tls apply --baseline-client-address disabled
+```
+
+Apply/verify menguji login baseline non-TLS untuk kedua role, penolakan non-TLS
+role lain, penolakan seluruh role proyek ke protected, dan login app verify-full.
+Database/credential app yang belum tersedia dicatat `pending`, bukan dianggap
+sudah diuji. `connection_matrix_complete` hanya true jika cakupan lengkap.
+Pengujian disposable mencakup kedua baseline dan ketiga protected, IP lain ditolak,
+upgrade HBA lama, apply berulang, disable/re-enable melalui rollback, serta salah
+alamat yang harus otomatis rollback. Tidak membuat database, tidak restart dan
+tidak mengubah data sumber. Bukti: `evidence/infra/postgres-tls-integration.json`.
+
 Klarifikasi: instance benchmark resmi berada di laptop teman; laptop ini memakai
 clone development pg-dpr sendiri. Clone dan validasinya disiapkan dengan
 `python -m infra.postgres.development ...`, detail di panduan PostgreSQL di atas.
