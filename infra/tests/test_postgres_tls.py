@@ -77,6 +77,76 @@ def test_hba_upgrade_adds_1m_and_preserves_existing_tail():
     with pytest.raises(pg.TLSUpdateError):pg.managed_hba(upgraded+pg.LEGACY_HBA_BLOCK.encode())
 
 
+@pytest.mark.parametrize("address,cidr", [("172.17.0.1", "172.17.0.1/32"), ("::1", "::1/128")])
+def test_baseline_exception_is_exact_and_precedes_reject(address, cidr):
+    tail = b"local all all trust\nhost all all all scram-sha-256\n"
+    expected = pg.baseline_hba_block(address).encode() + tail
+    for prior in (tail, pg.LEGACY_HBA_BLOCK.encode() + tail, pg.HBA_BLOCK.encode() + tail, expected):
+        assert pg.managed_hba(prior, address) == expected
+    block = pg.baseline_hba_block(address)
+    assert block.splitlines()[1] == "host baseline_100k,baseline_1m bench_user,scanner_user " + cidr + " scram-sha-256"
+    assert block.index("scram-sha-256") < block.index("hostnossl")
+    for invalid in ("0.0.0.0/0", "172.17.0.0/16", "bad\nhost all all all trust"):
+        with pytest.raises(ValueError):
+            pg.baseline_hba_block(invalid)
+    with pytest.raises(pg.TLSUpdateError):
+        pg.managed_hba(expected + pg.HBA_BLOCK.encode(), address)
+
+
+def test_baseline_credentials_are_required_without_fallback(tmp_path, monkeypatch):
+    monkeypatch.delenv("DPR_BENCH_USER_PASSWORD", raising=False)
+    with pytest.raises(pg.TLSUpdateError, match="baseline_bench_credential_required"):
+        pg.baseline_passwords(tmp_path)
+    password = os.urandom(24).hex()
+    monkeypatch.setenv("DPR_BENCH_USER_PASSWORD", password)
+    monkeypatch.setattr(pg, "role_password", Mock(return_value=password))
+    assert set(pg.baseline_passwords(tmp_path)) == set(pg.BASELINE_ROLES)
+    existing = os.urandom(5).hex()
+    monkeypatch.setenv("DPR_SCANNER_USER_PASSWORD", existing)
+    assert pg.baseline_passwords(tmp_path)["scanner_user"] == existing
+
+
+def test_connection_matrix_checks_real_baseline_roles_and_protected_tls(tmp_path, monkeypatch):
+    password = os.urandom(24).hex()
+    monkeypatch.setenv("DPR_BENCH_USER_PASSWORD", password)
+    monkeypatch.setattr(pg, "role_password", Mock(return_value=password))
+    rejected = Mock(return_value=True)
+    monkeypatch.setattr(pg, "plaintext_rejected", rejected)
+    calls = []
+
+    def connect(**params):
+        calls.append(params)
+        connection = Mock()
+        connection.execute.return_value.fetchone.return_value = (params["user"], params["dbname"], params["sslmode"] == "verify-full")
+        context = Mock()
+        context.__enter__ = Mock(return_value=connection)
+        context.__exit__ = Mock(return_value=False)
+        return context
+
+    monkeypatch.setattr(pg.psycopg, "connect", connect)
+    checks = pg.connection_matrix(tmp_path, "127.0.0.1", 5433, {"protected_100k": 123})
+    assert all(checks.values())
+    assert len([call for call in calls if call["sslmode"] == "disable"]) == 4
+    assert {call["user"] for call in calls if call["sslmode"] == "disable"} == set(pg.BASELINE_ROLES)
+    assert calls[-1]["user"] == "app_user" and calls[-1]["sslmode"] == "verify-full"
+    assert calls[-1]["sslrootcert"] == str(tmp_path / "postgres/tls/ca.crt")
+    assert "protected_verify_full:protected_734" not in checks  # not yet prepared
+    assert rejected.call_count == len(pg.DATABASES) * 9
+    monkeypatch.setattr(pg.psycopg, "connect", Mock(side_effect=pg.psycopg.OperationalError("withheld")))
+    failed = pg.connection_matrix(tmp_path, "127.0.0.1", 5433, {"protected_100k": 123})
+    assert not failed["baseline_plaintext_allowed:baseline_100k:bench_user"]
+    assert not failed["protected_verify_full:protected_100k"]
+
+
+def test_plaintext_probe_requires_hba_rejection_not_wrong_password(monkeypatch):
+    connect = Mock(side_effect=pg.psycopg.OperationalError("pg_hba.conf rejects connection: no encryption"))
+    monkeypatch.setattr(pg.psycopg, "connect", connect)
+    assert pg.plaintext_rejected("127.0.0.1", 5433, "protected_100k", "app_user")
+    assert connect.call_args.kwargs["user"] == "app_user"
+    connect.side_effect = pg.psycopg.OperationalError("password authentication failed")
+    assert not pg.plaintext_rejected("127.0.0.1", 5433, "protected_100k", "app_user")
+
+
 def test_state_save_is_atomic(tmp_path):
     directory = secure_directory(tmp_path / "private")
     path = directory / "state.json"

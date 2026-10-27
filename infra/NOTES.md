@@ -175,3 +175,22 @@ sintetis. Token/DEK/plaintext/ciphertext tidak masuk evidence.
 - Scope selesai: implementasi dan pengujian Tahap 1. Toolkit field AEAD/AAD dan
   backup streaming yang mengoreksi celah referensi adalah Tahap 2 dan Tahap 5;
   belum diimplementasikan di pekerjaan Tahap 1 ini dan tidak diklaim selesai.
+
+## Pengecualian TLS baseline di laptop benchmark (28 Oktober 2026)
+
+Atas keputusan eksplisit tim, branch `fix/tls-baseline-exception` mempertahankan
+akses baseline_100k/baseline_1m tanpa TLS hanya untuk bench_user/scanner_user dari
+IP Docker host yang diamati PostgreSQL, memakai SCRAM. Semua protected dan role
+lain tetap terkena aturan penolakan non-TLS. Tidak ada perubahan data/privilege
+baseline dan tidak ada benchmark yang diulang. Perubahan ini menunggu persetujuan
+Alby sebelum merge ke main. Aturan auth yang ada dipertahankan byte demi byte
+di luar blok terkelola; snapshot dan mekanisme rollback tetap digunakan.
+
+Pemeriksaan apply/verify memakai login baseline yang nyata dan uji penolakan HBA
+(bukan sekadar password salah). Login app verify-full diuji pada setiap protected
+yang sudah ada; target yang belum dibuat dinyatakan pending, kemudian diverifikasi
+ulang setelah prepare. Uji otomatis memakai data sintetis dan container disposable,
+termasuk upgrade HBA lama, apply berulang, serta rollback otomatis/eksplisit.
+Hasil: 206 test unit lulus, 5 integration opt-in dilewati; uji TLS disposable
+opt-in dijalankan terpisah dan lulus (1 test). Setelah penyesuaian pembacaan
+credential existing, 15 test unit TLS kembali lulus.

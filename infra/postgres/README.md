@@ -1,5 +1,27 @@
 # PostgreSQL proyek: pg-dpr:5433, TLS tanpa recreate
 
+## Pengecualian kondisi awal benchmark (28 Oktober 2026)
+
+Pada branch `fix/tls-baseline-exception`, hanya `bench_user` dan `scanner_user`
+boleh mengakses `baseline_100k` / `baseline_1m` tanpa TLS. Aturan `host` SCRAM
+diletakkan sebelum `hostnossl reject`, terbatas pada IP klien yang diamati server
+melalui koneksi bench terautentikasi (IPv4 /32 atau IPv6 /128, bukan seluruh subnet).
+Protected tetap wajib TLS untuk semua role; role lain juga wajib TLS ke baseline.
+Keputusan ini mempertahankan kondisi awal pengukuran yang telah diterima tim.
+
+Sebelum `apply` / `verify`, muat password bench yang sudah ada ke
+`DPR_BENCH_USER_PASSWORD`, dan password scanner yang sudah ada ke
+`DPR_SCANNER_USER_PASSWORD` (atau credential DPAPI scanner pada direktori role).
+Jangan memakai password contoh atau merotasi credential secara otomatis.
+`apply` menguji keempat koneksi baseline non-TLS, penolakan non-TLS role lain,
+penolakan app non-TLS ke seluruh protected, serta login app `verify-full` ke
+protected yang sudah ada. Jika belum dibuat, protected dicatat eksplisit dalam
+`protected_databases_pending_prepare`; login app belum diuji pada tahap itu.
+Setelah `migration prepare`, wajib jalankan `enable_tls verify` agar uji login app
+`verify-full` benar-benar dilakukan pada target yang baru dibuat.
+Updater tetap tidak membuat database, tidak mengubah tabel sumber, dan rollback
+otomatis bila salah satu pemeriksaan yang dapat dijalankan gagal.
+
 Allowlist migrasi kini juga mencakup baseline_1m/protected_1m. Jalankan kembali
 enable_tls apply setelah menarik pembaruan agar blok HBA lama tiga database
 ditingkatkan ke lima database tanpa recreate/restart; aturan auth lain dan source
