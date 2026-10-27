@@ -296,3 +296,60 @@ Evidence: evidence/overnight/ac_resume_status_20261028.json. Belum menerbitkan
 token baru, membuat target, atau menjalankan workload. Pengguna dimintai keputusan
 untuk melewati konflik dokumentasi verify/NOTES.md dengan mempertahankan kedua
 bagian lengkap; aturan gerbang sebelumnya masih meminta berhenti saat konflik.
+
+## Kelanjutan dengan izin union dokumentasi, 28 Oktober 2026
+
+Pengguna mengizinkan union semua konflik dokumentasi/NOTES .md, tanpa kehilangan
+isi; konflik kode/config tetap STOP. Merge feat/verify-bench diselesaikan pada
+07fbf4a: prefix bersama hanya sekali, seluruh tail feature tanggal 27 Oktober,
+lalu seluruh tail lokal tanggal 28 Oktober, diperiksa byte sesudah normalisasi
+LF/CRLF. Tidak ada konflik kode/config. Evidence gate0_resolution.json menyimpan
+hash kedua sisi dan pemeriksaan retensi lengkap; kegagalan sebelumnya diarsipkan.
+
+Pengumpulan test gabungan awal memakai venv benchmark untuk verifier sehingga
+Jinja2 tidak tersedia (dependensi dinyatakan pada verify/scanner requirements).
+Tidak ada test bisnis yang dieksekusi pada collection itu. Suite selanjutnya
+dipisah sesuai venv modul: benchmark/datagen 67 PASS, verify 24 PASS. Evidence
+merge_verification.json tetap merekam kesalahan pemilihan lingkungan awal.
+
+Migrasi baseline_1m -> protected_1m dimulai dengan token svc-migration dan svc-app
+BARU TTL 14400 detik, tanpa root pada proses migrator. Prepare dan check PASS.
+ACMonitor yang sudah diuji mengambil sampel tiap 2 detik; supervisor menghentikan
+hanya child migrator miliknya jika AC tidak terkonfirmasi atau disk <10 GiB.
+Checkpoint dipertahankan bila berhenti, tidak ada retry otomatis. Session.json
+di evidence/overnight/migration_1m/ mencatat fase dan durasi; hasil gate 1 baru
+dianggap PASS jika validation-protected_1m.json membandingkan tepat 1000000 baris.
+
+## Hasil overnight: gerbang 1 PASS, berhenti pada gerbang 2
+
+Migrasi protected_1m selesai: passed=true, rows_compared=1000000, complete=true,
+comparison=all_rows_all_fields. Run 01:11:41.905-01:53:47.447 WIB berlangsung
+2525.540631 detik (42.092 menit), termasuk validasi dan pencabutan token;
+seluruh sesi token/prepare/check/run 2540.822885 detik (42.347 menit).
+AC qualified: 2538 sampel, 0 sampel bukan AC, 0 Kernel-Power AC=false selama
+sesi. Insiden charger 00:58:21.876-00:58:54.603 WIB berada sebelum sesi ini,
+bukan run benchmark/migrasi aktif; tidak ada pengukuran yang perlu diulang.
+Token migrasi dicabut dan lookup ditolak 403; migration_user kembali NOLOGIN.
+Jumlah baris/OID/relfilenode/counter tulis/waktu start ketiga source tetap sama.
+Ukuran dan sisa disk aktual ada di evidence/overnight/migration_1m/completion.json.
+
+Gerbang 2 gagal pada prasyarat: benchmark/adapters/protected.py belum ada pada
+branch hasil merge; hanya plaintext.py dan __init__.py yang tersedia. Pencarian
+kode juga tidak menemukan ProtectedAdapter. Instrumentasi db_time di kode
+diagnostik lama masih berupa usulan, bukan kolektor protected yang dapat diuji.
+Tidak ada permintaan parity yang dijalankan: 0 dari 1000 kunci per skenario
+baca per dataset. Status read parity NOT_TESTED, db_time NOT_MEASURED;
+mismatches=null, bukan nol yang diklaim lulus.
+
+Sesuai instruksi gerbang, BERHENTI tanpa implementasi/perbaikan atau retry
+otomatis. Langkah 3 amandemen target, langkah 4 verifikasi after, dan langkah 5
+benchmark B-P-P-B belum dijalankan. Tidak mengubah ambang setelah melihat
+metrik, tidak mengulang benchmark baseline, tidak merge ke main. Evidence:
+evidence/benchmark/adapter_parity.json (FAILED_PRECONDITION), validasi 1M,
+session/power/completion JSON, dan evidence/overnight_summary.md.
+Kelanjutan memerlukan pembuatan adapter protected serta db_time dengan test
+dan instruksi melanjutkan gerbang 2; pertahankan protected_1m tervalidasi.
+Audit literal rahasia pada 21 file keluaran yang berubah dan log Docker PG/Bao
+sejak awal sesi tidak menemukan kecocokan credential/token/share/private-key
+aktif. Scope terbatas ini tercatat di evidence/overnight/output_audit.json;
+tidak menggantikan verifikasi after atau scan S06 yang belum dijalankan.

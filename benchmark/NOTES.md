@@ -531,3 +531,29 @@ final_validation.json mengonfirmasi arsip,42 test sebelum pengukuran, hash raw
 lama/baru, preservasi workload21/targets/ground truth,0 artefak sementara milik
 sesi, checksum generation, serta verifikasi AC. Sisa disk setelah sesi sekitar
 59,59GB desimal. Tidak ada retry, perubahan role/config, atau benchmark lain.
+
+## Overnight 28 Oktober 2026: gerbang adapter belum dapat diuji
+
+Branch run/overnight-28okt mengintegrasikan feat/verify-bench (merge 07fbf4a)
+setelah izin pengguna untuk union lengkap konflik verify/NOTES.md. Migrasi
+protected_1m kemudian lulus full decrypt-and-compare 1000000 baris. Run termasuk
+validasi/revokasi 2525.540631 detik; sesi termasuk token/prepare/check
+2540.822885 detik. AC qualified pada 2538 sampel dan 0 event AC=false.
+
+Gerbang 2 berhenti pada prasyarat: benchmark/adapters/protected.py belum ada,
+dan tidak ditemukan implementasi ProtectedAdapter di branch hasil merge.
+Tersedia hanya plaintext.py dan __init__.py. Instrumentasi db_time di
+diagnose_overhead.py masih berupa usulan. Oleh karena itu sampel parity
+1000 kunci per skenario pada protected_100k/protected_1m belum dieksekusi,
+db_time belum diukur, dan tidak ada angka ketidakcocokan atau kelulusan bisnis
+yang diklaim. Evidence/benchmark/adapter_parity.json merekam
+FAILED_PRECONDITION, 0 actual_parity_requests_executed, mismatches=null.
+
+Aturan pengguna meminta STOP dan tidak retry otomatis ketika gerbang gagal.
+Tidak membuat/memperbaiki adapter otomatis, tidak menjalankan benchmark B-P-P-B,
+tidak mengamendemen target (langkah 3 belum dicapai), dan tidak merge ke main.
+Seluruh 21 workload awal 1M, sesi pengganti backup/pgbench AC, dan ringkasan
+baseline terdahulu tetap utuh. Insiden charger 00:58:21.876-00:58:54.603 WIB
+terjadi sebelum migrasi 1M, saat berhenti pada merge; 0 run terdampak/diulang.
+Ringkasan akhir: evidence/overnight_summary.md. Data protected_1m yang sudah
+tervalidasi harus dipertahankan untuk kelanjutan setelah adapter tersedia.
