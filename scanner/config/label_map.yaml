@@ -1,0 +1,49 @@
+# Evaluation taxonomy only; detection never imports this file or ground truth.
+version: 1
+native_types:
+  - nik
+  - nama
+  - email
+  - telepon
+  - alamat
+  - tanggal_lahir
+  - tanggal_pernikahan
+  - tempat_lahir
+  - agama
+  - status_perkawinan
+  - keluarga
+  - rekening
+  - npwp
+  - identifier_lain
+  - kategori
+  - operasional
+  - tidak_diketahui
+labels:
+  PERSON_NAME: nama
+  NATIONAL_ID: nik
+  PHONE_NUMBER: telepon
+  MOBILE_PHONE: telepon
+  EMAIL_ADDRESS: email
+  PERSON_ADDRESS: alamat
+  BIRTH_DATE: tanggal_lahir
+  BIRTH_PLACE: tempat_lahir
+  RELIGION: agama
+  MARITAL_STATUS: status_perkawinan
+  FAMILY_CHILD_COUNT: keluarga
+  DEPENDENT_COUNT: keluarga
+  HOUSEHOLD_SIZE: keluarga
+  BANK_ACCOUNT_NUMBER: rekening
+  TAXPAYER_ID: npwp
+  BANK_ACCOUNT_HOLDER_NAME: nama
+  EMPLOYEE_ID: identifier_lain
+  USERNAME: identifier_lain
+  PERSON_LINKED_LOCATION_ID: identifier_lain
+  GENDER: kategori
+  OCCUPATION: kategori
+  GOVERNMENT_OFFICE_NAME: kategori
+  BANK_INSTITUTION_NAME: kategori
+  BANK_INSTITUTION_CODE: kategori
+  MARRIAGE_DATE: tanggal_pernikahan
+regex_only:
+  min_content_score: 60
+  personal_types: [email, telepon, nik, npwp, rekening, alamat, tanggal_lahir]

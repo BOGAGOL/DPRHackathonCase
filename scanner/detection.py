@@ -22,7 +22,7 @@ PATTERNS = {
 NAMES = {
     "email": ("email", "e_mail", "surel"),
     "telepon": ("hp", "handphone", "telp", "telpon", "telepon", "phone", "mobile", "fax"),
-    "nik": ("ktp", "no_ktp", "nik", "kependudukan"),
+    "nik": ("ktp", "no_ktp", "nik", "kependudukan", "noktp", "nomornik"),
     "npwp": ("npwp", "tax_id"),
     "rekening": ("rek", "rekening", "account", "kartu", "card", "iban"),
     "nama": ("nama", "name"),
@@ -123,6 +123,11 @@ def features(values):
                            for v in nonnull) / denominator
     dictionaries = {kind: sum(v.lower() in words for v in nonnull) / denominator
                     for kind, words in DICTIONARIES.items()}
+    dictionaries["bank"] = sum(v.lower().removeprefix("bank ").strip() in DICTIONARIES["bank"]
+                               for v in nonnull) / denominator
+    dictionaries["government_office"] = sum(bool(re.match(
+        r"^(?:kppn|kantor\s+pelayanan\s+perbendaharaan\s+negara)\b", v, re.I))
+        for v in nonnull) / denominator
     embedded = Counter(kind for v in nonnull for kind in set(k for k, _ in embedded_findings(v)))
     entropy = []
     for v in nonnull:
@@ -202,6 +207,14 @@ def classify(column, values, config, environment, bank_context=False, baseline=F
     for kind, ratio in f["embedded_ratios"].items():
         scores[kind] = max(scores.get(kind, 0), 82 * ratio)
     if not baseline:
+        anonymous_numeric = (f["nonnull"] >= 3 and identifier == 1 and f["max_length"] >= 14
+                             and f["max_length"] != 16
+                             and not any(ns[k] for k in ("nik", "npwp", "rekening", "telepon")))
+        if anonymous_numeric:
+            scores["identifier_lain"] = 95
+            for ambiguous in ("nik", "npwp", "rekening", "telepon"):
+                scores[ambiguous] *= 0.5
+            negatives.append("identifier digit unik berpanjang tetap; tanpa konteks jenis perlu review")
         nonstandard_nik = (ns["nik"] and not ns["rekening"] and f["nonnull"] >= 3
                            and f["charset_ratios"]["digits"] == 1 and f["fixed_length_ratio"] == 1
                            and f["unique_ratio"] == 1 and f["max_length"] != 16)
@@ -254,7 +267,7 @@ def classify(column, values, config, environment, bank_context=False, baseline=F
     else:
         triage = "low_confidence"
     internal_kind = kind
-    if not baseline and (family_count or (kind == "identifier_lain" and not ns["identifier_lain"])):
+    if not baseline and (family_count or anonymous_numeric or (kind == "identifier_lain" and not ns["identifier_lain"])):
         triage = "needs_review"
     if confidence < 20 and max(ns.values(), default=0) == 0:
         kind = "kategori" if f["unique_ratio"] < 0.2 and f["nonnull"] else "tidak_diketahui"
@@ -272,6 +285,10 @@ def classify(column, values, config, environment, bank_context=False, baseline=F
         triage = "needs_review"
         negatives.append("konteks data spesifik membutuhkan verifikasi manusia")
     pdp = "spesifik" if specific else "non_pribadi" if kind == "operasional" and content >= 70 else "umum"
+    institution_reference = (not baseline and kind == "kategori" and low_cardinality
+                             and max(dictionaries["bank"], dictionaries["government_office"]) >= 0.8)
+    if institution_reference:
+        pdp = "non_pribadi"
     if family_count and not baseline:
         pdp = "umum"
     factor_kind = internal_kind if internal_kind in {"kesehatan", "biometrik", "genetika", "kejahatan", "password"} else kind
@@ -309,6 +326,8 @@ def classify(column, values, config, environment, bank_context=False, baseline=F
     reasons += negatives
     if not baseline and low_cardinality and internal_kind == "kategori":
         reasons.append(f"{f['unique_count']} nilai unik; kategori, bukan nama orang")
+    if institution_reference:
+        reasons.append("bukti isi referensi institusi; asosiasi dengan individu tetap memerlukan kontrol akses")
     if not baseline and family_count:
         reasons.append("bilangan hitungan keluarga; bukan data anak individual")
     if not baseline and surrogate_id:
@@ -326,6 +345,7 @@ def classify(column, values, config, environment, bank_context=False, baseline=F
     f.update({"name_scores": ns, "type_content_scores": scores, "negative_evidence": negatives,
               "semantic_candidate": internal_kind,
               "family_count": family_count, "surrogate_id_candidate": surrogate_id,
+              "institution_reference": institution_reference,
               "conditional_presence": conditional_presence or {},
               "sensitivity_note": "rawan diskriminasi" if internal_kind == "agama" else ""})
     examples = list(dict.fromkeys(str(v) for v in values if v is not None and str(v).strip()))[:3]

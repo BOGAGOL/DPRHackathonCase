@@ -9,7 +9,7 @@ Tidak ada AGENTS.md di repositori atau direktori induk yang diperiksa.
 Tidak ada data panitia yang disalin sebagai fixture, ground truth yang dikarang,
 atau hasil scan asli yang ditambahkan ke Git.
 
-Scanner v1.1 **belum dijalankan ulang pada database asli**. Hasil run pertama
+Status historis sebelum langkah 4 (26 Oktober): scanner v1.1 belum dijalankan ulang pada database asli. Hasil run pertama
 v1.0 di `results/scanner/before_v1/` sudah dibaca, khususnya inventory.csv dan
 relations.json, untuk menyusun perbaikan. Angka k-anonymity satu kolom juga
 diperiksa dari JSON hasil tersebut. SCANNER_DATABASE_URL tidak tersedia di sesi
@@ -391,3 +391,34 @@ periksa reason tanggal lahir terhadap agregat satu kolom JSON, dan pastikan
 run_meta memuat scanner_version 1.1.0, change_summary, tiga faktor lingkungan,
 dan type_priority_policy. Hasil scan baru pada database asli tetap dikerjakan
 pengguna; pengujian lokal tidak membuktikan klasifikasi isi asli telah benar.
+
+## Langkah 4 — 27 Oktober 2026, implementasi evaluasi
+
+- Perbaikan A1–A8 yang sudah ada dipakai ulang bersama regresinya. Tambahan: identifier
+  numerik anonim 14/15/18 digit tidak dikonfirmasi sebagai NIK/NPWP tanpa konteks;
+  tetap identifier_lain + needs_review. Alias noKTP/nomorNIK ada di kamus generik.
+- Kategori institusi diberi non_pribadi hanya dengan bukti isi bank/kantor KPPN
+  yang kuat (>=80%) serta kardinalitas rendah, bukan dari nama kolom saja.
+  Kategori orang seperti jenis kelamin tetap umum. Kode bank yang hampir unik
+  tetap kandidat pribadi; konvensi label institusi Alby dan keputusan FIN pada
+  kontrak tetap dipisahkan dari hasil deteksi, tidak dipaksa agar akurasi sempurna.
+- Label map YAML hanya diimpor evaluator. Taksonomi Alby dipetakan ke tipe native,
+  termasuk tanggal_pernikahan, keluarga, kategori institusi, dan identifier_lain.
+  Ground truth/metodologi tidak diedit. Label tidak dikenal tampil pada unmapped_labels,
+  tidak dikeluarkan dari denominator dan tidak dianggap benar hanya karena teksnya sama.
+- Evaluator menormalisasi boolean/kelas PDP serta public sebagai schema default,
+  menolak kunci duplikat/CSV tidak lengkap, mengecualikan prediksi tidak berlabel,
+  dan menyimpan F1/F2, confusion matrix, akurasi, daftar ketidakcocokan, serta hash input.
+  Semua hasil in_sample=true; missing prediction tetap berada dalam denominator.
+- Regex_only memerlukan skor nama nol dan kecocokan isi >=60 untuk tipe regex yang
+  didukung. Aturan dibekukan sebelum evaluasi; kolom tanpa kecocokan tidak dihitung
+  terdeteksi hanya karena default pdp_class umum. Kelas/tipe mentah tetap dievaluasi
+  terpisah. Mode ini melewati relasi dan agregat k-anonymity untuk menghemat pekerjaan.
+- Eksekusi hanya pada sumber 734 baris; tidak ada benchmark, scan 100k/1M, perubahan
+  sumber/role/password, atau start/stop container. Credential scanner_user tidak ada
+  di env sesi agen; credential admin lab yang telah diotorisasi dipakai untuk login
+  dengan startup role=scanner_user dan default_transaction_read_only=on. Effective
+  role scanner_user, larangan UPDATE, dan transaksi read-only diperiksa; ini bukan
+  bukti autentikasi password scanner_user. Detail tanpa DSN ada di step4_preflight.json.
+- Perintah PowerShell tersedia di scanner/README.md. Hasil run/test dan keterbatasan
+  aktual dicatat pada evidence/scanner/, dengan checksum v1 dan ground truth dijaga.
