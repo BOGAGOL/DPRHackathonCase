@@ -50,3 +50,6 @@ results/
 # Reviewed protected schema/roles; dataset dumps remain ignored.
 !sql/protected/*.sql
 !sql/roles/*.sql
+
+# Encrypted backup artifacts belong in DPR_BACKUP_DIR outside the checkout.
+*.dprbak
