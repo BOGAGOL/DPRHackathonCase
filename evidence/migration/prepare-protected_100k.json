@@ -2,7 +2,7 @@
   "schema_version": 1,
   "passed": true,
   "command": "prepare",
-  "checked_at_utc": "2026-10-27T11:33:21.361366+00:00",
+  "checked_at_utc": "2026-10-27T17:36:55.039521+00:00",
   "checks": {
     "ciphertext_columns": true,
     "no_plaintext_pii_fin": true,

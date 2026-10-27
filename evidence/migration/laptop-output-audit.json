@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "checked_at_utc": "2026-10-27T17:46:06.408117+00:00",
+  "scope": "changed/untracked evidence and documentation; PostgreSQL/OpenBao Docker logs since bootstrap 2026-10-27T17:13:00Z; exact matching of current scanner/bench passwords, scanner SCRAM verifier, bootstrap shares/root, policy tokens and private key material",
+  "files_scanned": 29,
+  "sensitive_literals_checked": 15,
+  "matched_files": [],
+  "server_logs": {
+    "pg-dpr": {
+      "bytes_scanned": 23350,
+      "active_secret_literal_found": false
+    },
+    "dpr-infra-openbao-1": {
+      "bytes_scanned": 6337,
+      "active_secret_literal_found": false
+    }
+  },
+  "limitation": "Literal audit of these outputs, not a complete repository/history or host telemetry security scan."
+}

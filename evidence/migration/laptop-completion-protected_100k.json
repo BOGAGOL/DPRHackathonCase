@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "scope": "actual functional migration on benchmark laptop pg-dpr; not a benchmark",
+  "checked_at_utc": "2026-10-27T17:42:44.332640+00:00",
+  "source": "baseline_100k",
+  "target": "protected_100k",
+  "validation": {
+    "file": "evidence/migration/validation-protected_100k.json",
+    "passed": true,
+    "rows_compared": 100000,
+    "comparison": "all_rows_all_fields"
+  },
+  "duration_seconds": 192.562236,
+  "prepare_seconds": 8.528233,
+  "check_seconds": 1.153172,
+  "execution_steps_total_seconds": 202.243641,
+  "database_size_bytes": {
+    "postgres": 8640191,
+    "baseline_100k": 104732351,
+    "baseline_1m": 825194175,
+    "protected_100k": 230012607
+  },
+  "protected_to_baseline_size_ratio": 2.196194440436079,
+  "source_checks": {
+    "postgres": {
+      "rows": true,
+      "postmaster_started": true,
+      "database_oid": true,
+      "table_oid": true,
+      "relfilenode": true,
+      "inserted": true,
+      "updated": true,
+      "deleted": true
+    },
+    "baseline_100k": {
+      "rows": true,
+      "postmaster_started": true,
+      "database_oid": true,
+      "table_oid": true,
+      "relfilenode": true,
+      "inserted": true,
+      "updated": true,
+      "deleted": true
+    },
+    "baseline_1m": {
+      "rows": true,
+      "postmaster_started": true,
+      "database_oid": true,
+      "table_oid": true,
+      "relfilenode": true,
+      "inserted": true,
+      "updated": true,
+      "deleted": true
+    }
+  },
+  "source_metadata_after": {
+    "postgres": {
+      "rows": 734,
+      "size_bytes": 8640191,
+      "postmaster_started": "2026-10-27 11:21:01.585948+00",
+      "database_oid": 5,
+      "table_oid": 16385,
+      "relfilenode": 16385,
+      "inserted": 0,
+      "updated": 0,
+      "deleted": 0
+    },
+    "baseline_100k": {
+      "rows": 100000,
+      "size_bytes": 104732351,
+      "postmaster_started": "2026-10-27 11:21:01.585948+00",
+      "database_oid": 32768,
+      "table_oid": 32770,
+      "relfilenode": 32770,
+      "inserted": 0,
+      "updated": 0,
+      "deleted": 0
+    },
+    "baseline_1m": {
+      "rows": 1000000,
+      "size_bytes": 825194175,
+      "postmaster_started": "2026-10-27 11:21:01.585948+00",
+      "database_oid": 33000,
+      "table_oid": 33002,
+      "relfilenode": 33002,
+      "inserted": 222301,
+      "updated": 320756,
+      "deleted": 0
+    }
+  },
+  "migration_token_revoked_and_rejected": true,
+  "migration_database_role_nologin": true,
+  "free_disk_bytes": 64859758592,
+  "estimate_1m": {
+    "method": "linear extrapolation of complete 100k run, including full validation and token revocation; 10x rows",
+    "seconds": 1925.62236,
+    "minutes": 32.094,
+    "token_ttl_seconds": 14400,
+    "fraction_of_token_ttl": 0.13372377500000002,
+    "headroom_seconds": 12474.37764,
+    "fresh_workload_tokens_required": true,
+    "limitation": "Estimate, not a measured 1M migration; query, I/O and validation scaling may be nonlinear. Issue fresh 4-hour migration/app tokens immediately before the next migration; prior migration token is revoked."
+  },
+  "tls_matrix": {
+    "a_baseline_without_tls_allowed_bench_scanner": true,
+    "b_other_roles_without_tls_to_baseline_rejected": true,
+    "c_app_without_tls_to_protected_rejected": true,
+    "d_app_verify_full_to_protected_succeeds": true
+  },
+  "tls_evidence": "evidence/infra/postgres-tls.json",
+  "verification_tests": "evidence/migration/laptop-verification-tests.json",
+  "scanner_credential_evidence": "evidence/scanner/credential_rotation.json",
+  "benchmarks_executed": false,
+  "tls_fix_commit": "61b31101185dc5b0747d00c7a90d8ffbe5d9dfaf",
+  "prepare_to_run_completion_elapsed_seconds": 269.011449,
+  "output_secret_audit": {
+    "file": "evidence/migration/laptop-output-audit.json",
+    "passed": true
+  }
+}

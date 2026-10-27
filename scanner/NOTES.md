@@ -496,3 +496,20 @@ Hasil v1 memakai berkas historis asli dan dinilai ulang dengan evaluator yang sa
   evaluation_v1_1.json; evaluation_regex_only.json; comparison.json/CSV.
   evaluation.json adalah salinan identik evaluasi v1.1 untuk konsumen prompt C.
   Seluruh hasil adalah prediksi mentah sebelum tinjauan manusia.
+
+## Rotasi credential laptop benchmark, 28 Oktober 2026
+
+Atas izin eksplisit pengguna, hanya password scanner_user yang diubah menjadi
+CSPRNG 48 karakter alfanumerik. Password role lain, atribut role dan privilege
+tidak diubah oleh operasi rotasi. DPAPI canonical di luar repo:
+C:\dev\dpr-private\scanner_user.credential.xml; salinan identik untuk provisioning
+Modul A di DPR_SECRETS_DIR/postgres/roles/scanner_user.credential.xml.
+Nilai password tidak dicetak, tidak masuk argv/history, dan ALTER ROLE memakai
+verifier SCRAM dengan logging statement/durasi/error dibatasi pada transaksi admin.
+
+Uji nyata memakai scanner.sources.database dengan SCANNER_DATABASE_URL dari DPAPI
+terbaru: login scanner_user ke postgres (734) dan baseline_100k (100000) berhasil,
+transaksi read-only, koneksi non-TLS sesuai kondisi baseline. Operasi migrasi
+menggunakan role scanner yang sama sebagai source SELECT-only dengan verify-full.
+Percobaan awal hanya gagal pada query metadata sebelum ALTER ROLE; diperbaiki
+tanpa rotasi berulang. Evidence: evidence/scanner/credential_rotation.json.
