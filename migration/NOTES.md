@@ -179,3 +179,16 @@ setelah revokasi; bukti PASS yang disimpan berasal dari pemeriksaan sebelum run.
 Integrasi factory/akun/audit/principal Service App dengan B tetap terpisah.
 Tahap 5 backup/restore dapat memakai backup_user yang tetap aktif, dengan
 --enable-row-security; validasi pemulihan berkunci memerlukan token svc-app valid.
+
+## Sinkronisasi main sebelum penggabungan Modul A
+
+Main 27aa9fa memuat scanner v1.2 dan amandemen docs/targets.md: baseline_1m
+menjadi dataset benchmark utama; baseline_100k tetap titik skala terpisah.
+Perubahan itu digabung tanpa konflik dan tanpa mengubah kontrak blob/profile v1.
+Migrator pada penggabungan ini tetap hanya menerima pasangan 734/100k yang
+sudah diuji. baseline_1m->protected_1m belum diimplementasikan/dijalankan; jangan
+memakai hasil protected_100k sebagai pembanding before/after baseline_1m.
+Ekstensi target 1M memerlukan perubahan allowlist, provisioning, guard count,
+pengujian dan eksekusi migrasi tersendiri. Tidak membuat/mengubah dataset lokal
+untuk keperluan merge. Integrasi Service App dan adapter benchmark protected
+tetap mengikuti handoff A/B/C, terpisah dari penggabungan kode ini.
