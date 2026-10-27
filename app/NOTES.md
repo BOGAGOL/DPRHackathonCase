@@ -73,3 +73,42 @@ Run awal probe memiliki satu false-positive canary pada fixture: nomor KTP beraw
 Hasil Python/UI terbaru diekspor tersendiri ke `app/evidence/access-control/`. Hasil historis 33 tes Python/5 browser aplikasi lama tidak digunakan sebagai bukti kepatuhan kontrak baru. Mode parity dengan crypto test double tidak sama dengan decrypt-and-compare terhadap paket/test vectors/live OpenBao A. **Integrasi `baseline_100k` pada server tim, protected live, grants/RLS target, dan benchmark API 100k tetap NOT TESTED** sampai target/kredensial/dependensi tersedia. `check_ready.py` sengaja mempertahankan status PARTIAL untuk integrasi tersebut.
 
 Suite Python akhir: **222 passed, 1 skipped, total 223**, exit 0. Skip hanya swap ciphertext pada mode plain yang tidak berlaku; mode protected menguji swap dan audit kegagalannya. Suite UI: **12 passed**, build produksi dan TypeScript lulus. Bukti ini mencakup enam peran, DTO mentah, IDOR/BOLA, normalisasi lookup, update bidx, insert, batch unwrap/proyeksi minimal, session/CSRF/header/CSP, output provider yang invalid, binding opaque, dan guard runtime/setup. Report mencatat hash source tree serta status dirty ketika dijalankan agar hasil tidak keliru diklaim berasal dari commit base yang belum memuat kode baru.
+
+## Pembaruan lab lokal Zhafif — 27 Oktober 2026 WIB
+
+Status awal di atas merupakan riwayat sebelum lab ini dibuat. `local_lab.py` kini menyediakan
+container persisten **pg-dpr**, PostgreSQL **18.6**, port lokal **5433**, TLS wajib dan sertifikat
+dari generator A. `postgres` diinisialisasi satu kali pada instance baru dengan 734 record dari
+`sql/baseline/02_data.sql` commit main **cf2d2ccd786066ad9ea3c56ec2999987feda73ac**. Setelah itu,
+tidak ada perubahan pada sumber. Instance/volume yang tidak memiliki label kepemilikan B ditolak;
+skrip tidak mencoba mengadopsi atau mereset infrastruktur orang lain.
+
+Datagen C dijalankan tanpa mengubah kodenya: **100.000 baris, seed 42, 734 sumber + 99.266 sintetis**.
+Tujuan report generator diarahkan ke `app/` melalui adapter script B agar batas kepemilikan folder
+tetap dipatuhi. Validasi C lulus dan checksum seluruh baseline identik dengan evidence C yang
+sudah tersimpan di repo. Semua password/CA signing key/akun demo berada di storage privat luar Git
+dengan ACL utility A; hanya server TLS material dan password-file bootstrap dipasang ke container.
+
+`baseline-100k.json` mencatat **181 pemeriksaan lulus**: enam peran, DTO mentah dan correctness field,
+lookup, pagination 50 sampai halaman 2000, IDOR, PATCH, insert, analytics/audit, TLS tiap role,
+penolakan CA salah/non-TLS, no-DDL/NOBYPASSRLS, RLS lokal deny-default dan reset principal.
+Browser menguji Next HTTPS → API HTTPS → database verify-full, termasuk cookie/CSP/storage,
+masking, pencarian dan pembaruan kontak. Kontak dan insert uji dipulihkan; checksum seluruh baseline
+dan sumber cocok kembali. Metadata audit sengaja tetap tersimpan. Tidak ada benchmark bersamaan.
+
+Setup ulang diuji dan lulus tanpa reimport/regenerasi/rotasi kredensial. Suite Python terbaru:
+**243 passed, 1 skipped**, exit 0; hasil mesin diekspor ulang. Satu skip tetap kasus ciphertext
+swap pada plain yang tidak relevan. UI mock suite sebelumnya 12 lulus; alur browser nyata terbaru
+termasuk dalam 181 pemeriksaan di atas. Bug helper probe saat `AUTH_DATABASE_URL` tidak diisi
+diperbaiki agar memakai database runtime default, dengan regression test. Run gagal awal disimpan
+sebagai riwayat penjelasan ini; PASS berasal dari pengulangan lengkap sesudah perbaikan.
+
+`check_ready.py` sekarang membaca bukti target 100k dan hanya menerima status PASS jika semua
+pemeriksaan wajib ada serta bernilai true. Bukti parsial/palsu/failing tidak mengubah target menjadi
+PASS. **MODE=plain baseline_100k lokal: PASSED. MODE=protected live dan benchmark API resmi: NOT TESTED.**
+Readiness keseluruhan tetap PARTIAL. Toolkit/profile/test vectors A belum tersedia pada main yang
+diperiksa; B akan menyesuaikan bridge saat API A tersedia. Format AAD UUID, locator legacy, dan
+principal hex tidak diubah; lihat `docs/LOCAL_LAB.md` untuk tiga titik sinkronisasi A/B dan runbook.
+
+Perubahan lanjutan tetap hanya `app/`. PR #1 disiapkan untuk review Alby; merge ke main menunggu
+review anggota lain sebagaimana TEAM_PLAN, bukan dianggap sudah selesai dari bukti lokal saja.

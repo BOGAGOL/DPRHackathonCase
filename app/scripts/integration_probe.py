@@ -279,7 +279,7 @@ def exercise_live_https(settings, accounts, private, checks):
     # setup/migration/root/OpenBao credentials into either web process.
     base_env = {k: v for k, v in os.environ.items() if not any(word in k.upper() for word in ["DATABASE_URL", "PASSWORD", "TOKEN", "SECRET", "PRIVATE_DIR"])}
     api_env = {**base_env, "MODE": "plain", "DATABASE_URL": settings.database_url,
-               "AUTH_DATABASE_URL": settings.auth_database_url,
+               "AUTH_DATABASE_URL": settings.auth_database_url or settings.database_url,
                "ANALYST_DATABASE_URL": settings.analyst_database_url,
                "AUDITOR_DATABASE_URL": settings.auditor_database_url,
                "DPR_ALLOW_DISPOSABLE_DATABASE": "1", "APP_ORIGIN": base_url,

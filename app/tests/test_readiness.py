@@ -89,3 +89,29 @@ def test_readiness_main_writes_machine_report_and_only_safe_stdout(monkeypatch, 
     output = json.loads(capsys.readouterr().out)
     assert result["status"].startswith("PARTIAL")
     assert set(output) == {"status", "external_dependencies"}
+
+
+def test_baseline_incomplete_or_failed_checks_cannot_certify_target(monkeypatch, tmp_path):
+    module = local_report(monkeypatch, tmp_path)
+    path = module.APP / "evidence/access-control/baseline-100k.json"
+    path.parent.mkdir(parents=True)
+    for checks in [{}, {"datagen_validation": True}, {"datagen_validation": False}]:
+        path.write_text(json.dumps({"status": "PASSED", "checks": checks}), encoding="utf-8")
+        assert module.report()["target_integration"]["team_baseline_100k"].startswith("NOT TESTED")
+
+
+def test_complete_baseline_proof_does_not_certify_protected_or_benchmark(monkeypatch, tmp_path):
+    module = local_report(monkeypatch, tmp_path)
+    path = module.APP / "evidence/access-control/baseline-100k.json"
+    path.parent.mkdir(parents=True)
+    keys = "datagen_validation baseline_checksum_before baseline_checksum_restored source_checksum_unchanged pg18 non_tls_rejected wrong_ca_rejected last_page_100k insert patch patch_restore aggregate_count forced_rls_member_scope live_browser_probe_passed idor_detail idor_patch".split()
+    checks = {key: True for key in keys}
+    path.write_text(json.dumps({"status": "PASSED", "checks": checks}), encoding="utf-8")
+    report = module.report()
+    assert report["target_integration"]["team_baseline_100k"].startswith("PASSED")
+    assert report["target_integration"]["live_protected"].startswith("NOT TESTED")
+    assert report["target_integration"]["api_benchmark"].startswith("NOT TESTED")
+    assert report["status"].startswith("PARTIAL")
+    checks["source_checksum_unchanged"] = False
+    path.write_text(json.dumps({"status": "PASSED", "checks": checks}), encoding="utf-8")
+    assert module.report()["target_integration"]["team_baseline_100k"].startswith("NOT TESTED")

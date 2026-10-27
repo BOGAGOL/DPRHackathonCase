@@ -50,3 +50,25 @@ def test_probe_compose_requires_external_random_credentials_and_tls():
     assert '127.0.0.1:0:5432' in source
     assert "create_host_path: false" in source
     assert "baseline_100k" not in source and "protected_100k" not in source and "pg-dpr" not in source
+
+
+def test_live_https_accepts_default_auth_database_without_nonstring_env(monkeypatch, tmp_path):
+    from types import SimpleNamespace
+    probe = load_probe()
+    monkeypatch.setattr(probe, "APP", tmp_path)
+    (tmp_path / "web/.next").mkdir(parents=True)
+    (tmp_path / "web/scripts").mkdir()
+    (tmp_path / "web/.next/BUILD_ID").touch()
+    (tmp_path / "web/scripts/live-probe.mjs").touch()
+    monkeypatch.setattr(probe.shutil, "which", lambda name: "node")
+    ports = iter([3443, 8100])
+    monkeypatch.setattr(probe, "free_loopback_port", lambda: next(ports))
+    settings = SimpleNamespace(database_url="test-primary-database", auth_database_url=None,
+                               analyst_database_url="test-analyst-database", auditor_database_url="test-auditor-database")
+    def capture(*args, **kwargs):
+        assert kwargs["env"]["AUTH_DATABASE_URL"] == settings.database_url
+        assert all(isinstance(value, str) for value in kwargs["env"].values())
+        raise RuntimeError("STOP BEFORE NETWORK")
+    monkeypatch.setattr(probe.subprocess, "Popen", capture)
+    with pytest.raises(RuntimeError, match="STOP BEFORE NETWORK"):
+        probe.exercise_live_https(settings, {}, tmp_path, {})

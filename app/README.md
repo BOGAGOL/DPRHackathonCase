@@ -4,7 +4,7 @@ Pemilik: Zhafif, branch `feat/service-app`. Aplikasi ini mempertahankan Python/F
 
 Satu kode menyediakan `MODE=plain` untuk `baseline_100k` dan `MODE=protected` untuk `protected_100k`/`protected_734`. Endpoint, role, bentuk DTO dan pagination sama. Protected tidak pernah beralih ke plain ketika toolkit, key, TLS atau dekripsi gagal. [Matriks akses](ACCESS_MATRIX.md), [catatan keputusan/batas](NOTES.md), dan [interface crypto A](docs/CRYPTO_ADAPTER.md) adalah bagian dari handoff.
 
-**Status target tim:** periksa `app/evidence/access-control/` dan `python app/scripts/check_ready.py`. Toolkit `toolkit/dprcrypto`, protection profile dan test vectors Modul A belum ada saat implementasi ini dimulai. Test dengan driver tiruan bukan bukti dekripsi OpenBao nyata. Evidence C tentang 100.000 record bersifat historis; container `pg-dpr` tidak tersedia pada host sesi ini. Jangan menandai integrasi target, RLS target, parity target atau benchmark 100k sebagai lulus dari tes disposable.
+**Status target tim:** periksa `app/evidence/access-control/` dan `python app/scripts/check_ready.py`. Lab lokal Zhafif kini menyediakan `pg-dpr`, TLS dan `baseline_100k` dari datagen C seed 42; panduan reproduksi ada di [LOCAL_LAB.md](docs/LOCAL_LAB.md). Toolkit `toolkit/dprcrypto`, protection profile dan test vectors Modul A masih belum tersedia. Bukti plain lokal 100k, probe disposable dan driver crypto tiruan memiliki cakupan berbeda; tidak membuktikan protected/live OpenBao atau benchmark resmi.
 
 ## Prasyarat dan instalasi PowerShell
 
