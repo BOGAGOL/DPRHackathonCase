@@ -1,0 +1,7 @@
+{
+  "keys_separate_from_data_domains": true,
+  "manifest_key_separate": true,
+  "passed": true,
+  "schema_version": 1,
+  "storage": "Windows DPAPI outside repository"
+}

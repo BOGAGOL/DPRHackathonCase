@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "owned_modules_suite": {
+    "command": "python -m pytest infra/tests toolkit/tests policy/tests migration/tests scripts/backup/tests -q --tb=short",
+    "passed": 242,
+    "skipped": 6,
+    "seconds": 38.94
+  },
+  "backup_integration_suite": {
+    "command": "DPR_BACKUP_INTEGRATION=1 python -m pytest scripts/backup/tests -q --tb=short",
+    "passed": 32,
+    "skipped": 0,
+    "seconds": 37.37
+  },
+  "scope": "integration suite includes unit tests; counts are not additive"
+}

@@ -1,0 +1,128 @@
+{
+  "backup": {
+    "artifact_id": "84aca555-e2a2-47c6-8b15-de7f31b10b09",
+    "backup_seconds": 11.376413,
+    "created_at": "2026-10-27T16:31:38.085264+00:00",
+    "dump_role": "backup_user",
+    "encryption": "AES-256-GCM-framed-HKDF-SHA256-v1",
+    "encryption_key_id": "9650015b5c08980dd6fea824",
+    "format_version": 1,
+    "manifest": "C:\\Users\\Muhammad Albyarto Gh\\AppData\\Local\\DPR\\encrypted-backups\\84aca555-e2a2-47c6-8b15-de7f31b10b09.manifest.json",
+    "manifest_key_id": "327f1c2afc421e566ed39cd6",
+    "postgres_major": 18,
+    "retention_deadline": "2026-11-26T16:31:38.085264+00:00",
+    "sha256": "8ad541bba9ff72ce0f6bb787c58090d73ed67ed879fa2ccfe94ebeaf1d8c250c",
+    "size_bytes": 165999475,
+    "snapshot_consistent": true,
+    "source_database": "protected_100k",
+    "source_rows": 100000,
+    "table_rows": {
+      "access_scope": 0,
+      "anggota_protected": 100000,
+      "app_users": 0,
+      "audit_log": 100000,
+      "migration_jobs": 1
+    }
+  },
+  "original_table_counts_unchanged": true,
+  "passed": true,
+  "restores": [
+    {
+      "all_frames_authenticated_before_restore": true,
+      "artifact_id": "84aca555-e2a2-47c6-8b15-de7f31b10b09",
+      "backup_seconds": 11.376413,
+      "created_at": "2026-10-27T16:32:08.346203+00:00",
+      "created_database": {
+        "marker": "dpr-backup-v1:84aca555-e2a2-47c6-8b15-de7f31b10b09",
+        "name": "dpr_restore_39b79757c0be484895e662307132a991",
+        "oid": 17939
+      },
+      "database": "dpr_restore_39b79757c0be484895e662307132a991",
+      "decryption_smoke": {
+        "data_remains_field_ciphertext": true,
+        "performed": false,
+        "reason": "without_openbao"
+      },
+      "manifest_hmac_verified": true,
+      "mode": "without_openbao",
+      "passed": true,
+      "plaintext_dump_files": 0,
+      "restore_seconds": 18.875632,
+      "schema_version": 1,
+      "security": {
+        "analyst_can_select_view": true,
+        "analyst_cannot_select_base": true,
+        "app_has_no_ddl": true,
+        "app_principal_rls_present": true,
+        "backup_can_select_base": true,
+        "public_database_connect_revoked": true,
+        "schema_owner_and_forced_rls": true
+      },
+      "service_scope": "database, ACL/RLS and optional field decryption; HTTP app integration is separate",
+      "sha256_verified": true,
+      "size_bytes": 165999475,
+      "source_database": "protected_100k",
+      "source_rows": 100000,
+      "table_rows": {
+        "access_scope": 0,
+        "anggota_protected": 100000,
+        "app_users": 0,
+        "audit_log": 100000,
+        "migration_jobs": 1
+      },
+      "verification_database_removed": true
+    },
+    {
+      "all_frames_authenticated_before_restore": true,
+      "artifact_id": "84aca555-e2a2-47c6-8b15-de7f31b10b09",
+      "backup_seconds": 11.376413,
+      "created_at": "2026-10-27T16:32:24.973399+00:00",
+      "created_database": {
+        "marker": "dpr-backup-v1:84aca555-e2a2-47c6-8b15-de7f31b10b09",
+        "name": "dpr_restore_e8ff8b707a984f0d9837a5d929e8e17e",
+        "oid": 18129
+      },
+      "database": "dpr_restore_e8ff8b707a984f0d9837a5d929e8e17e",
+      "decryption_smoke": {
+        "authenticated_non_null_fields": 392,
+        "domains": [
+          "PII",
+          "FIN"
+        ],
+        "performed": true,
+        "plaintext_written": false,
+        "records": 16
+      },
+      "manifest_hmac_verified": true,
+      "mode": "with_openbao",
+      "passed": true,
+      "plaintext_dump_files": 0,
+      "restore_seconds": 16.415305,
+      "schema_version": 1,
+      "security": {
+        "analyst_can_select_view": true,
+        "analyst_cannot_select_base": true,
+        "app_has_no_ddl": true,
+        "app_principal_rls_present": true,
+        "backup_can_select_base": true,
+        "public_database_connect_revoked": true,
+        "schema_owner_and_forced_rls": true
+      },
+      "service_scope": "database, ACL/RLS and optional field decryption; HTTP app integration is separate",
+      "sha256_verified": true,
+      "size_bytes": 165999475,
+      "source_database": "protected_100k",
+      "source_rows": 100000,
+      "table_rows": {
+        "access_scope": 0,
+        "anggota_protected": 100000,
+        "app_users": 0,
+        "audit_log": 100000,
+        "migration_jobs": 1
+      },
+      "verification_database_removed": true
+    }
+  ],
+  "schema_version": 1,
+  "scope": "local migrated dataset; one engineering drill, not official benchmark"
+}

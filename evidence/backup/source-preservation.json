@@ -1,0 +1,71 @@
+{
+  "after": {
+    "checks": {
+      "official_checksum:baseline_100k": true,
+      "official_checksum:postgres": true,
+      "rows:baseline_100k": true,
+      "rows:postgres": true,
+      "verified_tls:baseline_100k": true,
+      "verified_tls:postgres": true,
+      "verified_tls:protected_100k": true,
+      "verified_tls:protected_734": true
+    },
+    "databases": {
+      "baseline_100k": {
+        "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+        "rows": 100000,
+        "tls": "TLSv1.3"
+      },
+      "postgres": {
+        "checksum_sha256": "5113038953aea9383f600de725b4267ecbf93de47c2a603a68bde6ad7e5c17e8",
+        "rows": 734,
+        "tls": "TLSv1.3"
+      },
+      "protected_100k": {
+        "public_tables": 5,
+        "tls": "TLSv1.3"
+      },
+      "protected_734": {
+        "public_tables": 5,
+        "tls": "TLSv1.3"
+      }
+    },
+    "passed": true
+  },
+  "before": {
+    "checks": {
+      "official_checksum:baseline_100k": true,
+      "official_checksum:postgres": true,
+      "rows:baseline_100k": true,
+      "rows:postgres": true,
+      "verified_tls:baseline_100k": true,
+      "verified_tls:postgres": true,
+      "verified_tls:protected_100k": true,
+      "verified_tls:protected_734": true
+    },
+    "databases": {
+      "baseline_100k": {
+        "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+        "rows": 100000,
+        "tls": "TLSv1.3"
+      },
+      "postgres": {
+        "checksum_sha256": "5113038953aea9383f600de725b4267ecbf93de47c2a603a68bde6ad7e5c17e8",
+        "rows": 734,
+        "tls": "TLSv1.3"
+      },
+      "protected_100k": {
+        "public_tables": 5,
+        "tls": "TLSv1.3"
+      },
+      "protected_734": {
+        "public_tables": 5,
+        "tls": "TLSv1.3"
+      }
+    },
+    "passed": true
+  },
+  "passed": true,
+  "protected_sources_counts_unchanged": true,
+  "schema_version": 1
+}
