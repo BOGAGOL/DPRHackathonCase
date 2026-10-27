@@ -124,3 +124,25 @@ Audit literal credential/token/share/private-key dan verifier SCRAM pada 29 file
 keluaran yang berubah serta log Docker PostgreSQL/OpenBao sejak bootstrap tidak
 menemukan kecocokan. Evidence laptop-output-audit.json menyatakan batas scope;
 ini bukan pengganti scan S06 seluruh repo/riwayat/host.
+
+## Overnight 28 Oktober 2026 — berhenti pada gerbang 0
+
+Branch run/overnight-28okt dibuat dari fix/tls-baseline-exception (7dcdd9e).
+Percobaan tunggal git merge --no-edit feat/verify-bench (fbeff98) gagal dengan
+konflik content pada verify/NOTES.md. Kedua branch menambahkan bagian berbeda
+pada lokasi yang sama: branch fix memuat preflight/TLS/rotasi scanner/migrasi
+protected_100k; branch feature memuat metodologi dan hasil leak baseline 1M.
+Tidak memilih atau menggabungkan salah satu sisi karena pengguna mewajibkan
+BERHENTI bila konflik. Potongan kedua sisi disimpan dalam evidence, diff lengkap
+lokal di results/overnight-28okt/gate0-merge-conflict.diff.
+
+Working tree bersih sebelum merge. Setelah evidence konflik tersimpan,
+git merge --abort mengembalikan branch run ke 7dcdd9e agar laporan kegagalan
+dapat di-commit; kedua branch sumber tetap utuh. Ini membatalkan merge yang
+belum selesai, bukan menyelesaikan konflik. Tidak ada retry otomatis.
+Langkah 1–5 tidak dimulai: 0 token baru, 0 migrasi baru, 0 run benchmark baru,
+tidak ada perubahan database, konfigurasi atau lifecycle container, dan tidak
+ada merge ke main. Test aplikasi tidak dijalankan karena integrasi gagal dan
+tidak ada kode yang diubah. Evidence: evidence/overnight/gate0_merge.json;
+ringkasan: evidence/overnight_summary.md. Resolusi konflik dan kelanjutan
+memerlukan instruksi lanjutan pengguna sesuai gerbang yang dihentikan.
