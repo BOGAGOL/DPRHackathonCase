@@ -46,3 +46,7 @@ _incoming/
 results/
 
 !docs/reference/onno-code/**/*.sql
+
+# Reviewed protected schema/roles; dataset dumps remain ignored.
+!sql/protected/*.sql
+!sql/roles/*.sql

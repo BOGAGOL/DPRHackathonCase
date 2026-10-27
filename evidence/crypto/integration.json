@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "checks": {
+    "unique_per_record_domain_deks": true,
+    "page_50_one_pii_batch": true,
+    "page_50_one_finance_batch": true,
+    "batch_order_and_keys": true,
+    "page_cache_no_extra_request": true,
+    "field_roundtrip_50_records": true,
+    "record_swap_rejected": true,
+    "column_swap_rejected": true,
+    "domain_key_rejected": true,
+    "bit_tamper_rejected": true,
+    "mixed_batch_fail_closed": true,
+    "hmac_normalization": true,
+    "hmac_pinned_after_rotation": true,
+    "hmac_new_version_distinct": true,
+    "new_wrap_uses_rotated_kek": true,
+    "old_wrap_still_unwraps": true,
+    "token_change_cannot_reuse_cache": true,
+    "migration_local_dek_and_wrap": true,
+    "migration_no_decrypt": true,
+    "migration_hmac_matches_app": true,
+    "root_token_refused": true,
+    "tls_wrong_ca_rejected": true,
+    "uncached_outage_fail_closed": true,
+    "no_workload_secrets_in_logs": true
+  },
+  "scope": "synthetic records; disposable TLS OpenBao; no database",
+  "openbao_version": "2.5.5",
+  "checked_at_utc": "2026-10-27T14:46:02.084671+00:00"
+}

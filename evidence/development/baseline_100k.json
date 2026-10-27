@@ -1,0 +1,95 @@
+{
+  "status": "PASSED",
+  "database": "baseline_100k",
+  "rows_requested": 100000,
+  "seed": 42,
+  "replicate_anomalies": true,
+  "created_at_utc": "2026-10-27T04:02:49.228897+00:00",
+  "generator_version": "1.0.0",
+  "code_commit": "39135a5b8c29b24fe24a4e8f6df23836bbc24d46",
+  "datagen_worktree_dirty": false,
+  "targets_commit": "e7fd5e31d94abd95a3f00d7ae7ed9a448af26649",
+  "targets_committed_at_wib": "2026-10-26T23:07:44+07:00",
+  "validation": {
+    "passed": true,
+    "row_count": 100000,
+    "groups": {
+      "source": 734,
+      "synthetic": 99266
+    },
+    "source_preserved": true,
+    "duplicate_or_null_counts": {},
+    "synthetic_format_violations": {},
+    "synthetic_relation_violations": {},
+    "distributions": {
+      "jenis_kelamin": {
+        "categories": 2,
+        "max_count_deviation": 3.2397820163459983,
+        "within_one_source_cycle": true
+      },
+      "tempat_lahir": {
+        "categories": 5,
+        "max_count_deviation": 9.196185286102263,
+        "within_one_source_cycle": true
+      },
+      "pekerjaan_terakhir": {
+        "categories": 6,
+        "max_count_deviation": 4.5749318801081245,
+        "within_one_source_cycle": true
+      },
+      "status_kawin": {
+        "categories": 2,
+        "max_count_deviation": 6.0,
+        "within_one_source_cycle": true
+      },
+      "agama": {
+        "categories": 7,
+        "max_count_deviation": 4.5749318801081245,
+        "within_one_source_cycle": true
+      },
+      "nama_bank": {
+        "categories": 4,
+        "max_count_deviation": 7.956403269756265,
+        "within_one_source_cycle": true
+      },
+      "nama_kppn": {
+        "categories": 5,
+        "max_count_deviation": 8.452316076294665,
+        "within_one_source_cycle": true
+      },
+      "jumlah_anak": {
+        "categories": 4,
+        "max_count_deviation": 8.419618528612773,
+        "within_one_source_cycle": true
+      }
+    },
+    "anomalies": {
+      "source": {
+        "null": 367,
+        "bank_nonmodal": 724,
+        "adult": 235,
+        "before_birth": 42,
+        "under_17": 90
+      },
+      "synthetic": {
+        "null": 49639,
+        "bank_nonmodal": 97913,
+        "adult": 31772,
+        "under_17": 12173,
+        "before_birth": 5682
+      }
+    },
+    "anomaly_policy_valid": true,
+    "anomaly_count_deviations": {
+      "before_birth": 1.9291553133516572,
+      "under_17": 1.419618528610954,
+      "bank_nonmodal": 0.6021798365109134
+    },
+    "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+    "source_checksum_sha256": "5113038953aea9383f600de725b4267ecbf93de47c2a603a68bde6ad7e5c17e8",
+    "source_database_unchanged": true
+  },
+  "baseline_checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+  "scope": "local development clone; not official benchmark",
+  "official_benchmark": false
+}

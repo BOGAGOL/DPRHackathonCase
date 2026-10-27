@@ -1,5 +1,15 @@
 # DPR Secure Data Management System
 
+## Keputusan infrastruktur terbaru — 27 Oktober 2026
+
+Database proyek memakai **PostgreSQL 18 `pg-dpr`, port host 5433**: `baseline_100k`
+untuk MODE=plain dan `protected_734`/`protected_100k` untuk MODE=protected.
+OpenBao memakai [Compose Modul A](infra/compose.yaml), TLS port 8200.
+Panduan terkini: [TLS pg-dpr dan clone development](infra/postgres/README.md).
+Instruksi PostgreSQL 17/port 554xx pada bagian lab di bawah adalah sistem lama;
+pengalihan konfigurasi API/MODE dikerjakan Modul B. Benchmark resmi tetap pada
+laptop pemilik baseline; clone laptop Alby memakai evidence/development terpisah.
+
 Aplikasi layanan Next.js + FastAPI untuk melihat, mencari, dan memperbarui data anggota sesuai hak akses. Ini prototipe hackathon dengan dataset sintetis, bukan situs resmi DPR atau Privacy Scanner. Kode scanner/artefak Task 1 di luar checkout tidak diubah.
 
 Sudah dijalankan pada Windows: PostgreSQL baseline/protected terpisah, import **734 × 29** tanpa perubahan nilai, autentikasi, role/record/field authorization, AES-256-GCM, blind lookup, edit kontak, audit, browser flows, backup/restore, dan benchmark tiga pengulangan termasuk **10.000 record sintetis baru**. Status dan evidence rinci ada di [PROGRESS.md](docs/legacy-md_zhafif/PROGRESS.md) dan [evidence/README.md](docs/legacy-md_zhafif/evidence/README.md). Docker Compose tervalidasi konfigurasinya; container runtime belum diuji karena Docker Engine tidak aktif. Live OpenBao dan TLS deployment: **NOT TESTED**.
@@ -214,6 +224,14 @@ Target yang disahkan sebelum benchmark: [docs/targets.md](docs/targets.md), deng
 di [evidence/targets_commit.json](evidence/targets_commit.json). Benchmark baru dan restore drill
 Modul C dijalankan pada langkah berikutnya, setelah baseline tervalidasi.
 
+## Policy dan skema protected (Modul A, tahap 3)
+
+Profile dari inventory scanner dan override kontrak: [policy/NOTES.md](policy/NOTES.md).
+Penerapan skema/role ke `pg-dpr:5433` dan handoff Service App:
+[sql/protected/NOTES.md](sql/protected/NOTES.md),
+[sql/roles/NOTES.md](sql/roles/NOTES.md). Tahap ini menyiapkan database protected;
+migrasi data dijalankan pada tahap berikutnya.
+
 ## Benchmark Modul C — baseline awal level DB
 
 Runner tujuh skenario plain pada pg-dpr tersedia di `benchmark/`, terpisah dari
@@ -224,3 +242,11 @@ Perintah utama: `python -m benchmark run --db baseline_100k --label before --ada
 lalu `python -m benchmark backup-restore --db baseline_100k --label before --runs 3`.
 Raw lokal berada di `results/bench/before/`; ringkasan di `evidence/benchmark/baseline/`.
 Baseline awal ini terpisah dari eksperimen berpasangan B–P–P–B dan bukan hasil API/protected.
+
+## Migrasi protected (Modul A, tahap 4)
+
+CLI prepare/check/run/validate/revoke dan panduan PowerShell tersedia di
+[migration/README.md](migration/README.md). Migrasi memakai source read-only,
+batch dengan checkpoint atomik, dua domain envelope, dan validasi decrypt seluruh
+baris. Dependensi serta batas integrasi Service App dicatat di
+[migration/NOTES.md](migration/NOTES.md). Token dan material recovery tetap di luar repo.

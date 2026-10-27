@@ -70,7 +70,8 @@ def test_compose_tls_and_database_isolation():
     assert all(v["read_only"] and not v["bind"]["create_host_path"] for v in bao["volumes"] if isinstance(v, dict))
     config = (REPO / "infra/openbao/openbao.hcl").read_text()
     assert "tls_disable = false" in config and 'tls_min_version = "tls12"' in config
-    pg = compose["services"]["postgres"]
-    assert pg["image"] == "postgres:18" and pg["profiles"] == ["new-postgres"]
-    assert pg["volumes"] == ["postgres_data:/var/lib/postgresql"]
-    assert "5434" in pg["ports"][0]
+    assert set(compose["services"]) == {"openbao"}
+    assert set(compose["volumes"]) == {"openbao_data"}
+    fixture = yaml.safe_load((REPO / "infra/tests/compose.postgres.yaml").read_text())
+    assert fixture["services"]["postgres"]["image"] == "postgres:18"
+    assert "5434" not in (REPO / "infra/compose.yaml").read_text()

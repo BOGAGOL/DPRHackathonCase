@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "engine": "postgresql",
+  "major_version": 18,
+  "container": "pg-dpr",
+  "host": "127.0.0.1",
+  "port": 5433,
+  "sslmode": "verify-full",
+  "plain_database": "baseline_100k",
+  "protected_databases": ["protected_734", "protected_100k"],
+  "read_only_sources": ["postgres", "baseline_100k"],
+  "openbao_address": "https://127.0.0.1:8200"
+}

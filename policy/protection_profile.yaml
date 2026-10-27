@@ -1,0 +1,692 @@
+profile_version: 1
+protection_version: 1
+source_table: public.anggota
+target_table: public.anggota_protected
+provenance:
+  inventory: evidence/scanner/before_v1/inventory.csv
+  inventory_sha256: 443064a25c9367e2d69ae6ee55e3499008005daf2fcfffc81fbf11a8b2d2293d
+  overrides_sha256: b1872e390349cd817624a573c3d4819219d8669a9ba73ee2b8a8bc571e6823de
+  contract_sha256: 2547b0be74f540f2eeb37215a7dc0144cd0012ba0772920d90138fdff2f97084
+record_id:
+  type: uuid4
+  source_mapping: id -> legacy_row_id
+null_policy: preserve_null
+ciphertext:
+  algorithm: AES-256-GCM
+  format: 01||nonce12||ciphertext||tag16
+  aad: dpr|v1|anggota_protected|<column>|<lowercase_uuid>|<protection_version>
+blind_index:
+  algorithm: HMAC-SHA256
+  provider: OpenBao Transit
+  key: search-hmac
+  key_version: 1
+  message: bidx|v1|<column>|<normalized>
+  bytes: 32
+derived:
+  age_band:
+    source: tanggal_lahir
+    reference_date: '2026-10-01'
+    width_years: 10
+    encoding: lower-upper
+    analyst_projection: true
+columns:
+  nama:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Identitas langsung; kontrak mempertahankan nama sebagai AEAD, bukan hash.
+    storage_column: nama_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: nama
+      pdp_class: umum
+      risk_level: tinggi
+      confidence: 28.83
+      priority_score: 20.0
+      triage: needs_review
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: false
+  nama_lengkap:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Scanner menyarankan minimisasi karena nama turunan; kontrak mewajibkan
+      retain dan AEAD.
+    storage_column: nama_lengkap_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: nama
+      pdp_class: umum
+      risk_level: tinggi
+      confidence: 28.83
+      priority_score: 20.0
+      triage: needs_review
+      recommendation: delete
+      candidate_aead: false
+      candidate_bidx: false
+      minimization_candidate: true
+    override_changes_scanner_action: true
+  nama_tanpa_gelar:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Relasi turunan nama dicatat sebagai kandidat minimisasi; kolom tetap disimpan
+      sesuai kontrak.
+    storage_column: nama_tanpa_gelar_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: nama
+      pdp_class: umum
+      risk_level: tinggi
+      confidence: 28.83
+      priority_score: 20.0
+      triage: needs_review
+      recommendation: delete
+      candidate_aead: false
+      candidate_bidx: false
+      minimization_candidate: true
+    override_changes_scanner_action: true
+  jenis_kelamin:
+    domain: null
+    aead: false
+    bidx: false
+    normalization: null
+    analyst_projection: jenis_kelamin
+    reason: REF untuk analisis agregat; risiko kombinasi atribut diuji k-anonymity
+      oleh Modul C.
+    storage_column: jenis_kelamin
+    wrapped_dek_column: null
+    bidx_column: null
+    assessment:
+      detected_type: kategori
+      pdp_class: umum
+      risk_level: kritis
+      confidence: 100.0
+      priority_score: 25.0
+      triage: auto_accept
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: true
+  tempat_lahir:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Quasi-identifier yang dapat mengidentifikasi bersama tanggal lahir; AEAD
+      domain PII.
+    storage_column: tempat_lahir_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: tempat_lahir
+      pdp_class: umum
+      risk_level: kritis
+      confidence: 96.0
+      priority_score: 25.0
+      triage: auto_accept
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: false
+  tanggal_lahir:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: age_band
+    reason: Tanggal asli AEAD; analis hanya mendapat age_band dekade pada reference_date
+      yang dibekukan.
+    storage_column: tanggal_lahir_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: tanggal_lahir
+      pdp_class: umum
+      risk_level: kritis
+      confidence: 92.0
+      priority_score: 26.0
+      triage: auto_accept
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: false
+  tanggal_pernikahan:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Informasi keluarga; AEAD, NULL sumber dipertahankan sebagai kebocoran
+      yang diterima.
+    storage_column: tanggal_pernikahan_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: tanggal_lahir
+      pdp_class: umum
+      risk_level: kritis
+      confidence: 72.0
+      priority_score: 26.0
+      triage: needs_review
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: false
+  no_ktp:
+    domain: PII
+    aead: true
+    bidx: true
+    normalization: ascii_digits_preserve_leading_zero
+    analyst_projection: null
+    reason: Identifier berentropi rendah; AEAD dan exact lookup HMAC, nol awal tidak
+      dipotong.
+    storage_column: no_ktp_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: no_ktp_bidx
+    assessment:
+      detected_type: identifier_lain
+      pdp_class: umum
+      risk_level: kritis
+      confidence: 65.6
+      priority_score: 26.0
+      triage: needs_review
+      recommendation: encrypt+blind_index+mask
+      candidate_aead: true
+      candidate_bidx: true
+      minimization_candidate: false
+    override_changes_scanner_action: false
+  pekerjaan_terakhir:
+    domain: null
+    aead: false
+    bidx: false
+    normalization: null
+    analyst_projection: pekerjaan_terakhir
+    reason: REF sesuai kontrak; override rekomendasi encrypt scanner untuk kegunaan
+      agregat, residual diuji.
+    storage_column: pekerjaan_terakhir
+    wrapped_dek_column: null
+    bidx_column: null
+    assessment:
+      detected_type: operasional
+      pdp_class: umum
+      risk_level: tinggi
+      confidence: 20.0
+      priority_score: 20.0
+      triage: needs_review
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: true
+  alamat_jakarta:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Alamat pribadi; AEAD tanpa blind index karena tidak ada exact lookup yang
+      disepakati.
+    storage_column: alamat_jakarta_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: alamat
+      pdp_class: umum
+      risk_level: kritis
+      confidence: 100.0
+      priority_score: 25.0
+      triage: auto_accept
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: false
+  alamat_daerah:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Alamat dan ketergantungan tempat lahir tetap sensitif; AEAD PII.
+    storage_column: alamat_daerah_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: alamat
+      pdp_class: umum
+      risk_level: kritis
+      confidence: 100.0
+      priority_score: 25.0
+      triage: auto_accept
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: false
+  telpon_jakarta:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Kontak pribadi; AEAD, tidak membuat indeks pencarian tambahan.
+    storage_column: telpon_jakarta_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: telepon
+      pdp_class: umum
+      risk_level: kritis
+      confidence: 100.0
+      priority_score: 26.0
+      triage: auto_accept
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: false
+  telpon_daerah:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Kontak pribadi; AEAD PII sesuai kontrak.
+    storage_column: telpon_daerah_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: telepon
+      pdp_class: umum
+      risk_level: kritis
+      confidence: 82.23
+      priority_score: 26.0
+      triage: auto_accept
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: false
+  handphone:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Kontak pribadi; enkripsi diperlukan, frekuensi tidak dibocorkan lewat
+      bidx tambahan.
+    storage_column: handphone_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: telepon
+      pdp_class: umum
+      risk_level: kritis
+      confidence: 100.0
+      priority_score: 26.0
+      triage: auto_accept
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: false
+  email:
+    domain: PII
+    aead: true
+    bidx: true
+    normalization: strip_lower
+    analyst_projection: null
+    reason: Identitas/kontak; lookup exact diperlukan, HMAC dengan strip+lower seluruh
+      email sesuai v1.
+    storage_column: email_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: email_bidx
+    assessment:
+      detected_type: email
+      pdp_class: umum
+      risk_level: kritis
+      confidence: 85.6
+      priority_score: 26.0
+      triage: auto_accept
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: true
+  ruangan:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Scanner menandai operasional tetapi nilai menghubungkan identitas/email/pengguna;
+      AEAD PII.
+    storage_column: ruangan_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: operasional
+      pdp_class: umum
+      risk_level: tinggi
+      confidence: 20.0
+      priority_score: 20.0
+      triage: needs_review
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: false
+  status_kawin:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Data keluarga; tidak masuk proyeksi analis per-record.
+    storage_column: status_kawin_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: status_perkawinan
+      pdp_class: umum
+      risk_level: kritis
+      confidence: 100.0
+      priority_score: 25.0
+      triage: auto_accept
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: false
+  jumlah_anak:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Data keluarga; angka diserialisasi desimal lalu AEAD, bukan hash tanpa
+      kunci.
+    storage_column: jumlah_anak_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: keluarga
+      pdp_class: spesifik
+      risk_level: tinggi
+      confidence: 20.0
+      priority_score: 20.0
+      triage: needs_review
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: false
+  jumlah_tanggungan:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Informasi keluarga dan relasinya dilindungi dalam domain PII.
+    storage_column: jumlah_tanggungan_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: keluarga
+      pdp_class: umum
+      risk_level: tinggi
+      confidence: 20.0
+      priority_score: 20.0
+      triage: needs_review
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: false
+  jumlah_jiwa:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Ketergantungan pada jumlah tanggungan tidak membuat nilai aman; tetap
+      AEAD PII.
+    storage_column: jumlah_jiwa_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: keluarga
+      pdp_class: umum
+      risk_level: tinggi
+      confidence: 20.0
+      priority_score: 20.0
+      triage: needs_review
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: false
+  rekening:
+    domain: FIN
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Keuangan pribadi; AEAD FIN, override blind index scanner karena lookup
+      rekening tidak disepakati.
+    storage_column: rekening_ct
+    wrapped_dek_column: dek_fin_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: rekening
+      pdp_class: spesifik
+      risk_level: kritis
+      confidence: 96.0
+      priority_score: 28.0
+      triage: auto_accept
+      recommendation: encrypt+blind_index+mask
+      candidate_aead: true
+      candidate_bidx: true
+      minimization_candidate: false
+    override_changes_scanner_action: true
+  nama_rekening:
+    domain: FIN
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Nama pemilik rekening tetap dipertahankan untuk finance walau turunan
+      nama; AEAD FIN, bukan delete.
+    storage_column: nama_rekening_ct
+    wrapped_dek_column: dek_fin_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: nama
+      pdp_class: umum
+      risk_level: tinggi
+      confidence: 30.68
+      priority_score: 20.0
+      triage: needs_review
+      recommendation: delete
+      candidate_aead: false
+      candidate_bidx: false
+      minimization_candidate: true
+    override_changes_scanner_action: true
+  npwp:
+    domain: FIN
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Identifier pajak pribadi; AEAD FIN, tanpa blind index tambahan.
+    storage_column: npwp_ct
+    wrapped_dek_column: dek_fin_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: npwp
+      pdp_class: umum
+      risk_level: kritis
+      confidence: 100.0
+      priority_score: 27.0
+      triage: auto_accept
+      recommendation: encrypt+blind_index+mask
+      candidate_aead: true
+      candidate_bidx: true
+      minimization_candidate: false
+    override_changes_scanner_action: true
+  kode_bank:
+    domain: FIN
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: 'Keputusan tim: hampir unik dan kombinasi REF mengidentifikasi seluruh
+      sumber; masuk FIN, bukan REF.'
+    storage_column: kode_bank_ct
+    wrapped_dek_column: dek_fin_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: identifier_lain
+      pdp_class: umum
+      risk_level: tinggi
+      confidence: 20.0
+      priority_score: 20.0
+      triage: needs_review
+      recommendation: encrypt+blind_index+mask
+      candidate_aead: true
+      candidate_bidx: true
+      minimization_candidate: false
+    override_changes_scanner_action: true
+  nama_kppn:
+    domain: null
+    aead: false
+    bidx: false
+    normalization: null
+    analyst_projection: nama_kppn
+    reason: Nilai institusi REF sesuai keputusan tim; override deteksi nama scanner,
+      residual kombinasi diuji.
+    storage_column: nama_kppn
+    wrapped_dek_column: null
+    bidx_column: null
+    assessment:
+      detected_type: nama
+      pdp_class: umum
+      risk_level: kritis
+      confidence: 80.0
+      priority_score: 25.0
+      triage: auto_accept
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: true
+  nama_bank:
+    domain: null
+    aead: false
+    bidx: false
+    normalization: null
+    analyst_projection: nama_bank
+    reason: Nama institusi REF; tidak menyimpan kode_bank sebagai plaintext, tetap
+      diuji k-anonymity.
+    storage_column: nama_bank
+    wrapped_dek_column: null
+    bidx_column: null
+    assessment:
+      detected_type: nama
+      pdp_class: umum
+      risk_level: kritis
+      confidence: 80.0
+      priority_score: 25.0
+      triage: auto_accept
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: true
+  nip_kppn:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Identifier pribadi; AEAD PII, blind index scanner tidak diterapkan karena
+      tidak ada kebutuhan lookup.
+    storage_column: nip_kppn_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: identifier_lain
+      pdp_class: umum
+      risk_level: kritis
+      confidence: 85.6
+      priority_score: 26.0
+      triage: auto_accept
+      recommendation: encrypt+blind_index+mask
+      candidate_aead: true
+      candidate_bidx: true
+      minimization_candidate: false
+    override_changes_scanner_action: true
+  pengguna:
+    domain: PII
+    aead: true
+    bidx: true
+    normalization: strip_case_sensitive
+    analyst_projection: null
+    reason: Pencocokan anggota memakai HMAC domain pengguna dengan strip case-sensitive,
+      nilai asli AEAD.
+    storage_column: pengguna_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: pengguna_bidx
+    assessment:
+      detected_type: identifier_lain
+      pdp_class: umum
+      risk_level: tinggi
+      confidence: 20.0
+      priority_score: 20.0
+      triage: needs_review
+      recommendation: encrypt+blind_index+mask
+      candidate_aead: true
+      candidate_bidx: true
+      minimization_candidate: false
+    override_changes_scanner_action: false
+  agama:
+    domain: PII
+    aead: true
+    bidx: false
+    normalization: null
+    analyst_projection: null
+    reason: Data pribadi umum menurut PDP dan berisiko tinggi; AEAD PII, tidak diproyeksikan
+      ke analis.
+    storage_column: agama_ct
+    wrapped_dek_column: dek_pii_wrapped
+    bidx_column: null
+    assessment:
+      detected_type: agama
+      pdp_class: umum
+      risk_level: kritis
+      confidence: 88.78
+      priority_score: 25.0
+      triage: auto_accept
+      recommendation: encrypt+mask
+      candidate_aead: true
+      candidate_bidx: false
+      minimization_candidate: false
+    override_changes_scanner_action: false

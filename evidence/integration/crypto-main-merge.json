@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "tested_merge_commit": "265f892bfcba5a877f3ad5eb2fe50dc0e04c9082",
+  "upstream_main": "27aa9fa08dbcbe0e20199748e15d98cd4e81582f",
+  "checked_at_utc": "2026-10-27T14:47:21.171397+00:00",
+  "suites": [
+    {
+      "junit": "evidence/integration/crypto-main-tests.xml",
+      "sha256": "48d3f4d084f707ca99b3259ce3ebb13c3439cc8cc0f93a2c1ac9a9420f13414c",
+      "tests": 239,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "passed": 238,
+      "skipped_cases": [
+        "test_complete_dataset_734x29"
+      ]
+    },
+    {
+      "junit": "evidence/integration/benchmark-main-tests.xml",
+      "sha256": "6ba8543f2687b21ef2ea65f9eb5137a45a0048ec938cb8e1f88d8de128471e32",
+      "tests": 53,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 53,
+      "skipped_cases": []
+    },
+    {
+      "junit": "evidence/integration/scanner-main-tests.xml",
+      "sha256": "de6ad816f9c7bc57859c831b516287b22368e339d34cd7b07f70e83de1520c99",
+      "tests": 194,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "passed": 193,
+      "skipped_cases": [
+        "test_read_only_snapshot"
+      ]
+    },
+    {
+      "junit": "evidence/integration/service-app-main-tests.xml",
+      "sha256": "a6b8c2a8cd75c5ed60337eaa92437e32dfe4e4afbcafd41d1b0c699f5c012bd7",
+      "tests": 244,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "passed": 243,
+      "skipped_cases": [
+        "test_decrypt_swap_fails_generic_and_audited[plain]"
+      ]
+    }
+  ],
+  "passed_tests": 727,
+  "skipped_tests": 3,
+  "integration_fixtures": "TLS OpenBao/PG18, schema ACL/RLS and 734+1001 invented migration records; disposable containers only",
+  "benchmark_measurement_repeated": false,
+  "local_datasets_regenerated": false,
+  "limits": [
+    "Live protected Service App still requires the documented A/B bridge and schema/principal alignment.",
+    "Migrator supports postgres/protected_734 and baseline_100k/protected_100k; 1M target extension remains pending."
+  ]
+}

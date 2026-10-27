@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dprcrypto"
+version = "0.1.0"
+description = "Contract v1 field AEAD and OpenBao envelope encryption for the DPR lab"
+requires-python = ">=3.11"
+dependencies = ["cryptography>=46.0.5,<47", "httpx>=0.28.1,<0.29"]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["dprcrypto*"]

@@ -1,0 +1,120 @@
+{
+  "format": "dpr-contract-v1",
+  "test_only": true,
+  "warning": "PUBLIC synthetic test keys. NEVER use these keys to protect data.",
+  "algorithm": "AES-256-GCM",
+  "fields": [
+    {
+      "domain": "PII",
+      "column": "nama",
+      "anggota_id": "651dfd7e-8ad5-42f3-ad09-b079081efd82",
+      "protection_version": 1,
+      "dek_hex": "1c2931e5b3c70e6adeb46a8a2ac5b98273184ec7bcdc34c38fbc6ee9ad45a7d1",
+      "plaintext": "Anggota Uji Ω",
+      "aad_utf8": "dpr|v1|anggota_protected|nama|651dfd7e-8ad5-42f3-ad09-b079081efd82|1",
+      "aad_hex": "6470727c76317c616e67676f74615f70726f7465637465647c6e616d617c36353164666437652d386164352d343266332d616430392d6230373930383165666438327c31",
+      "nonce_hex": "c786c4bc6f4b36a3f48929d8",
+      "blob_hex": "01c786c4bc6f4b36a3f48929d85b58f7dcd100f49de80326661509895d7e5e2b111611c7171f0b93b7392d"
+    },
+    {
+      "domain": "PII",
+      "column": "no_ktp",
+      "anggota_id": "651dfd7e-8ad5-42f3-ad09-b079081efd82",
+      "protection_version": 1,
+      "dek_hex": "1c2931e5b3c70e6adeb46a8a2ac5b98273184ec7bcdc34c38fbc6ee9ad45a7d1",
+      "plaintext": "00112233445566",
+      "aad_utf8": "dpr|v1|anggota_protected|no_ktp|651dfd7e-8ad5-42f3-ad09-b079081efd82|1",
+      "aad_hex": "6470727c76317c616e67676f74615f70726f7465637465647c6e6f5f6b74707c36353164666437652d386164352d343266332d616430392d6230373930383165666438327c31",
+      "nonce_hex": "8d826759dc95038b5a6875ce",
+      "blob_hex": "018d826759dc95038b5a6875cedd375f79c604c8bf53635425fffc3b6a007ed1ec3574f09cf2ed372410ac"
+    },
+    {
+      "domain": "PII",
+      "column": "tanggal_lahir",
+      "anggota_id": "651dfd7e-8ad5-42f3-ad09-b079081efd82",
+      "protection_version": 1,
+      "dek_hex": "1c2931e5b3c70e6adeb46a8a2ac5b98273184ec7bcdc34c38fbc6ee9ad45a7d1",
+      "plaintext": "1985-06-17",
+      "aad_utf8": "dpr|v1|anggota_protected|tanggal_lahir|651dfd7e-8ad5-42f3-ad09-b079081efd82|1",
+      "aad_hex": "6470727c76317c616e67676f74615f70726f7465637465647c74616e6767616c5f6c616869727c36353164666437652d386164352d343266332d616430392d6230373930383165666438327c31",
+      "nonce_hex": "87c6d3397ed6947267b125fb",
+      "blob_hex": "0187c6d3397ed6947267b125fb4c7f5585486e7657b7e4edec80aa09de253d38965ba4ae14e788"
+    },
+    {
+      "domain": "FIN",
+      "column": "rekening",
+      "anggota_id": "651dfd7e-8ad5-42f3-ad09-b079081efd82",
+      "protection_version": 1,
+      "dek_hex": "8b98e98e2e2306332a79d67e96a28362256d946a622da68e534bc10b75f992fe",
+      "plaintext": "0000111122223333",
+      "aad_utf8": "dpr|v1|anggota_protected|rekening|651dfd7e-8ad5-42f3-ad09-b079081efd82|1",
+      "aad_hex": "6470727c76317c616e67676f74615f70726f7465637465647c72656b656e696e677c36353164666437652d386164352d343266332d616430392d6230373930383165666438327c31",
+      "nonce_hex": "e09750fe5f1696793757f289",
+      "blob_hex": "01e09750fe5f1696793757f289a737915e6620a7e6aea0313ee52889714370906026fcc1d89db7d6b2ee1ce366"
+    },
+    {
+      "domain": "PII",
+      "column": "email",
+      "anggota_id": "651dfd7e-8ad5-42f3-ad09-b079081efd82",
+      "protection_version": 1,
+      "dek_hex": "1c2931e5b3c70e6adeb46a8a2ac5b98273184ec7bcdc34c38fbc6ee9ad45a7d1",
+      "plaintext": "",
+      "aad_utf8": "dpr|v1|anggota_protected|email|651dfd7e-8ad5-42f3-ad09-b079081efd82|1",
+      "aad_hex": "6470727c76317c616e67676f74615f70726f7465637465647c656d61696c7c36353164666437652d386164352d343266332d616430392d6230373930383165666438327c31",
+      "nonce_hex": "efaff71a7d0bb098172fa6c3",
+      "blob_hex": "01efaff71a7d0bb098172fa6c31043da06d3138ae63b69d1cf38fd2620"
+    },
+    {
+      "domain": "PII",
+      "column": "tanggal_pernikahan",
+      "anggota_id": "651dfd7e-8ad5-42f3-ad09-b079081efd82",
+      "protection_version": 1,
+      "dek_hex": "1c2931e5b3c70e6adeb46a8a2ac5b98273184ec7bcdc34c38fbc6ee9ad45a7d1",
+      "plaintext": null,
+      "aad_utf8": "dpr|v1|anggota_protected|tanggal_pernikahan|651dfd7e-8ad5-42f3-ad09-b079081efd82|1",
+      "aad_hex": "6470727c76317c616e67676f74615f70726f7465637465647c74616e6767616c5f7065726e696b6168616e7c36353164666437652d386164352d343266332d616430392d6230373930383165666438327c31",
+      "nonce_hex": null,
+      "blob_hex": null
+    }
+  ],
+  "blind_index": {
+    "search_key_hex": "79d9d3d92bd7c07799d90b756f56d64a517f466999664a45330bcb057423094c",
+    "cases": [
+      {
+        "column": "no_ktp",
+        "input": " 0011-2233 445566 ",
+        "normalized": "00112233445566",
+        "message_utf8": "bidx|v1|no_ktp|00112233445566",
+        "bidx_hex": "0c88e7fa1091a6ed30aa4524d2aa1797b09fddf23078b709dedb4f5eb8bbb004"
+      },
+      {
+        "column": "email",
+        "input": "  UJI@Example.TEST  ",
+        "normalized": "uji@example.test",
+        "message_utf8": "bidx|v1|email|uji@example.test",
+        "bidx_hex": "a751d3f2efa501b4f00f206cb10c7f1331838bf132a64ca938b64695441e97a1"
+      },
+      {
+        "column": "pengguna",
+        "input": "  Uji_001  ",
+        "normalized": "Uji_001",
+        "message_utf8": "bidx|v1|pengguna|Uji_001",
+        "bidx_hex": "f66eebb347e7e30e5be83f90ac2e420486e8d72691982807c501babc44b7f9e7"
+      },
+      {
+        "column": "email",
+        "input": null,
+        "normalized": null,
+        "message_utf8": null,
+        "bidx_hex": null
+      },
+      {
+        "column": "pengguna",
+        "input": "",
+        "normalized": "",
+        "message_utf8": "bidx|v1|pengguna|",
+        "bidx_hex": "e48dc4516a6369f6cd4f2d4f9dd44224d90094e16b08b62ed10bed57189c1cbe"
+      }
+    ]
+  }
+}

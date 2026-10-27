@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "scope": "disposable PG18; synthetic rows; not pg-dpr",
+  "checks": {
+    "automatic_rollback": true,
+    "tls_on": true,
+    "hostname_verified": true,
+    "same_container": true,
+    "no_postmaster_restart": true,
+    "database_oids_unchanged": true,
+    "plaintext_rejected:baseline_100k": true,
+    "plaintext_rejected:protected_734": true,
+    "plaintext_rejected:protected_100k": true,
+    "tls12_or_tls13": true,
+    "source_database_catalog_only": true,
+    "rows_preserved:baseline_100k": true,
+    "rows_preserved:protected_734": true,
+    "rows_preserved:protected_100k": true,
+    "private_key_postgres_0600": true,
+    "repeat_apply_preserves_hba_rules": true,
+    "rollback_to_previous_tls_keeps_tls": true,
+    "explicit_rollback_restores_settings": true,
+    "same_postmaster_after_rollback": true
+  },
+  "server_version_num": 180006,
+  "checked_at_utc": "2026-10-27T14:45:44.866312+00:00"
+}

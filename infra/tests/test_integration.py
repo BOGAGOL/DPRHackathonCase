@@ -26,7 +26,8 @@ def test_real_tls_bootstrap_acl_aad_restart_and_postgres(tmp_path):
     make_ca(root / "tls")
     env = {**os.environ, "DPR_SECRETS_DIR": str(root), "DPR_OPENBAO_PORT": "0",
            "DPR_POSTGRES_PORT": "0", "DPR_POSTGRES_PASSWORD": secrets.token_urlsafe(32)}
-    command = ["docker", "compose", "-p", project, "-f", str(REPO / "infra/compose.yaml"), "--profile", "new-postgres"]
+    command = ["docker", "compose", "-p", project, "-f", str(REPO / "infra/compose.yaml"),
+               "-f", str(REPO / "infra/tests/compose.postgres.yaml")]
     # The project is unpredictable and checked absent before its resources exist.
     collision = subprocess.run(["docker", "ps", "-aq", "--filter", f"label=com.docker.compose.project={project}"], capture_output=True, text=True, check=True)
     if collision.stdout.strip():

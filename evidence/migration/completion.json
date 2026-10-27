@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "official_benchmark": false,
+  "scope": "local development pg-dpr, actual organizer 734 + seed42 baseline 100k",
+  "checked_at_utc": "2026-10-27T14:12:59.604635+00:00",
+  "checks": {
+    "source_counts_checksums_and_tls_unchanged": true,
+    "openbao_initialized_unsealed": true,
+    "revoked_migration_token_rejected": true,
+    "validated_after_token_revocation:protected_734": true,
+    "validated_after_token_revocation:protected_100k": true,
+    "migration_database_role_nologin": true
+  },
+  "targets": {
+    "protected_734": {
+      "rows": 734,
+      "status": "validated",
+      "batch_count": 1,
+      "all_rows_all_fields_compared": true
+    },
+    "protected_100k": {
+      "rows": 100000,
+      "status": "validated",
+      "batch_count": 100,
+      "all_rows_all_fields_compared": true
+    }
+  }
+}
