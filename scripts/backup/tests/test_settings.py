@@ -65,3 +65,13 @@ def test_store_dedicated_outside_repo(tmp_path, monkeypatch):
     with pytest.raises(BackupError): settings.artifact_store(str(store))
     from infra.security import REPO
     with pytest.raises(ValueError): settings.artifact_store(str(REPO / "backup"))
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows DPAPI only")
+def test_real_windows_dpapi_roundtrip_and_no_plaintext(tmp_path, monkeypatch):
+    for name in settings.KEY_VARS: monkeypatch.setenv(name, "temporary")
+    keys = settings.local_keys(tmp_path, create=True)
+    assert settings.local_keys(tmp_path, create=True) == keys
+    serialized = b"".join(path.read_bytes() for path in (tmp_path/"backup-keys").glob("*.xml"))
+    for key in keys:
+        assert key not in serialized and base64.b64encode(key) not in serialized

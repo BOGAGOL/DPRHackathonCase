@@ -81,3 +81,33 @@ Rujukan perilaku tools: PostgreSQL 18
 [pg_dump](https://www.postgresql.org/docs/18/app-pgdump.html) dan
 [pg_restore](https://www.postgresql.org/docs/18/app-pgrestore.html).
 Streaming stdin tidak memakai --jobs (parallel restore memerlukan file biasa).
+
+## Hasil lokal 27 Oktober 2026
+
+Data yang sudah dimigrasikan diuji tanpa menulis ke sumber. Dua mode restore lulus;
+setiap restore menghitung seluruh tabel, memeriksa owner/ACL/RLS dan mode OpenBao
+mendekripsi 16 anggota (392 field non-NULL) di memori. DB hasil verification drill
+dibersihkan sesudah laporan disimpan; CLI restore biasa mempertahankan DB.
+
+| Sumber | Baris | Encrypted bytes | Backup detik | Restore tanpa Bao | Restore dengan Bao |
+|---|---:|---:|---:|---:|---:|
+| protected_734 | 734 | 1,244,857 | 1.484788 | 2.158697 | 1.525642 |
+| protected_100k | 100,000 | 165,999,475 | 11.376413 | 18.875632 | 16.415305 |
+
+Ini satu engineering drill per dataset, **bukan benchmark resmi median 3 run**.
+Evidence: `evidence/backup/local-protected_734.json`, `local-protected_100k.json`,
+`restore-report.json`, `tamper.json`, `retention.json`, `source-preservation.json`.
+Tamper 1 byte ditolak sebelum CREATE DB. Retensi clone 735 → 734 lulus; sumber
+protected tetap utuh. Hash dataset postgres dan baseline_100k sebelum/sesudah sama.
+Token svc-app khusus verifikasi ber-TTL 1 jam dicabut pada akhir drill; backup tidak
+memakai token itu. Tidak ada root/unseal/DEK/backup key dalam evidence.
+
+`protected_1m` didukung oleh CLI dan pipeline tanpa asumsi jumlah record, tetapi
+belum diuji backup lokal karena dataset tersebut belum ada di laptop ini. Rekan
+benchmark menjalankannya setelah migrasi 1m pada laptopnya sendiri. Backup DB hasil
+migrasi rekan membutuhkan key plane rekan untuk mode dekripsi; key plane laptop
+lain tidak dapat membuka wrapped DEK tersebut.
+
+Windows lokal tidak menyediakan cmdlet ConvertTo-SecureString di proses helper
+PowerShell yang dipakai. Helper membuat SecureString lewat .NET seperti helper
+kredensial tahap sebelumnya; roundtrip DPAPI nyata diuji, bukan mock saja.

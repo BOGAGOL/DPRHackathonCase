@@ -1,0 +1,11 @@
+{
+  "artifact_id": "1f3c8940-f5e9-4067-9544-12887dbe889b",
+  "created_at": "2026-10-27T16:31:31.137747+00:00",
+  "modified_bytes": 1,
+  "original_unchanged": true,
+  "passed": true,
+  "rejected_before_database_creation": true,
+  "rejection": "encrypted_artifact_digest_mismatch",
+  "restore_rejected": true,
+  "schema_version": 1
+}

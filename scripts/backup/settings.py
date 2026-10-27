@@ -23,7 +23,8 @@ def local_keys(root, *, create=False):
             value = base64.b64encode(secrets.token_bytes(32)).decode("ascii")
             serialized = powershell("""
 $ErrorActionPreference='Stop'
-$secure=ConvertTo-SecureString $env:DPR_CREDENTIAL_INPUT -AsPlainText -Force
+$secure=New-Object System.Security.SecureString
+foreach ($char in $env:DPR_CREDENTIAL_INPUT.ToCharArray()) { $secure.AppendChar($char) }
 $credential=New-Object System.Management.Automation.PSCredential($env:DPR_CREDENTIAL_ROLE,$secure)
 [Console]::Write([System.Management.Automation.PSSerializer]::Serialize($credential))
 """, {"DPR_CREDENTIAL_INPUT": value, "DPR_CREDENTIAL_ROLE": variable})

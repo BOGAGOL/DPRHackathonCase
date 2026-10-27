@@ -1,6 +1,9 @@
 """Invented records, disposable PG18 + OpenBao; no organizer data fixtures."""
 
 import json
+import hashlib
+import io
+from contextlib import contextmanager
 import os
 import secrets
 import subprocess
@@ -131,19 +134,46 @@ def test_full_stream_restore_modes_tamper_retention(laboratory, monkeypatch):
         with pytest.raises(BackupError): Tools(container, params).command("sh", [])
         with pytest.raises(BackupError): source_allowed("baseline_1m")
         checks["unsafe_inputs_existing_target_refused"] = True
-        # A valid HMAC cannot turn a wrong AES key into a restorable artifact.
-        modified = dict(payload); modified["encryption_key_id"] = key_id(os.urandom(32))
+        # Even a correctly signed hash cannot bypass AEAD with a wrong key or
+        # corrupted encrypted bytes; both must fail BEFORE creating a database.
+        wrong_key = os.urandom(32)
+        modified = dict(payload); modified["encryption_key_id"] = key_id(wrong_key)
         original = manifest.read_bytes()
         try:
             manifest.write_bytes(canonical(sign_manifest(modified, keys[1])))
-            with pytest.raises(BackupError): restore(manifest, params, keys, container=container)
+            with pytest.raises(BackupError, match="artifact_authentication_failed"):
+                restore(manifest, params, (wrong_key, keys[1]), container=container)
         finally: manifest.write_bytes(original)
+        encrypted_path = manifest.with_name(payload["artifact_id"]+".dprbak")
+        original_encrypted = encrypted_path.read_bytes()
+        broken = bytearray(original_encrypted); broken[len(broken)//2] ^= 1
+        with psycopg.connect(**params) as admin:
+            databases_before_failure = set(admin.execute("SELECT datname FROM pg_database").fetchall())
+        try:
+            encrypted_path.write_bytes(broken)
+            manifest.write_bytes(canonical(sign_manifest({**payload, "sha256": hashlib.sha256(broken).hexdigest()}, keys[1])))
+            with pytest.raises(BackupError, match="artifact_authentication_failed"):
+                restore(manifest, params, keys, container=container)
+        finally:
+            encrypted_path.write_bytes(original_encrypted); manifest.write_bytes(original)
+        checks["signed_digest_does_not_bypass_aead"] = True
+        files_before_failure = set(lab["store"].iterdir())
+        @contextmanager
+        def failing_dump(self, program, arguments):
+            from types import SimpleNamespace
+            yield SimpleNamespace(stdout=io.BytesIO(b"invented-partial-archive"))
+            raise BackupError("injected_dump_failure")
+        with monkeypatch.context() as patch:
+            patch.setattr(Tools, "process", failing_dump)
+            with pytest.raises(BackupError): backup("protected_734", lab["backup_params"], keys, lab["store"], container=container)
+        checks["failed_dump_leaves_no_artifact_or_manifest"] = set(lab["store"].iterdir()) == files_before_failure
         # A downstream failure must remove only its own newly created DB.
         from scripts.backup import runner
         with monkeypatch.context() as patch:
             patch.setattr(runner, "smoke_decrypt", lambda *args: (_ for _ in ()).throw(BackupError("injected")))
             with pytest.raises(BackupError): restore(manifest, params, keys, container=container, with_openbao=True)
-        checks["failed_restore_cleanup"] = True
+        with psycopg.connect(**params) as admin:
+            checks["failed_restore_cleanup"] = set(admin.execute("SELECT datname FROM pg_database").fetchall()) == databases_before_failure
         report["passed"] = all(checks.values())
         report["backup_seconds"] = artifact["backup_seconds"]; report["restore_seconds"] = with_keys["restore_seconds"]
         report["size_bytes"] = artifact["size_bytes"]

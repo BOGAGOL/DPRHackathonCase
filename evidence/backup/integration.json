@@ -1,9 +1,10 @@
 {
-  "backup_seconds": 0.620722,
+  "backup_seconds": 0.926836,
   "checks": {
     "acl_ownership_rls_restored": true,
     "analyst_view_works": true,
     "dump_backup_user_verified_tls": true,
+    "failed_dump_leaves_no_artifact_or_manifest": true,
     "failed_restore_cleanup": true,
     "no_plaintext_dump_files": true,
     "original_source_unchanged": true,
@@ -11,13 +12,14 @@
     "restore_without_openbao": true,
     "retention": true,
     "rls_denies_unscoped_app": true,
+    "signed_digest_does_not_bypass_aead": true,
     "snapshot_count_17": true,
     "tamper": true,
     "unsafe_inputs_existing_target_refused": true
   },
   "passed": true,
-  "restore_seconds": 1.756188,
+  "restore_seconds": 1.161484,
   "schema_version": 1,
   "scope": "17 invented records, disposable TLS PG18 and OpenBao",
-  "size_bytes": 78114
+  "size_bytes": 78112
 }

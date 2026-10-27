@@ -1,0 +1,26 @@
+{
+  "artifact_id": "84aca555-e2a2-47c6-8b15-de7f31b10b09",
+  "backup_seconds": 11.376413,
+  "created_at": "2026-10-27T16:31:38.085264+00:00",
+  "dump_role": "backup_user",
+  "encryption": "AES-256-GCM-framed-HKDF-SHA256-v1",
+  "encryption_key_id": "9650015b5c08980dd6fea824",
+  "format_version": 1,
+  "manifest": "C:\\Users\\Muhammad Albyarto Gh\\AppData\\Local\\DPR\\encrypted-backups\\84aca555-e2a2-47c6-8b15-de7f31b10b09.manifest.json",
+  "manifest_key_id": "327f1c2afc421e566ed39cd6",
+  "passed": true,
+  "postgres_major": 18,
+  "retention_deadline": "2026-11-26T16:31:38.085264+00:00",
+  "sha256": "8ad541bba9ff72ce0f6bb787c58090d73ed67ed879fa2ccfe94ebeaf1d8c250c",
+  "size_bytes": 165999475,
+  "snapshot_consistent": true,
+  "source_database": "protected_100k",
+  "source_rows": 100000,
+  "table_rows": {
+    "access_scope": 0,
+    "anggota_protected": 100000,
+    "app_users": 0,
+    "audit_log": 100000,
+    "migration_jobs": 1
+  }
+}
