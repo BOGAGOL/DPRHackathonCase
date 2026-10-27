@@ -105,3 +105,42 @@ Penetapan sesi: 27 Oktober 2026 WIB. Acuan target yang sudah disahkan:
 - Ringkasan kecil: `evidence/benchmark/baseline/`, di-commit. File dataset/targets
   sebelumnya tidak diubah. Tidak menyimpan DSN, password, token, atau kunci lookup
   pribadi ke metadata/CSV/log/repo. Kredensial dibaca dari env proses saja.
+
+## Hasil sesi 27 Oktober 2026 (sudah dijalankan)
+
+- Kode/workload dibekukan dan di-push pada `776d420845d17ace5d96aacf702a17d7e562d0d4`
+  sebelum pengukuran. Metadata mulai 10:43:37 WIB; pengukuran utama selesai
+  11:10:38 WIB, backup/restore selesai 11:11:24 WIB. Ini baseline awal, bukan B–P–P–B.
+- 42 unit/regression test benchmark + datagen lulus, serta 48 functional probe
+  DB nyata lulus sebelum measurement. Sebanyak 21 run terukur menghasilkan
+  **2.143.577 request, 0 error, 0 warmup error**. Semua run valid dan telemetry lengkap:
+  **336 sampel resource, 0 gagal**. Sensor charger true; hanya pg-dpr teramati berjalan.
+- Median antar-run (bukan percentile gabungan):
+
+| Skenario | p50 ms | p95 ms | Sukses/detik | Error |
+| --- | ---: | ---: | ---: | ---: |
+| read_by_nik | 3,8067 | 7,7971 | 1835,2674 | 0% |
+| read_by_email | 3,6632 | 6,7605 | 2010,0416 | 0% |
+| read_profile | 3,6662 | 6,8309 | 1993,4124 | 0% |
+| list_page | 2,6998 | 5,2452 | 2580,0420 | 0% |
+| update_contact | 5,6417 | 9,4342 | 1297,5272 | 0% |
+| insert_member | 9,3570 | 14,2481 | 807,1745 | 0% |
+| mixed | 4,3451 | 13,2371 | 1318,6113 | 0% |
+
+- Backup detik per run: 3,731489 / 3,313530 / 2,974606; **median 3,313530**.
+  Restore detik per run: 3,926249 / 2,858266 / 2,983256; **median 2,983256**.
+  Dump masing-masing 14.996.532 byte. Ketiga restore mempunyai 100.000 baris,
+  checksum seluruh data dan sequence sesuai; ketiga DB sementara dan dump privat
+  run ini dibersihkan setelah sukses. Snapshot datagen awal tetap dipertahankan.
+- Canonical checksum baseline tetap
+  `e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff`;
+  checksum sumber 734 tetap
+  `5113038953aea9383f600de725b4267ecbf93de47c2a603a68bde6ad7e5c17e8`.
+  Sequence baseline tetap 100.000/is_called=true.
+- Audit ulang CSV mentah memeriksa jumlah request/error/jenis operasi, urutan worker,
+  jendela timestamp di luar warmup, header/value yang dibatasi, jumlah resource,
+  dan menghitung ulang percentile/mean/throughput. Seluruh 21 run cocok. Manifest
+  SHA-256 lokal mencakup **189 file raw, 134.523.152 byte**, tidak di-commit.
+- Hasil mesin: `summary.json/CSV`, `run_summaries.json/CSV`, `env.json`,
+  `backup_restore.json`, `backup_restore/runs.csv`, `raw_validation.json` pada
+  `evidence/benchmark/baseline/`. P01–P03 protected/API tetap **BELUM DIUJI**.

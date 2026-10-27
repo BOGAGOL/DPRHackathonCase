@@ -1,0 +1,1319 @@
+[
+  {
+    "requests": 110122,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 3.806699998676777,
+    "p95_ms": 7.7970599988475415,
+    "p99_ms": 13.848834003292692,
+    "mean_ms": 4.327668632085153,
+    "throughput_rps": 1835.2674459912614,
+    "elapsed_s": 60.00324379999074,
+    "scenario": "read_by_nik",
+    "run": 1,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T03:43:51.889420+00:00",
+    "completed_at_utc": "2026-10-27T03:44:52.048280+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "read_by_nik": 110122
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 43.855,
+      "db_ram_bytes_median": 119432806.0,
+      "client_cpu_percent_one_core_median": 120.75,
+      "client_ram_bytes_median": 50548736.0,
+      "db_cpu_percent_one_core_peak": 63.54,
+      "db_ram_bytes_peak": 119642521,
+      "client_cpu_percent_one_core_peak": 134.0,
+      "client_ram_bytes_peak": 51974144
+    },
+    "successful_requests": {
+      "requests": 110122,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 3.806699998676777,
+      "p95_ms": 7.7970599988475415,
+      "p99_ms": 13.848834003292692,
+      "mean_ms": 4.327668632085153,
+      "throughput_rps": 1835.2674459912614,
+      "elapsed_s": 60.00324379999074
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 84899519,
+        "heap_bytes": 50397184,
+        "table_bytes": 50446336,
+        "index_bytes": 26411008
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 116515,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 3.7527000094996765,
+    "p95_ms": 6.956789988907982,
+    "p99_ms": 9.929617997258902,
+    "mean_ms": 4.089601272802695,
+    "throughput_rps": 1941.8342422760284,
+    "elapsed_s": 60.00254679999489,
+    "scenario": "read_by_nik",
+    "run": 2,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T03:45:08.375746+00:00",
+    "completed_at_utc": "2026-10-27T03:46:09.283882+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "read_by_nik": 116515
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 45.675,
+      "db_ram_bytes_median": 119957094.0,
+      "client_cpu_percent_one_core_median": 126.65,
+      "client_ram_bytes_median": 54140928.0,
+      "db_cpu_percent_one_core_peak": 51.73,
+      "db_ram_bytes_peak": 120481382,
+      "client_cpu_percent_one_core_peak": 135.4,
+      "client_ram_bytes_peak": 55316480
+    },
+    "successful_requests": {
+      "requests": 116515,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 3.7527000094996765,
+      "p95_ms": 6.956789988907982,
+      "p99_ms": 9.929617997258902,
+      "mean_ms": 4.089601272802695,
+      "throughput_rps": 1941.8342422760284,
+      "elapsed_s": 60.00254679999489
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 84932287,
+        "heap_bytes": 50397184,
+        "table_bytes": 50446336,
+        "index_bytes": 26411008
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 107209,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 3.9185000059660524,
+    "p95_ms": 8.013560003018933,
+    "p99_ms": 13.730735999415623,
+    "mean_ms": 4.444817983555768,
+    "throughput_rps": 1786.7109618681245,
+    "elapsed_s": 60.00354970000626,
+    "scenario": "read_by_nik",
+    "run": 3,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T03:46:25.602141+00:00",
+    "completed_at_utc": "2026-10-27T03:47:25.802994+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "read_by_nik": 107209
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 45.56,
+      "db_ram_bytes_median": 120009523.0,
+      "client_cpu_percent_one_core_median": 118.7,
+      "client_ram_bytes_median": 56619008.0,
+      "db_cpu_percent_one_core_peak": 60.66,
+      "db_ram_bytes_peak": 120376524,
+      "client_cpu_percent_one_core_peak": 133.5,
+      "client_ram_bytes_peak": 57622528
+    },
+    "successful_requests": {
+      "requests": 107209,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 3.9185000059660524,
+      "p95_ms": 8.013560003018933,
+      "p99_ms": 13.730735999415623,
+      "mean_ms": 4.444817983555768,
+      "throughput_rps": 1786.7109618681245,
+      "elapsed_s": 60.00354970000626
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 84965055,
+        "heap_bytes": 50397184,
+        "table_bytes": 50446336,
+        "index_bytes": 26411008
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 118343,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 3.7197999918134883,
+    "p95_ms": 6.888789994991384,
+    "p99_ms": 9.538280000560919,
+    "mean_ms": 4.026092429607338,
+    "throughput_rps": 1972.2862245340077,
+    "elapsed_s": 60.002954199997475,
+    "scenario": "read_by_email",
+    "run": 1,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T03:47:44.478832+00:00",
+    "completed_at_utc": "2026-10-27T03:48:44.704909+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "read_by_email": 118343
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 42.980000000000004,
+      "db_ram_bytes_median": 128450560.0,
+      "client_cpu_percent_one_core_median": 124.7,
+      "client_ram_bytes_median": 55377920.0,
+      "db_cpu_percent_one_core_peak": 69.64,
+      "db_ram_bytes_peak": 128765132,
+      "client_cpu_percent_one_core_peak": 138.1,
+      "client_ram_bytes_peak": 56889344
+    },
+    "successful_requests": {
+      "requests": 118343,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 3.7197999918134883,
+      "p95_ms": 6.888789994991384,
+      "p99_ms": 9.538280000560919,
+      "mean_ms": 4.026092429607338,
+      "throughput_rps": 1972.2862245340077,
+      "elapsed_s": 60.002954199997475
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 84973247,
+        "heap_bytes": 50397184,
+        "table_bytes": 50446336,
+        "index_bytes": 26411008
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 120609,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 3.6631999973906204,
+    "p95_ms": 6.7605199990794,
+    "p99_ms": 9.202219990547741,
+    "mean_ms": 3.9504674783686604,
+    "throughput_rps": 2010.0415917566802,
+    "elapsed_s": 60.00323600000411,
+    "scenario": "read_by_email",
+    "run": 2,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T03:49:00.846641+00:00",
+    "completed_at_utc": "2026-10-27T03:50:01.053208+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "read_by_email": 120609
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 43.045,
+      "db_ram_bytes_median": 128555417.0,
+      "client_cpu_percent_one_core_median": 123.95,
+      "client_ram_bytes_median": 56985600.0,
+      "db_cpu_percent_one_core_peak": 58.1,
+      "db_ram_bytes_peak": 128765132,
+      "client_cpu_percent_one_core_peak": 134.6,
+      "client_ram_bytes_peak": 58261504
+    },
+    "successful_requests": {
+      "requests": 120609,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 3.6631999973906204,
+      "p95_ms": 6.7605199990794,
+      "p99_ms": 9.202219990547741,
+      "mean_ms": 3.9504674783686604,
+      "throughput_rps": 2010.0415917566802,
+      "elapsed_s": 60.00323600000411
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 84981439,
+        "heap_bytes": 50397184,
+        "table_bytes": 50446336,
+        "index_bytes": 26411008
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 122621,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 3.5927999997511506,
+    "p95_ms": 6.628100003581494,
+    "p99_ms": 9.157260000938559,
+    "mean_ms": 3.8855211113990276,
+    "throughput_rps": 2043.5876287185426,
+    "elapsed_s": 60.00280990000465,
+    "scenario": "read_by_email",
+    "run": 3,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T03:50:17.912805+00:00",
+    "completed_at_utc": "2026-10-27T03:51:18.100425+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "read_by_email": 122621
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 44.295,
+      "db_ram_bytes_median": 128712703.5,
+      "client_cpu_percent_one_core_median": 124.19999999999999,
+      "client_ram_bytes_median": 56127488.0,
+      "db_cpu_percent_one_core_peak": 66.98,
+      "db_ram_bytes_peak": 128974848,
+      "client_cpu_percent_one_core_peak": 131.1,
+      "client_ram_bytes_peak": 57901056
+    },
+    "successful_requests": {
+      "requests": 122621,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 3.5927999997511506,
+      "p95_ms": 6.628100003581494,
+      "p99_ms": 9.157260000938559,
+      "mean_ms": 3.8855211113990276,
+      "throughput_rps": 2043.5876287185426,
+      "elapsed_s": 60.00280990000465
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 84989631,
+        "heap_bytes": 50397184,
+        "table_bytes": 50446336,
+        "index_bytes": 26411008
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 119115,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 3.66619999113027,
+    "p95_ms": 6.86782999546267,
+    "p99_ms": 10.098519992316144,
+    "mean_ms": 4.00059157032584,
+    "throughput_rps": 1985.1451512506353,
+    "elapsed_s": 60.0031689999887,
+    "scenario": "read_profile",
+    "run": 1,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T03:51:34.024211+00:00",
+    "completed_at_utc": "2026-10-27T03:52:34.201246+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "read_profile": 119115
+    },
+    "resources": {
+      "samples": 15,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 42.04,
+      "db_ram_bytes_median": 129394278,
+      "client_cpu_percent_one_core_median": 123.1,
+      "client_ram_bytes_median": 56819712,
+      "db_cpu_percent_one_core_peak": 47.19,
+      "db_ram_bytes_peak": 129603993,
+      "client_cpu_percent_one_core_peak": 133.6,
+      "client_ram_bytes_peak": 58474496
+    },
+    "successful_requests": {
+      "requests": 119115,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 3.66619999113027,
+      "p95_ms": 6.86782999546267,
+      "p99_ms": 10.098519992316144,
+      "mean_ms": 4.00059157032584,
+      "throughput_rps": 1985.1451512506353,
+      "elapsed_s": 60.0031689999887
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 85014207,
+        "heap_bytes": 50397184,
+        "table_bytes": 50446336,
+        "index_bytes": 26411008
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 120292,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 3.6263000074541196,
+    "p95_ms": 6.790045007801382,
+    "p99_ms": 10.107280996744517,
+    "mean_ms": 3.961055455890369,
+    "throughput_rps": 2004.747618070424,
+    "elapsed_s": 60.00356300000567,
+    "scenario": "read_profile",
+    "run": 2,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T03:52:51.128253+00:00",
+    "completed_at_utc": "2026-10-27T03:53:51.574920+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "read_profile": 120292
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 42.595,
+      "db_ram_bytes_median": 129446707.0,
+      "client_cpu_percent_one_core_median": 123.65,
+      "client_ram_bytes_median": 56598528.0,
+      "db_cpu_percent_one_core_peak": 55.04,
+      "db_ram_bytes_peak": 130128281,
+      "client_cpu_percent_one_core_peak": 134.3,
+      "client_ram_bytes_peak": 57548800
+    },
+    "successful_requests": {
+      "requests": 120292,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 3.6263000074541196,
+      "p95_ms": 6.790045007801382,
+      "p99_ms": 10.107280996744517,
+      "mean_ms": 3.961055455890369,
+      "throughput_rps": 2004.747618070424,
+      "elapsed_s": 60.00356300000567
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 85022399,
+        "heap_bytes": 50397184,
+        "table_bytes": 50446336,
+        "index_bytes": 26411008
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 119611,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 3.676899999845773,
+    "p95_ms": 6.830949998402502,
+    "p99_ms": 9.339119998912777,
+    "mean_ms": 3.9835263922201016,
+    "throughput_rps": 1993.4124477413384,
+    "elapsed_s": 60.00313690000621,
+    "scenario": "read_profile",
+    "run": 3,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T03:54:10.275543+00:00",
+    "completed_at_utc": "2026-10-27T03:55:10.461725+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "read_profile": 119611
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 41.67,
+      "db_ram_bytes_median": 129918566.0,
+      "client_cpu_percent_one_core_median": 124.80000000000001,
+      "client_ram_bytes_median": 56850432.0,
+      "db_cpu_percent_one_core_peak": 54.1,
+      "db_ram_bytes_peak": 130233139,
+      "client_cpu_percent_one_core_peak": 133.3,
+      "client_ram_bytes_peak": 58281984
+    },
+    "successful_requests": {
+      "requests": 119611,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 3.676899999845773,
+      "p95_ms": 6.830949998402502,
+      "p99_ms": 9.339119998912777,
+      "mean_ms": 3.9835263922201016,
+      "throughput_rps": 1993.4124477413384,
+      "elapsed_s": 60.00313690000621
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 85022399,
+        "heap_bytes": 50397184,
+        "table_bytes": 50446336,
+        "index_bytes": 26411008
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 154811,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 2.699799995752983,
+    "p95_ms": 5.251199996564537,
+    "p99_ms": 10.464559998945314,
+    "mean_ms": 3.0700197201937605,
+    "throughput_rps": 2580.0420072324678,
+    "elapsed_s": 60.0032865999965,
+    "scenario": "list_page",
+    "run": 1,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T03:55:26.747703+00:00",
+    "completed_at_utc": "2026-10-27T03:56:27.174109+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "list_page": 154811
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 118.745,
+      "db_ram_bytes_median": 129446707.0,
+      "client_cpu_percent_one_core_median": 127.69999999999999,
+      "client_ram_bytes_median": 56440832.0,
+      "db_cpu_percent_one_core_peak": 151.76,
+      "db_ram_bytes_peak": 129708851,
+      "client_cpu_percent_one_core_peak": 148.6,
+      "client_ram_bytes_peak": 58810368
+    },
+    "successful_requests": {
+      "requests": 154811,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 2.699799995752983,
+      "p95_ms": 5.251199996564537,
+      "p99_ms": 10.464559998945314,
+      "mean_ms": 3.0700197201937605,
+      "throughput_rps": 2580.0420072324678,
+      "elapsed_s": 60.0032865999965
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 85022399,
+        "heap_bytes": 50397184,
+        "table_bytes": 50446336,
+        "index_bytes": 26411008
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 153679,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 2.7350999880582094,
+    "p95_ms": 5.245199995988514,
+    "p99_ms": 10.210450004669841,
+    "mean_ms": 3.092301213566088,
+    "throughput_rps": 2561.1356370626195,
+    "elapsed_s": 60.00424100000237,
+    "scenario": "list_page",
+    "run": 2,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T03:56:43.689930+00:00",
+    "completed_at_utc": "2026-10-27T03:57:43.950060+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "list_page": 153679
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 114.755,
+      "db_ram_bytes_median": 129708851.0,
+      "client_cpu_percent_one_core_median": 130.85000000000002,
+      "client_ram_bytes_median": 58118144.0,
+      "db_cpu_percent_one_core_peak": 136.41,
+      "db_ram_bytes_peak": 130023424,
+      "client_cpu_percent_one_core_peak": 138.7,
+      "client_ram_bytes_peak": 59686912
+    },
+    "successful_requests": {
+      "requests": 153679,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 2.7350999880582094,
+      "p95_ms": 5.245199995988514,
+      "p99_ms": 10.210450004669841,
+      "mean_ms": 3.092301213566088,
+      "throughput_rps": 2561.1356370626195,
+      "elapsed_s": 60.00424100000237
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 85030591,
+        "heap_bytes": 50397184,
+        "table_bytes": 50446336,
+        "index_bytes": 26411008
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 160409,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 2.6560999976936728,
+    "p95_ms": 4.949920001672582,
+    "p99_ms": 8.845271993777736,
+    "mean_ms": 2.962144383431154,
+    "throughput_rps": 2673.339267080281,
+    "elapsed_s": 60.00323339999886,
+    "scenario": "list_page",
+    "run": 3,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T03:58:00.423070+00:00",
+    "completed_at_utc": "2026-10-27T03:59:00.666305+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "list_page": 160409
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 113.855,
+      "db_ram_bytes_median": 129866137.0,
+      "client_cpu_percent_one_core_median": 127.7,
+      "client_ram_bytes_median": 58355712.0,
+      "db_cpu_percent_one_core_peak": 141.92,
+      "db_ram_bytes_peak": 130233139,
+      "client_cpu_percent_one_core_peak": 140.5,
+      "client_ram_bytes_peak": 60796928
+    },
+    "successful_requests": {
+      "requests": 160409,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 2.6560999976936728,
+      "p95_ms": 4.949920001672582,
+      "p99_ms": 8.845271993777736,
+      "mean_ms": 2.962144383431154,
+      "throughput_rps": 2673.339267080281,
+      "elapsed_s": 60.00323339999886
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 85030591,
+        "heap_bytes": 50397184,
+        "table_bytes": 50446336,
+        "index_bytes": 26411008
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 76303,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 5.6674999941606075,
+    "p95_ms": 9.665779997885686,
+    "p99_ms": 17.617054006550433,
+    "mean_ms": 6.252797840189099,
+    "throughput_rps": 1271.5783994701403,
+    "elapsed_s": 60.00652419999824,
+    "scenario": "update_contact",
+    "run": 1,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T03:59:18.089064+00:00",
+    "completed_at_utc": "2026-10-27T04:00:19.819727+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "update_contact": 76303
+    },
+    "resources": {
+      "samples": 17,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 138.12,
+      "db_ram_bytes_median": 170708172,
+      "client_cpu_percent_one_core_median": 128.0,
+      "client_ram_bytes_median": 56909824,
+      "db_cpu_percent_one_core_peak": 165.02,
+      "db_ram_bytes_peak": 193671987,
+      "client_cpu_percent_one_core_peak": 143.4,
+      "client_ram_bytes_peak": 57884672
+    },
+    "successful_requests": {
+      "requests": 76303,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 5.6674999941606075,
+      "p95_ms": 9.665779997885686,
+      "p99_ms": 17.617054006550433,
+      "mean_ms": 6.252797840189099,
+      "throughput_rps": 1271.5783994701403,
+      "elapsed_s": 60.00652419999824
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 130619071,
+        "heap_bytes": 92225536,
+        "table_bytes": 92282880,
+        "index_bytes": 30162944
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 77858,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 5.641650001052767,
+    "p95_ms": 9.250859994790515,
+    "p99_ms": 15.230135007586764,
+    "mean_ms": 6.126994750692489,
+    "throughput_rps": 1297.5272129077555,
+    "elapsed_s": 60.004907199996524,
+    "scenario": "update_contact",
+    "run": 2,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T04:00:36.001687+00:00",
+    "completed_at_utc": "2026-10-27T04:01:36.120789+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "update_contact": 77858
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 126.91499999999999,
+      "db_ram_bytes_median": 194353561.0,
+      "client_cpu_percent_one_core_median": 130.3,
+      "client_ram_bytes_median": 57696256.0,
+      "db_cpu_percent_one_core_peak": 136.92,
+      "db_ram_bytes_peak": 196083712,
+      "client_cpu_percent_one_core_peak": 140.4,
+      "client_ram_bytes_peak": 58650624
+    },
+    "successful_requests": {
+      "requests": 77858,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 5.641650001052767,
+      "p95_ms": 9.250859994790515,
+      "p99_ms": 15.230135007586764,
+      "mean_ms": 6.126994750692489,
+      "throughput_rps": 1297.5272129077555,
+      "elapsed_s": 60.004907199996524
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 118806207,
+        "heap_bytes": 80412672,
+        "table_bytes": 80470016,
+        "index_bytes": 30162944
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 77985,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 5.619699993985705,
+    "p95_ms": 9.434160005184822,
+    "p99_ms": 15.412819997291088,
+    "mean_ms": 6.1171188998136286,
+    "throughput_rps": 1299.6333210862783,
+    "elapsed_s": 60.005386700009694,
+    "scenario": "update_contact",
+    "run": 3,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T04:01:52.269942+00:00",
+    "completed_at_utc": "2026-10-27T04:02:52.394188+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "update_contact": 77985
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 126.075,
+      "db_ram_bytes_median": 197446860.0,
+      "client_cpu_percent_one_core_median": 127.69999999999999,
+      "client_ram_bytes_median": 57559040.0,
+      "db_cpu_percent_one_core_peak": 150.44,
+      "db_ram_bytes_peak": 198810009,
+      "client_cpu_percent_one_core_peak": 156.5,
+      "client_ram_bytes_peak": 58302464
+    },
+    "successful_requests": {
+      "requests": 77985,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 5.619699993985705,
+      "p95_ms": 9.434160005184822,
+      "p99_ms": 15.412819997291088,
+      "mean_ms": 6.1171188998136286,
+      "throughput_rps": 1299.6333210862783,
+      "elapsed_s": 60.005386700009694
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 113514175,
+        "heap_bytes": 75046912,
+        "table_bytes": 75104256,
+        "index_bytes": 30244864
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 47783,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 9.425500000361353,
+    "p95_ms": 14.716940000653272,
+    "p99_ms": 23.74553399626166,
+    "mean_ms": 10.007156758711673,
+    "throughput_rps": 796.2149789842349,
+    "elapsed_s": 60.012686599991866,
+    "scenario": "insert_member",
+    "run": 1,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T04:03:08.600277+00:00",
+    "completed_at_utc": "2026-10-27T04:04:08.693003+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "insert_member": 47783
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 87.07499999999999,
+      "db_ram_bytes_median": 199911014.0,
+      "client_cpu_percent_one_core_median": 129.60000000000002,
+      "client_ram_bytes_median": 55863296.0,
+      "db_cpu_percent_one_core_peak": 119.08,
+      "db_ram_bytes_peak": 201116876,
+      "client_cpu_percent_one_core_peak": 142.8,
+      "client_ram_bytes_peak": 56565760
+    },
+    "successful_requests": {
+      "requests": 47783,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 9.425500000361353,
+      "p95_ms": 14.716940000653272,
+      "p99_ms": 23.74553399626166,
+      "mean_ms": 10.007156758711673,
+      "throughput_rps": 796.2149789842349,
+      "elapsed_s": 60.012686599991866
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 119559871,
+        "heap_bytes": 79429632,
+        "table_bytes": 79486976,
+        "index_bytes": 31907840
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 48437,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 9.357000002637506,
+    "p95_ms": 14.248100004624572,
+    "p99_ms": 21.375648007960987,
+    "mean_ms": 9.871549511758403,
+    "throughput_rps": 807.1744831637296,
+    "elapsed_s": 60.00809119999758,
+    "scenario": "insert_member",
+    "run": 2,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T04:04:24.689554+00:00",
+    "completed_at_utc": "2026-10-27T04:05:24.771971+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "insert_member": 48437
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 83.28999999999999,
+      "db_ram_bytes_median": 202060595.0,
+      "client_cpu_percent_one_core_median": 128.1,
+      "client_ram_bytes_median": 55949312.0,
+      "db_cpu_percent_one_core_peak": 115.47,
+      "db_ram_bytes_peak": 205311180,
+      "client_cpu_percent_one_core_peak": 137.6,
+      "client_ram_bytes_peak": 56406016
+    },
+    "successful_requests": {
+      "requests": 48437,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 9.357000002637506,
+      "p95_ms": 14.248100004624572,
+      "p99_ms": 21.375648007960987,
+      "mean_ms": 9.871549511758403,
+      "throughput_rps": 807.1744831637296,
+      "elapsed_s": 60.00809119999758
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 116496063,
+        "heap_bytes": 75309056,
+        "table_bytes": 75366400,
+        "index_bytes": 32964608
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 48701,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 9.272799987229519,
+    "p95_ms": 13.907600005040877,
+    "p99_ms": 23.781500000040978,
+    "mean_ms": 9.81798841089525,
+    "throughput_rps": 811.6041275338592,
+    "elapsed_s": 60.0058554999996,
+    "scenario": "insert_member",
+    "run": 3,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T04:05:42.289415+00:00",
+    "completed_at_utc": "2026-10-27T04:06:42.367713+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "insert_member": 48701
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 83.05,
+      "db_ram_bytes_median": 204105318.0,
+      "client_cpu_percent_one_core_median": 131.65,
+      "client_ram_bytes_median": 56059904.0,
+      "db_cpu_percent_one_core_peak": 109.59,
+      "db_ram_bytes_peak": 205206323,
+      "client_cpu_percent_one_core_peak": 141.0,
+      "client_ram_bytes_peak": 56623104
+    },
+    "successful_requests": {
+      "requests": 48701,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 9.272799987229519,
+      "p95_ms": 13.907600005040877,
+      "p99_ms": 23.781500000040978,
+      "mean_ms": 9.81798841089525,
+      "throughput_rps": 811.6041275338592,
+      "elapsed_s": 60.0058554999996
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 108558015,
+        "heap_bytes": 67371008,
+        "table_bytes": 67428352,
+        "index_bytes": 32964608
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 85649,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 4.095600001164712,
+    "p95_ms": 12.060699998983182,
+    "p99_ms": 16.95557999541054,
+    "mean_ms": 5.56865365969506,
+    "throughput_rps": 1427.3774647469013,
+    "elapsed_s": 60.00445019999461,
+    "scenario": "mixed",
+    "run": 1,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T04:06:58.716129+00:00",
+    "completed_at_utc": "2026-10-27T04:07:58.850472+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "read_profile": 17138,
+      "insert_member": 12848,
+      "read_by_nik": 17123,
+      "list_page": 8565,
+      "update_contact": 12845,
+      "read_by_email": 17130
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 93.47999999999999,
+      "db_ram_bytes_median": 209348198.0,
+      "client_cpu_percent_one_core_median": 125.69999999999999,
+      "client_ram_bytes_median": 58269696.0,
+      "db_cpu_percent_one_core_peak": 115.41,
+      "db_ram_bytes_peak": 210029772,
+      "client_cpu_percent_one_core_peak": 135.7,
+      "client_ram_bytes_peak": 59125760
+    },
+    "successful_requests": {
+      "requests": 85649,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 4.095600001164712,
+      "p95_ms": 12.060699998983182,
+      "p99_ms": 16.95557999541054,
+      "mean_ms": 5.56865365969506,
+      "throughput_rps": 1427.3774647469013,
+      "elapsed_s": 60.00445019999461
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 106575551,
+        "heap_bytes": 65396736,
+        "table_bytes": 65445888,
+        "index_bytes": 32964608
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 79123,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 4.345100009231828,
+    "p95_ms": 13.237050006864589,
+    "p99_ms": 21.457386001129613,
+    "mean_ms": 6.029420921866739,
+    "throughput_rps": 1318.6112810553327,
+    "elapsed_s": 60.004795300003025,
+    "scenario": "mixed",
+    "run": 2,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T04:08:15.754794+00:00",
+    "completed_at_utc": "2026-10-27T04:09:15.970536+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "read_profile": 15830,
+      "insert_member": 11868,
+      "read_by_nik": 15823,
+      "list_page": 7908,
+      "update_contact": 11871,
+      "read_by_email": 15823
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 108.38,
+      "db_ram_bytes_median": 209820057.0,
+      "client_cpu_percent_one_core_median": 119.1,
+      "client_ram_bytes_median": 57192448.0,
+      "db_cpu_percent_one_core_peak": 145.83,
+      "db_ram_bytes_peak": 210239488,
+      "client_cpu_percent_one_core_peak": 131.4,
+      "client_ram_bytes_peak": 58400768
+    },
+    "successful_requests": {
+      "requests": 79123,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 4.345100009231828,
+      "p95_ms": 13.237050006864589,
+      "p99_ms": 21.457386001129613,
+      "mean_ms": 6.029420921866739,
+      "throughput_rps": 1318.6112810553327,
+      "elapsed_s": 60.004795300003025
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 104732351,
+        "heap_bytes": 63553536,
+        "table_bytes": 63602688,
+        "index_bytes": 32964608
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  },
+  {
+    "requests": 78402,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 4.376500000944361,
+    "p95_ms": 13.376884994795546,
+    "p99_ms": 22.179899999173358,
+    "mean_ms": 6.084832270859869,
+    "throughput_rps": 1306.589442934109,
+    "elapsed_s": 60.005076900008135,
+    "scenario": "mixed",
+    "run": 3,
+    "duration_s": 60.0,
+    "warmup_s": 10.0,
+    "started_at_utc": "2026-10-27T04:09:33.817632+00:00",
+    "completed_at_utc": "2026-10-27T04:10:33.955299+00:00",
+    "concurrency": 8,
+    "warmup_errors": 0,
+    "operations": {
+      "read_profile": 15677,
+      "insert_member": 11761,
+      "read_by_nik": 15680,
+      "list_page": 7846,
+      "update_contact": 11756,
+      "read_by_email": 15682
+    },
+    "resources": {
+      "samples": 16,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 95.39,
+      "db_ram_bytes_median": 210029772.0,
+      "client_cpu_percent_one_core_median": 118.95,
+      "client_ram_bytes_median": 57481216.0,
+      "db_cpu_percent_one_core_peak": 150.65,
+      "db_ram_bytes_peak": 211602636,
+      "client_cpu_percent_one_core_peak": 132.1,
+      "client_ram_bytes_peak": 58736640
+    },
+    "successful_requests": {
+      "requests": 78402,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 4.376500000944361,
+      "p95_ms": 13.376884994795546,
+      "p99_ms": 22.179899999173358,
+      "mean_ms": 6.084832270859869,
+      "throughput_rps": 1306.589442934109,
+      "elapsed_s": 60.005076900008135
+    },
+    "dataset_after": {
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "storage": {
+        "database_bytes": 104732351,
+        "heap_bytes": 63553536,
+        "table_bytes": 63602688,
+        "index_bytes": 32964608
+      }
+    },
+    "data_and_sequence_unchanged": true,
+    "telemetry_complete": true,
+    "valid": true
+  }
+]

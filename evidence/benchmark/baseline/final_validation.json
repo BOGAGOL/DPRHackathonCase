@@ -1,0 +1,13 @@
+{
+  "status": "PASSED",
+  "checked_at_utc": "2026-10-27T04:16:27.894379+00:00",
+  "measurement_runs": 21,
+  "restore_runs": 3,
+  "all_measurement_data_and_sequences_unchanged": true,
+  "all_restore_counts_checksums_sequences_match": true,
+  "all_temporary_restore_databases_removed": true,
+  "baseline_unchanged": true,
+  "source_unchanged": true,
+  "private_profile_values_in_exports": 0,
+  "scope": "Private corpus names/emails/NIK checked against exported summaries; not a full repo/history/log secret audit"
+}
