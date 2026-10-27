@@ -179,3 +179,35 @@ Penetapan sesi: 27 Oktober 2026 WIB. Acuan target yang sudah disahkan:
 - Hasil mesin: `summary.json/CSV`, `run_summaries.json/CSV`, `env.json`,
   `backup_restore.json`, `backup_restore/runs.csv`, `raw_validation.json` pada
   `evidence/benchmark/baseline/`. P01–P03 protected/API tetap **BELUM DIUJI**.
+
+## Hasil sesi 1M dan pgbench yang dijalankan ? 27 Oktober 2026
+
+Kode sebelum run: `cfd703b8080a1c7bd6b574779e6e8e1dc9441a32`. Semua fase lulus tanpa retry.
+
+Ini perbandingan skala dua sesi baseline awal, bukan penilaian P01?P03 plain/protected. Semua median dihitung antar-run.
+
+| Skenario | 100k p50 / p95 (ms) | 1M p50 / p95 (ms) | 100k req/s | 1M req/s | Error 100k / 1M |
+|---|---:|---:|---:|---:|---:|
+| read_by_nik | 3.807 / 7.797 | 4.445 / 15.400 | 1835.267 | 1366.313 | 0.0% / 0.0% |
+| read_by_email | 3.663 / 6.761 | 3.471 / 6.331 | 2010.042 | 2122.647 | 0.0% / 0.0% |
+| read_profile | 3.666 / 6.831 | 3.429 / 6.185 | 1993.412 | 2163.505 | 0.0% / 0.0% |
+| list_page | 2.700 / 5.245 | 2.526 / 4.557 | 2580.042 | 2844.668 | 0.0% / 0.0% |
+| update_contact | 5.642 / 9.434 | 5.582 / 9.579 | 1297.527 | 1301.950 | 0.0% / 0.0% |
+| insert_member | 9.357 / 14.248 | 9.114 / 13.653 | 807.174 | 825.969 | 0.0% / 0.0% |
+| mixed | 4.345 / 13.237 | 3.932 / 11.578 | 1318.611 | 1481.665 | 0.0% / 0.0% |
+
+1M: 2,134,636 request terukur, 0 error dan seluruh21 run lulus checksum/sequence. Variasi antar-run tetap disimpan; misalnya email run1 lebih lambat daripada run2/3. Tidak membuang outlier atau mengulang untuk memperbaiki angka.
+Backup/restore1M: median 23.389305 / 27.942557 detik. Ketiga restore berisi1.000.000 baris dengan checksum/sequence sesuai; tiga DB dan dump sementara yang dibuat runner sudah dihapus. Snapshot privat generation tetap dipertahankan.
+Raw1M: 133.678.973 byte CSV menjadi28.953.920 byte gzip level1. Hash dekompresi cocok dengan setiap file asli sebelum CSV milik sesi ini diganti gzip. Audit seluruh request menghitung ulang persentil/count/throughput dari raw.
+
+| Pemeriksaan silang read_by_nik 100k | Python asli | pgbench (median3 run) |
+|---|---:|---:|
+| p50 (ms) | 3.806700 | 0.094000 |
+| p95 (ms) | 7.797060 | 0.142000 |
+| Mean (ms) | 4.327669 | 0.149000 |
+| Throughput (req/s) | 1835.267446 | 53661.138857 |
+| Error rate | 0.000000 | 0.000000 |
+
+Rasio throughput pgbench/Python = 29.239?. Hash corpus2048 key identik; semua3 run pgbench tanpa error, data/sequence100k tetap. Query mengembalikan30 field; pgbench memakai clientC, jalurTCP di container dan tidak mengonversi/membandingkan field Python tiap request. Angka tersebut mencakup overhead client, validasi/logging dan perbedaan transport/penempatan, bukan estimasi murni overhead interpreter.
+CPU client1M dari psutil: median per skenario 12.575?16.169% kapasitas8 logicalCPU; peak sampel tertinggi 17.988%. CPU keseluruhan mesin tidak jenuh pada sampel, tetapi ini tidak membuktikan ketiadaan batas GIL/satu inti atau bottleneck transport. CPU client100k read_by_nik historis 15.094% kapasitas mesin. Resource mentah berada dalam gzip; ringkasan client_cpu.json menyimpan definisi dan cakupan.
+Evidence: evidence/benchmark/baseline_1m/ (summary, per-run, env, backup_restore, raw_validation, client_cpu); crosscheck_pgbench.json; session_1m_crosscheck.json. Raw pgbench di results/bench/crosscheck_pgbench/ tanpa key; seluruh log sementara container serta script privat sudah dihapus.

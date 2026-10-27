@@ -1,0 +1,10 @@
+{
+  "status": "PASSED",
+  "tests": 50,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "code_commit": "cfd703b8080a1c7bd6b574779e6e8e1dc9441a32",
+  "junit_sha256": "f6ca9c304d66f9b149451be519bb05d7b8fb3e0b33c5e08def93d5379571a66c",
+  "command": "benchmark/.venv/Scripts/python.exe -m pytest benchmark/tests datagen/tests -q"
+}

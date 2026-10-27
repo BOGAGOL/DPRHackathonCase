@@ -1,0 +1,57 @@
+{
+  "logical_cpus": 8,
+  "scenarios": [
+    {
+      "scenario": "insert_member",
+      "client_cpu_percent_one_core_median_between_runs": 129.3,
+      "client_cpu_percent_machine_median_between_runs": 16.1625,
+      "client_cpu_percent_one_core_peak": 141.0,
+      "client_cpu_percent_machine_peak": 17.625
+    },
+    {
+      "scenario": "list_page",
+      "client_cpu_percent_one_core_median_between_runs": 128.2,
+      "client_cpu_percent_machine_median_between_runs": 16.025,
+      "client_cpu_percent_one_core_peak": 143.9,
+      "client_cpu_percent_machine_peak": 17.9875
+    },
+    {
+      "scenario": "mixed",
+      "client_cpu_percent_one_core_median_between_runs": 126.25,
+      "client_cpu_percent_machine_median_between_runs": 15.78125,
+      "client_cpu_percent_one_core_peak": 143.8,
+      "client_cpu_percent_machine_peak": 17.975
+    },
+    {
+      "scenario": "read_by_email",
+      "client_cpu_percent_one_core_median_between_runs": 126.55,
+      "client_cpu_percent_machine_median_between_runs": 15.81875,
+      "client_cpu_percent_one_core_peak": 133.8,
+      "client_cpu_percent_machine_peak": 16.725
+    },
+    {
+      "scenario": "read_by_nik",
+      "client_cpu_percent_one_core_median_between_runs": 100.6,
+      "client_cpu_percent_machine_median_between_runs": 12.575,
+      "client_cpu_percent_one_core_peak": 126.8,
+      "client_cpu_percent_machine_peak": 15.85
+    },
+    {
+      "scenario": "read_profile",
+      "client_cpu_percent_one_core_median_between_runs": 126.6,
+      "client_cpu_percent_machine_median_between_runs": 15.825,
+      "client_cpu_percent_one_core_peak": 136.1,
+      "client_cpu_percent_machine_peak": 17.0125
+    },
+    {
+      "scenario": "update_contact",
+      "client_cpu_percent_one_core_median_between_runs": 129.35,
+      "client_cpu_percent_machine_median_between_runs": 16.16875,
+      "client_cpu_percent_one_core_peak": 143.8,
+      "client_cpu_percent_machine_peak": 17.975
+    }
+  ],
+  "interpretation": "Shows machine CPU utilization. Does not by itself exclude GIL, single-core, scheduling, client conversion or network limits; pgbench comparison has placement and validation differences.",
+  "sampled_machine_cpu_saturation_observed": false,
+  "bottleneck_assessment": "Whole-machine client CPU was not saturated in samples; GIL/single-core, transport, or client overhead not isolated."
+}
