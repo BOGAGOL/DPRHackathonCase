@@ -1,0 +1,11 @@
+{
+  "status": "PASSED",
+  "database": "baseline_100k",
+  "rows": 100000,
+  "seed": 42,
+  "source_rows": 734,
+  "source_unchanged_after_bootstrap": true,
+  "dataset_commit": "cf2d2ccd786066ad9ea3c56ec2999987feda73ac",
+  "tls": "verify-full",
+  "local_only": true
+}
