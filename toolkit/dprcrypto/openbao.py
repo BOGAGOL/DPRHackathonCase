@@ -79,6 +79,8 @@ class OpenBaoClient:
                 headers={"X-Vault-Token": token, "X-Vault-Request": "true"})
             if not 200 <= response.status_code < 300:
                 raise OpenBaoError(response.status_code)
+            if response.status_code == 204 and not response.content:
+                return {}
             result = response.json()["data"]
             if not isinstance(result, dict):
                 raise ValueError()
@@ -139,6 +141,49 @@ class OpenBaoClient:
         try:
             return validate_wrapped(self._call(f"transit/encrypt/{kek}", payload)["ciphertext"])
         except KeyError:
+            raise OpenBaoError() from None
+
+    def key_metadata(self, kek: str) -> dict:
+        """Return safe envelope-key metadata only, using a key-operator identity."""
+        if kek not in KEKS:
+            raise CryptoError("Invalid KEK")
+        self.require_policy("key-operator")
+        with self._lock:
+            data = self._send("GET", f"transit/keys/{kek}", self._token())
+        try:
+            if (data["type"] != "aes256-gcm96" or data["derived"] or data["exportable"]
+                    or data["allow_plaintext_backup"] or data["deletion_allowed"]):
+                raise ValueError()
+            result = {name: data[name] for name in ("latest_version", "min_decryption_version", "min_encryption_version")}
+            if any(type(value) is not int or value < (1 if name == "latest_version" else 0)
+                   for name, value in result.items()):
+                raise ValueError()
+            return result
+        except (KeyError, ValueError, TypeError):
+            raise OpenBaoError() from None
+
+    def rotate_key(self, kek: str) -> dict:
+        """Non-idempotent operation: intentionally no automatic retry."""
+        if kek not in KEKS:
+            raise CryptoError("Invalid KEK")
+        self.require_policy("key-operator")
+        self._call(f"transit/keys/{kek}/rotate", {})
+        return self.key_metadata(kek)
+
+    def rewrap_batch(self, kek: str, wrapped: list[str], *, key_version: int) -> list[str]:
+        if (kek not in KEKS or not isinstance(wrapped, list) or len(wrapped) > 100
+                or type(key_version) is not int or key_version < 1):
+            raise CryptoError("Invalid rewrap batch input")
+        self.require_policy("key-operator")
+        items = [{"ciphertext": validate_wrapped(value), "reference": str(i), "key_version": key_version}
+                 for i, value in enumerate(wrapped)]
+        results = self._batch_results(f"transit/rewrap/{kek}", items)
+        try:
+            values = [validate_wrapped(item["ciphertext"]) for item in results]
+            if any(int(value.split(":", 2)[1][1:]) != key_version for value in values):
+                raise ValueError()
+            return values
+        except (KeyError, ValueError, TypeError):
             raise OpenBaoError() from None
 
     def require_policy(self, expected: str) -> None:
