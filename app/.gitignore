@@ -1,0 +1,9 @@
+.local/
+.venv/
+.env
+*.env
+*.log
+*.crt
+*.key
+__pycache__/
+.pytest_cache/

@@ -1,0 +1,23 @@
+version: 1
+seed: 42
+key_pool: 2048
+page_pool: 64
+page_size: 50
+scenarios:
+  - read_by_nik
+  - read_by_email
+  - read_profile
+  - list_page
+  - update_contact
+  - insert_member
+  - mixed
+mixed_cycle:
+  read_by_nik: 20
+  read_by_email: 20
+  read_profile: 20
+  list_page: 10
+  update_contact: 15
+  insert_member: 15
+single_record_fields: all_29_source_columns_plus_business_id
+list_fields: [id, nama, jenis_kelamin]
+write_policy: explicit_negative_id_and_transaction_rollback

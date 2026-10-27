@@ -1,0 +1,4 @@
+run,temporary_database,status,started_at_utc,backup_s,dump_bytes,restore_s,restored_rows,checksum_matches,sequence_matches,dump_sha256,temporary_database_removed,dump_retained_private
+1,bench_restore_1_cded6a7c3803,PASSED,2026-10-27T04:10:44.639057+00:00,3.731488999997964,14996532,3.9262490999972215,100000,True,True,b05cc013855d70ba8ba5e09c650298ce412f4e6b6a79c3d23e08c3ac88a5baa2,True,False
+2,bench_restore_2_61322676fa53,PASSED,2026-10-27T04:10:58.193211+00:00,3.3135301000002073,14996532,2.858266299997922,100000,True,True,bdff9c363bb057a9a61bd985bfb0b88f1426147f5184b6536324251fe1015820,True,False
+3,bench_restore_3_050c25825022,PASSED,2026-10-27T04:11:09.250887+00:00,2.974606399991899,14996532,2.9832559999922523,100000,True,True,77a69766b460eb50dfee968658bbda76491c18eacf062bb6411adfa18c9b94a1,True,False

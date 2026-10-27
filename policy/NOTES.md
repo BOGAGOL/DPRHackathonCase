@@ -38,3 +38,9 @@ atau sisa REF telah memenuhi k-anonymity; pengujian tersebut milik Modul C.
 Fixture `synthetic_scope_fixture.json` berlabel `test_only` dan seluruh principal,
 UUID, serta username dibuat untuk test. Fixture hanya dimuat di PostgreSQL
 sementara oleh integration test, tidak otomatis masuk database development.
+
+Sinkronisasi main 27 Oktober 2026 (`20e08f3`): kontrak menambahkan pengecualian
+dataset panitia pada repo private. Profile dibangun ulang agar hash provenance
+kontrak sesuai versi terbaru; keputusan perlindungan/format v1 tidak berubah.
+Dataset lokal sama dengan file yang kini dilacak di main. Pengecualian dataset
+tidak berlaku bagi credential, kunci, log, atau artefak hasil migrasi.

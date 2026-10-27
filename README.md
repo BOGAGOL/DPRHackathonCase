@@ -231,3 +231,14 @@ Penerapan skema/role ke `pg-dpr:5433` dan handoff Service App:
 [sql/protected/NOTES.md](sql/protected/NOTES.md),
 [sql/roles/NOTES.md](sql/roles/NOTES.md). Tahap ini menyiapkan database protected;
 migrasi data dijalankan pada tahap berikutnya.
+
+## Benchmark Modul C — baseline awal level DB
+
+Runner tujuh skenario plain pada pg-dpr tersedia di `benchmark/`, terpisah dari
+benchmark lab historis. [Panduan PowerShell](benchmark/README.md) menyiapkan credential
+melalui prompt aman/env; [NOTES](benchmark/NOTES.md) menjelaskan dataset tetap,
+rollback, metrik, keputusan instance bersama, serta batas pengukuran.
+Perintah utama: `python -m benchmark run --db baseline_100k --label before --adapter plain --scenario all --runs 3 --duration 60 --concurrency 8 --warmup 10`,
+lalu `python -m benchmark backup-restore --db baseline_100k --label before --runs 3`.
+Raw lokal berada di `results/bench/before/`; ringkasan di `evidence/benchmark/baseline/`.
+Baseline awal ini terpisah dari eksperimen berpasangan B–P–P–B dan bukan hasil API/protected.

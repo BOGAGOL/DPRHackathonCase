@@ -1,0 +1,67 @@
+{
+  "status": "PASSED",
+  "scope": "Chromium frontend with synthetic API mocks; does not verify backend authorization, database TLS or OpenBao",
+  "tests": [
+    {
+      "scenario": "API proxy verifies HTTPS configuration and withholds sensitive upstream error text",
+      "status": "passed",
+      "duration_ms": 18
+    },
+    {
+      "scenario": "API proxy preserves session cookies and CSRF without accepting redirects",
+      "status": "passed",
+      "duration_ms": 4
+    },
+    {
+      "scenario": "navigation policy and nonce validation deny unsupported usage",
+      "status": "passed",
+      "duration_ms": 20
+    },
+    {
+      "scenario": "strict CSP has a different nonce on each request and every inline script is nonced",
+      "status": "passed",
+      "duration_ms": 2385
+    },
+    {
+      "scenario": "login works under strict CSP without writing browser storage",
+      "status": "passed",
+      "duration_ms": 3171
+    },
+    {
+      "scenario": "member profile escapes XSS and only PATCHes changed contact fields",
+      "status": "passed",
+      "duration_ms": 1126
+    },
+    {
+      "scenario": "exact search uses API fetch without adding identifiers to the page URL",
+      "status": "passed",
+      "duration_ms": 567
+    },
+    {
+      "scenario": "analyst has a separate workspace and no record navigation",
+      "status": "passed",
+      "duration_ms": 743
+    },
+    {
+      "scenario": "auditor has a separate workspace and no record navigation",
+      "status": "passed",
+      "duration_ms": 606
+    },
+    {
+      "scenario": "finance is read-only and anggota has its own scoped directory",
+      "status": "passed",
+      "duration_ms": 881
+    },
+    {
+      "scenario": "privileged officer can insert source fields without crypto metadata",
+      "status": "passed",
+      "duration_ms": 709
+    },
+    {
+      "scenario": "mobile navigation stays within viewport",
+      "status": "passed",
+      "duration_ms": 1052
+    }
+  ],
+  "timestamp_utc": "2026-10-27T03:41:12.017Z"
+}

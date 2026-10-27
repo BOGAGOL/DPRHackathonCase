@@ -1,0 +1,16 @@
+{
+    "status":  "PASSED",
+    "checked_at_wib":  "2026-10-27T12:38:13+07:00",
+    "repository_visibility":  "PRIVATE",
+    "tests":  {
+                  "command":  ".\\datagen\\.venv\\Scripts\\python.exe -m pytest verify/tests -q",
+                  "passed":  3
+              },
+    "dataset_path":  "sql/baseline/02_data.sql",
+    "exact_path_exceptions":  [
+                                  "verify/scan_config.toml",
+                                  ".gitleaks.toml"
+                              ],
+    "public_archive_export_ignore":  true,
+    "scope":  "Configuration checks only; S05/S06 scans not yet run"
+}

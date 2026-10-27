@@ -9,3 +9,7 @@ paths = [
   '^docs/reference/',
   '^docs/legacy-md_zhafif/',
 ]
+
+[[allowlists]]
+description = "Organizer synthetic initial plaintext dataset; PRIVATE repository only (team decision 2026-10-27)"
+paths = ['^sql/baseline/02_data\.sql$']

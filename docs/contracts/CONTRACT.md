@@ -161,3 +161,16 @@ test yang mendekripsi vector ini (terutama jika backend bukan Python).
 | `docs/` | semua, laporan dikoordinasikan C |
 
 docs/reference/ = rujukan pihak ketiga, dikecualikan dari scan dan evidence
+
+### Pengecualian dataset panitia — keputusan tim 27 Oktober 2026
+
+`sql/baseline/02_data.sql` adalah dataset sintetis milik panitia dan boleh disimpan hanya
+di repo **PRIVATE** ini, sesuai arahan tim 27 Oktober 2026 (mengamendemen larangan commit
+path tersebut pada PROJECT_CONTEXT bagian 11). Dilarang memublikasikan dataset atau
+mengubah repo menjadi public, termasuk setelah file dihapus karena riwayat Git tetap memuatnya.
+Path ini dikecualikan dari paket lampiran publik melalui `.gitattributes` (`export-ignore`),
+dari scan plaintext S06 melalui `verify/scan_config.toml`, dan dari gitleaks melalui allowlist
+path persis di `.gitleaks.toml`: file itu sengaja merepresentasikan kondisi awal plaintext.
+Pengecualian ini tidak berlaku untuk file SQL lain, log, evidence, credential, atau kunci aktif.
+Snapshot hasil generation, known-values, dan rahasia tetap di luar repo melalui `DPR_PRIVATE_DIR`.
+Lihat `sql/baseline/README.md`; pengecualian harus dilaporkan sebagai batas cakupan scan.

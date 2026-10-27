@@ -6,7 +6,7 @@ provenance:
   inventory: evidence/scanner/before_v1/inventory.csv
   inventory_sha256: 443064a25c9367e2d69ae6ee55e3499008005daf2fcfffc81fbf11a8b2d2293d
   overrides_sha256: b1872e390349cd817624a573c3d4819219d8669a9ba73ee2b8a8bc571e6823de
-  contract_sha256: 22f2a6b95cbfc6fd305a0a5cb46b6e5824fc4746cacd7179b86c845c8e16d7eb
+  contract_sha256: 2547b0be74f540f2eeb37215a7dc0144cd0012ba0772920d90138fdff2f97084
 record_id:
   type: uuid4
   source_mapping: id -> legacy_row_id
