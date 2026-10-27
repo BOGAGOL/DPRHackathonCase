@@ -1,0 +1,10 @@
+{
+    "status":  "PASSED",
+    "tests":  42,
+    "failures":  0,
+    "errors":  0,
+    "skipped":  0,
+    "command":  "benchmark/.venv/Scripts/python.exe -m pytest benchmark/tests datagen/tests -q --junitxml=results/bench/implementation-tests.xml",
+    "timestamp_utc":  "2026-10-27T03:42:50.7747212+00:00",
+    "scope":  "Unit tests with handmade synthetic fixtures; DB functional preflight recorded separately"
+}

@@ -213,3 +213,14 @@ Sumber `postgres`/734 baris tetap hanya dibaca. Snapshot/credential berada di lu
 Target yang disahkan sebelum benchmark: [docs/targets.md](docs/targets.md), dengan bukti commit
 di [evidence/targets_commit.json](evidence/targets_commit.json). Benchmark baru dan restore drill
 Modul C dijalankan pada langkah berikutnya, setelah baseline tervalidasi.
+
+## Benchmark Modul C — baseline awal level DB
+
+Runner tujuh skenario plain pada pg-dpr tersedia di `benchmark/`, terpisah dari
+benchmark lab historis. [Panduan PowerShell](benchmark/README.md) menyiapkan credential
+melalui prompt aman/env; [NOTES](benchmark/NOTES.md) menjelaskan dataset tetap,
+rollback, metrik, keputusan instance bersama, serta batas pengukuran.
+Perintah utama: `python -m benchmark run --db baseline_100k --label before --adapter plain --scenario all --runs 3 --duration 60 --concurrency 8 --warmup 10`,
+lalu `python -m benchmark backup-restore --db baseline_100k --label before --runs 3`.
+Raw lokal berada di `results/bench/before/`; ringkasan di `evidence/benchmark/baseline/`.
+Baseline awal ini terpisah dari eksperimen berpasangan B–P–P–B dan bukan hasil API/protected.
