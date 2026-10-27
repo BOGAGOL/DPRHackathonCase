@@ -33,7 +33,7 @@ from scripts.backup.settings import artifact_store
 
 @pytest.fixture(scope="module")
 def laboratory(tmp_path_factory):
-    if os.environ.get("DPR_BACKUP_INTEGRATION") != "1":
+    if os.environ.get("DPR_BACKUP_INTEGRATION") != "1" and os.environ.get("DPR_ROTATION_INTEGRATION") != "1":
         pytest.skip("Set DPR_BACKUP_INTEGRATION=1 for disposable TLS PG18/OpenBao backup drills")
     folder = tmp_path_factory.mktemp("backup-lab")
     root = secure_directory(folder/"secrets"); make_ca(root/"tls"); make_certificate(root)
@@ -84,7 +84,8 @@ def laboratory(tmp_path_factory):
             with admin.cursor() as cursor: cursor.executemany(query, [[row[column] for column in columns] for row in encrypted])
         keys = (os.urandom(32), os.urandom(32)); store = artifact_store(str(folder/"archives"))
         backup_params = {**params, "dbname": "protected_734", "user": "backup_user", "password": passwords["backup_user"]}
-        yield {"params": params, "backup_params": backup_params, "container": container, "keys": keys, "store": store, "profile": profile}
+        yield {"params": params, "backup_params": backup_params, "container": container, "keys": keys,
+            "store": store, "profile": profile, "passwords": passwords, "root": root}
     finally:
         os.environ.clear(); os.environ.update(original_env)
         compose("down", "-v", "--remove-orphans")
