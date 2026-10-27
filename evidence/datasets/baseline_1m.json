@@ -1,0 +1,125 @@
+{
+  "status": "PASSED",
+  "database": "baseline_1m",
+  "rows_requested": 1000000,
+  "seed": 42,
+  "replicate_anomalies": true,
+  "created_at_utc": "2026-10-27T05:41:26.022079+00:00",
+  "generator_version": "1.0.0",
+  "code_commit": "8986fd183652f7c5b1ad55a928ae3c1a42388a43",
+  "datagen_worktree_dirty": false,
+  "targets_commit": "a412ce8e4c1045c72cdf2e77af6bfe77a7ef5b5f",
+  "targets_committed_at_wib": "2026-10-27T12:39:29+07:00",
+  "validation": {
+    "passed": true,
+    "row_count": 1000000,
+    "groups": {
+      "source": 734,
+      "synthetic": 999266
+    },
+    "source_preserved": true,
+    "duplicate_or_null_counts": {},
+    "synthetic_format_violations": {},
+    "synthetic_relation_violations": {},
+    "distributions": {
+      "jenis_kelamin": {
+        "categories": 2,
+        "max_count_deviation": 8.602179836540017,
+        "within_one_source_cycle": true
+      },
+      "tempat_lahir": {
+        "categories": 5,
+        "max_count_deviation": 5.673024523159256,
+        "within_one_source_cycle": true
+      },
+      "pekerjaan_terakhir": {
+        "categories": 6,
+        "max_count_deviation": 9.727520435961196,
+        "within_one_source_cycle": true
+      },
+      "status_kawin": {
+        "categories": 2,
+        "max_count_deviation": 5.0,
+        "within_one_source_cycle": true
+      },
+      "agama": {
+        "categories": 7,
+        "max_count_deviation": 2.395095367843169,
+        "within_one_source_cycle": true
+      },
+      "nama_bank": {
+        "categories": 4,
+        "max_count_deviation": 3.2207084468682297,
+        "within_one_source_cycle": true
+      },
+      "nama_kppn": {
+        "categories": 5,
+        "max_count_deviation": 4.155313351511722,
+        "within_one_source_cycle": true
+      },
+      "jumlah_anak": {
+        "categories": 4,
+        "max_count_deviation": 5.196185286156833,
+        "within_one_source_cycle": true
+      }
+    },
+    "anomalies": {
+      "source": {
+        "null": 367,
+        "bank_nonmodal": 724,
+        "adult": 235,
+        "before_birth": 42,
+        "under_17": 90
+      },
+      "synthetic": {
+        "null": 499628,
+        "bank_nonmodal": 985651,
+        "adult": 319926,
+        "under_17": 122528,
+        "before_birth": 57184
+      }
+    },
+    "anomaly_policy_valid": true,
+    "anomaly_count_deviations": {
+      "before_birth": 5.291553133516572,
+      "under_17": 2.1961852860986255,
+      "bank_nonmodal": 1.0217983651673421
+    },
+    "checksum_sha256": "39812166a18ed61a6c45787d8af1a84a61c561c44955855c4681c9c02c5186f0",
+    "source_checksum_sha256": "5113038953aea9383f600de725b4267ecbf93de47c2a603a68bde6ad7e5c17e8",
+    "matches_recorded_baseline": true,
+    "source_database_unchanged": true
+  },
+  "baseline_checksum_sha256": "39812166a18ed61a6c45787d8af1a84a61c561c44955855c4681c9c02c5186f0",
+  "roles": {
+    "passed": true,
+    "checks": {
+      "bench_identity": true,
+      "bench_read_count": true,
+      "bench_no_schema_ddl": true,
+      "bench_no_delete": true,
+      "bench_select_allowed": true,
+      "bench_insert_allowed": true,
+      "bench_update_allowed": true,
+      "bench_delete_denied": true,
+      "bench_truncate_denied": true,
+      "bench_identity_sequence_allowed": true,
+      "scanner_select_allowed": true,
+      "scanner_insert_denied": true,
+      "scanner_update_denied": true,
+      "scanner_delete_denied": true,
+      "scanner_truncate_denied": true,
+      "bench_no_source_select": true
+    },
+    "scope": "Data privileges; PUBLIC CONNECT on other databases is not modified"
+  },
+  "snapshot": {
+    "format": "pg_dump_custom",
+    "client": "pg-dpr/pg_dump18",
+    "outside_repository": true,
+    "bytes": 150429543,
+    "sha256": "477299e821462d274690dc7e21b9882eb2b3c3109681a63001e56d38f75e2dd6",
+    "created_at_utc": "2026-10-27T05:46:12.512806+00:00",
+    "archive_list_verified": true
+  }
+}

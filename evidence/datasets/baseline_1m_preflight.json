@@ -1,0 +1,17 @@
+{
+  "status": "PASSED",
+  "checked_at_utc": "2026-10-27T05:40:15.134014+00:00",
+  "new_target_absent": true,
+  "snapshot_absent": true,
+  "source_checksum_sha256": "5113038953aea9383f600de725b4267ecbf93de47c2a603a68bde6ad7e5c17e8",
+  "existing_database_sizes_bytes": {
+    "baseline_100k": 104732351,
+    "postgres": 8640191
+  },
+  "host_free_bytes": 6496575488,
+  "generator_version": "1.0.0",
+  "code_commit": "8986fd183652f7c5b1ad55a928ae3c1a42388a43",
+  "datagen_worktree_dirty": false,
+  "targets_commit": "a412ce8e4c1045c72cdf2e77af6bfe77a7ef5b5f",
+  "targets_committed_at_wib": "2026-10-27T12:39:29+07:00"
+}

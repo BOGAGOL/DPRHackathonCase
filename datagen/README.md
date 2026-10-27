@@ -54,3 +54,32 @@ Remove-Item Env:DATAGEN_DATABASE_URL,Env:BENCH_DATABASE_URL -ErrorAction Silentl
 Scanner memakai credential scanner yang sudah ada; cukup arahkan `SCANNER_DATABASE_URL` ke baseline
 saat langkah scanner nanti. Jangan mencetak variabel DSN atau membaca isi file privat ke output.
 Keputusan distribusi/anomali/keamanan dan batas CONNECT PUBLIC ada di [NOTES.md](NOTES.md).
+
+## Dataset utama 1M — amandemen tim 27 Oktober 2026
+
+`baseline_1m` berisi 1.000.000 baris (734 sumber + 999.266 tambahan), seed 42.
+`baseline_100k` beserta hasil benchmark awal tetap dipertahankan sebagai titik skala
+dan jaring pengaman. Kedua database berada di `pg-dpr`; database sumber `postgres`
+hanya dibaca. Gunakan penyiapan env admin/bench di atas dengan credential yang sama;
+`--db` memilih database baseline secara eksplisit, bukan database sumber.
+
+```powershell
+$env:DPR_PRIVATE_DIR = 'C:\dev\dpr-private'
+# Referensi pembuatan sekali saja; jangan ulangi bila DB/snapshot sudah ada:
+# .\datagen\.venv\Scripts\python.exe -m datagen --rows 1000000 --seed 42 --target-db baseline_1m
+# .\datagen\.venv\Scripts\python.exe -m datagen provision --db baseline_1m
+# .\datagen\.venv\Scripts\python.exe -m datagen snapshot --db baseline_1m --out "$env:DPR_PRIVATE_DIR\baseline_1m.dump"
+
+# Pemeriksaan ulang (memerlukan DATAGEN_DATABASE_URL dari penyiapan aman di atas):
+.\datagen\.venv\Scripts\python.exe -m datagen validate --db baseline_1m --rows 1000000
+Get-Content -Raw -Encoding UTF8 evidence/datasets/baseline_1m.json | ConvertFrom-Json
+Get-Content -Raw -Encoding UTF8 evidence/datasets/baseline_1m_execution.json | ConvertFrom-Json
+Get-Item -LiteralPath "$env:DPR_PRIVATE_DIR\baseline_1m.dump" | Select-Object Name,Length
+Get-PSDrive C | Select-Object Name,Free
+```
+
+Metadata execution memisahkan durasi generation (termasuk validasi bawaan), validasi ulang,
+provision, snapshot, dan total; mencatat ukuran DB/tabel/indeks serta sisa disk host dan
+filesystem Docker. Kapasitas virtual Docker tidak menggantikan batas ruang fisik Windows.
+Snapshot tetap di luar repo, dicek header/checksum dan `pg_restore --list`; ini belum
+merupakan drill restore 1M. Benchmark 1M menunggu instruksi terpisah.

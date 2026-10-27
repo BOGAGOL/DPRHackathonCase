@@ -1,5 +1,40 @@
 # Modul C — datagen baseline (langkah 2)
 
+## Amandemen dan generation 1M — 27 Oktober 2026
+
+- Perubahan dataset: arahan technical meeting panitia, 27 Okt 2026; disetujui tim.
+  Utama `baseline_1m` = 1.000.000 (734 sumber + 999.266 tambahan), seed 42.
+  `baseline_100k` tetap titik skala/jaring pengaman; evidence benchmark awal tidak diubah.
+  Target amandemen `a412ce8e4c1045c72cdf2e77af6bfe77a7ef5b5f`, 12:39:29 WIB,
+  telah di-push sebelum generation. `evidence/targets_commit.json` menyimpan field aktif
+  terbaru untuk kompatibilitas loader dan `history` yang mempertahankan entri awal serta amandemen.
+- Generator tetap versi 1.0.0, tanpa perubahan algoritme. Kode saat generation:
+  `8986fd183652f7c5b1ad55a928ae3c1a42388a43`. Hanya membuat DB baru di `pg-dpr`
+  PostgreSQL 18, `127.0.0.1:5433`, koneksi baseline tanpa TLS (`sslmode=disable`).
+  Tidak menyalakan/mematikan container, tidak menjalankan benchmark 1M atau migrasi A.
+- Eksekusi 12:41:19–12:46:19 WIB: generation termasuk validasi penuh **182,88 detik**;
+  validasi ulang penuh **78,87 detik**; provision/pemeriksaan role **0,43 detik**;
+  snapshot **25,13 detik**; total termasuk pemeriksaan akhir **300,12 detik**.
+- Kedua validasi lulus: 734 sumber identik; tambahan 999.266 terpisah; tidak ada duplicate/NULL
+  identifier unik, pelanggaran format/relasi; distribusi/anomali sesuai kebijakan sumber.
+  Checksum baseline baru cocok saat validasi ulang. Prefix 100.000 baris identik dengan baseline_100k.
+  Baseline_100k serta sequence-nya diperiksa sebelum/sesudah dan tetap sama; sumber tetap sama.
+- `bench_user` yang sudah ada diberi SELECT/INSERT/UPDATE dan USAGE/SELECT sequence hanya pada
+  baseline baru; tidak merotasi credential. Hak dibandingkan dengan baseline_100k, DELETE/TRUNCATE
+  dan DDL tetap ditolak. `scanner_user` diberi SELECT; query count dijalankan dengan SET LOCAL ROLE
+  scanner_user (bukan uji autentikasi password scanner). Pembatasan CONNECT PUBLIC tetap seperti catatan lama.
+- Ukuran DB saat selesai **801.609.407 byte**; tabel+indeks **793.616.384 byte**.
+  Snapshot custom privat `baseline_1m.dump`: **150.429.543 byte**, header PGDMP/SHA-256 dan
+  `pg_restore --list` diverifikasi; arsip memuat TABLE DATA dan SEQUENCE SET yang diperlukan.
+  Snapshot ini belum merupakan uji restore 1M. Lokasi mengikuti DPR_PRIVATE_DIR di luar repo.
+- Sisa disk akhir host C: **5.574.057.984 byte**. Filesystem virtual Docker melaporkan
+  **979.431.227.392 byte**, tetapi ruang fisik host adalah batas penyimpanan aktual.
+- Evidence: `evidence/datasets/baseline_1m.json`, `baseline_1m_preflight.json`,
+  `baseline_1m_execution.json`. Pemeriksaan 17 ambang target tetap dan pengecualian arsip:
+  `evidence/configuration/targets-and-public-archive.json`. Integrasi main sebelumnya bersih,
+  172 test lulus/1 skip: `evidence/integration/main-merge-cf2d2cc.json`.
+  Benchmark 1M menunggu perintah terpisah; hasil 100k tidak dianggap hasil 1M.
+
 Acuan: CONTRACT, PROJECT_CONTEXT, prompt datagen, dan keputusan pengguna 26 Oktober 2026.
 Target telah disahkan pada commit yang tercatat di `evidence/targets_commit.json`.
 
