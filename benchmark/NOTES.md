@@ -1,5 +1,40 @@
 # Modul C — baseline awal level DB, langkah 3
 
+## Sesi utama 1M dan pemeriksaan silang — 27 Oktober 2026
+
+- Parameter sama seperti baseline awal 100k: 7 skenario ×3 run, concurrency8,
+  measurement60 detik, warmup10 detik, TCP tanpa TLS, bench_user. Metode tetap
+  sesi baseline awal, terpisah dari B–P–P–B. Workload manifest dan timed worker
+  tidak diubah; benchmark versi1.1.0 hanya memperluas pilihan dataset dan output.
+- Dataset baseline_1m diverifikasi terhadap checksum generation dan sequence di
+  luar waktu ukur, termasuk setelah setiap run. Korpus 2048 profil dan64 halaman
+  dibuat seed42 secara terpisah untuk populasi1M; ini bukan pool ID yang identik
+  dengan 100k. Tabel perbandingan skala menggambarkan dua sesi awal terpisah.
+- Ambang ruang fisik Windows10 GB diperiksa sebelum 1M serta setiap run/restore;
+  kapasitas virtual Docker tidak dipakai untuk menggantikannya. Saat awal sesi
+  Docker Desktop tidak aktif; dinyalakan sekali, kemudian pg-dpr yang sama dijalankan.
+  Tidak ada container lain yang dinyalakan. Pemanasan cache tetap melalui integrity
+  scan, VACUUM ANALYZE dan warmup; tidak ada flush cache atau klaim cold-cache.
+- Pgbench18.6 berada di pg-dpr, TCP127.0.0.1:5432,8 koneksi/8 thread, prepared,
+  3×60 detik dan pemanasan terpisah10 detik. Custom SELECT mengembalikan30 field
+  yang sama. Seluruh2048 kunci diambil dari corpus100k asli dengan hash yang sama,
+  dipilih acak uniform seed42 (PRNG/urutan berbeda dari Python). CASE seimbang
+  memilih nilai integer; lpad mengembalikan nol awal ke14 digit. Query berparameter,
+  tanpa CREATE/INSERT tabel pgbench. Script privat hanya di DPR_PRIVATE_DIR dan
+  dikirim stdin; log transaksi tidak memuat key, disalin ke results sebelum dihapus
+  dari container. Password hanya di env Docker exec, bukan argv atau metadata.
+- Pgbench memakai client C dalam VM; Python berada di Windows melalui port5433,
+  melakukan konversi object/fetch, validasi hasil tiap request dan loggingCSV.
+  Pgbench tidak memvalidasi isi per-request; probe2048 key dilakukan terpisah.
+  Selisih mencakup overhead client dan jalur jaringan/penempatan, sehingga tidak
+  dapat diatribusikan seluruhnya pada interpreter Python. CPU psutil dibagi
+  jumlah logicalCPU untuk persentase kapasitas mesin; utilisasi rendah bukan bukti
+  yang menyingkirkan batas GIL/satu inti. Kesimpulan bottleneck mengikuti data aktual.
+  Rujukan primer: https://www.postgresql.org/docs/18/pgbench.html (custom scripts,
+  prepared protocol, per-transaction logs).
+- Perubahan scanner1.2 dilakukan setelah pengukuran1M dan pgbench berakhir.
+  Kegagalan setiap fase dicatat tanpa retry otomatis, fase independen dilanjutkan.
+
 Penetapan sesi: 27 Oktober 2026 WIB. Acuan target yang sudah disahkan:
 `docs/targets.md`, bukti commit di `evidence/targets_commit.json`.
 

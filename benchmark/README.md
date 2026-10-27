@@ -38,3 +38,24 @@ Sesi yang sudah mempunyai env.json atau CSV backup ditolak agar hasil lama tidak
 tertimpa. Sebelum pengulangan sesi, arsipkan raw/evidence secara terpisah setelah
 ditinjau; jangan menghapus hasil gagal atau mencampur sesi awal dan B–P–P–B.
 Metodologi, keputusan instance, sumber utilitas dan batas ada di [NOTES.md](NOTES.md).
+
+## Sesi utama 1M dan pemeriksaan silang
+
+Dengan env aman yang sama, pilihan DB menentukan koneksi dan keluaran secara eksplisit.
+Korpus 1M terpisah di DPR_PRIVATE_DIR; hasil 100k tetap utuh. Disk host wajib >=10 GB
+sebelum 1M dan diperiksa lagi sebelum setiap run/restore. Jalankan sekali; sesi yang
+sudah ada ditolak. Raw dapat dikompres gzip setelah semua pengukuran sesi selesai.
+
+```powershell
+.\benchmark\.venv\Scripts\python.exe -m benchmark run --db baseline_1m --label before --adapter plain --scenario all --runs 3 --duration 60 --concurrency 8 --warmup 10
+.\benchmark\.venv\Scripts\python.exe -m benchmark backup-restore --db baseline_1m --label before --runs 3
+# Dilakukan sesudah sesi 1M/restore, memakai corpus 100k yang telah disimpan:
+.\benchmark\.venv\Scripts\python.exe -c "from benchmark.pgbench_crosscheck import crosscheck; crosscheck()"
+Import-Csv evidence/benchmark/baseline_1m/summary.csv | Format-Table -AutoSize
+Get-Content -Raw evidence/benchmark/crosscheck_pgbench.json | ConvertFrom-Json
+```
+
+Keluaran 1M: results/bench/before_1m/ dan evidence/benchmark/baseline_1m/.
+Pgbench memakai custom script via stdin; kunci tidak masuk argv/repo. Tidak ada
+inisialisasi pgbench atau tabel baru pada baseline. Raw transaksi tanpa kunci berada
+di results/bench/crosscheck_pgbench/; file sementara container dibersihkan setelah disalin.

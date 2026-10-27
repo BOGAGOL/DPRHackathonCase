@@ -25,12 +25,12 @@ def test_initial_session_all_runs_and_aggregate_outputs(monkeypatch,tmp_path,sou
     monkeypatch.setattr(runner,"RAW",tmp_path / "raw")
     monkeypatch.setattr(runner,"EVIDENCE",tmp_path / "evidence/benchmark")
     monkeypatch.setattr(runner,"running_containers",lambda:["pg-dpr"])
-    monkeypatch.setattr(runner,"state",lambda:dict(STATE))
+    monkeypatch.setattr(runner,"state",lambda *a:dict(STATE))
     monkeypatch.setattr(runner,"source_rows",lambda:source)
     monkeypatch.setattr(runner,"load_keys",lambda *a: ({},{}))
     monkeypatch.setattr(runner,"PlaintextAdapter",MagicMock())
     monkeypatch.setattr(runner,"environment",lambda *a: {"session_kind":"baseline_awal"})
-    monkeypatch.setattr(runner,"parameters",lambda **k: {})
+    monkeypatch.setattr(runner,"parameters",lambda *a,**k: {})
     monkeypatch.setattr(runner.psycopg,"connect",MagicMock())
     def fake_run(adapter,scenario,run,*args):
         return {**summarize([1,2,3],0,1),"scenario":scenario,"run":run,"warmup_errors":0,"resources":{"samples":1,"failed_samples":0}}
@@ -51,7 +51,7 @@ def test_environment_without_exposing_inspect_env(monkeypatch,tmp_path):
     conn.execute.return_value.fetchone.side_effect=[(False,),("18.6",),("bench_user",)]
     conn.execute.return_value.fetchall.return_value=[("shared_buffers","16384")]
     monkeypatch.setattr(runner.psycopg,"connect",lambda **k:conn)
-    monkeypatch.setattr(runner,"parameters",lambda **k:{})
+    monkeypatch.setattr(runner,"parameters",lambda *a,**k:{})
     monkeypatch.setattr(runner,"provenance",lambda:{"targets_commit":"a"*40})
     monkeypatch.setattr(runner,"running_containers",lambda:["pg-dpr"])
     def call(cmd,**kwargs):
@@ -117,6 +117,7 @@ def test_cli_commands_and_generic_errors(monkeypatch,tmp_path,capsys):
     monkeypatch.setattr(cli,"backup_restore",MagicMock(return_value={"status":"PASSED"}))
     assert cli.main(["run"])==0 and cli.main(["backup-restore"])==0
     assert run.call_args.args==(3,60,8,10,"all")
+    assert run.call_args.kwargs=={"database":"baseline_100k"}
     run.side_effect=RuntimeError("private driver text")
     assert cli.main(["run"])==2
     assert "private driver text" not in capsys.readouterr().err
