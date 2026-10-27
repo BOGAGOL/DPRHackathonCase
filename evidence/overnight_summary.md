@@ -38,3 +38,19 @@ benchmark after yang dapat dilaporkan dari rangkaian ini.
 
 Kelanjutan menunggu instruksi untuk menyelesaikan konflik dokumentasi dan
 melanjutkan rangkaian; tidak ada pengulangan atau pekerjaan lanjutan otomatis.
+
+## Pemeriksaan setelah gangguan AC
+
+Pemeriksaan berikutnya mengonfirmasi tidak ada proses migrasi/benchmark aktif,
+tidak ada sesi DB workload terkait, dan database `protected_1m` belum dibuat.
+Progres migrasi **0/1.000.000**; tidak ada checkpoint yang perlu dilanjutkan.
+Rangkaian terakhir berhenti pada gerbang merge 0, bukan akibat charger.
+
+Kernel-Power ID 105, RecordId 27568–27569: AC terputus pada **28 Oktober 2026,
+00:58:21,876 WIB** dan terpasang kembali **00:58:54,603 WIB** (**32,73 detik**).
+Insiden ini terjadi setelah rangkaian berhenti. **Tidak ada run terdampak baterai;
+0 run perlu diulang.** AC pada pemeriksaan berikutnya terpasang.
+
+Detail mesin: [ac_resume_status_20261028.json](overnight/ac_resume_status_20261028.json).
+Kelanjutan masih menunggu keputusan penggabungan kedua bagian `verify/NOTES.md`
+agar gerbang 0 dapat diselesaikan sesuai aturan konflik pengguna.

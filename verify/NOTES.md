@@ -146,3 +146,25 @@ ada merge ke main. Test aplikasi tidak dijalankan karena integrasi gagal dan
 tidak ada kode yang diubah. Evidence: evidence/overnight/gate0_merge.json;
 ringkasan: evidence/overnight_summary.md. Resolusi konflik dan kelanjutan
 memerlukan instruksi lanjutan pengguna sesuai gerbang yang dihentikan.
+
+## Pemeriksaan setelah charger dipasang kembali, 28 Oktober 2026
+
+Pemeriksaan read-only menunjukkan branch run/overnight-28okt masih di f01d485,
+gerbang terakhir adalah merge pada langkah 0. Merge sebelumnya sudah dibatalkan;
+bukan migrasi atau benchmark yang terhenti karena baterai. Tidak ditemukan proses
+Python/pgbench/pg_dump/pg_restore, tidak ada sesi DB workload terkait, database
+protected_1m belum ada: **0 baris dimigrasi**, tidak ada checkpoint untuk resume.
+Baseline dan protected_100k tidak diubah oleh pemeriksaan ini.
+
+Log System / Microsoft-Windows-Kernel-Power / Event ID 105 mencatat:
+AC=false **2026-10-28 00:58:21.8764242 WIB** (RecordId 27568), disusul
+AC=true **00:58:54.6027659 WIB** (RecordId 27569), durasi sekitar **32.73 detik**.
+Gangguan terjadi sesudah commit laporan berhenti pada 00:58:15 WIB. Tidak ada
+pengukuran yang tumpang tindih: 0 run perlu ditandai terdampak baterai atau diulang.
+AC saat pemeriksaan sudah true. Gangguan tetap dicatat sebagai insiden lingkungan,
+bukan alasan untuk mengulang hasil terdahulu yang tidak tumpang tindih.
+
+Evidence: evidence/overnight/ac_resume_status_20261028.json. Belum menerbitkan
+token baru, membuat target, atau menjalankan workload. Pengguna dimintai keputusan
+untuk melewati konflik dokumentasi verify/NOTES.md dengan mempertahankan kedua
+bagian lengkap; aturan gerbang sebelumnya masih meminta berhenti saat konflik.
