@@ -1,5 +1,14 @@
 # Migrasi tahap 4 — PowerShell
 
+Status clone development Alby: kedua target sudah dimigrasikan dan tervalidasi
+(734/100000), token migrasi dicabut, login DB migration_user NOLOGIN. Bukti:
+evidence/migration/completion.json. Panduan berikut menjelaskan reproduksi saat
+akses migrasi diaktifkan admin, bukan instruksi untuk mengulang setup otomatis.
+Validasi ulang setelah penutupan akses memerlukan aktivasi LOGIN sementara oleh
+admin (misalnya melalui prepare pada skema A yang masih cocok), kemudian NOLOGIN
+lagi setelah selesai. Token svc-migration hanya diperlukan untuk run/revoke;
+validate memakai svc-app.
+
 Jalankan dari root repo, pada branch Modul A. Python 3.11+, Docker Desktop,
 PostgreSQL 18 `pg-dpr:5433`, toolkit dprcrypto, PyYAML/psycopg dari requirements
 infra diperlukan. Semua koneksi TCP PostgreSQL/OpenBao memverifikasi TLS dan CA.

@@ -1,4 +1,10 @@
-# Pemeriksaan awal tahap 4 — 27 Oktober 2026
+# Tahap 4 — 27 Oktober 2026
+
+**Status terkini:** migrasi development lokal protected_734 (734 record) dan
+protected_100k (100000 record) sudah tervalidasi seluruh field. Token migrasi
+dicabut dan login DB migration_user dinonaktifkan. Bukti akhir ada di
+evidence/migration/completion.json; catatan pemeriksaan awal berikut adalah
+riwayat sebelum OpenBao diaktifkan, bukan status terkini.
 
 Sinkronisasi dengan main `20e08f3`: belum menjalankan migrasi atau menulis data
 anggota ke protected_734/protected_100k. Tidak diperlukan dump tambahan untuk
@@ -138,3 +144,38 @@ issue token, kemudian mengisi env dan menjalankan check/run menurut README modul
 Tidak ada migrasi data nyata yang dijalankan dan tidak ada validation.json
 development yang diklaim PASS. Sinkronisasi factory/akun/audit/principal dengan
 B di bagian awal tetap pekerjaan integrasi Service App, tidak menghalangi migrator.
+
+## Eksekusi aktual setelah unseal operator
+
+Operator menginisialisasi dan melakukan unseal manual OpenBao 2.5.5. Konfigurasi
+Transit tiga key dan empat policy diterapkan; token orphan tiap policy diterbitkan
+TTL 3600 detik. Root hanya dipakai configure/issue lalu dihapus dari env proses;
+material recovery/token tidak keluar dari direktori eksternal. Verifier OpenBao
+PASS (evidence/infra/openbao.json) dan readiness dua target PASS sebelum migrasi.
+
+Run postgres->protected_734 selesai dalam satu batch; token dipertahankan untuk
+run baseline_100k->protected_100k yang selesai dalam 100 batch. Setiap target
+menjalankan decrypt-and-compare semua record/field, NULL, REF/age_band, HMAC dan
+uniqueness. Run terakhir mencabut token svc-migration. Validasi mandiri kedua
+target **diulang setelah token tersebut dicabut**, memakai svc-app; keduanya
+PASS. Hasil per target serta canonical validation.json adalah hasil aktual clone
+development Alby, bukan angka benchmark resmi atau fixture disposable.
+
+Verifikasi akhir memeriksa jumlah anggota/status job/fingerprint terhadap report,
+penolakan lookup token migrasi yang sudah dicabut (HTTP403), dan checksum/TLS
+source yang tetap cocok. Sesudah tidak ada sesi/member role migrasi, admin
+mengubah migration_user menjadi NOLOGIN melalui koneksi template1. Objek/grant
+role tetap ada untuk keperluan provisioning ulang oleh admin; tidak ada login
+aplikasi atau backup yang dinonaktifkan. completion.json PASS merekam hasilnya.
+
+Untuk run/validate ulang yang membutuhkan migration_user, admin perlu mengaktifkan
+LOGIN sementara, kemudian menonaktifkannya lagi sesudah verifikasi. Misalnya
+prepare pada skema A yang masih cocok mengaktifkan LOGIN kembali; aksi ini fase
+admin eksplisit, bukan dilakukan otomatis oleh service. Token migrasi baru hanya
+diperlukan untuk run, sedangkan validate memakai token svc-app yang masih valid.
+Verifier empat policy memerlukan token migrasi baru jika ingin dijalankan lagi
+setelah revokasi; bukti PASS yang disimpan berasal dari pemeriksaan sebelum run.
+
+Integrasi factory/akun/audit/principal Service App dengan B tetap terpisah.
+Tahap 5 backup/restore dapat memakai backup_user yang tetap aktif, dengan
+--enable-row-security; validasi pemulihan berkunci memerlukan token svc-app valid.
