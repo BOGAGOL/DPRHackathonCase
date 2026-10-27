@@ -9,15 +9,25 @@ from psycopg import sql
 
 from .model import MigrationError, canonical_value, compare_batch, protect_batch, source_bytes, target_columns
 from dprcrypto import normalize
+from infra.targets import MIGRATION_DATASETS, MIGRATION_PAIRS
 
 
-PAIRS = {"postgres":"protected_734", "baseline_100k":"protected_100k"}
+PAIRS = MIGRATION_PAIRS
 LOCK = 734100018
 
 
 def check_pair(source: str, target: str) -> None:
     if PAIRS.get(source)!=target:
         raise MigrationError("invalid_source_target_pair")
+
+
+def expected_source_rows(source: str, override: int | None = None) -> int:
+    if source not in MIGRATION_DATASETS:
+        raise MigrationError("invalid_source_target_pair")
+    expected = MIGRATION_DATASETS[source]["expected_rows"] if override is None else override
+    if type(expected) is not int or not 0<=expected<=9223372036854775807:
+        raise MigrationError("invalid_expected_row_count")
+    return expected
 
 
 def source_page(connection, columns: list[str], after, size: int) -> list[dict]:
@@ -63,7 +73,8 @@ def check_connections(source, target, source_name: str, target_name: str) -> str
     return json.dumps([source.info.host,source.info.port,source_name,identity],separators=(",",":"))
 
 
-def open_job(target, source_name: str, identity: str, profile_hash: str, summary: dict) -> dict:
+def open_job(target, source_name: str, identity: str, profile_hash: str, summary: dict,
+             compatible_profile_hashes: tuple[str,...] = ()) -> dict:
     with target.transaction():
         job = target.execute("SELECT * FROM public.migration_jobs WHERE job_id=1 FOR UPDATE").fetchone()
         state = target.execute("SELECT count(*) AS rows,max(legacy_row_id) AS last FROM public.anggota_protected").fetchone()
@@ -75,7 +86,8 @@ def open_job(target, source_name: str, identity: str, profile_hash: str, summary
                 (source_name,identity,profile_hash,summary["sha256"],summary["rows"])).fetchone()
         expected = (source_name,identity,profile_hash,summary["sha256"],summary["rows"])
         actual = tuple(job[key] for key in ("source_database","source_identity","profile_sha256","source_sha256","source_rows"))
-        if actual!=expected:
+        if (actual[:2]+actual[3:]!=expected[:2]+expected[3:]
+                or job["profile_sha256"] not in {profile_hash,*compatible_profile_hashes}):
             raise MigrationError("source_or_profile_changed")
         if state["rows"]!=job["migrated_rows"] or state["last"]!=job["last_legacy_id"]:
             raise MigrationError("target_checkpoint_mismatch")
@@ -134,7 +146,8 @@ def validate_all(source, target, profile: dict, summary: dict, client) -> dict:
 
 def execute(source, target, *, source_name: str, target_name: str, profile: dict, profile_hash: str,
             migration_client, validation_client, batch_size: int = 1000, max_batches: int | None = None,
-            validate_only: bool = False, expected_rows: int | None = None) -> dict:
+            validate_only: bool = False, expected_rows: int | None = None,
+            compatible_profile_hashes: tuple[str,...] = ()) -> dict:
     if type(batch_size) is not int or not 1<=batch_size<=1000 or (max_batches is not None and (type(max_batches) is not int or max_batches<1)):
         raise MigrationError("invalid_batch_bound")
     if expected_rows is not None and (type(expected_rows) is not int or expected_rows<0):
@@ -153,7 +166,7 @@ def execute(source, target, *, source_name: str, target_name: str, profile: dict
             summary = source_summary(source,profile)
             if expected_rows is not None and summary["rows"]!=expected_rows:
                 raise MigrationError("unexpected_source_row_count")
-            job = open_job(target,source_name,identity,profile_hash,summary)
+            job = open_job(target,source_name,identity,profile_hash,summary,compatible_profile_hashes)
             if validate_only and job["migrated_rows"]!=summary["rows"]:
                 raise MigrationError("migration_incomplete")
             batches = 0
@@ -180,7 +193,9 @@ def execute(source, target, *, source_name: str, target_name: str, profile: dict
                     raise MigrationError("source_changed_during_migration")
             target.execute("UPDATE public.migration_jobs SET status='validated',validated_at=clock_timestamp(),updated_at=clock_timestamp() WHERE job_id=1")
         return {**result,"complete":True,"status":"validated","source":source_name,"target":target_name,
-                "source_rows":summary["rows"],"migrated_rows":job["migrated_rows"],"profile_sha256":profile_hash,
+                "expected_rows":expected_rows,
+                "source_rows":summary["rows"],"migrated_rows":job["migrated_rows"],"profile_sha256":job["profile_sha256"],
+                "profile_canonical_sha256":profile_hash,
                 "source_sha256":summary["sha256"],"checked_at_utc":datetime.now(timezone.utc).isoformat()}
     finally:
         target.execute("SELECT pg_advisory_unlock(%s)",(LOCK,))

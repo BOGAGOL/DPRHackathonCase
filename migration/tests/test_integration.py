@@ -1,14 +1,16 @@
 """Real PG18 + OpenBao 2.5.5, both verified TLS; invented data, disposable volumes."""
 
 from datetime import datetime, timezone
-import hashlib
 import json
 import os
 import secrets
+import shutil
 import subprocess
+import threading
 import time
 
 import psycopg
+import psutil
 from psycopg import sql
 from psycopg.rows import dict_row
 import pytest
@@ -26,10 +28,13 @@ from migration.model import MigrationError
 from migration import cli
 from migration.runner import LOCK, check_connections, execute, source_summary
 from migration.tests.test_model import synthetic_row
+from policy.build_profile import text_hashes
 
 
 @pytest.mark.skipif(os.environ.get("DPR_MIGRATION_INTEGRATION")!="1",reason="Set DPR_MIGRATION_INTEGRATION=1 for disposable TLS migration test")
 def test_real_migration_resume_all_fields_tamper_and_revocation(tmp_path,monkeypatch):
+    scale_1m=int(os.environ.get("DPR_MIGRATION_1M_ROWS","1003"))
+    free_at_start=shutil.disk_usage(REPO).free
     project="dpr-migrate-test-"+secrets.token_hex(5)
     root=secure_directory(tmp_path/"secrets")
     make_ca(root/"tls");make_certificate(root)
@@ -41,8 +46,24 @@ def test_real_migration_resume_all_fields_tamper_and_revocation(tmp_path,monkeyp
         if result.returncode:raise RuntimeError("Disposable migration compose failed; output withheld")
         return result.stdout.strip()
     report={"schema_version":1,"passed":False,"scope":"invented data only; disposable TLS PG18 + TLS OpenBao","checks":{},"validations":{}}
+    observations={"host_free_at_start_bytes":free_at_start,"host_min_free_bytes":free_at_start,"sampled_peak_python_rss_bytes":0}
+    stop=threading.Event()
+    def sample_resources():
+        process=psutil.Process()
+        while not stop.wait(0.5):
+            observations["host_min_free_bytes"]=min(observations["host_min_free_bytes"],shutil.disk_usage(REPO).free)
+            observations["sampled_peak_python_rss_bytes"]=max(observations["sampled_peak_python_rss_bytes"],process.memory_info().rss)
+    sampler=threading.Thread(target=sample_resources,daemon=True);sampler.start()
+    original_call=OpenBaoClient._call
+    def guarded_call(self,path,payload):
+        if shutil.disk_usage(REPO).free<2*1024**3:
+            raise RuntimeError("Host disk headroom below 2 GiB; disposable migration aborted")
+        return original_call(self,path,payload)
+    monkeypatch.setattr(OpenBaoClient,"_call",guarded_call)
     checks=report["checks"]
     try:
+        if scale_1m>=1000000 and free_at_start<6*1024**3:
+            raise RuntimeError("1M fixture requires at least 6 GiB of host disk headroom")
         compose("up","-d")
         container=project+"-postgres-1"
         pg_port=int(compose("port","postgres","5432").rsplit(":",1)[1])
@@ -54,17 +75,28 @@ def test_real_migration_resume_all_fields_tamper_and_revocation(tmp_path,monkeyp
         else:raise RuntimeError("Disposable PG18 not ready")
         params={"host":"127.0.0.1","port":pg_port,"user":"dpr_bootstrap","password":password,"dbname":"postgres","autocommit":True}
         with psycopg.connect(**params) as admin:
-            for database in ("baseline_100k","protected_734","protected_100k"):
+            for database in ("baseline_100k","protected_734","protected_100k","baseline_1m","protected_1m"):
                 admin.execute(sql.SQL("CREATE DATABASE {}").format(sql.Identifier(database)))
         pg.apply(root)
         params.update(sslmode="verify-full",sslrootcert=str(root/"postgres/tls/ca.crt"),gssencmode="disable")
         profile=load_profile(REPO/"policy/protection_profile.yaml")
-        profile_hash=hashlib.sha256((REPO/"policy/protection_profile.yaml").read_bytes()).hexdigest()
+        profile_hashes=text_hashes(REPO/"policy/protection_profile.yaml")
+        profile_hash=profile_hashes[-1]
         passwords={role:secrets.token_urlsafe(36) for role in ROLES}
         # Include quote/backslash punctuation to exercise psql literal escaping.
         passwords["migration_user"] += "'\"\\$"
-        for target_name in ("protected_734","protected_100k"):
+        for target_name in ("protected_734","protected_100k","protected_1m"):
             provision(container,target_name,"dpr_bootstrap",passwords,profile)
+        # Existing two-source installations must upgrade without erasing progress.
+        with psycopg.connect(**{**params,"dbname":"protected_100k"}) as admin:
+            admin.execute("ALTER TABLE public.migration_jobs DROP CONSTRAINT migration_jobs_source_database_check")
+            admin.execute("ALTER TABLE public.migration_jobs ADD CONSTRAINT migration_jobs_source_database_check CHECK(source_database IN ('postgres','baseline_100k'))")
+            admin.execute("INSERT INTO public.migration_jobs(job_id,source_database,source_identity,profile_sha256,source_sha256,source_rows,status) VALUES(1,'baseline_100k','synthetic-upgrade',%s,%s,0,'paused')",("0"*64,"0"*64))
+        provision(container,"protected_100k","dpr_bootstrap",passwords,profile)
+        with psycopg.connect(**{**params,"dbname":"protected_100k"}) as admin:
+            checks["schema_upgrade_preserves_existing_checkpoint"]=admin.execute("SELECT source_identity,status FROM public.migration_jobs WHERE job_id=1").fetchone()==("synthetic-upgrade","paused")
+            checks["schema_upgrade_accepts_1m_source"]= "baseline_1m" in admin.execute("SELECT pg_get_constraintdef(oid) FROM pg_constraint WHERE conrelid='public.migration_jobs'::regclass AND conname='migration_jobs_source_database_check'").fetchone()[0]
+            admin.execute("DELETE FROM public.migration_jobs WHERE job_id=1")
         api=BaoAPI(address,str(root/"tls/ca.crt"))
         for _ in range(80):
             try:state=api.request("/sys/seal-status");break
@@ -80,17 +112,24 @@ def test_real_migration_resume_all_fields_tamper_and_revocation(tmp_path,monkeyp
         monkeypatch.setenv("OPENBAO_MIGRATION_TOKEN",tokens["svc-migration"])
         monkeypatch.setenv("OPENBAO_VALIDATION_TOKEN",tokens["svc-app"])
         columns=["id",*profile["columns"]]
-        for source_name,amount in (("postgres",734),("baseline_100k",int(os.environ.get("DPR_MIGRATION_SCALE_ROWS","1001")))):
+        for source_name,amount in (("postgres",734),("baseline_100k",int(os.environ.get("DPR_MIGRATION_SCALE_ROWS","1001"))),("baseline_1m",scale_1m)):
             with psycopg.connect(**{**params,"dbname":source_name}) as admin:
                 definitions=[sql.SQL("{} {}").format(sql.Identifier(column),sql.SQL("bigint PRIMARY KEY" if column=="id" else "date" if column.startswith("tanggal_") else "smallint" if column.startswith("jumlah_") else "text")) for column in columns]
                 admin.execute(sql.SQL("CREATE TABLE public.anggota({})").format(sql.SQL(",").join(definitions)))
-                query=sql.SQL("INSERT INTO public.anggota({}) VALUES({})").format(sql.SQL(",").join(map(sql.Identifier,columns)),sql.SQL(",").join(sql.Placeholder() for _ in columns))
-                with admin.cursor() as cursor:
-                    cursor.executemany(query,([synthetic_row(i,profile)[column] for column in columns] for i in range(1,amount+1)))
+                query=sql.SQL("COPY public.anggota({}) FROM STDIN").format(sql.SQL(",").join(map(sql.Identifier,columns)))
+                with admin.cursor().copy(query) as copy:
+                    for i in range(1,amount+1):
+                        if i%10000==0 and shutil.disk_usage(REPO).free<2*1024**3:
+                            raise RuntimeError("Insufficient host disk headroom for disposable source")
+                        row=synthetic_row(i,profile)
+                        copy.write_row([row[column] for column in columns])
+        monkeypatch.setattr(cli,"REPO",tmp_path/"cli-reports")
+        monkeypatch.setattr(cli,"runtime_parameters",lambda database,source:{**{key:value for key,value in params.items() if key!="autocommit"},"dbname":database,
+            **({} if source else {"user":"migration_user","password":passwords["migration_user"]})})
         with OpenBaoClient(token_env="OPENBAO_MIGRATION_TOKEN") as migrator,OpenBaoClient(token_env="OPENBAO_VALIDATION_TOKEN") as validator:
             try:migrator.unwrap_batch("pii-kek",migrator.wrap_batch("pii-kek",[os.urandom(32)]));checks["migration_decrypt_denied"]=False
             except OpenBaoError:checks["migration_decrypt_denied"]=True
-            for source_name,target_name in (("postgres","protected_734"),("baseline_100k","protected_100k")):
+            for source_name,target_name in (("postgres","protected_734"),("baseline_100k","protected_100k"),("baseline_1m","protected_1m")):
                 with psycopg.connect(**{**params,"dbname":source_name},row_factory=dict_row) as source, \
                      psycopg.connect(**{**params,"dbname":target_name,"user":"migration_user","password":passwords["migration_user"]},row_factory=dict_row) as target:
                     kwargs=dict(source_name=source_name,target_name=target_name,profile=profile,profile_hash=profile_hash,migration_client=migrator,validation_client=validator)
@@ -127,7 +166,8 @@ def test_real_migration_resume_all_fields_tamper_and_revocation(tmp_path,monkeyp
                         with pytest.raises(psycopg.errors.CheckViolation):execute(source,target,**kwargs,batch_size=100)
                         checks["failed_batch_atomic"]=target.execute("SELECT count(*) AS n FROM public.anggota_protected").fetchone()["n"]==100 and target.execute("SELECT migrated_rows FROM public.migration_jobs").fetchone()["migrated_rows"]==100
                         with psycopg.connect(**{**params,"dbname":target_name}) as admin:admin.execute("ALTER TABLE public.anggota_protected DROP CONSTRAINT fail_test_batch")
-                        result=execute(source,target,**kwargs,batch_size=150)
+                        result=execute(source,target,**{**kwargs,"profile_hash":profile_hashes[0]},compatible_profile_hashes=profile_hashes,batch_size=150)
+                        checks["line_endings_do_not_break_legacy_checkpoint"]=result["profile_sha256"]==profile_hash
                         checks["resume_preserves_existing_uuid_ct_wrapped"]=saved==target.execute("SELECT anggota_id,nama_ct,dek_pii_wrapped FROM public.anggota_protected WHERE legacy_row_id=1").fetchone()
                         fingerprints=target.execute("SELECT anggota_id,nama_ct,dek_pii_wrapped FROM public.anggota_protected ORDER BY legacy_row_id").fetchall()
                         execute(source,target,**kwargs)
@@ -145,13 +185,17 @@ def test_real_migration_resume_all_fields_tamper_and_revocation(tmp_path,monkeyp
                             competing.execute("SELECT pg_advisory_lock(%s)",(LOCK,))
                             with pytest.raises(MigrationError,match="migration_already_running"):execute(source,target,**kwargs)
                         checks["concurrent_run_rejected"]=True
+                    elif source_name=="baseline_1m":
+                        # Exercise the real 1M CLI, including an explicit non-default count in quick tests.
+                        monkeypatch.setattr("sys.argv",["migration","run","--source",source_name,"--target",target_name,
+                            "--profile",str(REPO/"policy/protection_profile.yaml"),"--expected-rows",str(scale_1m),"--keep-migration-token"])
+                        cli.main()
+                        result=json.loads((tmp_path/"cli-reports/evidence/migration/validation-protected_1m.json").read_text())
+                        checks["1m_cli_expected_rows"]=result["expected_rows"]==scale_1m
                     else:result=execute(source,target,**kwargs,batch_size=1000)
                     checks[source_name+":all_fields_validated"]=result["passed"] and result["rows_compared"]==before["rows"]
                     checks[source_name+":source_unchanged"]=source_summary(source,profile)==before
                     report["validations"][target_name]=result
-            monkeypatch.setattr(cli,"REPO",tmp_path/"cli-reports")
-            monkeypatch.setattr(cli,"runtime_parameters",lambda database,source:{**{key:value for key,value in params.items() if key!="autocommit"},"dbname":database,
-                **({} if source else {"user":"migration_user","password":passwords["migration_user"]})})
             monkeypatch.setattr("sys.argv",["migration","run","--source","postgres","--target","protected_734","--profile",str(REPO/"policy/protection_profile.yaml")])
             cli.main()
             cli_report=json.loads((tmp_path/"cli-reports/evidence/migration/validation.json").read_text())
@@ -161,9 +205,13 @@ def test_real_migration_resume_all_fields_tamper_and_revocation(tmp_path,monkeyp
         report["passed"]=all(checks.values())
         if not report["passed"]:pytest.fail("Migration integration failed checks: "+", ".join(name for name,passed in checks.items() if not passed),pytrace=False)
     finally:
+        stop.set();sampler.join(timeout=2)
+        report["resource_observations"]=observations
         report["checked_at_utc"]=datetime.now(timezone.utc).isoformat()
         path=REPO/"evidence/migration/integration.json";path.parent.mkdir(parents=True,exist_ok=True)
         path.write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
         if os.environ.get("DPR_MIGRATION_SCALE_ROWS")=="100000":
             path.with_name("integration-100k.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
+        if scale_1m==1000000:
+            path.with_name("integration-1m.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
         compose("down","--volumes","--remove-orphans")

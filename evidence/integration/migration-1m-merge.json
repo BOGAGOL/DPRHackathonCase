@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "checked_at_utc": "2026-10-27T15:45:12.877143+00:00",
+  "base_main": "324caa9bfff9f3a77204c9a2d9c5a48a0d0a09a9",
+  "passed_tests": 737,
+  "skipped_tests": 3,
+  "suites": [
+    {
+      "junit": "evidence/integration/crypto-1m-unit-tests.xml",
+      "sha256": "914bf7925ed06814b9b32974f2c7a76e9ebca459a1ce7c042a4dcd5eb9ba8962",
+      "tests": 244,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "passed": 243,
+      "skipped_cases": [
+        "test_complete_dataset_734x29"
+      ]
+    },
+    {
+      "junit": "evidence/integration/crypto-1m-live-tests.xml",
+      "sha256": "55f7990e95f9acc0f30fcee41743bf0a7de30fefe063bbaf7e85abf06f312aeb",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 4,
+      "skipped_cases": []
+    },
+    {
+      "junit": "evidence/migration/tests-1m-full.xml",
+      "sha256": "6cb399690153fb1fb84e0a7157602d92e7b01f63d2feb9c9d732c220d15eba58",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 1,
+      "skipped_cases": []
+    },
+    {
+      "junit": "evidence/integration/benchmark-1m-compat.xml",
+      "sha256": "e692a3dca4ee705311aee928c4d5b6bd6b107a5888ab9bba4c1166a90c0d5cf3",
+      "tests": 53,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 53,
+      "skipped_cases": []
+    },
+    {
+      "junit": "evidence/integration/scanner-1m-compat.xml",
+      "sha256": "ded823580b533e2088d7be3f7cc5a5fb864fd8622aaf2567f6e5430ad613f2f0",
+      "tests": 194,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "passed": 193,
+      "skipped_cases": [
+        "test_read_only_snapshot"
+      ]
+    },
+    {
+      "junit": "evidence/integration/service-app-1m-compat.xml",
+      "sha256": "21b788176b560b308b69bc7add968a8c49312a16f3be604caf6f7a2a294ce20b",
+      "tests": 244,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "passed": 243,
+      "skipped_cases": [
+        "test_decrypt_swap_fails_generic_and_audited[plain]"
+      ]
+    }
+  ],
+  "migration_1m_evidence": "evidence/migration/integration-1m.json",
+  "migration_1m_rows_compared": 1000000,
+  "migration_1m_checks": 28,
+  "local_734_100k_source_integrity_passed": true,
+  "official_benchmark_repeated": false,
+  "official_1m_dataset_migrated": false,
+  "scope": "functional 1M invented-data test; existing local 734/100k datasets preserved; official C benchmark dataset requires its own run"
+}

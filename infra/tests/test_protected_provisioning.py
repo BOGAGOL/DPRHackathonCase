@@ -9,6 +9,7 @@ import yaml
 
 from infra.protected import apply, credentials
 from infra.security import REPO
+from policy import build_profile as profile_builder
 
 
 def test_profile_rejects_stale_decisions(tmp_path):
@@ -18,6 +19,22 @@ def test_profile_rejects_stale_decisions(tmp_path):
     with pytest.raises(ValueError,match="stale"):apply.load_profile(path)
     assertion=apply.schema_check_sql(apply.load_profile(REPO/"policy/protection_profile.yaml"))
     assert "nama_ct" in assertion and "rekening_ct" in assertion and "Unexpected object ownership" in assertion
+
+
+@pytest.mark.parametrize("line_endings",[b"\n",b"\r\n"])
+def test_profile_input_provenance_survives_checkout_only(tmp_path,monkeypatch,line_endings):
+    paths=("evidence/scanner/before_v1/inventory.csv","policy/overrides.yaml","docs/contracts/CONTRACT.md")
+    profile_path=tmp_path/"policy/protection_profile.yaml"
+    original=yaml.safe_load((REPO/"policy/protection_profile.yaml").read_text())
+    for name in paths:
+        path=tmp_path/name;path.parent.mkdir(parents=True,exist_ok=True)
+        path.write_bytes((REPO/name).read_bytes().replace(b"\r\n",b"\n").replace(b"\n",line_endings))
+    profile_path.write_text(yaml.safe_dump(original))
+    monkeypatch.setattr(apply,"REPO",tmp_path);monkeypatch.setattr(profile_builder,"ROOT",tmp_path)
+    assert apply.load_profile(profile_path)==original
+    original["provenance"]["inventory_sha256"]="0"*64
+    profile_path.write_text(yaml.safe_dump(original))
+    with pytest.raises(ValueError,match="inputs changed"):apply.load_profile(profile_path)
 
 
 def test_provision_atomic_env_secrets_and_cluster_guard(monkeypatch):

@@ -16,7 +16,9 @@ infra diperlukan. Semua koneksi TCP PostgreSQL/OpenBao memverifikasi TLS dan CA.
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r infra/requirements.txt -e toolkit
 $env:DPR_SECRETS_DIR = Join-Path $env:LOCALAPPDATA 'DPR\crypto-infra-tls'
-.\.venv\Scripts\python.exe -m policy.build_profile
+# Profile yang dikomit diperiksa prepare/run. Bangun ulang hanya untuk revisi
+# assessment yang disengaja, bukan rutin setiap pull/resume:
+# .\.venv\Scripts\python.exe -m policy.build_profile
 # Fase admin eksplisit: buat DB bila belum ada, terapkan skema + role.
 .\.venv\Scripts\python.exe -m migration prepare --target protected_734
 .\.venv\Scripts\python.exe -m migration prepare --target protected_100k
@@ -36,8 +38,20 @@ DPR_SOURCE_PASSWORD, dengan fallback PGUSER/PGPASSWORD; gunakan login SELECT
 yang tersedia. Target selalu login `migration_user`, credential dari
 DPR_MIGRATION_USER_PASSWORD. Runtime tidak memerlukan credential admin target.
 Host/CA: PGHOST (default 127.0.0.1), PGPORT wajib 5433, PGSSLROOTCERT wajib ada.
-CLI memeriksa snapshot source berisi tepat 734/100000 sesuai pasangan kontrak;
-source yang belum lengkap atau terfilter RLS ditolak sebelum menulis job/baris.
+Ekspektasi jumlah baris dibaca dari infra/database-targets.json:
+
+| Source | Target | Bawaan expected_rows |
+|---|---|---:|
+| postgres | protected_734 | 734 |
+| baseline_100k | protected_100k | 100000 |
+| baseline_1m | protected_1m | 1000000 |
+
+Jumlah lain dapat ditetapkan eksplisit melalui `--expected-rows N` pada
+check/run/validate, termasuk saat resume. Nilai itu harus cocok dengan snapshot
+source sebelum job/baris ditulis. Nama database tetap allowlist dan pasangan
+source-target harus cocok; opsi ini tidak membuka target arbitrer atau overwrite
+source. Skema/profile tetap sama. Default menjaga source yang belum lengkap atau
+terfilter RLS tidak dianggap sebagai dataset penuh.
 
 Contoh memuat credential lokal yang sudah disimpan DPAPI, tanpa menampilkannya:
 
@@ -135,3 +149,56 @@ kontrak tetapi berada di container acak, bukan pg-dpr pengguna. Tidak ada reimpo
 atau regenerasi baseline lokal. Evidence test ke `evidence/migration/integration.json`;
 artefak itu **bukan** bukti migrasi development/resmi, dan tidak menggantikan
 `validation.json` hasil eksekusi pada target sesungguhnya.
+
+## Menjalankan target 1M di laptop benchmark
+
+`baseline_1m` yang sudah dibentuk Modul C dipertahankan. Jangan mengulang datagen
+atau menyalin database/kunci dari laptop lain hanya karena melakukan pull kode.
+Siapkan infra lokal, credential dan CA sesuai panduan infra; konfirmasi baseline
+1M milik C sebelum menulis target baru. Format blob/AAD/HMAC tetap protection v1.
+
+```powershell
+# Setelah env admin, runtime dan token workload disiapkan:
+# Upgrade blok HBA lama ke allowlist TLS yang juga mencakup baseline_1m/protected_1m.
+.\.venv\Scripts\python.exe -m infra.postgres.enable_tls apply
+.\.venv\Scripts\python.exe -m migration prepare --target protected_1m
+.\.venv\Scripts\python.exe -m migration check --source baseline_1m --target protected_1m
+.\.venv\Scripts\python.exe -m migration run --source baseline_1m --target protected_1m --profile policy/protection_profile.yaml
+```
+
+Untuk ukuran development yang berbeda, tambahkan `--expected-rows` yang sama
+pada check/run/validate, misalnya 12037. Ubah juga metadata perbandingan benchmark;
+nama target protected_1m tidak membuktikan jumlahnya 1M jika override dipakai.
+Token run 1M harus memiliki TTL cukup untuk operasi dan validasi penuh; operator
+dapat menerbitkan TTL hingga 14400 detik menggunakan skrip infra. Tidak ada token
+root pada migrator atau pembaruan TTL otomatis. Kegagalan/expiry mempertahankan
+checkpoint; terbitkan token workload baru lalu ulangi perintah yang sama.
+
+Prepare meningkatkan CHECK source_database pada tabel kontrol lama tanpa
+menghapus job/data. Setelah semua run/verifikasi selesai, cabut token migrasi
+(default run) dan nonaktifkan LOGIN role migrasi sementara sesuai prosedur admin.
+HBA updater hanya mengganti blok lama yang persis dikenali, mempertahankan aturan
+autentikasi lain, dan menolak blok yang telah diedit/duplikat.
+
+Profile yang sudah dipakai checkpoint tidak perlu dibangun ulang hanya karena
+checkout Windows/Linux. Loader memeriksa hash input LF/CRLF yang setara; CLI memakai
+hash profile kanonik LF dan menerima hash legacy untuk byte profile yang sama.
+Isi atau keputusan profile yang berbeda tetap menolak resume. Build profile
+tetap untuk perubahan inventory/override/kontrak yang memang disengaja.
+
+Uji 1M tanpa memakai corpus panitia atau mengubah pg-dpr lokal:
+
+```powershell
+$env:DPR_MIGRATION_INTEGRATION = '1'
+$env:DPR_MIGRATION_1M_ROWS = '1000000'
+.\.venv\Scripts\python.exe -m pytest migration/tests/test_integration.py -q
+```
+
+Fixture membuat source sendiri melalui COPY pada container acak, memakai TLS
+OpenBao/PG18, menjalankan CLI 1M, lalu membandingkan seluruh record/field.
+Resource diamati sebagai diagnostik uji fungsional, bukan benchmark resmi.
+Awal uji 1M membutuhkan sedikitnya 6 GiB ruang host; proses dihentikan jika ruang
+turun di bawah cadangan 2 GiB. Evidence skala penuh: integration-1m.json.
+Batch menjaga DEK/row working set tetap kecil; summary keunikan menyimpan nilai
+lookup ternormalisasi di RAM, sehingga kebutuhan memori mengikuti jumlah nilai
+unik. Tidak ada nilai tersebut ditulis ke disk atau evidence.

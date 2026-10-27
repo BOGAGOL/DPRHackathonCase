@@ -2,7 +2,7 @@
 SET LOCAL ROLE schema_owner;
 CREATE TABLE IF NOT EXISTS public.migration_jobs (
     job_id smallint PRIMARY KEY CHECK (job_id=1),
-    source_database text NOT NULL CHECK (source_database IN ('postgres','baseline_100k')),
+    source_database text NOT NULL,
     source_identity text NOT NULL,
     profile_sha256 text NOT NULL CHECK (profile_sha256 ~ '^[0-9a-f]{64}$'),
     source_sha256 text NOT NULL CHECK (source_sha256 ~ '^[0-9a-f]{64}$'),
@@ -15,5 +15,9 @@ CREATE TABLE IF NOT EXISTS public.migration_jobs (
     updated_at timestamptz NOT NULL DEFAULT now(),
     validated_at timestamptz
 );
+-- Upgrade the previous two-source CHECK without losing existing checkpoints.
+ALTER TABLE public.migration_jobs DROP CONSTRAINT IF EXISTS migration_jobs_source_database_check;
+ALTER TABLE public.migration_jobs ADD CONSTRAINT migration_jobs_source_database_check
+    CHECK (source_database IN ('postgres','baseline_100k','baseline_1m'));
 REVOKE ALL ON public.migration_jobs FROM PUBLIC;
 RESET ROLE;

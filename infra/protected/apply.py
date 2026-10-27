@@ -1,4 +1,4 @@
-"""Provision only protected_734/protected_100k on the existing pg-dpr, atomically."""
+"""Provision only allowlisted protected databases on the existing pg-dpr, atomically."""
 
 import argparse
 from datetime import datetime, timezone
@@ -15,10 +15,11 @@ import yaml
 from infra.postgres.development import parameters as local_admin_parameters
 from infra.protected.credentials import ROLES, role_environment, role_password
 from infra.security import REPO, external_directory
-from policy.build_profile import build
+from infra.targets import PROTECTED_DATABASES
+from policy.build_profile import build, text_hashes
 
 
-DATABASES = ("protected_734", "protected_100k")
+DATABASES = PROTECTED_DATABASES
 REF = ("jenis_kelamin", "pekerjaan_terakhir", "nama_kppn", "nama_bank", "age_band")
 
 
@@ -26,6 +27,11 @@ def load_profile(path: Path) -> dict:
     profile = yaml.safe_load(path.read_text(encoding="utf-8"))
     inventory = REPO / profile["provenance"]["inventory"]
     rebuilt = build(inventory, REPO / "policy/overrides.yaml", REPO / "docs/contracts/CONTRACT.md")
+    for key,input_path in (("inventory_sha256",inventory),("overrides_sha256",REPO/"policy/overrides.yaml"),
+                           ("contract_sha256",REPO/"docs/contracts/CONTRACT.md")):
+        if profile["provenance"][key] not in text_hashes(input_path):
+            raise ValueError("Protection profile inputs changed")
+        rebuilt["provenance"][key] = profile["provenance"][key]
     if profile != rebuilt:
         raise ValueError("Protection profile is stale or conflicts with its declared inputs")
     return profile
@@ -56,13 +62,13 @@ def provision(container: str, database: str, admin_user: str, passwords: dict[st
     roles_sql = (REPO / "sql/roles/01_roles.sql").read_text(encoding="utf-8")
     schema_sql = (REPO / "sql/protected/01_schema.sql").read_text(encoding="utf-8")
     schema_sql += "\n" + (REPO / "sql/protected/02_migration.sql").read_text(encoding="utf-8")
-    guard = """DO $$ BEGIN
-IF current_database() NOT IN ('protected_734','protected_100k') OR current_setting('server_version_num')::int/10000<>18
+    guard = sql.SQL("""DO $$ BEGIN
+IF NOT (current_database()=ANY({}::text[])) OR current_setting('server_version_num')::int/10000<>18
 THEN RAISE EXCEPTION 'Wrong protected target/version'; END IF;
 IF EXISTS(SELECT 1 FROM pg_class WHERE relnamespace='public'::regnamespace AND relkind IN ('r','v','S')
  AND relowner IS DISTINCT FROM (SELECT oid FROM pg_roles WHERE rolname='schema_owner'))
 THEN RAISE EXCEPTION 'Unmanaged existing objects'; END IF; END $$;
-"""
+""").format(sql.Literal(list(DATABASES))).as_string()
     if system_identifier is not None:
         if not system_identifier.isascii() or not system_identifier.isdecimal():
             raise ValueError("Invalid database cluster identity")

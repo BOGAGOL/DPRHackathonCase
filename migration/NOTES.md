@@ -6,6 +6,12 @@ dicabut dan login DB migration_user dinonaktifkan. Bukti akhir ada di
 evidence/migration/completion.json; catatan pemeriksaan awal berikut adalah
 riwayat sebelum OpenBao diaktifkan, bukan status terkini.
 
+**Pembaruan ukuran dataset:** CLI juga mendukung baseline_1m->protected_1m dan
+--expected-rows pada check/run/validate. Uji fungsional 1.000.000 record buatan
+sendiri telah lulus dengan pembandingan seluruh field; buktinya
+evidence/migration/integration-1m.json. Target 1M uji berada di container
+sementara yang sudah dibersihkan, bukan database development/benchmark resmi.
+
 Sinkronisasi dengan main `20e08f3`: belum menjalankan migrasi atau menulis data
 anggota ke protected_734/protected_100k. Tidak diperlukan dump tambahan untuk
 clone development lokal: file 02_data.sql identik dengan main dan source 734
@@ -192,3 +198,55 @@ Ekstensi target 1M memerlukan perubahan allowlist, provisioning, guard count,
 pengujian dan eksekusi migrasi tersendiri. Tidak membuat/mengubah dataset lokal
 untuk keperluan merge. Integrasi Service App dan adapter benchmark protected
 tetap mengikuti handoff A/B/C, terpisah dari penggabungan kode ini.
+
+## Penyelesaian ekstensi 1M dan ukuran konfigurabel
+
+Ekspektasi 734/100000/1000000 dan pasangan DB didefinisikan dalam
+infra/database-targets.json, dibaca bersama oleh CLI, connection guard dan
+provisioning. --expected-rows mengubah ekspektasi ukuran untuk pasangan yang
+sudah diizinkan, bukan membuka database lain. Nilai harus integer non-negatif
+dalam jangkauan bigint. Ekspektasi diperiksa pada snapshot source sebelum
+pembuatan job/penulisan baris; count/fingerprint/checkpoint saat resume tetap
+wajib cocok. Format enkripsi, AAD, normalisasi dan versi HMAC tidak berubah.
+
+02_migration.sql meningkatkan CHECK lama ke tiga source tanpa menghapus progres.
+TLS updater menambahkan baseline_1m/protected_1m dengan mengganti hanya blok HBA
+lama yang persis dikenal dan mempertahankan tail autentikasi. Blok yang berubah
+atau duplikat ditolak. Test nyata memverifikasi upgrade, rollback, penolakan
+non-TLS pada lima DB dan pemeliharaan data; kedua baseline tetap source read-only.
+
+Saat penyiapan ditemukan provenance profile lama bergantung byte LF/CRLF dari
+checkout Windows. Loader kini memeriksa kedua identitas teks yang setara sebelum
+membandingkan profile penuh terhadap input/kontrak. Fingerprint job baru memakai
+profile LF kanonik; checkpoint legacy hanya diterima bila hash cocok dengan byte
+LF/CRLF profile saat ini. Hash yang tersimpan pada job lama dipertahankan pada
+report, bersama profile_canonical_sha256. Isi/input profile yang berubah tetap
+ditolak. Test resume membuktikan UUID, ciphertext dan wrapped DEK lama tidak berubah.
+
+Uji penuh memakai source 734, 1001 dan **1000000** record buatan sendiri, TLS
+PostgreSQL 18/OpenBao 2.5.5, CLI 1M yang sesungguhnya dan token workload terpisah.
+**28 pemeriksaan lulus**, termasuk seluruh row/field decrypt-and-compare,
+NULL/REF/age_band, bidx, source/profile/checkpoint drift, ukuran eksplisit yang
+berbeda dari default, atomic rollback, idempotensi, scope role, upgrade dan
+revokasi. Source checksum seluruh fixture tetap sama. Semua container/volume uji
+dibersihkan; tidak ada corpus panitia disalin ke fixture atau plaintext ke evidence.
+
+Total kasus integrasi skala penuh **1456,21 detik** (24m16s), termasuk setup,
+generation, kasus regresi, migrasi/validasi dan cleanup. Peak RSS Python yang
+tersampel 377176064 byte (~359,7 MiB); minimum ruang host teramati 9935814656 byte
+(~9,25 GiB). Ini observasi diagnostik fixture pada laptop ini, bukan angka
+benchmark resmi, total RAM seluruh Docker, atau batas sumber daya semua dataset.
+Summary uniqueness tetap membutuhkan RAM sebanding jumlah nilai lookup unik.
+
+Test gabungan, dijalankan per suite: 243 unit/regresi A + 4 integrasi infra/crypto
++ 1 integrasi skala 1M + 53 benchmark/datagen/verify + 193 scanner + 243 Service
+App = **737 passed, 3 skipped**. JUnit dan manifest ada di evidence/integration/;
+file tests-1m-unit.xml dan tests-1m-quick.xml adalah subset tambahan, tidak dihitung
+ganda. Skip/warning dependensi tetap dicatat. Verifikasi checksum/TLS source
+734/100k development setelah uji juga PASS; database yang ada tidak diregenerate.
+
+Dataset primer baseline_1m milik C dan pengukuran benchmark tidak dijalankan pada
+uji ini. Setelah pull, pemilik laptop benchmark menjalankan prepare/check/run
+terhadap baseline_1m yang sudah diterima di sana, dengan token yang TTL-nya cukup
+dan metadata ukuran/populasi yang sama. Adapter protected dan integrasi B tetap
+pekerjaan terpisah; keberhasilan migrator tidak diklaim sebagai kelulusan API.

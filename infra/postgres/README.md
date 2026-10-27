@@ -1,5 +1,12 @@
 # PostgreSQL proyek: pg-dpr:5433, TLS tanpa recreate
 
+Allowlist migrasi kini juga mencakup baseline_1m/protected_1m. Jalankan kembali
+enable_tls apply setelah menarik pembaruan agar blok HBA lama tiga database
+ditingkatkan ke lima database tanpa recreate/restart; aturan auth lain dan source
+postgres dipertahankan. Database 1M tidak otomatis dibuat oleh pembaruan TLS.
+Target dibuat oleh python -m migration prepare --target protected_1m; gunakan
+baseline_1m yang telah dibuat/diterima C dan panduan migration/README.md.
+
 Keputusan tim 27 Oktober 2026: PostgreSQL **18** yang sudah ada di `pg-dpr`, port
 host **5433**, menampung `baseline_100k`, `protected_734`, `protected_100k`.
 OpenBao memakai `infra/compose.yaml`, TLS port 8200. Database asli `postgres`

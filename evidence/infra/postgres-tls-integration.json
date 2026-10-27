@@ -12,11 +12,16 @@
     "plaintext_rejected:baseline_100k": true,
     "plaintext_rejected:protected_734": true,
     "plaintext_rejected:protected_100k": true,
+    "plaintext_rejected:baseline_1m": true,
+    "plaintext_rejected:protected_1m": true,
+    "legacy_hba_upgraded_without_auth_rule_loss": true,
     "tls12_or_tls13": true,
     "source_database_catalog_only": true,
     "rows_preserved:baseline_100k": true,
     "rows_preserved:protected_734": true,
     "rows_preserved:protected_100k": true,
+    "rows_preserved:baseline_1m": true,
+    "rows_preserved:protected_1m": true,
     "private_key_postgres_0600": true,
     "repeat_apply_preserves_hba_rules": true,
     "rollback_to_previous_tls_keeps_tls": true,
@@ -24,5 +29,5 @@
     "same_postmaster_after_rollback": true
   },
   "server_version_num": 180006,
-  "checked_at_utc": "2026-10-27T14:45:44.866312+00:00"
+  "checked_at_utc": "2026-10-27T15:37:13.153336+00:00"
 }
