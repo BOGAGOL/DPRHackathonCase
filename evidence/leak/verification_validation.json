@@ -1,0 +1,62 @@
+{
+  "status": "PASSED",
+  "timestamp_utc": "2026-10-27T13:26:00.741552+00:00",
+  "code_commit_before_changes": "27aa9fa08dbcbe0e20199748e15d98cd4e81582f",
+  "final_code_sha256": {
+    "benchmark/diagnose_overhead.py": "26837dd16c1c988b53da6fbfb4d7b2d96f79094cdc8f1f0f392cbb270d1281ea",
+    "benchmark/tests/test_diagnose_overhead.py": "71dcf5055abdee8e641dd233477b6ec89f7885a1d078d9707fd3550d8fe36660",
+    "verify/__init__.py": "57328a5aaca023ed8df2d0b8ccef7b7c10d16319e089b75f47edb0b3a7d94a0b",
+    "verify/artifact_scanner.py": "7b8b2dddfca1e669997db133d389f8b46fc1a96eccad1325c7499227a4843ec0",
+    "verify/artifacts.py": "c0761db98ac1fd0604a5fdd08ec709907512729915a79155cba1fb7dbe9cd379",
+    "verify/known_values.py": "c86fccc68550debc012d0659e242cab23288b8f520a9fcd12ae44ab3b18c8318",
+    "verify/leak_sim.py": "9bc4d2f90583a19643482dee07cf9cb105d2678c0103ae187d008bb8f0225db2",
+    "verify/leakage_budget.py": "1e32fc06deb83024736af7d72d6842c1a21ba95026caebf04c246e422c4a030f",
+    "verify/output_audit.py": "a70623ea46939a012d0c8d253832410bf52b7da98b588024d08b71a4f9b3de3a",
+    "verify/profile.py": "c495b6f3bb6ff3c2ea2851720e177711d39e8b10612627fac4cfa8eed4f22d62",
+    "verify/residual.py": "4c4ac52be26b89f5766e97f9b02b03844b5724da6450d32c6578a1b3581f1fe7",
+    "verify/tests/test_leakage.py": "8c0ee2e879a907157b48007d64952e0e10376ea4e6c2524644a0c36dd4d17a7c",
+    "verify/tests/test_output_audit.py": "b925adbd42a71a0850b2bfbcae71813bce335ff5b9b9b1e0c5f83a0efeba845a",
+    "verify/tests/test_scan_config.py": "806882badf664b6e598f8d673e0d0bcbec318ebef2a9a1cb73431939e200331f"
+  },
+  "test_results": {
+    "benchmark": {
+      "passed": 30,
+      "venv": "benchmark/.venv"
+    },
+    "datagen": {
+      "passed": 25,
+      "venv": "benchmark/.venv"
+    },
+    "scanner": {
+      "passed": 194,
+      "unit_passed": 193,
+      "read_only_integration_passed": 1,
+      "integration_database": "baseline_100k",
+      "integration_user": "bench_user",
+      "venv": "scanner/.venv"
+    },
+    "verify": {
+      "passed": 24,
+      "venv": "scanner/.venv"
+    },
+    "unique_total_passed": 273,
+    "outstanding_skipped": 0
+  },
+  "official_baselines_runner_workload_ground_truth_targets_unchanged": true,
+  "official_benchmarks_repeated": 0,
+  "expanded_private_sql_files_remaining": 0,
+  "known_values_retained_bytes": 520065024,
+  "generation_snapshot_retained": true,
+  "budget_recomputed_with_sqlite_temp_store_MEMORY": true,
+  "measurement_code_manifest_policy": "Initial leak/matching evidence retains execution-time worktree hashes. Budget code and this final utility manifest are distinct. Diagnostic counters were not resampled.",
+  "privacy_audit_status": "PASSED",
+  "privacy_audit_initial_metadata_collision": {
+    "matched_cells": 41,
+    "field": "residual_before.json:age_band.reference_date",
+    "classified": "public frozen reference date, no row value disclosure",
+    "exemption_scope": "only that named field, never that date in other fields"
+  },
+  "main_profile_present": false,
+  "disk_free_bytes": 66975059968,
+  "checks": "All new DB operations SELECT/read-only; pg_restore stdout only, no restore/create database, no container lifecycle or server config changes."
+}

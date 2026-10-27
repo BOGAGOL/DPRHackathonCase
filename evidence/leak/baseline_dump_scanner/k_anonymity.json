@@ -1,0 +1,549 @@
+[
+  {
+    "table": "public.anggota",
+    "columns": [
+      "age_band"
+    ],
+    "total_rows": 1000000,
+    "groups": 5,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 147335,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "is_null_tanggal_pernikahan"
+    ],
+    "total_rows": 1000000,
+    "groups": 2,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 499995,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin"
+    ],
+    "total_rows": 1000000,
+    "groups": 2,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 498629,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "nama_bank"
+    ],
+    "total_rows": 1000000,
+    "groups": 4,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 227521,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "nama_kppn"
+    ],
+    "total_rows": 1000000,
+    "groups": 5,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 173022,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 1000000,
+    "groups": 6,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 144415,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "age_band",
+      "is_null_tanggal_pernikahan"
+    ],
+    "total_rows": 1000000,
+    "groups": 10,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 73303,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "age_band"
+    ],
+    "total_rows": 1000000,
+    "groups": 10,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 73456,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "is_null_tanggal_pernikahan"
+    ],
+    "total_rows": 1000000,
+    "groups": 4,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 246591,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "nama_bank"
+    ],
+    "total_rows": 1000000,
+    "groups": 8,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 111718,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "nama_kppn"
+    ],
+    "total_rows": 1000000,
+    "groups": 10,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 74936,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 1000000,
+    "groups": 12,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 69486,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "nama_bank",
+      "age_band"
+    ],
+    "total_rows": 1000000,
+    "groups": 20,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 33661,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "nama_bank",
+      "is_null_tanggal_pernikahan"
+    ],
+    "total_rows": 1000000,
+    "groups": 8,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 108993,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "nama_kppn",
+      "age_band"
+    ],
+    "total_rows": 1000000,
+    "groups": 25,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 25652,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "nama_kppn",
+      "is_null_tanggal_pernikahan"
+    ],
+    "total_rows": 1000000,
+    "groups": 10,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 85830,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "nama_kppn",
+      "nama_bank"
+    ],
+    "total_rows": 1000000,
+    "groups": 20,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 29972,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "age_band"
+    ],
+    "total_rows": 1000000,
+    "groups": 30,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 21378,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "is_null_tanggal_pernikahan"
+    ],
+    "total_rows": 1000000,
+    "groups": 12,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 70845,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "nama_bank"
+    ],
+    "total_rows": 1000000,
+    "groups": 24,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 27246,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 1000000,
+    "groups": 30,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 21797,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "age_band",
+      "is_null_tanggal_pernikahan"
+    ],
+    "total_rows": 1000000,
+    "groups": 20,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 36008,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "nama_bank",
+      "age_band"
+    ],
+    "total_rows": 1000000,
+    "groups": 40,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 16477,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "nama_bank",
+      "is_null_tanggal_pernikahan"
+    ],
+    "total_rows": 1000000,
+    "groups": 16,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 54495,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "nama_kppn",
+      "age_band"
+    ],
+    "total_rows": 1000000,
+    "groups": 50,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 11098,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "nama_kppn",
+      "is_null_tanggal_pernikahan"
+    ],
+    "total_rows": 1000000,
+    "groups": 20,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 34062,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "nama_kppn",
+      "nama_bank"
+    ],
+    "total_rows": 1000000,
+    "groups": 40,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 10900,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "pekerjaan_terakhir",
+      "age_band"
+    ],
+    "total_rows": 1000000,
+    "groups": 60,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 10301,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "pekerjaan_terakhir",
+      "is_null_tanggal_pernikahan"
+    ],
+    "total_rows": 1000000,
+    "groups": 24,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 31330,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "pekerjaan_terakhir",
+      "nama_bank"
+    ],
+    "total_rows": 1000000,
+    "groups": 48,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 10897,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "jenis_kelamin",
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 1000000,
+    "groups": 60,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 6812,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "nama_bank",
+      "age_band",
+      "is_null_tanggal_pernikahan"
+    ],
+    "total_rows": 1000000,
+    "groups": 40,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 16276,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "nama_kppn",
+      "age_band",
+      "is_null_tanggal_pernikahan"
+    ],
+    "total_rows": 1000000,
+    "groups": 50,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 12644,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "nama_kppn",
+      "nama_bank",
+      "age_band"
+    ],
+    "total_rows": 1000000,
+    "groups": 100,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 4456,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "nama_kppn",
+      "nama_bank",
+      "is_null_tanggal_pernikahan"
+    ],
+    "total_rows": 1000000,
+    "groups": 40,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 13623,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "age_band",
+      "is_null_tanggal_pernikahan"
+    ],
+    "total_rows": 1000000,
+    "groups": 60,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 10455,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "nama_bank",
+      "age_band"
+    ],
+    "total_rows": 1000000,
+    "groups": 120,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 4074,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "nama_bank",
+      "is_null_tanggal_pernikahan"
+    ],
+    "total_rows": 1000000,
+    "groups": 48,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 10898,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "nama_kppn",
+      "age_band"
+    ],
+    "total_rows": 1000000,
+    "groups": 150,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 3200,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "nama_kppn",
+      "is_null_tanggal_pernikahan"
+    ],
+    "total_rows": 1000000,
+    "groups": 60,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 8173,
+    "scope": "full_artifact_aggregate"
+  },
+  {
+    "table": "public.anggota",
+    "columns": [
+      "pekerjaan_terakhir",
+      "nama_kppn",
+      "nama_bank"
+    ],
+    "total_rows": 1000000,
+    "groups": 120,
+    "unique_rows": 0,
+    "unique_ratio": 0.0,
+    "k_min": 1362,
+    "scope": "full_artifact_aggregate"
+  }
+]

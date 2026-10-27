@@ -1,0 +1,38 @@
+{
+  "timestamp_utc": "2026-10-27T13:14:25.132174+00:00",
+  "profile_present_in_integrated_tree": false,
+  "scenarios": [
+    {
+      "scenario": "protected_dump_no_key",
+      "status": "BELUM DIUJI",
+      "reason": "Waiting for policy/protection_profile.yaml from Module A in integrated tree"
+    },
+    {
+      "scenario": "protected_dump_with_pii_key",
+      "status": "BELUM DIUJI",
+      "reason": "Waiting for policy/protection_profile.yaml from Module A in integrated tree"
+    },
+    {
+      "scenario": "protected_dump_with_finance_key",
+      "status": "BELUM DIUJI",
+      "reason": "Waiting for policy/protection_profile.yaml from Module A in integrated tree"
+    },
+    {
+      "scenario": "protected_dump_with_search_key",
+      "status": "BELUM DIUJI",
+      "reason": "Waiting for policy/protection_profile.yaml from Module A in integrated tree"
+    },
+    {
+      "scenario": "backup_artifact_no_key",
+      "status": "BELUM DIUJI",
+      "reason": "Waiting for policy/protection_profile.yaml from Module A in integrated tree"
+    }
+  ],
+  "not_claimed": [
+    "protected ESCE=0",
+    "decryption blast radius",
+    "physical data/WAL",
+    "TLS",
+    "S05/S06 operational scan"
+  ]
+}

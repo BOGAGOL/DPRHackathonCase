@@ -59,3 +59,35 @@ Keluaran 1M: results/bench/before_1m/ dan evidence/benchmark/baseline_1m/.
 Pgbench memakai custom script via stdin; kunci tidak masuk argv/repo. Tidak ada
 inisialisasi pgbench atau tabel baru pada baseline. Raw transaksi tanpa kunci berada
 di results/bench/crosscheck_pgbench/; file sementara container dibersihkan setelah disalin.
+## Audit gangguan daya dari hasil yang sudah ada
+
+```powershell
+.\benchmark\inspect_power_events.ps1
+.\benchmark\.venv\Scripts\python.exe -m benchmark.power_incident
+.\benchmark\.venv\Scripts\python.exe -m pytest benchmark/tests/test_power_incident.py -q
+```
+
+Khusus audit retrospektif 27 Oktober 2026: membaca System/Kernel-Power dan raw
+resource/log pgbench lokal yang sudah ada, lalu menambahkan kualifikasi metadata.
+Tidak menjalankan workload, query DB, backup/restore, atau start/stop container.
+Perintah terakhir hanya unit test analisis dengan fixture sintetis. Hasil:
+`evidence/benchmark/baseline_1m/power_events.json`, `power_incident.json`,
+`power_run_timeline.csv`. Lihat NOTES.md untuk interval baterai yang terkonfirmasi
+dan batas penilaian dampak. File raw harus tersedia di mesin yang menjalankan audit.
+
+## Pengukuran pengganti yang diotorisasi setelah gangguan baterai
+
+Dengan BENCH_DATABASE_URL, DATAGEN_DATABASE_URL, DPR_PRIVATE_DIR sudah diatur
+seperti di atas, charger terpasang dan hanya pg-dpr berjalan:
+
+```powershell
+.\benchmark\.venv\Scripts\python.exe -m benchmark.replacement_ac
+```
+
+Hanya backup/restore baseline_1m 3 run dan pgbench baseline_100k 3 run yang
+dijalankan. Workload21 run tidak dipanggil. Setiap panggilan membuat sesi
+ac_<UTC> eksklusif; jangan mengulang perintah tanpa otorisasi pengukuran baru.
+Ringkasan canonical diperbarui hanya setelah verifikasi AC + integritas lulus;
+hasil lama disalin byte-identik ke history dengan label "terdampak baterai".
+Raw lama tidak dipindah/dihapus. Lihat active_measurements.json untuk pilihan
+hasil aktif dan power_verification.json pada folder sesi untuk bukti AC.

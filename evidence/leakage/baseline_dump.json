@@ -1,0 +1,1704 @@
+{
+  "status": "PASSED",
+  "measurement_only": true,
+  "scenario": "baseline_dump",
+  "dataset": "baseline_1m",
+  "timestamp_utc": "2026-10-27T13:16:57.712304+00:00",
+  "code_commit": "27aa9fa08dbcbe0e20199748e15d98cd4e81582f",
+  "worktree_code_sha256": {
+    "verify/__init__.py": "57328a5aaca023ed8df2d0b8ccef7b7c10d16319e089b75f47edb0b3a7d94a0b",
+    "verify/artifact_scanner.py": "7b8b2dddfca1e669997db133d389f8b46fc1a96eccad1325c7499227a4843ec0",
+    "verify/artifacts.py": "c0761db98ac1fd0604a5fdd08ec709907512729915a79155cba1fb7dbe9cd379",
+    "verify/known_values.py": "67b25a1308de9e3483f30ab533f6580c195e2b024d11fefee739b7896104b49d",
+    "verify/leak_sim.py": "cc680c5ea2dff9b67bcf59ce14b8c52cecd81d6eb5cbedd8428e58c8454fef19",
+    "verify/leakage_budget.py": "9141f891424237495372dd870e8290e9027d77cc70bae203744836f44a59d64b",
+    "verify/profile.py": "c495b6f3bb6ff3c2ea2851720e177711d39e8b10612627fac4cfa8eed4f22d62",
+    "verify/residual.py": "4c4ac52be26b89f5766e97f9b02b03844b5724da6450d32c6578a1b3581f1fe7"
+  },
+  "budget_code_sha256": "1e32fc06deb83024736af7d72d6842c1a21ba95026caebf04c246e422c4a030f",
+  "targets_commit": "a412ce8e4c1045c72cdf2e77af6bfe77a7ef5b5f",
+  "artifact_sha256": "477299e821462d274690dc7e21b9882eb2b3c3109681a63001e56d38f75e2dd6",
+  "ESCE_scope": "25 future AEAD columns per CONTRACT section 3; REF four and surrogate id excluded; not the independent scanner taxonomy",
+  "direct_identifiers": [
+    "nama",
+    "nama_lengkap",
+    "nama_tanpa_gelar",
+    "nama_rekening",
+    "no_ktp",
+    "npwp",
+    "nip_kppn",
+    "rekening",
+    "email",
+    "pengguna",
+    "handphone",
+    "telpon_jakarta",
+    "telpon_daerah"
+  ],
+  "populations": {
+    "all": {
+      "ESCE": {
+        "numerator": 24500005,
+        "denominator": 24500005,
+        "ratio": 1.0
+      },
+      "DIE": {
+        "numerator": 1000000,
+        "denominator": 1000000,
+        "ratio": 1.0
+      },
+      "columns": [
+        {
+          "column": "nama",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "nama_lengkap",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "nama_tanpa_gelar",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "tempat_lahir",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "tanggal_lahir",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "tanggal_pernikahan",
+          "numerator": 500005,
+          "denominator": 500005,
+          "ratio": 1.0
+        },
+        {
+          "column": "no_ktp",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "alamat_jakarta",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "telpon_jakarta",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "alamat_daerah",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "telpon_daerah",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "handphone",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "email",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "ruangan",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "status_kawin",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_anak",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_tanggungan",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_jiwa",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "rekening",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "nama_rekening",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "npwp",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "nip_kppn",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "kode_bank",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "pengguna",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "agama",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        }
+      ]
+    },
+    "source_734": {
+      "ESCE": {
+        "numerator": 17983,
+        "denominator": 17983,
+        "ratio": 1.0
+      },
+      "DIE": {
+        "numerator": 734,
+        "denominator": 734,
+        "ratio": 1.0
+      },
+      "columns": [
+        {
+          "column": "nama",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "nama_lengkap",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "nama_tanpa_gelar",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "tempat_lahir",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "tanggal_lahir",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "tanggal_pernikahan",
+          "numerator": 367,
+          "denominator": 367,
+          "ratio": 1.0
+        },
+        {
+          "column": "no_ktp",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "alamat_jakarta",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "telpon_jakarta",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "alamat_daerah",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "telpon_daerah",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "handphone",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "email",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "ruangan",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "status_kawin",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_anak",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_tanggungan",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_jiwa",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "rekening",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "nama_rekening",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "npwp",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "nip_kppn",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "kode_bank",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "pengguna",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "agama",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        }
+      ]
+    },
+    "synthetic": {
+      "ESCE": {
+        "numerator": 24482022,
+        "denominator": 24482022,
+        "ratio": 1.0
+      },
+      "DIE": {
+        "numerator": 999266,
+        "denominator": 999266,
+        "ratio": 1.0
+      },
+      "columns": [
+        {
+          "column": "nama",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "nama_lengkap",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "nama_tanpa_gelar",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "tempat_lahir",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "tanggal_lahir",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "tanggal_pernikahan",
+          "numerator": 499638,
+          "denominator": 499638,
+          "ratio": 1.0
+        },
+        {
+          "column": "no_ktp",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "alamat_jakarta",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "telpon_jakarta",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "alamat_daerah",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "telpon_daerah",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "handphone",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "email",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "ruangan",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "status_kawin",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_anak",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_tanggungan",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_jiwa",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "rekening",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "nama_rekening",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "npwp",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "nip_kppn",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "kode_bank",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "pengguna",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "agama",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        }
+      ]
+    }
+  },
+  "ELS": {
+    "deterministic_bidx_columns": [],
+    "bidx_count": 0,
+    "plaintext_equality_column_count": 29,
+    "sqlite_temp_store": 2,
+    "method": "exact SQLite GROUP BY on private known ledger after every artifact row matched; NULL excluded and separately reported",
+    "columns": [
+      {
+        "column": "nama",
+        "storage": "plaintext",
+        "equality_classes": 1000000,
+        "largest_class": 1,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 1000000
+          }
+        ]
+      },
+      {
+        "column": "nama_lengkap",
+        "storage": "plaintext",
+        "equality_classes": 1000000,
+        "largest_class": 1,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 1000000
+          }
+        ]
+      },
+      {
+        "column": "nama_tanpa_gelar",
+        "storage": "plaintext",
+        "equality_classes": 1000000,
+        "largest_class": 1,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 1000000
+          }
+        ]
+      },
+      {
+        "column": "jenis_kelamin",
+        "storage": "plaintext",
+        "equality_classes": 2,
+        "largest_class": 501371,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 498629,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 501371,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "tempat_lahir",
+        "storage": "plaintext",
+        "equality_classes": 5,
+        "largest_class": 226161,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 186650,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 189372,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 193463,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 204354,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 226161,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "tanggal_lahir",
+        "storage": "plaintext",
+        "equality_classes": 16771,
+        "largest_class": 92,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 29,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 34,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 35,
+            "number_of_classes": 3
+          },
+          {
+            "class_size": 36,
+            "number_of_classes": 2
+          },
+          {
+            "class_size": 37,
+            "number_of_classes": 9
+          },
+          {
+            "class_size": 38,
+            "number_of_classes": 10
+          },
+          {
+            "class_size": 39,
+            "number_of_classes": 16
+          },
+          {
+            "class_size": 40,
+            "number_of_classes": 33
+          },
+          {
+            "class_size": 41,
+            "number_of_classes": 39
+          },
+          {
+            "class_size": 42,
+            "number_of_classes": 63
+          },
+          {
+            "class_size": 43,
+            "number_of_classes": 76
+          },
+          {
+            "class_size": 44,
+            "number_of_classes": 114
+          },
+          {
+            "class_size": 45,
+            "number_of_classes": 149
+          },
+          {
+            "class_size": 46,
+            "number_of_classes": 172
+          },
+          {
+            "class_size": 47,
+            "number_of_classes": 248
+          },
+          {
+            "class_size": 48,
+            "number_of_classes": 277
+          },
+          {
+            "class_size": 49,
+            "number_of_classes": 331
+          },
+          {
+            "class_size": 50,
+            "number_of_classes": 417
+          },
+          {
+            "class_size": 51,
+            "number_of_classes": 448
+          },
+          {
+            "class_size": 52,
+            "number_of_classes": 607
+          },
+          {
+            "class_size": 53,
+            "number_of_classes": 611
+          },
+          {
+            "class_size": 54,
+            "number_of_classes": 685
+          },
+          {
+            "class_size": 55,
+            "number_of_classes": 753
+          },
+          {
+            "class_size": 56,
+            "number_of_classes": 794
+          },
+          {
+            "class_size": 57,
+            "number_of_classes": 834
+          },
+          {
+            "class_size": 58,
+            "number_of_classes": 872
+          },
+          {
+            "class_size": 59,
+            "number_of_classes": 848
+          },
+          {
+            "class_size": 60,
+            "number_of_classes": 879
+          },
+          {
+            "class_size": 61,
+            "number_of_classes": 820
+          },
+          {
+            "class_size": 62,
+            "number_of_classes": 832
+          },
+          {
+            "class_size": 63,
+            "number_of_classes": 736
+          },
+          {
+            "class_size": 64,
+            "number_of_classes": 734
+          },
+          {
+            "class_size": 65,
+            "number_of_classes": 634
+          },
+          {
+            "class_size": 66,
+            "number_of_classes": 583
+          },
+          {
+            "class_size": 67,
+            "number_of_classes": 564
+          },
+          {
+            "class_size": 68,
+            "number_of_classes": 445
+          },
+          {
+            "class_size": 69,
+            "number_of_classes": 419
+          },
+          {
+            "class_size": 70,
+            "number_of_classes": 304
+          },
+          {
+            "class_size": 71,
+            "number_of_classes": 321
+          },
+          {
+            "class_size": 72,
+            "number_of_classes": 220
+          },
+          {
+            "class_size": 73,
+            "number_of_classes": 202
+          },
+          {
+            "class_size": 74,
+            "number_of_classes": 165
+          },
+          {
+            "class_size": 75,
+            "number_of_classes": 117
+          },
+          {
+            "class_size": 76,
+            "number_of_classes": 81
+          },
+          {
+            "class_size": 77,
+            "number_of_classes": 68
+          },
+          {
+            "class_size": 78,
+            "number_of_classes": 66
+          },
+          {
+            "class_size": 79,
+            "number_of_classes": 54
+          },
+          {
+            "class_size": 80,
+            "number_of_classes": 27
+          },
+          {
+            "class_size": 81,
+            "number_of_classes": 40
+          },
+          {
+            "class_size": 82,
+            "number_of_classes": 18
+          },
+          {
+            "class_size": 83,
+            "number_of_classes": 7
+          },
+          {
+            "class_size": 84,
+            "number_of_classes": 10
+          },
+          {
+            "class_size": 85,
+            "number_of_classes": 4
+          },
+          {
+            "class_size": 86,
+            "number_of_classes": 2
+          },
+          {
+            "class_size": 88,
+            "number_of_classes": 3
+          },
+          {
+            "class_size": 89,
+            "number_of_classes": 2
+          },
+          {
+            "class_size": 92,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "tanggal_pernikahan",
+        "storage": "plaintext",
+        "equality_classes": 26961,
+        "largest_class": 74,
+        "non_null_cells": 500005,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 1065
+          },
+          {
+            "class_size": 2,
+            "number_of_classes": 1005
+          },
+          {
+            "class_size": 3,
+            "number_of_classes": 916
+          },
+          {
+            "class_size": 4,
+            "number_of_classes": 957
+          },
+          {
+            "class_size": 5,
+            "number_of_classes": 838
+          },
+          {
+            "class_size": 6,
+            "number_of_classes": 819
+          },
+          {
+            "class_size": 7,
+            "number_of_classes": 821
+          },
+          {
+            "class_size": 8,
+            "number_of_classes": 843
+          },
+          {
+            "class_size": 9,
+            "number_of_classes": 902
+          },
+          {
+            "class_size": 10,
+            "number_of_classes": 856
+          },
+          {
+            "class_size": 11,
+            "number_of_classes": 841
+          },
+          {
+            "class_size": 12,
+            "number_of_classes": 819
+          },
+          {
+            "class_size": 13,
+            "number_of_classes": 839
+          },
+          {
+            "class_size": 14,
+            "number_of_classes": 789
+          },
+          {
+            "class_size": 15,
+            "number_of_classes": 753
+          },
+          {
+            "class_size": 16,
+            "number_of_classes": 765
+          },
+          {
+            "class_size": 17,
+            "number_of_classes": 758
+          },
+          {
+            "class_size": 18,
+            "number_of_classes": 736
+          },
+          {
+            "class_size": 19,
+            "number_of_classes": 732
+          },
+          {
+            "class_size": 20,
+            "number_of_classes": 743
+          },
+          {
+            "class_size": 21,
+            "number_of_classes": 668
+          },
+          {
+            "class_size": 22,
+            "number_of_classes": 669
+          },
+          {
+            "class_size": 23,
+            "number_of_classes": 647
+          },
+          {
+            "class_size": 24,
+            "number_of_classes": 597
+          },
+          {
+            "class_size": 25,
+            "number_of_classes": 597
+          },
+          {
+            "class_size": 26,
+            "number_of_classes": 508
+          },
+          {
+            "class_size": 27,
+            "number_of_classes": 495
+          },
+          {
+            "class_size": 28,
+            "number_of_classes": 464
+          },
+          {
+            "class_size": 29,
+            "number_of_classes": 409
+          },
+          {
+            "class_size": 30,
+            "number_of_classes": 379
+          },
+          {
+            "class_size": 31,
+            "number_of_classes": 333
+          },
+          {
+            "class_size": 32,
+            "number_of_classes": 314
+          },
+          {
+            "class_size": 33,
+            "number_of_classes": 285
+          },
+          {
+            "class_size": 34,
+            "number_of_classes": 236
+          },
+          {
+            "class_size": 35,
+            "number_of_classes": 234
+          },
+          {
+            "class_size": 36,
+            "number_of_classes": 227
+          },
+          {
+            "class_size": 37,
+            "number_of_classes": 210
+          },
+          {
+            "class_size": 38,
+            "number_of_classes": 195
+          },
+          {
+            "class_size": 39,
+            "number_of_classes": 187
+          },
+          {
+            "class_size": 40,
+            "number_of_classes": 222
+          },
+          {
+            "class_size": 41,
+            "number_of_classes": 156
+          },
+          {
+            "class_size": 42,
+            "number_of_classes": 172
+          },
+          {
+            "class_size": 43,
+            "number_of_classes": 169
+          },
+          {
+            "class_size": 44,
+            "number_of_classes": 184
+          },
+          {
+            "class_size": 45,
+            "number_of_classes": 150
+          },
+          {
+            "class_size": 46,
+            "number_of_classes": 140
+          },
+          {
+            "class_size": 47,
+            "number_of_classes": 161
+          },
+          {
+            "class_size": 48,
+            "number_of_classes": 145
+          },
+          {
+            "class_size": 49,
+            "number_of_classes": 113
+          },
+          {
+            "class_size": 50,
+            "number_of_classes": 122
+          },
+          {
+            "class_size": 51,
+            "number_of_classes": 119
+          },
+          {
+            "class_size": 52,
+            "number_of_classes": 107
+          },
+          {
+            "class_size": 53,
+            "number_of_classes": 84
+          },
+          {
+            "class_size": 54,
+            "number_of_classes": 85
+          },
+          {
+            "class_size": 55,
+            "number_of_classes": 69
+          },
+          {
+            "class_size": 56,
+            "number_of_classes": 54
+          },
+          {
+            "class_size": 57,
+            "number_of_classes": 47
+          },
+          {
+            "class_size": 58,
+            "number_of_classes": 41
+          },
+          {
+            "class_size": 59,
+            "number_of_classes": 33
+          },
+          {
+            "class_size": 60,
+            "number_of_classes": 39
+          },
+          {
+            "class_size": 61,
+            "number_of_classes": 23
+          },
+          {
+            "class_size": 62,
+            "number_of_classes": 16
+          },
+          {
+            "class_size": 63,
+            "number_of_classes": 16
+          },
+          {
+            "class_size": 64,
+            "number_of_classes": 9
+          },
+          {
+            "class_size": 65,
+            "number_of_classes": 12
+          },
+          {
+            "class_size": 66,
+            "number_of_classes": 11
+          },
+          {
+            "class_size": 67,
+            "number_of_classes": 3
+          },
+          {
+            "class_size": 68,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 69,
+            "number_of_classes": 3
+          },
+          {
+            "class_size": 70,
+            "number_of_classes": 2
+          },
+          {
+            "class_size": 71,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 74,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "no_ktp",
+        "storage": "plaintext",
+        "equality_classes": 1000000,
+        "largest_class": 1,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 1000000
+          }
+        ]
+      },
+      {
+        "column": "pekerjaan_terakhir",
+        "storage": "plaintext",
+        "equality_classes": 6,
+        "largest_class": 197556,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 144415,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 155321,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 156674,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 170290,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 175744,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 197556,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "alamat_jakarta",
+        "storage": "plaintext",
+        "equality_classes": 999652,
+        "largest_class": 6,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 999438
+          },
+          {
+            "class_size": 2,
+            "number_of_classes": 123
+          },
+          {
+            "class_size": 3,
+            "number_of_classes": 60
+          },
+          {
+            "class_size": 4,
+            "number_of_classes": 22
+          },
+          {
+            "class_size": 5,
+            "number_of_classes": 6
+          },
+          {
+            "class_size": 6,
+            "number_of_classes": 3
+          }
+        ]
+      },
+      {
+        "column": "telpon_jakarta",
+        "storage": "plaintext",
+        "equality_classes": 995096,
+        "largest_class": 3,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 990206
+          },
+          {
+            "class_size": 2,
+            "number_of_classes": 4876
+          },
+          {
+            "class_size": 3,
+            "number_of_classes": 14
+          }
+        ]
+      },
+      {
+        "column": "alamat_daerah",
+        "storage": "plaintext",
+        "equality_classes": 999910,
+        "largest_class": 4,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 999824
+          },
+          {
+            "class_size": 2,
+            "number_of_classes": 83
+          },
+          {
+            "class_size": 3,
+            "number_of_classes": 2
+          },
+          {
+            "class_size": 4,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "telpon_daerah",
+        "storage": "plaintext",
+        "equality_classes": 1000000,
+        "largest_class": 1,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 1000000
+          }
+        ]
+      },
+      {
+        "column": "handphone",
+        "storage": "plaintext",
+        "equality_classes": 1000000,
+        "largest_class": 1,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 1000000
+          }
+        ]
+      },
+      {
+        "column": "email",
+        "storage": "plaintext",
+        "equality_classes": 1000000,
+        "largest_class": 1,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 1000000
+          }
+        ]
+      },
+      {
+        "column": "ruangan",
+        "storage": "plaintext",
+        "equality_classes": 1000000,
+        "largest_class": 1,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 1000000
+          }
+        ]
+      },
+      {
+        "column": "status_kawin",
+        "storage": "plaintext",
+        "equality_classes": 2,
+        "largest_class": 500005,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 499995,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 500005,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "jumlah_anak",
+        "storage": "plaintext",
+        "equality_classes": 4,
+        "largest_class": 622621,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 118530,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 121250,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 137599,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 622621,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "jumlah_tanggungan",
+        "storage": "plaintext",
+        "equality_classes": 5,
+        "largest_class": 499995,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 118530,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 121250,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 122626,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 137599,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 499995,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "jumlah_jiwa",
+        "storage": "plaintext",
+        "equality_classes": 5,
+        "largest_class": 499995,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 118530,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 121250,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 122626,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 137599,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 499995,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "rekening",
+        "storage": "plaintext",
+        "equality_classes": 1000000,
+        "largest_class": 1,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 1000000
+          }
+        ]
+      },
+      {
+        "column": "nama_rekening",
+        "storage": "plaintext",
+        "equality_classes": 1000000,
+        "largest_class": 1,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 1000000
+          }
+        ]
+      },
+      {
+        "column": "npwp",
+        "storage": "plaintext",
+        "equality_classes": 1000000,
+        "largest_class": 1,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 1000000
+          }
+        ]
+      },
+      {
+        "column": "nama_kppn",
+        "storage": "plaintext",
+        "equality_classes": 5,
+        "largest_class": 222075,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 173022,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 193458,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 197548,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 213897,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 222075,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "nip_kppn",
+        "storage": "plaintext",
+        "equality_classes": 1000000,
+        "largest_class": 1,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 1000000
+          }
+        ]
+      },
+      {
+        "column": "nama_bank",
+        "storage": "plaintext",
+        "equality_classes": 4,
+        "largest_class": 262946,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 227521,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 253405,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 256128,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 262946,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "kode_bank",
+        "storage": "plaintext",
+        "equality_classes": 532,
+        "largest_class": 5451,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1362,
+            "number_of_classes": 221
+          },
+          {
+            "class_size": 1363,
+            "number_of_classes": 152
+          },
+          {
+            "class_size": 2724,
+            "number_of_classes": 47
+          },
+          {
+            "class_size": 2725,
+            "number_of_classes": 56
+          },
+          {
+            "class_size": 2726,
+            "number_of_classes": 18
+          },
+          {
+            "class_size": 4086,
+            "number_of_classes": 8
+          },
+          {
+            "class_size": 4087,
+            "number_of_classes": 15
+          },
+          {
+            "class_size": 4088,
+            "number_of_classes": 8
+          },
+          {
+            "class_size": 4089,
+            "number_of_classes": 2
+          },
+          {
+            "class_size": 5450,
+            "number_of_classes": 4
+          },
+          {
+            "class_size": 5451,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "pengguna",
+        "storage": "plaintext",
+        "equality_classes": 1000000,
+        "largest_class": 1,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 1000000
+          }
+        ]
+      },
+      {
+        "column": "agama",
+        "storage": "plaintext",
+        "equality_classes": 7,
+        "largest_class": 156678,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 128063,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 136240,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 140328,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 143052,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 147137,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 148502,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 156678,
+            "number_of_classes": 1
+          }
+        ]
+      }
+    ]
+  },
+  "DBR": {
+    "credentials_needed": "none",
+    "domains_exposed": {
+      "PII": [
+        "nama",
+        "nama_lengkap",
+        "nama_tanpa_gelar",
+        "tempat_lahir",
+        "tanggal_lahir",
+        "tanggal_pernikahan",
+        "no_ktp",
+        "alamat_jakarta",
+        "telpon_jakarta",
+        "alamat_daerah",
+        "telpon_daerah",
+        "handphone",
+        "email",
+        "ruangan",
+        "status_kawin",
+        "jumlah_anak",
+        "jumlah_tanggungan",
+        "jumlah_jiwa",
+        "nip_kppn",
+        "pengguna",
+        "agama"
+      ],
+      "FIN": [
+        "rekening",
+        "nama_rekening",
+        "npwp",
+        "kode_bank"
+      ]
+    },
+    "meaning": "Baseline plaintext exposure, not a tested OpenBao key compromise"
+  },
+  "residual": {
+    "file": "evidence/leakage/residual_before.json",
+    "attributes": [
+      "jenis_kelamin",
+      "pekerjaan_terakhir",
+      "nama_kppn",
+      "nama_bank",
+      "age_band",
+      "is_null_tanggal_pernikahan"
+    ],
+    "combinations_per_population": 41
+  },
+  "before_after": {
+    "before": "measured",
+    "after": "BELUM DIUJI; requires Module A artifact/profile and applicable credentials"
+  },
+  "target_status": {
+    "S03": "BELUM DIUJI: target applies to protected dump without keys"
+  },
+  "limitations": [
+    "Logical snapshot only; no physical files/WAL/operational log claim.",
+    "ESCE uses exact linked cells, not substring occurrence or merely possible inference.",
+    "DIE is this frozen direct-identifier list, not all possible re-identification attacks."
+  ]
+}

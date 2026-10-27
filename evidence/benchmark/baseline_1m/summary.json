@@ -130,5 +130,52 @@
   "database": "baseline_1m",
   "raw_requests_location": "results/bench/before_1m/<scenario>/run_<n>/requests_worker_<n>.csv.gz",
   "target_comparison": "BELUM DIUJI: no protected or API measurements in initial baseline",
-  "raw_compression_manifest": "evidence/benchmark/baseline_1m/raw_validation.json"
+  "raw_compression_manifest": "evidence/benchmark/baseline_1m/raw_validation.json",
+  "post_run_power_audit": {
+    "recorded_at_utc": "2026-10-27T14:02:21.663257+00:00",
+    "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+    "confirmed_battery_interval": {
+      "start_wib": "2026-10-27T19:18:04.0867490+07:00",
+      "end_wib": "2026-10-27T19:27:03.4603409+07:00",
+      "unplug_record_id": 27150,
+      "replug_record_id": 27177,
+      "duration_s": 539.373591
+    },
+    "verification_scope": "Historical charger=true was a preflight observation/user report, not continuous AC telemetry",
+    "no_rerun_no_metrics_removed": true,
+    "workload_runs_overlapping_confirmed_incident": 0,
+    "workload_interpretation": "No recorded AC interruption during 21 measurement/warmup intervals"
+  },
+  "replacement_measurements": {
+    "replacement_session": "ac_20261027T150728Z",
+    "power_verification_file": "evidence/benchmark/replacements/ac_20261027T150728Z/power_verification.json",
+    "workload_21_runs_repeated": false,
+    "workload_1m": {
+      "file": "evidence/benchmark/baseline_1m/summary.json",
+      "measurement": "original unaffected 21 runs"
+    },
+    "backup_restore_1m": {
+      "file": "evidence/benchmark/baseline_1m/backup_restore.json",
+      "medians": {
+        "backup_s": 33.39072339999257,
+        "restore_s": 47.39628559999983,
+        "dump_bytes": 150429543
+      }
+    },
+    "pgbench_crosscheck_100k": {
+      "file": "evidence/benchmark/crosscheck_pgbench.json",
+      "medians": {
+        "p50_ms": 0.099,
+        "p95_ms": 0.158,
+        "mean_ms": 0.163,
+        "throughput_rps": 49205.763924,
+        "error_rate": 0.0
+      }
+    },
+    "historical_measurements": {
+      "label": "terdampak baterai",
+      "manifest": "evidence/benchmark/history/battery_affected_ac_20261027T150728Z/manifest.json"
+    }
+  },
+  "post_run_power_audit_scope": "Original session; affected backup and pgbench now superseded by separate AC replacement"
 }

@@ -1,0 +1,1309 @@
+{
+  "status": "ANALYZED_NO_RERUN",
+  "timestamp_utc": "2026-10-27T14:02:21.663257+00:00",
+  "dataset": "baseline_1m",
+  "user_report": {
+    "possible_window_start_wib": "2026-10-27T19:00:00+07:00",
+    "possible_window_end_wib": "2026-10-27T19:21:00+07:00",
+    "approximate_duration_s": 60,
+    "interpretation": "19:00-19:21 WIB on benchmark date; approximate recollection, not a 21-minute outage"
+  },
+  "confirmed_interval": {
+    "start_wib": "2026-10-27T19:18:04.0867490+07:00",
+    "end_wib": "2026-10-27T19:27:03.4603409+07:00",
+    "unplug_record_id": 27150,
+    "replug_record_id": 27177,
+    "duration_s": 539.373591
+  },
+  "windows_events_file": "evidence/benchmark/baseline_1m/power_events.json",
+  "inputs_at_analysis_sha256": {
+    "evidence/benchmark/baseline_1m/env.json": "886b0b93249f9dc246a961b57ea71e1b10f26ec93cc3e17d03308bbfe27a14b7",
+    "evidence/benchmark/baseline_1m/run_summaries.json": "1b8b8800589ce2ac8fb481f1a76629c0c2f070cf2cb55d8d977035358c0e851c",
+    "evidence/benchmark/baseline_1m/summary.json": "def7dc922a0721135c5cefb5c2fa03180d6f7f105b1ab9bc0ea42a23441cfeee",
+    "evidence/benchmark/baseline_1m/backup_restore.json": "199403dc29bf58d12d1b915394fa28390aef826e6a15b86a0dc6e93c3a983480",
+    "evidence/benchmark/crosscheck_pgbench.json": "ac48ee60b8cb8a14543f1653bb60b8653c7af0121cddfd74cf975fda06adbffe",
+    "evidence/benchmark/session_1m_crosscheck.json": "eb3173570c75cb933e605445c5b35e988d2d2ec87c87aac99a861ef82c5c5336"
+  },
+  "source_git_commit": "de80b2104cf264418c2275394138bbe2fd2a1e94",
+  "workload_runs": [
+    {
+      "scenario": "read_by_nik",
+      "run": 1,
+      "started_at_wib": "2026-10-27T18:34:40.131733+07:00",
+      "ended_at_wib": "2026-10-27T18:35:40.137036+07:00",
+      "elapsed_s": 60.00530340000114,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T18:35:40.393659+07:00",
+      "reported_window_overlap_s": 0.0,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 4.4181999983266,
+          "other_two_runs_median": 4.451850007171743,
+          "difference_percent": -0.7558657365125621
+        },
+        "p95_ms": {
+          "value": 15.400325009977678,
+          "other_two_runs_median": 15.380099998219517,
+          "difference_percent": 0.13150117203726275
+        },
+        "throughput_rps": {
+          "value": 1366.3125649656902,
+          "other_two_runs_median": 1374.6141154790362,
+          "difference_percent": -0.6039186139488284
+        }
+      },
+      "resources": {
+        "samples": 15,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 64.4,
+        "db_cpu_percent_one_core_peak": 102.06,
+        "client_cpu_percent_one_core_median": 101.6,
+        "client_cpu_percent_one_core_peak": 116.5,
+        "db_ram_bytes_median": 748368691.0,
+        "db_ram_bytes_peak": 748788121.0,
+        "client_ram_bytes_median": 56799232.0,
+        "client_ram_bytes_peak": 57839616.0
+      },
+      "reported_window_resources": {
+        "samples": 0,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": null,
+        "db_cpu_percent_one_core_peak": null,
+        "client_cpu_percent_one_core_median": null,
+        "client_cpu_percent_one_core_peak": null,
+        "db_ram_bytes_median": null,
+        "db_ram_bytes_peak": null,
+        "client_ram_bytes_median": null,
+        "client_ram_bytes_peak": null
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T18:34:40.151748+07:00",
+      "last_resource_wib": "2026-10-27T18:35:37.275415+07:00"
+    },
+    {
+      "scenario": "read_by_nik",
+      "run": 2,
+      "started_at_wib": "2026-10-27T18:37:11.753174+07:00",
+      "ended_at_wib": "2026-10-27T18:38:11.756610+07:00",
+      "elapsed_s": 60.00343569999677,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T18:38:12.095402+07:00",
+      "reported_window_overlap_s": 0.0,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 4.445300000952557,
+          "other_two_runs_median": 4.438300005858764,
+          "difference_percent": 0.15771793444681048
+        },
+        "p95_ms": {
+          "value": 18.110279998654736,
+          "other_two_runs_median": 14.025122503880988,
+          "difference_percent": 29.127428253431063
+        },
+        "throughput_rps": {
+          "value": 1328.423932231672,
+          "other_two_runs_median": 1393.5584318460453,
+          "difference_percent": -4.673969754399865
+        }
+      },
+      "resources": {
+        "samples": 15,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 58.87,
+        "db_cpu_percent_one_core_peak": 84.43,
+        "client_cpu_percent_one_core_median": 98.1,
+        "client_cpu_percent_one_core_peak": 109.0,
+        "db_ram_bytes_median": 762105036.0,
+        "db_ram_bytes_peak": 762524467.0,
+        "client_ram_bytes_median": 56938496.0,
+        "client_ram_bytes_peak": 57905152.0
+      },
+      "reported_window_resources": {
+        "samples": 0,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": null,
+        "db_cpu_percent_one_core_peak": null,
+        "client_cpu_percent_one_core_median": null,
+        "client_cpu_percent_one_core_peak": null,
+        "db_ram_bytes_median": null,
+        "db_ram_bytes_peak": null,
+        "client_ram_bytes_median": null,
+        "client_ram_bytes_peak": null
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T18:37:11.766939+07:00",
+      "last_resource_wib": "2026-10-27T18:38:08.762847+07:00"
+    },
+    {
+      "scenario": "read_by_nik",
+      "run": 3,
+      "started_at_wib": "2026-10-27T18:39:40.301086+07:00",
+      "ended_at_wib": "2026-10-27T18:40:40.304424+07:00",
+      "elapsed_s": 60.00333759999194,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T18:40:40.472150+07:00",
+      "reported_window_overlap_s": 0.0,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 4.4584000133909285,
+          "other_two_runs_median": 4.431749999639578,
+          "difference_percent": 0.601342895098278
+        },
+        "p95_ms": {
+          "value": 12.649919997784298,
+          "other_two_runs_median": 16.755302504316205,
+          "difference_percent": -24.5019897759193
+        },
+        "throughput_rps": {
+          "value": 1420.8042987264005,
+          "other_two_runs_median": 1347.368248598681,
+          "difference_percent": 5.450332543022007
+        }
+      },
+      "resources": {
+        "samples": 15,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 62.49,
+        "db_cpu_percent_one_core_peak": 91.64,
+        "client_cpu_percent_one_core_median": 100.6,
+        "client_cpu_percent_one_core_peak": 126.8,
+        "db_ram_bytes_median": 762524467.0,
+        "db_ram_bytes_peak": 762839040.0,
+        "client_ram_bytes_median": 58392576.0,
+        "client_ram_bytes_peak": 59408384.0
+      },
+      "reported_window_resources": {
+        "samples": 0,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": null,
+        "db_cpu_percent_one_core_peak": null,
+        "client_cpu_percent_one_core_median": null,
+        "client_cpu_percent_one_core_peak": null,
+        "db_ram_bytes_median": null,
+        "db_ram_bytes_peak": null,
+        "client_ram_bytes_median": null,
+        "client_ram_bytes_peak": null
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T18:39:40.315602+07:00",
+      "last_resource_wib": "2026-10-27T18:40:37.578877+07:00"
+    },
+    {
+      "scenario": "read_by_email",
+      "run": 1,
+      "started_at_wib": "2026-10-27T18:41:58.939257+07:00",
+      "ended_at_wib": "2026-10-27T18:42:58.943216+07:00",
+      "elapsed_s": 60.003958900008,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T18:42:59.276502+07:00",
+      "reported_window_overlap_s": 0.0,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 4.363000000012107,
+          "other_two_runs_median": 3.468149996479042,
+          "difference_percent": 25.801940643903553
+        },
+        "p95_ms": {
+          "value": 16.310920003161296,
+          "other_two_runs_median": 6.314700003713369,
+          "difference_percent": 158.30079011781453
+        },
+        "throughput_rps": {
+          "value": 1390.0249505035388,
+          "other_two_runs_median": 2130.9061793375386,
+          "difference_percent": -34.7683645586089
+        }
+      },
+      "resources": {
+        "samples": 15,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 63.04,
+        "db_cpu_percent_one_core_peak": 78.95,
+        "client_cpu_percent_one_core_median": 101.9,
+        "client_cpu_percent_one_core_peak": 112.3,
+        "db_ram_bytes_median": 763153612.0,
+        "db_ram_bytes_peak": 763468185.0,
+        "client_ram_bytes_median": 58613760.0,
+        "client_ram_bytes_peak": 59682816.0
+      },
+      "reported_window_resources": {
+        "samples": 0,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": null,
+        "db_cpu_percent_one_core_peak": null,
+        "client_cpu_percent_one_core_median": null,
+        "client_cpu_percent_one_core_peak": null,
+        "db_ram_bytes_median": null,
+        "db_ram_bytes_peak": null,
+        "client_ram_bytes_median": null,
+        "client_ram_bytes_peak": null
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T18:41:58.950256+07:00",
+      "last_resource_wib": "2026-10-27T18:42:55.659797+07:00"
+    },
+    {
+      "scenario": "read_by_email",
+      "run": 2,
+      "started_at_wib": "2026-10-27T18:44:10.199515+07:00",
+      "ended_at_wib": "2026-10-27T18:45:10.203361+07:00",
+      "elapsed_s": 60.00384610000765,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T18:45:10.391681+07:00",
+      "reported_window_overlap_s": 0.0,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 3.471100004389882,
+          "other_two_runs_median": 3.9140999942901544,
+          "difference_percent": -11.31805499467351
+        },
+        "p95_ms": {
+          "value": 6.331199998385273,
+          "other_two_runs_median": 11.304560006101381,
+          "difference_percent": -43.99428199798886
+        },
+        "throughput_rps": {
+          "value": 2122.6472681054315,
+          "other_two_runs_median": 1764.595020536592,
+          "difference_percent": 20.290902071114324
+        }
+      },
+      "resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 44.18,
+        "db_cpu_percent_one_core_peak": 64.21,
+        "client_cpu_percent_one_core_median": 127.25,
+        "client_cpu_percent_one_core_peak": 132.1,
+        "db_ram_bytes_median": 779406540.0,
+        "db_ram_bytes_peak": 779721113.0,
+        "client_ram_bytes_median": 59187200.0,
+        "client_ram_bytes_peak": 60923904.0
+      },
+      "reported_window_resources": {
+        "samples": 0,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": null,
+        "db_cpu_percent_one_core_peak": null,
+        "client_cpu_percent_one_core_median": null,
+        "client_cpu_percent_one_core_peak": null,
+        "db_ram_bytes_median": null,
+        "db_ram_bytes_peak": null,
+        "client_ram_bytes_median": null,
+        "client_ram_bytes_peak": null
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T18:44:10.203529+07:00",
+      "last_resource_wib": "2026-10-27T18:45:07.198017+07:00"
+    },
+    {
+      "scenario": "read_by_email",
+      "run": 3,
+      "started_at_wib": "2026-10-27T18:46:00.610906+07:00",
+      "ended_at_wib": "2026-10-27T18:47:00.616092+07:00",
+      "elapsed_s": 60.00518639999791,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T18:47:00.821470+07:00",
+      "reported_window_overlap_s": 0.0,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 3.4651999885682017,
+          "other_two_runs_median": 3.9170500022009946,
+          "difference_percent": -11.535467083108408
+        },
+        "p95_ms": {
+          "value": 6.298200009041466,
+          "other_two_runs_median": 11.321060000773285,
+          "difference_percent": -44.367400149709766
+        },
+        "throughput_rps": {
+          "value": 2139.1650905696456,
+          "other_two_runs_median": 1756.336109304485,
+          "difference_percent": 21.797022747357975
+        }
+      },
+      "resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 44.22,
+        "db_cpu_percent_one_core_peak": 60.51,
+        "client_cpu_percent_one_core_median": 126.55,
+        "client_cpu_percent_one_core_peak": 133.8,
+        "db_ram_bytes_median": 779616256.0,
+        "db_ram_bytes_peak": 780140544.0,
+        "client_ram_bytes_median": 58918912.0,
+        "client_ram_bytes_peak": 60317696.0
+      },
+      "reported_window_resources": {
+        "samples": 0,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": null,
+        "db_cpu_percent_one_core_peak": null,
+        "client_cpu_percent_one_core_median": null,
+        "client_cpu_percent_one_core_peak": null,
+        "db_ram_bytes_median": null,
+        "db_ram_bytes_peak": null,
+        "client_ram_bytes_median": null,
+        "client_ram_bytes_peak": null
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T18:46:00.615918+07:00",
+      "last_resource_wib": "2026-10-27T18:46:57.360947+07:00"
+    },
+    {
+      "scenario": "read_profile",
+      "run": 1,
+      "started_at_wib": "2026-10-27T18:47:49.891500+07:00",
+      "ended_at_wib": "2026-10-27T18:48:49.895105+07:00",
+      "elapsed_s": 60.00360470000305,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T18:48:51.454712+07:00",
+      "reported_window_overlap_s": 0.0,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 3.4622000093804672,
+          "other_two_runs_median": 3.4125500023947097,
+          "difference_percent": 1.4549239410680093
+        },
+        "p95_ms": {
+          "value": 6.209990006755103,
+          "other_two_runs_median": 6.149464998088659,
+          "difference_percent": 0.9842321028781464
+        },
+        "throughput_rps": {
+          "value": 2152.454017483277,
+          "other_two_runs_median": 2166.700772480026,
+          "difference_percent": -0.65753218800223
+        }
+      },
+      "resources": {
+        "samples": 17,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 42.25,
+        "db_cpu_percent_one_core_peak": 49.99,
+        "client_cpu_percent_one_core_median": 124.8,
+        "client_cpu_percent_one_core_peak": 135.3,
+        "db_ram_bytes_median": 779930828.0,
+        "db_ram_bytes_peak": 780245401.0,
+        "client_ram_bytes_median": 58810368.0,
+        "client_ram_bytes_peak": 60727296.0
+      },
+      "reported_window_resources": {
+        "samples": 0,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": null,
+        "db_cpu_percent_one_core_peak": null,
+        "client_cpu_percent_one_core_median": null,
+        "client_cpu_percent_one_core_peak": null,
+        "db_ram_bytes_median": null,
+        "db_ram_bytes_peak": null,
+        "client_ram_bytes_median": null,
+        "client_ram_bytes_peak": null
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T18:47:49.895299+07:00",
+      "last_resource_wib": "2026-10-27T18:48:49.634326+07:00"
+    },
+    {
+      "scenario": "read_profile",
+      "run": 2,
+      "started_at_wib": "2026-10-27T18:49:39.880875+07:00",
+      "ended_at_wib": "2026-10-27T18:50:39.885576+07:00",
+      "elapsed_s": 60.004700599994976,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T18:50:40.168826+07:00",
+      "reported_window_overlap_s": 0.0,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 3.4289500035811216,
+          "other_two_runs_median": 3.4291750052943826,
+          "difference_percent": -0.006561394881088312
+        },
+        "p95_ms": {
+          "value": 6.1143849939981,
+          "other_two_runs_median": 6.197267504467161,
+          "difference_percent": -1.337404112527274
+        },
+        "throughput_rps": {
+          "value": 2169.896669728753,
+          "other_two_runs_median": 2157.979446357288,
+          "difference_percent": 0.5522398923484273
+        }
+      },
+      "resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 42.385000000000005,
+        "db_cpu_percent_one_core_peak": 49.54,
+        "client_cpu_percent_one_core_median": 128.4,
+        "client_cpu_percent_one_core_peak": 136.1,
+        "db_ram_bytes_median": 780035686.0,
+        "db_ram_bytes_peak": 780559974.0,
+        "client_ram_bytes_median": 59215872.0,
+        "client_ram_bytes_peak": 61063168.0
+      },
+      "reported_window_resources": {
+        "samples": 0,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": null,
+        "db_cpu_percent_one_core_peak": null,
+        "client_cpu_percent_one_core_median": null,
+        "client_cpu_percent_one_core_peak": null,
+        "db_ram_bytes_median": null,
+        "db_ram_bytes_peak": null,
+        "client_ram_bytes_median": null,
+        "client_ram_bytes_peak": null
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T18:49:39.884888+07:00",
+      "last_resource_wib": "2026-10-27T18:50:36.251270+07:00"
+    },
+    {
+      "scenario": "read_profile",
+      "run": 3,
+      "started_at_wib": "2026-10-27T18:51:29.952710+07:00",
+      "ended_at_wib": "2026-10-27T18:52:29.956273+07:00",
+      "elapsed_s": 60.00356250000186,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T18:52:31.712213+07:00",
+      "reported_window_overlap_s": 0.0,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 3.396150001208298,
+          "other_two_runs_median": 3.4455750064807944,
+          "difference_percent": -1.4344486821367353
+        },
+        "p95_ms": {
+          "value": 6.1845450021792185,
+          "other_two_runs_median": 6.162187500376602,
+          "difference_percent": 0.3628176163294361
+        },
+        "throughput_rps": {
+          "value": 2163.504875231299,
+          "other_two_runs_median": 2161.175343606015,
+          "difference_percent": 0.10779003342678006
+        }
+      },
+      "resources": {
+        "samples": 17,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 42.55,
+        "db_cpu_percent_one_core_peak": 54.29,
+        "client_cpu_percent_one_core_median": 126.6,
+        "client_cpu_percent_one_core_peak": 131.4,
+        "db_ram_bytes_median": 779930828.0,
+        "db_ram_bytes_peak": 780140544.0,
+        "client_ram_bytes_median": 59478016.0,
+        "client_ram_bytes_peak": 60882944.0
+      },
+      "reported_window_resources": {
+        "samples": 0,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": null,
+        "db_cpu_percent_one_core_peak": null,
+        "client_cpu_percent_one_core_median": null,
+        "client_cpu_percent_one_core_peak": null,
+        "db_ram_bytes_median": null,
+        "db_ram_bytes_peak": null,
+        "client_ram_bytes_median": null,
+        "client_ram_bytes_peak": null
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T18:51:29.955713+07:00",
+      "last_resource_wib": "2026-10-27T18:52:29.893390+07:00"
+    },
+    {
+      "scenario": "list_page",
+      "run": 1,
+      "started_at_wib": "2026-10-27T18:53:20.825427+07:00",
+      "ended_at_wib": "2026-10-27T18:54:20.829272+07:00",
+      "elapsed_s": 60.003845100000035,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T18:54:21.097737+07:00",
+      "reported_window_overlap_s": 0.0,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 2.5258999958168715,
+          "other_two_runs_median": 2.5398500001756474,
+          "difference_percent": -0.5492452057330621
+        },
+        "p95_ms": {
+          "value": 4.557250002108049,
+          "other_two_runs_median": 4.577020002398058,
+          "difference_percent": -0.4319404389679482
+        },
+        "throughput_rps": {
+          "value": 2844.6676994704776,
+          "other_two_runs_median": 2841.8659110024346,
+          "difference_percent": 0.09858974898131478
+        }
+      },
+      "resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 122.77,
+        "db_cpu_percent_one_core_peak": 166.23,
+        "client_cpu_percent_one_core_median": 128.2,
+        "client_cpu_percent_one_core_peak": 136.2,
+        "db_ram_bytes_median": 777886105.0,
+        "db_ram_bytes_peak": 778357964.0,
+        "client_ram_bytes_median": 60164096.0,
+        "client_ram_bytes_peak": 61906944.0
+      },
+      "reported_window_resources": {
+        "samples": 0,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": null,
+        "db_cpu_percent_one_core_peak": null,
+        "client_cpu_percent_one_core_median": null,
+        "client_cpu_percent_one_core_peak": null,
+        "db_ram_bytes_median": null,
+        "db_ram_bytes_peak": null,
+        "client_ram_bytes_median": null,
+        "client_ram_bytes_peak": null
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T18:53:20.827595+07:00",
+      "last_resource_wib": "2026-10-27T18:54:17.864139+07:00"
+    },
+    {
+      "scenario": "list_page",
+      "run": 2,
+      "started_at_wib": "2026-10-27T18:55:09.990971+07:00",
+      "ended_at_wib": "2026-10-27T18:56:09.994944+07:00",
+      "elapsed_s": 60.00397279999743,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T18:56:10.266034+07:00",
+      "reported_window_overlap_s": 0.0,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 2.5539000052958727,
+          "other_two_runs_median": 2.525849995436147,
+          "difference_percent": 1.1105176439776043
+        },
+        "p95_ms": {
+          "value": 4.619664994970662,
+          "other_two_runs_median": 4.545812505966751,
+          "difference_percent": 1.6246268165916122
+        },
+        "throughput_rps": {
+          "value": 2829.2793306513745,
+          "other_two_runs_median": 2849.560095411986,
+          "difference_percent": -0.7117156361525767
+        }
+      },
+      "resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 124.13,
+        "db_cpu_percent_one_core_peak": 144.82,
+        "client_cpu_percent_one_core_median": 127.44999999999999,
+        "client_cpu_percent_one_core_peak": 143.9,
+        "db_ram_bytes_median": 778567680.0,
+        "db_ram_bytes_peak": 778882252.0,
+        "client_ram_bytes_median": 60577792.0,
+        "client_ram_bytes_peak": 62980096.0
+      },
+      "reported_window_resources": {
+        "samples": 0,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": null,
+        "db_cpu_percent_one_core_peak": null,
+        "client_cpu_percent_one_core_median": null,
+        "client_cpu_percent_one_core_peak": null,
+        "db_ram_bytes_median": null,
+        "db_ram_bytes_peak": null,
+        "client_ram_bytes_median": null,
+        "client_ram_bytes_peak": null
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T18:55:09.994496+07:00",
+      "last_resource_wib": "2026-10-27T18:56:07.876151+07:00"
+    },
+    {
+      "scenario": "list_page",
+      "run": 3,
+      "started_at_wib": "2026-10-27T18:56:59.226495+07:00",
+      "ended_at_wib": "2026-10-27T18:57:59.233099+07:00",
+      "elapsed_s": 60.006603899993934,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T18:57:59.543572+07:00",
+      "reported_window_overlap_s": 0.0,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 2.525799995055422,
+          "other_two_runs_median": 2.539900000556372,
+          "difference_percent": -0.5551401826001556
+        },
+        "p95_ms": {
+          "value": 4.534375009825453,
+          "other_two_runs_median": 4.588457498539356,
+          "difference_percent": -1.1786638261576665
+        },
+        "throughput_rps": {
+          "value": 2854.452491353494,
+          "other_two_runs_median": 2836.973515060926,
+          "difference_percent": 0.6161134814892
+        }
+      },
+      "resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 122.09,
+        "db_cpu_percent_one_core_peak": 144.78,
+        "client_cpu_percent_one_core_median": 130.1,
+        "client_cpu_percent_one_core_peak": 140.0,
+        "db_ram_bytes_median": 778148249.0,
+        "db_ram_bytes_peak": 778462822.0,
+        "client_ram_bytes_median": 60862464.0,
+        "client_ram_bytes_peak": 63393792.0
+      },
+      "reported_window_resources": {
+        "samples": 0,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": null,
+        "db_cpu_percent_one_core_peak": null,
+        "client_cpu_percent_one_core_median": null,
+        "client_cpu_percent_one_core_peak": null,
+        "db_ram_bytes_median": null,
+        "db_ram_bytes_peak": null,
+        "client_ram_bytes_median": null,
+        "client_ram_bytes_peak": null
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T18:56:59.228496+07:00",
+      "last_resource_wib": "2026-10-27T18:57:56.521976+07:00"
+    },
+    {
+      "scenario": "update_contact",
+      "run": 1,
+      "started_at_wib": "2026-10-27T18:58:47.406413+07:00",
+      "ended_at_wib": "2026-10-27T18:59:47.411890+07:00",
+      "elapsed_s": 60.005477300001075,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T18:59:47.521859+07:00",
+      "reported_window_overlap_s": 0.0,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 5.432599995401688,
+          "other_two_runs_median": 5.60235000011744,
+          "difference_percent": -3.0299785752799013
+        },
+        "p95_ms": {
+          "value": 8.9152399887098,
+          "other_two_runs_median": 10.147229995345693,
+          "difference_percent": -12.141145979749934
+        },
+        "throughput_rps": {
+          "value": 1339.9610105259267,
+          "other_two_runs_median": 1271.7479213916235,
+          "difference_percent": 5.363727196790724
+        }
+      },
+      "resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 139.44,
+        "db_cpu_percent_one_core_peak": 147.15,
+        "client_cpu_percent_one_core_median": 131.0,
+        "client_cpu_percent_one_core_peak": 143.8,
+        "db_ram_bytes_median": 784177561.0,
+        "db_ram_bytes_peak": 795764326.0,
+        "client_ram_bytes_median": 59551744.0,
+        "client_ram_bytes_peak": 60837888.0
+      },
+      "reported_window_resources": {
+        "samples": 0,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": null,
+        "db_cpu_percent_one_core_peak": null,
+        "client_cpu_percent_one_core_median": null,
+        "client_cpu_percent_one_core_peak": null,
+        "db_ram_bytes_median": null,
+        "db_ram_bytes_peak": null,
+        "client_ram_bytes_median": null,
+        "client_ram_bytes_peak": null
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T18:58:47.408412+07:00",
+      "last_resource_wib": "2026-10-27T18:59:44.104555+07:00"
+    },
+    {
+      "scenario": "update_contact",
+      "run": 2,
+      "started_at_wib": "2026-10-27T19:00:37.662439+07:00",
+      "ended_at_wib": "2026-10-27T19:01:37.667820+07:00",
+      "elapsed_s": 60.0053814999992,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T19:01:37.827966+07:00",
+      "reported_window_overlap_s": 60.005381,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 5.582199999480508,
+          "other_two_runs_median": 5.52754999807803,
+          "difference_percent": 0.988683981537597
+        },
+        "p95_ms": {
+          "value": 9.57919999200385,
+          "other_two_runs_median": 9.815249993698668,
+          "difference_percent": -2.4049311209226487
+        },
+        "throughput_rps": {
+          "value": 1301.9498926108993,
+          "other_two_runs_median": 1290.7534803491374,
+          "difference_percent": 0.8674322736463402
+        }
+      },
+      "resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 131.99,
+        "db_cpu_percent_one_core_peak": 150.96,
+        "client_cpu_percent_one_core_median": 129.35,
+        "client_cpu_percent_one_core_peak": 137.0,
+        "db_ram_bytes_median": 824338022.0,
+        "db_ram_bytes_peak": 826802176.0,
+        "client_ram_bytes_median": 60243968.0,
+        "client_ram_bytes_peak": 61489152.0
+      },
+      "reported_window_resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 131.99,
+        "db_cpu_percent_one_core_peak": 150.96,
+        "client_cpu_percent_one_core_median": 129.35,
+        "client_cpu_percent_one_core_peak": 137.0,
+        "db_ram_bytes_median": 824338022.0,
+        "db_ram_bytes_peak": 826802176.0,
+        "client_ram_bytes_median": 60243968.0,
+        "client_ram_bytes_peak": 61489152.0
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T19:00:37.664438+07:00",
+      "last_resource_wib": "2026-10-27T19:01:34.331757+07:00"
+    },
+    {
+      "scenario": "update_contact",
+      "run": 3,
+      "started_at_wib": "2026-10-27T19:02:28.951559+07:00",
+      "ended_at_wib": "2026-10-27T19:03:28.956587+07:00",
+      "elapsed_s": 60.00502840000263,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T19:03:29.074151+07:00",
+      "reported_window_overlap_s": 60.005028,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 5.622500000754371,
+          "other_two_runs_median": 5.507399997441098,
+          "difference_percent": 2.0899154477022286
+        },
+        "p95_ms": {
+          "value": 10.715259998687538,
+          "other_two_runs_median": 9.247219990356825,
+          "difference_percent": 15.875474032861892
+        },
+        "throughput_rps": {
+          "value": 1241.545950172348,
+          "other_two_runs_median": 1320.955451568413,
+          "difference_percent": -6.01152001770987
+        }
+      },
+      "resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 136.76999999999998,
+        "db_cpu_percent_one_core_peak": 170.62,
+        "client_cpu_percent_one_core_median": 122.25,
+        "client_cpu_percent_one_core_peak": 137.4,
+        "db_ram_bytes_median": 1040816537.0,
+        "db_ram_bytes_peak": 1042389401.0,
+        "client_ram_bytes_median": 59774976.0,
+        "client_ram_bytes_peak": 61014016.0
+      },
+      "reported_window_resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 136.76999999999998,
+        "db_cpu_percent_one_core_peak": 170.62,
+        "client_cpu_percent_one_core_median": 122.25,
+        "client_cpu_percent_one_core_peak": 137.4,
+        "db_ram_bytes_median": 1040816537.0,
+        "db_ram_bytes_peak": 1042389401.0,
+        "client_ram_bytes_median": 59774976.0,
+        "client_ram_bytes_peak": 61014016.0
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T19:02:28.953614+07:00",
+      "last_resource_wib": "2026-10-27T19:03:25.602568+07:00"
+    },
+    {
+      "scenario": "insert_member",
+      "run": 1,
+      "started_at_wib": "2026-10-27T19:04:17.409836+07:00",
+      "ended_at_wib": "2026-10-27T19:05:17.437481+07:00",
+      "elapsed_s": 60.027644900008454,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T19:05:17.495086+07:00",
+      "reported_window_overlap_s": 60.027645,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 9.11350001115352,
+          "other_two_runs_median": 9.1433000015968,
+          "difference_percent": -0.3259216085885419
+        },
+        "p95_ms": {
+          "value": 13.839200008078478,
+          "other_two_runs_median": 13.587614997595661,
+          "difference_percent": 1.8515759427047085
+        },
+        "throughput_rps": {
+          "value": 825.9694359588813,
+          "other_two_runs_median": 830.6827848131086,
+          "difference_percent": -0.5674065889408997
+        }
+      },
+      "resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 84.565,
+        "db_cpu_percent_one_core_peak": 109.15,
+        "client_cpu_percent_one_core_median": 129.3,
+        "client_cpu_percent_one_core_peak": 138.9,
+        "db_ram_bytes_median": 1044224409.5,
+        "db_ram_bytes_peak": 1045535129.0,
+        "client_ram_bytes_median": 57634816.0,
+        "client_ram_bytes_peak": 58454016.0
+      },
+      "reported_window_resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 84.565,
+        "db_cpu_percent_one_core_peak": 109.15,
+        "client_cpu_percent_one_core_median": 129.3,
+        "client_cpu_percent_one_core_peak": 138.9,
+        "db_ram_bytes_median": 1044224409.5,
+        "db_ram_bytes_peak": 1045535129.0,
+        "client_ram_bytes_median": 57634816.0,
+        "client_ram_bytes_peak": 58454016.0
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T19:04:17.412392+07:00",
+      "last_resource_wib": "2026-10-27T19:05:14.296301+07:00"
+    },
+    {
+      "scenario": "insert_member",
+      "run": 2,
+      "started_at_wib": "2026-10-27T19:06:06.790310+07:00",
+      "ended_at_wib": "2026-10-27T19:07:06.814633+07:00",
+      "elapsed_s": 60.02432270000281,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T19:07:06.885510+07:00",
+      "reported_window_overlap_s": 60.024323,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 9.03680000192253,
+          "other_two_runs_median": 9.181650006212294,
+          "difference_percent": -1.5776031997708384
+        },
+        "p95_ms": {
+          "value": 13.522305008518739,
+          "other_two_runs_median": 13.746062497375533,
+          "difference_percent": -1.6277933328145089
+        },
+        "throughput_rps": {
+          "value": 838.6267055704344,
+          "other_two_runs_median": 824.354150007332,
+          "difference_percent": 1.7313621291256354
+        }
+      },
+      "resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 85.435,
+        "db_cpu_percent_one_core_peak": 106.32,
+        "client_cpu_percent_one_core_median": 130.55,
+        "client_cpu_percent_one_core_peak": 136.4,
+        "db_ram_bytes_median": 1039610674.5,
+        "db_ram_bytes_peak": 1041026252.0,
+        "client_ram_bytes_median": 58107904.0,
+        "client_ram_bytes_peak": 58576896.0
+      },
+      "reported_window_resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 85.435,
+        "db_cpu_percent_one_core_peak": 106.32,
+        "client_cpu_percent_one_core_median": 130.55,
+        "client_cpu_percent_one_core_peak": 136.4,
+        "db_ram_bytes_median": 1039610674.5,
+        "db_ram_bytes_peak": 1041026252.0,
+        "client_ram_bytes_median": 58107904.0,
+        "client_ram_bytes_peak": 58576896.0
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T19:06:06.793321+07:00",
+      "last_resource_wib": "2026-10-27T19:07:03.470322+07:00"
+    },
+    {
+      "scenario": "insert_member",
+      "run": 3,
+      "started_at_wib": "2026-10-27T19:07:55.142674+07:00",
+      "ended_at_wib": "2026-10-27T19:08:55.161718+07:00",
+      "elapsed_s": 60.019043899999815,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T19:08:55.245378+07:00",
+      "reported_window_overlap_s": 60.019044,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 9.249800001271069,
+          "other_two_runs_median": 9.075150006538024,
+          "difference_percent": 1.9244860372249706
+        },
+        "p95_ms": {
+          "value": 13.652924986672586,
+          "other_two_runs_median": 13.680752508298609,
+          "difference_percent": -0.2034063667853303
+        },
+        "throughput_rps": {
+          "value": 822.7388640557826,
+          "other_two_runs_median": 832.2980707646578,
+          "difference_percent": -1.148531643248052
+        }
+      },
+      "resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 88.36,
+        "db_cpu_percent_one_core_peak": 106.96,
+        "client_cpu_percent_one_core_median": 127.75,
+        "client_cpu_percent_one_core_peak": 141.0,
+        "db_ram_bytes_median": 1043175833.0,
+        "db_ram_bytes_peak": 1044276838.0,
+        "client_ram_bytes_median": 58257408.0,
+        "client_ram_bytes_peak": 58744832.0
+      },
+      "reported_window_resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 88.36,
+        "db_cpu_percent_one_core_peak": 106.96,
+        "client_cpu_percent_one_core_median": 127.75,
+        "client_cpu_percent_one_core_peak": 141.0,
+        "db_ram_bytes_median": 1043175833.0,
+        "db_ram_bytes_peak": 1044276838.0,
+        "client_ram_bytes_median": 58257408.0,
+        "client_ram_bytes_peak": 58744832.0
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T19:07:55.150673+07:00",
+      "last_resource_wib": "2026-10-27T19:08:52.059106+07:00"
+    },
+    {
+      "scenario": "mixed",
+      "run": 1,
+      "started_at_wib": "2026-10-27T19:09:44.617241+07:00",
+      "ended_at_wib": "2026-10-27T19:10:44.622030+07:00",
+      "elapsed_s": 60.00478880001174,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T19:10:44.769346+07:00",
+      "reported_window_overlap_s": 60.004789,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 3.9323999953921884,
+          "other_two_runs_median": 3.9585499944223557,
+          "difference_percent": -0.660595396471253
+        },
+        "p95_ms": {
+          "value": 11.577570001827553,
+          "other_two_runs_median": 11.733035002180253,
+          "difference_percent": -1.3250194883404953
+        },
+        "throughput_rps": {
+          "value": 1481.6650767043882,
+          "other_two_runs_median": 1469.8413124630379,
+          "difference_percent": 0.8044245416899409
+        }
+      },
+      "resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 95.62,
+        "db_cpu_percent_one_core_peak": 112.92,
+        "client_cpu_percent_one_core_median": 126.25,
+        "client_cpu_percent_one_core_peak": 140.8,
+        "db_ram_bytes_median": 1046531276.5,
+        "db_ram_bytes_peak": 1047422566.0,
+        "client_ram_bytes_median": 58433536.0,
+        "client_ram_bytes_peak": 59584512.0
+      },
+      "reported_window_resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 95.62,
+        "db_cpu_percent_one_core_peak": 112.92,
+        "client_cpu_percent_one_core_median": 126.25,
+        "client_cpu_percent_one_core_peak": 140.8,
+        "db_ram_bytes_median": 1046531276.5,
+        "db_ram_bytes_peak": 1047422566.0,
+        "client_ram_bytes_median": 58433536.0,
+        "client_ram_bytes_peak": 59584512.0
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T19:09:44.621252+07:00",
+      "last_resource_wib": "2026-10-27T19:10:42.378680+07:00"
+    },
+    {
+      "scenario": "mixed",
+      "run": 2,
+      "started_at_wib": "2026-10-27T19:11:37.420392+07:00",
+      "ended_at_wib": "2026-10-27T19:12:37.425361+07:00",
+      "elapsed_s": 60.00496930000372,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T19:12:37.567263+07:00",
+      "reported_window_overlap_s": 60.004969,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 4.081249993760139,
+          "other_two_runs_median": 3.8841249952383805,
+          "difference_percent": 5.075145592982144
+        },
+        "p95_ms": {
+          "value": 12.313974997232426,
+          "other_two_runs_median": 11.364832504477818,
+          "difference_percent": 8.35157484618132
+        },
+        "throughput_rps": {
+          "value": 1400.0173815603434,
+          "other_two_runs_median": 1510.6651600350601,
+          "difference_percent": -7.32444100796954
+        }
+      },
+      "resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 103.975,
+        "db_cpu_percent_one_core_peak": 130.48,
+        "client_cpu_percent_one_core_median": 120.25,
+        "client_cpu_percent_one_core_peak": 143.8,
+        "db_ram_bytes_median": 1049624576.0,
+        "db_ram_bytes_peak": 1051721728.0,
+        "client_ram_bytes_median": 58423296.0,
+        "client_ram_bytes_peak": 59379712.0
+      },
+      "reported_window_resources": {
+        "samples": 16,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 103.975,
+        "db_cpu_percent_one_core_peak": 130.48,
+        "client_cpu_percent_one_core_median": 120.25,
+        "client_cpu_percent_one_core_peak": 143.8,
+        "db_ram_bytes_median": 1049624576.0,
+        "db_ram_bytes_peak": 1051721728.0,
+        "client_ram_bytes_median": 58423296.0,
+        "client_ram_bytes_peak": 59379712.0
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T19:11:37.424391+07:00",
+      "last_resource_wib": "2026-10-27T19:12:34.312520+07:00"
+    },
+    {
+      "scenario": "mixed",
+      "run": 3,
+      "started_at_wib": "2026-10-27T19:13:30.086451+07:00",
+      "ended_at_wib": "2026-10-27T19:14:30.091702+07:00",
+      "elapsed_s": 60.00525139999809,
+      "end_method": "started_at_utc + measured elapsed_s (includes worker drain); completed_at_utc is later bookkeeping",
+      "completed_at_wib": "2026-10-27T19:14:31.841929+07:00",
+      "reported_window_overlap_s": 60.005251,
+      "confirmed_battery_overlap_s": 0.0,
+      "warmup_estimated_overlap_s": 0.0,
+      "errors": 0,
+      "comparisons": {
+        "p50_ms": {
+          "value": 3.8358499950845726,
+          "other_two_runs_median": 4.006824994576164,
+          "difference_percent": -4.267094263488702
+        },
+        "p95_ms": {
+          "value": 11.15209500712808,
+          "other_two_runs_median": 11.94577249952999,
+          "difference_percent": -6.644003076679528
+        },
+        "throughput_rps": {
+          "value": 1539.6652433657323,
+          "other_two_runs_median": 1440.8412291323657,
+          "difference_percent": 6.858771961493337
+        }
+      },
+      "resources": {
+        "samples": 17,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 93.16,
+        "db_cpu_percent_one_core_peak": 113.76,
+        "client_cpu_percent_one_core_median": 129.1,
+        "client_cpu_percent_one_core_peak": 137.7,
+        "db_ram_bytes_median": 1050673152.0,
+        "db_ram_bytes_peak": 1051721728.0,
+        "client_ram_bytes_median": 58294272.0,
+        "client_ram_bytes_peak": 59502592.0
+      },
+      "reported_window_resources": {
+        "samples": 17,
+        "failed": 0,
+        "db_cpu_percent_one_core_median": 93.16,
+        "db_cpu_percent_one_core_peak": 113.76,
+        "client_cpu_percent_one_core_median": 129.1,
+        "client_cpu_percent_one_core_peak": 137.7,
+        "db_ram_bytes_median": 1050673152.0,
+        "db_ram_bytes_peak": 1051721728.0,
+        "client_ram_bytes_median": 58294272.0,
+        "client_ram_bytes_peak": 59502592.0
+      },
+      "confirmed_incident_resource_samples": 0,
+      "first_resource_wib": "2026-10-27T19:13:30.091453+07:00",
+      "last_resource_wib": "2026-10-27T19:14:30.030438+07:00"
+    }
+  ],
+  "secondary_phases": {
+    "backup_restore": [
+      {
+        "run": 1,
+        "started_at_wib": "2026-10-27T19:15:42.857930+07:00",
+        "backup_end_approx_wib": "2026-10-27T19:16:06.247235+07:00",
+        "restore_end_approx_wib": "2026-10-27T19:16:34.494691+07:00",
+        "backup_s": 23.38930490000348,
+        "restore_s": 28.247455699995044,
+        "backup_battery_overlap_approx_s": 0.0,
+        "restore_battery_overlap_approx_s": 0.0
+      },
+      {
+        "run": 2,
+        "started_at_wib": "2026-10-27T19:17:15.416273+07:00",
+        "backup_end_approx_wib": "2026-10-27T19:17:39.526792+07:00",
+        "restore_end_approx_wib": "2026-10-27T19:18:07.469349+07:00",
+        "backup_s": 24.11051889999362,
+        "restore_s": 27.94255669999984,
+        "backup_battery_overlap_approx_s": 0.0,
+        "restore_battery_overlap_approx_s": 3.3826
+      },
+      {
+        "run": 3,
+        "started_at_wib": "2026-10-27T19:19:10.229176+07:00",
+        "backup_end_approx_wib": "2026-10-27T19:19:31.816671+07:00",
+        "restore_end_approx_wib": "2026-10-27T19:19:55.893430+07:00",
+        "backup_s": 21.587494599996717,
+        "restore_s": 24.076759300005506,
+        "backup_battery_overlap_approx_s": 21.587495,
+        "restore_battery_overlap_approx_s": 24.076759
+      }
+    ],
+    "backup_time_precision": "Approximate stage boundaries from run start + perf_counter durations; phase transition overhead not separately timestamped",
+    "pgbench_crosscheck": [
+      {
+        "run": 1,
+        "first_transaction_complete_wib": "2026-10-27T19:21:46.446443+07:00",
+        "last_transaction_complete_wib": "2026-10-27T19:22:46.440369+07:00",
+        "observed_transaction_span_battery_overlap_s": 59.993926,
+        "p50_ms": 0.1,
+        "p95_ms": 0.163,
+        "throughput_rps": 45550.192501,
+        "errors": 0
+      },
+      {
+        "run": 2,
+        "first_transaction_complete_wib": "2026-10-27T19:23:08.034076+07:00",
+        "last_transaction_complete_wib": "2026-10-27T19:24:08.044026+07:00",
+        "observed_transaction_span_battery_overlap_s": 60.00995,
+        "p50_ms": 0.094,
+        "p95_ms": 0.142,
+        "throughput_rps": 53736.930748,
+        "errors": 0
+      },
+      {
+        "run": 3,
+        "first_transaction_complete_wib": "2026-10-27T19:24:39.815275+07:00",
+        "last_transaction_complete_wib": "2026-10-27T19:25:39.812920+07:00",
+        "observed_transaction_span_battery_overlap_s": 59.997645,
+        "p50_ms": 0.092,
+        "p95_ms": 0.139,
+        "throughput_rps": 53661.138857,
+        "errors": 0
+      }
+    ],
+    "pgbench_time_precision": "First/last transaction completions across thread logs, not process start/finish",
+    "cpu_resource_during_incident": "UNAVAILABLE: official collector stops after last workload run at 19:14:30 WIB; backup/pgbench have no equivalent resource CSV"
+  },
+  "conclusion": {
+    "workload_runs_confirmed_overlap": 0,
+    "workload_runs_in_reported_uncertain_window": 8,
+    "last_workload_end_wib": "2026-10-27T19:14:30.091702+07:00",
+    "battery_started_after_last_workload_end_s": 213.995047,
+    "statement": "No workload measurement/warmup overlaps logged power loss. Backup restore run 2 tail and run 3, plus all pgbench runs are environmentally confounded; quantified causal slowdown is not established."
+  },
+  "limitations": [
+    "CPU/RAM samples are sparse and not battery-state, clock-frequency, thermal or power-plan telemetry.",
+    "No CPU/resource samples exist during confirmed incident; do not substitute zeros or earlier samples.",
+    "Kernel events 506/507 at 19:18:06/19:18:52 describe a Modern Standby session; SleepEntered=false and SleepDurationInUs=0, so do not infer a 46-second CPU suspension.",
+    "Original timing/error/integrity metrics retained; no run dropped, median changed, workload or restore repeated."
+  ]
+}
