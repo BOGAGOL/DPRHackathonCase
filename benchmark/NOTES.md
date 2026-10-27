@@ -447,3 +447,87 @@ Tidak mengubah konfigurasi PG, role, container, atau Windows power plan.
 Kode persiapan diuji dengan42 unit/regression test benchmark, termasuk
 preservasi histori, pengalihan path, AC fail-closed, dan kedua fase tanpa
 memanggil baseline_run. Hasil aktual sesi pengganti dicatat setelah selesai.
+
+## Hasil pengukuran pengganti AC — 27 Oktober 2026
+
+Sesi **ac_20261027T150728Z**, kode dibekukan sebelum pengukuran pada
+`748fa0d71d66079244c17161f13a7dd426b80449`. Mulai **22:07:28.750794 WIB**,
+selesai **22:20:39.155968 WIB**, sekitar13 menit10 detik termasuk validasi.
+Backup/restore beserta validasi531,400s; fase pgbench255,208s.
+**Hanya dua fase yang diotorisasi dijalankan ulang. Workload21 run tidak diulang**
+karena hasil audit menunjukkan tidak terdampak gangguan baterai.
+
+Backup/restore baseline_1m, container pg-dpr PG18, pg_dump custom plaintext,
+restore ke database sementara baru dengan opsi/batas timer yang sama:
+
+| Run | Awal backup–akhir restore WIB | Backup s | Restore s | Hasil validasi |
+|---|---|---:|---:|---|
+| 1 | 22:08:35.123652–22:10:06.684122 | 35.934644 | 55.625860 | 1M baris, seluruh checksum dan sequence sesuai |
+| 2 | 22:11:11.972877–22:12:32.760057 | 33.390723 | 47.396286 | 1M baris, seluruh checksum dan sequence sesuai |
+| 3 | 22:13:38.874611–22:14:34.855416 | 26.955186 | 29.024110 | 1M baris, seluruh checksum dan sequence sesuai |
+| **Median** | | **33.390723** | **47.396286** | **3/3 lulus** |
+
+Dump setiap run150.429.543 byte; ketiga database sementara dan dump privat
+run ini sudah dihapus setelah validasi. Pemeriksaan katalog mengonfirmasi
+0 database sementara milik sesi tersisa; snapshot generation tetap ada.
+Baseline1M dan sumber734 cocok checksum generation; sequence tidak berubah.
+
+Pgbench baseline_100k:8 client/thread, prepared, seed42,60s + warmup10s terpisah
+per run, tanpa TLS, pool2048 key asli dan script identik hash dengan sesi lama:
+
+| Run | Jendela proses terukur WIB | p50 ms | p95 ms | sukses/s | Error |
+|---|---|---:|---:|---:|---:|
+| 1 | 22:16:40.597029–22:17:40.878233 | 0.100 | 0.167 | 43932.214572 | 0 |
+| 2 | 22:18:02.060135–22:19:02.278123 | 0.099 | 0.158 | 49205.763924 | 0 |
+| 3 | 22:19:22.078500–22:20:22.306722 | 0.098 | 0.154 | 50908.947023 | 0 |
+| **Median** | | **0.099** | **0.158** | **49205.763924** | **0** |
+
+Mean latency median0,163ms. Baseline100k count/checksum/sequence tidak berubah;
+24 raw log baru tervalidasi hash dan seluruh catatan transaksi diperiksa runner,
+log sementara container dan script lookup privat sesi dibersihkan. Sample
+CPU Python100k/1M pada crosscheck tetap berasal dari workload asli yang tidak
+diulang, diberi scope eksplisit sebagai historis, bukan telemetry pgbench baru.
+
+Verifikasi daya **22:07:29.007393–22:20:37.003082 WIB** mencakup seluruh tahap
+timed dan validasi: **414 sample/guard, semuanya AC=true**, collector tanpa
+error. Kernel-Power105 terakhir sebelum mulai: record**27381** pada
+**21:56:57.699292 WIB**, AC=true; **0 event sumber daya berubah** dan
+**0 event AC=false** di seluruh jendela. Pemeriksaan log juga dilakukan saat
+sesi berlangsung. Hasil lengkap: power_verification.json; CSV sampling2s dan
+JSON seluruh sample/guard di raw lokal. Ini bukti OS/log selama sesi, bukan
+pengukuran gangguan listrik yang tidak tercatat oleh OS.
+
+Pemilihan hasil aktif berikut menggantikan angka sekunder lama; tidak mencampur
+run dari dua sesi, tidak membuang run lambat atau mengulang lagi:
+
+| Metrik | Sesi lama, bundle "terdampak baterai" | Sesi AC pengganti, aktif |
+|---|---:|---:|
+| Median backup1M s | 23.389305 | **33.390723** |
+| Median restore1M s | 27.942557 | **47.396286** |
+| Pgbench p50 ms | 0.094 | **0.099** |
+| Pgbench p95 ms | 0.142 | **0.158** |
+| Pgbench sukses/s | 53661.138857 | **49205.763924** |
+
+Angka pengganti lebih lambat; hasil3 run diterima apa adanya dengan AC terverifikasi.
+Ini dua sesi berbeda, tanpa telemetry frekuensi/thermal/cache untuk mengisolasi
+penyebab selisih; tidak menyimpulkan AC menyebabkan perlambatan atau baterai
+mempercepat. Rasio pgbench/Python100k sekarang **26,8112x** (sebelumnya29,2389x),
+tetap deskriptif dengan batas transport/driver/validasi yang dijelaskan sebelumnya.
+P01–P03 protected/API tetap BELUM DIUJI; tidak memakai data ini sebagai target baru.
+
+Ringkasan aktif: evidence/benchmark/active_measurements.json; canonical
+baseline_1m/backup_restore.json, backup_restore/runs.csv dan crosscheck_pgbench.json
+memuat sesi AC. summary.json/env.json diberi pointer pengganti;7 median workload
+dan CSV/JSON21 run asli **tidak berubah**. session_1m_crosscheck.json mempertahankan
+riwayat sesi awal dan menandai dua fase yang digantikan. Hasil lama tersimpan
+byte-identik dengan manifest label **"terdampak baterai"** di
+evidence/benchmark/history/battery_affected_ac_20261027T150728Z/;24 raw log pgbench
+lama diperiksa ulang hash, tidak dihapus/dipindah. Reproduksi audit gangguan lama
+memakai pointer arsip meski canonical sekarang telah diganti.
+
+Evidence sesi: evidence/benchmark/replacements/ac_20261027T150728Z/.
+Raw baru: results/bench/replacements/ac_20261027T150728Z/.
+final_validation.json mengonfirmasi arsip,42 test sebelum pengukuran, hash raw
+lama/baru, preservasi workload21/targets/ground truth,0 artefak sementara milik
+sesi, checksum generation, serta verifikasi AC. Sisa disk setelah sesi sekitar
+59,59GB desimal. Tidak ada retry, perubahan role/config, atau benchmark lain.

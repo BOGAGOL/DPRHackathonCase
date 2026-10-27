@@ -1,0 +1,21 @@
+{
+  "label": "terdampak baterai",
+  "superseded_by_session": "ac_20261027T150728Z",
+  "archived_at_utc": "2026-10-27T15:07:30.339145+00:00",
+  "label_scope": "Original session bundle; backup R1 did not overlap, restore R2 tail and R3 did; all original pgbench runs were on battery",
+  "files_byte_identical_to_pre_replacement": {
+    "baseline_1m/backup_restore.json": "4e417c92a586c1552a8d196be8a4fd6ad9f996bbfa988b42b55ea5cf1f5e0d5e",
+    "baseline_1m/backup_restore/runs.csv": "3d0d537e3cf419c31deaffbe2be260a45c20c3d0a3331c13ca50689256f97dc4",
+    "crosscheck_pgbench.json": "628dbb0019de92693cc0cc45d2367f72713e128a60b3d1e2065113a0a76fac8d",
+    "baseline_1m/env.json": "efb348066e06e648b6e750d5b8dbd9042e91290c9fd4f8f0a66342c259596944",
+    "baseline_1m/summary.json": "abb85f1f6bba301b795b3895763db254f27b910675092253f84be05a1798fbbf",
+    "session_1m_crosscheck.json": "277f049c5ee85979373a9e7b2575aa60e0935e37d04ae19144d4866e0a383a5c",
+    "baseline_1m/power_incident.json": "19c253f2a8bd17b53f9a1fbfaa0914c738b1abaa6a0f07ecb14735a6ecd021dd",
+    "baseline_1m/power_events.json": "19c6bbdfda6334e707ebf5713766377b0e75d9e287354ed88905831330243bbf"
+  },
+  "raw_retained_in_place": [
+    "results/bench/before_1m/backup_restore/",
+    "results/bench/crosscheck_pgbench/"
+  ],
+  "source_commit": "748fa0d71d66079244c17161f13a7dd426b80449"
+}
