@@ -7,6 +7,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+import shutil
 
 import psycopg
 from psycopg.conninfo import conninfo_to_dict
@@ -18,6 +19,21 @@ from datagen.model import COLUMNS, checksum
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "results/bench/before"
 EVIDENCE = ROOT / "evidence/benchmark/baseline"
+BASELINE_ROWS = {"baseline_100k": 100000, "baseline_1m": 1000000}
+
+
+def session_paths(database):
+    if database not in BASELINE_ROWS:
+        raise ValueError("Baseline dataset not authorized")
+    return ((RAW, EVIDENCE) if database == "baseline_100k" else
+            (ROOT / "results/bench/before_1m", ROOT / "evidence/benchmark/baseline_1m"))
+
+
+def require_disk_space(path=ROOT, minimum_bytes=10_000_000_000):
+    free = shutil.disk_usage(path).free
+    if free < minimum_bytes:
+        raise ValueError("Insufficient disk space: minimum 10 GB required")
+    return free
 
 
 def utc_now():
@@ -32,9 +48,9 @@ def parameters(database="baseline_100k", admin=False):
     params = conninfo_to_dict(value)
     if (params.get("host"), params.get("port")) != ("127.0.0.1", "5433"):
         raise ValueError("Only authorized pg-dpr endpoint allowed")
-    if not admin and (database != "baseline_100k" or params.get("user") != "bench_user"):
-        raise ValueError("Workload must use bench_user on baseline_100k")
-    if admin and database not in {"postgres", "baseline_100k"} and not database.startswith("bench_restore_"):
+    if not admin and (database not in BASELINE_ROWS or params.get("user") != "bench_user"):
+        raise ValueError("Workload must use bench_user on an authorized baseline")
+    if admin and database not in {"postgres", *BASELINE_ROWS} and not database.startswith("bench_restore_"):
         raise ValueError("Administrative database target denied")
     params.update(dbname=database, sslmode="disable", connect_timeout=10,
                   application_name="dpr-baseline-benchmark", options="-c statement_timeout=10000")

@@ -1,0 +1,69 @@
+{
+  "status": "PASSED",
+  "started_at_utc": "2026-10-27T05:41:19.875689+00:00",
+  "database": "baseline_1m",
+  "rows_requested": 1000000,
+  "seed": 42,
+  "benchmarks_run": false,
+  "durations_seconds": {
+    "generate_including_full_validation": 182.87876620001043,
+    "independent_full_validation": 78.87413340000785,
+    "provision_and_role_checks": 0.42862379999132827,
+    "snapshot": 25.128086900003836,
+    "total": 300.12288779999653
+  },
+  "checks": {
+    "retained_100k_checksum_before_matches": true,
+    "generation_and_validation_passed": true,
+    "independent_full_validation_passed": true,
+    "role_checks_passed": true,
+    "bench_grants_match_100k": true,
+    "scanner_role_actual_select_passed": true,
+    "snapshot_archive_list_verified": true,
+    "retained_100k_unchanged": true,
+    "retained_100k_sequence_unchanged": true,
+    "first_100k_identical": true,
+    "sequence_1m_correct": true
+  },
+  "generator_version": "1.0.0",
+  "code_commit": "8986fd183652f7c5b1ad55a928ae3c1a42388a43",
+  "datagen_worktree_dirty": false,
+  "targets_commit": "a412ce8e4c1045c72cdf2e77af6bfe77a7ef5b5f",
+  "targets_committed_at_wib": "2026-10-27T12:39:29+07:00",
+  "snapshot_bytes": 150429543,
+  "database_size_bytes": 801609407,
+  "table_total_bytes": 793616384,
+  "table_heap_bytes": 508624896,
+  "index_bytes": 284819456,
+  "storage": {
+    "host_c": {
+      "total_bytes": 510680625152,
+      "used_bytes": 505106567168,
+      "free_bytes": 5574057984
+    },
+    "docker_filesystem": {
+      "total_bytes": 1081101176832,
+      "used_bytes": 46677594112,
+      "free_bytes": 979431227392,
+      "note": "Virtual filesystem capacity; physical Windows C: free space is the host limit."
+    }
+  },
+  "finished_at_utc": "2026-10-27T05:46:19.998899+00:00",
+  "environment": {
+    "container": "pg-dpr",
+    "host": "127.0.0.1",
+    "port": 5433,
+    "postgresql_major": 18,
+    "sslmode": "disable",
+    "instance_configuration_changed": false,
+    "containers_started_or_stopped": false,
+    "private_dir_from_env": "DPR_PRIVATE_DIR"
+  },
+  "commands": [
+    "python -m datagen --rows 1000000 --seed 42 --target-db baseline_1m",
+    "python -m datagen validate --db baseline_1m --rows 1000000",
+    "python -m datagen provision --db baseline_1m",
+    "python -m datagen snapshot --db baseline_1m --out <DPR_PRIVATE_DIR>/baseline_1m.dump"
+  ],
+  "execution_method": "Same datagen Python functions used by CLI; additional read-only checks and per-stage timing in operator wrapper."
+}

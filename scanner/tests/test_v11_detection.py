@@ -10,7 +10,7 @@ def identities():
     return ["4783921056" + f"{9700 + i:04d}" for i in range(24)]
 
 
-@pytest.mark.parametrize("column", ["ktp", "no_ktp", "nik", "nomor_kependudukan"])
+@pytest.mark.parametrize("column", ["ktp", "no_ktp", "nik", "nomor_kependudukan", "noKTP", "nomorNIK"])
 def test_nonstandard_nik_requires_content(column, config, environment):
     row, f = classify(column, identities(), config, environment)
     assert name_scores(column)["nik"] == 100
@@ -36,6 +36,13 @@ def test_anonymous_nonstandard_identifier_stays_review(config, environment):
     assert row["triage"] == "needs_review"
 
 
+@pytest.mark.parametrize("width", [14, 15, 18])
+def test_anonymous_fixed_digits_do_not_confirm_tax_or_national_identity(width, config, environment):
+    values = ["047839210569".ljust(width - 2, "7") + f"{i:02d}" for i in range(24)]
+    row, _ = classify("col_01", values, config, environment)
+    assert (row["detected_type"], row["triage"]) == ("identifier_lain", "needs_review")
+
+
 def test_bank_context_does_not_overrule_valid_named_nik(config, environment):
     values = [f"317401{i + 1:02d}0690{9700 + i:04d}" for i in range(24)]
     row, _ = classify("nik", values, config, environment, bank_context=True)
@@ -58,6 +65,25 @@ def test_low_cardinality_is_category(column, values, config, environment):
     assert row["detected_type"] == "kategori"
     assert f["unique_count"] <= 20 or f["unique_ratio"] < 0.2
     assert f["type_content_scores"]["nama"] == 0
+
+
+@pytest.mark.parametrize("column,values", [
+    ("nama_bank", ["Bank BNI", "Bank BRI", "Bank BCA"] * 10),
+    ("nama_kppn", ["KPPN Imajinasi", "KPPN Rekaan"] * 10),
+])
+def test_institution_category_requires_content_evidence(column, values, config, environment):
+    row, f = classify(column, values, config, environment)
+    assert (row["detected_type"], row["pdp_class"]) == ("kategori", "non_pribadi")
+    assert f["institution_reference"]
+    assert "asosiasi dengan individu" in row["reason"]
+    unknown, _ = classify(column, ["Zafira Arunika", "Nayaka Rekaan"] * 10, config, environment)
+    assert unknown["pdp_class"] == "umum"
+
+
+def test_regex_only_does_not_use_relations_or_names(synthetic, config, environment):
+    inventory, features, relations = analyze([synthetic], config, environment, baseline=True)
+    assert not relations["derived_from"] and not relations["dependencies"]
+    assert all(row["name_score"] == 0 and not row["derived_from"] for row in inventory)
 
 
 def test_above_both_cardinality_cutoffs_can_be_person_name(config, environment):

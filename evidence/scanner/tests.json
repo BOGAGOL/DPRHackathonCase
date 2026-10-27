@@ -1,0 +1,13 @@
+{
+  "status": "PASSED",
+  "tested_code_commit": "12e4064a399c2eef26e043c8de8a39c566f093be",
+  "recorded_at_utc": "2026-10-27T07:45:21.555770+00:00",
+  "command": ".\\scanner\\.venv\\Scripts\\python.exe -m pytest scanner/tests -q --junitxml=results/scanner/step4-tests.xml",
+  "tests": 188,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "junit_sha256": "901c6138ce99975a34df485ab6a25b891d69d89fecf055877a752c89fce1dd0f",
+  "pytest": "8.4.2",
+  "integration": "SCANNER_TEST_DATABASE_URL supplied; effective role scanner_user, read-only source snapshot; no writes"
+}

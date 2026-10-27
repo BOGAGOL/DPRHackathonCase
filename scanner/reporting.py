@@ -79,7 +79,9 @@ def analyze(tables, config, environment, baseline=False):
             row.update(table=table.name, column=column, data_type=table.data_types[index])
             inventory.append(row)
             all_features[(table.name, column)] = f
-    rels = relationships(tables, inventory, config)
+    rels = (relationships(tables, inventory, config) if not baseline else {
+        "derived_from": [], "dependencies": [], "join_candidates": [], "near_unique_quasi_identifiers": [],
+        "scope": "regex_only: classification only; relational analysis skipped"})
     return inventory, all_features, rels
 
 

@@ -1,0 +1,30 @@
+{
+  "started_at_utc": "2026-10-27T11:31:33.148823+00:00",
+  "code_commit": "cfd703b8080a1c7bd6b574779e6e8e1dc9441a32",
+  "phases": {
+    "baseline_1m": {
+      "status": "PASSED",
+      "elapsed_s": 2611.943399900003
+    },
+    "backup_restore_1m": {
+      "status": "PASSED",
+      "elapsed_s": 358.35531450000417
+    },
+    "raw_audit_compression": {
+      "status": "PASSED",
+      "runs": 21,
+      "original_bytes": 133678973,
+      "gzip_bytes": 28953920
+    },
+    "crosscheck_pgbench": {
+      "status": "PASSED",
+      "elapsed_s": 277.48774460000277
+    }
+  },
+  "automatic_retries": 0,
+  "scanner_phase_after_benchmarks": true,
+  "docker_readiness": "Docker Desktop initially inactive; started once, then started existing pg-dpr once; readiness verified before work.",
+  "finished_at_utc": "2026-10-27T12:26:07.327016+00:00",
+  "host_free_bytes": 68154273792,
+  "status": "PASSED"
+}

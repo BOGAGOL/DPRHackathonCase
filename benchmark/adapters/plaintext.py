@@ -9,7 +9,7 @@ from psycopg import sql
 from psycopg.rows import dict_row
 
 from datagen.model import COLUMNS, UNIQUE, generate
-from ..common import parameters, private_directory, file_hash
+from ..common import BASELINE_ROWS, parameters, private_directory, file_hash
 
 SELECT = sql.SQL("SELECT {} FROM public.anggota ").format(sql.SQL(",").join(map(sql.Identifier, COLUMNS)))
 INSERT = sql.SQL("INSERT INTO public.anggota ({}) OVERRIDING SYSTEM VALUE VALUES ({}) RETURNING {}").format(
@@ -18,12 +18,14 @@ INSERT = sql.SQL("INSERT INTO public.anggota ({}) OVERRIDING SYSTEM VALUE VALUES
 DATES = ("tanggal_lahir", "tanggal_pernikahan")
 
 
-def load_keys(manifest, concurrency):
+def load_keys(manifest, concurrency, database="baseline_100k"):
     """One fixed corpus retained outside repo for later plain/protected comparisons."""
-    path = private_directory() / "baseline_100k_keys_v1.json"
+    if database not in BASELINE_ROWS:
+        raise ValueError("Key corpus database not authorized")
+    path = private_directory() / (database + "_keys_v1.json")
     if not path.exists():
         rng = random.Random(manifest["seed"])
-        with psycopg.connect(**parameters(), row_factory=dict_row) as conn:
+        with psycopg.connect(**parameters(database), row_factory=dict_row) as conn:
             identifiers = [r["id"] for r in conn.execute("SELECT id FROM public.anggota ORDER BY id")]
             chosen = rng.sample(identifiers[:-1], min(manifest["key_pool"] - 1, len(identifiers) - 1)) + [identifiers[-1]]
             source = conn.execute(SELECT + sql.SQL("WHERE id = ANY(%s) ORDER BY id"), (chosen,)).fetchall()
@@ -48,12 +50,13 @@ def load_keys(manifest, concurrency):
                     break
             if templates is None:
                 raise ValueError("Synthetic insert namespace collision")
-        payload = {"version": 1, "seed": manifest["seed"], "concurrency": concurrency,
+        payload = {"version": 1, "database": database, "seed": manifest["seed"], "concurrency": concurrency,
                    "profiles": source, "pages": pages, "insert_templates": templates}
         with path.open("x", encoding="utf-8") as handle:
             json.dump(payload, handle, default=str, ensure_ascii=False)
     payload = json.loads(path.read_text(encoding="utf-8"))
-    if payload["seed"] != manifest["seed"] or payload["concurrency"] != concurrency:
+    if (payload["seed"] != manifest["seed"] or payload["concurrency"] != concurrency
+            or payload.get("database", "baseline_100k") != database):
         raise ValueError("Existing key corpus parameters differ")
     for row in payload["profiles"] + payload["insert_templates"]:
         for col in DATES:
@@ -64,11 +67,12 @@ def load_keys(manifest, concurrency):
 
 
 class PlaintextAdapter:
-    def __init__(self, keys):
+    def __init__(self, keys, database="baseline_100k"):
         self.keys = keys
+        self.database = database
 
     def connect(self):
-        return psycopg.connect(**parameters(), autocommit=True, prepare_threshold=5)
+        return psycopg.connect(**parameters(self.database), autocommit=True, prepare_threshold=5)
 
     def execute(self, conn, operation, index, worker):
         row = self.keys["profiles"][index % len(self.keys["profiles"])]

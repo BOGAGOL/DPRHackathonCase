@@ -1,0 +1,262 @@
+{
+  "evaluation_stage": "raw_before_human_review",
+  "in_sample": true,
+  "method": "combined",
+  "scanner_version": "1.0.0",
+  "is_personal_rule": "pdp_class != non_pribadi (including low_confidence)",
+  "regex_only_rule": null,
+  "precision": 0.896551724137931,
+  "recall": 1.0,
+  "f1": 0.9454545454545454,
+  "f2": 0.9774436090225563,
+  "detected_type_accuracy": 0.7586206896551724,
+  "pdp_class_accuracy": 0.8620689655172413,
+  "confusion_matrix": {
+    "tp": 26,
+    "fp": 3,
+    "fn": 0,
+    "tn": 0
+  },
+  "detected_type_confusion_matrix": {
+    "nama": {
+      "nama": 4
+    },
+    "kategori": {
+      "kategori": 1,
+      "operasional": 1,
+      "nama": 2,
+      "identifier_lain": 1
+    },
+    "tempat_lahir": {
+      "tempat_lahir": 1
+    },
+    "tanggal_lahir": {
+      "tanggal_lahir": 1
+    },
+    "tanggal_pernikahan": {
+      "tanggal_lahir": 1
+    },
+    "nik": {
+      "identifier_lain": 1
+    },
+    "alamat": {
+      "alamat": 2
+    },
+    "telepon": {
+      "telepon": 3
+    },
+    "email": {
+      "email": 1
+    },
+    "identifier_lain": {
+      "operasional": 1,
+      "identifier_lain": 2
+    },
+    "status_perkawinan": {
+      "status_perkawinan": 1
+    },
+    "keluarga": {
+      "keluarga": 3
+    },
+    "rekening": {
+      "rekening": 1
+    },
+    "npwp": {
+      "npwp": 1
+    },
+    "agama": {
+      "agama": 1
+    }
+  },
+  "pdp_class_confusion_matrix": {
+    "umum": {
+      "umum": 24,
+      "spesifik": 1
+    },
+    "spesifik": {
+      "spesifik": 1
+    },
+    "non_pribadi": {
+      "umum": 3
+    }
+  },
+  "false_positive": [
+    {
+      "table": "public.anggota",
+      "column": "nama_kppn"
+    },
+    {
+      "table": "public.anggota",
+      "column": "nama_bank"
+    },
+    {
+      "table": "public.anggota",
+      "column": "kode_bank"
+    }
+  ],
+  "false_negative": [],
+  "missing_predictions": [],
+  "mismatches": [
+    {
+      "table": "public.anggota",
+      "column": "tanggal_pernikahan",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "tanggal_pernikahan",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "tanggal_lahir",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "no_ktp",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "nik",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "identifier_lain",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "pekerjaan_terakhir",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "kategori",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "operasional",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "ruangan",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "identifier_lain",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "operasional",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "jumlah_anak",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "keluarga",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "keluarga",
+        "pdp_class": "spesifik"
+      },
+      "fields": [
+        "pdp_class"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "nama_kppn",
+      "expected": {
+        "is_personal": false,
+        "detected_type": "kategori",
+        "pdp_class": "non_pribadi"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "nama",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal",
+        "detected_type",
+        "pdp_class"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "nama_bank",
+      "expected": {
+        "is_personal": false,
+        "detected_type": "kategori",
+        "pdp_class": "non_pribadi"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "nama",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal",
+        "detected_type",
+        "pdp_class"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "kode_bank",
+      "expected": {
+        "is_personal": false,
+        "detected_type": "kategori",
+        "pdp_class": "non_pribadi"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "identifier_lain",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal",
+        "detected_type",
+        "pdp_class"
+      ]
+    }
+  ],
+  "unmapped_labels": [],
+  "all_labels_mapped": true,
+  "truth_rows": 29,
+  "prediction_rows": 30,
+  "evaluated_prediction_rows": 29,
+  "unlabelled_predictions": [
+    {
+      "table": "public.anggota",
+      "column": "id"
+    }
+  ],
+  "unlabelled_predictions_excluded": true,
+  "input_sha256": {
+    "predictions": "443064a25c9367e2d69ae6ee55e3499008005daf2fcfffc81fbf11a8b2d2293d",
+    "ground_truth": "e741e3f6874f154d2e4b7a71a5810dfacc97ad6d2954a766b3fb8dabf6607f77",
+    "label_map": "3aefa415c087f358a5063a02d39bca7fb9c278ca32c49f53d4d20b091e22a1ed"
+  },
+  "evaluator_code_commit": "12e4064a399c2eef26e043c8de8a39c566f093be",
+  "evaluated_at_utc": "2026-10-27T07:45:21.505576+00:00"
+}

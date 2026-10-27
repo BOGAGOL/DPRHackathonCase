@@ -34,7 +34,7 @@ def test_all_operations_semantics_and_forced_rollback(source):
 
 
 def test_connect_uses_env_and_prepared_statements(monkeypatch):
-    monkeypatch.setattr(plain, "parameters", lambda: {"dbname": "baseline_100k"})
+    monkeypatch.setattr(plain, "parameters", lambda *a: {"dbname": "baseline_100k"})
     connect = MagicMock()
     monkeypatch.setattr(plain.psycopg, "connect", connect)
     plain.PlaintextAdapter({}).connect()
@@ -55,7 +55,7 @@ def test_existing_private_keys_dates_and_config_guard(monkeypatch, tmp_path, sou
 
 def test_new_corpus_is_exclusive_and_queries_are_bound(monkeypatch, tmp_path, source):
     monkeypatch.setattr(plain, "private_directory", lambda: tmp_path)
-    monkeypatch.setattr(plain, "parameters", lambda: {})
+    monkeypatch.setattr(plain, "parameters", lambda *a: {})
     conn = MagicMock()
     conn.__enter__.return_value = conn
     first = MagicMock(); first.__iter__.return_value = iter({"id":r["id"]} for r in source)
