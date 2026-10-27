@@ -291,3 +291,124 @@ lama sudah mempunyai db_time. Belum diaktifkan pada sesi ini.
 Rujukan primer untuk interpretasi: [PostgreSQL 18 cumulative statistics](https://www.postgresql.org/docs/18/monitoring-stats.html),
 [pg_stat_statements](https://www.postgresql.org/docs/18/pgstatstatements.html),
 [Psycopg concurrent connections](https://www.psycopg.org/psycopg3/docs/advanced/async.html).
+
+## Audit gangguan sumber daya sesi 1M — 27 Oktober 2026
+
+Tambahan informasi pengguna: charger sempat dicabut sekitar satu menit, waktunya
+diingat berada di sekitar **19:00–19:21 WIB**. Ini diperlakukan sebagai rentang
+ketidakpastian waktu kejadian, bukan pemadaman selama 21 menit. Pemeriksaan hanya
+membaca file hasil lama dan System event log Windows; **tidak ada benchmark,
+diagnostik request DB, backup atau restore yang diulang**.
+
+`Get-WinEvent`, provider `Microsoft-Windows-Kernel-Power`, event **105** memberi
+bukti yang lebih tepat:
+
+- Record **26748**: AC=true **18:15:35.383355 WIB**; tidak ada event AC=false
+  berikutnya sampai 19:18:04. Seluruh pengukuran workload 1M berada di antaranya.
+- Record **27150**: AC=false **19:18:04.086749 WIB**.
+- Record **27177**: AC=true **19:27:03.460341 WIB**.
+- Interval baterai menurut log: **539,374 detik (8 menit 59,374 detik)**.
+  Angka ini berbeda dari ingatan durasi sekitar satu menit; keduanya dicatat,
+  tidak mengganti timestamp log dengan perkiraan pengguna. Windows memakai
+  SE Asia Standard Time; evidence menyimpan UTC dan +07:00.
+- Event 506/507 pada 19:18:06.113 / 19:18:52.245 mencatat sesi Modern Standby
+  sekitar 46,132 detik. Payload exit menyatakan **SleepEntered=false**,
+  SleepDurationInUs=0 dan DripsResidencyInUs=0; **tidak menyimpulkan CPU/VM
+  berhenti selama 46 detik** hanya dari judul event.
+
+Waktu berikut adalah **measurement**, WIB, tanggal 27 Oktober; warmup 10 detik
+sebelumnya tidak dihitung. Akhir = started_at_utc + elapsed_s, termasuk drain
+worker; completed_at_utc adalah bookkeeping sesudah measurement. Rentang
+berikut ditampilkan hingga detik; CSV/JSON mempertahankan subdetik.
+
+| Skenario | Run 1 | Run 2 | Run 3 |
+|---|---|---|---|
+| read_by_nik | 18:34:40–18:35:40 | 18:37:11–18:38:11 | 18:39:40–18:40:40 |
+| read_by_email | 18:41:58–18:42:58 | 18:44:10–18:45:10 | 18:46:00–18:47:00 |
+| read_profile | 18:47:49–18:48:49 | 18:49:39–18:50:39 | 18:51:29–18:52:29 |
+| list_page | 18:53:20–18:54:20 | 18:55:09–18:56:09 | 18:56:59–18:57:59 |
+| update_contact | 18:58:47–18:59:47 | 19:00:37–19:01:37 | 19:02:28–19:03:28 |
+| insert_member | 19:04:17–19:05:17 | 19:06:06–19:07:06 | 19:07:55–19:08:55 |
+| mixed | 19:09:44–19:10:44 | 19:11:37–19:12:37 | 19:13:30–19:14:30 |
+
+**Tidak satu pun dari 21 measurement/warmup beririsan dengan interval baterai
+yang tercatat.** Measurement terakhir selesai **19:14:30.091702**, yaitu
+**213,995 detik sebelum** AC=false. P95 NIK yang tinggi pada 18:34–18:40 dan
+email run 1 pada 18:41 tidak disebabkan oleh kejadian AC=false 19:18 ini.
+Ini bukan bukti semua penyebab variasi kinerja sudah diketahui.
+
+Delapan run yang masuk rentang ingatan 19:00–19:21: update_contact 2/3,
+insert_member 1/2/3, mixed 1/2/3. Perbandingan dengan run lain dalam skenario
+yang sama (run 1 update di luar rentang juga ditampilkan):
+
+| Skenario/run | p50 ms | p95 ms | sukses/s | CPU client median % satu inti | CPU DB median % satu inti |
+|---|---:|---:|---:|---:|---:|
+| update_contact 1 | 5.4326 | 8.9152 | 1339.961 | 131.00 | 139.44 |
+| update_contact 2 | 5.5822 | 9.5792 | 1301.950 | 129.35 | 131.99 |
+| update_contact 3 | 5.6225 | 10.7153 | 1241.546 | 122.25 | 136.77 |
+| insert_member 1 | 9.1135 | 13.8392 | 825.969 | 129.30 | 84.565 |
+| insert_member 2 | 9.0368 | 13.5223 | 838.627 | 130.55 | 85.435 |
+| insert_member 3 | 9.2498 | 13.6529 | 822.739 | 127.75 | 88.36 |
+| mixed 1 | 3.9324 | 11.5776 | 1481.665 | 126.25 | 95.62 |
+| mixed 2 | 4.0812 | 12.3140 | 1400.017 | 120.25 | 103.975 |
+| mixed 3 | 3.8358 | 11.1521 | 1539.665 | 129.10 | 93.16 |
+
+Contoh variasi terhadap median dua peer: update run 3 p95 +15,88%, throughput
+-6,01%; mixed run 2 p95 +8,35%, throughput -7,32%. Insert relatif stabil
+(p95 13,5223–13,8392 ms). Semua masih AC menurut urutan event, jadi variasi
+ini **tidak dapat diatribusikan pada unplug 19:18**. Seluruh perbandingan
+persentase 21 run dan median/peak CPU/RAM ada di power_run_timeline.csv/JSON.
+
+Ada **129 sampel resource** pada delapan run dalam rentang ingatan, tanpa
+sampling gagal; last sample timestamp **19:14:30.030438**. Client RSS peak
+sekitar 58,5–61,5 MB desimal, DB RAM peak sekitar 826,8–1051,7 MB pada delapan
+run tersebut. CPU % satu inti dapat >100 karena multi-thread; persen kapasitas
+mesin dibagi 8. Collector tidak mencatat AC state, frekuensi CPU atau temperatur.
+**Tidak ada sampel CPU/RAM benchmark saat interval baterai yang terkonfirmasi**;
+backup/pgbench tidak punya collector setara. Tidak mengisi data itu dengan nol
+atau memakai sampel lebih awal seolah-olah berasal dari waktu kejadian.
+
+### Fase sesudah workload yang benar-benar beririsan
+
+| Backup/restore | Mulai WIB | Backup s | Restore s | Paparan baterai saat pengukuran |
+|---|---|---:|---:|---|
+| Run 1 | 19:15:42.857930 | 23.389305 | 28.247456 | Tidak |
+| Run 2 | 19:17:15.416273 | 24.110519 | 27.942557 | Sekitar 3,383 s terakhir restore, sampai sekitar 19:18:07.469349 |
+| Run 3 | 19:19:10.229176 | 21.587495 | 24.076759 | Seluruh backup dan restore, sampai sekitar 19:19:55.893430 |
+
+Batas tahap backup/restore diturunkan dari start + durasi monotonic; overhead
+peralihan tidak punya timestamp terpisah, sehingga overlap 3,383 s adalah
+perkiraan, bukan presisi event log. Run 3 justru lebih cepat; ini tidak
+membuktikan baterai mempercepat, atau bahwa pengaruh daya nol. Run 2 juga
+beririsan dengan awal sesi event 506/507 saat restore/validasi; tidak dapat
+memisahkan pengaruh screen/power/OS dari durasi saja. Validasi count/checksum/
+sequence tiga restore tetap lulus; **kualifikasi lingkungan untuk timing run 2/3
+ditandai ENVIRONMENT_DEVIATION**, tanpa menghapus data atau mengubah median.
+
+Ketiga run pgbench pada baseline_100k juga seluruhnya berada pada baterai.
+Batas ini dibaca dari first/last transaction completion di log tiap thread,
+bukan timestamp file atau asumsi lama proses:
+
+| pgbench | Jendela transaksi WIB | p50 / p95 ms | sukses/s |
+|---|---|---:|---:|
+| Run 1 | 19:21:46.446443–19:22:46.440369 | 0.100 / 0.163 | 45550.193 |
+| Run 2 | 19:23:08.034076–19:24:08.044026 | 0.094 / 0.142 | 53736.931 |
+| Run 3 | 19:24:39.815275–19:25:39.812920 | 0.092 / 0.139 | 53661.139 |
+
+Run 1 lebih lambat dari run 2/3, tetapi ketiganya sama-sama pada baterai; tidak
+bisa menyatakan perbedaannya disebabkan transisi AC. Semua 0 error. **Perbandingan
+pgbench vs Python baseline 100k memiliki confound tambahan: baterai vs AC**.
+Rasio 29,24× tetap angka deskriptif hasil lama, tidak boleh dipakai mengisolasi
+overhead Python atau dianggap perbandingan dengan kondisi daya yang sama.
+
+Evidence: power_events.json, power_incident.json, power_run_timeline.csv dalam
+evidence/benchmark/baseline_1m/. Metadata env, per-run, summary, backup_restore,
+session dan crosscheck diberi post_run_power_audit; flag charger=true asli
+dipertahankan sebagai **observasi preflight/laporan awal**, bukan verifikasi AC
+kontinu. Status PASSED lama berarti uji eksekusi/integritas lulus; tidak menghapus
+catatan ketidaksesuaian lingkungan. Raw dan seluruh nilai metrik asli dipertahankan.
+Keputusan pengulangan menunggu pengguna; tidak ada pengulangan otomatis.
+
+Analisis offline baru diuji dengan **5 unit test sintetis**, termasuk batas overlap,
+timezone, resource unavailable, waktu log pgbench, dan pelestarian metrik ketika
+metadata ditambah. Tidak menjalankan ulang suite benchmark/dataset atau test DB.

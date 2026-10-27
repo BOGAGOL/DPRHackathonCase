@@ -59,3 +59,18 @@ Keluaran 1M: results/bench/before_1m/ dan evidence/benchmark/baseline_1m/.
 Pgbench memakai custom script via stdin; kunci tidak masuk argv/repo. Tidak ada
 inisialisasi pgbench atau tabel baru pada baseline. Raw transaksi tanpa kunci berada
 di results/bench/crosscheck_pgbench/; file sementara container dibersihkan setelah disalin.
+## Audit gangguan daya dari hasil yang sudah ada
+
+```powershell
+.\benchmark\inspect_power_events.ps1
+.\benchmark\.venv\Scripts\python.exe -m benchmark.power_incident
+.\benchmark\.venv\Scripts\python.exe -m pytest benchmark/tests/test_power_incident.py -q
+```
+
+Khusus audit retrospektif 27 Oktober 2026: membaca System/Kernel-Power dan raw
+resource/log pgbench lokal yang sudah ada, lalu menambahkan kualifikasi metadata.
+Tidak menjalankan workload, query DB, backup/restore, atau start/stop container.
+Perintah terakhir hanya unit test analisis dengan fixture sintetis. Hasil:
+`evidence/benchmark/baseline_1m/power_events.json`, `power_incident.json`,
+`power_run_timeline.csv`. Lihat NOTES.md untuk interval baterai yang terkonfirmasi
+dan batas penilaian dampak. File raw harus tersedia di mesin yang menjalankan audit.

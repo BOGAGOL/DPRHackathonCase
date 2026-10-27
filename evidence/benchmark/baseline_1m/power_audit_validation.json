@@ -1,0 +1,31 @@
+{
+  "status": "PASSED",
+  "timestamp_utc": "2026-10-27T14:06:43.112073+00:00",
+  "tests": {
+    "command": ".\\benchmark\\.venv\\Scripts\\python.exe -m pytest benchmark/tests/test_power_incident.py -q",
+    "passed": 5,
+    "fixtures": "synthetic only; no DB/workload execution"
+  },
+  "original_fields_preserved": {
+    "evidence/benchmark/baseline_1m/env.json": true,
+    "evidence/benchmark/baseline_1m/run_summaries.json": true,
+    "evidence/benchmark/baseline_1m/summary.json": true,
+    "evidence/benchmark/baseline_1m/backup_restore.json": true,
+    "evidence/benchmark/crosscheck_pgbench.json": true,
+    "evidence/benchmark/session_1m_crosscheck.json": true
+  },
+  "official_workloads_rerun": 0,
+  "db_diagnostics_rerun": 0,
+  "backup_restore_rerun": 0,
+  "analysis_sources_sha256": {
+    "benchmark/inspect_power_events.ps1": "d9f9315ed7b00bc9e730cfcfd68a130429269ebbbd6d959f4f9de0bea4c0c234",
+    "benchmark/power_incident.py": "cd34ea317a8f741bbcfe419c9eaa582ede1855f015642b159ee7feca327b38b4",
+    "benchmark/tests/test_power_incident.py": "9cdf0ab5e87e6a20f88539a777f1dacc32c3ba0ff34ebe603a3822b111208c01"
+  },
+  "confirmed_workload_overlap_count": 0,
+  "metadata_original_values_git_commit": "de80b2104cf264418c2275394138bbe2fd2a1e94",
+  "recorded_resource_samples": 335,
+  "samples_in_user_uncertain_window": 129,
+  "samples_in_confirmed_battery_interval": 0,
+  "raw_preservation": "Files opened for read only; no raw CSV/log, dataset, snapshot or credential file written by this audit."
+}

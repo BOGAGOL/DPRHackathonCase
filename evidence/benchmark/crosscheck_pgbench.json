@@ -92,7 +92,8 @@
     "pgbench C client does not materialize Python objects or validate each row; Python runner does.",
     "Container TCP and Windows Docker port path differ; delta cannot isolate Python overhead alone.",
     "Balanced CASE lookup and lpad restore the fixed 14-digit key; these add small client/server work.",
-    "CPU percentages describe utilization, not proof excluding GIL/client bottlenecks."
+    "CPU percentages describe utilization, not proof excluding GIL/client bottlenecks.",
+    "Retrospective Kernel-Power audit: all pgbench runs on battery, while original Python baseline ran on AC; power conditions not matched."
   ],
   "reference": "https://www.postgresql.org/docs/18/pgbench.html",
   "data_and_sequence_unchanged": true,
@@ -134,5 +135,51 @@
     "peak_percent_machine": 17.9875,
     "sampled_machine_cpu_saturation_observed": false,
     "bottleneck_assessment": "Whole-machine client CPU was not saturated in samples; GIL/single-core, transport, or client overhead not isolated."
+  },
+  "post_run_power_audit": {
+    "recorded_at_utc": "2026-10-27T14:02:21.663257+00:00",
+    "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+    "confirmed_battery_interval": {
+      "start_wib": "2026-10-27T19:18:04.0867490+07:00",
+      "end_wib": "2026-10-27T19:27:03.4603409+07:00",
+      "unplug_record_id": 27150,
+      "replug_record_id": 27177,
+      "duration_s": 539.373591
+    },
+    "verification_scope": "Historical charger=true was a preflight observation/user report, not continuous AC telemetry",
+    "no_rerun_no_metrics_removed": true,
+    "performance_qualification": "ENVIRONMENT_DEVIATION: all three pgbench runs on battery vs original Python baseline on AC; ratio is descriptive, not a controlled Python-overhead estimate",
+    "transaction_time_windows": [
+      {
+        "run": 1,
+        "first_transaction_complete_wib": "2026-10-27T19:21:46.446443+07:00",
+        "last_transaction_complete_wib": "2026-10-27T19:22:46.440369+07:00",
+        "observed_transaction_span_battery_overlap_s": 59.993926,
+        "p50_ms": 0.1,
+        "p95_ms": 0.163,
+        "throughput_rps": 45550.192501,
+        "errors": 0
+      },
+      {
+        "run": 2,
+        "first_transaction_complete_wib": "2026-10-27T19:23:08.034076+07:00",
+        "last_transaction_complete_wib": "2026-10-27T19:24:08.044026+07:00",
+        "observed_transaction_span_battery_overlap_s": 60.00995,
+        "p50_ms": 0.094,
+        "p95_ms": 0.142,
+        "throughput_rps": 53736.930748,
+        "errors": 0
+      },
+      {
+        "run": 3,
+        "first_transaction_complete_wib": "2026-10-27T19:24:39.815275+07:00",
+        "last_transaction_complete_wib": "2026-10-27T19:25:39.812920+07:00",
+        "observed_transaction_span_battery_overlap_s": 59.997645,
+        "p50_ms": 0.092,
+        "p95_ms": 0.139,
+        "throughput_rps": 53661.138857,
+        "errors": 0
+      }
+    ]
   }
 }

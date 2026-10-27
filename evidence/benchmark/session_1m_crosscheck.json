@@ -26,5 +26,19 @@
   "docker_readiness": "Docker Desktop initially inactive; started once, then started existing pg-dpr once; readiness verified before work.",
   "finished_at_utc": "2026-10-27T12:26:07.327016+00:00",
   "host_free_bytes": 68154273792,
-  "status": "PASSED"
+  "status": "PASSED",
+  "post_run_power_audit": {
+    "recorded_at_utc": "2026-10-27T14:02:21.663257+00:00",
+    "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+    "confirmed_battery_interval": {
+      "start_wib": "2026-10-27T19:18:04.0867490+07:00",
+      "end_wib": "2026-10-27T19:27:03.4603409+07:00",
+      "unplug_record_id": 27150,
+      "replug_record_id": 27177,
+      "duration_s": 539.373591
+    },
+    "verification_scope": "Historical charger=true was a preflight observation/user report, not continuous AC telemetry",
+    "no_rerun_no_metrics_removed": true,
+    "qualification": "Workload 1M has no recorded overlap; later backup/restore and pgbench were not continuously on AC. PASSED denotes original integrity/execution checks."
+  }
 }
