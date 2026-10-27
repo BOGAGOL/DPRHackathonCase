@@ -44,3 +44,21 @@ def test_runtime_parameters_environment_and_local_dpapi(tmp_path, monkeypatch):
         assert cli.runtime_parameters("protected_734", role, True)["password"] == secret
     with pytest.raises(RotationError): cli.runtime_parameters("protected_734", "admin_user")
     with pytest.raises(RotationError): cli.runtime_parameters("protected_734", "bad")
+
+
+def test_atomic_report_retries_transient_windows_file_lock(tmp_path, monkeypatch):
+    from pathlib import Path
+    original = Path.replace; calls = []
+    def transient(self, target):
+        calls.append(1)
+        if len(calls)<3: raise PermissionError()
+        return original(self, target)
+    monkeypatch.setattr(Path, "replace", transient)
+    monkeypatch.setattr(cli.time, "sleep", lambda seconds: None)
+    path = tmp_path/"rotation.json"
+    cli.write_report(path, {"target_version": 2})
+    assert len(calls) == 3 and json.loads(path.read_text())["target_version"] == 2
+    assert not list(tmp_path.glob("*.tmp"))
+    monkeypatch.setattr(Path, "replace", lambda *a: (_ for _ in ()).throw(PermissionError()))
+    with pytest.raises(PermissionError): cli.write_report(path, {"target_version": 3})
+    assert json.loads(path.read_text())["target_version"] == 2 and not list(tmp_path.glob("*.tmp"))

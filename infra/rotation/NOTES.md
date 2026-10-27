@@ -43,6 +43,11 @@
   bersifat ambigu; metadata/custodian menentukan versi resume. Rewrap memakai
   versi tujuan eksplisit, CAS dan checkpoint setelah batch commit. Partial progress
   tetap aman karena OpenBao mempertahankan versi lama; resume wajib versi yang sama.
+- Penulisan checkpoint atomik memakai bounded retry untuk PermissionError Windows
+  ketika antivirus/pembaca sedang membuka file laporan. Retry hanya mengganti
+  file JSON, tidak mengulang rotasi OpenBao atau transaksi DB yang sudah commit.
+  Temporary report dibersihkan pada kegagalan; perilaku transient/permanent file
+  lock diuji dengan fault injection.
 - Jendela maintenance diperlukan untuk bukti before/after yang stabil. Advisory
   lock melindungi coordinator yang memakai protocol ini pada DB yang sama, bukan
   seluruh key plane lintas cluster. Penulisan aplikasi/rotasi operator lain dapat

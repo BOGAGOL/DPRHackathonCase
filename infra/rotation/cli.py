@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
+import time
 from uuid import uuid4
 
 from infra.postgres.credentials import load_password
@@ -36,7 +37,18 @@ def write_report(path, report):
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name+"."+uuid4().hex+".tmp")
     temporary.write_text(json.dumps(report, indent=2, sort_keys=True)+"\n", encoding="utf-8")
-    temporary.replace(path)
+    try:
+        # Windows scanners/readers can briefly deny replacement of the canonical
+        # report. Never repeat a committed key/DB operation just to retry this IO.
+        for attempt in range(10):
+            try:
+                temporary.replace(path)
+                break
+            except PermissionError:
+                if attempt == 9: raise
+                time.sleep(0.01*(attempt+1))
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 def main(argv=None):
@@ -68,9 +80,9 @@ def main(argv=None):
         print(json.dumps({"passed": report.get("passed"), "status": report.get("status", "prepared"),
             "target_version": report.get("target_version"), "report": str(path)}))
         return 0 if success else 1
-    except (Exception, KeyboardInterrupt):
+    except (Exception, KeyboardInterrupt) as error:
         # Preserve checkpoint/target after partial commit or ambiguous rotation.
-        report.update(passed=False, status="failed", error="rotation_failed_details_withheld")
+        report.update(passed=False, status="failed", error="rotation_failed_details_withheld", error_type=type(error).__name__)
         write_report(path, report)
         print(json.dumps({"passed": False, "error": "rotation_failed_details_withheld",
             "target_version": report.get("target_version"), "report": str(path),
