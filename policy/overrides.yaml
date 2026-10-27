@@ -1,0 +1,34 @@
+protection_version: 1
+reference_date: '2026-10-01'
+age_band_width: 10
+decision_source: docs/contracts/CONTRACT.md#3
+columns:
+  nama: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Identitas langsung; kontrak mempertahankan nama sebagai AEAD, bukan hash.'}
+  nama_lengkap: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Scanner menyarankan minimisasi karena nama turunan; kontrak mewajibkan retain dan AEAD.'}
+  nama_tanpa_gelar: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Relasi turunan nama dicatat sebagai kandidat minimisasi; kolom tetap disimpan sesuai kontrak.'}
+  jenis_kelamin: {domain: null, aead: false, bidx: false, normalization: null, analyst_projection: jenis_kelamin, reason: 'REF untuk analisis agregat; risiko kombinasi atribut diuji k-anonymity oleh Modul C.'}
+  tempat_lahir: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Quasi-identifier yang dapat mengidentifikasi bersama tanggal lahir; AEAD domain PII.'}
+  tanggal_lahir: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: age_band, reason: 'Tanggal asli AEAD; analis hanya mendapat age_band dekade pada reference_date yang dibekukan.'}
+  tanggal_pernikahan: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Informasi keluarga; AEAD, NULL sumber dipertahankan sebagai kebocoran yang diterima.'}
+  no_ktp: {domain: PII, aead: true, bidx: true, normalization: ascii_digits_preserve_leading_zero, analyst_projection: null, reason: 'Identifier berentropi rendah; AEAD dan exact lookup HMAC, nol awal tidak dipotong.'}
+  pekerjaan_terakhir: {domain: null, aead: false, bidx: false, normalization: null, analyst_projection: pekerjaan_terakhir, reason: 'REF sesuai kontrak; override rekomendasi encrypt scanner untuk kegunaan agregat, residual diuji.'}
+  alamat_jakarta: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Alamat pribadi; AEAD tanpa blind index karena tidak ada exact lookup yang disepakati.'}
+  alamat_daerah: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Alamat dan ketergantungan tempat lahir tetap sensitif; AEAD PII.'}
+  telpon_jakarta: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Kontak pribadi; AEAD, tidak membuat indeks pencarian tambahan.'}
+  telpon_daerah: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Kontak pribadi; AEAD PII sesuai kontrak.'}
+  handphone: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Kontak pribadi; enkripsi diperlukan, frekuensi tidak dibocorkan lewat bidx tambahan.'}
+  email: {domain: PII, aead: true, bidx: true, normalization: strip_lower, analyst_projection: null, reason: 'Identitas/kontak; lookup exact diperlukan, HMAC dengan strip+lower seluruh email sesuai v1.'}
+  ruangan: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Scanner menandai operasional tetapi nilai menghubungkan identitas/email/pengguna; AEAD PII.'}
+  status_kawin: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Data keluarga; tidak masuk proyeksi analis per-record.'}
+  jumlah_anak: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Data keluarga; angka diserialisasi desimal lalu AEAD, bukan hash tanpa kunci.'}
+  jumlah_tanggungan: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Informasi keluarga dan relasinya dilindungi dalam domain PII.'}
+  jumlah_jiwa: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Ketergantungan pada jumlah tanggungan tidak membuat nilai aman; tetap AEAD PII.'}
+  rekening: {domain: FIN, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Keuangan pribadi; AEAD FIN, override blind index scanner karena lookup rekening tidak disepakati.'}
+  nama_rekening: {domain: FIN, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Nama pemilik rekening tetap dipertahankan untuk finance walau turunan nama; AEAD FIN, bukan delete.'}
+  npwp: {domain: FIN, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Identifier pajak pribadi; AEAD FIN, tanpa blind index tambahan.'}
+  kode_bank: {domain: FIN, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Keputusan tim: hampir unik dan kombinasi REF mengidentifikasi seluruh sumber; masuk FIN, bukan REF.'}
+  nama_kppn: {domain: null, aead: false, bidx: false, normalization: null, analyst_projection: nama_kppn, reason: 'Nilai institusi REF sesuai keputusan tim; override deteksi nama scanner, residual kombinasi diuji.'}
+  nama_bank: {domain: null, aead: false, bidx: false, normalization: null, analyst_projection: nama_bank, reason: 'Nama institusi REF; tidak menyimpan kode_bank sebagai plaintext, tetap diuji k-anonymity.'}
+  nip_kppn: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Identifier pribadi; AEAD PII, blind index scanner tidak diterapkan karena tidak ada kebutuhan lookup.'}
+  pengguna: {domain: PII, aead: true, bidx: true, normalization: strip_case_sensitive, analyst_projection: null, reason: 'Pencocokan anggota memakai HMAC domain pengguna dengan strip case-sensitive, nilai asli AEAD.'}
+  agama: {domain: PII, aead: true, bidx: false, normalization: null, analyst_projection: null, reason: 'Data pribadi umum menurut PDP dan berisiko tinggi; AEAD PII, tidak diproyeksikan ke analis.'}

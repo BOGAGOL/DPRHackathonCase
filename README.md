@@ -223,3 +223,11 @@ Sumber `postgres`/734 baris tetap hanya dibaca. Snapshot/credential berada di lu
 Target yang disahkan sebelum benchmark: [docs/targets.md](docs/targets.md), dengan bukti commit
 di [evidence/targets_commit.json](evidence/targets_commit.json). Benchmark baru dan restore drill
 Modul C dijalankan pada langkah berikutnya, setelah baseline tervalidasi.
+
+## Policy dan skema protected (Modul A, tahap 3)
+
+Profile dari inventory scanner dan override kontrak: [policy/NOTES.md](policy/NOTES.md).
+Penerapan skema/role ke `pg-dpr:5433` dan handoff Service App:
+[sql/protected/NOTES.md](sql/protected/NOTES.md),
+[sql/roles/NOTES.md](sql/roles/NOTES.md). Tahap ini menyiapkan database protected;
+migrasi data dijalankan pada tahap berikutnya.

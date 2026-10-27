@@ -1,0 +1,18 @@
+{
+  "test_only": true,
+  "description": "Synthetic authorization labels; no passwords or source dataset values. Used only in disposable tests, never seeded into migration targets.",
+  "principals": [
+    {"user_id": "151c3bf7-b2df-42ae-9ab1-5c97e3fb6720", "username": "synthetic-officer-a", "role": "privileged_officer"},
+    {"user_id": "5a6d2e19-d7e0-418c-b279-9a9c867fd357", "username": "synthetic-officer-b", "role": "operator"}
+  ],
+  "records": [
+    {"anggota_id": "3f6c26a1-b458-4a21-945c-d8606ce967a1", "legacy_row_id": 1},
+    {"anggota_id": "8b994f83-5f14-4d56-80fd-197d95b8b924", "legacy_row_id": 2}
+  ],
+  "scopes": [
+    {"principal": "151c3bf7-b2df-42ae-9ab1-5c97e3fb6720", "anggota_id": "3f6c26a1-b458-4a21-945c-d8606ce967a1", "permission": "read", "source_label": "synthetic"},
+    {"principal": "151c3bf7-b2df-42ae-9ab1-5c97e3fb6720", "anggota_id": "3f6c26a1-b458-4a21-945c-d8606ce967a1", "permission": "update", "source_label": "synthetic"},
+    {"principal": "151c3bf7-b2df-42ae-9ab1-5c97e3fb6720", "anggota_id": null, "permission": "insert", "source_label": "synthetic"},
+    {"principal": "5a6d2e19-d7e0-418c-b279-9a9c867fd357", "anggota_id": "8b994f83-5f14-4d56-80fd-197d95b8b924", "permission": "read", "source_label": "synthetic"}
+  ]
+}

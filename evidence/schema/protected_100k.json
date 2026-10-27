@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "database": "protected_100k",
+  "data_migrated": false,
+  "checked_at_utc": "2026-10-27T05:04:23.763430+00:00",
+  "checks": {
+    "ciphertext_columns": true,
+    "no_plaintext_pii_fin": true,
+    "blind_index_columns": true,
+    "analyst_projection_only": true,
+    "rls_enabled_and_forced": true,
+    "roles_not_privileged": true,
+    "owner_nologin": true,
+    "service_logins": true
+  },
+  "row_counts": {
+    "anggota_protected": 0,
+    "app_users": 0,
+    "access_scope": 0,
+    "audit_log": 0
+  },
+  "profile_sha256": "a9bed9349c7d2bd599f9f6c7b40ca8cf510d5ab6c6d38fbb1efd0cebce76bc01"
+}
