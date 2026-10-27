@@ -1,0 +1,54 @@
+{
+  "status": "PASSED",
+  "code_commit": "d60e5ccb407a5f734362857b6f9270db9e5deab8",
+  "checked_at_utc": "2026-10-27T12:37:18.323669+00:00",
+  "source_unchanged": true,
+  "source_checksum_sha256": "5113038953aea9383f600de725b4267ecbf93de47c2a603a68bde6ad7e5c17e8",
+  "ground_truth_methodology_and_v1_unchanged": true,
+  "functional_count_v1_1": 13,
+  "functional_count_v1_2": 6,
+  "all_functional_consistency_exact": true,
+  "all_functional_sources_unique_ratio_le_0_8": true,
+  "near_unique_columns": 18,
+  "required_address_relation": {
+    "table": "public.anggota",
+    "kind": "text_component",
+    "source": "alamat_daerah",
+    "target": "tempat_lahir",
+    "component": "last_comma_segment",
+    "ratio": 1.0,
+    "compared_rows": 734,
+    "basis": "matched extracted component; no inference from unique full source values"
+  },
+  "required_presence_relation": {
+    "table": "public.anggota",
+    "kind": "presence_iff_category",
+    "source": "status_kawin",
+    "target": "tanggal_pernikahan",
+    "category_masked": "<1 huruf>",
+    "ratio": 1.0,
+    "compared_rows": 734
+  },
+  "privacy_complete_values_checked": 10645,
+  "privacy_full_value_matches": 0,
+  "privacy_scope": "Exact values >=6 chars excluding stated reference columns, scanner outputs only; not an S06 system-wide result",
+  "tests": {
+    "tests": 194,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "junit_sha256": "4534f17b01e56ce6bc341f4b3d980980500989e31ce9dead94a9da3bb982b318",
+  "temporary_restore_databases_remaining": 0,
+  "temporary_restore_dumps_remaining": 0,
+  "retained_100k_unchanged": true,
+  "evaluation": {
+    "precision": 0.9629629629629629,
+    "recall": 1.0,
+    "f1": 0.9811320754716981,
+    "f2": 0.9923664122137404,
+    "detected_type_accuracy": 0.896551724137931,
+    "pdp_class_accuracy": 0.9655172413793104
+  },
+  "host_free_bytes": 68138373120
+}

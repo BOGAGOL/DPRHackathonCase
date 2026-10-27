@@ -1,0 +1,25 @@
+{
+  "status": "PASSED",
+  "checked_at_utc": "2026-10-27T07:37:01.655305+00:00",
+  "database": "postgres",
+  "host": "127.0.0.1",
+  "port": 5433,
+  "rows": 734,
+  "postgresql": "18.6 (Debian 18.6-1.pgdg13+2)",
+  "login_role": "postgres",
+  "effective_role": "scanner_user",
+  "transaction_read_only": "on",
+  "role_credentials_changed": false,
+  "authentication_note": "Existing authorized lab admin credential; startup role=scanner_user restricts effective session. Scanner login password unavailable; not rotated.",
+  "source_checksum_sha256": "5113038953aea9383f600de725b4267ecbf93de47c2a603a68bde6ad7e5c17e8",
+  "immutable_files_sha256": {
+    "scanner/ground_truth_eval.csv": "e741e3f6874f154d2e4b7a71a5810dfacc97ad6d2954a766b3fb8dabf6607f77",
+    "docs/ground_truth_methodology.md": "675f70b6ae421780b0b07a93279205e973a38a0c78d4b55a1133cf92cb52db27",
+    "evidence/scanner/before_v1/inventory.csv": "443064a25c9367e2d69ae6ee55e3499008005daf2fcfffc81fbf11a8b2d2293d",
+    "evidence/scanner/before_v1/k_anonymity.json": "3d642cdaa8a692e16411adbda45c363ecb5335576fc20786b0a2698912251e28",
+    "evidence/scanner/before_v1/relations.json": "b87b37cb28a8e4c36024a3bf75a83ee230f8022054bd4bc454ec79844ec7c924",
+    "evidence/scanner/before_v1/run_meta.json": "7638bcc73010d89ddaba23c79d716661c85922456ee22920fe635be01e0760f6"
+  },
+  "benchmarks_run": false,
+  "scope": "Only 734-row source; no scan of baseline_100k or baseline_1m."
+}

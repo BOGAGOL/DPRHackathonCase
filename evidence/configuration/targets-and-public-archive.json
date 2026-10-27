@@ -1,0 +1,10 @@
+{
+  "status": "PASSED",
+  "p01_p03_rows_identical_to_original": true,
+  "target_history_entries": 2,
+  "original_target_entry_preserved": true,
+  "actual_git_archive_excludes_dataset": true,
+  "scope": "Target and packaging checks, no benchmark or S06 content scan",
+  "all_17_target_threshold_cells_unchanged": true,
+  "checked_at_utc": "2026-10-27T05:44:11.290742+00:00"
+}

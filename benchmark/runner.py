@@ -128,8 +128,8 @@ def one_run(adapter, scenario, run, manifest, concurrency, duration, warmup, dir
             conn.close()
 
 
-def environment(manifest, config, before, corpus):
-    with psycopg.connect(**parameters()) as conn:
+def environment(manifest, config, before, corpus, database="baseline_100k"):
+    with psycopg.connect(**parameters(database)) as conn:
         tls = conn.execute("SELECT ssl FROM pg_stat_ssl WHERE pid=pg_backend_pid()").fetchone()[0]
         version = conn.execute("SHOW server_version").fetchone()[0]
         settings = dict(conn.execute("SELECT name,setting FROM pg_settings WHERE name=ANY(%s)",
@@ -149,7 +149,7 @@ def environment(manifest, config, before, corpus):
     docker_version = subprocess.run(["docker", "version", "--format", "{{.Server.Version}}"],
                                     capture_output=True, text=True, check=True).stdout.strip()
     return {"session_kind": "baseline_awal", "separate_from_paired_B_P_P_B": True, "level": "DB",
-            "adapter": "plain", "endpoint": "127.0.0.1:5433", "database": "baseline_100k", "tls": False,
+            "adapter": "plain", "endpoint": "127.0.0.1:5433", "database": database, "tls": False,
             "started_at_utc": utc_now(),
             "started_at_wib": datetime.now(timezone(timedelta(hours=7))).isoformat(),
             **provenance(), "benchmark_version": __version__,
@@ -163,17 +163,20 @@ def environment(manifest, config, before, corpus):
                           "memory_limit_bytes": inspect["HostConfig"]["Memory"], "nano_cpus": inspect["HostConfig"]["NanoCpus"]},
             "running_containers": running_containers(), "power_plugged_verified": battery.power_plugged if battery else None,
             "active_power_scheme": power,
-            "user_reported_conditions": {"charger": True, "power_mode": "Best performance", "no_heavy_apps": True,
+            "user_reported_conditions": {"charger": True, "power_mode": "Best performance", "no_heavy_apps": "not independently verified this session",
                                          "other_containers_stopped": True},
-            "team_decision": {"all_databases": "pg-dpr:5433 (baseline_100k, protected_734, protected_100k)",
+            "team_decision": {"all_databases": "pg-dpr:5433 (baseline_100k, baseline_1m, protected datasets)",
                               "openbao": "infra/compose.yaml Modul A", "excluded": ["optional PostgreSQL 5434", "root Compose PostgreSQL 17"]},
             "targets": {"DB_P01_P03": "BELUM DIUJI: protected adapter not measured", "API_P01_P03": "BELUM DIUJI"}}
 
 
-def baseline_run(runs=3, duration=60, concurrency=8, warmup=10, scenario="all"):
+def baseline_run(runs=3, duration=60, concurrency=8, warmup=10, scenario="all", database="baseline_100k"):
     if runs < 3 or min(duration, concurrency, warmup) <= 0:
         raise ValueError("At least three runs and positive timings/concurrency required")
-    if (RAW / "env.json").exists():
+    from .common import BASELINE_ROWS, session_paths, require_disk_space
+    raw, evidence = (RAW, EVIDENCE) if database == "baseline_100k" else session_paths(database)
+    disk_free = require_disk_space() if database == "baseline_1m" else None
+    if (raw / "env.json").exists():
         raise ValueError("Existing baseline session; refusing overwrite")
     if running_containers() != ["pg-dpr"]:
         raise ValueError("Expected only pg-dpr running")
@@ -181,43 +184,46 @@ def baseline_run(runs=3, duration=60, concurrency=8, warmup=10, scenario="all"):
     scenarios = manifest["scenarios"] if scenario == "all" else [scenario]
     if any(s not in manifest["scenarios"] for s in scenarios):
         raise ValueError("Unknown scenario")
-    expected = json.loads((ROOT / "evidence/datasets/baseline_100k.json").read_text(encoding="utf-8"))
-    before = state()
-    if before["rows"] != 100000 or before["checksum_sha256"] != expected["baseline_checksum_sha256"]:
+    expected = json.loads((ROOT / "evidence/datasets" / (database + ".json")).read_text(encoding="utf-8"))
+    before = state(database)
+    if before["rows"] != BASELINE_ROWS[database] or before["checksum_sha256"] != expected["baseline_checksum_sha256"]:
         raise ValueError("Baseline differs from validated generation")
     source_before = checksum(source_rows())
-    keys, corpus = load_keys(manifest, concurrency)
-    adapter = PlaintextAdapter(keys)
+    keys, corpus = load_keys(manifest, concurrency, database)
+    adapter = PlaintextAdapter(keys, database)
     # Untimed functional probe for every worker and operation, plus rollback/sequence proof.
     for worker in range(concurrency):
         with adapter.connect() as conn:
             for op in manifest["scenarios"][:-1]:
                 adapter.execute(conn, op, worker, worker)
-    if not same_data(before, state()):
+    if not same_data(before, state(database)):
         raise ValueError("Functional preflight altered dataset or sequence")
     config = dict(runs=runs, duration_s=duration, concurrency=concurrency, warmup_s=warmup, scenario=scenario)
-    meta = environment(manifest, config, before, corpus)
-    RAW.mkdir(parents=True, exist_ok=True)
-    write_json(RAW / "env.json", meta)
-    write_json(EVIDENCE / "env.json", meta)
+    meta = environment(manifest, config, before, corpus, database)
+    meta["disk_preflight_free_bytes"] = disk_free
+    raw.mkdir(parents=True, exist_ok=True)
+    write_json(raw / "env.json", meta)
+    write_json(evidence / "env.json", meta)
     summaries = []
     for name in scenarios:
         for run in range(1, runs + 1):
             if running_containers() != ["pg-dpr"]:
                 raise ValueError("Container environment changed during session")
             # Uniform maintenance on baseline only, outside measured/warmup windows.
-            with psycopg.connect(**parameters(admin=True), autocommit=True) as admin:
+            if database == "baseline_1m":
+                require_disk_space()
+            with psycopg.connect(**parameters(database, admin=True), autocommit=True) as admin:
                 admin.execute("VACUUM (ANALYZE) public.anggota")
             print(json.dumps({"phase": "starting", "scenario": name, "run": run, "at_utc": utc_now()}), flush=True)
-            result = one_run(adapter, name, run, manifest, concurrency, duration, warmup, RAW / name / f"run_{run}")
-            after = state()
+            result = one_run(adapter, name, run, manifest, concurrency, duration, warmup, raw / name / f"run_{run}")
+            after = state(database)
             result["dataset_after"] = after
             result["data_and_sequence_unchanged"] = same_data(before, after)
             result["telemetry_complete"] = result["resources"]["samples"] > 0 and result["resources"]["failed_samples"] == 0
             result["valid"] = result["data_and_sequence_unchanged"] and result["resources"]["samples"] > result["resources"]["failed_samples"]
             summaries.append(result)
-            write_json(RAW / "run_summaries.json", summaries)
-            write_json(EVIDENCE / "run_summaries.json", summaries)
+            write_json(raw / "run_summaries.json", summaries)
+            write_json(evidence / "run_summaries.json", summaries)
             print(json.dumps({"phase": "finished", "scenario": name, "run": run,
                 "p50_ms": result["p50_ms"], "p95_ms": result["p95_ms"], "throughput_rps": result["throughput_rps"],
                 "errors": result["errors"], "valid": result["valid"]}), flush=True)
@@ -229,7 +235,7 @@ def baseline_run(runs=3, duration=60, concurrency=8, warmup=10, scenario="all"):
         group = [r for r in summaries if r["scenario"] == name]
         metrics = {"scenario": name, "runs": runs, **medians(group),
                    "requests_total": sum(r["requests"] for r in group), "errors_total": sum(r["errors"] for r in group)}
-        for field in ("db_cpu_percent_one_core_median", "db_ram_bytes_peak", "client_cpu_percent_one_core_median", "client_ram_bytes_peak"):
+        for field in ("db_cpu_percent_one_core_median", "db_ram_bytes_peak", "client_cpu_percent_one_core_median", "client_cpu_percent_one_core_peak", "client_ram_bytes_peak"):
             values = [r["resources"].get(field) for r in group if r["resources"].get(field) is not None]
             metrics[field + "_between_runs"] = statistics.median(values) if values else None
         combined.append(metrics)
@@ -237,9 +243,9 @@ def baseline_run(runs=3, duration=60, concurrency=8, warmup=10, scenario="all"):
     result = {"status": status, "session_kind": "baseline_awal", "level": "DB", "adapter": "plain",
               "median_between_runs": combined, "source_database_unchanged": source_before == source_after,
               "source_checksum_sha256": source_after, "completed_at_utc": utc_now(),
-              "raw_requests_location": "results/bench/before/<scenario>/run_<n>/requests_worker_<n>.csv",
+              "database": database, "raw_requests_location": raw.relative_to(ROOT).as_posix() + "/<scenario>/run_<n>/requests_worker_<n>.csv",
               "target_comparison": "BELUM DIUJI: no protected or API measurements in initial baseline"}
-    for directory in (RAW, EVIDENCE):
+    for directory in (raw, evidence):
         write_json(directory / "summary.json", result)
         write_csv(directory / "summary.csv", combined)
         write_csv(directory / "run_summaries.csv", [{k: v for k, v in r.items() if not isinstance(v, dict)} for r in summaries])

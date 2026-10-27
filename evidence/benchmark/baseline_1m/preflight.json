@@ -1,0 +1,14 @@
+{
+  "status": "PASSED",
+  "checked_at_utc": "2026-10-27T11:31:33.468606+00:00",
+  "host_free_bytes": 68291584000,
+  "minimum_free_bytes": 10000000000,
+  "running_containers": [
+    "pg-dpr"
+  ],
+  "power_plugged_verified": true,
+  "user_reported_power_mode": "Best performance",
+  "initial_host_cpu_percent": 99.8,
+  "source_checksum_sha256": "5113038953aea9383f600de725b4267ecbf93de47c2a603a68bde6ad7e5c17e8",
+  "code_commit": "cfd703b8080a1c7bd6b574779e6e8e1dc9441a32"
+}

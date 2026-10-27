@@ -1,0 +1,26 @@
+{
+  "status": "PASSED",
+  "recorded_at_utc": "2026-10-27T05:44:11.346257+00:00",
+  "main_commit": "cf2d2ccd786066ad9ea3c56ec2999987feda73ac",
+  "method": "fetch; checkout main; pull --no-rebase; merge feature (fast-forward); push main; checkout feature; merge main; push feature",
+  "new_commits_from_origin_main": [],
+  "conflicts": [],
+  "tests": [
+    {
+      "command": ".\\datagen\\.venv\\Scripts\\python.exe -m pytest datagen/tests verify/tests -q",
+      "passed": 28,
+      "skipped": 0
+    },
+    {
+      "command": ".\\scanner\\.venv\\Scripts\\python.exe -m pytest scanner/tests -q",
+      "passed": 127,
+      "skipped": 1
+    },
+    {
+      "command": ".\\benchmark\\.venv\\Scripts\\python.exe -m pytest benchmark/tests -q",
+      "passed": 17,
+      "skipped": 0
+    }
+  ],
+  "benchmarks_run": false
+}

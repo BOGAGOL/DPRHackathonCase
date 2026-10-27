@@ -1,0 +1,62 @@
+{
+  "status": "PASSED",
+  "checked_at_utc": "2026-10-27T07:45:21.532848+00:00",
+  "code_commit": "12e4064a399c2eef26e043c8de8a39c566f093be",
+  "checks": {
+    "source_unchanged": true,
+    "ground_truth_and_methodology_unchanged": true,
+    "v1_artifacts_unchanged": true,
+    "a1_a8_real_output_checks": true,
+    "all_29_truth_columns_matched": true,
+    "no_unmapped_labels": true,
+    "surrogate_id_excluded_from_evaluation": true,
+    "full_source_values_not_exported_within_stated_scope": true,
+    "minimal_k_html_full_json": true,
+    "all_tests_passed_including_database": true
+  },
+  "source_checksum_sha256": "5113038953aea9383f600de725b4267ecbf93de47c2a603a68bde6ad7e5c17e8",
+  "source_rows": 734,
+  "priority_counts": {
+    "P2": 10,
+    "P1": 10,
+    "P0": 10
+  },
+  "priority_note": "Before environment volume=3,exposure=5,recovery=5 implies minimum score16/P2; P3 supported under other environments, not forced here.",
+  "k_anonymity": {
+    "total_combinations_json": 298,
+    "after_superset_filter": 232,
+    "html_max_rows": 15,
+    "reference_triple_unique_rows": 730,
+    "reference_triple_population": 734
+  },
+  "privacy_check": {
+    "distinct_complete_values_checked": 10645,
+    "minimum_value_length": 6,
+    "excluded_reference_columns": [
+      "agama",
+      "jenis_kelamin",
+      "kode_bank",
+      "nama_bank",
+      "nama_kppn",
+      "pekerjaan_terakhir",
+      "status_kawin"
+    ],
+    "full_value_matches": 0,
+    "limitation": "Exact complete-value check only; short values and inference are not ruled out. Masked prefixes intentionally remain."
+  },
+  "benchmarks_run": false,
+  "artifacts_sha256": {
+    "before_v1_1/features.json": "ce0a0f411241a002cc8b6808bcfcd94f92020ff07e01aacbcf22b490ad8f5ab2",
+    "before_v1_1/inventory.csv": "5f70eddb44a0df0b681c7df8205ecb7ff37a5e2bb282fcc7519d1a2e6b4992a7",
+    "before_v1_1/k_anonymity.json": "f757729127856830f9cf0befecceb9a7a1d1d0ed47114aa88df17f9e255401cb",
+    "before_v1_1/relations.json": "8fe0b99f04fc81733403dfcf5b558867a1588b8bcc0943def34b524081d6d7b4",
+    "before_v1_1/report.html": "db7f7282b94c13a8f6567b1fb152b7834c59849f6614b46b37d23f89a7771146",
+    "before_v1_1/run_meta.json": "ad039c49b06b03b694708fb01d880d95ea117d8fc6a32dd8fcdca345d14b1668",
+    "before_regex_only/features.json": "0bd89bd70c39323fcf0d59369fabad528f11895454104f1786824c784106090c",
+    "before_regex_only/inventory.csv": "5b683c575ab400887445e5ef40c1a00a891e04645467ae47955b6e7e1dcfa641",
+    "before_regex_only/k_anonymity.json": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+    "before_regex_only/relations.json": "fe5321d3a4021cf3656515572d50e8318c910998e8e39a1b91249e879c727ec4",
+    "before_regex_only/report.html": "ec51ed1e7ea61456d736391e18239f3eb87550119ff667bc5217d49d68210656",
+    "before_regex_only/run_meta.json": "993fa02654ba590d80ba02772fa8dc82f011432957abf35b1d085820f3b8c4d6"
+  }
+}

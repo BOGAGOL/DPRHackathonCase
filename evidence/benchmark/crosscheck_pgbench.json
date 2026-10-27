@@ -1,0 +1,138 @@
+{
+  "status": "PASSED",
+  "database": "baseline_100k",
+  "started_at_utc": "2026-10-27T12:21:35.952322+00:00",
+  "runs": [
+    {
+      "run": 1,
+      "requests": 2733031,
+      "errors": 0,
+      "throughput_rps": 45550.192501,
+      "mean_ms": 0.176,
+      "p50_ms": 0.1,
+      "p95_ms": 0.163,
+      "error_rate": 0.0,
+      "container_temporary_logs_removed": true,
+      "raw_sha256": {
+        "run_1/dpr_pgbench_57212f1821554679968629bda3f28c80_r1.628.1": "d1fcfd2bf5646312e001e1b34f5075184131747e6cbd06168cfc84a66936cf66",
+        "run_1/dpr_pgbench_57212f1821554679968629bda3f28c80_r1.628": "885bed9c760c512c92c255b8fb979567c12d311f94a44a48a0bc53a893def38a",
+        "run_1/dpr_pgbench_57212f1821554679968629bda3f28c80_r1.628.6": "a8b6337a03b2a9ea907eccbf9653b12b9ad47d0f55d86031906bca2294aa323d",
+        "run_1/dpr_pgbench_57212f1821554679968629bda3f28c80_r1.628.5": "16e1814ea6e8d3a5d9f85ae2ec560a1169f737c007fd6c73bc88f753a5ce3895",
+        "run_1/dpr_pgbench_57212f1821554679968629bda3f28c80_r1.628.7": "9f793003931b9c238871bdf35597a109a5faae16d28bdc5ba07fc471e6409f9f",
+        "run_1/dpr_pgbench_57212f1821554679968629bda3f28c80_r1.628.2": "9daa0782b403e657f7b7ab33d0bd201a691e566fa13188e4145a2acc94e18369",
+        "run_1/dpr_pgbench_57212f1821554679968629bda3f28c80_r1.628.3": "2e42b15d9cf03246dee930bf8086351323a7de4ec423caec6febe98d0c4ad723",
+        "run_1/dpr_pgbench_57212f1821554679968629bda3f28c80_r1.628.4": "63344b264a0bdfbd557abf06e2ae7f7f1639d59e209ad47980393f5dda41b9db"
+      }
+    },
+    {
+      "run": 2,
+      "requests": 3224904,
+      "errors": 0,
+      "throughput_rps": 53736.930748,
+      "mean_ms": 0.149,
+      "p50_ms": 0.094,
+      "p95_ms": 0.142,
+      "error_rate": 0.0,
+      "container_temporary_logs_removed": true,
+      "raw_sha256": {
+        "run_2/dpr_pgbench_4f6f4bc6aa8f4741a48c757cd037f959_r2.690.2": "c5a106acb699095ba80bced35d7b3335b2e67eac4b7b9490ccb893d54c07ddca",
+        "run_2/dpr_pgbench_4f6f4bc6aa8f4741a48c757cd037f959_r2.690.7": "14c84ac44c39c0c7276d386dbaa365321f023e5df6dcba5017802d316f4293f8",
+        "run_2/dpr_pgbench_4f6f4bc6aa8f4741a48c757cd037f959_r2.690.1": "9e9bcb28199c752cd4439cc8f13f5d05a83aed12a165821ccd15e41a87b2026a",
+        "run_2/dpr_pgbench_4f6f4bc6aa8f4741a48c757cd037f959_r2.690.3": "8056b4eae586e65e5c1f75fc049fe1da2665447dd024306ab07d606592bcb240",
+        "run_2/dpr_pgbench_4f6f4bc6aa8f4741a48c757cd037f959_r2.690.5": "50c0e505486b2f755c8f3b4d24d2a51e18baafa8159f8d011b3ca34eddaaf7d9",
+        "run_2/dpr_pgbench_4f6f4bc6aa8f4741a48c757cd037f959_r2.690": "ba193fadb861c506f73545576d777174dc12410a472d1f5f7fdd32c249f7a3fd",
+        "run_2/dpr_pgbench_4f6f4bc6aa8f4741a48c757cd037f959_r2.690.6": "634b12315fcf3201b6113a1bfba2b1c17b2f4ad002c4bcded056d2d91af3ba23",
+        "run_2/dpr_pgbench_4f6f4bc6aa8f4741a48c757cd037f959_r2.690.4": "b209dc232e2f0c6e8b529e0232f59e7ce7de0ba4f20a0e560cf0ffe2d1fd5f3c"
+      }
+    },
+    {
+      "run": 3,
+      "requests": 3219876,
+      "errors": 0,
+      "throughput_rps": 53661.138857,
+      "mean_ms": 0.149,
+      "p50_ms": 0.092,
+      "p95_ms": 0.139,
+      "error_rate": 0.0,
+      "container_temporary_logs_removed": true,
+      "raw_sha256": {
+        "run_3/dpr_pgbench_641bf3431dd24efeba4fd5a2e5d9b816_r3.752": "6963d258ae018ef5c910698d91d34b2c88f0a16cb4dcb19956a23c8211874080",
+        "run_3/dpr_pgbench_641bf3431dd24efeba4fd5a2e5d9b816_r3.752.4": "5858b5dd5661d2aa941a483ebe24eaab40b041ca512a9e908a4342681541e4db",
+        "run_3/dpr_pgbench_641bf3431dd24efeba4fd5a2e5d9b816_r3.752.2": "38960fbafe66643215bdb291e535188a8eb9cd95c39bc742dbf9a586a2cf44a8",
+        "run_3/dpr_pgbench_641bf3431dd24efeba4fd5a2e5d9b816_r3.752.5": "15d152dbb659e0af535d7f1ac60bf5afbd102aaeb3ae0adece9f23d5c6692ddc",
+        "run_3/dpr_pgbench_641bf3431dd24efeba4fd5a2e5d9b816_r3.752.1": "658b615c7650e20000379dbec0cb8395534cbcad8491c6eb0091243151e68f1e",
+        "run_3/dpr_pgbench_641bf3431dd24efeba4fd5a2e5d9b816_r3.752.3": "4e03e72f4d620210d10b1ebd785b0adc1c7977dc65a37eebd830ca4fb14853be",
+        "run_3/dpr_pgbench_641bf3431dd24efeba4fd5a2e5d9b816_r3.752.6": "039621deb758a7f144f3366d92b5d1953255fd7bafb816c9bf1722e97e879c1a",
+        "run_3/dpr_pgbench_641bf3431dd24efeba4fd5a2e5d9b816_r3.752.7": "479f6a95b26b3f82d7f568d875b10d105e0317a5d42c9ef7317e91f396bd368a"
+      }
+    }
+  ],
+  "parameters": {
+    "runs": 3,
+    "duration_s": 60,
+    "concurrency": 8,
+    "untimed_warmup_s": 10,
+    "protocol": "prepared"
+  },
+  "key_corpus": {
+    "version": 1,
+    "seed": 42,
+    "sha256": "b38b8f59819b1eee314fac75c510417f7945c8d1b9b4e52f95839bf865e92ea5",
+    "profile_count": 2048,
+    "page_count": 64,
+    "location": "DPR_PRIVATE_DIR/benchmark (not exported)"
+  },
+  "lookup_pool_matches_original_python": true,
+  "script_sha256": "07c33061f3f5f4df92cd33a9f85d93d0e3b604631aa5f6664469dcccb850efa1",
+  "script_location": "DPR_PRIVATE_DIR/benchmark; fed over stdin, no key material in argv/repo",
+  "transport": "pgbench in pg-dpr, TCP 127.0.0.1:5432, no TLS",
+  "python_transport": "Windows host TCP 127.0.0.1:5433 through Docker Desktop",
+  "comparability_limits": [
+    "Same 2048-key pool and full 30-column SELECT; PRNG stream differs.",
+    "pgbench C client does not materialize Python objects or validate each row; Python runner does.",
+    "Container TCP and Windows Docker port path differ; delta cannot isolate Python overhead alone.",
+    "Balanced CASE lookup and lpad restore the fixed 14-digit key; these add small client/server work.",
+    "CPU percentages describe utilization, not proof excluding GIL/client bottlenecks."
+  ],
+  "reference": "https://www.postgresql.org/docs/18/pgbench.html",
+  "data_and_sequence_unchanged": true,
+  "median_between_runs": {
+    "p50_ms": 0.094,
+    "p95_ms": 0.142,
+    "mean_ms": 0.149,
+    "throughput_rps": 53661.138857,
+    "error_rate": 0.0
+  },
+  "python_original_medians": {
+    "p50_ms": 3.806699998676777,
+    "p95_ms": 7.7970599988475415,
+    "mean_ms": 4.327668632085153,
+    "throughput_rps": 1835.2674459912614,
+    "error_rate": 0.0
+  },
+  "ratios_pgbench_over_python": {
+    "p50_ms": 0.024693303920107903,
+    "p95_ms": 0.018211992728155043,
+    "mean_ms": 0.03442962312209402,
+    "throughput_rps": 29.23886596158558
+  },
+  "private_temporary_script_removed": true,
+  "completed_at_utc": "2026-10-27T12:26:07.317019+00:00",
+  "pgbench_version": "pgbench (PostgreSQL) 18.6 (Debian 18.6-1.pgdg13+2)",
+  "code_commit": "cfd703b8080a1c7bd6b574779e6e8e1dc9441a32",
+  "python_original_code_commit": "776d420845d17ace5d96aacf702a17d7e562d0d4",
+  "python_original_client_cpu": {
+    "percent_one_core_median": 120.75,
+    "logical_cpus": 8,
+    "percent_machine_median": 15.09375
+  },
+  "baseline_1m_client_cpu_summary": {
+    "median_percent_machine_range": [
+      12.575,
+      16.16875
+    ],
+    "peak_percent_machine": 17.9875,
+    "sampled_machine_cpu_saturation_observed": false,
+    "bottleneck_assessment": "Whole-machine client CPU was not saturated in samples; GIL/single-core, transport, or client overhead not isolated."
+  }
+}

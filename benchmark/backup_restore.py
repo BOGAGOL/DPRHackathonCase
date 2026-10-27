@@ -22,17 +22,23 @@ def guard_restore(name):
     return name
 
 
-def backup_restore(runs=3, keep=False):
+def backup_restore(runs=3, keep=False, database="baseline_100k"):
     if runs < 3:
         raise ValueError("At least three backup/restore runs required")
-    if (RAW / "backup_restore/runs.csv").exists():
+    from .common import session_paths, require_disk_space
+    raw, evidence = (RAW, EVIDENCE) if database == "baseline_100k" else session_paths(database)
+    if database == "baseline_1m":
+        require_disk_space()
+    if (raw / "backup_restore/runs.csv").exists():
         raise ValueError("Existing backup session; refusing overwrite")
     if running_containers() != ["pg-dpr"]:
         raise ValueError("Expected only pg-dpr running")
-    before = state()
+    before = state(database)
     original = checksum(source_rows())
     rows = []
     for run in range(1, runs + 1):
+        if database == "baseline_1m":
+            require_disk_space()
         name = guard_restore(f"bench_restore_{run}_{uuid4().hex[:12]}")
         path = private_directory() / (name + ".dump")
         row = {"run": run, "temporary_database": name, "status": "FAILED", "started_at_utc": utc_now()}
@@ -40,7 +46,7 @@ def backup_restore(runs=3, keep=False):
             started = time.perf_counter()
             with path.open("xb") as handle:
                 subprocess.run(["docker", "exec", "pg-dpr", "pg_dump", "-U", "postgres", "-Fc", "--no-owner", "--no-acl",
-                                "--dbname", "baseline_100k"], stdout=handle, stderr=subprocess.PIPE, check=True)
+                                "--dbname", database], stdout=handle, stderr=subprocess.PIPE, check=True)
             row.update(backup_s=time.perf_counter() - started, dump_bytes=path.stat().st_size)
             started = time.perf_counter()
             with psycopg.connect(**parameters("postgres", admin=True), autocommit=True) as admin:
@@ -63,16 +69,16 @@ def backup_restore(runs=3, keep=False):
             row["dump_retained_private"] = keep
         except Exception:
             rows.append(row)
-            write_json(RAW / "backup_restore/failure.json", {"status": "FAILED", "runs": rows})
-            write_json(EVIDENCE / "backup_restore.json", {"status": "FAILED", "runs": rows})
+            write_json(raw / "backup_restore/failure.json", {"status": "FAILED", "runs": rows})
+            write_json(evidence / "backup_restore.json", {"status": "FAILED", "runs": rows})
             raise
         rows.append(row)
         print(json.dumps({"phase": "backup_restore_finished", "run": run,
                           "backup_s": row["backup_s"], "restore_s": row["restore_s"], "rows": row["restored_rows"]}), flush=True)
-    after = state()
+    after = state(database)
     source_unchanged = original == checksum(source_rows())
     report = {"status": "PASSED" if same_data(before, after) and source_unchanged else "FAILED",
-              "session_kind": "baseline_awal", "database": "baseline_100k", "endpoint": "pg-dpr:5433",
+              "session_kind": "baseline_awal", "database": database, "endpoint": "pg-dpr:5433",
               "level": "DB", "runs": rows, "medians": {k: statistics.median(r[k] for r in rows)
                                                        for k in ("backup_s", "restore_s", "dump_bytes")},
               "baseline_data_and_sequence_unchanged": same_data(before, after), "source_database_unchanged": source_unchanged,
@@ -81,7 +87,7 @@ def backup_restore(runs=3, keep=False):
               "transport": "container Unix socket, no TLS", "backup_boundary": "Docker exec + pg_dump + writing private custom archive",
               "restore_boundary": "CREATE new database + Docker exec + pg_restore; validation and cleanup excluded",
               "completed_at_utc": utc_now(), **provenance()}
-    for directory in (RAW, EVIDENCE):
+    for directory in (raw, evidence):
         write_json(directory / "backup_restore.json", report)
         write_csv(directory / "backup_restore/runs.csv", rows)
     return report

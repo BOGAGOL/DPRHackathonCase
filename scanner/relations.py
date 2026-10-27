@@ -25,11 +25,11 @@ def relationships(tables, inventory, config):
             nonnull = [str(r[index]) for r in table.rows if r[index] is not None and str(r[index]).strip()]
             ratio = len(set(nonnull)) / max(1, len(nonnull))
             source_unique_ratios[index] = ratio
-            if ratio > 0.9:
+            if ratio > 0.8:
                 near_unique.append({"table": table.name, "column": column, "unique_ratio": ratio,
                                     "unique_values": len(set(nonnull)), "nonnull_rows": len(nonnull),
                                     "sample_rows": len(table.rows), "excluded_from": "functional_source",
-                                    "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"})
+                                    "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"})
         for a, b in combinations(range(len(table.columns)), 2):
             ca, cb = table.columns[a], table.columns[b]
             pairs = [(r[a], r[b]) for r in table.rows if r[a] is not None and r[b] is not None
@@ -94,9 +94,21 @@ def relationships(tables, inventory, config):
                     dependencies.append({"table": table.name, "kind": "arithmetic_offset",
                                          "source": ca, "target": cb, "offset": str(offset),
                                          "ratio": hits / len(pairs), "compared_rows": len(pairs)})
-            # Functional dependency via group consistency: no category values exported.
+            # A verified text component can explain a relation even when the complete
+            # source is unique. This is recorded separately from group-based FD.
             for source_i, target_i in ((a, b), (b, a)):
-                if source_unique_ratios[source_i] > 0.9:
+                oriented = pairs if source_i == a else [(y, x) for x, y in pairs]
+                if (minimum <= len({str(y) for _, y in oriented}) <= 0.8 * len(oriented)
+                        and all("," in str(x) for x, _ in oriented)):
+                    hits = sum(normalize(str(x).rsplit(",", 1)[-1]) == normalize(y) for x, y in oriented)
+                    if hits == len(oriented):
+                        dependencies.append({"table": table.name, "kind": "text_component",
+                            "source": table.columns[source_i], "target": table.columns[target_i],
+                            "component": "last_comma_segment", "ratio": 1.0, "compared_rows": len(oriented),
+                            "basis": "matched extracted component; no inference from unique full source values"})
+            # Functional dependency via exact group consistency: no category values exported.
+            for source_i, target_i in ((a, b), (b, a)):
+                if source_unique_ratios[source_i] > 0.8:
                     continue
                 groups = {}
                 for row in table.rows:
@@ -104,7 +116,7 @@ def relationships(tables, inventory, config):
                         groups.setdefault(str(row[source_i]), set()).add(str(row[target_i]))
                 if len(groups) > 1:
                     consistent = sum(len(v) == 1 for v in groups.values()) / len(groups)
-                    if consistent >= threshold:
+                    if consistent == 1.0:
                         dependencies.append({"table": table.name, "kind": "functional",
                                              "source": table.columns[source_i], "target": table.columns[target_i],
                                              "consistent_group_ratio": consistent, "groups": len(groups)})
@@ -146,6 +158,8 @@ def relationships(tables, inventory, config):
                                   "confirmed": False})
     return {"derived_from": derived, "dependencies": dependencies, "join_candidates": joins,
             "near_unique_quasi_identifiers": near_unique,
+            "functional_policy": {"maximum_source_unique_ratio": 0.8, "required_consistent_group_ratio": 1.0,
+                                  "source_ratio_denominator": "non-NULL sample rows"},
             "join_pairs_checked": attempted, "join_limit_reached": truncated,
             "scope": "sample; correlations are candidates requiring human review"}
 

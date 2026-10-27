@@ -1,0 +1,41 @@
+{
+  "status": "PASSED",
+  "tested_merge_commit": "fb39a70fc376a6793486850fc7acf38bbf7052d3",
+  "recorded_at_wib": "2026-10-27T19:40:54.677182+07:00",
+  "method": "fetch; checkout main; pull --no-rebase origin main; merge --no-edit feat/verify-bench; tests; push main; merge main back to feature",
+  "conflicts": [],
+  "upstream_main_commits": [
+    "20e08f39bffe160049a6f9414325702e56fa5342 Merge pull request #1 from BOGAGOL/feat/service-app",
+    "427cad41609d3a0bb6ade0a2a7c0bdaf24214420 feat(service-app): verify plain mode on local TLS baseline 100k",
+    "b36a9ac512612985938fee612fbe40d34fe6ef44 feat(service-app): add dual-mode API and role-based access controls"
+  ],
+  "upstream_changes": "Service App dual mode, API/role access controls, UI and local TLS baseline verification from Module B (PR #1).",
+  "module_c_tests": [
+    {
+      "command": ".\\benchmark\\.venv\\Scripts\\python.exe -m pytest benchmark/tests datagen/tests verify/tests -q",
+      "tests": 53,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit_sha256": "4b274f6d7c20a90f9f347de85891f64a31eb5c6694f47e8a46d15aa7c43274a9"
+    },
+    {
+      "command": ".\\scanner\\.venv\\Scripts\\python.exe -m pytest scanner/tests -q",
+      "tests": 194,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "junit_sha256": "4da749f8df4b1dafa2844d3365a8ded13848090ea10e5c2abd6f50ad3138dae1"
+    }
+  ],
+  "test_count": 247,
+  "ground_truth_methodology_and_v1_unchanged": true,
+  "benchmark_1m_status": "PASSED",
+  "pgbench_crosscheck_status": "PASSED",
+  "scanner_v1_2_status": "PASSED",
+  "benchmark_runs_repeated_during_integration": false,
+  "host_free_bytes": 68142383104,
+  "raw_gzip_files": 192,
+  "raw_gzip_bytes": 28953920,
+  "raw_original_csv_bytes": 133678973
+}

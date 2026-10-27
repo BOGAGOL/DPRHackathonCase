@@ -53,6 +53,8 @@ def parser():
     cmd.add_argument("--pred", type=Path, required=True)
     cmd.add_argument("--truth", type=Path, required=True)
     cmd.add_argument("--out", type=Path, required=True)
+    cmd.add_argument("--label-map", type=Path, default=CONFIG / "label_map.yaml")
+    cmd.add_argument("--baseline", choices=["regex_only"])
     return root
 
 
@@ -139,7 +141,7 @@ def file_scan(paths, sample, output_directory):
 def run(args):
     started = time.perf_counter()
     if args.command == "evaluate":
-        result = evaluate(args.pred, args.truth)
+        result = evaluate(args.pred, args.truth, args.label_map, args.baseline)
         args.out.parent.mkdir(parents=True, exist_ok=True)
         write_json(args.out, result)
         return
@@ -155,7 +157,7 @@ def run(args):
             inventory, feature_map, relations = analyze(tables, config, environment, baseline)
             relations["foreign_keys"] = foreign_keys(conn, args.schema)
             for table in tables:
-                combos = quasi_combinations(table, feature_map, config)
+                combos = quasi_combinations(table, feature_map, config) if not baseline else []
                 anonymity.extend(database_k(conn, table, combos, args.schema))
             source = safe_db_source(url)
     elif args.command == "dump":
@@ -165,7 +167,7 @@ def run(args):
             inventory, feature_map, relations = analyze(tables, config, environment, baseline)
             relations["foreign_keys"] = []
             for table in tables:
-                anonymity.extend(store.k_anonymity(table, quasi_combinations(table, feature_map, config)))
+                anonymity.extend(store.k_anonymity(table, quasi_combinations(table, feature_map, config) if not baseline else []))
             source = {"mode": "dump", "path": str(args.file.resolve())}
         finally:
             store.close()

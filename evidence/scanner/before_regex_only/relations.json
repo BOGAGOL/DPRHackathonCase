@@ -1,0 +1,8 @@
+{
+  "derived_from": [],
+  "dependencies": [],
+  "join_candidates": [],
+  "near_unique_quasi_identifiers": [],
+  "scope": "regex_only: classification only; relational analysis skipped",
+  "foreign_keys": []
+}
