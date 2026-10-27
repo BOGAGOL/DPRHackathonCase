@@ -53,3 +53,36 @@
   seluruh key plane lintas cluster. Penulisan aplikasi/rotasi operator lain dapat
   membuat verifikasi gagal. Tool tidak menurunkan/menonaktifkan key version sebagai
   upaya rollback; lakukan resume setelah konflik diselesaikan.
+
+## Hasil lokal 28 Oktober 2026 (WIB)
+
+Tahap 5 sudah di-merge melalui PR #4 (`5ab5248`). Fungsi rotation kemudian
+diterapkan eksplisit ke protected_734/protected_100k; tidak membuat ulang container,
+tidak menjalankan ulang migrasi dan migration_user tetap NOLOGIN.
+
+`pii-kek` berotasi **v1 → v2** satu kali. Seluruh **734 + 100.000 wrapped DEK PII**
+kini v2. Domain finance-kek/search-hmac tetap v1; min_decryption_version tetap 1.
+Seluruh field PII/FIN didekripsi dan dibandingkan before/after; DEK, ciphertext,
+wrapped FIN, blind index dan REF tetap sama. NULL dipertahankan.
+
+Eksekusi awal terhenti setelah 734 + 54.600 baris commit dan meninggalkan temporary
+checkpoint. Penulisan checkpoint Windows diberi bounded retry dan fault-injection
+test, lalu resume **versi 2 yang sama** menyelesaikan 45.400 sisanya. Tidak ada
+rotasi kedua. `rotation-first-attempt.json` adalah bukti historis kegagalan yang
+superseded, bukan hasil akhir; `rotation.json` adalah hasil akhir passed.
+Report akhir menyertakan versi awal keseluruhan, distribusi versi dan total baris
+lintas kedua attempt. Total waktu kedua attempt 228.269197 detik mencakup validasi
+ulang, bukan benchmark rotasi tanpa interupsi.
+
+Sebagai pemeriksaan tambahan setelah resume, setiap record dan seluruh kolom
+(termasuk blind index/NULL) dibandingkan kembali terhadap sumber postgres dan
+baseline_100k: **100.734/100.734 cocok** tanpa mencetak plaintext. Checksum kedua
+sumber resmi sebelum/sesudah tetap sama. Backup protected_734 yang dibuat sebelum
+rotasi berhasil restore dan smoke decrypt kedua domain; scratch DB dibersihkan.
+Token operator/validator sementara dicabut, termasuk token perbandingan tambahan.
+
+Bukti: `evidence/keys/rotation.json`, `post-rotation-validation.json`,
+`source-preservation.json`, `backup-compatibility.json`,
+`validation-token-revocation.json`, `integration.json` dan `test-results.json`.
+Data protected_1m belum tersedia lokal; CLI mendukungnya, eksekusi di laptop rekan
+benchmark memerlukan key plane dan token milik laptop tersebut.

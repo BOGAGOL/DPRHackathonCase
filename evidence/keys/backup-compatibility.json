@@ -1,0 +1,51 @@
+{
+  "all_frames_authenticated_before_restore": true,
+  "artifact_id": "1f3c8940-f5e9-4067-9544-12887dbe889b",
+  "backup_seconds": 1.484788,
+  "created_at": "2026-10-27T17:06:41.430652+00:00",
+  "created_database": {
+    "marker": "dpr-backup-v1:1f3c8940-f5e9-4067-9544-12887dbe889b",
+    "name": "dpr_restore_54a111fbebf84f2796b020a490f77dad",
+    "oid": 18450
+  },
+  "database": "dpr_restore_54a111fbebf84f2796b020a490f77dad",
+  "decryption_smoke": {
+    "authenticated_non_null_fields": 392,
+    "domains": [
+      "PII",
+      "FIN"
+    ],
+    "performed": true,
+    "plaintext_written": false,
+    "records": 16
+  },
+  "manifest_hmac_verified": true,
+  "mode": "with_openbao",
+  "passed": true,
+  "plaintext_dump_files": 0,
+  "restore_seconds": 5.357059,
+  "schema_version": 1,
+  "scope": "Backup created before PII KEK rotation remains decryptable after rotation",
+  "security": {
+    "analyst_can_select_view": true,
+    "analyst_cannot_select_base": true,
+    "app_has_no_ddl": true,
+    "app_principal_rls_present": true,
+    "backup_can_select_base": true,
+    "public_database_connect_revoked": true,
+    "schema_owner_and_forced_rls": true
+  },
+  "service_scope": "database, ACL/RLS and optional field decryption; HTTP app integration is separate",
+  "sha256_verified": true,
+  "size_bytes": 1244857,
+  "source_database": "protected_734",
+  "source_rows": 734,
+  "table_rows": {
+    "access_scope": 0,
+    "anggota_protected": 734,
+    "app_users": 0,
+    "audit_log": 734,
+    "migration_jobs": 1
+  },
+  "verification_database_removed": true
+}

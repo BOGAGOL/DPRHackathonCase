@@ -1,0 +1,6 @@
+{
+  "admin_access": "wrapped PII DEK maintenance functions only",
+  "database": "protected_734",
+  "new_tables": 0,
+  "passed": true
+}
