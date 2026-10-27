@@ -1,0 +1,4 @@
+import Link from "next/link";
+import { ArrowUpRight, Users } from "lucide-react";
+import type { Member } from "@/lib/api";
+export function MemberTable({ members }: { members: Member[] }) { return <div className="table-scroll"><table><thead><tr><th>ANGGOTA</th><th>ID LAYANAN</th><th>AKSI</th></tr></thead><tbody>{members.map(m => <tr key={m.anggota_id}><td><div className="member-cell"><span className="member-avatar" aria-hidden="true">•</span><strong>{m.nama ?? "—"}</strong></div></td><td><span className="room-tag">{m.anggota_id}</span></td><td><Link className="text-link" href={`/anggota/${encodeURIComponent(m.anggota_id)}`}>Lihat profil <ArrowUpRight size={14} /></Link></td></tr>)}</tbody></table>{!members.length && <div className="empty-state"><Users size={30} /><h3>Tidak ada hasil</h3><p>Tidak ada anggota dalam hasil atau cakupan akun ini.</p></div>}</div>; }
