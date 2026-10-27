@@ -1,0 +1,46 @@
+{
+  "in_sample": true,
+  "truth_columns": 29,
+  "code_commit": "12e4064a399c2eef26e043c8de8a39c566f093be",
+  "results": [
+    {
+      "method": "v1",
+      "precision": 0.896551724137931,
+      "recall": 1.0,
+      "f1": 0.9454545454545454,
+      "f2": 0.9774436090225563,
+      "detected_type_accuracy": 0.7586206896551724,
+      "pdp_class_accuracy": 0.8620689655172413,
+      "tp": 26,
+      "fp": 3,
+      "fn": 0,
+      "tn": 0
+    },
+    {
+      "method": "v1_1",
+      "precision": 0.9629629629629629,
+      "recall": 1.0,
+      "f1": 0.9811320754716981,
+      "f2": 0.9923664122137404,
+      "detected_type_accuracy": 0.896551724137931,
+      "pdp_class_accuracy": 0.9655172413793104,
+      "tp": 26,
+      "fp": 1,
+      "fn": 0,
+      "tn": 2
+    },
+    {
+      "method": "regex_only",
+      "precision": 1.0,
+      "recall": 0.4230769230769231,
+      "f1": 0.5945945945945946,
+      "f2": 0.4782608695652174,
+      "detected_type_accuracy": 0.3103448275862069,
+      "pdp_class_accuracy": 0.6896551724137931,
+      "tp": 11,
+      "fp": 0,
+      "fn": 15,
+      "tn": 3
+    }
+  ]
+}

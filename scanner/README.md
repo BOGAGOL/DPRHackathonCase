@@ -57,3 +57,9 @@ institusi tidak mengubah domain FIN `kode_bank` pada kontrak. Distribusi priorit
 memakai faktor lingkungan yang sama; baseline minimum P2, sementara konfigurasi after
 memungkinkan P3. Nama/duplikat tidak di-hash atau dihapus otomatis. HTML menyediakan
 ringkasan dan CSS cetak A4 landscape; seluruh kombinasi k-anonymity tetap ada di JSON.
+
+Hasil sesi 27 Oktober 2026 ada di [comparison.csv](../evidence/scanner/comparison.csv),
+[evaluasi v1.1](../evidence/scanner/evaluation_v1_1.json), dan
+[validasi artefak](../evidence/scanner/step4_validation.json).
+`evaluation.json` adalah salinan evaluasi v1.1. Seluruh 188 test, termasuk integrasi
+read-only dan nama disamarkan, lulus; keputusan/keterbatasan terperinci ada di NOTES.md.

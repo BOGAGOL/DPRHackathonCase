@@ -1,6 +1,6 @@
 # Catatan implementasi scanner
 
-## Lingkup dan status
+## Lingkup dan status awal (sebelum langkah 4)
 
 Implementasi ada seluruhnya di `scanner/`, selain target Makefile dan bagian
 Scanner pada README. `.gitignore` yang sudah ada mengabaikan `.env`, environment
@@ -422,3 +422,48 @@ pengguna; pengujian lokal tidak membuktikan klasifikasi isi asli telah benar.
   bukti autentikasi password scanner_user. Detail tanpa DSN ada di step4_preflight.json.
 - Perintah PowerShell tersedia di scanner/README.md. Hasil run/test dan keterbatasan
   aktual dicatat pada evidence/scanner/, dengan checksum v1 dan ground truth dijaga.
+
+## Hasil langkah 4 yang benar-benar dijalankan
+
+27 Oktober 2026, kode dibekukan pada `12e4064a399c2eef26e043c8de8a39c566f093be`.
+Scan gabungan 734 baris selesai **7,313 detik**, regex_only **0,909 detik**.
+Keduanya versi 1.1.0; tabel/sampel sama, 30 prediksi dibandingkan dengan 29 label
+(id tidak dinilai). Seluruh 25 label taksonomi Alby terpetakan, tanpa missing prediction.
+Hasil v1 memakai berkas historis asli dan dinilai ulang dengan evaluator yang sama.
+
+| Metode | Precision | Recall | F1 | F2 | Akurasi tipe | Akurasi kelas |
+|---|---:|---:|---:|---:|---:|---:|
+| v1 | 89,66% | 100% | 94,55% | 97,74% | 75,86% | 86,21% |
+| v1.1 | 96,30% | 100% | 98,11% | 99,24% | 89,66% | 96,55% |
+| regex_only | 100% | 42,31% | 59,46% | 47,83% | 31,03% | 68,97% |
+
+- Seluruh evaluasi **in_sample=true**. V1.1: TP=26, FP=1, FN=0, TN=2.
+  FP tersisa adalah kode_bank terhadap konvensi label institusi; perbedaan tipe
+  lain pada pekerjaan_terakhir dan ruangan. Ketiganya disimpan di mismatches;
+  aturan tidak diubah lagi setelah melihat hasil ini. Domain FIN kode_bank tetap
+  mengikuti kontrak. Regex_only melewatkan 15 atribut pribadi, termasuk email yang
+  rasio kecocokan pola penuhnya di bawah ambang tetap 60; keterbatasan baseline
+  regex dibedakan dari bukti nilai keseluruhan aman.
+- Prioritas sebelum: **P0=10, P1=10, P2=10**, P3=0 sesuai batas matematis
+  faktor lingkungan lama, tanpa mengubah ambang prioritas. Enam faktor tetap
+  tersimpan per kolom. P3 diuji pada konfigurasi lain oleh regresi prioritas.
+- JSON k-anonymity menyimpan **298 kombinasi**; kombinasi tempat_lahir +
+  tanggal_lahir + jenis_kelamin tetap mencatat **730/734 unik**. Supersetnya
+  disembunyikan di HTML karena tanggal_lahir tunggal sudah unik >=95%.
+  Ringkasan HTML dibatasi 15 hasil setelah filter; JSON tetap lengkap.
+- Test final: **188 lulus, 0 gagal/error/skip**, termasuk integrasi transaksi read-only
+  dan test_disguised_names (24 fixture buatan sendiri, enam tipe terdeteksi dengan
+  confidence >=60, name_score=0 dan relasi turunan tetap ditemukan).
+  JUnit lokal di results/scanner/step4-tests.xml, ringkasan di evidence/scanner/tests.json
+  dan disguised_names.json. Tidak memakai baris dump sebagai fixture.
+- Audit keluaran baru mencari **10.645 nilai lengkap berbeda** dari sumber,
+  panjang >=6 pada kolom selain referensi yang dinyatakan: **0 kecocokan**.
+  Ini pemeriksaan nilai utuh dalam keluaran scanner saja, bukan scan S06 seluruh
+  sistem; nilai pendek, prefiks termasking dan inferensi tetap di luar kesimpulan.
+- Checksum sumber 734, kedua berkas ground truth/metodologi, serta empat artefak
+  before_v1 tetap sama. Snapshot baseline dan hasil benchmark tidak disentuh.
+  step4_validation.json memuat pemeriksaan serta hash seluruh artefak scan baru.
+- Evidence utama: before_v1_1/; before_regex_only/; evaluation_v1.json;
+  evaluation_v1_1.json; evaluation_regex_only.json; comparison.json/CSV.
+  evaluation.json adalah salinan identik evaluasi v1.1 untuk konsumen prompt C.
+  Seluruh hasil adalah prediksi mentah sebelum tinjauan manusia.

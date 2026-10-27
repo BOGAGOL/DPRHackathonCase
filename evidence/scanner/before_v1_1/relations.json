@@ -1,0 +1,470 @@
+{
+  "derived_from": [
+    {
+      "table": "public.anggota",
+      "source": "nama",
+      "column": "nama_lengkap",
+      "relation": "equal",
+      "a": "nama",
+      "b": "nama_lengkap",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama",
+      "column": "nama_tanpa_gelar",
+      "relation": "equal",
+      "a": "nama",
+      "b": "nama_tanpa_gelar",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama",
+      "column": "email",
+      "relation": "a_prefix_b",
+      "a": "nama",
+      "b": "email",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama",
+      "column": "nama_rekening",
+      "relation": "b_prefix_a",
+      "a": "nama",
+      "b": "nama_rekening",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama",
+      "column": "pengguna",
+      "relation": "a_in_b",
+      "a": "nama",
+      "b": "pengguna",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_lengkap",
+      "column": "nama_tanpa_gelar",
+      "relation": "equal",
+      "a": "nama_lengkap",
+      "b": "nama_tanpa_gelar",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_lengkap",
+      "column": "email",
+      "relation": "a_prefix_b",
+      "a": "nama_lengkap",
+      "b": "email",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_lengkap",
+      "column": "nama_rekening",
+      "relation": "b_prefix_a",
+      "a": "nama_lengkap",
+      "b": "nama_rekening",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_lengkap",
+      "column": "pengguna",
+      "relation": "a_in_b",
+      "a": "nama_lengkap",
+      "b": "pengguna",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_tanpa_gelar",
+      "column": "email",
+      "relation": "a_prefix_b",
+      "a": "nama_tanpa_gelar",
+      "b": "email",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_rekening",
+      "column": "nama_tanpa_gelar",
+      "relation": "b_prefix_a",
+      "a": "nama_tanpa_gelar",
+      "b": "nama_rekening",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_tanpa_gelar",
+      "column": "pengguna",
+      "relation": "a_in_b",
+      "a": "nama_tanpa_gelar",
+      "b": "pengguna",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "tempat_lahir",
+      "column": "alamat_daerah",
+      "relation": "a_in_b",
+      "a": "tempat_lahir",
+      "b": "alamat_daerah",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_rekening",
+      "column": "email",
+      "relation": "b_prefix_a",
+      "a": "email",
+      "b": "nama_rekening",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    },
+    {
+      "table": "public.anggota",
+      "source": "nama_rekening",
+      "column": "pengguna",
+      "relation": "a_in_b",
+      "a": "nama_rekening",
+      "b": "pengguna",
+      "ratio": 1.0,
+      "compared_rows": 734,
+      "implication": "Melindungi kolom sumber saja tidak cukup; tinjau turunan dan minimisasi."
+    }
+  ],
+  "dependencies": [
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "alamat_daerah",
+      "target": "jenis_kelamin",
+      "consistent_group_ratio": 0.9394409937888198,
+      "groups": 644
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "alamat_daerah",
+      "target": "tempat_lahir",
+      "consistent_group_ratio": 1.0,
+      "groups": 644
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "alamat_daerah",
+      "target": "tanggal_pernikahan",
+      "consistent_group_ratio": 0.90527950310559,
+      "groups": 644
+    },
+    {
+      "table": "public.anggota",
+      "kind": "presence_iff_category",
+      "source": "status_kawin",
+      "target": "tanggal_pernikahan",
+      "category_masked": "<1 huruf>",
+      "ratio": 1.0,
+      "compared_rows": 734
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "alamat_daerah",
+      "target": "status_kawin",
+      "consistent_group_ratio": 0.9363354037267081,
+      "groups": 644
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "alamat_daerah",
+      "target": "jumlah_anak",
+      "consistent_group_ratio": 0.9239130434782609,
+      "groups": 644
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "alamat_daerah",
+      "target": "jumlah_tanggungan",
+      "consistent_group_ratio": 0.9130434782608695,
+      "groups": 644
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "alamat_daerah",
+      "target": "jumlah_jiwa",
+      "consistent_group_ratio": 0.9130434782608695,
+      "groups": 644
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "jumlah_tanggungan",
+      "target": "status_kawin",
+      "consistent_group_ratio": 1.0,
+      "groups": 5
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "jumlah_jiwa",
+      "target": "status_kawin",
+      "consistent_group_ratio": 1.0,
+      "groups": 5
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "jumlah_tanggungan",
+      "target": "jumlah_anak",
+      "consistent_group_ratio": 1.0,
+      "groups": 5
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "jumlah_jiwa",
+      "target": "jumlah_anak",
+      "consistent_group_ratio": 1.0,
+      "groups": 5
+    },
+    {
+      "table": "public.anggota",
+      "kind": "arithmetic_offset",
+      "source": "jumlah_tanggungan",
+      "target": "jumlah_jiwa",
+      "offset": "1",
+      "ratio": 1.0,
+      "compared_rows": 734
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "jumlah_tanggungan",
+      "target": "jumlah_jiwa",
+      "consistent_group_ratio": 1.0,
+      "groups": 5
+    },
+    {
+      "table": "public.anggota",
+      "kind": "functional",
+      "source": "jumlah_jiwa",
+      "target": "jumlah_tanggungan",
+      "consistent_group_ratio": 1.0,
+      "groups": 5
+    }
+  ],
+  "join_candidates": [],
+  "near_unique_quasi_identifiers": [
+    {
+      "table": "public.anggota",
+      "column": "id",
+      "unique_ratio": 1.0,
+      "unique_values": 734,
+      "nonnull_rows": 734,
+      "sample_rows": 734,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota",
+      "column": "nama",
+      "unique_ratio": 1.0,
+      "unique_values": 734,
+      "nonnull_rows": 734,
+      "sample_rows": 734,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota",
+      "column": "nama_lengkap",
+      "unique_ratio": 1.0,
+      "unique_values": 734,
+      "nonnull_rows": 734,
+      "sample_rows": 734,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota",
+      "column": "nama_tanpa_gelar",
+      "unique_ratio": 1.0,
+      "unique_values": 734,
+      "nonnull_rows": 734,
+      "sample_rows": 734,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota",
+      "column": "tanggal_lahir",
+      "unique_ratio": 0.9768392370572208,
+      "unique_values": 717,
+      "nonnull_rows": 734,
+      "sample_rows": 734,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota",
+      "column": "tanggal_pernikahan",
+      "unique_ratio": 0.9809264305177112,
+      "unique_values": 360,
+      "nonnull_rows": 367,
+      "sample_rows": 734,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota",
+      "column": "no_ktp",
+      "unique_ratio": 1.0,
+      "unique_values": 734,
+      "nonnull_rows": 734,
+      "sample_rows": 734,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota",
+      "column": "telpon_jakarta",
+      "unique_ratio": 0.9986376021798365,
+      "unique_values": 733,
+      "nonnull_rows": 734,
+      "sample_rows": 734,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota",
+      "column": "telpon_daerah",
+      "unique_ratio": 1.0,
+      "unique_values": 734,
+      "nonnull_rows": 734,
+      "sample_rows": 734,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota",
+      "column": "handphone",
+      "unique_ratio": 1.0,
+      "unique_values": 734,
+      "nonnull_rows": 734,
+      "sample_rows": 734,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota",
+      "column": "email",
+      "unique_ratio": 1.0,
+      "unique_values": 734,
+      "nonnull_rows": 734,
+      "sample_rows": 734,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota",
+      "column": "ruangan",
+      "unique_ratio": 1.0,
+      "unique_values": 734,
+      "nonnull_rows": 734,
+      "sample_rows": 734,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota",
+      "column": "rekening",
+      "unique_ratio": 1.0,
+      "unique_values": 734,
+      "nonnull_rows": 734,
+      "sample_rows": 734,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota",
+      "column": "nama_rekening",
+      "unique_ratio": 1.0,
+      "unique_values": 734,
+      "nonnull_rows": 734,
+      "sample_rows": 734,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota",
+      "column": "npwp",
+      "unique_ratio": 1.0,
+      "unique_values": 734,
+      "nonnull_rows": 734,
+      "sample_rows": 734,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota",
+      "column": "nip_kppn",
+      "unique_ratio": 1.0,
+      "unique_values": 734,
+      "nonnull_rows": 734,
+      "sample_rows": 734,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota",
+      "column": "pengguna",
+      "unique_ratio": 1.0,
+      "unique_values": 734,
+      "nonnull_rows": 734,
+      "sample_rows": 734,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.9; korelasi tidak membuktikan dependency"
+    }
+  ],
+  "join_pairs_checked": 0,
+  "join_limit_reached": false,
+  "scope": "sample; correlations are candidates requiring human review",
+  "foreign_keys": []
+}
