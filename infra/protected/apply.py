@@ -55,6 +55,7 @@ def provision(container: str, database: str, admin_user: str, passwords: dict[st
         raise ValueError("Invalid role credential input")
     roles_sql = (REPO / "sql/roles/01_roles.sql").read_text(encoding="utf-8")
     schema_sql = (REPO / "sql/protected/01_schema.sql").read_text(encoding="utf-8")
+    schema_sql += "\n" + (REPO / "sql/protected/02_migration.sql").read_text(encoding="utf-8")
     guard = """DO $$ BEGIN
 IF current_database() NOT IN ('protected_734','protected_100k') OR current_setting('server_version_num')::int/10000<>18
 THEN RAISE EXCEPTION 'Wrong protected target/version'; END IF;

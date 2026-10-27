@@ -141,6 +141,61 @@ class OpenBaoClient:
         except KeyError:
             raise OpenBaoError() from None
 
+    def require_policy(self, expected: str) -> None:
+        """Check workload separation without exposing a token or identity payload."""
+        if expected not in SERVICE_POLICIES:
+            raise OpenBaoError()
+        with self._lock:
+            self.authorization_scope()
+            identity = self._send("GET", "auth/token/lookup-self", self._token())
+            if identity.get("policies") != [expected]:
+                raise OpenBaoError()
+
+    def _batch_results(self, path: str, items: list[dict], **options) -> list[dict]:
+        if not isinstance(items, list) or len(items) > 100:
+            raise CryptoError("Invalid Transit batch size")
+        if not items:
+            return []
+        try:
+            results = self._call(path, {"batch_input": items, **options})["batch_results"]
+            if not isinstance(results, list) or len(results) != len(items):
+                raise ValueError()
+            if any(not isinstance(item, dict) or item.get("error") or item.get("reference") != str(i)
+                   for i, item in enumerate(results)):
+                raise ValueError()
+            return results
+        except (KeyError, ValueError, TypeError):
+            raise OpenBaoError() from None
+
+    def wrap_batch(self, kek: str, deks: list[bytes]) -> list[str]:
+        if kek not in KEKS or not isinstance(deks, list) or len(deks) > 100:
+            raise CryptoError("Invalid wrap batch input")
+        items = [{"plaintext": base64.b64encode(validate_dek(dek)).decode("ascii"), "reference": str(i)}
+                 for i, dek in enumerate(deks)]
+        try:
+            return [validate_wrapped(item["ciphertext"]) for item in self._batch_results(f"transit/encrypt/{kek}", items)]
+        except KeyError:
+            raise OpenBaoError() from None
+
+    def hmac_batch(self, messages: list[bytes], *, key_version: int = 1) -> list[bytes]:
+        if (not isinstance(messages, list) or len(messages) > 100 or any(not isinstance(value, bytes) for value in messages)
+                or type(key_version) is not int or key_version < 1):
+            raise CryptoError("Invalid HMAC batch input")
+        items = [{"input": base64.b64encode(message).decode("ascii"), "reference": str(i)}
+                 for i, message in enumerate(messages)]
+        try:
+            results = self._batch_results("transit/hmac/search-hmac/sha2-256", items, key_version=key_version)
+            values = []
+            for item in results:
+                prefix, version, encoded = item["hmac"].split(":", 2)
+                digest = base64.b64decode(encoded, validate=True)
+                if prefix != "vault" or version != f"v{key_version}" or len(digest) != 32:
+                    raise ValueError()
+                values.append(digest)
+            return values
+        except (KeyError, ValueError, TypeError, AttributeError):
+            raise OpenBaoError() from None
+
     def unwrap_batch(self, kek: str, wrapped: list[str], *, associated_data: bytes | None = None) -> list[bytes]:
         if not isinstance(wrapped, list) or len(wrapped) > 100:
             raise CryptoError("Invalid unwrap batch size")

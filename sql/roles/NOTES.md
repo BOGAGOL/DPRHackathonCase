@@ -40,3 +40,7 @@ LOGIN/CONNECT/hak migration_user setelah migrasi (tahap 4), bukan sebelum itu.
 Rujukan: [pg_dump](https://www.postgresql.org/docs/18/app-pgdump.html),
 [ALTER DEFAULT PRIVILEGES](https://www.postgresql.org/docs/18/sql-alterdefaultprivileges.html),
 [psql](https://www.postgresql.org/docs/18/app-psql.html).
+
+Tahap 4 menambahkan migration_jobs: migration_user SELECT/INSERT/UPDATE dan
+backup_user SELECT. app/analyst/auditor/admin/scanner tidak mendapat hak kontrol
+progres. Tabel dibuat oleh schema_owner lewat 02_migration.sql sebelum GRANT.

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "passed": false,
+  "command": "check",
+  "checked_at_utc": "2026-10-27T11:45:04.304234+00:00",
+  "checks": {
+    "profile_current": true,
+    "openbao_initialized": false,
+    "openbao_unsealed": false,
+    "migration_token_present": false,
+    "validation_token_present": false,
+    "migration_policy_valid": false,
+    "validation_policy_valid": false,
+    "source_tls_connection": true,
+    "source_read_only": true,
+    "target_tls_connection": true,
+    "target_control_table": true,
+    "target_migration_login": true
+  },
+  "data_migrated": false,
+  "source": "postgres",
+  "target": "protected_734"
+}

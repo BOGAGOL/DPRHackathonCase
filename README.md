@@ -242,3 +242,11 @@ Perintah utama: `python -m benchmark run --db baseline_100k --label before --ada
 lalu `python -m benchmark backup-restore --db baseline_100k --label before --runs 3`.
 Raw lokal berada di `results/bench/before/`; ringkasan di `evidence/benchmark/baseline/`.
 Baseline awal ini terpisah dari eksperimen berpasangan B–P–P–B dan bukan hasil API/protected.
+
+## Migrasi protected (Modul A, tahap 4)
+
+CLI prepare/check/run/validate/revoke dan panduan PowerShell tersedia di
+[migration/README.md](migration/README.md). Migrasi memakai source read-only,
+batch dengan checkpoint atomik, dua domain envelope, dan validasi decrypt seluruh
+baris. Dependensi serta batas integrasi Service App dicatat di
+[migration/NOTES.md](migration/NOTES.md). Token dan material recovery tetap di luar repo.

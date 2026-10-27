@@ -119,5 +119,7 @@ GRANT SELECT,INSERT,UPDATE,DELETE ON public.app_users,public.access_scope TO adm
 GRANT SELECT ON public.audit_log TO admin_user;
 GRANT USAGE ON SEQUENCE public.access_scope_scope_id_seq TO admin_user;
 GRANT SELECT,INSERT,UPDATE ON public.anggota_protected TO migration_user;
+GRANT SELECT,INSERT,UPDATE ON public.migration_jobs TO migration_user;
+GRANT SELECT ON public.migration_jobs TO backup_user;
 GRANT SELECT ON public.anggota_protected,public.analyst_view TO scanner_user;
 \endif
