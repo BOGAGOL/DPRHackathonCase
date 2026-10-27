@@ -1,0 +1,9 @@
+# Repo-relative POSIX paths; exact equality, never substring or directory-prefix matching.
+version = 1
+
+[plaintext_s06]
+exclude_exact_paths = ["sql/baseline/02_data.sql"]
+reason = "Organizer synthetic dataset intentionally represents initial plaintext; PRIVATE repository only; team decision 2026-10-27."
+
+[public_attachment]
+exclude_exact_paths = ["sql/baseline/02_data.sql"]

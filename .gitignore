@@ -25,7 +25,7 @@ evidence/raw/
 openbao-init*.json
 
 # Data panitia dan hasil
-sql/baseline/02_data.sql
+!sql/baseline/02_data.sql
 anggota_dummy.sql
 dummy_palmerah.zip
 *.sql.gz
