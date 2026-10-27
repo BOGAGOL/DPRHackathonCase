@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "decision": "accepted_after_changes",
+  "reviewed_commits": [
+    "61b31101185dc5b0747d00c7a90d8ffbe5d9dfaf",
+    "7dcdd9e701791810ea6471a17e5f8f7f90fed87d"
+  ],
+  "baseline_databases": [
+    "baseline_100k",
+    "baseline_1m"
+  ],
+  "baseline_roles": [
+    "bench_user",
+    "scanner_user"
+  ],
+  "configuration": "DPR_BASELINE_CLIENT_ADDRESS / --baseline-client-address: auto, exact IPv4/IPv6, disabled; default preserves installed policy",
+  "changes": [
+    "hostnossl preserves existing TLS authentication methods",
+    "exact /32 or /128 unicast only; no CIDR subnets or injection",
+    "recognize prior managed IP to support address change and removal",
+    "fresh strict TLS bootstrap does not require benchmark roles or credentials",
+    "auto discovery over verified TLS works even with an old strict HBA and ssl=off",
+    "reject probes include benchmark/scanner roles on all protected targets",
+    "missing databases and app credentials remain explicit pending coverage"
+  ],
+  "tests": "evidence/infra/tls-review-tests.json",
+  "local_state": "evidence/infra/tls-review-local-state.json",
+  "protection_verified": "evidence/infra/postgres-tls-integration.json",
+  "added_lines_known_secret_patterns": {
+    "private_key_pem": 0,
+    "service_token_shape": 0
+  },
+  "secret_scan_scope": "known-pattern heuristic on added lines only; not a complete credential/history scan",
+  "runtime_policy_changed": false,
+  "official_benchmark_rerun": false
+}

@@ -1,0 +1,23 @@
+{
+  "comparison": "all_rows_all_fields_and_blind_indexes_against_original_sources",
+  "databases": {
+    "protected_100k": {
+      "all_fields_match": true,
+      "blind_indexes_match": true,
+      "passed": true,
+      "rows_compared": 100000,
+      "source": "baseline_100k"
+    },
+    "protected_734": {
+      "all_fields_match": true,
+      "blind_indexes_match": true,
+      "passed": true,
+      "rows_compared": 734,
+      "source": "postgres"
+    }
+  },
+  "passed": true,
+  "plaintext_written": false,
+  "schema_version": 1,
+  "validation_token_revoked": true
+}

@@ -7,6 +7,29 @@ Langkah 4 dibatasi pada database `postgres` (734 baris), bukan baseline 100k/1M.
 
 ## Credential dan test
 
+Pada laptop benchmark, password `scanner_user` dirotasi atas izin pengguna pada
+28 Oktober 2026. Gunakan credential DPAPI terbaru di luar repo; jangan memakai
+password lama atau menyalinnya ke file konfigurasi. Contoh memuatnya tanpa echo:
+
+```powershell
+$env:DPR_PRIVATE_DIR = 'C:\dev\dpr-private'
+$cScannerCredential = Import-Clixml -LiteralPath (Join-Path $env:DPR_PRIVATE_DIR 'scanner_user.credential.xml')
+try {
+  $env:SCANNER_DATABASE_URL = 'postgresql://scanner_user:' +
+    [Uri]::EscapeDataString($cScannerCredential.GetNetworkCredential().Password) +
+    '@127.0.0.1:5433/postgres?sslmode=disable'
+} finally { Remove-Variable cScannerCredential }
+# Untuk baseline_100k, ubah hanya nama database pada URL di atas.
+# Setelah selesai: Remove-Item Env:SCANNER_DATABASE_URL
+```
+
+Kedua baseline tetap mendukung koneksi non-TLS dari role scanner/bench sebagai
+kondisi awal eksperimen. Koneksi scanner ke protected memakai `sslmode=verify-full`
+dan `sslrootcert` CA PostgreSQL lokal. Bukti login read-only pada `postgres` dan
+`baseline_100k`: `evidence/scanner/credential_rotation.json`.
+
+Alternatif input interaktif (tanpa password pada history):
+
 ```powershell
 $cScannerSecure = Read-Host 'Password scanner_user lab' -AsSecureString
 $cScannerCredential = [pscredential]::new('scanner_user', $cScannerSecure)

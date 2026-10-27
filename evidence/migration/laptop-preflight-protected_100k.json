@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "status": "COMPLETE",
+  "scope": "actual functional migration on benchmark laptop pg-dpr; not a benchmark",
+  "checked_at_utc": "2026-10-27T17:43:51.251815+00:00",
+  "branch": "fix/tls-baseline-exception",
+  "tls_fix_commit": "61b31101185dc5b0747d00c7a90d8ffbe5d9dfaf",
+  "completion_file": "evidence/migration/laptop-completion-protected_100k.json",
+  "validation_file": "evidence/migration/validation-protected_100k.json",
+  "rows_compared": 100000,
+  "tls_matrix": {
+    "a_baseline_without_tls_allowed_bench_scanner": true,
+    "b_other_roles_without_tls_to_baseline_rejected": true,
+    "c_app_without_tls_to_protected_rejected": true,
+    "d_app_verify_full_to_protected_succeeds": true
+  },
+  "scanner_password_rotation": "authorized; canonical and mirror DPAPI updated; no other existing role password changed",
+  "migration_token_revoked": true,
+  "migration_role_nologin": true,
+  "benchmarks_executed": false
+}

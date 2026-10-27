@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "checked_at_utc": "2026-10-27T17:43:51.219540+00:00",
+  "tests": [
+    {
+      "suite": "infra TLS unit",
+      "raw_junit": "results/migration/tls-unit.xml",
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": true
+    },
+    {
+      "suite": "scanner actual read-only DB integration",
+      "raw_junit": "results/migration/scanner-readonly.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": true
+    }
+  ]
+}

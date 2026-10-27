@@ -1,0 +1,1 @@
+"""Rotation test namespace."""

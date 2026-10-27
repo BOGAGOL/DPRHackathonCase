@@ -1,8 +1,10 @@
 """Enable TLS on an EXISTING PG18 container with ALTER SYSTEM + reload, no restart."""
 
 import argparse
+import base64
 from datetime import datetime, timezone
 import hashlib
+import ipaddress
 import json
 import os
 from pathlib import Path, PurePosixPath
@@ -21,10 +23,13 @@ import psycopg
 from psycopg import sql
 
 from infra.security import REPO, external_directory, secure_directory, write_private
+from infra.protected.credentials import role_password
 
 
 SSL_SETTINGS = ("ssl", "ssl_cert_file", "ssl_key_file", "ssl_min_protocol_version")
 DATABASES = ("baseline_100k", "protected_734", "protected_100k", "baseline_1m", "protected_1m")
+BASELINES = ("baseline_100k", "baseline_1m")
+BASELINE_ROLES = ("bench_user", "scanner_user")
 LEGACY_HBA_BLOCK = ("# BEGIN DPR PROJECT TLS\n"
              "hostnossl baseline_100k,protected_734,protected_100k all 0.0.0.0/0 reject\n"
              "hostnossl baseline_100k,protected_734,protected_100k all ::/0 reject\n"
@@ -39,17 +44,46 @@ class TLSUpdateError(RuntimeError):
     """Only a fixed non-secret failure code may be reported."""
 
 
-def managed_hba(original: bytes) -> bytes:
+def baseline_hba_block(address: str) -> str:
+    # The address observed by PostgreSQL, not a guessed Docker subnet or /0.
+    client = ipaddress.ip_address(address)
+    if "%" in address or client.is_unspecified or client.is_multicast:
+        raise ValueError("An exact unicast client address is required")
+    # Only non-TLS authentication is excepted. Existing hostssl/cert rules retain
+    # their precedence and authentication method for encrypted connections.
+    exception = f"hostnossl {','.join(BASELINES)} {','.join(BASELINE_ROLES)} {client}/{client.max_prefixlen} scram-sha-256\n"
+    return HBA_BLOCK.replace("# BEGIN DPR PROJECT TLS\n", "# BEGIN DPR PROJECT TLS\n" + exception, 1)
+
+
+def split_managed_hba(original: bytes) -> tuple[bytes, str | None]:
+    """Recognize only our exact strict blocks or a validated exact-IP exception."""
     content = original.decode("utf-8")
-    for block in (HBA_BLOCK,LEGACY_HBA_BLOCK):
-        if content.startswith(block):
-            suffix=content[len(block):]
-            if "# BEGIN DPR PROJECT TLS" in suffix or "# END DPR PROJECT TLS" in suffix:
-                raise TLSUpdateError("unexpected_managed_hba_block")
-            return HBA_BLOCK.encode()+suffix.encode("utf-8")
-    if "# BEGIN DPR PROJECT TLS" in content or "# END DPR PROJECT TLS" in content:
+    begin, end = "# BEGIN DPR PROJECT TLS\n", "# END DPR PROJECT TLS\n"
+    address = None
+    if content.startswith(begin) and end in content:
+        stop = content.index(end)+len(end)
+        block, suffix = content[:stop], content[stop:]
+        if block not in (HBA_BLOCK, LEGACY_HBA_BLOCK):
+            match = re.fullmatch(r"host(?:nossl)? baseline_100k,baseline_1m bench_user,scanner_user ([^\s/]+)/(32|128) scram-sha-256", block.splitlines()[1])
+            try:
+                if not match: raise ValueError()
+                candidate = baseline_hba_block(match[1])
+                legacy = candidate.replace("hostnossl baseline_", "host baseline_", 1)
+                if block not in (candidate, legacy): raise ValueError()
+                address = str(ipaddress.ip_address(match[1]))
+            except ValueError:
+                raise TLSUpdateError("unexpected_managed_hba_block") from None
+    else:
+        suffix = content
+    if "# BEGIN DPR PROJECT TLS" in suffix or "# END DPR PROJECT TLS" in suffix:
         raise TLSUpdateError("unexpected_managed_hba_block")
-    return HBA_BLOCK.encode() + original
+    return suffix.encode("utf-8"), address
+
+
+def managed_hba(original: bytes, baseline_address: str | None = None) -> bytes:
+    suffix, _ = split_managed_hba(original)
+    desired = baseline_hba_block(baseline_address) if baseline_address else HBA_BLOCK
+    return desired.encode()+suffix
 
 
 def save_state(path: Path, state: dict) -> None:
@@ -76,15 +110,76 @@ def verify_tls(host: str, port: int, ca: Path, expected_certificate: Path) -> di
         raise TLSUpdateError("verified_tls_connection_failed") from None
 
 
-def plaintext_rejected(host: str, port: int, database: str) -> bool:
+def plaintext_rejected(host: str, port: int, database: str, user: str = "dpr_tls_probe") -> bool:
     try:
-        # Synthetic nonexistent user/password: never send a real credential without TLS.
-        with psycopg.connect(host=host, port=port, dbname=database, user="dpr_tls_probe",
+        # A synthetic password proves HBA rejection before password authentication.
+        with psycopg.connect(host=host, port=port, dbname=database, user=user,
                 password=secrets.token_urlsafe(24), sslmode="disable", gssencmode="disable", connect_timeout=3):
             return False
     except psycopg.OperationalError as error:
         # libpq startup failures do not always expose diag.sqlstate. Do not log text.
         return "pg_hba.conf rejects connection" in str(error) and "no encryption" in str(error)
+
+
+def baseline_passwords(root: Path) -> dict:
+    password = os.environ.get("DPR_BENCH_USER_PASSWORD")
+    if not password:
+        raise TLSUpdateError("baseline_bench_credential_required")
+    # This verifies an existing login, not the strength of a newly created password.
+    scanner = os.environ.get("DPR_SCANNER_USER_PASSWORD") or role_password(root, "scanner_user")
+    return {"bench_user": password, "scanner_user": scanner}
+
+
+def optional_role_password(root: Path, role: str) -> str | None:
+    value = os.environ.get("DPR_"+role.upper()+"_PASSWORD")
+    if value: return value
+    if (root/"postgres/roles"/(role+".credential.xml")).is_file():
+        return role_password(root, role)
+    return None
+
+
+def connection_matrix(root: Path, host: str, port: int, existing_databases: dict,
+                      baseline_address: str | None = None) -> dict:
+    checks = {}
+    credentials = baseline_passwords(root) if baseline_address else {}
+    app_password = optional_role_password(root, "app_user")
+    for role, password in credentials.items():
+        for database in BASELINES:
+            if database not in existing_databases: continue
+            try:
+                with psycopg.connect(host=host, port=port, dbname=database, user=role, password=password,
+                        sslmode="disable", gssencmode="disable", connect_timeout=5,
+                        options="-c default_transaction_read_only=on") as connection:
+                    actual = connection.execute("SELECT current_user,current_database(),ssl FROM pg_stat_ssl WHERE pid=pg_backend_pid()").fetchone()
+                allowed = actual == (role, database, False)
+            except psycopg.Error:
+                allowed = False
+            checks[f"baseline_plaintext_allowed:{database}:{role}"] = allowed
+    for database in DATABASES:
+        checks["plaintext_rejected:" + database] = plaintext_rejected(host, port, database)
+        denied = ("app_user", "postgres", "migration_user", "analyst_user", "auditor_user", "backup_user", "admin_user", "schema_owner")
+        if database not in BASELINES or not baseline_address: denied += BASELINE_ROLES
+        for role in denied:
+            checks[f"plaintext_rejected:{database}:{role}"] = plaintext_rejected(host, port, database, role)
+        if database not in BASELINES and database in existing_databases and app_password:
+            try:
+                with psycopg.connect(host=host, port=port, dbname=database, user="app_user",
+                        password=app_password, sslmode="verify-full",
+                        sslrootcert=str(root / "postgres/tls/ca.crt"), gssencmode="disable", connect_timeout=5,
+                        options="-c default_transaction_read_only=on") as connection:
+                    actual = connection.execute("SELECT current_user,current_database(),ssl FROM pg_stat_ssl WHERE pid=pg_backend_pid()").fetchone()
+                verified = actual == ("app_user", database, True)
+            except psycopg.Error:
+                verified = False
+            checks["protected_verify_full:" + database] = verified
+    return checks
+
+
+def matrix_coverage(existing_databases: dict, checks: dict, baseline_address: str | None) -> dict:
+    protected = [db for db in DATABASES if db not in BASELINES and "protected_verify_full:"+db not in checks]
+    baselines = [db for db in BASELINES if db not in existing_databases] if baseline_address else []
+    return {"baseline_databases_pending": baselines, "protected_databases_pending_prepare": protected,
+            "connection_matrix_complete": not protected and not baselines}
 
 
 class ExistingPostgres:
@@ -207,27 +302,44 @@ SELECT json_build_object(
         state["status"] = "rolled_back"
         save_state(state_path, state)
 
-    def apply(self, root: Path) -> tuple[Path, dict]:
+    def read_hba(self) -> bytes:
+        # The administrative connection stays inside the selected container.
+        return base64.b64decode(self.query("SELECT encode(pg_read_binary_file(current_setting('hba_file')),'base64');"))
+
+    def apply(self, root: Path, *, baseline_address: str | None = None) -> tuple[Path, dict]:
         root = external_directory(str(root))
         before = self.metadata()
         material = root / "postgres/tls"
         for name in ("server.crt", "server.key", "ca.crt"):
             if not (material / name).is_file():
                 raise TLSUpdateError("postgresql_certificate_material_missing")
+        original_hba = self.read_hba()
+        _, previous_address = split_managed_hba(original_hba)
+        # Preserve an installed benchmark exception by default, but do not add
+        # one or require benchmark credentials on a fresh/strict installation.
+        selected = previous_address if baseline_address is None else baseline_address
+        if selected == "disabled": selected = None
+        if selected is not None and selected != "auto":
+            baseline_hba_block(selected)  # Validate before any mutation.
+            selected = str(ipaddress.ip_address(selected))
+        credentials = baseline_passwords(root) if selected else {}
+        discovery_database = next((db for db in BASELINES if db in before["database_oids"]), None)
+        if selected == "auto" and not discovery_database:
+            raise TLSUpdateError("baseline_database_required_for_discovery")
         snapshot = secure_directory(root / "postgres" / "changes" / uuid.uuid4().hex)
         state_path = snapshot / "state.json"
         hba = snapshot / "pg_hba.before.conf"
         self.run(["cp", self.container + ":" + before["hba_file"], str(hba)])
         self.run(["cp", self.container + ":" + before["data_directory"] + "/postgresql.auto.conf", str(snapshot / "postgresql.auto.before.conf")])
-        modified = managed_hba(hba.read_bytes())
+        if hba.read_bytes() != original_hba:
+            raise TLSUpdateError("hba_changed_before_snapshot")
         staged_hba = snapshot / "pg_hba.after.conf"
-        write_private(staged_hba, modified)
         certificate_dir = before["data_directory"] + "/dpr-tls/" + uuid.uuid4().hex
         desired = {"ssl": "on", "ssl_cert_file": certificate_dir + "/server.crt",
                    "ssl_key_file": certificate_dir + "/server.key", "ssl_min_protocol_version": "TLSv1.2"}
         state = {"container_id": self.info["Id"], "before": before, "desired": desired, "status": "prepared",
                  "hba_before_sha256": hashlib.sha256(hba.read_bytes()).hexdigest(),
-                 "hba_applied_sha256": hashlib.sha256(modified).hexdigest()}
+                 "hba_applied_sha256": hashlib.sha256(original_hba).hexdigest()}
         save_state(state_path, state)
         self.run(["exec", "--user", "0", self.container, "sh", "-ceu",
                   'test ! -L "$1/dpr-tls"; mkdir -p -- "$2"; chown postgres:postgres "$1/dpr-tls" "$2"; chmod 700 "$1/dpr-tls" "$2"',
@@ -239,23 +351,42 @@ SELECT json_build_object(
                 self.alter(name, value)
             self.reload(desired)
             tls = verify_tls(self.host, self.port, material / "ca.crt", material / "server.crt")
+            if selected == "auto":
+                # Enable/verify TLS first: even an old hostnossl reject block on
+                # an ssl=off installation must be upgradeable without sending
+                # real discovery credentials over plaintext.
+                try:
+                    with psycopg.connect(host=self.host, port=self.port, dbname=discovery_database,
+                            user="bench_user", password=credentials["bench_user"], sslmode="verify-full",
+                            sslrootcert=str(material/"ca.crt"), gssencmode="disable", connect_timeout=5,
+                            options="-c default_transaction_read_only=on") as connection:
+                        selected = connection.execute("SELECT host(inet_client_addr())").fetchone()[0]
+                except psycopg.Error:
+                    raise TLSUpdateError("baseline_client_address_discovery_failed") from None
+                baseline_hba_block(selected)
+                selected = str(ipaddress.ip_address(selected))
+            modified = managed_hba(original_hba, selected)
+            write_private(staged_hba, modified)
+            state["hba_applied_sha256"] = hashlib.sha256(modified).hexdigest()
+            save_state(state_path, state)
             # Enforce only after a verified TLS connection has succeeded.
             self.install_file(staged_hba, before["hba_file"], "600")
             if self.query("SELECT count(*) FROM pg_hba_file_rules WHERE error IS NOT NULL;") != "0":
                 raise TLSUpdateError("hba_parse_error")
             after = self.reload(desired)
-            rejects = {database: plaintext_rejected(self.host, self.port, database) for database in DATABASES}
+            access = connection_matrix(root, self.host, self.port, after["database_oids"], selected)
             current_info = json.loads(self.run(["inspect", self.container]))[0]
             checks = {"tls_on": after["settings"]["ssl"] == "on", "hostname_verified": tls["hostname_verified"],
                       "same_container": current_info["Id"] == self.info["Id"],
                       "no_postmaster_restart": before["started_at"] == after["started_at"],
                       "database_oids_unchanged": before["database_oids"] == after["database_oids"],
-                      **{"plaintext_rejected:" + name: rejected for name, rejected in rejects.items()}}
+                      **access}
             if not all(checks.values()):
                 raise TLSUpdateError("post_apply_verification_failed")
             state["status"] = "applied"
             save_state(state_path, state)
-            return state_path, {"passed": True, "checks": checks, **tls, "server_version_num": after["version"]}
+            return state_path, {"passed": True, "checks": checks, **tls, "server_version_num": after["version"],
+                "baseline_client_address": selected, **matrix_coverage(after["database_oids"], checks, selected)}
         except Exception:
             self.rollback(state_path)
             raise
@@ -268,6 +399,8 @@ def main() -> None:
     parser.add_argument("--host", default=os.environ.get("PGHOST", "127.0.0.1"))
     parser.add_argument("--port", type=int, default=int(os.environ.get("PGPORT", "5433")))
     parser.add_argument("--state", type=Path)
+    parser.add_argument("--baseline-client-address", default=os.environ.get("DPR_BASELINE_CLIENT_ADDRESS"),
+        help="Benchmark exception: auto, an exact IPv4/IPv6 address, or disabled. Default preserves existing policy.")
     args = parser.parse_args()
     report = {"schema_version": 1, "passed": False, "command": args.command, "container": args.container,
               "host": args.host, "port": args.port, "checked_at_utc": datetime.now(timezone.utc).isoformat()}
@@ -279,7 +412,7 @@ def main() -> None:
         else:
             root = secure_directory(external_directory(os.environ.get("DPR_SECRETS_DIR")))
             if args.command == "apply":
-                state_path, result = target.apply(root)
+                state_path, result = target.apply(root, baseline_address=args.baseline_client_address)
                 report.update(result, rollback_state_id=state_path.parent.name)
             elif args.command == "rollback":
                 if args.state is None or not args.state.resolve().is_relative_to((root / "postgres/changes").resolve()):
@@ -290,9 +423,15 @@ def main() -> None:
                 material = root / "postgres/tls"
                 metadata = target.metadata()
                 tls = verify_tls(args.host, args.port, material / "ca.crt", material / "server.crt")
-                checks = {"tls_on": metadata["settings"]["ssl"] == "on", **{
-                    "plaintext_rejected:" + name: plaintext_rejected(args.host, args.port, name) for name in DATABASES}}
-                report.update(passed=all(checks.values()), checks=checks, **tls)
+                _, active_address = split_managed_hba(target.read_hba())
+                checks = {"tls_on": metadata["settings"]["ssl"] == "on",
+                          **connection_matrix(root, args.host, args.port, metadata["database_oids"], active_address)}
+                requested = args.baseline_client_address
+                if requested is not None:
+                    expected = None if requested == "disabled" else active_address if requested == "auto" else str(ipaddress.ip_address(requested))
+                    checks["configured_baseline_address_matches"] = active_address == expected and (requested != "auto" or active_address is not None)
+                report.update(passed=all(checks.values()), checks=checks, baseline_client_address=active_address,
+                    **matrix_coverage(metadata["database_oids"], checks, active_address), **tls)
     except (TLSUpdateError, ValueError, KeyError, TypeError, OSError, RuntimeError) as error:
         report["error"] = str(error) if isinstance(error, TLSUpdateError) else "operation_failed_details_withheld"
     evidence = REPO / "evidence/infra/postgres-tls.json"

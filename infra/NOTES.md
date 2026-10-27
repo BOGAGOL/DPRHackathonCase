@@ -175,3 +175,71 @@ sintetis. Token/DEK/plaintext/ciphertext tidak masuk evidence.
 - Scope selesai: implementasi dan pengujian Tahap 1. Toolkit field AEAD/AAD dan
   backup streaming yang mengoreksi celah referensi adalah Tahap 2 dan Tahap 5;
   belum diimplementasikan di pekerjaan Tahap 1 ini dan tidak diklaim selesai.
+
+## Pengecualian TLS baseline di laptop benchmark (28 Oktober 2026)
+
+Atas keputusan eksplisit tim, branch `fix/tls-baseline-exception` mempertahankan
+akses baseline_100k/baseline_1m tanpa TLS hanya untuk bench_user/scanner_user dari
+IP Docker host yang diamati PostgreSQL, memakai SCRAM. Semua protected dan role
+lain tetap terkena aturan penolakan non-TLS. Tidak ada perubahan data/privilege
+baseline dan tidak ada benchmark yang diulang. Perubahan ini menunggu persetujuan
+Alby sebelum merge ke main. Aturan auth yang ada dipertahankan byte demi byte
+di luar blok terkelola; snapshot dan mekanisme rollback tetap digunakan.
+
+Pemeriksaan apply/verify memakai login baseline yang nyata dan uji penolakan HBA
+(bukan sekadar password salah). Login app verify-full diuji pada setiap protected
+yang sudah ada; target yang belum dibuat dinyatakan pending, kemudian diverifikasi
+ulang setelah prepare. Uji otomatis memakai data sintetis dan container disposable,
+termasuk upgrade HBA lama, apply berulang, serta rollback otomatis/eksplisit.
+Hasil: 206 test unit lulus, 5 integration opt-in dilewati; uji TLS disposable
+opt-in dijalankan terpisah dan lulus (1 test). Setelah penyesuaian pembacaan
+credential existing, 15 test unit TLS kembali lulus.
+
+## Review Modul A: pengecualian baseline (28 Oktober 2026)
+
+Review commit 61b3110 dan pembaruan evidence 7dcdd9e dari Modul C: keputusan
+metodologi diterima. Baseline awal non-TLS tidak diukur ulang/diubah oleh review.
+Tidak merotasi credential laptop lain atau menganggap evidence Delf sebagai
+hasil pengujian laptop Alby; riwayat evidence keduanya dipertahankan.
+
+Perbaikan sebelum merge:
+- `--baseline-client-address` / `DPR_BASELINE_CLIENT_ADDRESS`: auto, IP literal
+  unicast, atau disabled. Auto melalui koneksi verify-full setelah TLS diaktifkan
+  dan diverifikasi, sehingga strict HBA lama pada ssl=off juga bisa di-upgrade.
+- Default API/CLI tidak membutuhkan role benchmark saat bootstrap TLS baru.
+  Exception yang sudah terpasang dipertahankan; verifikasinya tetap membutuhkan
+  credential existing yang benar. Tidak mengubah privilege atau password.
+- Aturan host pada patch awal dapat menimpa metode auth hostssl sebelumnya bagi
+  dua role baseline. Menggunakan hostnossl membatasi perubahan pada non-TLS saja.
+  Batas database/role literal, SCRAM, IPv4 /32 atau IPv6 /128; tidak menerima /0,
+  subnet, hostname, zone id, unspecified/multicast atau konfigurasi tambahan.
+- Parser hanya meng-upgrade blok exact milik proyek (legacy tiga DB, strict lima
+  DB, exception patch C, dan exception hostnossl baru). Pergantian IP/disable
+  aman, tail auth dipertahankan byte demi byte; blok tak dikenal/duplikat ditolak.
+- Matrix penolakan protected mencakup bench/scanner juga, bukan hanya app.
+  Positif baseline hanya bagi DB yang sudah ada; positif app hanya jika DB dan
+  credential tersedia. Pending DB/credential dicatat, connection_matrix_complete
+  false jika cakupan belum lengkap. Password salah tidak dianggap bukti reject.
+
+Uji PG18 disposable mencakup kedua baseline/ketiga protected, semua kontrol (a)–(d),
+sumber IP lain untuk bench/scanner, HBA legacy ketika SSL masih mati maupun sudah
+aktif, exception C, apply berulang, IP salah + rollback, disable + rollback serta
+preservasi data/container/postmaster. Bootstrap tanpa benchmark credential diuji
+ulang lewat integration backup/rotation yang menyiapkan role sesudah TLS.
+Tidak menerapkan pengecualian baru pada pg-dpr lokal sebagai efek samping review.
+Operator laptop benchmark menarik main lalu memakai apply/verify dengan env
+credential existing; konfigurasi yang sudah terpasang tidak berubah hanya karena pull.
+
+Rujukan: [PostgreSQL 18 pg_hba.conf](https://www.postgresql.org/docs/18/auth-pg-hba-conf.html).
+HBA memakai aturan cocok pertama; hostnossl tidak mengubah autentikasi TLS.
+
+Hasil review final: regresi Modul A **261 passed / 7 skipped**, Modul C (datagen,
+scanner, benchmark, verify) pada subprocess terpisah **246 passed / 1 skipped**.
+Integration TLS + backup + rotasi dengan PG18/OpenBao TLS disposable **3 passed**;
+cakupan matrix TLS lengkap pada dua baseline dan tiga protected. `tls-review-tests.json`
+mencatat command/count/durasi dan batas cakupan. Koleksi lintas semua modul dalam
+satu proses pytest berbenturan pada nama conftest/plugin serta scripts/benchmark.py;
+test C memakai proses terpisah dengan importlib, tanpa mengubah test/kode milik C.
+Verifikasi lokal read-only tetap cocok dengan checksum sumber resmi; exception
+baseline lokal tidak ditambahkan dan tidak ada benchmark resmi yang diulang.
+Evidence keputusan: `evidence/infra/tls-review-61b3110.json`.

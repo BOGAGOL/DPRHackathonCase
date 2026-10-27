@@ -1,0 +1,17 @@
+{
+  "owned_modules_suite": {
+    "command": "python -m pytest infra/tests toolkit/tests policy/tests migration/tests scripts/backup/tests infra/rotation/tests -q --tb=short",
+    "passed": 252,
+    "seconds": 24.29,
+    "skipped": 7
+  },
+  "passed": true,
+  "rotation_integration_suite": {
+    "command": "$env:DPR_ROTATION_INTEGRATION='1'; python -m pytest infra/rotation/tests toolkit/tests/test_rotation_client.py -q --tb=short",
+    "passed": 11,
+    "seconds": 30.37,
+    "skipped": 0
+  },
+  "schema_version": 1,
+  "scope": "Integration suite includes unit tests; counts are not additive. Real local 734 and 100k evidence is separate."
+}

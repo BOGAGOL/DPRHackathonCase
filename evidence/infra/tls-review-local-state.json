@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "checks": {
+    "verified_tls:postgres": true,
+    "rows:postgres": true,
+    "official_checksum:postgres": true,
+    "verified_tls:baseline_100k": true,
+    "rows:baseline_100k": true,
+    "official_checksum:baseline_100k": true,
+    "verified_tls:protected_734": true,
+    "verified_tls:protected_100k": true
+  },
+  "databases": {
+    "postgres": {
+      "tls": "TLSv1.3",
+      "rows": 734,
+      "checksum_sha256": "5113038953aea9383f600de725b4267ecbf93de47c2a603a68bde6ad7e5c17e8"
+    },
+    "baseline_100k": {
+      "tls": "TLSv1.3",
+      "rows": 100000,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff"
+    },
+    "protected_734": {
+      "tls": "TLSv1.3",
+      "public_tables": 5
+    },
+    "protected_100k": {
+      "tls": "TLSv1.3",
+      "public_tables": 5
+    }
+  },
+  "scope": "read-only local development check; no TLS apply, role/password change or benchmark performed",
+  "runtime_baseline_exception_address": null,
+  "runtime_policy_changed": false
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "scope": "benchmark laptop actual protected_100k migration",
+  "prepare": {
+    "started_at_utc": "2026-10-27T17:36:54.146444+00:00",
+    "finished_at_utc": "2026-10-27T17:37:02.674627+00:00",
+    "duration_seconds": 8.528233,
+    "exit_code": 0
+  },
+  "check": {
+    "started_at_utc": "2026-10-27T17:37:39.485272+00:00",
+    "finished_at_utc": "2026-10-27T17:37:40.637535+00:00",
+    "duration_seconds": 1.153172,
+    "exit_code": 0,
+    "tokens": {
+      "svc-migration": {
+        "remaining_ttl_seconds": 13143,
+        "creation_ttl_seconds": 14400,
+        "renewable": false,
+        "policies": [
+          "svc-migration"
+        ]
+      },
+      "svc-app": {
+        "remaining_ttl_seconds": 13143,
+        "creation_ttl_seconds": 14400,
+        "renewable": false,
+        "policies": [
+          "svc-app"
+        ]
+      }
+    },
+    "source_role": "scanner_user",
+    "target_role": "migration_user"
+  },
+  "run": {
+    "started_at_utc": "2026-10-27T17:38:10.595961+00:00",
+    "status": "complete",
+    "source": "baseline_100k",
+    "target": "protected_100k",
+    "source_role": "scanner_user",
+    "target_role": "migration_user",
+    "token_remaining_seconds_at_start": 13111,
+    "includes_full_decrypt_compare_and_token_revocation": true,
+    "finished_at_utc": "2026-10-27T17:41:23.157893+00:00",
+    "duration_seconds": 192.562236,
+    "exit_code": 0
+  }
+}
