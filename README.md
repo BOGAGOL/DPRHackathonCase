@@ -250,3 +250,8 @@ CLI prepare/check/run/validate/revoke dan panduan PowerShell tersedia di
 batch dengan checkpoint atomik, dua domain envelope, dan validasi decrypt seluruh
 baris. Dependensi serta batas integrasi Service App dicatat di
 [migration/NOTES.md](migration/NOTES.md). Token dan material recovery tetap di luar repo.
+
+Migrator juga mendukung pasangan `baseline_1m` → `protected_1m`. Ekspektasi jumlah
+baris berasal dari konfigurasi dataset dan dapat diatur dengan `--expected-rows`;
+nama source/target tetap dilindungi allowlist. Lihat bagian target 1M pada
+[migration/README.md](migration/README.md) untuk persiapan TLS, resume dan uji skala.

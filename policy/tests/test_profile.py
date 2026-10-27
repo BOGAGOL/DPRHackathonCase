@@ -25,7 +25,8 @@ def test_assessment_and_overrides_match_every_contract_column_without_samples():
     assert fields["tanggal_lahir"]["analyst_projection"]=="age_band"
     assert profile["derived"]["age_band"]["reference_date"]=="2026-10-01"
     assert "sample_masked" not in json.dumps(profile) and "content_score" not in json.dumps(profile)
-    assert load_profile(ROOT/"policy/protection_profile.yaml")==profile
+    loaded=load_profile(ROOT/"policy/protection_profile.yaml")
+    assert {key:value for key,value in loaded.items() if key!="provenance"}=={key:value for key,value in profile.items() if key!="provenance"}
 
 
 def test_inventory_changes_affect_assessment_not_binding_protection_decision(tmp_path):
@@ -74,3 +75,13 @@ def test_cli_builds_deterministically_and_records_failure(tmp_path,monkeypatch):
     monkeypatch.setattr("sys.argv",["build-profile","--inventory",str(tmp_path/"missing")])
     with pytest.raises(SystemExit): builder.main()
     assert not json.loads((tmp_path/"evidence/policy/build-profile.json").read_text())["passed"]
+
+
+def test_text_hashes_survive_checkout_but_not_content_changes(tmp_path):
+    path=tmp_path/"profile.yaml"
+    path.write_bytes(b"domain: PII\nversion: 1\n")
+    hashes=builder.text_hashes(path)
+    path.write_bytes(b"domain: PII\r\nversion: 1\r\n")
+    assert set(builder.text_hashes(path))==set(hashes)
+    path.write_bytes(b"domain: FIN\r\nversion: 1\r\n")
+    assert set(builder.text_hashes(path)).isdisjoint(hashes)

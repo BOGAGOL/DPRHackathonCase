@@ -9,7 +9,7 @@ import pytest
 from migration import cli, prepare as setup
 from migration.connection import connection_parameters
 from migration.model import MigrationError
-from migration.runner import check_connections, execute
+from migration.runner import check_connections, execute, expected_source_rows
 
 
 def test_runtime_credentials_split_and_read_only_source(tmp_path,monkeypatch):
@@ -79,6 +79,7 @@ def test_readiness_reports_sealed_dependencies_without_writes(monkeypatch,tmp_pa
         def execute(self,query,values=None):
             assert str(query).startswith(("SELECT","SHOW"))
             if str(query).startswith("SHOW"):return SimpleNamespace(fetchone=lambda:("on",))
+            if "count(*)" in str(query):return SimpleNamespace(fetchone=lambda:(734,))
             if "to_regclass" in str(query) or "pg_roles" in str(query):return SimpleNamespace(fetchone=lambda:(True,))
             return SimpleNamespace(fetchone=lambda:("postgres" if not hasattr(self,"used") else "protected_734",180006))
     source=ReadOnly();target=ReadOnly();target.used=True
@@ -129,6 +130,45 @@ def test_execute_rejects_invalid_bounds_before_connections():
     with pytest.raises(MigrationError,match="invalid_expected_row_count"):
         execute(None,None,source_name="postgres",target_name="protected_734",profile={},profile_hash="",
                 migration_client=None,validation_client=None,expected_rows=True)
+
+
+def test_expected_counts_are_configurable_without_opening_arbitrary_targets():
+    assert expected_source_rows("postgres")==734
+    assert expected_source_rows("baseline_100k")==100000
+    assert expected_source_rows("baseline_1m")==1000000
+    assert expected_source_rows("baseline_1m",12037)==12037
+    assert expected_source_rows("baseline_100k",0)==0
+    for value in (-1,True,"1000",2**63):
+        with pytest.raises(MigrationError):expected_source_rows("baseline_1m",value)
+    with pytest.raises(MigrationError):expected_source_rows("arbitrary",100)
+
+
+@pytest.mark.parametrize("command",["run","validate","check"])
+def test_cli_1m_count_override_is_forwarded(command,tmp_path,monkeypatch):
+    profile=tmp_path/"profile.yaml";profile.write_text("synthetic")
+    monkeypatch.setattr(cli,"REPO",tmp_path)
+    args=["migration",command,"--source","baseline_1m","--target","protected_1m","--profile",str(profile),"--expected-rows","12037"]
+    if command=="run":args.append("--keep-migration-token")
+    monkeypatch.setattr("sys.argv",args)
+    monkeypatch.setattr(cli,"load_profile",lambda path:{})
+    monkeypatch.setattr(cli,"runtime_parameters",lambda *a,**kw:{})
+    monkeypatch.setattr(cli,"OpenBaoClient",lambda **kw:FakeConnection())
+    monkeypatch.setattr(cli.psycopg,"connect",lambda **kw:FakeConnection())
+    captured={}
+    def run(*a,**kwargs):captured.update(kwargs);return {"passed":True,"complete":True}
+    def check(*args):captured["expected_rows"]=args[3];return {"passed":True}
+    monkeypatch.setattr(cli,"execute",run);monkeypatch.setattr(cli,"check_dependencies",check)
+    cli.main()
+    assert captured["expected_rows"]==12037
+    if command!="check":assert captured["target_name"]=="protected_1m"
+
+
+def test_cli_invalid_expected_count_fails_before_crypto_or_database(tmp_path,monkeypatch):
+    monkeypatch.setattr(cli,"REPO",tmp_path)
+    monkeypatch.setattr("sys.argv",["migration","run","--source","baseline_1m","--target","protected_1m","--expected-rows","-1"])
+    monkeypatch.setattr(cli,"OpenBaoClient",lambda **kw:pytest.fail("Must reject before connection"))
+    with pytest.raises(SystemExit):cli.main()
+    assert json.loads((tmp_path/"evidence/migration/validation.json").read_text())["error"]=="invalid_expected_row_count"
 
 
 def test_atomic_reports_allow_concurrent_targets(tmp_path,monkeypatch):

@@ -15,6 +15,13 @@ ROOT = Path(__file__).resolve().parents[1]
 NORMALIZATION = {"no_ktp": "ascii_digits_preserve_leading_zero", "email": "strip_lower", "pengguna": "strip_case_sensitive"}
 
 
+def text_hashes(path: Path) -> tuple[str, ...]:
+    """Equivalent UTF-8 text identities across Git LF/CRLF checkouts, canonical LF first."""
+    raw = path.read_bytes()
+    lf = raw.replace(b"\r\n",b"\n")
+    return tuple(dict.fromkeys(hashlib.sha256(value).hexdigest() for value in (lf,lf.replace(b"\n",b"\r\n"),raw)))
+
+
 def contract_columns(path: Path) -> dict:
     section = path.read_text(encoding="utf-8-sig").split("## 3.", 1)[1].split("## 4.", 1)[0]
     columns = {}

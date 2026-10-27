@@ -1,11 +1,10 @@
 """Require the decided pg-dpr endpoint/TLS and fence off original/baseline targets."""
 
-import json
 import os
 from pathlib import Path
 
 
-TARGETS = json.loads((Path(__file__).resolve().parents[1] / "infra/database-targets.json").read_text())
+from infra.targets import TARGETS
 
 
 def connection_parameters(database: str, *, source: bool = False, user: str | None = None,

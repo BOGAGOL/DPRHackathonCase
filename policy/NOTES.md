@@ -1,5 +1,11 @@
 # Tahap 3: Assessment-Driven Protection Profile
 
+Pemeriksaan loader menerima hash LF/CRLF dari input teks yang sama agar checkout
+Git Windows/Linux tidak dianggap perubahan assessment. Hash isi lainnya tetap
+harus cocok dan keputusan profile dibangun ulang/dibandingkan seluruhnya. Fingerprint
+job migrasi memakai profile LF kanonik dengan kompatibilitas hash byte legacy;
+perubahan isi profile tetap menggagalkan resume. Tidak ada perubahan kriptografi v1.
+
 `protection_profile.yaml` dibuat oleh `python -m policy.build_profile`, bukan diedit
 manual. Urutannya: inventory scanner -> kandidat tindakan -> keputusan eksplisit
 di `overrides.yaml` -> validasi kontrak bagian 3 -> profile. Ketidaksesuaian

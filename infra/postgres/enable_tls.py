@@ -24,10 +24,14 @@ from infra.security import REPO, external_directory, secure_directory, write_pri
 
 
 SSL_SETTINGS = ("ssl", "ssl_cert_file", "ssl_key_file", "ssl_min_protocol_version")
-DATABASES = ("baseline_100k", "protected_734", "protected_100k")
-HBA_BLOCK = ("# BEGIN DPR PROJECT TLS\n"
+DATABASES = ("baseline_100k", "protected_734", "protected_100k", "baseline_1m", "protected_1m")
+LEGACY_HBA_BLOCK = ("# BEGIN DPR PROJECT TLS\n"
              "hostnossl baseline_100k,protected_734,protected_100k all 0.0.0.0/0 reject\n"
              "hostnossl baseline_100k,protected_734,protected_100k all ::/0 reject\n"
+             "# END DPR PROJECT TLS\n")
+HBA_BLOCK = ("# BEGIN DPR PROJECT TLS\n"
+             f"hostnossl {','.join(DATABASES)} all 0.0.0.0/0 reject\n"
+             f"hostnossl {','.join(DATABASES)} all ::/0 reject\n"
              "# END DPR PROJECT TLS\n")
 
 
@@ -37,8 +41,12 @@ class TLSUpdateError(RuntimeError):
 
 def managed_hba(original: bytes) -> bytes:
     content = original.decode("utf-8")
-    if content.startswith(HBA_BLOCK):
-        return original
+    for block in (HBA_BLOCK,LEGACY_HBA_BLOCK):
+        if content.startswith(block):
+            suffix=content[len(block):]
+            if "# BEGIN DPR PROJECT TLS" in suffix or "# END DPR PROJECT TLS" in suffix:
+                raise TLSUpdateError("unexpected_managed_hba_block")
+            return HBA_BLOCK.encode()+suffix.encode("utf-8")
     if "# BEGIN DPR PROJECT TLS" in content or "# END DPR PROJECT TLS" in content:
         raise TLSUpdateError("unexpected_managed_hba_block")
     return HBA_BLOCK.encode() + original
@@ -132,7 +140,7 @@ SELECT json_build_object(
  'command_line_override', EXISTS(SELECT 1 FROM pg_settings WHERE name IN
    ('ssl','ssl_cert_file','ssl_key_file','ssl_min_protocol_version') AND source = 'command line'),
  'database_oids', (SELECT json_object_agg(datname, oid) FROM pg_database
-   WHERE datname IN ('postgres','baseline_100k','protected_734','protected_100k')));
+   WHERE datname IN ('postgres','baseline_100k','protected_734','protected_100k','baseline_1m','protected_1m')));
 """))
         if not result["superuser"] or not 180000 <= result["version"] < 190000:
             raise TLSUpdateError("requires_pg18_cluster_admin")

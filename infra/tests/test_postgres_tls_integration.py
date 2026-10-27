@@ -49,6 +49,13 @@ def test_live_enable_reload_verify_and_rollback_preserves_container_and_data(tmp
             target.run(["exec", "-i", "--user", "postgres", name, "psql", "-X", "-w", "-v", "ON_ERROR_STOP=1",
                         "-U", "dpr_bootstrap", "-d", database],
                         stdin="CREATE TABLE synthetic_probe (id integer PRIMARY KEY); INSERT INTO synthetic_probe SELECT generate_series(1,5);\n")
+        # Simulate an existing installation with the old three-database HBA block.
+        original_hba=directory/"postgres/fixture-original-hba.conf"
+        target.run(["cp",name+":"+before["hba_file"],str(original_hba)])
+        legacy_hba=directory/"postgres/fixture-legacy-hba.conf"
+        legacy_hba.write_bytes(pg.LEGACY_HBA_BLOCK.encode()+original_hba.read_bytes())
+        target.install_file(legacy_hba,before["hba_file"],"600")
+        target.query("SELECT pg_reload_conf();")
         # Force a post-reload verification failure: automatic rollback must restore SSL/HBA.
         original_verify = pg.verify_tls
         def fail_verify(*args):
@@ -63,6 +70,9 @@ def test_live_enable_reload_verify_and_rollback_preserves_container_and_data(tmp
         monkeypatch.setattr(pg, "verify_tls", original_verify)
         state_path, result = target.apply(directory)
         checks.update(result["checks"])
+        applied_hba=directory/"postgres/fixture-applied-hba.conf"
+        target.run(["cp",name+":"+before["hba_file"],str(applied_hba)])
+        checks["legacy_hba_upgraded_without_auth_rule_loss"]=applied_hba.read_bytes()==pg.HBA_BLOCK.encode()+original_hba.read_bytes()
         checks["tls12_or_tls13"] = result["tls_version"] in ("TLSv1.2", "TLSv1.3")
         checks["source_database_catalog_only"] = target.metadata()["database_oids"]["postgres"] == before["database_oids"]["postgres"]
         for database in pg.DATABASES:

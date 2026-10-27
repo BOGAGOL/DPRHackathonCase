@@ -68,6 +68,15 @@ def test_hba_block_is_idempotent_and_preserves_existing_auth_rules():
         pg.managed_hba(b"# BEGIN DPR PROJECT TLS\nunexpected configuration\n")
 
 
+def test_hba_upgrade_adds_1m_and_preserves_existing_tail():
+    tail=b"local all all trust\nhost all all all scram-sha-256\n"
+    upgraded=pg.managed_hba(pg.LEGACY_HBA_BLOCK.encode()+tail)
+    assert upgraded==pg.HBA_BLOCK.encode()+tail
+    assert "baseline_1m,protected_1m" in pg.HBA_BLOCK
+    assert pg.managed_hba(upgraded)==upgraded
+    with pytest.raises(pg.TLSUpdateError):pg.managed_hba(upgraded+pg.LEGACY_HBA_BLOCK.encode())
+
+
 def test_state_save_is_atomic(tmp_path):
     directory = secure_directory(tmp_path / "private")
     path = directory / "state.json"

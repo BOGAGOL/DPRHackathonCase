@@ -7,7 +7,12 @@
   "port": 5433,
   "sslmode": "verify-full",
   "plain_database": "baseline_100k",
-  "protected_databases": ["protected_734", "protected_100k"],
-  "read_only_sources": ["postgres", "baseline_100k"],
+  "protected_databases": ["protected_734", "protected_100k", "protected_1m"],
+  "read_only_sources": ["postgres", "baseline_100k", "baseline_1m"],
+  "migration_pairs": {
+    "postgres": {"target": "protected_734", "expected_rows": 734},
+    "baseline_100k": {"target": "protected_100k", "expected_rows": 100000},
+    "baseline_1m": {"target": "protected_1m", "expected_rows": 1000000}
+  },
   "openbao_address": "https://127.0.0.1:8200"
 }

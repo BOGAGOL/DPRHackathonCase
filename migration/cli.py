@@ -2,7 +2,6 @@
 
 import argparse
 from datetime import datetime, timezone
-import hashlib
 import json
 import os
 from pathlib import Path
@@ -17,10 +16,11 @@ from infra.openbao.api import from_environment
 from infra.openbao.init import revoke_migration
 from infra.protected.apply import load_profile
 from infra.security import REPO
+from policy.build_profile import text_hashes
 from .connection import connection_parameters
 from .model import MigrationError
 from .prepare import prepare
-from .runner import PAIRS, check_pair, execute
+from .runner import PAIRS, check_pair, execute, expected_source_rows
 
 
 def write_report(name: str, report: dict) -> None:
@@ -65,8 +65,10 @@ def revoke() -> dict:
     return {"passed":True,"migration_token_revoked":True}
 
 
-def check_dependencies(source_name: str, target_name: str, profile_path: Path) -> dict:
+def check_dependencies(source_name: str, target_name: str, profile_path: Path,
+                       expected_rows: int | None = None) -> dict:
     check_pair(source_name,target_name)
+    expected = expected_source_rows(source_name,expected_rows)
     load_profile(profile_path)
     checks = {"profile_current":True}
     # No writes, no automatic init/unseal, and no secret values in this report.
@@ -92,12 +94,13 @@ def check_dependencies(source_name: str, target_name: str, profile_path: Path) -
                 checks[label+"_tls_connection"] = actual==database and version//10000==18
                 if is_source:
                     checks["source_read_only"] = connection.execute("SHOW transaction_read_only").fetchone()[0]=="on"
+                    checks["source_expected_rows"] = connection.execute("SELECT count(*) FROM public.anggota").fetchone()[0]==expected
                 else:
                     checks["target_control_table"] = connection.execute("SELECT to_regclass('public.migration_jobs') IS NOT NULL").fetchone()[0]
                     checks["target_migration_login"] = connection.execute("SELECT current_user='migration_user' AND NOT rolsuper AND NOT rolbypassrls AND NOT rolcreatedb AND NOT rolcreaterole AND NOT rolreplication FROM pg_roles WHERE rolname=current_user").fetchone()[0]
         except Exception:
             checks[label+"_tls_connection"] = False
-    return {"passed":all(checks.values()),"checks":checks,"data_migrated":False,"source":source_name,"target":target_name}
+    return {"passed":all(checks.values()),"checks":checks,"data_migrated":False,"source":source_name,"target":target_name,"expected_rows":expected}
 
 
 def main() -> None:
@@ -108,6 +111,7 @@ def main() -> None:
         command.add_argument("--source",choices=tuple(PAIRS),required=True)
         command.add_argument("--target",choices=tuple(PAIRS.values()),required=True)
         command.add_argument("--profile",type=Path,default=REPO/"policy/protection_profile.yaml")
+        command.add_argument("--expected-rows",type=int,help="Expected source count; default comes from the reviewed dataset configuration")
         if name=="run":
             command.add_argument("--batch-size",type=int,default=1000)
             command.add_argument("--max-batches",type=int)
@@ -126,19 +130,21 @@ def main() -> None:
         elif args.command=="revoke":
             report.update(revoke())
         elif args.command=="check":
-            report.update(check_dependencies(args.source,args.target,args.profile))
+            report.update(check_dependencies(args.source,args.target,args.profile,args.expected_rows))
         else:
             check_pair(args.source,args.target)
+            expected = expected_source_rows(args.source,args.expected_rows)
             profile = load_profile(args.profile)
+            profile_hashes = text_hashes(args.profile)
             with OpenBaoClient(token_env="OPENBAO_MIGRATION_TOKEN") as migration_client, \
                  OpenBaoClient(token_env="OPENBAO_VALIDATION_TOKEN") as validation_client, \
                  psycopg.connect(**runtime_parameters(args.source,source=True),autocommit=True,row_factory=dict_row) as source, \
                  psycopg.connect(**runtime_parameters(args.target,source=False),autocommit=True,row_factory=dict_row) as target:
                 report.update(execute(source,target,source_name=args.source,target_name=args.target,profile=profile,
-                    profile_hash=hashlib.sha256(args.profile.read_bytes()).hexdigest(),migration_client=migration_client,
+                    profile_hash=profile_hashes[0],compatible_profile_hashes=profile_hashes[1:],migration_client=migration_client,
                     validation_client=validation_client,batch_size=getattr(args,"batch_size",1000),
                     max_batches=getattr(args,"max_batches",None),validate_only=args.command=="validate",
-                    expected_rows=734 if args.source=="postgres" else 100000))
+                    expected_rows=expected))
             if args.command=="run" and report.get("complete") and not args.keep_migration_token:
                 revocation = {**revoke(),"schema_version":1,"checked_at_utc":datetime.now(timezone.utc).isoformat()}
                 write_report("revocation",revocation)
