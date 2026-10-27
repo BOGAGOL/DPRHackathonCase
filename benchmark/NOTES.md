@@ -211,3 +211,83 @@ Raw1M: 133.678.973 byte CSV menjadi28.953.920 byte gzip level1. Hash dekompresi 
 Rasio throughput pgbench/Python = 29.239?. Hash corpus2048 key identik; semua3 run pgbench tanpa error, data/sequence100k tetap. Query mengembalikan30 field; pgbench memakai clientC, jalurTCP di container dan tidak mengonversi/membandingkan field Python tiap request. Angka tersebut mencakup overhead client, validasi/logging dan perbedaan transport/penempatan, bukan estimasi murni overhead interpreter.
 CPU client1M dari psutil: median per skenario 12.575?16.169% kapasitas8 logicalCPU; peak sampel tertinggi 17.988%. CPU keseluruhan mesin tidak jenuh pada sampel, tetapi ini tidak membuktikan ketiadaan batas GIL/satu inti atau bottleneck transport. CPU client100k read_by_nik historis 15.094% kapasitas mesin. Resource mentah berada dalam gzip; ringkasan client_cpu.json menyimpan definisi dan cakupan.
 Evidence: evidence/benchmark/baseline_1m/ (summary, per-run, env, backup_restore, raw_validation, client_cpu); crosscheck_pgbench.json; session_1m_crosscheck.json. Raw pgbench di results/bench/crosscheck_pgbench/ tanpa key; seluruh log sementara container serta script privat sudah dihapus.
+
+## Investigasi overhead runner — 27 Oktober 2026
+
+Ini diagnostik terbatas, **bukan rerun benchmark resmi**. Kode runner/adapter dan
+seluruh hasil baseline 100k/1M tetap. Perintah: `python -m benchmark.diagnose_overhead`
+(venv benchmark; env BENCH_DATABASE_URL dan DPR_PRIVATE_DIR yang sama). Request
+read-only: 2.000 **total** per concurrency 1/8, warmup 32 per worker; tambahan 32
+EXPLAIN per database. Corpus lookup privat asli dipakai kembali, tanpa generation.
+Raw aman di `results/bench/diagnostics/`; hasil `evidence/benchmark/runner_overhead.json`.
+
+Audit `one_run`/`worker_run`/`PlaintextAdapter`: satu koneksi persisten per worker,
+dibuka sebelum thread/measurement; bukan connect setiap request. CSV per worker
+buffer 256 KiB, tanpa flush/fsync per request, ditulis setelah latency dicatat.
+Validasi satu tuple 30 field; expected tuple dan komposisi query dibuat per request.
+Sorting percentile dan checksum seluruh DB berada di luar measurement. Tidak ada
+lock bersama eksplisit dalam request path. Delapan backend tetap, masing-masing
+memiliki satu prepared statement setelah warmup. Tidak ditemukan cacat implementasi
+yang mengharuskan perbaikan/rerun; tidak ada benchmark resmi yang diulang.
+
+Rata-rata komponen dari sampel diagnostik (ms; p50/p95 tersimpan juga di JSON):
+
+| Komponen | concurrency 1 | concurrency 8 |
+|---|---:|---:|
+| psycopg.execute | 0.737483 | 3.309983 |
+| psycopg.fetchall | 0.006094 | 0.009216 |
+| kode adapter di luar driver | 0.030470 | 0.049302 |
+| end-to-end adapter | 0.774047 | 3.368501 |
+| bookkeeping + buffered CSV, di luar latency | 0.012643 | 0.020303 |
+
+P50/p95 request: c1 **0.677650/1.309210 ms**, c8 **3.239200/5.569475 ms**,
+masing-masing 0 error. Timer proxy menambah sedikit overhead. Komponen mean
+menjumlah; percentile komponen tidak boleh dijumlah/dikurangkan. CSV diagnostik
+berisi timer execute/fetch/adapter/latency aman; bookkeeping setelah penulisan
+CSV hanya diagregasi di JSON (kolom raw itu kosong), tanpa parameter bisnis. `execute` mencakup
+psycopg/libpq, round trip Windows→Docker forwarded port, scheduling dan server;
+ini **bukan pengukuran CPU interpreter Python saja**. Runtime Python 3.11.3,
+psycopg 3.3.6 dengan libpq implementation `binary`, waiting function module
+`psycopg.waiting`, switch interval GIL default 5 ms (tidak diubah). Thread CPU terukur 0,5000 s
+(c1) dan 1,1875 s (c8). Tidak ada lock profiler, sehingga GIL/per-core scheduling
+belum dapat dipisahkan secara kuantitatif. Tidak menyimpulkan seluruh selisih
+29,24× pgbench berasal dari GIL. pgbench berjalan lewat loopback di container dan
+tidak melakukan konversi serta validasi tuple Python. Sampel 2.000 request ini
+lebih singkat dan kondisi cache/waktu berbeda dari sesi resmi; tidak menggantikannya.
+
+EXPLAIN ANALYZE terpisah (TIMING ON; overhead instrumentasi termasuk): server
+100k execution mean/p50/p95 **0.031469/0.029500/0.051600 ms**; 1M
+**1.076281/1.012000/1.925400 ms**. Planning dilaporkan terpisah. Plan lengkap
+tidak disimpan karena Index Cond dapat mengandung NIK; hanya node/index name,
+timing dan aggregate buffer counts keluar. Tidak mengurangkan p50 EXPLAIN dari
+p50 client seolah sampelnya berpasangan.
+
+P95 resmi NIK 7,797→15,400 ms konsisten dengan working set yang membesar:
+NIK index 100k **5.336 MiB**, 1M **44.023 MiB**; shared_buffers **128 MiB**, global
+untuk instance. **Index NIK 1M sendiri masih muat**; total index 279,18 MiB dan
+heap 499,68 MiB bersaing memperebutkan buffer, dibanding total heap+index 100k
+91,95 MiB. Snapshot statistik saat investigasi: NIK index hit 99,9982% vs 97,8057%,
+heap hit 99,9397% vs 73,5230% (100k vs 1M). EXPLAIN 100k 128 hit/0 read block;
+1M 61 hit/97 read block. Ini mendukung cache misses sebagai faktor yang masuk
+akal, **bukan bukti sebab tunggal p95 historis**: counters kumulatif mencampur
+benchmark, integrity scan dan pgbench; hit OS cache bukan hit shared buffers.
+Tidak mereset statistik, membersihkan cache, menjalankan VACUUM atau mengubah konfigurasi.
+
+`pg_stat_statements` belum terpasang di kedua baseline; pembacaan admin memastikan
+shared_preload_libraries kosong dan track_io_timing off. Tiga probe metadata awal
+gagal karena hak baca shared_preload_libraries dibatasi/row disembunyikan dari
+bench_user; diperbaiki menjadi nilai unavailable. Semua terjadi **sebelum** loop
+diagnostik; hanya satu batch c1/c8 berhasil dijalankan. Tidak mengubah role/config.
+
+Usulan untuk eksperimen berpasangan nanti: tampilkan **db_time_mean_ms = delta
+total_exec_time / delta calls** dari pg_stat_statements, berdampingan dengan
+latency bisnis end-to-end yang tetap menjadi target P01. Ambil delta per dbid,
+userid, queryid dan top-level pada interval measurement yang terisolasi; catat
+planning terpisah, reset/eviction dan sesi lain. Ini mean server, bukan p95 atau
+waktu crypto/round trip. Pengaktifan membutuhkan setup/restart yang disepakati
+sebelum **kedua mode**; jangan mengubahnya di tengah B-P-P-B atau menyebut baseline
+lama sudah mempunyai db_time. Belum diaktifkan pada sesi ini.
+
+Rujukan primer untuk interpretasi: [PostgreSQL 18 cumulative statistics](https://www.postgresql.org/docs/18/monitoring-stats.html),
+[pg_stat_statements](https://www.postgresql.org/docs/18/pgstatstatements.html),
+[Psycopg concurrent connections](https://www.psycopg.org/psycopg3/docs/advanced/async.html).

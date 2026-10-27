@@ -1,0 +1,15 @@
+population,metric,before,numerator,denominator,after
+all,ESCE,1.0,24500005,24500005,BELUM DIUJI
+all,DIE,1.0,1000000,1000000,BELUM DIUJI
+all,residual_min_k_across_1_to_3_attributes,1362,,,BELUM DIUJI
+all,birth_reference_unique_ratio,0.003123,3123,1000000,BELUM DIUJI
+source_734,ESCE,1.0,17983,17983,BELUM DIUJI
+source_734,DIE,1.0,734,734,BELUM DIUJI
+source_734,residual_min_k_across_1_to_3_attributes,1,,,BELUM DIUJI
+source_734,birth_reference_unique_ratio,0.9945504087193461,730,734,BELUM DIUJI
+synthetic,ESCE,1.0,24482022,24482022,BELUM DIUJI
+synthetic,DIE,1.0,999266,999266,BELUM DIUJI
+synthetic,residual_min_k_across_1_to_3_attributes,1361,,,BELUM DIUJI
+synthetic,birth_reference_unique_ratio,0.0031383035147798484,3136,999266,BELUM DIUJI
+all,ELS_plaintext_equality_columns,29,,,BELUM DIUJI
+all,ELS_bidx_columns,0,,,BELUM DIUJI
