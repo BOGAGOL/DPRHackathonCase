@@ -1,5 +1,15 @@
 # DPR Secure Data Management System
 
+## Keputusan infrastruktur terbaru — 27 Oktober 2026
+
+Database proyek memakai **PostgreSQL 18 `pg-dpr`, port host 5433**: `baseline_100k`
+untuk MODE=plain dan `protected_734`/`protected_100k` untuk MODE=protected.
+OpenBao memakai [Compose Modul A](infra/compose.yaml), TLS port 8200.
+Panduan terkini: [TLS pg-dpr dan clone development](infra/postgres/README.md).
+Instruksi PostgreSQL 17/port 554xx pada bagian lab di bawah adalah sistem lama;
+pengalihan konfigurasi API/MODE dikerjakan Modul B. Benchmark resmi tetap pada
+laptop pemilik baseline; clone laptop Alby memakai evidence/development terpisah.
+
 Aplikasi layanan Next.js + FastAPI untuk melihat, mencari, dan memperbarui data anggota sesuai hak akses. Ini prototipe hackathon dengan dataset sintetis, bukan situs resmi DPR atau Privacy Scanner. Kode scanner/artefak Task 1 di luar checkout tidak diubah.
 
 Sudah dijalankan pada Windows: PostgreSQL baseline/protected terpisah, import **734 × 29** tanpa perubahan nilai, autentikasi, role/record/field authorization, AES-256-GCM, blind lookup, edit kontak, audit, browser flows, backup/restore, dan benchmark tiga pengulangan termasuk **10.000 record sintetis baru**. Status dan evidence rinci ada di [PROGRESS.md](docs/legacy-md_zhafif/PROGRESS.md) dan [evidence/README.md](docs/legacy-md_zhafif/evidence/README.md). Docker Compose tervalidasi konfigurasinya; container runtime belum diuji karena Docker Engine tidak aktif. Live OpenBao dan TLS deployment: **NOT TESTED**.

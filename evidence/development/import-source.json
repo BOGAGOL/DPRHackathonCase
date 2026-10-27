@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "command": "import-source",
+  "passed": true,
+  "official_benchmark": false,
+  "scope": "local development only",
+  "checked_at_utc": "2026-10-27T04:02:44.858013+00:00",
+  "result": {
+    "rows": 734,
+    "ktp_unique": 734,
+    "nik_min_length": 14,
+    "nik_max_length": 14,
+    "married": 367,
+    "marriage_dates": 367,
+    "passed": true,
+    "input_sha256": "2c8b49f58b0abd1701c5e2b4437cf75037f808c272690c59ce5c7913c1d34d3c"
+  }
+}

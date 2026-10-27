@@ -1,5 +1,62 @@
 # Modul A — Tahap 1 infra
 
+## Pembaruan keputusan dan penerapan — 27 Oktober 2026
+
+Bagian Tahap 1 di bawah merekam kondisi historis. Keputusan terbaru: seluruh DB
+proyek pada pg-dpr PostgreSQL 18 port host 5433; Compose Modul A hanya OpenBao
+8200. Opsi proyek 5434 dihapus. Fixture PG18 disposable dipisah ke infra/tests/.
+Konfigurasi mesin ada di infra/database-targets.json; helper migration/connection
+memagari target protected_734/protected_100k dan sumber read-only, TLS verify-full.
+
+Awalnya pg-dpr tidak ditemukan pada Docker context lokal. Pengguna mengklarifikasi
+bahwa instance resmi ada di laptop teman dan secara eksplisit meminta clone
+development lokal. Container baru pg-dpr dibuat **hanya di laptop ini** dengan
+named volume pg-dpr-data, PG18 parent mount, password CSPRNG via env Docker.
+Kredensial tersimpan sebagai PSCredential Windows DPAPI di luar repo (ACL operator).
+Instance resmi, container, dan data laptop lain tidak diakses/diubah.
+
+TLS diaktifkan di container lokal setelah bootstrap dengan sertifikat leaf
+terpisah ditandatangani CA lokal, server.key owner postgres/0600 pada volume.
+ALTER SYSTEM empat parameter + pg_reload_conf, tanpa recreate atau restart
+postmaster. Snapshot SSL overrides/HBA/auto.conf di luar repo; rollback hanya
+mengembalikan setting SSL terkait dan HBA yang hash-nya masih cocok, tidak RESET
+ALL/menimpa perubahan lain. Leaf 30 hari, TLS minimum 1.2. hostnossl reject IPv4
+dan IPv6 untuk baseline_100k/protected_734/protected_100k, setelah TLS verify-full
+berhasil; aturan autentikasi lain dan Unix socket dipertahankan. Existing session
+tidak diputus. Koneksi sumber asli postgres juga memakai TLS dari client A.
+
+Sumber privat sql/baseline/02_data.sql ditemukan lokal, tetap gitignored. Initial
+population ke DB postgres **baru/kosong** memakai lexer scanner non-executing dan
+INSERT berparameter, tanpa plaintext temp di container; tabel sumber yang sudah
+ada ditolak. Sesudah import, validasi/read checksum saja: **734**, KTP unik **734**,
+panjang NIK **14/14**, kawin/tanggal **367/367**. Checksum sumber cocok evidence C.
+
+baseline_100k lokal dibuat dengan generator C rows=100000/seed=42 dan checksum
+**e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff**, identik
+laporan resmi. Writer evidence C diarahkan sementara dalam proses ke
+evidence/development/, dipulihkan finally. Tidak mengubah kode C atau overwrite
+evidence/datasets/baseline_100k.json resmi. Semua evidence development diberi
+official_benchmark=false. Protected DB dibuat kosong, **belum** skema/migrasi.
+
+Hasil akhir:
+
+- Verifikasi SQL read-only pada empat DB memakai verify-full, pg_stat_ssl
+  mengonfirmasi **TLSv1.3**; checksum sumber + baseline dihitung ulang via streaming
+  cursor dan keduanya cocok laporan resmi. Evidence: evidence/development/verify.json.
+- Uji container PG18 disposable: **19 check lulus** untuk reload, rollback otomatis/
+  eksplisit, idempotensi HBA, mode key, row sintetis tetap, ID container dan waktu
+  start postmaster tetap. Evidence: evidence/infra/postgres-tls-integration.json.
+- Gabungan aplikasi/infra/toolkit **176 test lulus, 1 skip** dataset opsional,
+  1 warning deprecation Starlette lama. Datagen+scanner terpisah **152 lulus,
+  1 skip** DB test opsional. XML di evidence/infra/pg-dpr-*-regression*.xml.
+- Readiness harus menunggu TCP server final; initdb sementara hanya socket tidak
+  boleh dipakai sebagai tanda siap untuk mengubah konfigurasi atau membuat DB.
+- OpenBao lokal HTTPS 8200 berjalan, **initialized=false/sealed=true**, menunggu
+  bootstrap/unseal manual sesuai runbook. Toolkit test memakai server disposable.
+- API lama/Compose PostgreSQL 17 milik B tidak diubah. Panduan pemilihan MODE,
+  endpoint pg-dpr, CA publik, dan batas scope disediakan di infra/postgres/README.md.
+  TLS pada instance resmi teman masih perlu diterapkan di laptop/context miliknya.
+
 ## Batas tahap dan adaptasi referensi
 
 Membaca AGENTS.md, PROJECT_CONTEXT, CONTRACT, TEAM_PLAN dan prompt modul A.

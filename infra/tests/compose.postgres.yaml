@@ -1,0 +1,21 @@
+# Disposable integration fixture only; never use this file for the project database.
+services:
+  postgres:
+    image: postgres:18
+    environment:
+      POSTGRES_USER: dpr_bootstrap
+      POSTGRES_DB: dpr_lab
+      POSTGRES_PASSWORD: ${DPR_POSTGRES_PASSWORD:?Synthetic test password required}
+      POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256
+    ports: ["127.0.0.1:${DPR_POSTGRES_PORT:-0}:5432"]
+    volumes: [postgres_test_data:/var/lib/postgresql]
+    healthcheck:
+      test: [CMD, pg_isready, -U, dpr_bootstrap, -d, dpr_lab]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+    networks: [data_test]
+networks:
+  data_test: {}
+volumes:
+  postgres_test_data: {}

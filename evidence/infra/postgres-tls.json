@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "command": "verify",
+  "container": "pg-dpr",
+  "host": "127.0.0.1",
+  "port": 5433,
+  "checked_at_utc": "2026-10-27T04:06:37.087882+00:00",
+  "checks": {
+    "tls_on": true,
+    "plaintext_rejected:baseline_100k": true,
+    "plaintext_rejected:protected_734": true,
+    "plaintext_rejected:protected_100k": true
+  },
+  "tls_version": "TLSv1.3",
+  "certificate_sha256": "b2477cef394d2664ae4c6e166dffee6b464183417ee63c64d3cdd2c17c849795",
+  "hostname_verified": true
+}

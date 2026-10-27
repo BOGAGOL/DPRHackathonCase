@@ -65,18 +65,30 @@ menerbitkan ulang sebelum TTL habis. Setelah restart server, ulangi unseal manua
 File recovery kosong setelah interupsi harus ditangani operator; jangan menghapus
 file lalu mengulang init tanpa mengecek status/recovery terlebih dahulu.
 
-PostgreSQL: pakai `pg-dpr` yang sudah ada di 5433 tanpa mengubah database `postgres`,
-atau jalankan instance **baru** pada port default 5434:
+Keputusan database proyek (27 Oktober 2026): semua database berada pada container
+**`pg-dpr`, PostgreSQL 18, port host 5433**. OpenBao tetap Compose ini pada 8200.
+Compose ini hanya mengelola OpenBao. Target mesin ada di
+[database-targets.json](database-targets.json); panduan TLS in-place ada di
+[postgres/README.md](postgres/README.md).
 
 ```powershell
-# Isi DPR_POSTGRES_PASSWORD dari secret manager / environment sesi; jangan literal
-# password dalam command history. Image akan menolak password kosong.
-docker compose -f infra/compose.yaml --profile new-postgres up -d postgres
+# Jalankan pada Docker context yang memiliki container/data tersebut.
+docker start pg-dpr
+.\.venv\Scripts\python.exe -m infra.postgres.make_cert
+.\.venv\Scripts\python.exe -m infra.postgres.enable_tls inspect
+.\.venv\Scripts\python.exe -m infra.postgres.enable_tls apply
 ```
 
-Database baru bernama `dpr_lab`, admin `dpr_bootstrap`, volume PG18 terpisah.
-Port PostgreSQL hanya loopback; TLS PostgreSQL belum termasuk tahap ini.
-Lihat [NOTES.md](NOTES.md) untuk keputusan dan batas klaim.
+`baseline_100k` yang sudah ada dipertahankan untuk MODE=plain; target MODE=protected
+adalah `protected_734` / `protected_100k`. Skrip TLS tidak membuat database/tabel,
+tidak recreate/restart container, dan tidak menjalankan migrasi. Sertifikat dan
+key server dipasang di volume data yang sudah ada, lalu ALTER SYSTEM + reload.
+Snapshot rollback dan CA/key privat berada di DPR_SECRETS_DIR di luar repo.
+Client memakai `sslmode=verify-full` dan CA yang sama.
+Klarifikasi: instance benchmark resmi berada di laptop teman; laptop ini memakai
+clone development pg-dpr sendiri. Clone dan validasinya disiapkan dengan
+`python -m infra.postgres.development ...`, detail di panduan PostgreSQL di atas.
+Evidence development terpisah dari evidence/datasets resmi.
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest infra/tests -q
@@ -86,6 +98,8 @@ Uji container nyata (Docker aktif, image PostgreSQL 18/OpenBao akan diunduh bila
 belum ada). Uji membuat project/volume acak, memakai data sintetis dalam memori,
 lalu menghapus hanya resource uji tersebut. Tidak menyentuh `pg-dpr` atau volume
 `dpr-infra`. Recovery material uji berada di temporary directory di luar repo.
+PostgreSQL disposable hanya didefinisikan di `infra/tests/compose.postgres.yaml`,
+tanpa port tetap. Ini fixture test, bukan pilihan database proyek.
 
 ```powershell
 $env:DPR_INFRA_INTEGRATION = '1'
