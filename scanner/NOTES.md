@@ -19,6 +19,16 @@
   termasuk integrasi read-only dan nama disamarkan. Klasifikasi/evaluator tetap;
   ground truth dan metodologi tidak diedit. Hasil scan aktual dicatat sesudah freeze kode.
 
+Hasil aktual v1.2 (19:37 WIB): scan 734 baris lulus. Functional turun dari13 menjadi6,
+semuanya consistent_group_ratio=1.0 dan sumber di bawah/sama batas0.8;18 kolom
+dicatat near_unique. Alamat_daerah → tempat_lahir muncul sebagai text_component,
+ratio1.0 pada734 pasangan; status_kawin → tanggal_pernikahan tetap presence_iff_category,
+ratio1.0 pada734 pasangan. Prediksi tipe/kelas tidak diubah oleh aturan relasi baru:
+precision96,30%, recall100%, F1=98,11%, F2=99,24%, in_sample=true pada29 kolom tanpa id.
+194 test lulus tanpa skip/error. Checksum sumber, GT/metodologi dan artefak v1 utuh;
+audit10.645 nilai lengkap dalam cakupan yang dinyatakan menemukan0 kecocokan.
+Evidence: before_v1_2/, evaluation_v1_2.json, v1_2_validation.json. Artefak v1.1 dipertahankan.
+
 ## Lingkup dan status awal (sebelum langkah 4)
 
 Implementasi ada seluruhnya di `scanner/`, selain target Makefile dan bagian

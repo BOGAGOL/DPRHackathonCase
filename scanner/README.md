@@ -83,3 +83,5 @@ Get-Content -Raw evidence/scanner/before_v1_2/relations.json | ConvertFrom-Json
 ```
 
 Pertahankan keluaran historis; gunakan direktori berbeda untuk scan ulang.
+Hasil aktual v1.2: [evaluasi](../evidence/scanner/evaluation_v1_2.json) dan
+[validasi relasi/test](../evidence/scanner/v1_2_validation.json).
