@@ -17,8 +17,8 @@ def test_near_unique_nonnull_source_not_functional(config, environment):
     assert near[0]["unique_values"] == 19
 
 
-def test_functional_source_at_ninety_percent_kept(config, environment):
-    rows = [(f"source-{i}", "X") for i in range(18)] + [("source-0", "X")] * 2
+def test_functional_source_at_eighty_percent_kept(config, environment):
+    rows = [(f"source-{i}", "X") for i in range(16)] + [("source-0", "X")] * 4
     table = Table("fixture", ["source", "target"], ["text"] * 2, rows, len(rows))
     _, _, rels = analyze([table], config, environment)
     assert any(r["kind"] == "functional" and r["source"] == "source" for r in rels["dependencies"])

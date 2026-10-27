@@ -95,7 +95,7 @@ def test_run_metadata_and_single_birth_uniqueness(sql_dump, tmp_path):
     out = tmp_path / "v11"
     assert main(["dump", "--file", str(sql_dump), "--out", str(out)]) == 0
     meta = json.loads((out / "run_meta.json").read_text(encoding="utf-8"))
-    assert meta["scanner_version"] == __version__ == "1.1.0"
+    assert meta["scanner_version"] == __version__ == "1.2.0"
     assert meta["change_summary"] == CHANGE_SUMMARY
     assert all(isinstance(change, str) and change for change in meta["change_summary"])
     with (out / "inventory.csv").open(encoding="utf-8", newline="") as handle:

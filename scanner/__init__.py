@@ -1,8 +1,9 @@
 """Local, read-only personal data candidate scanner."""
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 CHANGE_SUMMARY = [
+    "v1.2: functional hanya konsistensi 1.0 dan rasio unik sumber <=0.8; kecocokan komponen teks dicatat terpisah.",
     "NIK nonstandar dengan bukti isi; kategori, tanggal pernikahan, hitungan keluarga, dan surrogate ID dibedakan.",
     "Sensitivitas dan dampak per jenis dari impact.yaml; tiga faktor lingkungan tetap terpisah.",
     "Functional dependency mengecualikan sumber hampir unik dan melaporkannya sebagai quasi-identifier.",

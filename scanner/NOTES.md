@@ -1,5 +1,24 @@
 # Catatan implementasi scanner
 
+## Scanner 1.2.0 — relasi sesudah benchmark 1M/pgbench, 27 Oktober 2026
+
+- Perubahan scanner baru dimulai setelah seluruh fase benchmark berakhir pada
+  19:26:07 WIB; session_1m_crosscheck.json mencatat semuanya PASSED tanpa retry.
+- Functional memerlukan consistent_group_ratio tepat1.0. Sumber dengan rasio
+  unik non-NULL >0.8 diabaikan sebagai sumber functional dan dicatat pada
+  near_unique_quasi_identifiers. Batas tepat0.8 masih diterima; kebijakan mesin
+  disimpan dalam relations.json. Threshold relasi jenis lain tetap terpisah.
+- Alamat lengkap unik per baris sehingga tidak membuktikan FD hanya melalui
+  pengelompokan. Relasi alamat_daerah → tempat_lahir dipertahankan sebagai
+  `text_component`, berdasarkan kecocokan persis hasil ekstraksi segmen setelah
+  koma terakhir pada semua pasangan. Aturan generik juga diuji dengan nama kolom
+  delivery_label/town_label; tidak ada pengecualian hardcode untuk kolom dump.
+  Presence iff kategori status_kawin → tanggal_pernikahan tetap dipertahankan.
+- Regresi baru menolak konsistensi90%/95%, menolak sumber unik85%, menerima batas80%,
+  serta menguji komponen kota dan relasi NULL. Seluruh194 test scanner lulus,
+  termasuk integrasi read-only dan nama disamarkan. Klasifikasi/evaluator tetap;
+  ground truth dan metodologi tidak diedit. Hasil scan aktual dicatat sesudah freeze kode.
+
 ## Lingkup dan status awal (sebelum langkah 4)
 
 Implementasi ada seluruhnya di `scanner/`, selain target Makefile dan bagian

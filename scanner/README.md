@@ -1,4 +1,4 @@
-# Scanner 1.1.0 dan evaluasi independen
+# Scanner 1.2.0 dan evaluasi independen
 
 Scanner membaca sampel dan agregat dalam transaksi REPEATABLE READ READ ONLY.
 Hasil memuat contoh termasking, bukan salinan nilai sumber. Jalankan dari root repo
@@ -23,7 +23,7 @@ $env:SCANNER_TEST_DATABASE_URL = $env:SCANNER_DATABASE_URL
 Test integrasi hanya memeriksa snapshot read-only, isolasi transaksi, dan batas sampel;
 tidak membuat/mengubah tabel. Jangan merotasi password role untuk mengulang pengujian.
 
-## Scan dan evaluasi
+## Scan dan evaluasi sesi 1.1 (historis)
 
 Perintah pembuatan evidence berikut untuk eksekusi pertama. Pertahankan
 `evidence/scanner/before_v1/` dan pilih direktori baru untuk scan ulang agar hasil lama tetap utuh.
@@ -63,3 +63,23 @@ Hasil sesi 27 Oktober 2026 ada di [comparison.csv](../evidence/scanner/compariso
 [validasi artefak](../evidence/scanner/step4_validation.json).
 `evaluation.json` adalah salinan evaluasi v1.1. Seluruh 188 test, termasuk integrasi
 read-only dan nama disamarkan, lulus; keputusan/keterbatasan terperinci ada di NOTES.md.
+
+## Relasi v1.2 dan scan terbaru
+
+Functional hanya dilaporkan jika seluruh grup konsisten (`consistent_group_ratio=1.0`)
+dan rasio unik non-NULL sumber <=0.8. Kolom di atas batas dicatat sebagai
+near_unique_quasi_identifiers. Komponen setelah koma terakhir dapat diuji terhadap
+kolom lain; kecocokan persis pada seluruh pasangan dicatat sebagai `text_component`.
+Dengan demikian relasi alamat → kota dibuktikan dari komponen yang cocok, sementara
+alamat unik tetap dikecualikan sebagai sumber functional. Nama kolom tidak di-hardcode.
+Presence iff kategori tetap dianalisis dengan seluruh pasangan, termasuk NULL.
+
+Setelah mengatur env scanner dengan aman seperti di atas, untuk eksekusi pertama:
+
+```powershell
+.\scanner\.venv\Scripts\python.exe -m scanner db --schema public --sample 1000 --label before --out evidence/scanner/before_v1_2
+.\scanner\.venv\Scripts\python.exe -m scanner evaluate --pred evidence/scanner/before_v1_2/inventory.csv --truth scanner/ground_truth_eval.csv --out evidence/scanner/evaluation_v1_2.json
+Get-Content -Raw evidence/scanner/before_v1_2/relations.json | ConvertFrom-Json
+```
+
+Pertahankan keluaran historis; gunakan direktori berbeda untuk scan ulang.
