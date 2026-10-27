@@ -1,0 +1,30 @@
+﻿table,column,is_personal,detected_type,pdp_class,risk_level,notes
+public.anggota,nama,1,PERSON_NAME,umum,sedang,Nama anggota; pengenal langsung. Ketiga kolom nama bernilai identik dalam semua 734 record; tetap labeli masing-masing atribut.
+public.anggota,nama_lengkap,1,PERSON_NAME,umum,sedang,Nama lengkap anggota merupakan data pribadi umum secara eksplisit dalam UU PDP Pasal 4(3); duplikat semantik kolom nama.
+public.anggota,nama_tanpa_gelar,1,PERSON_NAME,umum,sedang,Nama tanpa gelar mengidentifikasi orang; isi dump identik dengan nama dan nama_lengkap.
+public.anggota,jenis_kelamin,1,GENDER,umum,rendah,"Atribut jenis kelamin L/P; Pasal 4(3) termasuk pribadi umum, bukan data biometrik atau spesifik."
+public.anggota,tempat_lahir,1,BIRTH_PLACE,umum,sedang,Kota tempat lahir; quasi-identifier yang memperkuat identifikasi jika digabung nama atau tanggal lahir.
+public.anggota,tanggal_lahir,1,BIRTH_DATE,umum,tinggi,Tanggal lahir lengkap YYYY-MM-DD; memperkuat pencocokan identitas dan rekonstruksi profil bersama identifier lain.
+public.anggota,tanggal_pernikahan,1,MARRIAGE_DATE,umum,sedang,Tanggal pernikahan adalah riwayat pribadi; 367 dari 734 bernilai NULL. Ada tanggal pernikahan mendahului tanggal lahir (anomali dummy).
+public.anggota,no_ktp,1,NATIONAL_ID,umum,kritis,Kolom bernama no_ktp merupakan identifier kependudukan; seluruh nilai dummy 14 digit BUKAN NIK valid 16 digit. Deteksi perlu konteks nama kolom dan isi; risiko tinggi untuk penyalahgunaan identitas.
+public.anggota,pekerjaan_terakhir,1,OCCUPATION,umum,rendah,"Riwayat pekerjaan individu; quasi-identifier, bukan rahasia autentikasi atau informasi kesehatan (misalnya nilai Dokter adalah pekerjaan)."
+public.anggota,alamat_jakarta,1,PERSON_ADDRESS,umum,tinggi,Alamat jalan dan nomor rumah terkait individu di Jakarta; berisiko lokasi fisik/rekonstruksi identitas meskipun menggunakan alamat sintetis.
+public.anggota,telpon_jakarta,1,PHONE_NUMBER,umum,tinggi,"Telepon kontak wilayah Jakarta; bentuk numerik 11 digit, perlu diperlakukan sebagai string agar nol di depan bertahan."
+public.anggota,alamat_daerah,1,PERSON_ADDRESS,umum,tinggi,Alamat jalan dan nomor rumah wilayah daerah terkait anggota; dapat mengungkap lokasi pribadi.
+public.anggota,telpon_daerah,1,PHONE_NUMBER,umum,tinggi,Nomor telepon daerah numerik 10 digit; memungkinkan kontak langsung walau kode area sintetis tidak selalu valid.
+public.anggota,handphone,1,MOBILE_PHONE,umum,tinggi,Nomor telepon seluler anggota; pengenal/kontak langsung dan target phishing atau penyalahgunaan identitas.
+public.anggota,email,1,EMAIL_ADDRESS,umum,tinggi,"Alamat email pribadi pada domain example.com (dummy); tanda baca tak lazim di local-part pada sebagian record, sehingga regex email ketat dapat false negative."
+public.anggota,ruangan,1,PERSON_LINKED_LOCATION_ID,umum,sedang,"Nilai DUMMY-001 sampai DUMMY-734 bersifat unik per anggota; label ruangan/identitas lokasi tertaut pada record, bukan sekadar nama ruangan umum."
+public.anggota,status_kawin,1,MARITAL_STATUS,umum,sedang,Status perkawinan K/TK; UU PDP Pasal 4(3) menyebut status perkawinan sebagai data pribadi umum.
+public.anggota,jumlah_anak,1,FAMILY_CHILD_COUNT,umum,sedang,"Jumlah anak untuk setiap anggota; data komposisi keluarga, BUKAN otomatis kategori spesifik data anak karena tidak mengidentifikasi anak tertentu."
+public.anggota,jumlah_tanggungan,1,DEPENDENT_COUNT,umum,sedang,"Jumlah tanggungan keluarga pada orang tertentu; quasi-identifier/indikator kondisi keluarga dan ekonomi, bukan nilai saldo rekening."
+public.anggota,jumlah_jiwa,1,HOUSEHOLD_SIZE,umum,sedang,Ukuran rumah tangga yang terkait individu; memungkinkan inferensi keluarga apabila dipadukan identitas dan status kawin.
+public.anggota,rekening,1,BANK_ACCOUNT_NUMBER,spesifik,kritis,Nomor rekening 16 digit terkait individu dan nama_rekening; merupakan data keuangan pribadi menurut Pasal 4(2)(f); jangan gunakan hash cepat tanpa kunci untuk exact match.
+public.anggota,nama_rekening,1,BANK_ACCOUNT_HOLDER_NAME,umum,tinggi,Nama pemegang rekening: identitas orang (kategori umum) namun sangat terkait nomor rekening spesifik; protect kedua field bersama. Nama bukan otomatis spesifik.
+public.anggota,npwp,1,TAXPAYER_ID,umum,tinggi,NPWP terkait individu; identifier pajak 15 digit dalam dummy. Tidak otomatis data keuangan spesifik karena nilai ini tidak berisi transaksi/saldo.
+public.anggota,nama_kppn,0,GOVERNMENT_OFFICE_NAME,non-pribadi,rendah,"Nama kantor KPPN, misalnya KPPN Surabaya; entitas institusi non-pribadi. Asosiasi dengan record anggota tetap membutuhkan kontrol akses."
+public.anggota,nip_kppn,1,EMPLOYEE_ID,umum,tinggi,Nilai NIP 18 digit mengarah ke identifier pegawai/individu; pemilik NIP tidak dijelaskan di dump sehingga identitas subjek (pegawai KPPN atau pihak lain) perlu divalidasi.
+public.anggota,nama_bank,0,BANK_INSTITUTION_NAME,non-pribadi,rendah,"Nama lembaga bank adalah data referensi institusi, bukan nama orang. Hubungan bank-ke-anggota melalui rekening tetap informasi kontekstual yang harus dibatasi."
+public.anggota,kode_bank,0,BANK_INSTITUTION_CODE,non-pribadi,rendah,"Kode 3 digit diperlakukan sebagai referensi institusi, bukan nomor rekening; kode dummy tidak konsisten untuk bank yang sama sehingga jangan dianggap kode bank nasional valid."
+public.anggota,pengguna,1,USERNAME,umum,tinggi,"Username berawalan dummy_ dan terkait unik dengan orang; identifier akun, bukan password/secret token. Jangan salah labeli sebagai kredensial rahasia."
+public.anggota,agama,1,RELIGION,umum,tinggi,"Atribut agama (Islam/Kristen/dll) secara EKSPLISIT termasuk pribadi UMUM pada UU PDP Pasal 4(3), walau pengungkapan dapat menyebabkan profiling atau diskriminasi."

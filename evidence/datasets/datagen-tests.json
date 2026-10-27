@@ -1,0 +1,11 @@
+{
+    "status":  "PASSED",
+    "tests":  25,
+    "failures":  0,
+    "errors":  0,
+    "skipped":  0,
+    "command":  "python -m pytest datagen/tests -q --junitxml=results/datagen/unit-tests.xml",
+    "timestamp_utc":  "2026-10-26T16:27:59.2018866+00:00",
+    "targets_commit":  "e7fd5e31d94abd95a3f00d7ae7ed9a448af26649",
+    "fixture":  "Handmade synthetic data only; no organizer rows"
+}

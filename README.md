@@ -199,3 +199,17 @@ landscape; k-anonymity diurutkan 1–3 kolom, maksimal 15 kombinasi minimal di H
 sementara semua agregat tetap di JSON. Setiap run mencatat versi, ringkasan
 perubahan, dan kebijakan prioritas yang dipakai. Simpan run v1.1 di folder baru
 agar hasil `before_v1/` tetap dapat dibandingkan.
+
+## Data sintetis Modul C (kontrak PostgreSQL 18)
+
+Generator baseline 100k sesuai kontrak tersedia di `datagen/`, terpisah dari generator lab historis
+`scripts/scale_lab.py`. Panduan PowerShell dan prompt password aman ada di
+[datagen/README.md](datagen/README.md); keputusan dan batas ada di [datagen/NOTES.md](datagen/NOTES.md).
+Jalankan `python -m datagen --rows 100000 --seed 42 --target-db baseline_100k` dari environment datagen
+setelah credential env disetel. Jika database sudah ada, gunakan
+`python -m datagen validate --db baseline_100k --rows 100000`; generate menolak overwrite.
+Sumber `postgres`/734 baris tetap hanya dibaca. Snapshot/credential berada di luar repo melalui
+`DPR_PRIVATE_DIR`; ringkasan mesin ke `evidence/datasets/`, raw lokal ke `results/`.
+Target yang disahkan sebelum benchmark: [docs/targets.md](docs/targets.md), dengan bukti commit
+di [evidence/targets_commit.json](evidence/targets_commit.json). Benchmark baru dan restore drill
+Modul C dijalankan pada langkah berikutnya, setelah baseline tervalidasi.
