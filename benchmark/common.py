@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import subprocess
 import shutil
+import re
 
 import psycopg
 from psycopg.conninfo import conninfo_to_dict
@@ -20,6 +21,12 @@ ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "results/bench/before"
 EVIDENCE = ROOT / "evidence/benchmark/baseline"
 BASELINE_ROWS = {"baseline_100k": 100000, "baseline_1m": 1000000}
+
+
+def replacement_paths(session):
+    if not re.fullmatch(r"ac_[0-9]{8}T[0-9]{6}Z", session):
+        raise ValueError("Invalid AC replacement session name")
+    return ROOT / "results/bench/replacements" / session, ROOT / "evidence/benchmark/replacements" / session
 
 
 def session_paths(database):

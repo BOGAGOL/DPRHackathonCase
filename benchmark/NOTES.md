@@ -412,3 +412,38 @@ Keputusan pengulangan menunggu pengguna; tidak ada pengulangan otomatis.
 Analisis offline baru diuji dengan **5 unit test sintetis**, termasuk batas overlap,
 timezone, resource unavailable, waktu log pgbench, dan pelestarian metrik ketika
 metadata ditambah. Tidak menjalankan ulang suite benchmark/dataset atau test DB.
+
+## Persiapan pengukuran pengganti AC — otorisasi pengguna 27 Oktober 2026
+
+Pengguna mengizinkan **hanya** backup/restore baseline_1m tiga run dan pgbench
+baseline_100k tiga run diulang, charger dijaga terpasang. Workload 21 run 1M
+tidak diulang karena tidak beririsan dengan gangguan. Tidak mengubah target,
+workload, corpus lookup, seed42, prepare protocol, delapan client/thread,
+durasi60s + warmup10s, transport tanpa TLS, atau batas timer dump/restore.
+Tambahan timestamp/guard AC berada di luar interval timed. Power sampler
+psutil tiap2s berjalan di host; overhead pemantau ini tidak diisolasi.
+
+Sesi baru memakai results/bench/replacements/ac_<UTC>/ dan evidence/benchmark/
+replacements/ac_<UTC>/. Sebelum promosi, salinan byte-identik evidence lama
+disimpan pada evidence/benchmark/history/battery_affected_ac_<UTC>/ dengan
+manifest berlabel **"terdampak baterai"**; label berlaku pada bundle sesi,
+bukan klaim backup run1 lama juga pada baterai. Raw lama dipertahankan di lokasi
+aslinya. Canonical backup_restore.json dan crosscheck_pgbench.json hanya
+diganti bila kedua fase valid dan verifikasi AC penuh lulus. Histori audit
+Kernel-Power tetap mengacu pada hasil lama melalui pointer arsip.
+
+AC wajib terkonfirmasi pada preflight, guard tiap fase/run, dan sample2s;
+setelah selesai, baca System/Kernel-Power105 untuk seluruh jendela, termasuk
+event terakhir sebelum mulai. Syarat promosi: prior AC=true, semua sample
+AC=true, tidak ada event AC=false, dan collector tidak gagal. Jika tidak,
+pertahankan sesi sebagai gagal/tidak qualified, tanpa pengulangan otomatis
+atau promosi. Power verification menyimpan batas waktu, record event dan
+jumlah sample; semua sample aman juga tersedia di raw lokal.
+
+Validasi tetap memakai checksum seluruh data/sequence 1M/100k serta checksum
+sumber734. Restore ke tiga database sementara unik bench_restore_*, bukan
+baseline/postgres; cleanup mengikuti utilitas lama setelah validasi lulus.
+Tidak mengubah konfigurasi PG, role, container, atau Windows power plan.
+Kode persiapan diuji dengan42 unit/regression test benchmark, termasuk
+preservasi histori, pengalihan path, AC fail-closed, dan kedua fase tanpa
+memanggil baseline_run. Hasil aktual sesi pengganti dicatat setelah selesai.

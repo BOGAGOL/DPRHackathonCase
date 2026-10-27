@@ -133,6 +133,18 @@ def secondary_phases(backup, pgbench, raw, incident):
             "cpu_resource_during_incident": "UNAVAILABLE: official collector stops after last workload run at 19:14:30 WIB; backup/pgbench have no equivalent resource CSV"}
 
 
+def historical_measurement(path, root):
+    document = json.loads(path.read_text(encoding="utf-8"))
+    reference = document.get("original_battery_affected_evidence")
+    if reference:
+        historical = (root / reference).resolve()
+        history_root = (root / "evidence/benchmark/history").resolve()
+        if not historical.is_relative_to(history_root):
+            raise ValueError("Historical power audit input outside history folder")
+        return json.loads(historical.read_text(encoding="utf-8"))
+    return document
+
+
 def run(root=ROOT):
     directory = root / "evidence/benchmark/baseline_1m"
     events = json.loads((directory / "power_events.json").read_text(encoding="utf-8"))
@@ -149,8 +161,8 @@ def run(root=ROOT):
         path = root / "results/bench/before_1m" / row["scenario"] / f"run_{row['run']}" / "resources.csv.gz"
         resources[(row["scenario"], row["run"])] = resource_rows(path)
     analyzed = analyze_runs(runs, resources, incident)
-    backup = json.loads((directory / "backup_restore.json").read_text(encoding="utf-8"))
-    pgbench = json.loads((root / "evidence/benchmark/crosscheck_pgbench.json").read_text(encoding="utf-8"))
+    backup = historical_measurement(directory / "backup_restore.json", root)
+    pgbench = historical_measurement(root / "evidence/benchmark/crosscheck_pgbench.json", root)
     secondary = secondary_phases(backup, pgbench, root / "results/bench/crosscheck_pgbench", incident)
     report = {"status": "ANALYZED_NO_RERUN", "timestamp_utc": utc_now(), "dataset": "baseline_1m",
               "user_report": {"possible_window_start_wib": REPORTED_START, "possible_window_end_wib": REPORTED_END,

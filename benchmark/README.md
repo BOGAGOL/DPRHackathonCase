@@ -74,3 +74,20 @@ Perintah terakhir hanya unit test analisis dengan fixture sintetis. Hasil:
 `evidence/benchmark/baseline_1m/power_events.json`, `power_incident.json`,
 `power_run_timeline.csv`. Lihat NOTES.md untuk interval baterai yang terkonfirmasi
 dan batas penilaian dampak. File raw harus tersedia di mesin yang menjalankan audit.
+
+## Pengukuran pengganti yang diotorisasi setelah gangguan baterai
+
+Dengan BENCH_DATABASE_URL, DATAGEN_DATABASE_URL, DPR_PRIVATE_DIR sudah diatur
+seperti di atas, charger terpasang dan hanya pg-dpr berjalan:
+
+```powershell
+.\benchmark\.venv\Scripts\python.exe -m benchmark.replacement_ac
+```
+
+Hanya backup/restore baseline_1m 3 run dan pgbench baseline_100k 3 run yang
+dijalankan. Workload21 run tidak dipanggil. Setiap panggilan membuat sesi
+ac_<UTC> eksklusif; jangan mengulang perintah tanpa otorisasi pengukuran baru.
+Ringkasan canonical diperbarui hanya setelah verifikasi AC + integritas lulus;
+hasil lama disalin byte-identik ke history dengan label "terdampak baterai".
+Raw lama tidak dipindah/dihapus. Lihat active_measurements.json untuk pilihan
+hasil aktif dan power_verification.json pada folder sesi untuk bukti AC.

@@ -63,11 +63,16 @@ def transaction_metrics(paths, expected):
             "error_rate": errors / (len(latencies) + errors)}
 
 
-def crosscheck(runs=3, duration=60, concurrency=8):
+def crosscheck(runs=3, duration=60, concurrency=8, session=None, power_guard=None):
     if (runs, duration, concurrency) != (3, 60, 8):
         raise ValueError("Crosscheck requires three 60-second runs and eight clients")
     output = ROOT / "evidence/benchmark/crosscheck_pgbench.json"
     raw = ROOT / "results/bench/crosscheck_pgbench"
+    if session is not None:
+        from .common import replacement_paths
+        replacement_raw, replacement_evidence = replacement_paths(session)
+        output = replacement_evidence / "crosscheck_pgbench.json"
+        raw = replacement_raw / "crosscheck_pgbench"
     if output.exists() or raw.exists():
         raise ValueError("Existing crosscheck; refusing overwrite")
     if running_containers() != ["pg-dpr"]:
@@ -107,6 +112,8 @@ def crosscheck(runs=3, duration=60, concurrency=8):
     phase = "warmup"
     try:
         for run in range(1, runs + 1):
+            if power_guard:
+                power_guard()
             if running_containers() != ["pg-dpr"]:
                 raise ValueError("Container environment changed")
             prefix = "/tmp/dpr_pgbench_" + uuid4().hex + f"_r{run}"
@@ -116,10 +123,14 @@ def crosscheck(runs=3, duration=60, concurrency=8):
                 subprocess.run(base + ["-T", "10", "baseline_100k"], stdin=handle, env=env,
                                capture_output=True, check=True, timeout=40)
             phase = "measurement"
+            if power_guard:
+                power_guard()
+            measurement_start = utc_now()
             with script.open("rb") as handle:
                 result = subprocess.run(base + ["-T", "60", "-l", "--log-prefix=" + prefix, "baseline_100k"],
                                         stdin=handle, env=env, capture_output=True, check=True, timeout=100)
-            row = {"run": run, **parse_output(result.stdout.decode("utf-8"))}
+            row = {"run": run, "measurement_started_at_utc": measurement_start,
+                   "measurement_completed_at_utc": utc_now(), **parse_output(result.stdout.decode("utf-8"))}
             phase = "raw log collection and validation"
             listing = subprocess.run(["docker", "exec", "pg-dpr", "find", "/tmp", "-maxdepth", "1", "-type", "f",
                                       "-name", prefix.split("/")[-1] + ".*"], capture_output=True, text=True, check=True)
@@ -140,6 +151,8 @@ def crosscheck(runs=3, duration=60, concurrency=8):
             write_json(output, report)
             print(json.dumps({"phase": "pgbench_finished", "run": run, "throughput_rps": row["throughput_rps"],
                               "p95_ms": row["p95_ms"], "errors": row["errors"]}), flush=True)
+            if power_guard:
+                power_guard()
         report["data_and_sequence_unchanged"] = same_data(before, state())
         report["median_between_runs"] = {key: statistics.median(row[key] for row in report["runs"])
                                          for key in ("p50_ms", "p95_ms", "mean_ms", "throughput_rps", "error_rate")}
@@ -158,5 +171,7 @@ def crosscheck(runs=3, duration=60, concurrency=8):
         script.unlink()
         report["private_temporary_script_removed"] = True
         report["completed_at_utc"] = utc_now()
+        if session is not None:
+            report.update(replacement_session=session, measurement_label="pengukuran pengganti AC")
         write_json(output, report)
     return report
