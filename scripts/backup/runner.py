@@ -165,6 +165,10 @@ def restore(manifest, parameters, keys, *, container="pg-dpr", database=None,
                 if counts != payload["table_rows"]:
                     raise BackupError("restored_row_count_mismatch")
                 service = tuple(sorted(counts)) == SERVICE_TABLES
+                # Old authenticated archives may contain the former per-record
+                # analyst ACL. Harden it before publishing CONNECT to any runtime.
+                from infra.protected.analyst import upgrade
+                upgrade(connection)
                 security = check_restored_security(connection, service=service)
             smoke = smoke_decrypt(target_parameters, profile_path, sample_size) if with_openbao else {"performed": False, "reason": "without_openbao", "data_remains_field_ciphertext": True}
             created = allow_runtime_connections(target_parameters, created, service=service)

@@ -90,3 +90,58 @@ def test_restore_requires_hba_rejection_before_creating_any_database(tmp_path, m
     with pytest.raises(BackupError,match="restore_database_tls_policy_required"):
         runner.restore(tmp_path/(identity+".manifest.json"),{"host":"localhost","port":5433},(os.urandom(32),os.urandom(32)))
     create.assert_not_called()
+
+
+@pytest.mark.parametrize("upgrade_fails", [False, True])
+def test_restore_hardens_old_analyst_acl_before_publishing_connect(tmp_path,monkeypatch,upgrade_fails):
+    from contextlib import contextmanager
+    from uuid import uuid4
+    from infra.protected import analyst
+    from scripts.backup import runner
+    identity=str(uuid4()); name="dpr_restore_"+"a"*32
+    (tmp_path/(identity+".dprbak")).write_bytes(b"invented encrypted archive")
+    counts={"anggota_protected":17}
+    payload={"artifact_id":identity,"sha256":"verified","size_bytes":26,"table_rows":counts,
+        "source_database":"protected_734","source_rows":17,"backup_seconds":1}
+    monkeypatch.setattr(runner,"inspect_manifest",lambda *a:payload)
+    monkeypatch.setattr(runner,"file_digest",lambda *a:("verified",26))
+    monkeypatch.setattr(runner,"decrypt_stream",lambda *a:None)
+    monkeypatch.setattr(runner,"plaintext_rejected",lambda *a:True)
+    monkeypatch.setattr(runner,"create_database",lambda *a:{"name":name,"oid":123,"marker":"invented"})
+    monkeypatch.setattr(runner,"check_server",lambda *a:None)
+    monkeypatch.setattr(runner,"row_counts",lambda *a:counts)
+    connection=MagicMock();connection.__enter__.return_value=connection
+    monkeypatch.setattr(runner.psycopg,"connect",lambda **kw:connection)
+    class Tools:
+        def __init__(self,*a): pass
+        def __enter__(self): return self
+        def __exit__(self,*a): pass
+        def bind(self): pass
+        @contextmanager
+        def process(self,*a): yield MagicMock()
+    monkeypatch.setattr(runner,"Tools",Tools)
+    events=[]
+    def upgrade(value):
+        events.append("upgrade")
+        if upgrade_fails: raise ValueError("unsafe old ACL")
+    monkeypatch.setattr(analyst,"upgrade",upgrade)
+    def check(*a,**kw):
+        assert events==["upgrade"]
+        events.append("security_checked")
+        return {"analyst_safe":True}
+    monkeypatch.setattr(runner,"check_restored_security",check)
+    def publish(parameters,created,**kwargs):
+        assert events==["upgrade","security_checked"]
+        events.append("published")
+        return created
+    monkeypatch.setattr(runner,"allow_runtime_connections",publish)
+    cleanup=MagicMock();monkeypatch.setattr(runner,"drop_created_database",cleanup)
+    arguments=(tmp_path/"manifest.json",{"host":"localhost","port":5433},(os.urandom(32),os.urandom(32)))
+    if upgrade_fails:
+        with pytest.raises(ValueError): runner.restore(*arguments)
+        assert events==["upgrade"]
+        cleanup.assert_called_once()
+    else:
+        assert runner.restore(*arguments)["passed"]
+        assert events[-1]=="published"
+        cleanup.assert_not_called()

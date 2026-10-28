@@ -116,7 +116,9 @@ def test_full_stream_restore_modes_tamper_retention(laboratory, monkeypatch):
             admin.execute("SET ROLE app_user")
             checks["rls_denies_unscoped_app"] = admin.execute("SELECT count(*) FROM public.anggota_protected").fetchone()[0] == 0
             admin.execute("RESET ROLE"); admin.execute("SET ROLE analyst_user")
-            checks["analyst_view_works"] = admin.execute("SELECT count(*) FROM public.analyst_view").fetchone()[0] == 17
+            checks["analyst_aggregate_only"] = admin.execute("SELECT count(*) FROM public.analyst_summary WHERE anggota_count<5").fetchone()[0] == 0
+            with pytest.raises(psycopg.errors.InsufficientPrivilege), admin.transaction():
+                admin.execute("SELECT * FROM public.analyst_view")
         checks["tamper"] = tamper_test(manifest, params, keys, container=container)["passed"]
         retention = retention_test(manifest, params, lab["backup_params"], keys, lab["store"], container=container)
         checks["retention"] = retention["passed"] and retention["rows_before_delete"] == 18 and retention["rows_after_delete"] == 17
