@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-10-28T08:57:18.302139+00:00",
+  "status": "IMPLEMENTED_UNIT_TESTED_LIVE_BLOCKED",
+  "implementation_commits": [
+    "8dfc985",
+    "ea2b7a8"
+  ],
+  "user_authorized_both_A_and_B": true,
+  "tests": {
+    "module_A": {
+      "counts": {
+        "tests": 291,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 8,
+        "passed": 283
+      },
+      "passed": true,
+      "raw_report": "results/recovery/regression-a.xml"
+    },
+    "module_B": {
+      "counts": {
+        "tests": 287,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 1,
+        "passed": 286
+      },
+      "passed": true,
+      "raw_report": "results/recovery/regression-b.xml"
+    },
+    "https_helper": {
+      "counts": {
+        "tests": 1,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "passed": 1
+      },
+      "passed": true,
+      "raw_report": "results/recovery/https-helper.xml"
+    }
+  },
+  "docker_integration": {
+    "status": "BLOCKED",
+    "attempted": true,
+    "setup_errors": 2,
+    "raw_report": "results/recovery/live-startup-failure.xml",
+    "root_cause": "Docker Desktop Unexpected WSL error; listing WSL distributions context deadline exceeded; engine proxy no route to host",
+    "application_database_checks_executed": false,
+    "passing_live_recovery_claim": false
+  },
+  "required_rerun": "Set DPR_BACKUP_INTEGRATION=1 and DPR_POSTGRES_TLS_INTEGRATION=1, then python -m pytest --import-mode=importlib infra/tests/test_postgres_tls_integration.py scripts/backup/tests/test_integration.py scripts/backup/tests/test_service_recovery_integration.py -q --tb=short",
+  "operational_steps": [
+    "Recover WSL/Docker without resetting data/volumes",
+    "Apply reviewed TLS updater once to existing pg-dpr",
+    "Run idempotent B schema setup on the active protected database to grant backup_user SELECT on service allocator",
+    "Make a new seven-table service backup; restore and cut over according to app/docs/RECOVERY.md"
+  ],
+  "limitations": [
+    "No end-to-end database/crypto/HTTPS recovery pass until the Docker integration is rerun",
+    "Synthetic fixture tests do not certify official migrated 734/100k/1M targets or benchmark",
+    "Earlier five-table backup and disposable B evidence remain historical evidence with their original scope"
+  ],
+  "existing_project_database_or_key_mutations": false
+}
