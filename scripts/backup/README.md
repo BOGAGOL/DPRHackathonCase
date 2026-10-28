@@ -1,5 +1,13 @@
 # Backup / restore tahap 5
 
+**Pembaruan recovery A+B, 28 Oktober 2026:** backup menerima layout A lima tabel
+atau A+B tujuh tabel secara lengkap. Untuk layanan B, jalankan ulang setup B
+idempoten agar backup_user dapat membaca sequence; apply updater TLS terbaru
+sebelum restore. Panduan langkah lengkap: [recovery layanan](../../app/docs/RECOVERY.md).
+Restore menulis `service_schema_restored` dan pilihan `DPR_RESTORED_DATABASE` pada
+laporan untuk layout tujuh tabel. Arsip lima tabel lama tetap dapat dipulihkan sebagai
+data, tetapi tidak membawa akun/sesi/binding B yang belum ada saat backup dibuat.
+
 Jalankan dari root repo dengan Python venv (`python -m pip install -r infra/requirements.txt`
 dan `python -m pip install -e toolkit`). Tidak perlu paket Python tambahan.
 Gunakan PostgreSQL **18** di `pg-dpr`, port host **5433**, dengan TLS verify-full.

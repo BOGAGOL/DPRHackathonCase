@@ -15,6 +15,7 @@ from .crypto import BackupError
 
 
 TABLES = ("access_scope", "anggota_protected", "app_users", "audit_log", "migration_jobs")
+SERVICE_TABLES = tuple(sorted((*TABLES, "service_member_bindings", "service_sessions")))
 RESTORE_NAME = re.compile(r"dpr_restore_[0-9a-f]{32}\Z")
 
 
@@ -28,11 +29,63 @@ def check_server(connection, *, backup=False):
             raise BackupError("unsafe_backup_role")
 
 
+def validated_tables(names):
+    """Accept complete reviewed layouts only, including legacy five-table dumps."""
+    try:
+        actual = tuple(sorted(names))
+    except TypeError:
+        raise BackupError("unexpected_public_tables") from None
+    if actual not in (TABLES, SERVICE_TABLES):
+        raise BackupError("unexpected_public_tables")
+    return actual
+
+
 def row_counts(connection):
     actual = tuple(row[0] for row in connection.execute("SELECT c.relname FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relkind IN ('r','p') ORDER BY c.relname"))
-    if actual != TABLES:
-        raise BackupError("unexpected_public_tables")
-    return {table: connection.execute(sql.SQL("SELECT count(*) FROM public.{}").format(sql.Identifier(table))).fetchone()[0] for table in TABLES}
+    return {table: connection.execute(sql.SQL("SELECT count(*) FROM public.{}").format(sql.Identifier(table))).fetchone()[0] for table in validated_tables(actual)}
+
+
+def check_service_schema(connection):
+    """Validate B-owned controls without reading session hashes or account bindings."""
+    names = ("service_member_bindings", "service_sessions")
+    owners = connection.execute("SELECT relname,pg_get_userbyid(relowner) FROM pg_class WHERE relnamespace='public'::regnamespace AND relname=ANY(%s) ORDER BY relname", (list(names),)).fetchall()
+    expected = {
+        "service_sessions": {"app_user": {"SELECT", "INSERT", "DELETE"}, "backup_user": {"SELECT"}},
+        "service_member_bindings": {"app_user": {"SELECT"}, "admin_user": {"SELECT", "INSERT", "UPDATE", "DELETE"}, "backup_user": {"SELECT"}},
+    }
+    grants_ok = True
+    for table in names:
+        for role in ROLES:
+            for privilege in ("SELECT", "INSERT", "UPDATE", "DELETE", "TRUNCATE", "REFERENCES", "TRIGGER", "MAINTAIN"):
+                actual = connection.execute("SELECT has_table_privilege(%s,%s,%s)", (role, "public."+table, privilege)).fetchone()[0]
+                grants_ok &= actual == (privilege in expected[table].get(role, set()))
+                if privilege in ("SELECT", "INSERT", "UPDATE", "REFERENCES") and not actual:
+                    column_access = connection.execute("SELECT has_any_column_privilege(%s,%s,%s)", (role, "public."+table, privilege)).fetchone()[0]
+                    grants_ok &= not column_access
+    public_access = connection.execute("SELECT EXISTS(SELECT 1 FROM pg_class c CROSS JOIN LATERAL aclexplode(c.relacl) a WHERE c.relnamespace='public'::regnamespace AND c.relname=ANY(%s) AND a.grantee=0 UNION ALL SELECT 1 FROM pg_attribute t JOIN pg_class c ON c.oid=t.attrelid CROSS JOIN LATERAL aclexplode(t.attacl) a WHERE c.relnamespace='public'::regnamespace AND c.relname=ANY(%s) AND a.grantee=0)", (list(names), list(names))).fetchone()[0]
+    sequence = connection.execute("SELECT pg_get_userbyid(c.relowner),s.seqincrement,s.seqcycle FROM pg_sequence s JOIN pg_class c ON c.oid=s.seqrelid WHERE c.oid=to_regclass('public.service_legacy_id_seq')").fetchone()
+    sequence_ok = sequence == ("schema_owner", 1, False)
+    if sequence_ok:
+        last, called = connection.execute("SELECT last_value,is_called FROM public.service_legacy_id_seq").fetchone()
+        maximum = connection.execute("SELECT coalesce(max(legacy_row_id),0) FROM public.anggota_protected").fetchone()[0]
+        sequence_ok = maximum < last + int(called) <= 9223372036854775807
+    sequence_grants = bool(sequence)
+    if sequence:
+        for role in ROLES:
+            for privilege in ("USAGE", "SELECT", "UPDATE"):
+                actual = connection.execute("SELECT has_sequence_privilege(%s,'public.service_legacy_id_seq',%s)", (role, privilege)).fetchone()[0]
+                sequence_grants &= actual == ((role, privilege) in {("app_user", "USAGE"), ("backup_user", "SELECT")})
+        sequence_public = connection.execute("SELECT EXISTS(SELECT 1 FROM pg_class c CROSS JOIN LATERAL aclexplode(c.relacl) a WHERE c.oid='public.service_legacy_id_seq'::regclass AND a.grantee=0)").fetchone()[0]
+        sequence_grants &= not sequence_public
+    checks = {
+        "service_tables_owned_by_schema_owner": owners == [(name, "schema_owner") for name in names],
+        "service_table_grants_minimal": bool(grants_ok) and not public_access,
+        "service_locator_sequence_safe": bool(sequence_ok),
+        "service_locator_sequence_grants": bool(sequence_grants),
+    }
+    if not all(checks.values()):
+        raise BackupError("service_schema_validation_failed")
+    return checks
 
 
 def check_roles(connection):
@@ -41,7 +94,7 @@ def check_roles(connection):
         raise BackupError("restore_requires_preprovisioned_safe_contract_roles")
 
 
-def check_restored_security(connection):
+def check_restored_security(connection, *, service=False):
     check_roles(connection)
     table = connection.execute("SELECT pg_get_userbyid(relowner),relrowsecurity,relforcerowsecurity FROM pg_class WHERE oid='public.anggota_protected'::regclass").fetchone()
     checks = {
@@ -55,6 +108,8 @@ def check_restored_security(connection):
     }
     if not all(checks.values()):
         raise BackupError("restored_security_validation_failed")
+    if service:
+        checks.update(check_service_schema(connection))
     return checks
 
 
@@ -145,10 +200,18 @@ def create_database(admin_parameters, artifact_id, name=None):
     return {"name": name, "oid": oid, "marker": marker}
 
 
-def allow_runtime_connections(parameters):
+def allow_runtime_connections(parameters, created, *, service=False):
     # Publish CONNECT only after all authentication/validation has succeeded.
+    marker = created["marker"]
+    if service:
+        marker = "dpr-service-restore-v1:" + marker.removeprefix("dpr-backup-v1:")
     with psycopg.connect(**parameters) as admin:
+        actual = admin.execute("SELECT oid,shobj_description(oid,'pg_database') FROM pg_database WHERE datname=current_database()").fetchone()
+        if actual != (created["oid"], created["marker"]):
+            raise BackupError("restore_database_identity_changed")
+        admin.execute(sql.SQL("COMMENT ON DATABASE {} IS {}").format(sql.Identifier(parameters["dbname"]), sql.Literal(marker)))
         admin.execute(sql.SQL("GRANT CONNECT ON DATABASE {} TO {}").format(sql.Identifier(parameters["dbname"]), sql.SQL(",").join(map(sql.Identifier, ROLES))))
+    return {**created, "marker": marker}
 
 
 def drop_created_database(admin_parameters, created):

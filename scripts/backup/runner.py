@@ -15,10 +15,11 @@ from dprcrypto import OpenBaoClient, decrypt
 from infra.protected.apply import load_profile
 from infra.security import REPO, write_private
 from infra.targets import PROTECTED_DATABASES
+from infra.postgres.enable_tls import plaintext_rejected
 from .crypto import (BackupError, canonical, decrypt_stream, encrypt_stream, file_digest,
                      key_id, sign_manifest, verify_manifest)
-from .postgres import (TABLES, Tools, allow_runtime_connections, check_restored_security, check_server, create_database,
-                       drop_created_database, row_counts)
+from .postgres import (SERVICE_TABLES, RESTORE_NAME, Tools, allow_runtime_connections, check_restored_security,
+                       check_service_schema, check_server, create_database, drop_created_database, row_counts, validated_tables)
 
 
 def utc_now():
@@ -50,6 +51,8 @@ def backup(database, parameters, keys, store, *, container="pg-dpr", retention_d
                 if actual != (created["oid"], created["marker"]):
                     raise BackupError("drill_database_identity_changed")
             counts = row_counts(source)
+            if tuple(counts) == SERVICE_TABLES:
+                check_service_schema(source)
             snapshot = source.execute("SELECT pg_export_snapshot()").fetchone()[0]
             with Tools(container, connection_parameters) as tools:
                 tools.bind()
@@ -90,10 +93,11 @@ def inspect_manifest(manifest, keys):
                 or payload["dump_role"] != "backup_user" or payload["snapshot_consistent"] is not True
                 or not re.fullmatch(r"[0-9a-f]{64}", payload["sha256"])
                 or type(payload["size_bytes"]) is not int or payload["size_bytes"] < 60
-                or set(payload["table_rows"]) != set(TABLES)
+                or not isinstance(payload["table_rows"], dict)
                 or any(type(n) is not int or n < 0 for n in payload["table_rows"].values())
                 or type(payload["source_rows"]) is not int or payload["source_rows"] != payload["table_rows"]["anggota_protected"]):
             raise ValueError()
+        validated_tables(payload["table_rows"])
         source_allowed(payload["source_database"], {"name": payload["source_database"]} if re.fullmatch(r"dpr_restore_[0-9a-f]{32}", payload["source_database"]) else None)
         created_at = datetime.fromisoformat(payload["created_at"])
         deadline = datetime.fromisoformat(payload["retention_deadline"])
@@ -143,6 +147,11 @@ def restore(manifest, parameters, keys, *, container="pg-dpr", database=None,
             # Validate the optional capability before allocating a database.
             with OpenBaoClient(token_env="OPENBAO_VALIDATION_TOKEN") as client:
                 client.require_policy("svc-app")
+        database = database or "dpr_restore_"+uuid4().hex
+        if not RESTORE_NAME.fullmatch(database):
+            raise BackupError("restore_requires_reserved_new_database_name")
+        if not plaintext_rejected(parameters["host"], int(parameters["port"]), database, "app_user"):
+            raise BackupError("restore_database_tls_policy_required")
         try:
             created = create_database(parameters, payload["artifact_id"], database)
             target_parameters = {**parameters, "dbname": created["name"], "application_name": "dpr-restore-"+uuid4().hex}
@@ -155,9 +164,10 @@ def restore(manifest, parameters, keys, *, container="pg-dpr", database=None,
                 counts = row_counts(connection)
                 if counts != payload["table_rows"]:
                     raise BackupError("restored_row_count_mismatch")
-                security = check_restored_security(connection)
+                service = tuple(sorted(counts)) == SERVICE_TABLES
+                security = check_restored_security(connection, service=service)
             smoke = smoke_decrypt(target_parameters, profile_path, sample_size) if with_openbao else {"performed": False, "reason": "without_openbao", "data_remains_field_ciphertext": True}
-            allow_runtime_connections(target_parameters)
+            created = allow_runtime_connections(target_parameters, created, service=service)
             return {"schema_version": 1, "passed": True, "artifact_id": payload["artifact_id"],
                 "created_at": utc_now(), "database": created["name"], "mode": "with_openbao" if with_openbao else "without_openbao",
                 "source_database": payload["source_database"], "table_rows": counts, "source_rows": payload["source_rows"],
@@ -165,6 +175,8 @@ def restore(manifest, parameters, keys, *, container="pg-dpr", database=None,
                 "security": security, "decryption_smoke": smoke, "size_bytes": size,
                 "backup_seconds": payload["backup_seconds"], "restore_seconds": round(time.perf_counter()-start, 6),
                 "created_database": created, "plaintext_dump_files": 0,
+                "service_schema_restored": service,
+                "service_recovery_environment": {"DPR_RESTORED_DATABASE": created["name"]} if service else {},
                 "service_scope": "database, ACL/RLS and optional field decryption; HTTP app integration is separate"}
         except BaseException:
             if created: drop_created_database(parameters, created)

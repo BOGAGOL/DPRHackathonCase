@@ -79,6 +79,7 @@ def main(argv=None):
             "artifact_authentication_failed", "restore_requires_reserved_new_database_name", "unsafe_backup_role",
             "two_distinct_32_byte_backup_keys_required", "restore_requires_preprovisioned_safe_contract_roles",
             "unexpected_public_tables", "restored_security_validation_failed", "restored_row_count_mismatch"}
+        safe_codes.update({"service_schema_validation_failed", "restore_database_tls_policy_required", "restore_database_identity_changed"})
         code = str(error) if isinstance(error, BackupError) and str(error) in safe_codes else "backup_operation_failed_details_withheld"
         write_report(args.evidence_dir, filename, {"schema_version": 1, "passed": False, "error": code})
         print(json.dumps({"passed": False, "error": code, "report": str(args.evidence_dir/filename)}))
