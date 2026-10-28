@@ -1,0 +1,23 @@
+{
+  "status": "PARTIAL",
+  "source": "Operator-pasted read-only SSH command output, 28 October 2026",
+  "host": "VM-2-21-ubuntu",
+  "operator_user": "ubuntu",
+  "public_ipv4": "43.156.157.247",
+  "listeners": {
+    "0.0.0.0": [22, 80, 443],
+    "::": [22, 80],
+    "127.0.0.1": [3443, 5433, 8100, 8200, 36577],
+    "127.0.0.53%lo": [53],
+    "127.0.0.54": [53]
+  },
+  "ufw": "inactive",
+  "dpr_unit_files_count": 0,
+  "containers": [
+    {"name": "dpr-demo-openbao-1", "image": "openbao/openbao:2.5.5", "publish": "127.0.0.1:8200->8200/tcp"},
+    {"name": "dpr-demo-postgres-1", "image": "postgres:18", "publish": "127.0.0.1:5433->5432/tcp"}
+  ],
+  "excluded_scope": ["SSH 22", "DNS 53", "Unidentified loopback listener 36577", "Any non-DPR services belonging to host owner"],
+  "not_verified": ["Cloud security-group rules", "iptables/nftables", "Complete host-owner service inventory", "New pt account provisioning", "Golden creation", "Actual golden reset"],
+  "scope": "Observed listeners and container metadata only; no database or reset success inferred"
+}

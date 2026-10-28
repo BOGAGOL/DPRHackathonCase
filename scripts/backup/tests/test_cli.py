@@ -7,7 +7,7 @@ import pytest
 
 from scripts.backup import cli, runner
 from scripts.backup.crypto import BackupError, canonical, key_id, sign_manifest
-from scripts.backup.postgres import TABLES
+from scripts.backup.postgres import TABLES, SERVICE_TABLES
 
 
 def test_parser_requires_safe_options():
@@ -47,10 +47,11 @@ def test_cli_failure_redacts_arbitrary_errors(tmp_path, monkeypatch, capsys):
     assert json.loads((tmp_path/"restore-report.json").read_text())["error"] == "invalid_manifest"
 
 
-def test_manifest_validation_schema_and_hmac(tmp_path):
+@pytest.mark.parametrize("tables", [TABLES, SERVICE_TABLES])
+def test_manifest_validation_schema_and_hmac(tmp_path, tables):
     keys = (os.urandom(32), os.urandom(32)); identity = str(uuid4())
     path = tmp_path/(identity+".manifest.json")
-    counts = {table: 0 for table in TABLES}
+    counts = {table: 0 for table in tables}
     payload = {"format_version": 1, "artifact_id": identity, "postgres_major": 18,
         "encryption": "AES-256-GCM-framed-HKDF-SHA256-v1", "dump_role": "backup_user", "snapshot_consistent": True,
         "encryption_key_id": key_id(keys[0]), "manifest_key_id": key_id(keys[1]), "size_bytes": 100,
@@ -58,6 +59,9 @@ def test_manifest_validation_schema_and_hmac(tmp_path):
         "created_at": "2026-10-27T00:00:00+00:00", "retention_deadline": "2026-11-27T00:00:00+00:00"}
     path.write_bytes(canonical(sign_manifest(payload, keys[1])))
     assert runner.inspect_manifest(path, keys) == payload
+    for names in ((*TABLES, "service_sessions"), (*SERVICE_TABLES, "unreviewed")):
+        path.write_bytes(canonical(sign_manifest({**payload, "table_rows": dict.fromkeys(names, 0)}, keys[1])))
+        with pytest.raises(BackupError): runner.inspect_manifest(path, keys)
     for field, value in [("artifact_id", "../unsafe"), ("format_version", 2), ("size_bytes", -1), ("table_rows", {}),
                          ("sha256", "bad"), ("source_database", "postgres"), ("source_rows", 1),
                          ("created_at", "2026-10-27"), ("retention_deadline", "2026-10-27T00:00:00+00:00")]:

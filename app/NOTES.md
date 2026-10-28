@@ -1,5 +1,35 @@
 # Catatan implementasi Modul B
 
+## Perbaikan recovery A/B oleh Alby — 28 Oktober 2026
+
+Pengguna secara eksplisit mengizinkan pengerjaan kedua modul karena Zhafif berhalangan.
+`DPR_RESTORED_DATABASE` menerima satu nama dpr_restore_<32 hex> yang sama dengan seluruh
+URL runtime, hanya MODE=protected. Guard role dan TLS verify-full tetap berlaku.
+Startup menggunakan app_user read-only untuk memeriksa nama/role/TLS, provenance marker
+restore yang telah dipublish A, tepat tujuh tabel dan owner/FORCE RLS anggota.
+Marker saja tidak membuktikan integritas arsip; pemeriksaan HMAC/SHA/AEAD adalah tugas
+restore A. Kredensial admin/setup tidak diperlukan atau diteruskan ke aplikasi.
+
+Setup B yang idempoten menambah SELECT pada service_legacy_id_seq kepada backup_user,
+tanpa memberikan UPDATE sequence (setval), DDL, atau akses OpenBao. Sequence existing
+tidak di-reset. Restore mempertahankan akun/scope/binding/sesi dan allocator, sehingga
+tidak perlu provision ulang akun setelah cutover. Backup data-only lima tabel lama
+tidak dianggap backup layanan B lengkap dan ditolak oleh gate startup recovery.
+
+Pengujian recovery memakai data buatan sendiri di PostgreSQL/OpenBao TLS sementara;
+HTTPS backend membuktikan alur aplikasi. Ini tidak menggantikan benchmark resmi,
+acceptance pada dataset hasil migrasi tim, atau bukti browser/frontend terpisah.
+
+Setelah restart Windows, recovery tujuh tabel benar-benar dijalankan pada container
+sementara: 33 pemeriksaan lulus melalui HTTPS backend dengan schema/toolkit A asli.
+Akun dan sesi hasil restore bekerja; enam peran, scope record, kebijakan FIN, pencarian,
+update kontak/bidx dan insert allocator tervalidasi. Hilangnya identitas OpenBao
+menghasilkan 500 generik, lalu layanan dapat membaca lagi setelah identitas sah
+diinjeksi ulang. Tamper dan retention tujuh tabel juga lulus. Bukti mesin pada
+`evidence/backup/service-recovery-integration.json`; rangkuman empat test integrasi
+di `evidence/recovery/verification.json`. Pengujian ini memakai 17 record buatan
+sendiri dan bukan acceptance pada dataset resmi atau benchmark.
+
 Pemilik: Zhafif. Platform: Windows PowerShell. Branch kerja: `feat/service-app`. Acuan mengikat: `AGENTS.md`, `docs/PROJECT_CONTEXT.md`, `docs/contracts/CONTRACT.md`, `docs/TEAM_PLAN.md`, dan `docs/ai-prompts/PROMPT_B_SERVICE_APP.md`.
 
 ## Batas perubahan dan penggunaan ulang
@@ -167,3 +197,143 @@ Small-cell suppression B tidak menjamin perlindungan terhadap seluruh query diff
 lintas filter/waktu. Samakan scope akun/workload sebelum benchmark plain vs protected C.
 Panduan PowerShell lengkap: docs/INTEGRATION_A.md. PR1 sudah merged; perubahan ini PR lanjutan,
 merge ke main tetap memerlukan review anggota lain sesuai TEAM_PLAN.
+
+## Perbaikan dependency saat persiapan deploy — 28 Oktober 2026 WIB
+
+npm ci di server melaporkan satu advisory high pada Zod4.3.6. Audit lockfile lokal
+mengonfirmasi GHSA-mrhx-c7xc-m3w5 (konsumsi memori berlebih ketika memvalidasi
+koleksi besar; versi terdampak <4.6.6). Zod dipin ke4.6.7 dan lockfile diperbarui;
+tidak memakai npm audit fix --force atau perubahan npm global server.
+
+Validasi lokal sesudah perubahan: npm audit melaporkan0 vulnerability, build
+produksi Next/TypeScript lulus, Playwright13 skenario lulus. Evidence audit di
+app/evidence/access-control/npm-audit.json; report UI diekspor ulang oleh runner.
+Hasil audit adalah snapshot advisory dependency, bukan klaim keamanan seluruh aplikasi.
+
+Untuk paket runtime lama9029b77 yang sudah diunggah: jalankan dari app/web,
+npm install zod@4.6.7 --save-exact, kemudian npm run build. Perintah sudah diberikan
+ke Zhafif. Kelulusan instalasi backend/server ada pada log pengguna; upgrade Zod
+serta build server belum diklaim PASS sebelum hasil aktual diterima.
+Rujukan: https://github.com/advisories/GHSA-mrhx-c7xc-m3w5 dan
+https://github.com/colinhacks/zod/commit/a0ebf970f2d752e5f58527cd2942ff48be4f46bd
+
+
+## A5/B4: interface analis terbaru — 28 Oktober 2026
+
+Instruksi Alby/Delf melalui Zhafif dan CONTRACT 10.1/PR A #10 mengganti perilaku
+analytics lama. Query hanya public.analyst_summary via analyst_user, proyeksi
+3 kolom dan bind parameter. Count >=5 (juga predicate pertahanan B), total selalu
+null. Kelompok kecil tidak dikirim sama sekali termasuk labelnya. Tidak ada
+placeholder <5 atau fallback per-record/role/decrypt. Filter cohort anggota lama
+422 eksplisit; dimension/value memilih hanya marginal yang sudah dirilis.
+
+DTO Python/TypeScript, form UI, fixture kedua mode, dan probe integrasi diselaraskan.
+Setup plain baru/disposable menghasilkan marginal ekuivalen; tidak dijalankan ke
+pg-dpr existing. Readiness tidak menerima evidence pre-A5 sebagai pengesahan versi
+baru. Bukti historical baseline/protected tetap disimpan, bukan diubah menjadi PASS
+A5. SHA provenance profile/format ciphertext tidak diubah oleh B.
+
+Validasi final: pytest 328 lulus, 1 skip (swap ciphertext tidak berlaku pada plain),
+termasuk 64 kasus analytics dua mode dan 2 gate readiness A5; Next production build
+lulus; Playwright 14 lulus, termasuk filter marginal, empty state, dan escaping XSS
+label yang dirilis. Evidence hanya status/metadata, bukan nilai anggota/rahasia.
+Empat script setup/probe berubah juga diperiksa parse; integrasi PG18/OpenBao baru
+belum dijalankan pada revisi ini. Mesin ini menyediakan PG17 native, bukan PG18;
+tidak ada startup Docker, migrasi, SQL upgrade, atau akses VM dalam pekerjaan ini.
+
+Panduan rilis: app/docs/DEPLOY_A5.md. Source yang diubah hanya app/. Paket VM
+mengikutsertakan dependensi A5 yang sudah merged tanpa mengubah source A. Terapkan
+SQL melalui infra.protected.analyst hanya pada protected_734 VM saat maintenance,
+bukan migration prepare/full provisioning. Jangan menerapkan perubahan pada laptop
+Delf/pg-dpr atau database benchmark selama benchmark berlangsung. Deployment A5 VM,
+acceptance enam akun pasca-upgrade, sertifikat renew dry-run, dan systemd tetap
+pekerjaan berikutnya, bukan PASS dari unit/browser mock.
+
+
+## UI filter analytics — 28 Oktober 2026
+
+Menindaklanjuti screenshot Zhafif: panel menempel pada tepi dan tombol terlihat
+seperti teks. Penyebab pada revisi A5 B: form tidak mempunyai padding isi; class
+btn-primary/btn-secondary tidak terdefinisi, sedangkan komponen Button shared memakai
+button/button-primary/button-outline. Gunakan komponen shared itu, bukan alias CSS.
+
+Panel mendapat padding 24px desktop/20px mobile, grid dua kolom yang bertumpuk pada
+<=640px, tindakan terpisah dengan gap 12px dan tinggi minimal 44px. Label eksplisit
+htmlFor/id, focus keyboard terlihat, input label kelompok disabled sampai dimensi
+dipilih. Terapkan adalah aksi utama hijau; Reset outline dan disabled saat tidak ada
+filter. Kartu total kosong dan paragraf penjelasan berulang dihapus; satu kalimat
+menjelaskan kelompok kurang dari 5 tidak ditampilkan. DTO/API A5 tetap total null.
+
+Acuan desain yang dibaca: GOV.UK Button (hierarki tindakan dan teks singkat), GOV.UK
+Spacing (ruang konsisten/responsif), W3C WAI Labeling Controls (label terlihat dan
+asosiasi eksplisit). Ini penerapan prinsip, bukan klaim audit aksesibilitas lengkap.
+https://design-system.service.gov.uk/components/button/
+https://design-system.service.gov.uk/styles/spacing/
+https://www.w3.org/WAI/tutorials/forms/labels/
+
+Uji browser existing diperluas untuk regresi penyebab screenshot: padding dan ukuran
+klik, primary button mempunyai background, reset, fokus keyboard, layout 320/390px,
+serta tidak ada overflow horizontal. Screenshot lokal hanya fixture sintetis, di
+app/web/.local/. Build produksi Next.js/TypeScript lulus dan 14 test browser lulus.
+Preview desktop/mobile sudah diperiksa visual. Tidak ada backend, SQL, izin, scope,
+crypto, atau database yang diubah oleh perbaikan UI.
+
+
+## Penyederhanaan layar layanan — 28 Oktober 2026
+
+Zhafif menandai empat elemen untuk dihapus: panel promosi login, kartu keamanan dan
+footer Modul B di sidebar, indikator Sesi terautentikasi, dan catatan backend pada
+halaman profil. Semua dihapus dari markup, bukan disembunyikan dengan CSS. Login
+menjadi satu kartu terpusat dengan brand ringkas, username/password dan tombol masuk.
+Footer umum juga diringkas ke copyright brand. Identitas/peran akun dan tombol Keluar
+masih ada di header; posisi akun diratakan kanan setelah indikator sesi dihapus.
+CSS banner/sidebar lama yang tidak terpakai dibersihkan, termasuk selector responsif.
+
+Login/CSRF/session, policy backend dan navigasi sesuai role tetap menggunakan flow
+sebelumnya. Patch hanya frontend. Build Next.js/TypeScript lulus; preview login
+1280px/390px diperiksa visual dan 14 test browser lulus. Screenshot sebelum input
+kredensial, hanya memakai API mock sintetis. Tidak ada perubahan DB atau deployment
+langsung ke VM. Rilis memakai paket frontend yang diperbarui dan rebuild/restart web.
+
+## Kit persiapan whitebox pentest — 28 Oktober 2026
+
+Prompt revisi pengguna secara eksplisit meminta docs/deploy/PENTEST_BRIEF.md dan
+scripts/deploy/reset_to_golden.sh di luar app/. Perubahan dibatasi ke file tersebut
+dan helper deploy B; tidak mengubah source/tooling A/C, SQL A5 atau dataset asal.
+Audit historis docs/team_status_20261028.md dibaca dari remote run/overnight-28okt;
+statusnya mendahului rilis A5 dan deployment VM, bukan bukti terbaru VM.
+
+Delapan pt accounts memakai Argon2id/random, operator scope disjoint5+5, dua owner
+bound ke pengguna_bidx unik. Admin setup URL harus protected_734, endpoint sama dan
+verify-full. Existing file/scope diverifikasi tanpa rotate/regrant; demo/member rows
+tidak ditulis. Private credential file600 di private/service-b/pentest/pt-accounts.json,
+peta UUID/legacy metadata terpisah tanpa password. Disable8 pt membersihkan sesi.
+
+Reset memerlukan dua unit systemd DPR yang isinya sama dengan source review,
+lokasi checkout fixed, container berlabel vm-demo, PG18 TLS dan metadata identitas
+cluster/OID. Golden immutable dibuat saat app berhenti, ALLOW_CONNECTIONSfalse;
+reset hanya DROP/CREATE protected_734. Audit ekspor allowlist ke private600 sebelum
+stop dan sesudah stop; CONNECT ACL dipulihkan, count734/A5/FORCE RLS dan14 login
+diverifikasi. Fail stop tidak memaksa start app setelah kegagalan CREATE.
+Setting database kustom ditolak sebelum golden karena tidak ikut CREATE TEMPLATE.
+Golden satu volume bukan backup bencana, kehilangan kunci Bao tidak dipulihkan oleh
+golden. Freeze key deletion/rotation; old versions yang tetap tersedia masih valid.
+Restore utama Alby; disable pt sesudah restore agar tidak kembali aktif dari golden.
+
+Output operator VM: localhost5433/8200/8100/3443, Nginx80/443, UFW inactive, unit DPR0,
+unknown localhost36577 dikeluarkan dari scope. Cloud SG/iptables belum diverifikasi.
+Operator telah mengupload kit melalui sesi SSH miliknya dan menjalankan provisioning,
+install unit, A5 verify, inventory, create golden dan satu reset; semua PASS.
+Laporan diunduh melalui SCP ke cache lokal dan disimpan terpisah sebagai vm-*.json.
+Inventory nyata: PG18.6/Python3.12.3/Node24.22.1/Nginx1.24.0; modeprotected target734,
+migration_jobs validated734, verifiedTLS seluruh URL role, Bao2.5.5 unsealed policy
+svc-app TTL5648s pada21:24:57WIB. Reset count734 dan14 login/policy/IDOR/A5 checks
+true. Metadata audit7849 event diekspor sebelum DROP. Unit test tidak dipakai untuk
+mengklaim hasil VM. Peta10 UUID/legacy dan8 akun dimasukkan ke brief.
+
+Inventory sudo mengidentifikasi localhost36577 sebagai containerd; tat_agent.service
+dan daemon OS/Ardi excluded. iptables INPUTACCEPT/FORWARDDROP/OUTPUTACCEPT, nft raw
+menolak akses non-loopback ke127.0.0.1 ports5433/8200. Cloud SG tetap NOT VERIFIED.
+Certificate Let's Encrypt YE2 aktif sampai4Nov09:03:49WIB. Private custody/renewal
+end-to-end dan pentest penuh Delf bukan hasil kit. Jangan disable pt sebelum pentest;
+disable terakhir sesudah restore. Frontend tidak diubah, npm build tidak diperlukan.

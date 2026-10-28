@@ -171,19 +171,22 @@ class AuditPage(Strict):
 
 
 class AggregateGroup(Strict):
-    dimension: str
+    dimension: Literal["jenis_kelamin", "pekerjaan_terakhir", "nama_kppn", "nama_bank", "age_band"]
     value: str | None
-    count: int | Literal["<5"] | None
+    count: int = Field(ge=5)
 
 
 class Analytics(Strict):
-    total: int | Literal["<5"] | None
+    total: None = None
     groups: list[AggregateGroup]
 
 
 class AnalyticsFilters(Strict):
-    jenis_kelamin: Literal["L", "P"] | None = None
-    pekerjaan_terakhir: str | None = Field(default=None, min_length=1, max_length=50)
-    nama_kppn: str | None = Field(default=None, min_length=1, max_length=50)
-    nama_bank: str | None = Field(default=None, min_length=1, max_length=50)
-    age_band: str | None = Field(default=None, pattern=r"^[0-9]{1,3}-[0-9]{1,3}$")
+    dimension: Literal["jenis_kelamin", "pekerjaan_terakhir", "nama_kppn", "nama_bank", "age_band"] | None = None
+    value: str | None = Field(default=None, min_length=1, max_length=50)
+
+    @model_validator(mode="after")
+    def released_label_requires_dimension(self):
+        if self.value is not None and self.dimension is None:
+            raise ValueError("Select a released dimension before its label")
+        return self

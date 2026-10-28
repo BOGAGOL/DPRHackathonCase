@@ -1,0 +1,415 @@
+{
+  "status": "PASSED",
+  "total": 64,
+  "counts": {
+    "passed": 64,
+    "failed": 0,
+    "skipped": 0
+  },
+  "cases": [
+    {
+      "test": "test_small_cohort_omits_labels_counts_and_total[plain]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.302
+    },
+    {
+      "test": "test_small_cohort_omits_labels_counts_and_total[protected]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.23
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[plain-Profesi Kelompok Uji-1]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.242
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[plain-Profesi Kelompok Uji-2]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.278
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[plain-Profesi Kelompok Uji-3]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.223
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[plain-Profesi Kelompok Uji-4]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.217
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[plain-Profesi Kelompok Uji-5]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.272
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[plain-Profesi Kelompok Uji-6]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.255
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[plain-None-1]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.205
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[plain-None-2]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.216
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[plain-None-3]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.21
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[plain-None-4]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.236
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[plain-None-5]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.284
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[plain-None-6]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.234
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[protected-Profesi Kelompok Uji-1]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.199
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[protected-Profesi Kelompok Uji-2]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.216
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[protected-Profesi Kelompok Uji-3]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.21
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[protected-Profesi Kelompok Uji-4]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.249
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[protected-Profesi Kelompok Uji-5]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.199
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[protected-Profesi Kelompok Uji-6]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.243
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[protected-None-1]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.225
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[protected-None-2]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.237
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[protected-None-3]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.212
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[protected-None-4]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.246
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[protected-None-5]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.256
+    },
+    {
+      "test": "test_threshold_omits_entire_small_group_including_null[protected-None-6]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.213
+    },
+    {
+      "test": "test_released_marginal_filters_do_not_create_cohorts[plain]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.214
+    },
+    {
+      "test": "test_released_marginal_filters_do_not_create_cohorts[protected]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.201
+    },
+    {
+      "test": "test_member_cohort_filters_are_explicitly_rejected[plain-filters0]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.202
+    },
+    {
+      "test": "test_member_cohort_filters_are_explicitly_rejected[plain-filters1]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.19
+    },
+    {
+      "test": "test_member_cohort_filters_are_explicitly_rejected[plain-filters2]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.184
+    },
+    {
+      "test": "test_member_cohort_filters_are_explicitly_rejected[plain-filters3]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.171
+    },
+    {
+      "test": "test_member_cohort_filters_are_explicitly_rejected[plain-filters4]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.17
+    },
+    {
+      "test": "test_member_cohort_filters_are_explicitly_rejected[plain-filters5]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.169
+    },
+    {
+      "test": "test_member_cohort_filters_are_explicitly_rejected[protected-filters0]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.216
+    },
+    {
+      "test": "test_member_cohort_filters_are_explicitly_rejected[protected-filters1]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.215
+    },
+    {
+      "test": "test_member_cohort_filters_are_explicitly_rejected[protected-filters2]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.21
+    },
+    {
+      "test": "test_member_cohort_filters_are_explicitly_rejected[protected-filters3]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.262
+    },
+    {
+      "test": "test_member_cohort_filters_are_explicitly_rejected[protected-filters4]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.181
+    },
+    {
+      "test": "test_member_cohort_filters_are_explicitly_rejected[protected-filters5]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.197
+    },
+    {
+      "test": "test_invalid_released_filters_are_rejected[plain-filters0]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.187
+    },
+    {
+      "test": "test_invalid_released_filters_are_rejected[plain-filters1]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.172
+    },
+    {
+      "test": "test_invalid_released_filters_are_rejected[plain-filters2]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.198
+    },
+    {
+      "test": "test_invalid_released_filters_are_rejected[plain-filters3]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.208
+    },
+    {
+      "test": "test_invalid_released_filters_are_rejected[protected-filters0]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.174
+    },
+    {
+      "test": "test_invalid_released_filters_are_rejected[protected-filters1]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.191
+    },
+    {
+      "test": "test_invalid_released_filters_are_rejected[protected-filters2]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.167
+    },
+    {
+      "test": "test_invalid_released_filters_are_rejected[protected-filters3]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.178
+    },
+    {
+      "test": "test_query_uses_only_summary_with_bound_values_and_no_fallback[plain]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.195
+    },
+    {
+      "test": "test_query_uses_only_summary_with_bound_values_and_no_fallback[protected]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.241
+    },
+    {
+      "test": "test_app_defense_also_drops_small_labels_from_invalid_view[plain]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.22
+    },
+    {
+      "test": "test_app_defense_also_drops_small_labels_from_invalid_view[protected]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.193
+    },
+    {
+      "test": "test_postgresql_projection_is_public_and_internal_cohort_calls_fail",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.001
+    },
+    {
+      "test": "test_dto_rejects_small_counts_raw_totals_and_unknown_dimensions",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.001
+    },
+    {
+      "test": "test_released_filters_do_not_bypass_role_policy[plain-operator]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.171
+    },
+    {
+      "test": "test_released_filters_do_not_bypass_role_policy[plain-finance_officer]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.177
+    },
+    {
+      "test": "test_released_filters_do_not_bypass_role_policy[plain-privileged_officer]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.241
+    },
+    {
+      "test": "test_released_filters_do_not_bypass_role_policy[plain-anggota]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.166
+    },
+    {
+      "test": "test_released_filters_do_not_bypass_role_policy[plain-auditor]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.175
+    },
+    {
+      "test": "test_released_filters_do_not_bypass_role_policy[protected-operator]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.197
+    },
+    {
+      "test": "test_released_filters_do_not_bypass_role_policy[protected-finance_officer]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.218
+    },
+    {
+      "test": "test_released_filters_do_not_bypass_role_policy[protected-privileged_officer]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.2
+    },
+    {
+      "test": "test_released_filters_do_not_bypass_role_policy[protected-anggota]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.19
+    },
+    {
+      "test": "test_released_filters_do_not_bypass_role_policy[protected-auditor]",
+      "suite": "tests.test_analytics_suppression",
+      "status": "PASSED",
+      "seconds": 0.199
+    }
+  ],
+  "checked_at_utc": "2026-10-28T11:36:34.531907+00:00",
+  "source_commit": "5dfb839e634f963b38f0955eaa65905de63cfe03",
+  "app_worktree_dirty": true,
+  "app_source_sha256_at_export": "b88300003dde6411f4a4c44e8e8a7f6c0401226937352b0fc9047b46234ac9cf",
+  "command": "python -m pytest -c app/pytest.ini app/tests/test_analytics_suppression.py -q --junitxml=app/.local/analytics-a5.xml",
+  "scope": "A5/B4 API contract: invented isolated SQLite fixtures in plain/protected modes and PostgreSQL SQL compilation; no live database upgrade",
+  "not_tested": [
+    "Live PostgreSQL/OpenBao integration (reported separately)",
+    "Live baseline_100k or migrated datasets (reported separately)",
+    "Browser XSS and transport TLS (reported separately)"
+  ],
+  "skipped_scope": "Plain-mode ciphertext-swap test is not applicable; protected-mode swap is exercised",
+  "privacy": "No failure messages, request bodies, response values, cookies, credentials or crypto material exported",
+  "contract": "docs/contracts/CONTRACT.md section 10.1 (PR A #10)",
+  "vm_a5": "NOT TESTED",
+  "live_pg18_a5_api": "NOT TESTED",
+  "pg_dpr_modified": false,
+  "benchmark_databases_modified": false,
+  "build": "PASSED: npm run build",
+  "browser": "PASSED: 14 Playwright tests with mocked API; see browser-tests.json"
+}

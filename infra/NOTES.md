@@ -1,5 +1,16 @@
 # Modul A — Tahap 1 infra
 
+## Recovery database TLS — 28 Oktober 2026
+
+Managed HBA menambah reject hostnossl IPv4/IPv6 untuk regex database yang sempit
+`/^dpr_restore_[0-9a-f]{32}$`. PostgreSQL 18 mendukung regex pada field database;
+acuan: https://www.postgresql.org/docs/18/auth-pg-hba-conf.html. Updater mengenali
+blok strict/exception lama secara persis dan mengupgradenya; suffix existing dan
+exception non-TLS baseline untuk bench/scanner pada IP tunggal tetap dipertahankan.
+Verify juga memeriksa penolakan plaintext pada nama restore, termasuk bench/scanner.
+Pull kode belum mengubah pg_hba server. Apply diperlukan sebelum restore, yang kini
+menolak bila probe HBA tidak membuktikan penolakan plaintext sebelum CREATE DB.
+
 ## Pembaruan keputusan dan penerapan — 27 Oktober 2026
 
 Bagian Tahap 1 di bawah merekam kondisi historis. Keputusan terbaru: seluruh DB

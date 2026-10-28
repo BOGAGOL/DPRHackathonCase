@@ -1,4 +1,5 @@
 > **Pembaruan 28 Oktober 2026:** bagian lama di bawah dipertahankan sebagai riwayat.
+> Pemulihan layanan A+B: [backup tujuh tabel dan cutover restore](docs/RECOVERY.md).
 > Toolkit/schema/test vectors A kini tersedia dan integrasi protected disposable telah diuji.
 > Gunakan Python **3.11+ (diuji 3.12.10)** dan `dprcrypto:public-v1`.
 > Panduan terbaru yang menggantikan asumsi factory, akun/audit dan principal lama:
@@ -220,3 +221,33 @@ Analytics mendukung filter equality `jenis_kelamin`, `pekerjaan_terakhir`, `nama
 jumlah sekunder/total yang perlu disembunyikan menjadi `null`. UI menampilkan null sebagai
 “Disembunyikan”. Konsumen DTO harus menerima `number | "<5" | null`; kunci respons tetap
 `total` dan `groups`. Pengujian filter, batas 4/5 dan rendering tercakup di evidence.
+
+
+## Revisi analytics A5/B4 — 28 Oktober 2026
+
+Bagian ini menggantikan petunjuk analytics/filter/suppression lama di atas.
+Sesuai CONTRACT 10.1, endpoint kini membaca `public.analyst_summary` sebagai
+`analyst_user`. Response tetap `{total, groups}`: total selalu null dan groups hanya
+berisi dimension/value/count dengan count integer >=5. Kelompok 1–4 beserta labelnya
+hilang seluruhnya; tidak dikirim sebagai `<5`, null-count, atau label kosong.
+Filter yang tersedia hanya `dimension` dan `value` untuk marginal yang sudah dirilis;
+value memerlukan dimension. Semua filter cohort anggota lama ditolak 422.
+
+SQL A5 dan aplikasi harus dirilis bersama. Lihat [panduan VM](docs/DEPLOY_A5.md).
+Jangan menjalankan full migration prepare, provisioning akun, atau mengubah pg-dpr
+selama benchmark. Kode saja tidak menerapkan perubahan SQL. Fixture unit adalah
+sintetis SQLite; pengujian UI memakai API mock. Keduanya tidak menyatakan A5 VM PASS.
+Evidence khusus: `app/evidence/access-control/analytics-a5.json`.
+
+## Kit pentest VM Zhafif
+
+Panduan [PENTEST_SETUP.md](docs/PENTEST_SETUP.md) menyediakan provisioning8 akun
+`pt.*` terpisah, login6 demo existing, systemd dua proses aplikasi, inventory metadata,
+template golden dan reset cadangan yang dibatasi ke protected_734.
+[Brief Delf](../docs/deploy/PENTEST_BRIEF.md) berisi D1–D12 dan peta scope tanpa password.
+File credential tetap di private server mode600, bukan repo. Restore utama tetap
+tooling Alby; golden tidak menggantikan backup atau key plane OpenBao.
+Pengujian lokal memakai fixture/fake katalog dan dipisahkan dari bukti live.
+**Reset VM PASSED** satu kali; laporan aktual tersimpan di
+`app/evidence/access-control/vm-golden-reset.json`: members734 dan14 akun lulus.
+Inventory/A5/provision/golden berasal dari VM nyata; SG provider tetap belum diverifikasi.

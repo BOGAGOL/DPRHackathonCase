@@ -5,68 +5,73 @@
     {
       "scenario": "API proxy verifies HTTPS configuration and withholds sensitive upstream error text",
       "status": "passed",
-      "duration_ms": 21
+      "duration_ms": 15
     },
     {
       "scenario": "API proxy preserves session cookies and CSRF without accepting redirects",
       "status": "passed",
-      "duration_ms": 9
+      "duration_ms": 3
     },
     {
       "scenario": "navigation policy and nonce validation deny unsupported usage",
       "status": "passed",
-      "duration_ms": 28
+      "duration_ms": 13
     },
     {
       "scenario": "strict CSP has a different nonce on each request and every inline script is nonced",
       "status": "passed",
-      "duration_ms": 1084
+      "duration_ms": 566
     },
     {
       "scenario": "login works under strict CSP without writing browser storage",
       "status": "passed",
-      "duration_ms": 889
+      "duration_ms": 1302
     },
     {
       "scenario": "member profile escapes XSS and only PATCHes changed contact fields",
       "status": "passed",
-      "duration_ms": 674
+      "duration_ms": 632
     },
     {
       "scenario": "exact search uses API fetch without adding identifiers to the page URL",
       "status": "passed",
-      "duration_ms": 448
+      "duration_ms": 417
     },
     {
       "scenario": "analyst has a separate workspace and no record navigation",
       "status": "passed",
-      "duration_ms": 1093
+      "duration_ms": 507
     },
     {
       "scenario": "auditor has a separate workspace and no record navigation",
       "status": "passed",
-      "duration_ms": 844
+      "duration_ms": 638
     },
     {
       "scenario": "finance is read-only and anggota has its own scoped directory",
       "status": "passed",
-      "duration_ms": 770
+      "duration_ms": 566
     },
     {
       "scenario": "privileged officer can insert source fields without crypto metadata",
       "status": "passed",
-      "duration_ms": 765
+      "duration_ms": 618
     },
     {
       "scenario": "mobile navigation stays within viewport",
       "status": "passed",
-      "duration_ms": 907
+      "duration_ms": 805
     },
     {
-      "scenario": "analytics renders server suppression and sends combined filters without exposing counts",
+      "scenario": "analytics shows only released marginals and sends dimension/label filters",
       "status": "passed",
-      "duration_ms": 592
+      "duration_ms": 1194
+    },
+    {
+      "scenario": "analytics empty state omits small labels and escapes released text",
+      "status": "passed",
+      "duration_ms": 703
     }
   ],
-  "timestamp_utc": "2026-10-28T02:35:27.858Z"
+  "timestamp_utc": "2026-10-28T12:51:02.138Z"
 }

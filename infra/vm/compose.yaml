@@ -1,0 +1,89 @@
+name: dpr-demo
+
+services:
+  postgres:
+    image: postgres:18
+    restart: unless-stopped
+    labels: {dpr.scope: vm-demo}
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres-password
+      POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256
+    command: [postgres, -c, log_statement=none, -c, log_min_duration_statement=-1, -c, log_min_error_statement=panic, -c, log_parameter_max_length_on_error=0, -c, log_error_verbosity=terse]
+    ports: ["127.0.0.1:5433:5432"]
+    volumes:
+      - postgres_data:/var/lib/postgresql
+      - type: bind
+        source: ${DPR_SECRETS_DIR:?External private directory required}/postgres-password
+        target: /run/secrets/postgres-password
+        read_only: true
+        bind: {create_host_path: false}
+    healthcheck:
+      test: [CMD, pg_isready, -U, postgres, -d, postgres]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+    networks: [data_plane]
+
+  bao-volume:
+    image: postgres:18
+    user: "0:0"
+    entrypoint: [sh, -ec]
+    command: ['chown "$$DPR_VM_UID:$$DPR_VM_GID" /data; chmod 0700 /data']
+    environment:
+      DPR_VM_UID: ${DPR_VM_UID:?Run init-secrets as the VM operator}
+      DPR_VM_GID: ${DPR_VM_GID:?Run init-secrets as the VM operator}
+    cap_drop: [ALL]
+    cap_add: [CHOWN, FOWNER, DAC_OVERRIDE]
+    network_mode: none
+    volumes: [openbao_data:/data]
+
+  openbao:
+    image: openbao/openbao:2.5.5
+    restart: unless-stopped
+    user: "${DPR_VM_UID:?Operator UID required}:${DPR_VM_GID:?Operator GID required}"
+    environment:
+      SKIP_CHOWN: "1"
+      HOME: /tmp
+      BAO_ADDR: https://127.0.0.1:8200
+      BAO_CACERT: /openbao/tls/ca.crt
+    command: [server, -config=/openbao/config/openbao.hcl]
+    depends_on:
+      bao-volume: {condition: service_completed_successfully}
+    ports: ["127.0.0.1:8200:8200"]
+    volumes:
+      - openbao_data:/openbao/file
+      - type: bind
+        source: ../openbao/openbao.hcl
+        target: /openbao/config/openbao.hcl
+        read_only: true
+        bind: {create_host_path: false}
+      - type: bind
+        source: ${DPR_SECRETS_DIR:?External private directory required}/tls/ca.crt
+        target: /openbao/tls/ca.crt
+        read_only: true
+        bind: {create_host_path: false}
+      - type: bind
+        source: ${DPR_SECRETS_DIR:?External private directory required}/tls/server.crt
+        target: /openbao/tls/server.crt
+        read_only: true
+        bind: {create_host_path: false}
+      - type: bind
+        source: ${DPR_SECRETS_DIR:?External private directory required}/tls/server.key
+        target: /openbao/tls/server.key
+        read_only: true
+        bind: {create_host_path: false}
+    healthcheck:
+      test: [CMD, bao, status]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks: [key_plane]
+
+networks:
+  data_plane: {}
+  key_plane: {}
+volumes:
+  postgres_data: {labels: {dpr.scope: vm-demo}}
+  openbao_data: {labels: {dpr.scope: vm-demo}}

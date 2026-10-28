@@ -1,4 +1,5 @@
 import os
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -20,6 +21,7 @@ class Settings:
     openbao_token: str = field(default="", repr=False)
     openbao_cacert: str = ""
     crypto_factory: str = "dprcrypto:public-v1"
+    restored_database: str | None = None
 
     def validate(self):
         if self.mode not in {"plain", "protected"} or not 60 <= self.session_ttl <= 1800:
@@ -28,7 +30,13 @@ class Settings:
             raise ValueError("Browser origin must use HTTPS")
         if self.testing:
             return self
+        if self.restored_database is not None:
+            if (self.mode != "protected" or not re.fullmatch(r"dpr_restore_[0-9a-f]{32}", self.restored_database)
+                    or make_url(self.database_url).database != self.restored_database):
+                raise ValueError("Select exactly one reserved restored database in protected mode")
         expected = {"baseline_100k", "baseline_1m"} if self.mode == "plain" else {"protected_100k", "protected_734", "protected_1m"}
+        if self.restored_database:
+            expected = {self.restored_database}
         for value, role in [(self.database_url, "app_user"), (self.auth_database_url, "app_user"),
                             (self.analyst_database_url, "analyst_user"), (self.auditor_database_url, "auditor_user")]:
             if value is None:
@@ -54,4 +62,5 @@ class Settings:
                    session_ttl=int(os.getenv("SESSION_TTL_SECONDS", "900")),
                    allow_disposable_database=os.getenv("DPR_ALLOW_DISPOSABLE_DATABASE") == "1",
                    openbao_addr=os.getenv("OPENBAO_ADDR", ""), openbao_token=os.getenv("OPENBAO_TOKEN", ""),
-                   openbao_cacert=os.getenv("OPENBAO_CACERT", ""), crypto_factory=os.getenv("DPR_CRYPTO_FACTORY", "dprcrypto:public-v1")).validate()
+                   openbao_cacert=os.getenv("OPENBAO_CACERT", ""), crypto_factory=os.getenv("DPR_CRYPTO_FACTORY", "dprcrypto:public-v1"),
+                   restored_database=os.getenv("DPR_RESTORED_DATABASE") or None).validate()

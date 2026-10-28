@@ -1,0 +1,16 @@
+{
+  "status": "PASSED",
+  "checked_at_utc": "2026-10-28T09:12:14.0994826Z",
+  "scope": "npm audit of local Module B frontend lockfile; not a complete application security assessment",
+  "zod": "4.6.7",
+  "vulnerabilities": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "command": "npm audit --json",
+  "advisory_remediated": "GHSA-mrhx-c7xc-m3w5"
+}

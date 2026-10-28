@@ -1,0 +1,306 @@
+{
+  "reviewed_commit": "ed88ecde71107ae3180b055eecefed3b9ad1f60b",
+  "checked_at_utc": "2026-10-28T07:51:32.697816+00:00",
+  "status": "NOT_READY_FOR_SUBMISSION",
+  "scope": "Tracked current main and local component tests. No production state mutated; no Docker runtime rerun; external Drive/submission assets not inspected.",
+  "static_review": {
+    "backup_app_schema_probe": {
+      "rejects_current_app_schema": true,
+      "error_code": "unexpected_public_tables",
+      "scope": "in-memory catalog result with the two table names added by app/scripts/schema.py; no database connection"
+    },
+    "restore_service_config_probe": {
+      "rejects_restore_target_name": true,
+      "scope": "Settings.validate with a backup-generated target name; public CA existence stubbed; no credentials or connection"
+    },
+    "app_readiness": {
+      "status": "PARTIAL: migrated protected datasets and official API benchmark remain NOT TESTED",
+      "target_integration": {
+        "team_baseline_100k": "PASSED: Zhafif local pg-dpr, team schema/dataset + C datagen seed42, verified TLS and six-role HTTPS flow",
+        "live_protected": "PASSED: disposable PG18/OpenBao TLS with actual Module A schema/toolkit and six-role HTTPS flow",
+        "migrated_protected_datasets": "NOT TESTED: local protected_734/100k/1m not provisioned; disposable checks do not certify migrated datasets",
+        "api_benchmark": "NOT TESTED: measured by Module C on target datasets"
+      }
+    },
+    "required_artifacts": {
+      "verify/leak_sim.py": false,
+      "verify/leakage_budget.py": false,
+      "verify/run_security_tests.py": false,
+      "benchmark/adapters/protected.py": false,
+      "benchmark/adapters/api.py": false,
+      "docs/evidence_index.md": false,
+      "docs/sbom": false,
+      "evidence/leakage": false,
+      "evidence/access-control/db-roles.json": false,
+      "evidence/secrets-and-logs.json": false,
+      "evidence/summary.json": false
+    },
+    "tracked_final_document_artifacts": [],
+    "verify_implementation_files": [
+      "verify/NOTES.md",
+      "verify/scan_config.toml"
+    ],
+    "benchmark_adapters": [
+      "benchmark/adapters/__init__.py",
+      "benchmark/adapters/plaintext.py"
+    ]
+  },
+  "runtime": {
+    "docker_engine": "NOT_AVAILABLE",
+    "live_postgres_openbao_app": "NOT_RERUN",
+    "existing_service_configuration_changed": false,
+    "database_mutations_performed": false,
+    "key_operations_performed": false
+  },
+  "environment": {
+    "python": "3.11.5",
+    "packages": {
+      "pytest": "9.0.2",
+      "psycopg": "3.3.3",
+      "cryptography": "46.0.5",
+      "fastapi": "0.134.0",
+      "SQLAlchemy": "2.0.47",
+      "httpx": "0.28.1"
+    }
+  },
+  "findings": [
+    {
+      "id": "R01",
+      "severity": "HIGH",
+      "owner": "A + B",
+      "finding": "Backup rejects current Module B schema",
+      "sources": [
+        "scripts/backup/postgres.py:17",
+        "scripts/backup/postgres.py:33",
+        "scripts/backup/runner.py:93",
+        "app/scripts/schema.py:23"
+      ],
+      "validation": "in-memory catalog-result probe confirmed unexpected_public_tables for the five A tables plus the two B tables",
+      "required": "Support reviewed A and A+B layouts with authenticated per-table counts, security validation and restore/integrity/retention regression evidence."
+    },
+    {
+      "id": "R02",
+      "severity": "HIGH",
+      "owner": "A + B",
+      "finding": "Application configuration rejects fresh restore database names",
+      "sources": [
+        "scripts/backup/postgres.py:18",
+        "app/backend/service_app/config.py:31",
+        "app/backend/service_app/config.py:38",
+        "scripts/backup/runner.py:168"
+      ],
+      "validation": "Settings.validate rejected a dpr_restore_<32 hex> target with valid role and verify-full options; public CA existence stubbed, no connection",
+      "required": "Define a controlled cutover path preserving TLS and least privilege; prove login/read/search/update through HTTPS after restore."
+    },
+    {
+      "id": "R03",
+      "severity": "HIGH",
+      "owner": "C",
+      "finding": "No implemented leak simulation/budget/security aggregator in current main",
+      "sources": [
+        "verify/NOTES.md:10",
+        "docs/ai-prompts/PROMPT_C_VERIFY_EVIDENCE.md"
+      ],
+      "validation": "Tracked verify implementation contains only NOTES.md and scan_config.toml; evidence/leakage, db-roles.json, secrets-and-logs.json and summary.json absent",
+      "required": "Implement and run actual artifact scenarios, ESCE/DIE/ELS/DBR, residual k-anonymity, DB role tests and secret/history/log scan."
+    },
+    {
+      "id": "R04",
+      "severity": "HIGH",
+      "owner": "C with A/B support",
+      "finding": "Official protected and API before/after benchmarks absent",
+      "sources": [
+        "benchmark/__main__.py:13",
+        "benchmark/__main__.py:17",
+        "benchmark/__main__.py:18",
+        "docs/targets.md"
+      ],
+      "validation": "Only plaintext DB adapter exists; CLI accepts plain/before; evidence benchmark folders cover baseline and baseline_1m only",
+      "required": "Implement protected/API adapters and comparison, equivalent scopes/results, paired B-P-P-B repeated measurements for matching 100k and 1M datasets, include protected encrypted backup/restore timings."
+    },
+    {
+      "id": "R05",
+      "severity": "HIGH",
+      "owner": "A + B + C",
+      "finding": "Target dataset end-to-end acceptance not complete",
+      "sources": [
+        "app/scripts/check_ready.py:61",
+        "app/evidence/access-control/protected-integration.json",
+        "evidence/migration/integration-1m.json"
+      ],
+      "validation": "B reports PARTIAL; disposable integration does not certify migrated target datasets; 1M A evidence explicitly invented/disposable",
+      "required": "Run protected app and role/record/field/crypto checks on migrated target datasets; migrate official baseline_1m on benchmark laptop and collect full comparison evidence."
+    },
+    {
+      "id": "R06",
+      "severity": "HIGH",
+      "owner": "C and team",
+      "finding": "Submission artifacts not found in tracked repository",
+      "sources": [
+        "docs/PROJECT_CONTEXT.md:90",
+        "docs/PROJECT_CONTEXT.md:96"
+      ],
+      "validation": "No tracked final PDF/PPTX/DOCX outside reference/archive; docs/evidence_index.md and docs/sbom missing",
+      "required": "Prepare final report, slides, evidence index, SBOM, current architecture/threat model, clean-clone guide, licenses/AI disclosure and sanitized reproduction package; verify external Drive files separately if already prepared."
+    },
+    {
+      "id": "R07",
+      "severity": "MEDIUM",
+      "owner": "C and team",
+      "finding": "Benchmark unit test depends on actual laptop charger state",
+      "sources": [
+        "benchmark/tests/test_sessions_cli_backup.py:46",
+        "benchmark/runner.py:142"
+      ],
+      "validation": "Normal run failed Charger requirement not satisfied; the same test passed with sensors_battery mocked as plugged in, with no source edits",
+      "required": "Mock battery state within the test while retaining the real benchmark charger guard."
+    },
+    {
+      "id": "R08",
+      "severity": "MEDIUM",
+      "owner": "team",
+      "finding": "Top-level quick start and default tests still point at the archived application",
+      "sources": [
+        "README.md:15",
+        "README.md:19",
+        "pytest.ini:2",
+        "pytest.ini:3"
+      ],
+      "validation": "Current app is app/, but root README/default pytest use old apps/api and PostgreSQL17 lab; local docs preserve historical notes",
+      "required": "Add an authoritative entry point for current PG18/pg-dpr/OpenBao/app and isolated test commands; verify from a clean clone."
+    }
+  ],
+  "secret_scan": {
+    "performed": false,
+    "reason": "Full repository/history/log scan is a missing mandatory deliverable, not certified by this audit."
+  },
+  "external_artifacts_verified": false,
+  "source_code_changed": false,
+  "tests": {
+    "owned_A": {
+      "command": ".venv/Scripts/python -m pytest infra/tests infra/rotation/tests toolkit/tests policy/tests migration/tests scripts/backup/tests -q --tb=short",
+      "passed": 261,
+      "skipped": 7,
+      "failed": 0,
+      "exit_code": 0,
+      "seconds": 100.6
+    },
+    "datagen": {
+      "command": ".venv/Scripts/python -m pytest --import-mode=importlib datagen/tests -q --tb=short",
+      "passed": 25,
+      "skipped": 0,
+      "failed": 0,
+      "exit_code": 0,
+      "seconds": 9.52
+    },
+    "scanner": {
+      "command": ".venv/Scripts/python -m pytest --import-mode=importlib scanner/tests -q --tb=short",
+      "passed": 193,
+      "skipped": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "seconds": 19.54
+    },
+    "benchmark_and_verify_configuration": {
+      "command": ".venv/Scripts/python -m pytest --import-mode=importlib benchmark/tests verify/tests -q --tb=short",
+      "passed": 27,
+      "skipped": 0,
+      "failed": 1,
+      "exit_code": 1,
+      "seconds": 3.11,
+      "failure": "benchmark/tests/test_sessions_cli_backup.py::test_environment_without_exposing_inspect_env: Charger requirement not satisfied"
+    },
+    "benchmark_battery_isolation": {
+      "command": "Patch psutil.sensors_battery to plugged-in using unittest.mock.patch only within the test process; run the failing test again",
+      "passed": 1,
+      "skipped": 0,
+      "failed": 0,
+      "exit_code": 0,
+      "seconds": 2.43,
+      "scope": "Does not replace the original failed test result; no real benchmark and no code edits"
+    },
+    "service_B": {
+      "command": "From app/: ../.venv/Scripts/python -m pytest -q --tb=short --junitxml=../results/readiness-20261028/app-tests.xml",
+      "passed": 276,
+      "skipped": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "seconds": 450.85
+    },
+    "legacy_root_application": {
+      "command": ".venv/Scripts/python -m pytest tests -q --tb=short --junitxml=results/readiness-20261028/legacy-tests.xml",
+      "passed": 32,
+      "skipped": 1,
+      "failed": 0,
+      "exit_code": 0,
+      "seconds": 338.63,
+      "scope": "Archived application in apps/api; not current app/ acceptance"
+    },
+    "initial_B_wrong_import_mode": {
+      "exit_code": 1,
+      "collection_errors": 4,
+      "reason": "importlib mode cannot resolve direct from conftest imports in B tests; rerun with app pytest configuration/default mode passed"
+    },
+    "frontend": {
+      "npm_ci": {
+        "status": "PASSED",
+        "command": "npm.cmd ci --no-audit --no-fund",
+        "packages_added": 61,
+        "dependency_audit_performed": false
+      },
+      "production_build": {
+        "status": "PASSED",
+        "command": "npm.cmd run build (NEXT_TELEMETRY_DISABLED=1)",
+        "typescript": "PASSED as part of Next production build"
+      },
+      "proxy_navigation_tests": {
+        "status": "PASSED",
+        "command": "node node_modules/@playwright/test/cli.js test --reporter=line --grep 'API proxy|navigation policy' --output=.local/readiness-test-results",
+        "passed": 3,
+        "seconds": 6.4,
+        "scope": "Proxy and navigation/CSP unit tests through Playwright runner; no browser fixture or real backend"
+      },
+      "full_browser_suite": {
+        "status": "NOT_RERUN",
+        "reason": "Local Playwright browser binary unavailable; previously committed 13-test UI and live browser reports read as historical evidence, not claimed as new execution"
+      }
+    }
+  },
+  "test_totals_excluding_diagnostic_rerun": {
+    "passed": 814,
+    "skipped": 10,
+    "failed": 1,
+    "scope": "Six isolated suites, includes 32 legacy-root tests; excludes the battery-mocked diagnostic rerun and frontend"
+  },
+  "pull": {
+    "source": "origin/main",
+    "method": "fast-forward into existing feat/crypto-migration; fast-forward local main",
+    "commit": "ed88ecde71107ae3180b055eecefed3b9ad1f60b"
+  },
+  "review_report": "docs/SUBMISSION_READINESS.md",
+  "verification_limitations": [
+    "Full Docker integration not rerun because engine is stopped",
+    "External Drive report and slides not inspected",
+    "Full repo/history/log secret scan and vulnerability audit not performed",
+    "No official benchmark measured in this review",
+    "Component tests used existing root .venv, not a fresh install of isolated B/C environment pins",
+    "No automated complete security/code audit or production readiness certification"
+  ],
+  "tracked_source_changes_during_review": [],
+  "follow_up_recovery": {
+    "status": "IMPLEMENTED_AND_INTEGRATION_TESTED",
+    "implementation_commits": [
+      "8dfc985",
+      "ea2b7a8"
+    ],
+    "findings": [
+      "R01",
+      "R02"
+    ],
+    "evidence": "evidence/recovery/verification.json",
+    "live_integration": "PASSED",
+    "overall_submission_ready": false,
+    "tested_commit": "52148297e8836e01dd1ef6e87bad05ff3d9fc08d",
+    "resolved_scope": "R01/R02 implementation and actual A+B recovery validated with invented disposable fixtures; deployment/official datasets separate"
+  }
+}

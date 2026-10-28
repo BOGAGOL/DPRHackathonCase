@@ -35,7 +35,6 @@ protected_members = Table("anggota_protected", Base.metadata,
     *(Column(f, Text) for f in sorted(REF | {"age_band"})),
     *(Column(f + "_bidx", LargeBinary, index=True) for f in ["no_ktp", "email", "pengguna"]),
     Column("created_at", DateTime, default=utcnow), Column("updated_at", DateTime, default=utcnow))
-analyst_view = Table("analyst_view", Base.metadata, *(Column(f, Text) for f in sorted(REF | {"age_band"})))
 
 
 class User(Base):

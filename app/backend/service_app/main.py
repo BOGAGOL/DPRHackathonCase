@@ -23,6 +23,7 @@ from .crypto import CryptoUnavailable, ToolkitAdapter
 from .models import AuditLog, Session as PlainSession, User as PlainUser, protected_members, utcnow
 from .protected_control import ProtectedUser, ProtectedSession, audit_table
 from .analytics import summary
+from .recovery import verify_restore_target
 from .policy import ROLES, can_access, detail_policy, mask, mask_list_name
 from .repository import MemberRepository, normalized
 from .schemas import (Analytics, AuditDTO, AuditPage, ContactPatch, FinanceDetail, Login, MemberDetail,
@@ -76,11 +77,23 @@ def create_app(settings=None, crypto=None):
         if url not in engines:
             engines[url] = create_engine(url, hide_parameters=True, pool_pre_ping=True,
                 connect_args={"check_same_thread": False} if url.startswith("sqlite") else {"connect_timeout": 10})
+            if settings.testing and url.startswith("sqlite"):
+                engines[url] = engines[url].execution_options(schema_translate_map={"public": None})
         return engines[url]
     data_engine = engine_for(settings.database_url)
     auth_engine = engine_for(settings.auth_database_url or settings.database_url)
     analyst_engine = engine_for(settings.analyst_database_url or (settings.database_url if settings.testing else None))
     auditor_engine = engine_for(settings.auditor_database_url or (settings.auth_database_url or settings.database_url if settings.testing else None))
+    if settings.restored_database and not settings.testing:
+        try:
+            with data_engine.begin() as connection:
+                verify_restore_target(connection, settings.restored_database)
+        except Exception:
+            for engine in engines.values():
+                engine.dispose()
+            if protection is not None:
+                protection.close()
+            raise ValueError("Verified service restore target unavailable") from None
     data_factory = sessionmaker(data_engine, expire_on_commit=False)
     auth_factory = sessionmaker(auth_engine, expire_on_commit=False)
     @asynccontextmanager
@@ -150,6 +163,8 @@ def create_app(settings=None, crypto=None):
 
     @app.exception_handler(RequestValidationError)
     async def invalid_input(request, exc):
+        if request.url.path == "/analytics/summary" and set(request.query_params) - {"dimension", "value"}:
+            return JSONResponse({"detail": "Filter cohort anggota tidak didukung; gunakan dimension dan value."}, status_code=422)
         return JSONResponse({"detail": "Input tidak valid"}, status_code=422)
 
     @app.exception_handler(CryptoUnavailable)
