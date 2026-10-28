@@ -1,0 +1,310 @@
+{
+  "passed": true,
+  "before": {
+    "postgres": {
+      "rows": 734,
+      "rows_match": true,
+      "checksum_sha256": "5113038953aea9383f600de725b4267ecbf93de47c2a603a68bde6ad7e5c17e8",
+      "sequence": {
+        "last_value": 734,
+        "is_called": true
+      },
+      "database_bytes": 8640191,
+      "all_control_tables": {},
+      "all_sequences": [
+        [
+          "public",
+          "anggota_id_seq",
+          734
+        ]
+      ]
+    },
+    "baseline_100k": {
+      "rows": 100000,
+      "rows_match": true,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "database_bytes": 114521791,
+      "all_control_tables": {},
+      "all_sequences": [
+        [
+          "public",
+          "anggota_id_seq",
+          100000
+        ]
+      ]
+    },
+    "baseline_1m": {
+      "rows": 1000000,
+      "rows_match": true,
+      "checksum_sha256": "39812166a18ed61a6c45787d8af1a84a61c561c44955855c4681c9c02c5186f0",
+      "sequence": {
+        "last_value": 1000000,
+        "is_called": true
+      },
+      "database_bytes": 906376895,
+      "all_control_tables": {},
+      "all_sequences": [
+        [
+          "public",
+          "anggota_id_seq",
+          1000000
+        ]
+      ]
+    },
+    "protected_100k": {
+      "rows": 100000,
+      "rows_match": true,
+      "ciphertext_rows_binary_sha256": "def969d165c8047dcc9ac30f5c02c52253978bae0e0c64bbf0d9e2beff398d04",
+      "control_counts": {
+        "app_users": 0,
+        "access_scope": 0,
+        "audit_log": 656846
+      },
+      "database_bytes": 452605631,
+      "all_control_tables": {
+        "access_scope": {
+          "sha256": "62a74fd0e2d1e3a59b88b5b71c06ca8d43662c6787430c516b8e0bc28bbbda02",
+          "rows": 0
+        },
+        "app_users": {
+          "sha256": "62a74fd0e2d1e3a59b88b5b71c06ca8d43662c6787430c516b8e0bc28bbbda02",
+          "rows": 0
+        },
+        "audit_log": {
+          "sha256": "8f2c2f04a06b4d89801c1f7fdf59b872978c754fb087559f5827d0aa8e7364f6",
+          "rows": 656846
+        },
+        "migration_jobs": {
+          "sha256": "e76499861aa3719b179d710fdec89a64365ef19b0efcd36ec2bb81016d330ab7",
+          "rows": 1
+        }
+      },
+      "all_sequences": [
+        [
+          "public",
+          "access_scope_scope_id_seq",
+          425954
+        ],
+        [
+          "public",
+          "audit_log_event_id_seq",
+          1076764
+        ]
+      ]
+    },
+    "protected_1m": {
+      "rows": 1000000,
+      "rows_match": true,
+      "ciphertext_rows_binary_sha256": "b3b1a927aa9b5121d9e93fe9a7ac48de05b635a92e8b22a9958aed367a2d1cfc",
+      "control_counts": {
+        "app_users": 0,
+        "access_scope": 0,
+        "audit_log": 1530622
+      },
+      "database_bytes": 2879698623,
+      "all_control_tables": {
+        "access_scope": {
+          "sha256": "62a74fd0e2d1e3a59b88b5b71c06ca8d43662c6787430c516b8e0bc28bbbda02",
+          "rows": 0
+        },
+        "app_users": {
+          "sha256": "62a74fd0e2d1e3a59b88b5b71c06ca8d43662c6787430c516b8e0bc28bbbda02",
+          "rows": 0
+        },
+        "audit_log": {
+          "sha256": "9f2f5881043a9d9ec178be96279daf2b2a798f5acdde7f771da433bef0df27d2",
+          "rows": 1530622
+        },
+        "migration_jobs": {
+          "sha256": "62e2e8bd31f6b01c224cf5b437bddfe94b7dcec230fae638d39f9db49e8321c1",
+          "rows": 1
+        }
+      },
+      "all_sequences": [
+        [
+          "public",
+          "access_scope_scope_id_seq",
+          403975
+        ],
+        [
+          "public",
+          "audit_log_event_id_seq",
+          1931934
+        ]
+      ]
+    }
+  },
+  "after": {
+    "postgres": {
+      "rows": 734,
+      "rows_match": true,
+      "checksum_sha256": "5113038953aea9383f600de725b4267ecbf93de47c2a603a68bde6ad7e5c17e8",
+      "sequence": {
+        "last_value": 734,
+        "is_called": true
+      },
+      "database_bytes": 8640191,
+      "all_control_tables": {},
+      "all_sequences": [
+        [
+          "public",
+          "anggota_id_seq",
+          734
+        ]
+      ]
+    },
+    "baseline_100k": {
+      "rows": 100000,
+      "rows_match": true,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "database_bytes": 114521791,
+      "all_control_tables": {},
+      "all_sequences": [
+        [
+          "public",
+          "anggota_id_seq",
+          100000
+        ]
+      ]
+    },
+    "baseline_1m": {
+      "rows": 1000000,
+      "rows_match": true,
+      "checksum_sha256": "39812166a18ed61a6c45787d8af1a84a61c561c44955855c4681c9c02c5186f0",
+      "sequence": {
+        "last_value": 1000000,
+        "is_called": true
+      },
+      "database_bytes": 906376895,
+      "all_control_tables": {},
+      "all_sequences": [
+        [
+          "public",
+          "anggota_id_seq",
+          1000000
+        ]
+      ]
+    },
+    "protected_100k": {
+      "rows": 100000,
+      "rows_match": true,
+      "ciphertext_rows_binary_sha256": "def969d165c8047dcc9ac30f5c02c52253978bae0e0c64bbf0d9e2beff398d04",
+      "control_counts": {
+        "app_users": 0,
+        "access_scope": 0,
+        "audit_log": 656846
+      },
+      "database_bytes": 452605631,
+      "all_control_tables": {
+        "access_scope": {
+          "sha256": "62a74fd0e2d1e3a59b88b5b71c06ca8d43662c6787430c516b8e0bc28bbbda02",
+          "rows": 0
+        },
+        "app_users": {
+          "sha256": "62a74fd0e2d1e3a59b88b5b71c06ca8d43662c6787430c516b8e0bc28bbbda02",
+          "rows": 0
+        },
+        "audit_log": {
+          "sha256": "8f2c2f04a06b4d89801c1f7fdf59b872978c754fb087559f5827d0aa8e7364f6",
+          "rows": 656846
+        },
+        "migration_jobs": {
+          "sha256": "e76499861aa3719b179d710fdec89a64365ef19b0efcd36ec2bb81016d330ab7",
+          "rows": 1
+        }
+      },
+      "all_sequences": [
+        [
+          "public",
+          "access_scope_scope_id_seq",
+          425954
+        ],
+        [
+          "public",
+          "audit_log_event_id_seq",
+          1076764
+        ]
+      ]
+    },
+    "protected_1m": {
+      "rows": 1000000,
+      "rows_match": true,
+      "ciphertext_rows_binary_sha256": "b3b1a927aa9b5121d9e93fe9a7ac48de05b635a92e8b22a9958aed367a2d1cfc",
+      "control_counts": {
+        "app_users": 0,
+        "access_scope": 0,
+        "audit_log": 1530622
+      },
+      "database_bytes": 2879698623,
+      "all_control_tables": {
+        "access_scope": {
+          "sha256": "62a74fd0e2d1e3a59b88b5b71c06ca8d43662c6787430c516b8e0bc28bbbda02",
+          "rows": 0
+        },
+        "app_users": {
+          "sha256": "62a74fd0e2d1e3a59b88b5b71c06ca8d43662c6787430c516b8e0bc28bbbda02",
+          "rows": 0
+        },
+        "audit_log": {
+          "sha256": "9f2f5881043a9d9ec178be96279daf2b2a798f5acdde7f771da433bef0df27d2",
+          "rows": 1530622
+        },
+        "migration_jobs": {
+          "sha256": "62e2e8bd31f6b01c224cf5b437bddfe94b7dcec230fae638d39f9db49e8321c1",
+          "rows": 1
+        }
+      },
+      "all_sequences": [
+        [
+          "public",
+          "access_scope_scope_id_seq",
+          403975
+        ],
+        [
+          "public",
+          "audit_log_event_id_seq",
+          1931934
+        ]
+      ]
+    }
+  },
+  "baseline_nossl": [
+    {
+      "role": "bench_user",
+      "database": "baseline_100k",
+      "rows": 100000,
+      "ssl": false,
+      "passed": true
+    },
+    {
+      "role": "bench_user",
+      "database": "baseline_1m",
+      "rows": 1000000,
+      "ssl": false,
+      "passed": true
+    },
+    {
+      "role": "scanner_user",
+      "database": "baseline_100k",
+      "rows": 100000,
+      "ssl": false,
+      "passed": true
+    },
+    {
+      "role": "scanner_user",
+      "database": "baseline_1m",
+      "rows": 1000000,
+      "ssl": false,
+      "passed": true
+    }
+  ],
+  "at_utc": "2026-10-28T23:11:31.151931+00:00"
+}
