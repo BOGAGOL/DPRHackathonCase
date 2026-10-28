@@ -1,5 +1,9 @@
 # Benchmark API read-path, laptop
 
+Fixture TLS k6 yang mengubah trust store pengguna Windows dijalankan terpisah
+dengan DPR_RUN_K6_TLS_FIXTURE=1. Regresi default tidak mengubah trust store;
+subprocess pemasangan/penghapusan CA fixture dibatasi30s.
+
 Jalankan hanya atas instruksi operator. Tidak mengubah app/; backend HTTPS dari
 app/scripts/serve.py, app_user verify-full di kedua mode, https_pool, DEK cache OFF.
 Server deployment tidak disentuh. Install app dependencies di app/.venv dan toolkit
@@ -25,6 +29,12 @@ ke seluruh 100k agar total dan pagination sama dengan plain, mencakup korpus DB2
 Password/file account dan korpus hanya di direktori privat dengan ACL operator.
 Parity 200 key x4 endpoint x2 mode membandingkan seluruh body JSON, hanya header diabaikan.
 Mismatch berisi nama field, tidak berisi nilai.
+
+Sebelum CLI B, controller memberi CONNECT dan USAGE public kepada app_user hanya
+pada copy yang OID-nya cocok dengan journal swapped. Original tidak diberi grant.
+Ini prasyarat koneksi; CLI B tetap membuat tabel/grant tabel dan akun resmi.
+Ringkasan resource utama memakai sampel dalam window pengukuran; statistik yang
+termasuk login/warmup juga disimpan terpisah sebagai resources_including_setup.
 
 Dua blok B/P/P/B, empat endpoint GET, 8VU dan60s per run. App restart hanya saat mode
 berubah; warmup30s sesudah tiap start. K6 login8x sebelum pengukuran setiap run.

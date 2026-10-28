@@ -14,7 +14,8 @@ from benchmark.api import runner as r
 from infra.tls.make_ca import make_ca
 
 
-@pytest.mark.skipif(os.name!='nt' or not r.K6.is_file(),reason='Windows + installed k6 required for isolated TLS script integration')
+@pytest.mark.skipif(os.name!='nt' or not r.K6.is_file() or os.environ.get('DPR_RUN_K6_TLS_FIXTURE')!='1',
+                   reason='Opt-in DPR_RUN_K6_TLS_FIXTURE=1: isolated k6 integration changes the Windows user CA store')
 def test_real_k6_setup_load_summary_and_no_values_in_raw(tmp_path):
     directory=tmp_path/'cert';make_ca(directory)
     state={'logins':0,'gets':0};lock=threading.Lock()
@@ -54,7 +55,7 @@ def test_real_k6_setup_load_summary_and_no_values_in_raw(tmp_path):
     # Production duration remains 60 seconds and is also checked by k6 inspect.
     script=tmp_path/'fixture.js';script.write_text(source.replace('60 + warmupMs / 1000','2 + warmupMs / 1000'),encoding='utf-8')
     try:
-        subprocess.run(['powershell.exe','-NoProfile','-Command',certificate_script+'$s.Add($c);$s.Close()'],env=env,check=True,capture_output=True)
+        subprocess.run(['powershell.exe','-NoProfile','-Command',certificate_script+'$s.Add($c);$s.Close()'],env=env,check=True,capture_output=True,timeout=30)
         run=subprocess.run([str(r.K6),'run','--quiet','--include-system-env-vars','--log-output=none','--out','json='+str(raw),str(script)],
                            env=env,capture_output=True,timeout=30)
         assert run.returncode==0, 'k6 fixture failed; no private output printed'
@@ -66,4 +67,4 @@ def test_real_k6_setup_load_summary_and_no_values_in_raw(tmp_path):
         assert b'synthetic-session' not in contents and b'"url"' not in contents
     finally:
         server.shutdown();server.server_close();thread.join(timeout=5)
-        subprocess.run(['powershell.exe','-NoProfile','-Command',certificate_script+'$s.Remove($c);$s.Close()'],env=env,check=True,capture_output=True)
+        subprocess.run(['powershell.exe','-NoProfile','-Command',certificate_script+'$s.Remove($c);$s.Close()'],env=env,check=True,capture_output=True,timeout=30)

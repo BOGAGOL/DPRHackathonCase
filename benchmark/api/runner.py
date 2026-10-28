@@ -129,7 +129,21 @@ def guarded_command(args, env):
     if completed.returncode:raise RuntimeError('official_setup_command_failed_details_withheld')
 
 
-def prepare(private):
+def grant_copy_prerequisites(swap, database):
+    """Connection/schema grants are prerequisites omitted by B's table-only CLI."""
+    expected=swap.state['copies'].get(database)
+    if (swap.state['status']!='swapped' or not expected
+            or expected in {v['oid'] for v in swap.state['originals'].values()}
+            or swap.store.entries().get(database,{}).get('oid')!=expected):
+        raise RuntimeError('copy_grant_target_not_owned_copy')
+    with psycopg.connect(**paired.admin_parameters(database,True)) as c:
+        actual=c.execute('SELECT oid FROM pg_database WHERE datname=current_database()').fetchone()[0]
+        if actual!=expected:raise RuntimeError('copy_connection_oid_mismatch')
+        c.execute(sql.SQL('GRANT CONNECT ON DATABASE {} TO app_user').format(sql.Identifier(database)))
+        c.execute('GRANT USAGE ON SCHEMA public TO app_user')
+
+
+def prepare(private, swap):
     source = Path(os.environ['DPR_PRIVATE_DIR'])/'benchmark/baseline_100k_keys_v1.json'
     original = json.loads(source.read_text(encoding='utf-8'))
     profiles = [{k:r[k] for k in ('id','no_ktp','email')} for r in original['profiles']]
@@ -138,6 +152,7 @@ def prepare(private):
     key_path = private/'keys.json'; key_path.write_text(json.dumps(keys),encoding='utf-8')
     accounts = {}
     for mode, db in [('plain','baseline_100k'),('protected','protected_100k')]:
+        grant_copy_prerequisites(swap,db)
         env = application_env(mode)
         env['APP_SETUP_DATABASE_URL'] = service_url(db, True)
         env['DPR_PRIVATE_DIR'] = str(secure_directory(private/mode))
@@ -276,11 +291,20 @@ class Resources:
     def finish(self):
         self.stop.set();self.thread.join(timeout=15)
         write_json(self.path,self.rows)
-        good=[r for r in self.rows if r['ok']]
-        fields=set().union(*(r.keys() for r in good))-{'timestamp_utc','ok'} if good else set()
-        return {'samples':len(self.rows),'failed_samples':len(self.rows)-len(good),
-                **{f+'_median':statistics.median(r[f] for r in good) for f in fields},
-                **{f+'_peak':max(r[f] for r in good) for f in fields}}
+        return summarize_resources(self.rows)
+
+
+def summarize_resources(rows, started=None, completed=None):
+    """Keep measurement CPU/RSS separate from login and warmup samples."""
+    if started is not None:
+        first=datetime.fromisoformat(started.replace('Z','+00:00'))
+        last=datetime.fromisoformat(completed.replace('Z','+00:00'))
+        rows=[r for r in rows if first<=datetime.fromisoformat(r['timestamp_utc'].replace('Z','+00:00'))<=last]
+    good=[r for r in rows if r['ok']]
+    fields=set().union(*(r.keys() for r in good))-{'timestamp_utc','ok'} if good else set()
+    return {'samples':len(rows),'failed_samples':len(rows)-len(good),
+            **{f+'_median':statistics.median(r[f] for r in good) for f in fields},
+            **{f+'_peak':max(r[f] for r in good) for f in fields}}
 
 
 def parse_raw(path):
@@ -329,7 +353,9 @@ def run_once(app, endpoint, directory, key_path, account_path, warmup, power, ha
         if proc.poll() is None:proc.terminate();proc.wait(timeout=15)
         summary_resources=resources.finish()
     result=parse_raw(raw)
-    result.update(endpoint=endpoint,mode=app.mode,warmup_seconds=warmup,resources=summary_resources,ac_confirmed=True)
+    result.update(endpoint=endpoint,mode=app.mode,warmup_seconds=warmup,
+        resources=summarize_resources(resources.rows,result['measurement_started_at_utc'],result['measurement_completed_at_utc']),
+        resources_including_setup=summary_resources,ac_confirmed=True)
     for p in (raw,directory/'resources.json'):
         with p.open('rb') as source,gzip.open(str(p)+'.gz','wb',compresslevel=1) as target:shutil.copyfileobj(source,target)
         p.unlink()
@@ -419,7 +445,7 @@ def run():
     try:
         swap.swap()
         report['stage']='prepare_clones'
-        keys,key_path,accounts=prepare(private)
+        keys,key_path,accounts=prepare(private,swap)
         report['stage']='parity'
         report['parity']=parity(app,keys,accounts)
         report['stage']='measurement'

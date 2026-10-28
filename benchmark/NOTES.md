@@ -922,3 +922,15 @@ Regresi260 PASS/1 SKIP plus1 test k6 nyata TLS PASS pada fixture lokal buatan se
 ## API B-P-P-B 100k — 2026-10-28T23:11:31.241032+00:00
 
 Status STOPPED. Clone bernama baseline_100k/protected_100k karena allowlist app; originals diarsip sementara __official dan dilindungi OID/ALLOW_CONNECTIONS. Journal db_swap_state.json wajib restored setelah count/checksum/control/sequence/TLS bench+scanner lolos. App asli tanpa edit, TLS verify-full kedua mode, 8VU/60s, warmup30s per start, cooldown login310s agar satu akun tidak kena limiter10/5menit. Raw/summary/parity/metadata di evidence/benchmark/api_bppb_100k. Tidak mengganti hasil DB.
+
+## API setup salinan dipulihkan; prasyarat CONNECT/USAGE, 29 Oktober 2026
+
+Percobaan detached commit4af5d15 berhenti saat provisioning plain, sebelum parity dan sebelum run ukur (0/32). Diagnosis read-only sesudah pemulihan menunjukkan app_user tidak memiliki CONNECT baseline_100k maupun USAGE public; schema.py B hanya memberi hak tabel. Bukti setup_readonly_diagnosis.json; keluaran CLI privat tidak dicetak. Tidak mengubah app/ atau hak pada database resmi.
+
+Pemulihan percobaan ini PASS: db_swap_state.json berstatus restored, OID original baseline100k32768/protected100k41230 kembali ke nama semula; seluruh count/checksum/tabel kontrol/sequence kelima database cocok; empat koneksi bench/scanner non-TLS pada kedua baseline PASS. Copy dihapus, app berhenti, trust CA sementara dilepas. Evidence percobaan dipush54af65e sebelum diagnosis/perbaikan.
+
+Persiapan C ditambah GRANT CONNECT dan USAGE public hanya setelah status swapped, OID copy dikenal, bukan OID original, dan OID koneksi aktual cocok. Ini prasyarat pada salinan yang diizinkan operator; CLI B tetap dipakai tanpa perubahan. Statistik CPU/RSS window ukur dipisah dari login/warmup; sampel lengkap tetap disimpan. Sebelum mencoba lagi, token harus cukup untuk seluruh sesi10400s; operator diminta token svc-app4jam baru karena token lama tak lagi cukup. Tidak auto-issue/renew atau membaca root token. Riwayat gagal dan bukti pemulihan dipertahankan, bukan ditimpa sebagai hasil ukur.
+
+Validasi perbaikan persiapan: toolkit+benchmark+verify262 PASS/2 SKIP; khusus swap/runner26 PASS. JUnit/JSON di evidence/benchmark/api_bppb_100k/. Ulang fixture k6 tertahan pada subprocess Windows penambahan CA (sebelum k6 dimulai); proses uji milik sesi dihentikan dan CA fixture dipastikan tidak terpasang. Tidak menyimpulkan penyebab UI/OS secara pasti. Test TLS fixture kini opt-in DPR_RUN_K6_TLS_FIXTURE=1 dengan timeout subprocess30s; hasil fixture TLS yang telah PASS sebelumnya tetap disimpan, bukan diklaim sebagai run baru. load.js produksi tidak berubah. Statistik resource kini memilih timestamp window ukur, tetap menyimpan agregat seluruh proses.
+
+Pada06:47:05WIB lookup-self read-only menunjukkan svc-app TTL9417s (2:36:57), di bawah anggaran10400s (2:53:20); peluncuran ulang belum dilakukan. Bukti token_budget_check.json dan setup_fix_verification.json. Menunggu token baru dari operator; tidak ada worker/app/run benchmark aktif. Journal tetap restored dan riwayat percobaan gagal tetap pada lokasi semula sampai tersedia token yang cukup.

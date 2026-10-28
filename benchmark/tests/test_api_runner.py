@@ -176,3 +176,25 @@ def test_windows_server_children_stop_before_parent_and_reused_pid_is_refused(mo
     r.stop_owned_app({'pid':10,'created':1,'children':[{'pid':20,'created':2}]})
     assert calls==[20,10]
     with pytest.raises(RuntimeError):r.stop_owned_app({'pid':10,'created':999})
+
+
+def test_copy_connection_grants_never_apply_to_official_oid(monkeypatch):
+    swap=MagicMock();swap.state={'status':'swapped','copies':{'baseline_100k':111},'originals':{'baseline_100k':{'oid':11}}}
+    swap.store.entries.return_value={'baseline_100k':{'oid':111}}
+    monkeypatch.setattr(r.paired,'admin_parameters',lambda db,writable:{'dbname':db})
+    conn=MagicMock();conn.__enter__.return_value=conn;conn.execute.return_value.fetchone.return_value=(111,)
+    connect=MagicMock(return_value=conn);monkeypatch.setattr(r.psycopg,'connect',connect)
+    r.grant_copy_prerequisites(swap,'baseline_100k')
+    assert conn.execute.call_count==3
+    swap.state['copies']['baseline_100k']=11
+    with pytest.raises(RuntimeError,match='not_owned_copy'):r.grant_copy_prerequisites(swap,'baseline_100k')
+    assert connect.call_count==1
+
+
+def test_resources_use_only_measurement_window_and_retain_failures():
+    rows=[{'timestamp_utc':f'2026-10-29T00:00:0{i}Z','ok':i!=2,'app_rss_bytes':v}
+          for i,v in enumerate([9000,10,20,30,9999])]
+    report=r.summarize_resources(rows,'2026-10-29T00:00:01+00:00','2026-10-29T00:00:03+00:00')
+    assert report=={'samples':3,'failed_samples':1,'app_rss_bytes_median':20,'app_rss_bytes_peak':30}
+    assert r.summarize_resources(rows)['app_rss_bytes_peak']==9999
+    assert r.summarize_resources([],None,None)=={'samples':0,'failed_samples':0}
