@@ -155,12 +155,22 @@ def test_protected_provision_stores_only_index_binding_not_source_identifier(mon
     database_url = "sqlite:///" + str(tmp_path / "control.sqlite")
     settings = Settings(mode="protected", database_url=database_url, testing=True)
     engine = create_engine(database_url)
-    User.__table__.create(engine)
+    from service_app.protected_control import ProtectedBase, ProtectedUser, bindings
+    from service_app.models import protected_members
+    ProtectedBase.metadata.create_all(engine)
+    protected_members.create(engine)
+    from uuid import uuid4
+    record_id = str(uuid4())
     monkeypatch.setattr(module.Settings, "from_env", classmethod(lambda cls: settings))
     monkeypatch.setenv("DPR_PRIVATE_DIR", str(tmp_path))
     original_identifier = "synthetic-" + secrets.token_urlsafe(12)
     expected_index = secrets.token_bytes(32)
     monkeypatch.setenv("DEMO_MEMBER_PRINCIPAL", original_identifier)
+    monkeypatch.setenv("APP_SETUP_DATABASE_URL", database_url)
+    monkeypatch.setenv("DEMO_ASSIGNED_IDS", "1")
+    with engine.begin() as db:
+        db.execute(protected_members.insert().values(anggota_id=record_id, legacy_row_id=1, protection_version=1,
+            dek_pii_wrapped="test-reference", dek_fin_wrapped="test-reference", pengguna_bidx=expected_index))
     monkeypatch.setattr(module, "external_directory", lambda value: tmp_path)
     def private(path):
         path.mkdir()
@@ -172,15 +182,17 @@ def test_protected_provision_stores_only_index_binding_not_source_identifier(mon
         def blind_index(self, field, value):
             assert field == "pengguna" and value == original_identifier
             return expected_index
+        def close(self):
+            pass
     monkeypatch.setattr(module, "ToolkitAdapter", TestAdapter)
     module.main()
     with DBSession(engine) as db:
-        users = db.scalars(select(User)).all()
+        users = db.scalars(select(ProtectedUser)).all()
         assert len(users) == 6
         assert all(u.principal != original_identifier for u in users)
         member = next(u for u in users if u.role == "anggota")
         assert member.principal == "bidx:v1:" + expected_index.hex()
-        assert all(u.principal == u.id for u in users if u.role != "anggota")
+        assert all(u.principal == "" for u in users if u.role != "anggota")
     output = tmp_path / "service-b/service-b-protected-accounts.json"
     serialized = output.read_text(encoding="utf-8")
     stdout = capsys.readouterr().out

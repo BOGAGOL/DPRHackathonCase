@@ -1,0 +1,61 @@
+{
+  "checks": {
+    "all_wrapped_keys_v2": true,
+    "cas_invalid_batch_and_downgrade_refused": true,
+    "coordinator_only_wrapped_key_functions": true,
+    "full_field_decryption_and_unchanged_deks": true,
+    "key_operator_cannot_encrypt_or_decrypt": true,
+    "old_key_versions_not_disabled": true,
+    "pause_commits_atomic_batch": true,
+    "pre_rotation_backup_still_decrypts": true,
+    "resume_does_not_rotate_again": true,
+    "rewrap_idempotent": true
+  },
+  "passed": true,
+  "rotation": {
+    "checked_at_utc": "2026-10-27T18:03:47.654314+00:00",
+    "completed_batches": 3,
+    "databases": {
+      "protected_734": {
+        "after_versions": {
+          "2": 17
+        },
+        "all_rows_at_target_or_newer": true,
+        "before_validation": {
+          "authenticated_fields": 408,
+          "rows": 17
+        },
+        "before_versions": {
+          "1": 12,
+          "2": 5
+        },
+        "rewrapped_rows": 12,
+        "validation": {
+          "all_plaintext_values_unchanged": true,
+          "all_record_deks_unchanged": true,
+          "authenticated_fields": 408,
+          "ciphertext_finance_bidx_ref_unchanged": true,
+          "passed": true,
+          "row_count_unchanged": true,
+          "rows": 17
+        }
+      }
+    },
+    "elapsed_seconds": 1.300963,
+    "key": "pii-kek",
+    "key_operator_has_database_credentials": false,
+    "key_version_after": 2,
+    "key_version_before": 2,
+    "min_decryption_version_before": 1,
+    "minimum_key_versions_changed": false,
+    "passed": true,
+    "plaintext_or_deks_written": false,
+    "resumed": true,
+    "schema_version": 1,
+    "status": "complete",
+    "target_version": 2,
+    "validation": "all records, all PII/FIN fields, private in-memory comparisons"
+  },
+  "schema_version": 1,
+  "scope": "17 invented records, TLS PG18/OpenBao 2.5.5, real subprocesses"
+}

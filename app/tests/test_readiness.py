@@ -115,3 +115,19 @@ def test_complete_baseline_proof_does_not_certify_protected_or_benchmark(monkeyp
     checks["source_checksum_unchanged"] = False
     path.write_text(json.dumps({"status": "PASSED", "checks": checks}), encoding="utf-8")
     assert module.report()["target_integration"]["team_baseline_100k"].startswith("NOT TESTED")
+
+
+@pytest.mark.parametrize("complete", [True, False])
+def test_real_protected_evidence_does_not_certify_migrated_targets(monkeypatch, tmp_path, complete):
+    module = local_report(monkeypatch, tmp_path)
+    path = module.APP / "evidence/access-control/protected-integration.json"
+    path.parent.mkdir(parents=True)
+    names = "B_provisioning_with_A_schema A_schema_owner_preserved A_audit_no_extra_grants A_ciphertext_decrypts_in_B scoped_insert_no_RETURNING new_record_scope_trigger reencrypt_and_bidx_update real_AAD_swap_generic_500 A_audit_context_and_error filtered_count_suppressed live_api_https_verified_ca live_web_https_verified_ca live_browser_probe_passed revoked_key_identity_fails_closed".split()
+    checks = dict.fromkeys(names, True)
+    if not complete:
+        checks["revoked_key_identity_fails_closed"] = False
+    path.write_text(json.dumps({"status": "PASSED", "checks": checks}), encoding="utf-8")
+    result = module.report()
+    assert result["target_integration"]["live_protected"].startswith("PASSED" if complete else "NOT TESTED")
+    assert result["target_integration"]["migrated_protected_datasets"].startswith("NOT TESTED")
+    assert result["target_integration"]["api_benchmark"].startswith("NOT TESTED")

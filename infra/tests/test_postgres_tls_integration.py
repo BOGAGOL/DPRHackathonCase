@@ -59,23 +59,27 @@ def test_live_enable_reload_verify_and_rollback_preserves_container_and_data(tmp
         target.run(["cp",name+":"+before["hba_file"],str(original_hba)])
         legacy_hba=directory/"postgres/fixture-legacy-hba.conf"
         legacy_hba.write_bytes(pg.LEGACY_HBA_BLOCK.encode()+original_hba.read_bytes())
+        # Exercise the harder case too: a strict old block while ssl is OFF.
+        target.install_file(legacy_hba,before["hba_file"],"600")
+        target.query("SELECT pg_reload_conf();")
         # Force a post-reload verification failure: automatic rollback must restore SSL/HBA.
         original_verify = pg.verify_tls
         def fail_verify(*args):
             raise pg.TLSUpdateError("forced_verification_failure")
         monkeypatch.setattr(pg, "verify_tls", fail_verify)
         try:
-            target.apply(directory)
+            target.apply(directory,baseline_address="auto")
             checks["automatic_rollback"] = False
         except pg.TLSUpdateError:
             after_failure = target.metadata()
             checks["automatic_rollback"] = after_failure["settings"] == before["settings"]
         monkeypatch.setattr(pg, "verify_tls", original_verify)
-        state_path, result = target.apply(directory)
+        state_path, result = target.apply(directory,baseline_address="auto")
         checks.update(result["checks"])
         applied_hba=directory/"postgres/fixture-applied-hba.conf"
         target.run(["cp",name+":"+before["hba_file"],str(applied_hba)])
         checks["auth_rules_preserved"]=applied_hba.read_bytes()==pg.baseline_hba_block(result["baseline_client_address"]).encode()+original_hba.read_bytes()
+        checks["complete_connection_matrix"] = result["connection_matrix_complete"]
         checks["tls12_or_tls13"] = result["tls_version"] in ("TLSv1.2", "TLSv1.3")
         checks["source_database_catalog_only"] = target.metadata()["database_oids"]["postgres"] == before["database_oids"]["postgres"]
         for database in pg.DATABASES:
@@ -84,14 +88,30 @@ def test_live_enable_reload_verify_and_rollback_preserves_container_and_data(tmp
             checks["rows_preserved:" + database] = count == "5"
         mode = target.run(["exec", "--user", "0", name, "stat", "-c", "%a:%U", target.metadata()["settings"]["ssl_key_file"]])
         checks["private_key_postgres_0600"] = mode == "600:postgres"
-        # An old managed block represents an installation that already has TLS.
+        # A wrong explicit IP must fail the login checks and automatically roll back.
+        with pytest.raises(pg.TLSUpdateError): target.apply(directory,baseline_address="192.0.2.240")
+        checks["wrong_address_rolled_back"] = pg.split_managed_hba(target.read_hba())[1]==result["baseline_client_address"]
+        # The original Delf patch used host (TLS and non-TLS); upgrade it safely.
+        legacy_hba.write_bytes(pg.baseline_hba_block(result["baseline_client_address"]).replace("hostnossl baseline_","host baseline_",1).encode()+original_hba.read_bytes())
         target.install_file(legacy_hba,before["hba_file"],"600")
         target.query("SELECT pg_reload_conf();")
         upgraded_state, upgraded = target.apply(directory)
         target.run(["cp",name+":"+before["hba_file"],str(applied_hba)])
         checks["legacy_hba_upgraded_without_auth_rule_loss"] = upgraded["passed"] and applied_hba.read_bytes()==pg.baseline_hba_block(result["baseline_client_address"]).encode()+original_hba.read_bytes()
+        # Loopback inside the container is a different source than Docker's host
+        # NAT address. Even allowed benchmark roles must hit an explicit reject.
+        for role in pg.BASELINE_ROLES:
+            client_env={**os.environ,"PGPASSWORD":os.environ["DPR_"+role.upper()+"_PASSWORD"],
+                "PGSSLMODE":"disable","PGGSSENCMODE":"disable","PGCONNECT_TIMEOUT":"3"}
+            probe=subprocess.run(["docker","exec","-i","--env","PGPASSWORD","--env","PGSSLMODE","--env","PGGSSENCMODE","--env","PGCONNECT_TIMEOUT",name,
+                "psql","-X","-w","-h","127.0.0.1","-U",role,"-d","baseline_100k","-c","SELECT 1"],env=client_env,capture_output=True,text=True,timeout=15)
+            checks["other_address_rejected:"+role]=probe.returncode!=0 and "pg_hba.conf rejects connection" in probe.stderr and "no encryption" in probe.stderr
         second_state, second = target.apply(directory)
         checks["repeat_apply_preserves_hba_rules"] = second["passed"]
+        disabled_state, disabled = target.apply(directory,baseline_address="disabled")
+        checks["explicit_disable_restores_strict_tls"] = disabled["passed"] and pg.split_managed_hba(target.read_hba())[1] is None
+        target.rollback(disabled_state)
+        checks["rollback_restores_exact_exception_address"] = pg.split_managed_hba(target.read_hba())[1]==result["baseline_client_address"]
         target.rollback(second_state)
         checks["rollback_to_previous_tls_keeps_tls"] = target.metadata()["settings"]["ssl"] == "on"
         target.rollback(upgraded_state)

@@ -95,17 +95,17 @@ def test_bad_provider_result_is_generic_error_and_cannot_erase_record(lab, monke
 def test_production_member_scope_does_not_accept_raw_identifier():
     repo = MemberRepository("protected", crypto=None, testing=False)
     with pytest.raises(CryptoUnavailable):
-        repo.scope(SimpleNamespace(role="anggota", principal="invented-raw-identifier"))
+        repo.scope(SimpleNamespace(id="00000000-0000-4000-8000-000000000001", role="anggota", principal="invented-raw-identifier"))
     with pytest.raises(CryptoUnavailable):
-        repo.scope(SimpleNamespace(role="anggota", principal="bidx:v1:invalid"))
+        repo.scope(SimpleNamespace(id="00000000-0000-4000-8000-000000000001", role="anggota", principal="bidx:v1:invalid"))
 
 
 def test_stored_blind_index_binding_matches_only_own_record(lab):
     if lab.mode == "protected":
         expected = lab.crypto.blind_index("pengguna", lab.rows[0]["pengguna"])
         with DBSession(lab.engine) as db:
-            user = db.get(User, lab.users["anggota"])
-            user.principal = "bidx:v1:" + expected.hex()
+            from service_app.protected_control import bindings
+            db.execute(bindings.update().where(bindings.c.user_id == lab.users["anggota"]).values(pengguna_bidx=expected))
             db.commit()
     login(lab, "anggota")
     assert lab.client.get("/anggota/1").status_code == 200

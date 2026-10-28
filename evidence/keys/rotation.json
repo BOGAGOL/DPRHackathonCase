@@ -1,0 +1,82 @@
+{
+  "checked_at_utc": "2026-10-27T17:03:58.751751+00:00",
+  "completed_batches": 454,
+  "databases": {
+    "protected_100k": {
+      "after_versions": {
+        "2": 100000
+      },
+      "all_rows_at_target_or_newer": true,
+      "before_validation": {
+        "authenticated_fields": 2449994,
+        "rows": 100000
+      },
+      "before_versions": {
+        "1": 45400,
+        "2": 54600
+      },
+      "rewrapped_rows": 45400,
+      "validation": {
+        "all_plaintext_values_unchanged": true,
+        "all_record_deks_unchanged": true,
+        "authenticated_fields": 2449994,
+        "ciphertext_finance_bidx_ref_unchanged": true,
+        "passed": true,
+        "row_count_unchanged": true,
+        "rows": 100000
+      }
+    },
+    "protected_734": {
+      "after_versions": {
+        "2": 734
+      },
+      "all_rows_at_target_or_newer": true,
+      "before_validation": {
+        "authenticated_fields": 17983,
+        "rows": 734
+      },
+      "before_versions": {
+        "2": 734
+      },
+      "rewrapped_rows": 0,
+      "validation": {
+        "all_plaintext_values_unchanged": true,
+        "all_record_deks_unchanged": true,
+        "authenticated_fields": 17983,
+        "ciphertext_finance_bidx_ref_unchanged": true,
+        "passed": true,
+        "row_count_unchanged": true,
+        "rows": 734
+      }
+    }
+  },
+  "elapsed_seconds": 143.395009,
+  "initial_key_version_before": 1,
+  "key": "pii-kek",
+  "key_operator_has_database_credentials": false,
+  "key_version_after": 2,
+  "key_version_before": 2,
+  "min_decryption_version_before": 1,
+  "minimum_key_versions_changed": false,
+  "overall_before_versions": {
+    "protected_100k": {
+      "1": 100000
+    },
+    "protected_734": {
+      "1": 734
+    }
+  },
+  "overall_rewrapped_rows": {
+    "protected_100k": 100000,
+    "protected_734": 734
+  },
+  "passed": true,
+  "plaintext_or_deks_written": false,
+  "previous_attempt_evidence": "evidence/keys/rotation-first-attempt.json",
+  "resumed": true,
+  "schema_version": 1,
+  "status": "complete",
+  "target_version": 2,
+  "total_attempt_execution_seconds": 228.269197,
+  "validation": "all records, all PII/FIN fields, private in-memory comparisons"
+}

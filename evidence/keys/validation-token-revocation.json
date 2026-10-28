@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "schema_version": 1,
+  "transient_tokens_revoked": {
+    "OPENBAO_KEY_OPERATOR_TOKEN": true,
+    "OPENBAO_VALIDATION_TOKEN": true
+  }
+}

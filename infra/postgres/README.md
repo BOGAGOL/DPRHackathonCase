@@ -2,21 +2,43 @@
 
 ## Pengecualian kondisi awal benchmark (28 Oktober 2026)
 
-Pada branch `fix/tls-baseline-exception`, hanya `bench_user` dan `scanner_user`
-boleh mengakses `baseline_100k` / `baseline_1m` tanpa TLS. Aturan `host` SCRAM
+Hanya `bench_user` dan `scanner_user`
+boleh mengakses `baseline_100k` / `baseline_1m` tanpa TLS. Aturan `hostnossl` SCRAM
 diletakkan sebelum `hostnossl reject`, terbatas pada IP klien yang diamati server
-melalui koneksi bench terautentikasi (IPv4 /32 atau IPv6 /128, bukan seluruh subnet).
+melalui koneksi bench terautentikasi dengan verify-full (IPv4 /32 atau IPv6 /128,
+bukan seluruh subnet), atau dikonfigurasi dengan IP literal yang divalidasi.
 Protected tetap wajib TLS untuk semua role; role lain juga wajib TLS ke baseline.
 Keputusan ini mempertahankan kondisi awal pengukuran yang telah diterima tim.
 
-Sebelum `apply` / `verify`, muat password bench yang sudah ada ke
+Untuk mengaktifkan pengecualian pada laptop benchmark:
+
+```powershell
+$env:DPR_BASELINE_CLIENT_ADDRESS = 'auto'
+python -m infra.postgres.enable_tls apply
+python -m infra.postgres.enable_tls verify
+# Override IP persis yang terlihat oleh PostgreSQL:
+python -m infra.postgres.enable_tls apply --baseline-client-address 192.168.65.1
+```
+
+Jangan menyalin 172.17.0.1 antar-laptop tanpa memeriksa alamat sebenarnya.
+`auto` mendeteksi setelah TLS terverifikasi aktif dan sebelum mengubah HBA;
+kredensial discovery tidak dikirim melalui koneksi plaintext. Tanpa konfigurasi,
+instalasi baru tetap strict (tidak memerlukan bench/scanner); pengecualian yang
+sudah terpasang dipertahankan. `--baseline-client-address disabled` menutupnya.
+Pergantian IP / upgrade patch `host` sebelumnya didukung tanpa kehilangan tail
+aturan auth. Baca [alasan dan cakupan pengujian TLS](../README.md#tls-dan-pengecualian-baseline-benchmark-28-oktober-2026).
+
+Sebelum `apply` / `verify` pada instalasi yang memiliki pengecualian, muat password bench yang sudah ada ke
 `DPR_BENCH_USER_PASSWORD`, dan password scanner yang sudah ada ke
 `DPR_SCANNER_USER_PASSWORD` (atau credential DPAPI scanner pada direktori role).
 Jangan memakai password contoh atau merotasi credential secara otomatis.
-`apply` menguji keempat koneksi baseline non-TLS, penolakan non-TLS role lain,
-penolakan app non-TLS ke seluruh protected, serta login app `verify-full` ke
-protected yang sudah ada. Jika belum dibuat, protected dicatat eksplisit dalam
-`protected_databases_pending_prepare`; login app belum diuji pada tahap itu.
+`apply` menguji login baseline non-TLS yang sudah tersedia untuk kedua role,
+penolakan non-TLS role lain, penolakan semua role termasuk bench/scanner ke seluruh
+protected, serta login app `verify-full` ke protected yang sudah ada dengan
+credential `DPR_APP_USER_PASSWORD` / DPAPI. Jika DB/credential belum tersedia,
+protected dicatat dalam `protected_databases_pending_prepare`; baseline yang belum
+ada dalam `baseline_databases_pending`. `connection_matrix_complete=false` berarti
+uji login terkait belum selesai, bukan hasil lulus penuh untuk target tersebut.
 Setelah `migration prepare`, wajib jalankan `enable_tls verify` agar uji login app
 `verify-full` benar-benar dilakukan pada target yang baru dibuat.
 Updater tetap tidak membuat database, tidak mengubah tabel sumber, dan rollback

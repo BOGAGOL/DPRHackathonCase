@@ -148,3 +148,26 @@ test("mobile navigation stays within viewport", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Profil & hak akses");
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
+
+test("analytics renders server suppression and sends combined filters without exposing counts", async ({ page }) => {
+  await mock(page, "analyst");
+  await page.route("**/api/analytics/summary**", async route => {
+    await route.fulfill({ json: { total: null, groups: [
+      { dimension: "pekerjaan_terakhir", value: "Dokter", count: "<5" },
+      { dimension: "pekerjaan_terakhir", value: "Guru", count: null },
+      { dimension: "nama_bank", value: "Bank Uji", count: 5 },
+    ] } });
+  });
+  await page.goto("/analytics");
+  await expect(page.locator("tbody tr").filter({ hasText: "Dokter" }).locator("td").last()).toHaveText("<5");
+  await expect(page.locator("tbody tr").filter({ hasText: "Guru" }).locator("td").last()).toHaveText("Disembunyikan");
+  await expect(page.locator("tbody tr").filter({ hasText: "Bank Uji" }).locator("td").last()).toHaveText("5");
+  await page.getByLabel("Nama KPPN", { exact: true }).fill("KPPN Surabaya");
+  await page.getByLabel("Pekerjaan terakhir", { exact: true }).fill("Dokter");
+  const request = page.waitForRequest(r => r.url().includes("/analytics/summary?") && r.url().includes("nama_kppn="));
+  await page.getByRole("button", { name: "Terapkan filter" }).click();
+  const query = new URL((await request).url()).searchParams;
+  expect(query.get("nama_kppn")).toBe("KPPN Surabaya");
+  expect(query.get("pekerjaan_terakhir")).toBe("Dokter");
+  expect(new URL(page.url()).search).toBe("");
+});

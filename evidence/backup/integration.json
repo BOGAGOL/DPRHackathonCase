@@ -1,5 +1,5 @@
 {
-  "backup_seconds": 0.926836,
+  "backup_seconds": 0.61804,
   "checks": {
     "acl_ownership_rls_restored": true,
     "analyst_view_works": true,
@@ -18,8 +18,8 @@
     "unsafe_inputs_existing_target_refused": true
   },
   "passed": true,
-  "restore_seconds": 1.161484,
+  "restore_seconds": 0.929533,
   "schema_version": 1,
   "scope": "17 invented records, disposable TLS PG18 and OpenBao",
-  "size_bytes": 78112
+  "size_bytes": 78128
 }

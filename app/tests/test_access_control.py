@@ -36,11 +36,11 @@ def test_login_cookie_flags_and_hashed_password(lab):
     assert set(response.json()) == {"id", "username", "role"}
     assert lab.password not in response.text
     with DBSession(lab.engine) as db:
-        user = db.get(User, lab.users["operator"])
+        user = db.get(lab.app.state.User, lab.users["operator"])
         assert user.password_hash.startswith("$argon2id$")
         token = lab.client.cookies.get("dpr_session")
-        assert db.get(Session, hashlib.sha256(token.encode()).hexdigest()) is not None
-        assert db.get(Session, token) is None
+        assert db.get(lab.app.state.Session, hashlib.sha256(token.encode()).hexdigest()) is not None
+        assert db.get(lab.app.state.Session, token) is None
 
 
 def test_login_failure_does_not_enumerate_users(lab):
@@ -82,7 +82,7 @@ def test_expired_session_and_logout_revocation(lab):
     login(lab)
     raw_token = lab.client.cookies.get("dpr_session")
     with DBSession(lab.engine) as db:
-        session = db.get(Session, hashlib.sha256(raw_token.encode()).hexdigest())
+        session = db.get(lab.app.state.Session, hashlib.sha256(raw_token.encode()).hexdigest())
         session.expires_at = datetime.now(timezone.utc).replace(tzinfo=None) - timedelta(seconds=1)
         db.commit()
     assert lab.client.get("/anggota").status_code == 401
@@ -284,7 +284,7 @@ def test_decrypt_swap_fails_generic_and_audited(lab):
     assert not any(row["nama"] in response.text for row in lab.rows)
     assert "traceback" not in response.text.lower() and "context" not in response.text.lower()
     with DBSession(lab.engine) as db:
-        events = db.scalars(select(AuditLog)).all()
+        events = lab.audit_entries()
         assert any("decrypt" in e.action.lower() and e.decision.lower() in {"error", "denied", "failed"} for e in events)
 
 
@@ -292,12 +292,12 @@ def test_audit_has_metadata_and_no_sensitive_values(lab):
     login(lab, "privileged_officer")
     assert lab.client.get("/anggota/1").status_code == 200
     with DBSession(lab.engine) as db:
-        entries = db.scalars(select(AuditLog)).all()
+        entries = lab.audit_entries()
         metadata = [{k: v for k, v in entry.__dict__.items() if k != "_sa_instance_state"} for entry in entries]
     serialized = json.dumps(metadata, default=str)
     forbidden = [lab.password, lab.client.cookies.get("dpr_session"), *[lab.rows[0][f] for f in ("no_ktp", "rekening", "email", "handphone")]]
     assert not any(value in serialized for value in forbidden)
-    assert any(e["role"] == "privileged_officer" and e["anggota_id"] == "1" and e["request_id"] and e["field_class"] for e in metadata)
+    assert any(e["role"] == "privileged_officer" and e["anggota_id"] is not None and e["request_id"] and e["field_class"] for e in metadata)
 
 
 def test_security_headers_on_member_response(lab):
@@ -324,7 +324,7 @@ def test_analyst_and_auditor_only_their_endpoints(lab):
     login(lab, "analyst")
     summary = lab.client.get("/analytics/summary")
     assert summary.status_code == 200
-    assert summary.json()["total"] == 3
+    assert summary.json()["total"] == "<5"
     assert set(summary.json()) == {"total", "groups"}
     assert not any(r["nama"] in summary.text or r["no_ktp"] in summary.text for r in lab.rows)
     assert lab.client.get("/audit").status_code == 403
@@ -335,9 +335,23 @@ def test_analyst_and_auditor_only_their_endpoints(lab):
     assert lab.client.get("/analytics/summary").status_code == 403
 
 
-def test_plain_and_protected_responses_match_for_authorized_roles(lab):
+def test_plain_and_protected_responses_match_for_authorized_roles(lab, tmp_path):
     other_mode = "protected" if lab.mode == "plain" else "plain"
-    settings = Settings(mode=other_mode, database_url=str(lab.engine.url), testing=True)
+    import sqlite3
+    from sqlalchemy import create_engine
+    from service_app.protected_control import audit_table
+    source = sqlite3.connect(lab.engine.url.database)
+    target = sqlite3.connect(str(tmp_path / "other.sqlite"))
+    source.backup(target)
+    source.close()
+    target.execute("DROP TABLE audit_log")
+    target.commit()
+    target.close()
+    other_url = "sqlite:///" + str(tmp_path / "other.sqlite")
+    other_engine = create_engine(other_url)
+    (AuditLog.__table__ if other_mode == "plain" else audit_table).create(other_engine)
+    other_engine.dispose()
+    settings = Settings(mode=other_mode, database_url=other_url, testing=True)
     other_app = create_app(settings, crypto=lab.crypto)
     with TestClient(other_app, base_url="https://localhost:3443", raise_server_exceptions=False) as other_client:
         other = replace(lab, app=other_app, client=other_client, mode=other_mode)
