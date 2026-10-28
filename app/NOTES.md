@@ -167,3 +167,22 @@ Small-cell suppression B tidak menjamin perlindungan terhadap seluruh query diff
 lintas filter/waktu. Samakan scope akun/workload sebelum benchmark plain vs protected C.
 Panduan PowerShell lengkap: docs/INTEGRATION_A.md. PR1 sudah merged; perubahan ini PR lanjutan,
 merge ke main tetap memerlukan review anggota lain sesuai TEAM_PLAN.
+
+## Perbaikan dependency saat persiapan deploy — 28 Oktober 2026 WIB
+
+npm ci di server melaporkan satu advisory high pada Zod4.3.6. Audit lockfile lokal
+mengonfirmasi GHSA-mrhx-c7xc-m3w5 (konsumsi memori berlebih ketika memvalidasi
+koleksi besar; versi terdampak <4.6.6). Zod dipin ke4.6.7 dan lockfile diperbarui;
+tidak memakai npm audit fix --force atau perubahan npm global server.
+
+Validasi lokal sesudah perubahan: npm audit melaporkan0 vulnerability, build
+produksi Next/TypeScript lulus, Playwright13 skenario lulus. Evidence audit di
+app/evidence/access-control/npm-audit.json; report UI diekspor ulang oleh runner.
+Hasil audit adalah snapshot advisory dependency, bukan klaim keamanan seluruh aplikasi.
+
+Untuk paket runtime lama9029b77 yang sudah diunggah: jalankan dari app/web,
+npm install zod@4.6.7 --save-exact, kemudian npm run build. Perintah sudah diberikan
+ke Zhafif. Kelulusan instalasi backend/server ada pada log pengguna; upgrade Zod
+serta build server belum diklaim PASS sebelum hasil aktual diterima.
+Rujukan: https://github.com/advisories/GHSA-mrhx-c7xc-m3w5 dan
+https://github.com/colinhacks/zod/commit/a0ebf970f2d752e5f58527cd2942ff48be4f46bd
