@@ -557,3 +557,27 @@ baseline terdahulu tetap utuh. Insiden charger 00:58:21.876-00:58:54.603 WIB
 terjadi sebelum migrasi 1M, saat berhenti pada merge; 0 run terdampak/diulang.
 Ringkasan akhir: evidence/overnight_summary.md. Data protected_1m yang sudah
 tervalidasi harus dipertahankan untuk kelanjutan setelah adapter tersedia.
+
+## Kelanjutan 28 Oktober 2026, 10:44 WIB: berhenti pada prasyarat lingkungan
+
+Instruksi terbaru mengizinkan merge main berisi PR #5 Alby (b8e9998), apply dan
+verify TLS final dengan DPR_BASELINE_CLIENT_ADDRESS=auto, implementasi adapter,
+parity, amandemen target, dan verifikasi after; benchmark B-P-P-B tetap dilarang.
+Pemeriksaan awal tidak menemukan proses host Python/pgbench/pg_dump/pg_restore.
+Namun docker ps dan pemeriksaan sesi DB gagal karena named pipe
+dockerDesktopLinuxEngine tidak tersedia pada context desktop-linux. Proses
+Docker Desktop/com.docker.backend tidak ditemukan, com.docker.service Stopped,
+dan tidak ditemukan listener host pada port 5433/8200. Status proses container
+dan sesi PostgreSQL tidak dapat diverifikasi; bukan diklaim nol sesi DB.
+
+Sesuai aturan gerbang, BERHENTI tanpa start/stop layanan/container, retry,
+fetch/merge main, memuat credential, apply/verify TLS, atau langkah berikutnya.
+Konfigurasi final main BELUM diterapkan atau diuji pada sesi ini; hasil uji
+(a)-(d) sebelumnya tidak dipakai sebagai pengganti uji ulang yang diminta.
+Migrasi semalam memakai konfigurasi fix/tls-baseline-exception, dengan pengecualian
+non-TLS hanya untuk bench_user/scanner_user pada kedua baseline; kesetaraan dengan
+implementasi final PR #5 belum diperiksa pada sesi ini. Evidence migrasi 1M PASS
+sebelumnya tetap dipertahankan, tetapi DB tidak diperiksa ulang saat engine mati.
+Evidence kegagalan: evidence/overnight/resume_preflight_20261028_1044.json.
+Kelanjutan dimulai dari pemeriksaan lingkungan dan langkah 1 setelah Docker
+tersedia kembali serta instruksi melanjutkan; tidak mengulang migrasi yang lulus.
