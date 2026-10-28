@@ -1,4 +1,5 @@
 > **Pembaruan 28 Oktober 2026:** bagian lama di bawah dipertahankan sebagai riwayat.
+> Pemulihan layanan A+B: [backup tujuh tabel dan cutover restore](docs/RECOVERY.md).
 > Toolkit/schema/test vectors A kini tersedia dan integrasi protected disposable telah diuji.
 > Gunakan Python **3.11+ (diuji 3.12.10)** dan `dprcrypto:public-v1`.
 > Panduan terbaru yang menggantikan asumsi factory, akun/audit dan principal lama:
