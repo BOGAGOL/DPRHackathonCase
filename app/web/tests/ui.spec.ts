@@ -69,6 +69,11 @@ test("strict CSP has a different nonce on each request and every inline script i
 test("login works under strict CSP without writing browser storage", async ({ page }) => {
   await mock(page, "operator");
   await page.goto("/login");
+  await expect(page.getByLabel("Username", { exact: true })).toBeVisible();
+  await page.screenshot({ path: ".local/login-compact-desktop.png", fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.screenshot({ path: ".local/login-compact-mobile.png", fullPage: true });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.getByLabel("Username", { exact: true }).fill("uji.browser");
   await page.getByLabel("Password", { exact: true }).fill(randomBytes(24).toString("base64url"));
   await page.getByRole("button", { name: "Masuk ke aplikasi" }).click();

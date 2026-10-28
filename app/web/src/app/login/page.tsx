@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { ArrowRight, Database, KeyRound, LockKeyhole, ShieldCheck } from "lucide-react";
+import { ArrowRight, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { api } from "@/lib/api";
 const schema = z.object({ username: z.string().min(1, "Masukkan username").max(64), password: z.string().min(1, "Masukkan password").max(256) });
@@ -12,5 +12,22 @@ export default function Login() {
   const router = useRouter(), [error, setError] = useState("");
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<z.infer<typeof schema>>({ resolver: zodResolver(schema) });
   async function login(values: z.infer<typeof schema>) { setError(""); try { await api("/auth/csrf"); await api("/auth/login", { method: "POST", body: JSON.stringify(values) }); router.replace("/dashboard"); router.refresh(); } catch (e) { setError((e as Error).message); } }
-  return <div className="login-page"><section className="login-story"><div className="brand brand-light"><div className="brand-mark"><ShieldCheck /></div><span>DPR <strong>Secure</strong><small>DATA MANAGEMENT</small></span></div><div className="login-story-content"><div className="eyebrow">LAYANAN DATA ANGGOTA</div><h1>Data terlindungi.<br />Layanan tetap berjalan.</h1><p>Kelola informasi anggota melalui satu ruang kerja dengan akses sesuai kewenangan.</p><div className="login-feature"><Database /><div><strong>Minimisasi informasi</strong><p>Informasi yang diterima mengikuti izin peran dan record.</p></div></div><div className="login-feature"><KeyRound /><div><strong>Akses yang terukur</strong><p>Izin berdasarkan peran, kepemilikan record, dan jenis informasi.</p></div></div></div><div className="login-story-footer">FINAL HACKATHON DPR RI 2026 <span>PROTOTIPE · DATA SINTETIS</span></div></section><section className="login-form-panel"><div className="login-form"><div className="login-icon"><LockKeyhole size={25} /></div><div className="eyebrow">SELAMAT DATANG</div><h2>Masuk ke ruang kerja</h2><p>Gunakan akun yang diberikan administrator.</p><form onSubmit={handleSubmit(login)}><label htmlFor="username">Username</label><input id="username" autoComplete="username" placeholder="Masukkan username" {...register("username")} />{errors.username && <small className="field-error">{errors.username.message}</small>}<label htmlFor="password">Password</label><input id="password" type="password" autoComplete="current-password" placeholder="Masukkan password" {...register("password")} />{errors.password && <small className="field-error">{errors.password.message}</small>}{error && <div role="alert" className="notice notice-error">{error}</div>}<Button disabled={isSubmitting} type="submit" className="w-full">{isSubmitting ? "Memverifikasi…" : "Masuk ke aplikasi"}<ArrowRight size={17} /></Button></form><div className="login-note"><ShieldCheck size={17} /><span>Aktivitas akses dicatat. Gunakan data hanya untuk keperluan yang diizinkan.</span></div></div><span className="login-copyright">DPR Secure Data Management System</span></section></div>;
+  return <main className="login-screen">
+    <div className="login-container">
+      <div className="brand"><div className="brand-mark"><ShieldCheck size={24} aria-hidden="true" /></div><span>DPR <strong>Secure</strong></span></div>
+      <section className="card login-card" aria-labelledby="login-title">
+        <h1 id="login-title">Masuk</h1>
+        <form onSubmit={handleSubmit(login)}>
+          <label htmlFor="username">Username</label>
+          <input id="username" autoComplete="username" {...register("username")} />
+          {errors.username && <small className="field-error">{errors.username.message}</small>}
+          <label htmlFor="password">Password</label>
+          <input id="password" type="password" autoComplete="current-password" {...register("password")} />
+          {errors.password && <small className="field-error">{errors.password.message}</small>}
+          {error && <div role="alert" className="notice notice-error">{error}</div>}
+          <Button disabled={isSubmitting} type="submit">{isSubmitting ? "Memverifikasi…" : "Masuk ke aplikasi"}<ArrowRight size={17} aria-hidden="true" /></Button>
+        </form>
+      </section>
+    </div>
+  </main>;
 }

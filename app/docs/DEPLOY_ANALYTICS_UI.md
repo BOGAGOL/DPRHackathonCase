@@ -1,6 +1,7 @@
-# Update tampilan filter analytics
+# Update tampilan layanan
 
-Paket ini hanya source `app/web`. Tidak perlu menjalankan SQL A5, handoff,
+Paket ini hanya source `app/web`: perbaikan filter analytics dan penyederhanaan
+login/sidebar/header/profil sesuai screenshot pengguna. Tidak perlu menjalankan SQL A5, handoff,
 provision akun, atau migrasi ulang. Backend tetap berjalan. Web berhenti sementara
 selama build dan kemudian dijalankan lagi. Gunakan instalasi Node/dependency VM existing.
 
@@ -46,6 +47,8 @@ Biarkan terminal tetap terbuka. Login analyst lalu hard refresh Ctrl+Shift+R pad
 `https://43.156.157.247/analytics`. Tampil panel Filter statistik dengan padding,
 Terapkan hijau dan Reset outline. Input bertumpuk pada layar kecil. Kartu total
 tanpa nilai dan teks berulang dihapus; total API tetap null, label kecil tetap hilang.
+Login menjadi kartu ringkas; panel promosi, kartu keamanan sidebar, indikator sesi,
+dan catatan backend pada profil dihapus. Identitas akun dan tombol Keluar tetap ada.
 
 Jika aplikasi belum memakai backend/SQL A5, panduan UI ini bukan pengganti rilis
 [A5](DEPLOY_A5.md). Masalah token svc-app kedaluwarsa juga terpisah dari tampilan.
