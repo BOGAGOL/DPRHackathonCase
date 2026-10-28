@@ -1,5 +1,10 @@
 # Infra Tahap 1 (Windows / PowerShell)
 
+**VM Ubuntu baru:** gunakan [paket/prosedur Modul A untuk Zhafif](vm/README.md):
+Compose terisolasi, material privat native Linux, TLS/role, migrasi protected_734,
+handoff runtime B, dan verifier seluruh 734 record. Tidak memakai credential XML
+DPAPI Windows pada VM. Deployment web/routing dikerjakan Modul B.
+
 **Recovery A+B:** updater TLS terbaru juga menolak koneksi plaintext ke nama
 `dpr_restore_<32 hex>` (IPv4/IPv6), termasuk bench/scanner. Apply diperlukan sekali
 pada server existing sebelum menggunakan restore versi ini; pull kode saja tidak

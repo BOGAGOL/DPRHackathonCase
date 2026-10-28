@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "checked_at_utc": "2026-10-28T10:20:58.901011+00:00",
+  "scope": "Package unit/regression tests, Compose configuration rendering and native Bash syntax/quoting; not a live Ubuntu VM installation",
+  "counts": {
+    "tests": 98,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "passed": 98
+  },
+  "package_tests": 25,
+  "checks": {
+    "compose_cli_rendered": true,
+    "bash_syntax_and_quoting_passed": true,
+    "env_files_do_not_include_secrets_outside_their_scope": true,
+    "source_import_refuses_existing_or_other_cluster": true,
+    "read_only_full_734_validation_logic_tested": true,
+    "app_refresh_does_not_reissue_migration_token": true
+  },
+  "base_commit": "5e78feb69bec28a0379859e0ac0abad6c0e87ce1",
+  "package_source_sha256": "82e3291fd2d0da2ef6061d5435e28743beaafd8fb55d1c3d86f2c1b591e9b6c4",
+  "raw_report": "results/vm-package/regression-final.xml",
+  "raw_sha256": "a1f940e2ba8a54c48bd7cd1f7a215eae6f85bbef5b0203c7cacfc75c704659cc",
+  "command": "python -m pytest infra/vm/tests infra/tests/test_tls.py infra/tests/test_postgres_tls.py infra/tests/test_protected_provisioning.py migration/tests/test_cli.py migration/tests/test_model.py -q --tb=short",
+  "remote_vm_actions_performed": false,
+  "live_vm_installation_status": "NOT_RUN: Zhafif installs using infra/vm/README.md and returns VM evidence",
+  "local_live_stack_status": "NOT_RUN: Docker Desktop engine returned 500 during package preparation; Compose config rendering does not require the engine",
+  "ssh_access_from_Alby_required_for_package": false,
+  "operator_private_material_in_repository": false,
+  "final_runbook_checks": {
+    "passed": 2,
+    "raw_report": "results/vm-package/runbook-final.xml",
+    "scope": "Rerun after final private input permission commands were documented"
+  }
+}
