@@ -248,3 +248,32 @@ bukan migration prepare/full provisioning. Jangan menerapkan perubahan pada lapt
 Delf/pg-dpr atau database benchmark selama benchmark berlangsung. Deployment A5 VM,
 acceptance enam akun pasca-upgrade, sertifikat renew dry-run, dan systemd tetap
 pekerjaan berikutnya, bukan PASS dari unit/browser mock.
+
+
+## UI filter analytics — 28 Oktober 2026
+
+Menindaklanjuti screenshot Zhafif: panel menempel pada tepi dan tombol terlihat
+seperti teks. Penyebab pada revisi A5 B: form tidak mempunyai padding isi; class
+btn-primary/btn-secondary tidak terdefinisi, sedangkan komponen Button shared memakai
+button/button-primary/button-outline. Gunakan komponen shared itu, bukan alias CSS.
+
+Panel mendapat padding 24px desktop/20px mobile, grid dua kolom yang bertumpuk pada
+<=640px, tindakan terpisah dengan gap 12px dan tinggi minimal 44px. Label eksplisit
+htmlFor/id, focus keyboard terlihat, input label kelompok disabled sampai dimensi
+dipilih. Terapkan adalah aksi utama hijau; Reset outline dan disabled saat tidak ada
+filter. Kartu total kosong dan paragraf penjelasan berulang dihapus; satu kalimat
+menjelaskan kelompok kurang dari 5 tidak ditampilkan. DTO/API A5 tetap total null.
+
+Acuan desain yang dibaca: GOV.UK Button (hierarki tindakan dan teks singkat), GOV.UK
+Spacing (ruang konsisten/responsif), W3C WAI Labeling Controls (label terlihat dan
+asosiasi eksplisit). Ini penerapan prinsip, bukan klaim audit aksesibilitas lengkap.
+https://design-system.service.gov.uk/components/button/
+https://design-system.service.gov.uk/styles/spacing/
+https://www.w3.org/WAI/tutorials/forms/labels/
+
+Uji browser existing diperluas untuk regresi penyebab screenshot: padding dan ukuran
+klik, primary button mempunyai background, reset, fokus keyboard, layout 320/390px,
+serta tidak ada overflow horizontal. Screenshot lokal hanya fixture sintetis, di
+app/web/.local/. Build produksi Next.js/TypeScript lulus dan 14 test browser lulus.
+Preview desktop/mobile sudah diperiksa visual. Tidak ada backend, SQL, izin, scope,
+crypto, atau database yang diubah oleh perbaikan UI.

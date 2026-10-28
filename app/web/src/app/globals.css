@@ -5,3 +5,28 @@
 @media(max-width:760px){.sidebar{transform:translateX(-100%);transition:transform .2s}.sidebar-open{transform:translateX(0);box-shadow:20px 0 100px #0003}.workspace{margin-left:0}.mobile-menu,.mobile-close{display:block;border:0;background:none;color:#52735f}.mobile-menu{padding:0}.mobile-close{position:absolute;right:10px;top:10px}.topbar{height:68px;padding:0 19px;gap:12px}.breadcrumb{gap:7px}.breadcrumb>span{display:none}.user-chip{padding-left:12px;gap:8px}.user-chip strong{max-width:100px;overflow:hidden;text-overflow:ellipsis}.user-chip button{margin-left:0}.user-chip .avatar{width:28px;height:28px}main{padding:25px 18px}h1{font-size:24px}.page-heading{align-items:flex-start;flex-wrap:wrap;margin-bottom:22px}.page-heading p{line-height:1.8;font-size:11px}.welcome-banner{padding:24px;min-height:220px}.welcome-banner h2{font-size:20px;max-width:300px}.welcome-banner p{max-width:310px}.banner-art{display:none}.stats-grid{grid-template-columns:1fr;gap:12px}.stat-card{padding:17px 21px;position:relative}.stat-number{font-size:28px;margin-top:0}.stat-top{justify-content:flex-start}.stat-icon{margin-left:auto}.stat-card small{font-size:9px}.dashboard-grid{margin-top:20px;gap:18px}.card-heading{padding:18px}.card-heading h3{font-size:13px}.card-heading p{max-width:210px}th,td{padding-left:18px;padding-right:18px}.table-toolbar{padding:17px;flex-wrap:wrap}.search-input{max-width:none}.sort-control{width:100%;justify-content:flex-end}.pagination{padding:15px;gap:12px;flex-wrap:wrap}.main-footer{font-size:8px;padding:17px;gap:12px}.main-footer span:last-child{display:none}.profile-banner{padding:20px;flex-wrap:wrap;gap:13px}.profile-banner>.badge{margin-left:0}.profile-banner h2{font-size:17px}.profile-avatar{width:48px;height:48px;font-size:21px}.detail-grid,.form-grid{grid-template-columns:1fr}.contact-form{padding:20px}.search-card{padding:24px}.search-row{flex-direction:column}.search-card .button{align-self:flex-start}.login-page{grid-template-columns:1fr}.login-story{padding:26px 30px;min-height:210px}.login-story-content{padding:28px 0 10px}.login-story h1{font-size:27px;margin:0 0 10px}.login-story-content>p{font-size:11px;max-width:100%}.login-story-content .eyebrow,.login-feature,.login-story-footer{display:none}.brand-light{font-size:20px}.brand-light .brand-mark{height:35px;width:35px}.login-form-panel{padding:40px 26px 70px;min-height:590px}.login-form h2{font-size:25px}.login-icon{display:none}.profile-card{padding:25px}}
 
 .stat-card + .card{margin-top:22px}
+
+/* Analytics filters: aligned fields and shared action buttons. */
+.analytics-filter .card-heading{padding:20px 24px;min-height:68px}
+.analytics-filter .card-heading h2{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600}
+.analytics-filter .card-heading h2 svg{color:var(--green);flex-shrink:0}
+.analytics-filter-body{padding:24px}
+.analytics-filter-fields{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.analytics-field{min-width:0}
+.analytics-field label{margin-bottom:8px;color:#334b54}
+.analytics-field input,.analytics-field select{min-height:46px;font-size:14px;font-weight:400}
+.analytics-field input:disabled{background:#f4f6f7;color:#73828a;cursor:not-allowed}
+.analytics-field input:disabled::placeholder{color:#73828a}
+.analytics-filter-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px;padding-top:20px;border-top:1px solid #edf0f1}
+.analytics-filter-actions .button{min-height:44px;padding:11px 18px;font-size:13px}
+.analytics-filter-actions .button-outline:not(:disabled):hover{background:#f5f8f7;border-color:#b8c9c1}
+.analytics-filter :is(input,select,button):focus-visible{outline:3px solid var(--green);outline-offset:3px}
+.analytics-results{margin-top:24px}
+.analytics-results .card-heading h2{font-size:14px;font-weight:600}
+@media(max-width:640px){
+  .analytics-filter .card-heading{padding:18px 20px;min-height:62px}
+  .analytics-filter-body{padding:20px}
+  .analytics-filter-fields{grid-template-columns:minmax(0,1fr);gap:20px}
+  .analytics-filter-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-top:20px;padding-top:20px}
+  .analytics-filter-actions .button{width:100%;padding:11px 12px}
+}

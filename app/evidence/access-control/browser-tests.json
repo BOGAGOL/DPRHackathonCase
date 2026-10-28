@@ -5,7 +5,7 @@
     {
       "scenario": "API proxy verifies HTTPS configuration and withholds sensitive upstream error text",
       "status": "passed",
-      "duration_ms": 18
+      "duration_ms": 19
     },
     {
       "scenario": "API proxy preserves session cookies and CSRF without accepting redirects",
@@ -20,58 +20,58 @@
     {
       "scenario": "strict CSP has a different nonce on each request and every inline script is nonced",
       "status": "passed",
-      "duration_ms": 750
+      "duration_ms": 462
     },
     {
       "scenario": "login works under strict CSP without writing browser storage",
       "status": "passed",
-      "duration_ms": 715
+      "duration_ms": 947
     },
     {
       "scenario": "member profile escapes XSS and only PATCHes changed contact fields",
       "status": "passed",
-      "duration_ms": 557
+      "duration_ms": 555
     },
     {
       "scenario": "exact search uses API fetch without adding identifiers to the page URL",
       "status": "passed",
-      "duration_ms": 416
+      "duration_ms": 362
     },
     {
       "scenario": "analyst has a separate workspace and no record navigation",
       "status": "passed",
-      "duration_ms": 433
+      "duration_ms": 505
     },
     {
       "scenario": "auditor has a separate workspace and no record navigation",
       "status": "passed",
-      "duration_ms": 480
+      "duration_ms": 831
     },
     {
       "scenario": "finance is read-only and anggota has its own scoped directory",
       "status": "passed",
-      "duration_ms": 452
+      "duration_ms": 538
     },
     {
       "scenario": "privileged officer can insert source fields without crypto metadata",
       "status": "passed",
-      "duration_ms": 505
+      "duration_ms": 573
     },
     {
       "scenario": "mobile navigation stays within viewport",
       "status": "passed",
-      "duration_ms": 649
+      "duration_ms": 885
     },
     {
       "scenario": "analytics shows only released marginals and sends dimension/label filters",
       "status": "passed",
-      "duration_ms": 709
+      "duration_ms": 1243
     },
     {
       "scenario": "analytics empty state omits small labels and escapes released text",
       "status": "passed",
-      "duration_ms": 505
+      "duration_ms": 690
     }
   ],
-  "timestamp_utc": "2026-10-28T11:29:26.560Z"
+  "timestamp_utc": "2026-10-28T12:14:14.243Z"
 }

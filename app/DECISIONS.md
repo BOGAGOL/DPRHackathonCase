@@ -19,3 +19,12 @@
 - Rilis VM memakai maintenance aplikasi, update source/build, CLI SQL A5 kanonis,
   verify, kemudian runtime. Tidak prepare/provision ulang. Bukti lokal dan VM dicatat
   terpisah; evidence lama tanpa cek A5 tidak boleh mengesahkan rilis baru.
+
+
+## 28 Oktober 2026 — perbaikan visual filter analytics
+
+Gunakan Button shared agar style konsisten dan hindari class CSS yang tidak ada.
+Field mempunyai label terpisah dan ruang isi kartu; desktop dua kolom, mobile satu
+kolom. Satu aksi utama Terapkan dan aksi sekunder Reset; tidak menggunakan link
+untuk tindakan form. Hapus kartu total tanpa nilai dan teks berulang; total API tetap
+null sesuai A5. Rilis ini hanya frontend dan tidak memerlukan SQL/migrasi ulang.

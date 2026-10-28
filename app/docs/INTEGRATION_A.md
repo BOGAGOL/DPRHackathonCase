@@ -71,7 +71,7 @@ sudah dirilis SQL, bukan menghitung ulang cohort. Value memerlukan dimension.
 Parameter anggota lama (nama_kppn, pekerjaan_terakhir, jenis_kelamin, nama_bank,
 age_band) dan gabungannya ditolak 422; tidak ada fallback ke role atau proyeksi lama.
 View hilang/permission ditolak menghasilkan 503 generik. Frontend menyediakan pemilih
-dimensi/label saja; menampilkan total sebagai Tidak disediakan dan tidak merender
+dimensi/label saja; tidak menampilkan kartu total tanpa nilai dan tidak merender
 label kecil. NULL yang dirilis dengan count >=5 tetap didukung.
 
 SQL A5 harus diterapkan terpisah dan terkoordinasi; pull/extract kode tidak mengubah

@@ -152,28 +152,63 @@ test("mobile navigation stays within viewport", async ({ page }) => {
 test("analytics shows only released marginals and sends dimension/label filters", async ({ page }) => {
   await mock(page, "analyst");
   await page.route("**/api/analytics/summary**", async route => {
-    await route.fulfill({ json: { total: null, groups: [
+    const query = new URL(route.request().url()).searchParams;
+    const groups = [
       { dimension: "pekerjaan_terakhir", value: "Guru Uji", count: 6 },
       { dimension: "nama_bank", value: "Bank Uji", count: 5 },
       { dimension: "nama_kppn", value: null, count: 5 },
-    ] } });
+    ].filter(group => (!query.has("dimension") || group.dimension === query.get("dimension")) && (!query.has("value") || group.value === query.get("value")));
+    await route.fulfill({ json: { total: null, groups } });
   });
   await page.goto("/analytics");
   await expect(page.locator("tbody tr")).toHaveCount(3);
   await expect(page.locator("tbody tr").filter({ hasText: "Guru Uji" }).locator("td").last()).toHaveText("6");
   await expect(page.locator("tbody tr").filter({ hasText: "Bank Uji" }).locator("td").last()).toHaveText("5");
-  await expect(page.getByText("Tidak disediakan", { exact: true })).toBeVisible();
+  await expect(page.getByText("Tidak disediakan", { exact: true })).toHaveCount(0);
   await expect(page.getByText("Dokter", { exact: true })).toHaveCount(0);
   await expect(page.getByLabel("Label kelompok", { exact: true })).toBeDisabled();
+  const form = page.getByRole("form", { name: "Filter statistik" });
+  const apply = form.getByRole("button", { name: "Terapkan", exact: true });
+  const reset = form.getByRole("button", { name: "Reset", exact: true });
+  await expect(reset).toBeDisabled();
+  await expect(apply).not.toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+  await expect(apply).not.toHaveCSS("background-color", "rgb(255, 255, 255)");
+  const formBox = (await form.boundingBox())!;
+  const fieldBox = (await page.getByLabel("Dimensi", { exact: true }).boundingBox())!;
+  expect(fieldBox.x - formBox.x).toBeGreaterThanOrEqual(20);
+  expect((await apply.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+  expect((await reset.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+  await page.getByLabel("Dimensi", { exact: true }).focus();
+  await expect(page.getByLabel("Dimensi", { exact: true })).toBeFocused();
+  await page.getByRole("heading", { name: "Ringkasan agregat", exact: true }).click();
+  await page.screenshot({ path: ".local/analytics-filter-desktop.png", fullPage: true });
   await page.getByLabel("Dimensi", { exact: true }).selectOption("pekerjaan_terakhir");
   await page.getByLabel("Label kelompok", { exact: true }).fill("Guru Uji");
   const request = page.waitForRequest(r => r.url().includes("/analytics/summary?") && r.url().includes("dimension="));
-  await page.getByRole("button", { name: "Terapkan filter" }).click();
+  await page.getByRole("button", { name: "Terapkan", exact: true }).click();
   const query = new URL((await request).url()).searchParams;
   expect([...query.keys()].sort()).toEqual(["dimension", "value"]);
   expect(query.get("dimension")).toBe("pekerjaan_terakhir");
   expect(query.get("value")).toBe("Guru Uji");
+  await expect(page.locator("tbody tr")).toHaveCount(1);
   expect(new URL(page.url()).search).toBe("");
+  for (const width of [390, 320]) {
+    await page.setViewportSize({ width, height: 844 });
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    const dimensionBox = (await page.getByLabel("Dimensi", { exact: true }).boundingBox())!;
+    const labelBox = (await page.getByLabel("Label kelompok", { exact: true }).boundingBox())!;
+    expect(labelBox.y).toBeGreaterThan(dimensionBox.y + dimensionBox.height);
+    expect((await apply.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+  }
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.screenshot({ path: ".local/analytics-filter-mobile.png", fullPage: true });
+  const resetRequest = page.waitForRequest(r => new URL(r.url()).pathname.endsWith("/api/analytics/summary") && !new URL(r.url()).search);
+  await reset.click();
+  await resetRequest;
+  await expect(page.locator("tbody tr")).toHaveCount(3);
+  await expect(page.getByLabel("Dimensi", { exact: true })).toHaveValue("");
+  await expect(page.getByLabel("Label kelompok", { exact: true })).toBeDisabled();
+  await expect(reset).toBeDisabled();
 });
 
 test("analytics empty state omits small labels and escapes released text", async ({ page }) => {
@@ -181,7 +216,7 @@ test("analytics empty state omits small labels and escapes released text", async
   let groups: { dimension: string; value: string; count: number }[] = [];
   await page.route("**/api/analytics/summary**", route => route.fulfill({ json: { total: null, groups } }));
   await page.goto("/analytics");
-  await expect(page.getByRole("heading", { name: "Tidak ada kelompok yang dapat ditampilkan" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Tidak ada hasil" })).toBeVisible();
   await expect(page.locator("tbody tr")).toHaveCount(0);
   groups = [{ dimension: "nama_bank", value: "<script>window.analyticsXss=true</script>", count: 5 }];
   await page.reload();
