@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "target": "protected_734",
+  "scopes": {
+    "operator": {
+      "read": 734,
+      "update": 734
+    },
+    "privileged_officer": {
+      "read": 734,
+      "update": 734
+    },
+    "finance_officer": {
+      "read": 734,
+      "update": 0
+    }
+  }
+}
