@@ -22,6 +22,7 @@ from infra.openbao.init import configure, issue_tokens, save_response
 from infra.postgres.development import read_source
 from infra.postgres.enable_tls import ExistingPostgres
 from infra.protected.apply import load_profile
+from infra.protected.analyst import security_checks as analyst_security_checks
 from infra.protected.credentials import ROLES, role_environment
 from infra.security import REPO, external_directory, secure_directory, write_private
 from migration.model import compare_batch
@@ -235,6 +236,7 @@ def verify(root):
         checks["forced_rls"]=connection.execute("SELECT relrowsecurity AND relforcerowsecurity AND pg_get_userbyid(relowner)='schema_owner' FROM pg_class WHERE oid='public.anggota_protected'::regclass").fetchone()[0]
         checks["backup_cannot_update"]=not connection.execute("SELECT has_table_privilege(current_user,'public.anggota_protected','UPDATE')").fetchone()[0]
         checks["app_has_no_ddl"]=not connection.execute("SELECT has_schema_privilege('app_user','public','CREATE')").fetchone()[0]
+        checks.update(analyst_security_checks(connection))
     for role in ("app_user","analyst_user","auditor_user"):
         with psycopg.connect(**database_parameters(root,"protected_734",role,True)) as connection:
             checks[role+":verified_tls"]=connection.execute("SELECT ssl FROM pg_stat_ssl WHERE pid=pg_backend_pid()").fetchone()[0]

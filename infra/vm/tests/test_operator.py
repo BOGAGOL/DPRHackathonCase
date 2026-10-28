@@ -225,8 +225,8 @@ def test_changed_destructive_baseline_ddl_is_refused_before_execution(material,m
     assert connection.execute.call_count==2
 
 
-@pytest.mark.parametrize("unsafe",[False,True])
-def test_readonly_verifier_covers_all_rows_and_detects_bad_role_metadata(material,monkeypatch,unsafe):
+@pytest.mark.parametrize(("unsafe","analyst_safe"),[(False,True),(True,True),(False,False)])
+def test_readonly_verifier_covers_all_rows_and_detects_bad_role_metadata(material,monkeypatch,unsafe,analyst_safe):
     seed_tokens(material)
     monkeypatch.setattr(vm,"load_profile",lambda path:{})
     compare=MagicMock();monkeypatch.setattr(vm,"compare_batch",compare)
@@ -234,6 +234,8 @@ def test_readonly_verifier_covers_all_rows_and_detects_bad_role_metadata(materia
     monkeypatch.setattr(vm,"OpenBaoClient",lambda **kwargs:client)
     api=MagicMock();api.request.side_effect=vm.BaoError(403)
     monkeypatch.setattr(vm,"from_environment",lambda:api)
+    analyst_check=MagicMock(return_value={"analyst_no_per_record_select":analyst_safe})
+    monkeypatch.setattr(vm,"analyst_security_checks",analyst_check)
     def connect(**parameters):
         role=parameters["user"];database=parameters["dbname"]
         assert parameters["options"]=="-c default_transaction_read_only=on"
@@ -255,8 +257,10 @@ def test_readonly_verifier_covers_all_rows_and_detects_bad_role_metadata(materia
     monkeypatch.setattr(vm.psycopg,"connect",connect)
     result=vm.verify(material)
     assert result["rows_compared"]==734 and compare.call_count==8
-    assert result["passed"] is not unsafe
+    assert result["passed"] is (not unsafe and analyst_safe)
     assert result["checks"]["migration_identity_rejected"]
+    assert result["checks"]["analyst_no_per_record_select"] is analyst_safe
+    analyst_check.assert_called_once()
 
 
 def test_compose_keeps_tls_private_files_and_loopback_bindings():

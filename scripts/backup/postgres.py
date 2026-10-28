@@ -11,6 +11,7 @@ import psycopg
 from psycopg import sql
 
 from infra.protected.credentials import ROLES
+from infra.protected.analyst import security_checks
 from .crypto import BackupError
 
 
@@ -101,11 +102,11 @@ def check_restored_security(connection, *, service=False):
         "schema_owner_and_forced_rls": table == ("schema_owner", True, True),
         "app_has_no_ddl": not connection.execute("SELECT has_schema_privilege('app_user','public','CREATE')").fetchone()[0],
         "analyst_cannot_select_base": not connection.execute("SELECT has_table_privilege('analyst_user','public.anggota_protected','SELECT')").fetchone()[0],
-        "analyst_can_select_view": connection.execute("SELECT has_table_privilege('analyst_user','public.analyst_view','SELECT')").fetchone()[0],
         "backup_can_select_base": connection.execute("SELECT has_table_privilege('backup_user','public.anggota_protected','SELECT')").fetchone()[0],
         "app_principal_rls_present": connection.execute("SELECT EXISTS(SELECT 1 FROM pg_policies WHERE schemaname='public' AND tablename='anggota_protected' AND (qual LIKE %s OR with_check LIKE %s)) AND pg_get_functiondef('public.request_principal()'::regprocedure) LIKE %s", ('%request_principal%', '%request_principal%', '%app.principal%')).fetchone()[0],
         "public_database_connect_revoked": not connection.execute("SELECT EXISTS(SELECT 1 FROM pg_database d, LATERAL aclexplode(coalesce(d.datacl,acldefault('d',d.datdba))) a WHERE d.datname=current_database() AND a.grantee=0 AND a.privilege_type='CONNECT')").fetchone()[0],
     }
+    checks.update(security_checks(connection))
     if not all(checks.values()):
         raise BackupError("restored_security_validation_failed")
     if service:
