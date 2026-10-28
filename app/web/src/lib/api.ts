@@ -5,8 +5,8 @@ export type MemberPage = { items: Member[]; total: number; page: number; page_si
 export type Detail = Member & Record<string, string | number | null>;
 export type AuditEvent = { id: string | number; actor: string | null; role: string; action: string; anggota_id: string | null; field_class: string | string[]; decision: string; request_id: string; created_at: string };
 export type AuditPage = { items: AuditEvent[]; total: number; page: number; page_size: number };
-export type AggregateCount = number | "<5" | null;
-export type Analytics = { total: AggregateCount; groups: { dimension: string; value: string | null; count: AggregateCount }[] };
+export type AggregateCount = number | null;
+export type Analytics = { total: null; groups: { dimension: string; value: string | null; count: number }[] };
 export class ApiError extends Error { constructor(public status: number, message: string) { super(message); } }
 
 export async function api<T>(path: string, options: RequestInit = {}): Promise<T> {

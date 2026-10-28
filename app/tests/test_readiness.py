@@ -104,7 +104,7 @@ def test_complete_baseline_proof_does_not_certify_protected_or_benchmark(monkeyp
     module = local_report(monkeypatch, tmp_path)
     path = module.APP / "evidence/access-control/baseline-100k.json"
     path.parent.mkdir(parents=True)
-    keys = "datagen_validation baseline_checksum_before baseline_checksum_restored source_checksum_unchanged pg18 non_tls_rejected wrong_ca_rejected last_page_100k insert patch patch_restore aggregate_count forced_rls_member_scope live_browser_probe_passed idor_detail idor_patch".split()
+    keys = "datagen_validation baseline_checksum_before baseline_checksum_restored source_checksum_unchanged pg18 non_tls_rejected wrong_ca_rejected last_page_100k insert patch patch_restore A5_total_unavailable A5_threshold A5_released_group forced_rls_member_scope live_browser_probe_passed idor_detail idor_patch".split()
     checks = {key: True for key in keys}
     path.write_text(json.dumps({"status": "PASSED", "checks": checks}), encoding="utf-8")
     report = module.report()
@@ -122,7 +122,7 @@ def test_real_protected_evidence_does_not_certify_migrated_targets(monkeypatch, 
     module = local_report(monkeypatch, tmp_path)
     path = module.APP / "evidence/access-control/protected-integration.json"
     path.parent.mkdir(parents=True)
-    names = "B_provisioning_with_A_schema A_schema_owner_preserved A_audit_no_extra_grants A_ciphertext_decrypts_in_B scoped_insert_no_RETURNING new_record_scope_trigger reencrypt_and_bidx_update real_AAD_swap_generic_500 A_audit_context_and_error filtered_count_suppressed live_api_https_verified_ca live_web_https_verified_ca live_browser_probe_passed revoked_key_identity_fails_closed".split()
+    names = "B_provisioning_with_A_schema A_schema_owner_preserved A_audit_no_extra_grants A_ciphertext_decrypts_in_B scoped_insert_no_RETURNING new_record_scope_trigger reencrypt_and_bidx_update real_AAD_swap_generic_500 A_audit_context_and_error cohort_filter_rejected B4_small_label_omitted A5_total_unavailable A5_threshold A5_released_group live_api_https_verified_ca live_web_https_verified_ca live_browser_probe_passed revoked_key_identity_fails_closed".split()
     checks = dict.fromkeys(names, True)
     if not complete:
         checks["revoked_key_identity_fails_closed"] = False

@@ -27,7 +27,7 @@ Staff internal (`operator`, `privileged_officer`, `finance_officer`) memiliki ca
 
 Semua endpoint di atas membutuhkan session sah. Login/logout/CSRF merupakan fungsi sesi semua peran. Tidak ada peran admin universal yang otomatis membaca seluruh PII/FIN.
 
-Koneksi data anggota memakai DB role `app_user`. Analytics membuka koneksi berbeda sebagai `analyst_user`, hanya pada `analyst_view`; audit dibaca dengan `auditor_user`, hanya pada `audit_log`. Identitas aplikasi bukan role PostgreSQL. `app.principal` diset lokal pada transaksi untuk integrasi RLS; RLS tidak menggantikan predicate pemilik pada backend.
+Koneksi data anggota memakai DB role `app_user`. Analytics membuka koneksi berbeda sebagai `analyst_user`, hanya pada `public.analyst_summary`; audit dibaca dengan `auditor_user`, hanya pada `audit_log`. Identitas aplikasi bukan role PostgreSQL. `app.principal` diset lokal pada transaksi untuk integrasi RLS; RLS tidak menggantikan predicate pemilik pada backend.
 
 Daftar hanya mengembalikan `anggota_id` dan `nama`, dengan pagination 50 record. Detail memakai allowlist per peran pada backend; kolom yang dilarang tidak dikirim sebagai null/placeholder maupun tersembunyi dalam JSON. Kontak baru divalidasi, hanya dua field yang dapat diubah, dan email blind index diperbarui dalam transaksi yang sama pada MODE=protected. Keputusan deny merupakan default jika peran, record, field, atau dependensi crypto tidak cocok.
 
@@ -45,6 +45,11 @@ Binding bidx berada di tabel B terpisah. Audit A mengisi actor/role melalui trig
 B tidak mengirim actor buatan sendiri dalam INSERT. UUID resource audit adalah UUID internal,
 sementara locator URL tetap legacy_row_id. Plain mempertahankan model kontrol baseline.
 
-Analyst menerima agregat tersensor server: 1–4 menjadi "<5", secondary suppression/total
-menjadi null bila diperlukan. Endpoint anggota tetap ditolak untuk analyst dan auditor.
-Pembatasan DB analyst_view menjadi aggregate-only merupakan perubahan milik A, bukan B.
+Analyst hanya menerima marginal satu dimensi dari `public.analyst_summary` sesuai
+CONTRACT 10.1/A5. Kelompok 1–4 beserta labelnya tidak menghasilkan baris DTO.
+`groups[].count` adalah integer >=5; `total` selalu null. Hanya filter `dimension`
+dan `value` pada marginal yang sudah dirilis yang didukung; `value` memerlukan
+`dimension`. Filter cohort anggota lama ditolak HTTP 422. Tidak ada fallback ke
+analyst_view, role app_user, atau admin. Endpoint anggota tetap ditolak untuk
+analyst dan auditor. SQL A5 diterapkan terpisah oleh operator sebelum rilis aplikasi.
+Lima marginal bukan cohort gabungan atau jaminan k-anonymity atas seluruh atribut.

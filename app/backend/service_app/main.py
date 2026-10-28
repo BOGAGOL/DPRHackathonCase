@@ -77,6 +77,8 @@ def create_app(settings=None, crypto=None):
         if url not in engines:
             engines[url] = create_engine(url, hide_parameters=True, pool_pre_ping=True,
                 connect_args={"check_same_thread": False} if url.startswith("sqlite") else {"connect_timeout": 10})
+            if settings.testing and url.startswith("sqlite"):
+                engines[url] = engines[url].execution_options(schema_translate_map={"public": None})
         return engines[url]
     data_engine = engine_for(settings.database_url)
     auth_engine = engine_for(settings.auth_database_url or settings.database_url)
@@ -161,6 +163,8 @@ def create_app(settings=None, crypto=None):
 
     @app.exception_handler(RequestValidationError)
     async def invalid_input(request, exc):
+        if request.url.path == "/analytics/summary" and set(request.query_params) - {"dimension", "value"}:
+            return JSONResponse({"detail": "Filter cohort anggota tidak didukung; gunakan dimension dan value."}, status_code=422)
         return JSONResponse({"detail": "Input tidak valid"}, status_code=422)
 
     @app.exception_handler(CryptoUnavailable)

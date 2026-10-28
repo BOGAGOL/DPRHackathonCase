@@ -46,7 +46,7 @@ async function mock(page: Page, role: Role, payload: Record<string, unknown> = {
     else if (endpoint === "/anggota" || endpoint === "/anggota/search") data = list;
     else if (endpoint.endsWith("/kontak")) data = { ...member, ...request.postDataJSON() };
     else if (endpoint === "/anggota/1") data = { ...member, no_ktp: "00123456789012", email: "u••••@••••", handphone: "••••89", ...payload };
-    else if (endpoint === "/analytics/summary") data = { total: 4, groups: [{ dimension: "age_band", value: "40-49", count: 4 }] };
+    else if (endpoint === "/analytics/summary") data = { total: null, groups: [{ dimension: "age_band", value: "40-49", count: 5 }] };
     else if (endpoint === "/audit") data = { total: 1, page: 1, page_size: 50, items: [{ id: 1, actor: "synthetic-user", role: "operator", action: "member.detail", anggota_id: "1", field_class: ["PII"], decision: "allowed", request_id: "synthetic-request", created_at: "2026-10-27T00:00:00Z" }] };
     await route.fulfill({ contentType: "application/json", headers: { "Cache-Control": "no-store" }, body: JSON.stringify(data) });
   });
@@ -149,25 +149,42 @@ test("mobile navigation stays within viewport", async ({ page }) => {
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
 
-test("analytics renders server suppression and sends combined filters without exposing counts", async ({ page }) => {
+test("analytics shows only released marginals and sends dimension/label filters", async ({ page }) => {
   await mock(page, "analyst");
   await page.route("**/api/analytics/summary**", async route => {
     await route.fulfill({ json: { total: null, groups: [
-      { dimension: "pekerjaan_terakhir", value: "Dokter", count: "<5" },
-      { dimension: "pekerjaan_terakhir", value: "Guru", count: null },
+      { dimension: "pekerjaan_terakhir", value: "Guru Uji", count: 6 },
       { dimension: "nama_bank", value: "Bank Uji", count: 5 },
+      { dimension: "nama_kppn", value: null, count: 5 },
     ] } });
   });
   await page.goto("/analytics");
-  await expect(page.locator("tbody tr").filter({ hasText: "Dokter" }).locator("td").last()).toHaveText("<5");
-  await expect(page.locator("tbody tr").filter({ hasText: "Guru" }).locator("td").last()).toHaveText("Disembunyikan");
+  await expect(page.locator("tbody tr")).toHaveCount(3);
+  await expect(page.locator("tbody tr").filter({ hasText: "Guru Uji" }).locator("td").last()).toHaveText("6");
   await expect(page.locator("tbody tr").filter({ hasText: "Bank Uji" }).locator("td").last()).toHaveText("5");
-  await page.getByLabel("Nama KPPN", { exact: true }).fill("KPPN Surabaya");
-  await page.getByLabel("Pekerjaan terakhir", { exact: true }).fill("Dokter");
-  const request = page.waitForRequest(r => r.url().includes("/analytics/summary?") && r.url().includes("nama_kppn="));
+  await expect(page.getByText("Tidak disediakan", { exact: true })).toBeVisible();
+  await expect(page.getByText("Dokter", { exact: true })).toHaveCount(0);
+  await expect(page.getByLabel("Label kelompok", { exact: true })).toBeDisabled();
+  await page.getByLabel("Dimensi", { exact: true }).selectOption("pekerjaan_terakhir");
+  await page.getByLabel("Label kelompok", { exact: true }).fill("Guru Uji");
+  const request = page.waitForRequest(r => r.url().includes("/analytics/summary?") && r.url().includes("dimension="));
   await page.getByRole("button", { name: "Terapkan filter" }).click();
   const query = new URL((await request).url()).searchParams;
-  expect(query.get("nama_kppn")).toBe("KPPN Surabaya");
-  expect(query.get("pekerjaan_terakhir")).toBe("Dokter");
+  expect([...query.keys()].sort()).toEqual(["dimension", "value"]);
+  expect(query.get("dimension")).toBe("pekerjaan_terakhir");
+  expect(query.get("value")).toBe("Guru Uji");
   expect(new URL(page.url()).search).toBe("");
+});
+
+test("analytics empty state omits small labels and escapes released text", async ({ page }) => {
+  await mock(page, "analyst");
+  let groups: { dimension: string; value: string; count: number }[] = [];
+  await page.route("**/api/analytics/summary**", route => route.fulfill({ json: { total: null, groups } }));
+  await page.goto("/analytics");
+  await expect(page.getByRole("heading", { name: "Tidak ada kelompok yang dapat ditampilkan" })).toBeVisible();
+  await expect(page.locator("tbody tr")).toHaveCount(0);
+  groups = [{ dimension: "nama_bank", value: "<script>window.analyticsXss=true</script>", count: 5 }];
+  await page.reload();
+  await expect(page.locator("tbody td").filter({ hasText: "<script>window.analyticsXss=true</script>" })).toHaveCount(1);
+  expect(await page.evaluate(() => Reflect.get(window, "analyticsXss"))).toBeUndefined();
 });

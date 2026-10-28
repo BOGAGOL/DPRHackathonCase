@@ -157,7 +157,12 @@ def main():
                         check("own_endpoint:" + role, response.status_code == 200)
                         if role == "analyst":
                             filtered = http.get(endpoint, params={"nama_kppn": "KPPN Surabaya", "pekerjaan_terakhir": "Dokter"})
-                            check("filtered_count_suppressed", filtered.json()["total"] == "<5" and all(g["count"] == "<5" for g in filtered.json()["groups"]))
+                            check("cohort_filter_rejected", filtered.status_code == 422)
+                            groups = response.json().get("groups", [])
+                            check("A5_total_unavailable", response.json().get("total") is None)
+                            check("B4_small_label_omitted", not any(g["value"] == "Dokter" for g in groups))
+                            check("A5_threshold", all(isinstance(g["count"], int) and g["count"] >= 5 for g in groups))
+                            check("A5_released_group", any(g["dimension"] == "pekerjaan_terakhir" and g["value"] == "Guru" and g["count"] == 7 for g in groups))
                         continue
                     check("detail:" + role, detail.status_code == 200)
                     expected = 1 if role == "anggota" else 2

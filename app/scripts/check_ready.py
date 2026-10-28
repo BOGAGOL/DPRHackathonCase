@@ -35,7 +35,7 @@ def report():
     # A stale arbitrary PASS or policy test double must not certify this target.
     required = {"datagen_validation", "baseline_checksum_before", "baseline_checksum_restored",
                 "source_checksum_unchanged", "pg18", "non_tls_rejected", "wrong_ca_rejected",
-                "last_page_100k", "insert", "patch", "patch_restore", "aggregate_count",
+                "last_page_100k", "insert", "patch", "patch_restore", "A5_total_unavailable", "A5_threshold", "A5_released_group",
                 "forced_rls_member_scope", "live_browser_probe_passed", "idor_detail", "idor_patch"}
     baseline_passed = (baseline.get("status") == "PASSED" and isinstance(checks, dict)
                        and required.issubset(checks) and all(v is True for v in checks.values()))
@@ -44,7 +44,8 @@ def report():
     protected_required = {"B_provisioning_with_A_schema", "A_schema_owner_preserved", "A_audit_no_extra_grants",
                           "A_ciphertext_decrypts_in_B", "scoped_insert_no_RETURNING", "new_record_scope_trigger",
                           "reencrypt_and_bidx_update", "real_AAD_swap_generic_500", "A_audit_context_and_error",
-                          "filtered_count_suppressed", "live_api_https_verified_ca", "live_web_https_verified_ca",
+                          "cohort_filter_rejected", "B4_small_label_omitted", "A5_total_unavailable",
+                          "A5_threshold", "A5_released_group", "live_api_https_verified_ca", "live_web_https_verified_ca",
                           "live_browser_probe_passed", "revoked_key_identity_fails_closed"}
     protected_passed = (protected.get("status") == "PASSED" and isinstance(protected_checks, dict)
                         and protected_required.issubset(protected_checks)

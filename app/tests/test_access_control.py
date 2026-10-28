@@ -324,7 +324,7 @@ def test_analyst_and_auditor_only_their_endpoints(lab):
     login(lab, "analyst")
     summary = lab.client.get("/analytics/summary")
     assert summary.status_code == 200
-    assert summary.json()["total"] == "<5"
+    assert summary.json() == {"total": None, "groups": []}
     assert set(summary.json()) == {"total", "groups"}
     assert not any(r["nama"] in summary.text or r["no_ktp"] in summary.text for r in lab.rows)
     assert lab.client.get("/audit").status_code == 403

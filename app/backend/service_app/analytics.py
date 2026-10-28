@@ -1,26 +1,22 @@
-"""Bounded aggregate queries and small-cell suppression before DTO serialization."""
-from sqlalchemy import func, select
-from .models import analyst_view
+"""Read only the released A5 marginals; never reconstruct member cohorts."""
+from sqlalchemy import BigInteger, Column, MetaData, Table, Text, select
 
 DIMENSIONS = ("jenis_kelamin", "pekerjaan_terakhir", "nama_kppn", "nama_bank", "age_band")
 THRESHOLD = 5
+ANALYST_SUMMARY = Table("analyst_summary", MetaData(), Column("dimension", Text),
+                        Column("value", Text), Column("anggota_count", BigInteger), schema="public")
 
 
 def summary(db, filters):
-    predicates = [analyst_view.c[field] == value for field, value in filters.items() if value is not None]
-    total = db.scalar(select(func.count()).select_from(analyst_view).where(*predicates))
-    groups = []
-    any_small = False
-    for field in DIMENSIONS:
-        column = analyst_view.c[field]
-        rows = db.execute(select(column, func.count()).where(*predicates).group_by(column).order_by(column).limit(101)).all()
-        small = [i for i, (_, count) in enumerate(rows) if 0 < count < THRESHOLD]
-        any_small |= bool(small)
-        # When exactly one cell is small, suppress one additional cell so the
-        # small count cannot be recovered by subtracting its siblings from a total.
-        secondary = next((i for i, (_, n) in enumerate(rows) if n >= THRESHOLD), None) if len(small) == 1 else None
-        for i, (value, count) in enumerate(rows[:100]):
-            released = "<5" if i in small else None if i == secondary else count
-            groups.append({"dimension": field, "value": value, "count": released})
-    released_total = "<5" if 0 < total < THRESHOLD else None if any_small else total
-    return {"total": released_total, "groups": groups}
+    if set(filters) - {"dimension", "value"} or ("value" in filters and not filters.get("dimension")):
+        raise ValueError("Member cohort filters are not supported")
+    columns = ANALYST_SUMMARY.c
+    query = select(columns.dimension, columns.value, columns.anggota_count).where(columns.anggota_count >= THRESHOLD)
+    for field, value in filters.items():
+        if value is not None:
+            query = query.where(columns[field] == value)
+    rows = db.execute(query.order_by(columns.dimension, columns.value.nulls_last())).all()
+    return {"total": None, "groups": [
+        {"dimension": dimension, "value": value, "count": count}
+        for dimension, value, count in rows
+    ]}
