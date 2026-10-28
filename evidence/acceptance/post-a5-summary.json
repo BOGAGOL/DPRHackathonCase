@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "status": "PASSED",
+  "checked_at_utc": "2026-10-28T13:28:03.393234+00:00",
+  "application_base_commit": "112da8da97dbfa90d76bbc7b2cd73c4935baafbc",
+  "local": {
+    "passed": true,
+    "checks": 143,
+    "evidence": "evidence/backup/service-recovery-integration.json",
+    "fixture_rows": 17,
+    "transport": "native_pg18_openbao_tls",
+    "browser": {
+      "certificate_trust": "verified private CA for service clients; exact ephemeral SPKI pin for local Chrome only",
+      "coverage": {
+        "application_data_mutations": false,
+        "foreign_record_idor": true,
+        "network_mocking": false,
+        "real_chrome": true,
+        "stage": "complete"
+      },
+      "error_type": null,
+      "status": "PASSED"
+    },
+    "tls_postgres": true,
+    "tls_openbao": true,
+    "backup_restore_both_modes": true,
+    "application_mutations_only_on_owned_restore_clone": true
+  },
+  "deployment": {
+    "passed": true,
+    "checks": 100,
+    "evidence": "evidence/acceptance/deployed-browser.json",
+    "origin": "https://43.156.157.247",
+    "real_chrome": true,
+    "mocked_network": false,
+    "member_data_modified": false,
+    "ssh_or_server_configuration_changes": false,
+    "public_https_preflight": {
+      "/login": {
+        "status": 200,
+        "expected": 200,
+        "passed": true,
+        "tls_certificate_verified": true
+      },
+      "/api/health/ready": {
+        "status": 200,
+        "expected": 200,
+        "passed": true,
+        "tls_certificate_verified": true
+      },
+      "/api/auth/me": {
+        "status": 401,
+        "expected": 401,
+        "passed": true,
+        "tls_certificate_verified": true
+      },
+      "/api/analytics/summary": {
+        "status": 401,
+        "expected": 401,
+        "passed": true,
+        "tls_certificate_verified": true
+      }
+    }
+  },
+  "regression": {
+    "passed": 327,
+    "skipped": 8,
+    "failures": 0,
+    "errors": 0,
+    "native_post_a5_and_native_a5_sql_included": true
+  },
+  "tooling": {
+    "docker_status": "timeout; existing Docker stack unchanged",
+    "postgres_version": "18.6 native Windows",
+    "openbao_version": "2.5.5 native Windows",
+    "openbao_release_checksum_verified": true,
+    "frontend_npm_ci_and_production_build": "PASSED; locked Zod 4.6.7",
+    "browser": "installed Google Chrome via Playwright; computer-use bridge unavailable"
+  },
+  "source_sha256_lf": {
+    "infra/acceptance/browser.mjs": "42af43436a445bb815e4053e3c5da5567b6dc99727fb65ceadd738468646733a",
+    "infra/acceptance/browser.py": "4cb7b6d79f4b06cabba2100a564ffe094c6397a2929ab800301c2cb9912767e1",
+    "infra/acceptance/native_lab.py": "1432b461ad708434ab6fd536baa1e0836a79635a9ad34db304280261af9129ec",
+    "infra/tests/test_acceptance_helpers.py": "5b9647d0ab2e0d4b8d1ea0c3854442986e53081b0d308c507ebff3b5a6e6c5b6",
+    "scripts/backup/tests/test_post_a5_acceptance.py": "0c07ccfbad9c27bfe323c1f625e8d3f64f3fa7447fa5dc936d8a46a040f62958",
+    "scripts/backup/tests/test_service_recovery_integration.py": "e47f87a44fc368e46b301ac451c2cdb4d8ca79d752bc5b7ce98318d231a57690",
+    "sql/protected/03_analyst_suppression.sql": "ec2099f67b4361050b6c93495d21c713d4265f61a9ccd041b7eb69af039213e3",
+    "app/backend/service_app/analytics.py": "2774133850c8ef8d7b342fc5fb0aaf5971f195106d4811aa6780ca7b576d128e",
+    "app/web/package-lock.json": "0fe5b23a861095b033e8ec1755ab2ee6b530bccb8459b3b65d731048682ea2da"
+  },
+  "limitations": [
+    "Synthetic 17-row lab is not official 734/100k/1m dataset acceptance or performance benchmark",
+    "VM checks cover web/API through six accounts; direct VM SQL grants, PG/OpenBao TLS and deployed commit were not inspected via SSH",
+    "Backup/restore and data modifications were only in the fresh local lab; no VM disaster recovery or key-plane recovery claim",
+    "No complete repository/history/log privacy scan is claimed; reports contain only sanitized checks and metadata"
+  ],
+  "credentials_committed": false,
+  "plaintext_member_data_or_deks_in_evidence": false
+}
