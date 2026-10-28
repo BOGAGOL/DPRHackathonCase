@@ -19,14 +19,20 @@ ketiadaan di Git tidak membuktikan ketiadaan di luar repository.
 R01/R02 sudah mendapat implementasi pada commit `8dfc985` dan `ea2b7a8`: layout backup
 lima/tujuh tabel, sequence/grant, TLS restore, serta target aplikasi yang dipilih
 eksplisit dan diperiksa saat startup. Regresi A **283 lulus / 8 skip**, B **286 lulus /
-1 skip**; helper HTTPS **1 lulus**. Uji end-to-end Docker belum dapat berjalan karena
-WSL host macet (`Unexpected WSL error`, context deadline exceeded). Jadi statusnya
-**diimplementasikan + diuji komponen, integrasi live menunggu WSL pulih**, bukan
-kelulusan pemulihan layanan penuh. Lihat [bukti verifikasi recovery](../evidence/recovery/verification.json)
+1 skip**; helper HTTPS **1 lulus**. Setelah Windows direstart, **4 test integrasi
+lulus** pada commit `5214829`: TLS (90 pemeriksaan), backup lima tabel (15 pemeriksaan),
+helper HTTPS, dan recovery A+B tujuh tabel (33 pemeriksaan). Alur nyata meliputi
+restore kedua mode, akun/sesi/binding, enam peran, scope record, pencarian blind index,
+update kontak, insert dengan allocator hasil restore, tamper/retention, dan gagal
+tertutup saat identitas kunci tidak tersedia. Status R01/R02:
+**diimplementasikan + diuji integrasi dengan 17 record buatan sendiri**. Kegagalan
+WSL awal disimpan sebagai sejarah, bukan status terkini. Lingkungan test sudah
+dibersihkan; pg-dpr/OpenBao existing tetap berhenti. Deployment dan pengujian dataset
+resmi tim tetap mengikuti runbook. Lihat [bukti verifikasi recovery](../evidence/recovery/verification.json)
 dan [runbook cutover](../app/docs/RECOVERY.md). Temuan audit awal di bawah merujuk
 commit ed88ecd; R03–R08 dan kesiapan submit keseluruhan belum dinyatakan selesai.
 
-## Temuan yang menghalangi kesiapan
+## Temuan pada commit audit awal (status recovery terbaru di atas)
 
 | ID | Prioritas | Temuan dan bukti | Tindak lanjut / pemilik |
 | --- | --- | --- | --- |

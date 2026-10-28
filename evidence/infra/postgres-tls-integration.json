@@ -67,6 +67,12 @@
     "plaintext_rejected:protected_1m:bench_user": true,
     "plaintext_rejected:protected_1m:scanner_user": true,
     "protected_verify_full:protected_1m": true,
+    "restore_plaintext_rejected:app_user": true,
+    "restore_plaintext_rejected:backup_user": true,
+    "restore_plaintext_rejected:analyst_user": true,
+    "restore_plaintext_rejected:auditor_user": true,
+    "restore_plaintext_rejected:bench_user": true,
+    "restore_plaintext_rejected:scanner_user": true,
     "auth_rules_preserved": true,
     "complete_connection_matrix": true,
     "tls12_or_tls13": true,
@@ -89,5 +95,5 @@
     "same_postmaster_after_rollback": true
   },
   "server_version_num": 180006,
-  "checked_at_utc": "2026-10-27T18:03:02.764827+00:00"
+  "checked_at_utc": "2026-10-28T09:13:59.782136+00:00"
 }

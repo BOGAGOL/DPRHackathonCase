@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "checked_at_utc": "2026-10-28T08:57:18.302139+00:00",
-  "status": "IMPLEMENTED_UNIT_TESTED_LIVE_BLOCKED",
+  "checked_at_utc": "2026-10-28T09:17:15.710414+00:00",
+  "status": "IMPLEMENTED_AND_INTEGRATION_TESTED",
   "implementation_commits": [
     "8dfc985",
     "ea2b7a8"
@@ -40,28 +40,59 @@
       },
       "passed": true,
       "raw_report": "results/recovery/https-helper.xml"
+    },
+    "live_recovery": {
+      "counts": {
+        "tests": 4,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "passed": 4
+      },
+      "passed": true,
+      "seconds": 141.888,
+      "raw_report": "results/recovery/live-after-restart.xml",
+      "junit_sha256": "21cabe91d8afe48f3e382da694d298015bdea47c526d336f8a1dcd90833f2b9a"
     }
   },
   "docker_integration": {
-    "status": "BLOCKED",
+    "status": "PASSED",
     "attempted": true,
-    "setup_errors": 2,
-    "raw_report": "results/recovery/live-startup-failure.xml",
-    "root_cause": "Docker Desktop Unexpected WSL error; listing WSL distributions context deadline exceeded; engine proxy no route to host",
-    "application_database_checks_executed": false,
-    "passing_live_recovery_claim": false
+    "application_database_checks_executed": true,
+    "passing_live_recovery_claim": true,
+    "scope": "Disposable TLS PG18/OpenBao, 17 invented records, actual A+B schema/toolkit, live HTTPS backend; not production or official benchmark datasets",
+    "evidence": {
+      "evidence/infra/postgres-tls-integration.json": {
+        "passed": true,
+        "checks": 90
+      },
+      "evidence/backup/integration.json": {
+        "passed": true,
+        "checks": 15
+      },
+      "evidence/backup/service-recovery-integration.json": {
+        "passed": true,
+        "checks": 33
+      }
+    },
+    "cleanup_verified": true,
+    "temporary_test_volumes_remaining": 0,
+    "original_pg_dpr_and_openbao_still_stopped": true,
+    "historical_wsl_blocker": "evidence/recovery/history/verification-wsl-blocked.json"
   },
-  "required_rerun": "Set DPR_BACKUP_INTEGRATION=1 and DPR_POSTGRES_TLS_INTEGRATION=1, then python -m pytest --import-mode=importlib infra/tests/test_postgres_tls_integration.py scripts/backup/tests/test_integration.py scripts/backup/tests/test_service_recovery_integration.py -q --tb=short",
   "operational_steps": [
-    "Recover WSL/Docker without resetting data/volumes",
     "Apply reviewed TLS updater once to existing pg-dpr",
     "Run idempotent B schema setup on the active protected database to grant backup_user SELECT on service allocator",
     "Make a new seven-table service backup; restore and cut over according to app/docs/RECOVERY.md"
   ],
   "limitations": [
-    "No end-to-end database/crypto/HTTPS recovery pass until the Docker integration is rerun",
-    "Synthetic fixture tests do not certify official migrated 734/100k/1M targets or benchmark",
-    "Earlier five-table backup and disposable B evidence remain historical evidence with their original scope"
+    "Integrated recovery passed on 17 invented rows in disposable containers; target-team migrated dataset acceptance and official benchmark are separate",
+    "Existing pg-dpr was not modified; deployment still requires the TLS apply and idempotent B setup described in the runbook",
+    "Browser frontend tests are separate; this recovery proof exercises the live HTTPS backend",
+    "Earlier WSL startup failure is retained as historical evidence and is superseded by this successful run"
   ],
-  "existing_project_database_or_key_mutations": false
+  "existing_project_database_or_key_mutations": false,
+  "passed": true,
+  "tested_commit": "52148297e8836e01dd1ef6e87bad05ff3d9fc08d",
+  "reproduction_command": "Set DPR_BACKUP_INTEGRATION=1 and DPR_POSTGRES_TLS_INTEGRATION=1; python -m pytest --import-mode=importlib infra/tests/test_postgres_tls_integration.py scripts/backup/tests/test_integration.py scripts/backup/tests/test_service_recovery_integration.py -q --tb=short"
 }

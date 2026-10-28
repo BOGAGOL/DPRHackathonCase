@@ -20,6 +20,16 @@ Pengujian recovery memakai data buatan sendiri di PostgreSQL/OpenBao TLS sementa
 HTTPS backend membuktikan alur aplikasi. Ini tidak menggantikan benchmark resmi,
 acceptance pada dataset hasil migrasi tim, atau bukti browser/frontend terpisah.
 
+Setelah restart Windows, recovery tujuh tabel benar-benar dijalankan pada container
+sementara: 33 pemeriksaan lulus melalui HTTPS backend dengan schema/toolkit A asli.
+Akun dan sesi hasil restore bekerja; enam peran, scope record, kebijakan FIN, pencarian,
+update kontak/bidx dan insert allocator tervalidasi. Hilangnya identitas OpenBao
+menghasilkan 500 generik, lalu layanan dapat membaca lagi setelah identitas sah
+diinjeksi ulang. Tamper dan retention tujuh tabel juga lulus. Bukti mesin pada
+`evidence/backup/service-recovery-integration.json`; rangkuman empat test integrasi
+di `evidence/recovery/verification.json`. Pengujian ini memakai 17 record buatan
+sendiri dan bukan acceptance pada dataset resmi atau benchmark.
+
 Pemilik: Zhafif. Platform: Windows PowerShell. Branch kerja: `feat/service-app`. Acuan mengikat: `AGENTS.md`, `docs/PROJECT_CONTEXT.md`, `docs/contracts/CONTRACT.md`, `docs/TEAM_PLAN.md`, dan `docs/ai-prompts/PROMPT_B_SERVICE_APP.md`.
 
 ## Batas perubahan dan penggunaan ulang

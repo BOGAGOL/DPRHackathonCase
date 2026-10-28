@@ -288,7 +288,7 @@
   ],
   "tracked_source_changes_during_review": [],
   "follow_up_recovery": {
-    "status": "IMPLEMENTED_UNIT_TESTED_LIVE_BLOCKED",
+    "status": "IMPLEMENTED_AND_INTEGRATION_TESTED",
     "implementation_commits": [
       "8dfc985",
       "ea2b7a8"
@@ -298,7 +298,9 @@
       "R02"
     ],
     "evidence": "evidence/recovery/verification.json",
-    "live_integration": "BLOCKED_WSL",
-    "overall_submission_ready": false
+    "live_integration": "PASSED",
+    "overall_submission_ready": false,
+    "tested_commit": "52148297e8836e01dd1ef6e87bad05ff3d9fc08d",
+    "resolved_scope": "R01/R02 implementation and actual A+B recovery validated with invented disposable fixtures; deployment/official datasets separate"
   }
 }

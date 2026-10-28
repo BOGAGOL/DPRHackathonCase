@@ -29,6 +29,16 @@ dipulihkan beserta TTL sesi yang sudah ada. Mengakhiri sesi existing saat cutove
 keputusan operator terpisah; tidak diam-diam mengubah row count manifest. Uji HTTPS
 backend memiliki evidence tersendiri, bukan diperoleh dari smoke_decrypt saja.
 
+Verifikasi setelah WSL pulih, 28 Oktober: empat test integrasi lulus. TLS mencatat
+90 pemeriksaan, backup lima tabel 15, dan recovery tujuh tabel 33. Akun/sesi existing,
+enam peran, pembatasan record/FIN, pencarian, update bidx/kontak, insert ID berikutnya,
+key identity fail closed, tamper dan retention terbukti melalui HTTPS backend nyata.
+Fixture berisi 17 record buatan sendiri; container/volume sementara dibersihkan.
+Evidence: `evidence/backup/service-recovery-integration.json` dan
+`evidence/recovery/verification.json`. Source yang diuji `5214829`; bukan benchmark
+resmi atau klaim pengujian database tim 734/100k/1M. Tidak ada perubahan source
+implementasi setelah run ini; pembaruan berikutnya hanya dokumentasi/evidence.
+
 ## Adaptasi referensi dan format
 
 Referensi dibaca: `docs/reference/onno-code/data-leak-proof-postgresql/scripts/backup.sh`
