@@ -1,5 +1,10 @@
 # Handoff deployment VM baru — 28 Oktober 2026
 
+**Pembaruan tugas:** Zhafif melanjutkan deployment web dan menjalankan dependensi A
+sendiri pada VM. Prosedur executable kini ada di [infra/vm/README.md](vm/README.md).
+Alby memvalidasi ringkasan evidence sesudah pemasangan. Akses SSH Alby/public key
+di bawah merupakan preflight historis, bukan prasyarat untuk memakai paket ini.
+
 Target terbaru dari pengguna adalah **ubuntu@43.156.157.247**, bukan akun agenz pada
 server sebelumnya. Path yang diminta: kode `~/juara1onno`, material operasional
 privat `~/dpr-demo-zhafif/private`. Keberadaan/izin folder belum diverifikasi di VM.
