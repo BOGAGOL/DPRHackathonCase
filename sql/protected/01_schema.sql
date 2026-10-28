@@ -201,10 +201,8 @@ CREATE POLICY scope_backup_read ON public.access_scope FOR SELECT TO backup_user
 
 CREATE OR REPLACE VIEW public.analyst_view WITH (security_barrier=true) AS
     SELECT jenis_kelamin,pekerjaan_terakhir,nama_kppn,nama_bank,age_band FROM public.anggota_protected;
-CREATE OR REPLACE FUNCTION public.analyst_age_summary() RETURNS TABLE(age_band varchar(10),anggota_count bigint)
-LANGUAGE sql STABLE SECURITY INVOKER SET search_path=pg_catalog AS $$
-    SELECT age_band,count(*) FROM public.analyst_view GROUP BY age_band ORDER BY age_band;
-$$;
+-- This is an internal projection, not an analyst interface. The suppressed
+-- aggregate view/function are created by 03_analyst_suppression.sql before grants.
 
 REVOKE ALL ON ALL TABLES IN SCHEMA public FROM PUBLIC;
 REVOKE ALL ON ALL SEQUENCES IN SCHEMA public FROM PUBLIC;

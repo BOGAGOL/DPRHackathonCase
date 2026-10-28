@@ -2,7 +2,10 @@
 
 Dokumen ini adalah satu-satunya sumber kebenaran untuk format data terproteksi. Migrasi (Python),
 Service App (bahasa apa pun), verifikasi, dan backup harus memakai format yang sama persis.
-Perubahan kontrak hanya lewat kesepakatan tim dan menaikkan `protection_version`.
+Perubahan format data hanya lewat kesepakatan tim dan menaikkan `protection_version`.
+Revisi ACL analis A5 (28 Oktober 2026, disetujui tim melalui instruksi Modul A) di bagian
+10.1 hanya memperketat izin dan interface agregat: format ciphertext/AAD/bidx tetap v1,
+sehingga tidak menaikkan `protection_version` atau mengenkripsi ulang data.
 
 Acuan desain: docs/Rancangan_Hardening_Final (PDF tim), buku Onno W. Purbo *Data Leak-Proof*
 (Bab 3, 5, 6, 7, 9), soal final dan dokumen Detail Hackathon.
@@ -138,12 +141,67 @@ test yang mendekripsi vector ini (terutama jika backend bukan Python).
 |---|---|
 | `schema_owner` | NOLOGIN, pemilik objek |
 | `app_user` | SELECT/INSERT/UPDATE pada anggota_protected + tabel aplikasi; NOSUPERUSER, NOBYPASSRLS, tanpa DDL |
-| `analyst_user` | SELECT hanya `analyst_view` (kolom REF + age_band) dan fungsi agregat; tidak ke tabel dasar |
+| `analyst_user` | SELECT hanya `analyst_summary` (agregat k>=5) dan EXECUTE `analyst_age_summary()` yang membaca agregat itu; tanpa akses per record |
 | `auditor_user` | SELECT tabel `audit_log`; tidak ke data anggota |
 | `backup_user` | Hak minimum untuk pg_dump; tidak punya kredensial OpenBao |
 | `admin_user` | Administrasi terbatas, tercatat; tidak punya kredensial OpenBao decrypt |
 | `migration_user` | Sementara, dicabut setelah migrasi |
 | `scanner_user` | Read-only untuk scanner |
+
+### 10.1. Interface analis A5: agregat dengan ambang 5
+
+`public.analyst_view` tetap merupakan proyeksi internal REF + age_band per record dan
+**tidak boleh dibaca `analyst_user`**, termasuk melalui grant per kolom. Tabel dasar,
+tabel akun/sesi, dan proyeksi per record lainnya juga tidak boleh dibaca role ini.
+
+Interface baru: `public.analyst_summary`, view milik NOLOGIN `schema_owner`, dengan
+`security_barrier=true` dan owner rights (`security_invoker=false`):
+
+| Kolom | Tipe | Arti |
+|---|---|---|
+| `dimension` | text | Salah satu `jenis_kelamin`, `pekerjaan_terakhir`, `nama_kppn`, `nama_bank`, `age_band` |
+| `value` | text, nullable | Label kelompok; NULL berarti kelompok nilai NULL |
+| `anggota_count` | bigint | Jumlah anggota, selalu >= 5 |
+
+View berisi lima marginal satu dimensi yang dihitung secara independen menggunakan
+`GROUP BY <dimensi> HAVING count(*) >= 5`, digabung `UNION ALL`. Kelompok berukuran
+1–4 **tidak menghasilkan baris sama sekali**, termasuk labelnya. NULL dihitung dengan
+`count(*)`, sehingga kelompok NULL juga tunduk pada ambang. Tidak ada UUID, legacy id,
+ciphertext, wrapped DEK, atau kombinasi atribut per anggota di interface ini.
+`analyst_age_summary()` mempertahankan kolom `(age_band varchar(10), anggota_count bigint)`
+dan kini membaca hanya marginal `age_band` pada view baru, dengan SECURITY INVOKER.
+
+**Handoff Modul B:** `app/backend/service_app/analytics.py` saat revisi ini masih membaca
+`analyst_view` per record. Query tersebut akan ditolak sesudah SQL A5 diterapkan. Modul B
+wajib menggantinya dengan query berparameter berikut dan memetakan `anggota_count` ke
+`groups[].count` pada DTO:
+
+```sql
+SELECT dimension, value, anggota_count
+FROM public.analyst_summary
+ORDER BY dimension, value NULLS LAST;
+```
+
+Jangan melakukan `count(*)` atas view baru untuk menghitung jumlah anggota; hasilnya
+adalah jumlah kelompok. Jangan menjumlahkan lintas dimensi (anggota terhitung berulang).
+`total` pada DTO harus `null`: view ini tidak menyediakan total mentah/kelompok tersembunyi.
+Jangan mengirim label kelompok kecil dengan `"<5"` sebagai count. Filter SQL di atas
+view hanya boleh memilih marginal yang sudah dirilis (`dimension`/`value`), bukan
+menyimulasikan cohort gabungan. Filter anggota seperti `nama_kppn` + `pekerjaan_terakhir`
+pada endpoint lama harus ditolak secara eksplisit (misalnya HTTP 422) sampai tersedia
+interface SQL agregat terfilter dengan suppression tersendiri; jangan fallback ke query
+per record, role app_user, atau query admin. Penyesuaian `app/` adalah tugas Modul B.
+
+Penerapan harus dikoordinasikan dengan rilis Modul B (maintenance endpoint analytics
+sampai query baru aktif). CLI khusus A5 tidak mengubah LOGIN role migrasi, password,
+grant tabel Service App, atau isi anggota. Backup lama yang terautentikasi juga mendapat
+upgrade ACL A5 pada restore sebelum CONNECT runtime dibuka. Runbook:
+`infra/protected/ANALYST_SUPPRESSION.md`.
+
+**Batas klaim:** ambang ini berlaku untuk setiap marginal yang dirilis. Ini bukan
+k-anonymity atas seluruh kombinasi REF, differential privacy, atau perlindungan mutlak
+dari inferensi melalui pengetahuan tambahan, perbedaan antarwaktu, dan penggabungan hasil.
+Kolom REF tetap tersimpan pada tabel dasar untuk role yang memang diizinkan/dump.
 
 ## 11. Folder dan kepemilikan
 | Folder | Pemilik |

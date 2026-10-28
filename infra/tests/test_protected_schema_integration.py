@@ -98,10 +98,10 @@ def test_contract_schema_least_privilege_rls_audit_backup_and_idempotence(tmp_pa
             checks[role+":no_owner_membership"]=denied(role,"SET ROLE schema_owner")
         for role in ("analyst_user","auditor_user","admin_user"):
             checks[role+":no_raw_member_read"]=denied(role,"SELECT * FROM public.anggota_protected")
+        checks["analyst_no_per_record_view"]=denied("analyst_user","SELECT * FROM public.analyst_view")
         with connect("analyst_user") as analyst:
-            cursor=analyst.execute("SELECT * FROM public.analyst_view")
-            checks["analyst_full_safe_projection"]=len(cursor.fetchall())==3 and [column.name for column in cursor.description]==["jenis_kelamin","pekerjaan_terakhir","nama_kppn","nama_bank","age_band"]
-            checks["analyst_aggregate_function"]=sum(row[1] for row in analyst.execute("SELECT * FROM public.analyst_age_summary()"))==3
+            checks["analyst_small_groups_absent"]=analyst.execute("SELECT * FROM public.analyst_summary").fetchall()==[]
+            checks["analyst_aggregate_function_suppressed"]=analyst.execute("SELECT * FROM public.analyst_age_summary()").fetchall()==[]
         checks["analyst_no_auth_hashes"]=denied("analyst_user","SELECT password_hash FROM public.app_users")
         with connect("auditor_user") as auditor:checks["auditor_can_read_audit"]=auditor.execute("SELECT count(*) FROM public.audit_log").fetchone()[0]>0
         checks["auditor_no_audit_mutation"]=denied("auditor_user","DELETE FROM public.audit_log")
