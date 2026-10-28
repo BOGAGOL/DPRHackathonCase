@@ -581,3 +581,21 @@ sebelumnya tetap dipertahankan, tetapi DB tidak diperiksa ulang saat engine mati
 Evidence kegagalan: evidence/overnight/resume_preflight_20261028_1044.json.
 Kelanjutan dimulai dari pemeriksaan lingkungan dan langkah 1 setelah Docker
 tersedia kembali serta instruksi melanjutkan; tidak mengulang migrasi yang lulus.
+
+## Pemulihan layanan 28 Oktober 2026, 13:11 WIB
+
+Setelah izin eksplisit pengguna, pg-dpr yang berhenti dinyalakan; service OpenBao
+dari infra/compose.yaml dipastikan berjalan tanpa recreate database. OpenBao
+awalnya sealed, kemudian dibuka dengan shares tersimpan di DPR_SECRETS_DIR,
+tanpa mencetak shares/root/token. Transit dan ketiga key v1 lolos pemeriksaan;
+HMAC sintetis menggunakan svc-app berhasil. Token svc-app dan svc-migration
+lama tidak dapat dipakai, sehingga diterbitkan token baru per policy, orphan,
+nonrenewable, tanpa default/root policy, TTL 14400 detik, disimpan di luar repo.
+
+Pemeriksaan count read-only via verify-full: postgres=734, baseline_100k=100000,
+baseline_1m=1000000, protected_100k=100000, protected_1m=1000000; seluruhnya PASS.
+Server ssl=on dan koneksi TLS aktif pada kelima database. Ini belum menggantikan
+uji ulang pengecualian baseline non-TLS (a)-(d) sesudah merge/apply final.
+Evidence: evidence/overnight/recovery_20261028.json. Tidak menjalankan benchmark.
+Fetch menemukan origin/main ed88ecd berisi PR #5 Alby b8e9998 dan PR #6 B 9029b77;
+merge berikutnya mengikuti union dokumentasi dan STOP konflik kode/konfigurasi.
