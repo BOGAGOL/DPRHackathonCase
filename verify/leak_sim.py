@@ -90,6 +90,10 @@ def pending_scenarios(path=None):
 def run(artifact, known_path, database="baseline_1m", scenario="baseline_dump"):
     plan = protection_plan(scenario)
     if scenario != "baseline_dump":
+        if scenario.startswith("protected_dump_"):
+            from .protected_artifact import run as protected_run
+            target = database.replace("baseline_", "protected_")
+            return protected_run(artifact, known_path, target, scenario)
         raise PendingProtection("Profile accepted; waiting for real artifact format/decryption adapters from Module A")
     if database != "baseline_1m":
         raise ValueError("This authorized verification session is baseline_1m only")
@@ -170,10 +174,13 @@ def main():
     parser.add_argument("--artifact", type=Path, required=True)
     parser.add_argument("--known-values", type=Path, required=True)
     parser.add_argument("--scenario", choices=SCENARIOS, required=True)
+    parser.add_argument("--db", choices=["baseline_1m", "protected_100k", "protected_1m"], default="baseline_1m")
     args = parser.parse_args()
     try:
-        report = run(args.artifact, args.known_values, scenario=args.scenario)
-        print(json.dumps({"status": report["status"], "rows": report["rows_checked"], "elapsed_s": report["total_elapsed_s"]}))
+        report = run(args.artifact, args.known_values, database=args.db, scenario=args.scenario)
+        rows = report["rows_checked"] if "rows_checked" in report else report["populations"]["all"]["rows"]
+        elapsed = report["total_elapsed_s"] if "total_elapsed_s" in report else report["elapsed_s"]
+        print(json.dumps({"status": report["status"], "rows": rows, "elapsed_s": elapsed}))
     except PendingProtection as exc:
         write_json(ROOT / "evidence/leak" / (args.scenario + ".json"),
                    {"status": "BELUM DIUJI", "scenario": args.scenario, "reason": str(exc), "timestamp_utc": utc_now()})

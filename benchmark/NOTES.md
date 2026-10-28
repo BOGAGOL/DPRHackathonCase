@@ -640,3 +640,56 @@ NOT_MEASURED, bukan nol atau hasil EXPLAIN pengganti yang dilabel ulang.
 Evidence: evidence/overnight/db_time_preflight_20261028.json. Kelanjutan menunggu
 instruksi penyiapan pg_stat_statements dan pelanjutan langkah 2; seluruh hasil
 migrasi dan dataset yang sudah lulus dipertahankan.
+
+## pg_stat_statements dan adapter protected, 28 Oktober 2026
+
+Pengguna secara eksplisit menyetujui preload dan restart pg-dpr. Sebelum restart
+tidak ditemukan proses host Python/pgbench/pg_dump/pg_restore atau sesi DB client.
+Nilai shared_preload_libraries lama kosong; updater mempertahankan daftar lama
+bila ada dan menambahkan pg_stat_statements. ALTER SYSTEM, satu restart pg-dpr,
+readiness, lalu CREATE EXTENSION IF NOT EXISTS pada kedua baseline dan kedua
+protected berhasil. Tidak restart OpenBao. Count kelima DB tetap tepat; OpenBao
+tetap unsealed; TLS apply/verify dan uji nyata (a)-(d) kembali PASS. Protected_734
+belum tersedia, tetap pending. Evidence: overnight/pg_stat_statements_20261028/.
+
+pg_stat_statements aktif mulai persiapan sesi B-P-P-B. Baseline awal 100k/1M
+diukur TANPA extension/preload ini; hanya B versus P dalam blok B-P-P-B dengan
+konfigurasi sekarang yang boleh dibandingkan langsung. Hasil baseline awal
+dipertahankan sebagai sesi historis dan tidak diulang. Instalasi extension
+adalah perubahan skema eksplisit yang diizinkan pengguna; isi anggota tidak
+diubah. Tidak menambah membership pg_read_all_stats atau grant monitoring pada
+bench_user/app_user. Atribut role dan membership diperiksa tetap sama.
+
+DbTimeMonitor memakai koneksi admin/monitoring verify-full terpisah, memfilter
+dbid/userid/toplevel tanpa mengekspor teks SQL. Delta total_exec_time/calls
+diambil hanya pada jendela terukur, di luar waktu request; reset/deallocation
+atau counter menurun membuat pengukuran gagal. Dilaporkan mean per request
+bisnis dan per SQL call; bukan p50/p95 server yang tidak disediakan counter.
+db_time tidak mencakup planning, transport, validasi Python atau kripto.
+Runner menerima monitor opsional; jalur baseline historis tidak ditimpa.
+Compare menilai selisih absolut baca 5ms/tulis 10ms berdampingan dengan rasio
+1.5x, throughput 70%, error tidak naik, tanpa mengganti kegagalan rasio menjadi
+kelulusan melalui ambang absolut. Mixed memakai batas tulis dan dicatat.
+
+ProtectedAdapter memakai app_user verify-full + principal UUID RLS, exact lookup
+HMAC toolkit A, legacy_row_id sebagai locator dan anggota_id UUID untuk AAD.
+Profil tunggal membuka seluruh 29 kolom sama dengan plain; list hanya nama dan
+REF jenis_kelamin plus legacy id, batch unwrap hanya PII. KeyManager tanpa cache
+antarrequest (TTL/max_entries=0), satu client/manager per koneksi worker, tidak
+berbagi lock Transit antarworker. Update/insert tetap force_rollback; insert
+SELECT setelah trigger creator scope, tanpa bypass RLS. Fail closed tanpa nilai
+atau credential di error/evidence. Korpus benchmark privat asli tidak diubah.
+
+Test baru adapter memakai fixture buatan sendiri dan AES-GCM nyata, memeriksa
+domain minimal, UUID AAD, fail closed, endpoint/identity, rollback, penghitung
+db_time, comparison, dan cleanup principal. Suite gabungan awal 76 PASS/1 FAIL
+karena unit test metadata lama membaca charger fisik. Test itu diisolasi dengan
+power_plugged sintetis (tidak mengubah guard runtime), lalu suite 77 PASS.
+Kedua JUnit disimpan di results/overnight-28okt/; bukan retry gerbang parity DB.
+
+Gerbang parity menggunakan 1000 profil berbeda dari korpus lookup yang sama dan
+1000 anchor halaman berbeda seed42 khusus parity (korpus benchmark tetap 64
+halaman). Setup admin membuat principal/scope sementara hanya pada protected;
+workload selalu app_user dan scope dihapus saat selesai. Audit setup/cleanup
+tercatat, bukan dihapus; tidak mengubah data anggota. Ini pemeriksaan kebenaran
+terbatas, bukan pengukuran performa atau benchmark B-P-P-B.

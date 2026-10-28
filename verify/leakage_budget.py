@@ -26,7 +26,7 @@ def build_report(known, leak, residual):
             "ESCE": ratio(sum(recovered["exposed_cells"].values()), sum(cells.values())),
             "DIE": ratio(recovered["direct_exposed_rows"], denominator),
             "columns": [{"column": c, **ratio(recovered["exposed_cells"].get(c, 0), cells.get(c, 0))} for c in SENSITIVE]}
-    return {"status": "PASSED", "measurement_only": True, "scenario": "baseline_dump", "dataset": "baseline_1m",
+    return {"status": "PASSED", "measurement_only": True, "scenario": "baseline_dump", "dataset": leak.get("dataset", "baseline_1m"),
             "timestamp_utc": utc_now(), "code_commit": leak["code_commit"], "worktree_code_sha256": leak["worktree_code_sha256"],
             "budget_code_sha256": file_hash(Path(__file__)),
             "targets_commit": leak["targets_commit"], "artifact_sha256": leak["artifact_sha256"],
@@ -39,7 +39,7 @@ def build_report(known, leak, residual):
                     "columns": known.equality()},
             "DBR": {"credentials_needed": "none", "domains_exposed": {"PII": list(PII), "FIN": list(FIN)},
                     "meaning": "Baseline plaintext exposure, not a tested OpenBao key compromise"},
-            "residual": {"file": "evidence/leakage/residual_before.json", "attributes": residual["attributes"],
+            "residual": {"file": leak.get("residual_file", "evidence/leakage/residual_before.json"), "attributes": residual["attributes"],
                          "combinations_per_population": len(residual["populations"]["all"]["combinations"])},
             "before_after": {"before": "measured", "after": "BELUM DIUJI; requires Module A artifact/profile and applicable credentials"},
             "target_status": {"S03": "BELUM DIUJI: target applies to protected dump without keys"},

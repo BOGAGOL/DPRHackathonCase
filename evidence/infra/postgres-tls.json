@@ -5,7 +5,7 @@
   "container": "pg-dpr",
   "host": "127.0.0.1",
   "port": 5433,
-  "checked_at_utc": "2026-10-28T06:12:42.806353+00:00",
+  "checked_at_utc": "2026-10-28T06:26:04.622938+00:00",
   "checks": {
     "tls_on": true,
     "baseline_plaintext_allowed:baseline_100k:bench_user": true,

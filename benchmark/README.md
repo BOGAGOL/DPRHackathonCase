@@ -91,3 +91,35 @@ Ringkasan canonical diperbarui hanya setelah verifikasi AC + integritas lulus;
 hasil lama disalin byte-identik ke history dengan label "terdampak baterai".
 Raw lama tidak dipindah/dihapus. Lihat active_measurements.json untuk pilihan
 hasil aktif dan power_verification.json pada folder sesi untuk bukti AC.
+# Adapter protected dan gerbang kebenaran (28 Oktober 2026)
+
+Instal dependensi modul dan toolkit publik A dari root repo:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r benchmark/requirements.txt -e ./toolkit
+.\.venv\Scripts\python.exe -m benchmark.parity
+.\.venv\Scripts\python.exe -m benchmark.compare --before <summary-B.json> --after <summary-P.json> --out results/bench/compare
+```
+
+Parity membutuhkan `DPR_PRIVATE_DIR`, `BENCH_DATABASE_URL` (bench_user, baseline,
+tanpa TLS), `PROTECTED_DATABASE_URL` (app_user, verify-full + CA),
+`BENCH_MONITOR_DATABASE_URL` (admin/monitoring terpisah, verify-full, database
+dengan view pg_stat_statements), dan `OPENBAO_ADDR`/`OPENBAO_CACERT`/
+`OPENBAO_TOKEN` svc-app aktif. Muat password/token dari material privat ke env;
+jangan menulis DSN berpassword di command line/history. Tidak memberikan hak
+monitoring ke role workload. `benchmark.parity` melakukan setup scope sementara
+melalui koneksi admin dan membersihkannya; database anggota baseline/protected
+tidak diubah permanen. Scope/audit setup berada di protected, tidak di baseline.
+
+Adapter mengembalikan bisnis sama dengan plain; list membuka nama saja. DEK
+tidak dicache antarrequest, UUID internal selalu dipakai untuk AAD. Monitor
+opsional pada `runner.one_run(..., db_monitor=...)` mengambil counter sebelum
+dan sesudah fase measured, bukan request sinkron tambahan. db_time adalah mean
+execution time, tidak menyediakan persentil. Compare mempertahankan penilaian
+rasio dan absolut terpisah. Mixed memakai ambang tulis 10ms.
+
+Gerbang parity adalah pemeriksaan terbatas 1000 kunci berbeda per skenario baca
+per dataset, ditambah probe rollback tulis; bukan pengganti benchmark 3 run.
+Perintah `benchmark run` lama tetap khusus baseline awal. Jangan menjalankannya
+untuk membuat hasil after atau menimpa artefak historis; B-P-P-B membutuhkan
+instruksi pengguna terpisah dan kondisi daya/perangkat yang memenuhi syarat.

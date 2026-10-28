@@ -353,3 +353,55 @@ Audit literal rahasia pada 21 file keluaran yang berubah dan log Docker PG/Bao
 sejak awal sesi tidak menemukan kecocokan credential/token/share/private-key
 aktif. Scope terbatas ini tercatat di evidence/overnight/output_audit.json;
 tidak menggantikan verifikasi after atau scan S06 yang belum dijalankan.
+
+## Implementasi verifikasi after, 28 Oktober 2026
+
+Setelah izin aktivasi pg_stat_statements, restart pg-dpr dan TLS/count lulus,
+gerbang adapter lulus pada protected_100k dan protected_1m: 1000 kunci berbeda
+untuk masing-masing 4 skenario baca, 0 mismatch, batch unwrap/AAD toolkit A,
+db_time nyata dari koneksi admin terpisah. Probe rollback update/insert lulus;
+principal/scope sementara dibersihkan, auditnya dipertahankan. Benchmark tidak
+dijalankan. Target absolut 5ms baca/10ms tulis/mixed sudah commit/push 8c09a25
+dan ledger caa0770 sebelum verifikasi after dan sebelum benchmark mendatang.
+
+Modul protected_artifact membaca COPY anggota_protected dari dump custom nyata,
+tanpa menjalankan SQL. Setiap legacy ID harus unik dan ditemukan pada ledger
+baseline sesuai ukuran; total dan denominator non-NULL diperiksa terpisah pada
+all/source_734/synthetic. REF dan age_band nyata dicocokkan terhadap sumber;
+dekripsi memakai UUID anggota, versi dan nama kolom sebagai AAD. Ledger 100k
+ditambahkan privat; ledger/budget 1M lama tetap dipertahankan. Snapshot before
+100k diperiksa ulang hash dan keseluruhan HMAC-row untuk comparison yang setara,
+bukan menjalankan ulang benchmark. Ringkasan before 100k disimpan terpisah.
+
+No-key tidak membuat client, membaca token, atau meminta decrypt. Tiga skenario
+lain memakai proses tersendiri dan token ACL satu kemampuan: modc-leak-pii,
+modc-leak-finance, modc-leak-search, tanpa default/root, TTL maksimal 4 jam.
+Operator-only attacker_setup membuat policy namespace C dan token di luar repo;
+policy existing yang berbeda ditolak, policy workload A tidak diubah. Aplikasi
+tetap memakai client publik toolkit A; client khusus simulasi tidak mengubah
+allowlist identitas aplikasi A. AES-GCM/AAD/normalisasi tetap toolkit A. ACL
+decrypt domain terlarang diuji dengan wrapped DEK valid dan harus ditolak 403.
+Root hanya di proses operator untuk policy/issuance, tidak diteruskan ke proses
+attacker. Token simulasi dicabut setelah digunakan.
+
+Lookup ledger memakai indeks dalam batch, bukan pencarian file per nilai.
+HMAC kamus dibuat per batch 100, dicocokkan melalui dict digest->nilai hanya
+dalam memori. Kamus search mencakup seluruh nilai baseline pada 3 kolom bidx:
+ini eksperimen kamus sintetis lengkap sebagai batas atas, bukan asumsi bahwa
+penyerang nyata sudah memiliki baseline. ESCE/DIE hanya pemulihan sel langsung;
+inferensi (misalnya turunan nama) tetap risiko di luar numerator yang diukur.
+DBR membedakan domain yang benar-benar didekripsi dari pemulihan melalui oracle
+HMAC. Kemampuan token yang dicuri disimulasikan, bukan ekspor KEK nonexportable.
+
+ELS menghitung histogram exact bidx/REF/age_band dari artefak tanpa mengekspor
+nilai kelas. Residual mengagregasi REF + age_band tersimpan + pola NULL; subset
+sumber 734 dipisah dari sintetis untuk 100k dan 1M. Temp/dump/known-values tetap
+di DPR_PRIVATE_DIR; proses scanner diarahkan memakai TEMP/TMP privat. Kelahiran
+asli tidak tersedia di protected tanpa decrypt, sehingga birth_reference tidak
+dilabel ulang sebagai hasil plaintext. Tabel before_after lama akan diarsipkan
+byte-identik sebelum pembaruan. Dump logis bukan bukti physical file/WAL atau
+scan operasional S05/S06; tidak ada klaim itu dari langkah ini.
+
+Test implementasi gabungan awal 109 PASS; test operator setup tambahan 2 PASS;
+validasi tambahan proyeksi/CLI/comparison 6 PASS. JUnit lokal di
+results/overnight-28okt/; ringkasan final akan mencatat suite terakhir.

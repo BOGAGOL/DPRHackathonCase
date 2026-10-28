@@ -85,12 +85,14 @@ def worker_run(adapter, conn, scenario, worker, manifest, barrier, measured_barr
             "warmup_errors": warmup_errors, "counts": counts, "ended": time.perf_counter()}
 
 
-def one_run(adapter, scenario, run, manifest, concurrency, duration, warmup, directory):
+def one_run(adapter, scenario, run, manifest, concurrency, duration, warmup, directory, db_monitor=None):
     directory.mkdir(parents=True, exist_ok=False)
     connections = [adapter.connect() for _ in range(concurrency)]
     timing = {"warmup_end": 0}
     collector = Collector(directory / "resources.csv")
     def start_measurement():
+        if db_monitor is not None:
+            timing["db_time_before"] = db_monitor.snapshot()
         timing.update(start=time.perf_counter(), wall_start=time.time())
         timing["deadline"] = timing["start"] + duration
         collector.start()
@@ -105,6 +107,11 @@ def one_run(adapter, scenario, run, manifest, concurrency, duration, warmup, dir
             measured_barrier.wait()
             results = [future.result() for future in futures]
         elapsed = max(r["ended"] for r in results) - timing["start"]
+        if db_monitor is not None:
+            from .db_time import db_time_delta
+            db_time = db_time_delta(timing["db_time_before"], db_monitor.snapshot(), sum(len(r["latencies"]) for r in results))
+        else:
+            db_time = None
         resource = collector.finish()
         all_latencies = array("d")
         success_latencies = array("d")
@@ -119,6 +126,7 @@ def one_run(adapter, scenario, run, manifest, concurrency, duration, warmup, dir
                        completed_at_utc=utc_now(),
                        concurrency=concurrency, warmup_errors=sum(r["warmup_errors"] for r in results),
                        operations=dict(counts), resources=resource,
+                       db_time=db_time,
                        successful_requests=summarize(success_latencies, 0, elapsed) if success_latencies else None)
         return summary
     finally:

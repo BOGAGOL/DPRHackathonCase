@@ -53,3 +53,38 @@ Adapter profile membaca format kolom A (`columns.<name>.aead/domain/storage_colu
 File belum diintegrasikan berarti BELUM DIUJI. Skenario protected/backup tidak
 menggunakan fallback baseline, tidak menerima decrypt tak terbatas, dan tetap
 menunggu artefak serta hook OpenBao/toolkit nyata sebelum menghasilkan skor.
+# Verifikasi artefak protected (28 Oktober 2026)
+
+```powershell
+.\.venv\Scripts\python.exe -m pip install -r verify/requirements.txt -e ./toolkit
+.\.venv\Scripts\python.exe -m verify.leak_sim --db protected_100k --artifact <dump-privat> --known-values <ledger-baseline-100k-privat> --scenario protected_dump_no_key
+# Skenario lain: protected_dump_with_pii_key / protected_dump_with_finance_key / protected_dump_with_search_key
+# Ukuran utama: --db protected_1m dengan artefak/ledger 1M yang cocok.
+.\.venv\Scripts\python.exe -m verify.after_comparison
+```
+
+Setiap skenario berjalan pada proses tersendiri. No-key tidak membuat client
+dekripsi dan tidak membaca token. Untuk skenario dengan kemampuan kunci, operator
+menyediakan token terbatas `DPR_LEAK_TOKEN` dengan tepat satu policy khusus C:
+`modc-leak-pii` hanya decrypt pii-kek, `modc-leak-finance` hanya decrypt finance-kek,
+atau `modc-leak-search` hanya HMAC search-hmac; semuanya boleh lookup-self dan
+revoke-self, tanpa default/root policy, TTL maksimal 4 jam. Semua koneksi OpenBao
+HTTPS + CA eksplisit dari `OPENBAO_ADDR`/`OPENBAO_CACERT`. Jangan memakai svc-app
+untuk meniru kebocoran satu domain: svc-app memiliki kedua kemampuan decrypt.
+Policy aplikasi/toolkit A tidak diubah; client simulasi memeriksa identitas ACL
+khusus dan memakai format AES-GCM/AAD toolkit A yang sama. Probe decrypt domain
+terlarang harus ditolak. Operator mencabut token simulasi setelah skenario.
+
+Dump custom, SQL hasil ekspansi, ledger dan rahasia hanya di DPR_PRIVATE_DIR
+di luar repo. Input dump dibaca tanpa menjalankan SQL; COPY anggota_protected
+divalidasi lengkap, NULL/populasi/legacy ID diverifikasi terhadap ledger privat
+dengan lookup batch. ESCE/DIE berisi numerator/denominator, ELS histogram tanpa
+nilai grup, DBR daftar kolom/domain langsung pulih. K-anonymity memakai REF,
+age_band nyata dan pola NULL pada seluruh populasi dan subset sumber/sintetis.
+
+Uji search memakai seluruh nilai baseline sebagai kamus sintetis lengkap untuk
+mengukur batas atas serangan dictionary berkemampuan HMAC, bukan asumsi bahwa
+penyerang nyata mengetahui seluruh baseline. ESCE menghitung pemulihan langsung;
+inferensi antarkolom tidak ditambahkan diam-diam. Dump logis tidak membuktikan
+keamanan file fisik/WAL atau log operasional. Evidence before historis diarsipkan
+sebelum tabel comparison diperbarui; tidak menjalankan benchmark performa.

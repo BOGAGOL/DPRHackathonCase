@@ -1,0 +1,587 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>Inventaris kandidat data pribadi</title>
+<style>
+body{font:15px system-ui,sans-serif;margin:2rem;color:#182230;background:#fafbff}h1,h2{color:#15365a}
+.scroll{overflow:auto;border:1px solid #bcc8d5}table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{padding:.55rem;text-align:left;border:1px solid #c6cdd8;vertical-align:top}th{background:#15365a;color:white}
+td{overflow-wrap:anywhere}td.reason{white-space:normal;min-width:14rem}
+.summary{table-layout:fixed}.summary th,.summary td{overflow-wrap:anywhere}
+@page{size:A4 landscape;margin:10mm}
+@media print{
+body{margin:0;background:white;font-size:9pt}h1{font-size:16pt}h2{font-size:12pt;break-after:avoid}
+.scroll{overflow:visible;border:0}table{table-layout:fixed;width:100%;font-size:6pt}
+thead{display:table-header-group}tfoot{display:table-footer-group}tr{break-inside:avoid;page-break-inside:avoid}
+th,td{padding:2mm 1mm;white-space:normal;overflow-wrap:anywhere;min-width:0!important}
+.summary{font-size:9pt}.detail{font-size:4.5pt}.detail td.reason{min-width:0}
+.detail-section{break-before:page}pre{font-size:7pt}a{color:inherit;text-decoration:none}
+}
+.P0{background:#ffd5d5}.P1{background:#ffe4c4}.P2{background:#fff5c9}.P3{background:#e2f4e6}
+pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#edf1f8;padding:1rem}a{color:#17518a}
+</style></head><body>
+<h1>Inventaris kandidat data pribadi</h1>
+<p>Label after · 2026-10-28T06:51:46.841667+00:00 · versi 1.2.0 · metode combined</p>
+<p>Hasil mentah sebelum verifikasi manusia. Confidence rendah tetap perlu diperiksa. Relasi adalah kandidat dari sampel; k-anonymity memakai seluruh sumber terstruktur. Semua contoh termasking.</p>
+<h2 id="summary">Ringkasan kolom</h2><div class="scroll"><table class="summary"><thead><tr>
+<th>column</th><th>detected_type</th><th>pdp_class</th><th>priority</th><th>triage</th><th>recommendation</th><th>consistent_protection_with</th>
+</tr></thead><tbody><tr class="P2"><td>anggota_id</td><td>identifier_lain</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+blind_index+mask</td><td></td></tr><tr class="P1"><td>legacy_row_id</td><td>identifier_lain</td><td>umum</td><td>P1</td><td>needs_review</td><td>encrypt+blind_index+mask</td><td></td></tr><tr class="P3"><td>protection_version</td><td>kategori</td><td>umum</td><td>P3</td><td>needs_review</td><td>encrypt+mask</td><td></td></tr><tr class="P2"><td>dek_pii_wrapped</td><td>tidak_diketahui</td><td>umum</td><td>P2</td><td>low_confidence</td><td>encrypt+mask</td><td></td></tr><tr class="P2"><td>dek_fin_wrapped</td><td>tidak_diketahui</td><td>umum</td><td>P2</td><td>low_confidence</td><td>encrypt+mask</td><td></td></tr><tr class="P2"><td>nama_ct</td><td>nama</td><td>umum</td><td>P2</td><td>needs_review</td><td>retain+mask_for_analyst</td><td></td></tr><tr class="P2"><td>nama_lengkap_ct</td><td>nama</td><td>umum</td><td>P2</td><td>needs_review</td><td>retain+mask_for_analyst</td><td></td></tr><tr class="P2"><td>nama_tanpa_gelar_ct</td><td>nama</td><td>umum</td><td>P2</td><td>needs_review</td><td>retain+mask_for_analyst</td><td></td></tr><tr class="P2"><td>tempat_lahir_ct</td><td>tempat_lahir</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+mask</td><td></td></tr><tr class="P2"><td>tanggal_lahir_ct</td><td>tanggal_lahir</td><td>umum</td><td>P2</td><td>needs_review</td><td>generalize_for_analyst</td><td></td></tr><tr class="P2"><td>tanggal_pernikahan_ct</td><td>status_perkawinan</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+mask</td><td></td></tr><tr class="P1"><td>no_ktp_ct</td><td>nik</td><td>umum</td><td>P1</td><td>needs_review</td><td>encrypt+blind_index+mask</td><td></td></tr><tr class="P2"><td>alamat_jakarta_ct</td><td>alamat</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+mask</td><td></td></tr><tr class="P2"><td>alamat_daerah_ct</td><td>alamat</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+mask</td><td></td></tr><tr class="P2"><td>telpon_jakarta_ct</td><td>telepon</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+mask</td><td></td></tr><tr class="P2"><td>telpon_daerah_ct</td><td>telepon</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+mask</td><td></td></tr><tr class="P2"><td>handphone_ct</td><td>telepon</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+mask</td><td></td></tr><tr class="P2"><td>email_ct</td><td>email</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+mask</td><td></td></tr><tr class="P3"><td>ruangan_ct</td><td>operasional</td><td>umum</td><td>P3</td><td>needs_review</td><td>encrypt+mask</td><td></td></tr><tr class="P2"><td>status_kawin_ct</td><td>status_perkawinan</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+mask</td><td></td></tr><tr class="P2"><td>jumlah_anak_ct</td><td>keluarga</td><td>spesifik</td><td>P2</td><td>needs_review</td><td>encrypt+mask</td><td></td></tr><tr class="P2"><td>jumlah_tanggungan_ct</td><td>keluarga</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+mask</td><td></td></tr><tr class="P2"><td>jumlah_jiwa_ct</td><td>keluarga</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+mask</td><td></td></tr><tr class="P1"><td>rekening_ct</td><td>rekening</td><td>spesifik</td><td>P1</td><td>needs_review</td><td>encrypt+blind_index+mask</td><td></td></tr><tr class="P2"><td>nama_rekening_ct</td><td>nama</td><td>umum</td><td>P2</td><td>needs_review</td><td>retain+mask_for_analyst</td><td></td></tr><tr class="P1"><td>npwp_ct</td><td>npwp</td><td>umum</td><td>P1</td><td>needs_review</td><td>encrypt+blind_index+mask</td><td></td></tr><tr class="P2"><td>kode_bank_ct</td><td>identifier_lain</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+blind_index+mask</td><td></td></tr><tr class="P2"><td>nip_kppn_ct</td><td>identifier_lain</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+blind_index+mask</td><td></td></tr><tr class="P2"><td>pengguna_ct</td><td>identifier_lain</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+blind_index+mask</td><td></td></tr><tr class="P2"><td>agama_ct</td><td>agama</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+mask</td><td></td></tr><tr class="P1"><td>no_ktp_bidx</td><td>nik</td><td>umum</td><td>P1</td><td>needs_review</td><td>encrypt+blind_index+mask</td><td></td></tr><tr class="P2"><td>email_bidx</td><td>email</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+mask</td><td></td></tr><tr class="P2"><td>pengguna_bidx</td><td>identifier_lain</td><td>umum</td><td>P2</td><td>needs_review</td><td>encrypt+blind_index+mask</td><td></td></tr><tr class="P3"><td>jenis_kelamin</td><td>kategori</td><td>umum</td><td>P3</td><td>auto_accept</td><td>encrypt+mask</td><td></td></tr><tr class="P3"><td>pekerjaan_terakhir</td><td>operasional</td><td>umum</td><td>P3</td><td>needs_review</td><td>encrypt+mask</td><td></td></tr><tr class="P3"><td>nama_kppn</td><td>kategori</td><td>non_pribadi</td><td>P3</td><td>auto_accept</td><td>retain</td><td></td></tr><tr class="P3"><td>nama_bank</td><td>kategori</td><td>non_pribadi</td><td>P3</td><td>auto_accept</td><td>retain</td><td></td></tr><tr class="P3"><td>age_band</td><td>kategori</td><td>umum</td><td>P3</td><td>low_confidence</td><td>encrypt+mask</td><td></td></tr><tr class="P2"><td>created_at</td><td>tanggal_lahir</td><td>umum</td><td>P2</td><td>needs_review</td><td>generalize_for_analyst</td><td></td></tr><tr class="P2"><td>updated_at</td><td>tanggal_lahir</td><td>umum</td><td>P2</td><td>needs_review</td><td>generalize_for_analyst</td><td></td></tr></tbody></table></div>
+<p><a href="#inventory">Inventaris</a> · <a href="#review">Perlu tinjauan</a> · <a href="#relations">Relasi</a> · <a href="#anonymity">K-anonymity</a></p>
+<h2 id="inventory" class="detail-section">Inventaris</h2><div class="scroll"><table class="detail"><thead><tr><th>table</th><th>column</th><th>data_type</th><th>detected_type</th><th>pdp_class</th><th>risk_level</th><th>priority</th><th>priority_score</th><th>f_sensitivity</th><th>f_volume</th><th>f_exposure</th><th>f_exploitability</th><th>f_impact</th><th>f_recovery</th><th>content_score</th><th>name_score</th><th>confidence</th><th>triage</th><th>derived_from</th><th>sample_masked</th><th>reason</th><th>recommendation</th><th>allowed_roles</th><th>search_need</th><th>consistent_protection_with</th></tr></thead>
+<tbody><tr class="P2"><td>public.anggota_protected</td><td>anggota_id</td><td>uuid</td><td>identifier_lain</td><td>umum</td><td>sedang</td><td>P2</td><td>17</td><td>4</td><td>3</td><td>2</td><td>1</td><td>4</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;36 campuran&gt; | &lt;36 campuran&gt; | &lt;36 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 56% digit; panjang 36-36; panjang tetap 100%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: id</td><td>encrypt+blind_index+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P1"><td>public.anggota_protected</td><td>legacy_row_id</td><td>bigint</td><td>identifier_lain</td><td>umum</td><td>tinggi</td><td>P1</td><td>20</td><td>4</td><td>3</td><td>2</td><td>4</td><td>4</td><td>3</td><td>65</td><td>100</td><td>72.0</td><td>needs_review</td><td></td><td>&lt;5 digit&gt; | &lt;5 digit&gt; | &lt;5 digit&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 100% digit; panjang 2-5; panjang tetap 90%; rasio unik 100%; NULL 0%; bukti isi 65.0; nama 100; kamus nama: id</td><td>encrypt+blind_index+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P3"><td>public.anggota_protected</td><td>protection_version</td><td>smallint</td><td>kategori</td><td>umum</td><td>rendah</td><td>P3</td><td>11</td><td>1</td><td>3</td><td>2</td><td>1</td><td>1</td><td>3</td><td>0.0</td><td>0</td><td>0.0</td><td>needs_review</td><td></td><td>&lt;1 digit&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 100% digit; panjang 1-1; panjang tetap 100%; rasio unik 0%; NULL 0%; bukti isi 0.0; nama 0; distribusi digit berulang; bukti identifier lemah; rawan diskriminasi; UU PDP Pasal 4(3): umum</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>dek_pii_wrapped</td><td>text</td><td>tidak_diketahui</td><td>umum</td><td>sedang</td><td>P2</td><td>15</td><td>3</td><td>3</td><td>2</td><td>1</td><td>3</td><td>3</td><td>0.5</td><td>0</td><td>0.4</td><td>low_confidence</td><td></td><td>&lt;89 campuran&gt; | &lt;89 campuran&gt; | &lt;89 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 15% digit; panjang 89-89; panjang tetap 100%; rasio unik 100%; NULL 0%; bukti isi 0.5; nama 0</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>dek_fin_wrapped</td><td>text</td><td>tidak_diketahui</td><td>umum</td><td>sedang</td><td>P2</td><td>15</td><td>3</td><td>3</td><td>2</td><td>1</td><td>3</td><td>3</td><td>0.5</td><td>0</td><td>0.4</td><td>low_confidence</td><td></td><td>&lt;89 campuran&gt; | &lt;89 campuran&gt; | &lt;89 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 15% digit; panjang 89-89; panjang tetap 100%; rasio unik 100%; NULL 0%; bukti isi 0.5; nama 0</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>nama_ct</td><td>bytea</td><td>nama</td><td>umum</td><td>sedang</td><td>P2</td><td>13</td><td>2</td><td>3</td><td>2</td><td>1</td><td>2</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;178 campuran&gt; | &lt;219 campuran&gt; | &lt;161 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 115-257; panjang tetap 3%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: nama; nama berentropi rendah/publik; hash rentan kamus, batasi tampilan analis</td><td>retain+mask_for_analyst</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>nama_lengkap_ct</td><td>bytea</td><td>nama</td><td>umum</td><td>sedang</td><td>P2</td><td>13</td><td>2</td><td>3</td><td>2</td><td>1</td><td>2</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;178 campuran&gt; | &lt;210 campuran&gt; | &lt;163 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 121-250; panjang tetap 3%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: nama; nama berentropi rendah/publik; hash rentan kamus, batasi tampilan analis</td><td>retain+mask_for_analyst</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>nama_tanpa_gelar_ct</td><td>bytea</td><td>nama</td><td>umum</td><td>sedang</td><td>P2</td><td>13</td><td>2</td><td>3</td><td>2</td><td>1</td><td>2</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;194 campuran&gt; | &lt;251 campuran&gt; | &lt;146 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 124-251; panjang tetap 4%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: nama; nama berentropi rendah/publik; hash rentan kamus, batasi tampilan analis</td><td>retain+mask_for_analyst</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>tempat_lahir_ct</td><td>bytea</td><td>tempat_lahir</td><td>umum</td><td>sedang</td><td>P2</td><td>15</td><td>3</td><td>3</td><td>2</td><td>1</td><td>3</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;115 campuran&gt; | &lt;106 campuran&gt; | &lt;105 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 81-141; panjang tetap 6%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: tempat_lahir</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>tanggal_lahir_ct</td><td>bytea</td><td>tanggal_lahir</td><td>umum</td><td>sedang</td><td>P2</td><td>15</td><td>3</td><td>3</td><td>2</td><td>1</td><td>3</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;117 campuran&gt; | &lt;138 campuran&gt; | &lt;120 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 85-144; panjang tetap 8%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: lahir; k-anonymity satu kolom: 100000 dari 100000 baris unik (k=1)</td><td>generalize_for_analyst</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>tanggal_pernikahan_ct</td><td>bytea</td><td>status_perkawinan</td><td>umum</td><td>sedang</td><td>P2</td><td>15</td><td>3</td><td>3</td><td>2</td><td>1</td><td>3</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;117 campuran&gt; | &lt;108 campuran&gt; | &lt;125 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 88-144; panjang tetap 10%; rasio unik 100%; NULL 52%; bukti isi 0.0; nama 100; kamus nama: pernikahan; sinyal nama tambahan: tanggal_pernikahan</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P1"><td>public.anggota_protected</td><td>no_ktp_ct</td><td>bytea</td><td>nik</td><td>umum</td><td>tinggi</td><td>P1</td><td>19</td><td>5</td><td>3</td><td>2</td><td>1</td><td>5</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;130 campuran&gt; | &lt;130 campuran&gt; | &lt;136 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 96-157; panjang tetap 7%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: ktp, no_ktp; panjang tidak baku untuk NIK; perlu verifikasi</td><td>encrypt+blind_index+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>alamat_jakarta_ct</td><td>bytea</td><td>alamat</td><td>umum</td><td>sedang</td><td>P2</td><td>17</td><td>4</td><td>3</td><td>2</td><td>1</td><td>4</td><td>3</td><td>0.5</td><td>100</td><td>20.4</td><td>needs_review</td><td></td><td>&lt;182 campuran&gt; | &lt;189 campuran&gt; | &lt;154 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 134-203; panjang tetap 6%; rasio unik 100%; NULL 0%; bukti isi 0.5; nama 100; kamus nama: alamat</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>alamat_daerah_ct</td><td>bytea</td><td>alamat</td><td>umum</td><td>sedang</td><td>P2</td><td>17</td><td>4</td><td>3</td><td>2</td><td>1</td><td>4</td><td>3</td><td>0.5</td><td>100</td><td>20.4</td><td>needs_review</td><td></td><td>&lt;157 campuran&gt; | &lt;179 campuran&gt; | &lt;172 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 136-223; panjang tetap 5%; rasio unik 100%; NULL 0%; bukti isi 0.5; nama 100; kamus nama: alamat</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>telpon_jakarta_ct</td><td>bytea</td><td>telepon</td><td>umum</td><td>sedang</td><td>P2</td><td>17</td><td>4</td><td>3</td><td>2</td><td>1</td><td>4</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;142 campuran&gt; | &lt;135 campuran&gt; | &lt;107 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 90-142; panjang tetap 8%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: telp, telpon</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>telpon_daerah_ct</td><td>bytea</td><td>telepon</td><td>umum</td><td>sedang</td><td>P2</td><td>17</td><td>4</td><td>3</td><td>2</td><td>1</td><td>4</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;96 campuran&gt; | &lt;132 campuran&gt; | &lt;99 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 87-144; panjang tetap 9%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: telp, telpon</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>handphone_ct</td><td>bytea</td><td>telepon</td><td>umum</td><td>sedang</td><td>P2</td><td>17</td><td>4</td><td>3</td><td>2</td><td>1</td><td>4</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;102 campuran&gt; | &lt;135 campuran&gt; | &lt;133 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 91-144; panjang tetap 9%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: handphone, phone</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>email_ct</td><td>bytea</td><td>email</td><td>umum</td><td>sedang</td><td>P2</td><td>17</td><td>4</td><td>3</td><td>2</td><td>1</td><td>4</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;238 campuran&gt; | &lt;254 campuran&gt; | &lt;216 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 156-291; panjang tetap 3%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: email</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P3"><td>public.anggota_protected</td><td>ruangan_ct</td><td>bytea</td><td>operasional</td><td>umum</td><td>rendah</td><td>P3</td><td>11</td><td>1</td><td>3</td><td>2</td><td>1</td><td>1</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;128 campuran&gt; | &lt;100 campuran&gt; | &lt;140 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 85-148; panjang tetap 7%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: ruangan</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>status_kawin_ct</td><td>bytea</td><td>status_perkawinan</td><td>umum</td><td>sedang</td><td>P2</td><td>15</td><td>3</td><td>3</td><td>2</td><td>1</td><td>3</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;81 campuran&gt; | &lt;102 campuran&gt; | &lt;90 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 66-115; panjang tetap 8%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: kawin</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>jumlah_anak_ct</td><td>bytea</td><td>keluarga</td><td>spesifik</td><td>sedang</td><td>P2</td><td>15</td><td>3</td><td>3</td><td>2</td><td>1</td><td>3</td><td>3</td><td>0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;93 campuran&gt; | &lt;74 campuran&gt; | &lt;84 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 66-117; panjang tetap 9%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: anak</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>jumlah_tanggungan_ct</td><td>bytea</td><td>keluarga</td><td>umum</td><td>sedang</td><td>P2</td><td>15</td><td>3</td><td>3</td><td>2</td><td>1</td><td>3</td><td>3</td><td>0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;87 campuran&gt; | &lt;68 campuran&gt; | &lt;93 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 62-111; panjang tetap 11%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: tanggungan</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>jumlah_jiwa_ct</td><td>bytea</td><td>keluarga</td><td>umum</td><td>sedang</td><td>P2</td><td>15</td><td>3</td><td>3</td><td>2</td><td>1</td><td>3</td><td>3</td><td>0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;96 campuran&gt; | &lt;94 campuran&gt; | &lt;102 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 67-120; panjang tetap 10%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: jiwa</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P1"><td>public.anggota_protected</td><td>rekening_ct</td><td>bytea</td><td>rekening</td><td>spesifik</td><td>tinggi</td><td>P1</td><td>19</td><td>5</td><td>3</td><td>2</td><td>1</td><td>5</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;138 campuran&gt; | &lt;133 campuran&gt; | &lt;124 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 100-162; panjang tetap 7%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: rek, rekening</td><td>encrypt+blind_index+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>nama_rekening_ct</td><td>bytea</td><td>nama</td><td>umum</td><td>sedang</td><td>P2</td><td>13</td><td>2</td><td>3</td><td>2</td><td>1</td><td>2</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;158 campuran&gt; | &lt;136 campuran&gt; | &lt;151 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 109-176; panjang tetap 6%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: nama; nama berentropi rendah/publik; hash rentan kamus, batasi tampilan analis</td><td>retain+mask_for_analyst</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P1"><td>public.anggota_protected</td><td>npwp_ct</td><td>bytea</td><td>npwp</td><td>umum</td><td>tinggi</td><td>P1</td><td>19</td><td>5</td><td>3</td><td>2</td><td>1</td><td>5</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;123 campuran&gt; | &lt;126 campuran&gt; | &lt;128 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 101-159; panjang tetap 6%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: npwp</td><td>encrypt+blind_index+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>kode_bank_ct</td><td>bytea</td><td>identifier_lain</td><td>umum</td><td>sedang</td><td>P2</td><td>17</td><td>4</td><td>3</td><td>2</td><td>1</td><td>4</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;92 campuran&gt; | &lt;87 campuran&gt; | &lt;92 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 75-123; panjang tetap 9%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: kode; sinyal nama tambahan: operasional</td><td>encrypt+blind_index+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>nip_kppn_ct</td><td>bytea</td><td>identifier_lain</td><td>umum</td><td>sedang</td><td>P2</td><td>17</td><td>4</td><td>3</td><td>2</td><td>1</td><td>4</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;144 campuran&gt; | &lt;128 campuran&gt; | &lt;150 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 98-170; panjang tetap 6%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: nip; sinyal nama tambahan: operasional</td><td>encrypt+blind_index+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>pengguna_ct</td><td>bytea</td><td>identifier_lain</td><td>umum</td><td>sedang</td><td>P2</td><td>17</td><td>4</td><td>3</td><td>2</td><td>1</td><td>4</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;213 campuran&gt; | &lt;278 campuran&gt; | &lt;155 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 144-278; panjang tetap 3%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: pengguna</td><td>encrypt+blind_index+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>agama_ct</td><td>bytea</td><td>agama</td><td>umum</td><td>sedang</td><td>P2</td><td>15</td><td>3</td><td>3</td><td>2</td><td>1</td><td>3</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;107 campuran&gt; | &lt;116 campuran&gt; | &lt;114 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 79-131; panjang tetap 5%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: agama; rawan diskriminasi; UU PDP Pasal 4(3): umum</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P1"><td>public.anggota_protected</td><td>no_ktp_bidx</td><td>bytea</td><td>nik</td><td>umum</td><td>tinggi</td><td>P1</td><td>19</td><td>5</td><td>3</td><td>2</td><td>1</td><td>5</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;89 campuran&gt; | &lt;114 campuran&gt; | &lt;87 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 22% digit; panjang 65-123; panjang tetap 9%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: ktp, no_ktp; panjang tidak baku untuk NIK; perlu verifikasi</td><td>encrypt+blind_index+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>email_bidx</td><td>bytea</td><td>email</td><td>umum</td><td>sedang</td><td>P2</td><td>17</td><td>4</td><td>3</td><td>2</td><td>1</td><td>4</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;92 campuran&gt; | &lt;89 campuran&gt; | &lt;108 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 22% digit; panjang 69-122; panjang tetap 10%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: email</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>pengguna_bidx</td><td>bytea</td><td>identifier_lain</td><td>umum</td><td>sedang</td><td>P2</td><td>17</td><td>4</td><td>3</td><td>2</td><td>1</td><td>4</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;96 campuran&gt; | &lt;89 campuran&gt; | &lt;95 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 53-116; panjang tetap 9%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: id, pengguna</td><td>encrypt+blind_index+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P3"><td>public.anggota_protected</td><td>jenis_kelamin</td><td>character</td><td>kategori</td><td>umum</td><td>rendah</td><td>P3</td><td>11</td><td>1</td><td>3</td><td>2</td><td>1</td><td>1</td><td>3</td><td>100.0</td><td>100</td><td>100.0</td><td>auto_accept</td><td></td><td>&lt;1 huruf&gt; | &lt;1 huruf&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 0% digit; panjang 1-1; panjang tetap 100%; rasio unik 0%; NULL 0%; bukti isi 100.0; nama 100; kamus nama: kelamin</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P3"><td>public.anggota_protected</td><td>pekerjaan_terakhir</td><td>character varying</td><td>operasional</td><td>umum</td><td>rendah</td><td>P3</td><td>11</td><td>1</td><td>3</td><td>2</td><td>1</td><td>1</td><td>3</td><td>0.0</td><td>100</td><td>20.0</td><td>needs_review</td><td></td><td>&lt;7 huruf&gt; | &lt;14 campuran&gt; | &lt;9 huruf&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 0% digit; panjang 4-14; panjang tetap 19%; rasio unik 1%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: pekerjaan; kardinalitas rendah: bukan kandidat nama orang</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P3"><td>public.anggota_protected</td><td>nama_kppn</td><td>character varying</td><td>kategori</td><td>non_pribadi</td><td>rendah</td><td>P3</td><td>11</td><td>1</td><td>3</td><td>2</td><td>1</td><td>1</td><td>3</td><td>100.0</td><td>100</td><td>100.0</td><td>auto_accept</td><td></td><td>&lt;12 campuran&gt; | &lt;13 campuran&gt; | &lt;12 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 0% digit; panjang 12-15; panjang tetap 41%; rasio unik 0%; NULL 0%; bukti isi 100.0; nama 100; kamus nama: ; sinyal nama tambahan: operasional; kardinalitas rendah: bukan kandidat nama orang; 5 nilai unik; kategori, bukan nama orang; bukti isi referensi institusi; asosiasi dengan individu tetap memerlukan kontrol akses</td><td>retain</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P3"><td>public.anggota_protected</td><td>nama_bank</td><td>character varying</td><td>kategori</td><td>non_pribadi</td><td>rendah</td><td>P3</td><td>11</td><td>1</td><td>3</td><td>2</td><td>1</td><td>1</td><td>3</td><td>100.0</td><td>100</td><td>100.0</td><td>auto_accept</td><td></td><td>&lt;8 campuran&gt; | &lt;8 campuran&gt; | &lt;12 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 0% digit; panjang 8-12; panjang tetap 78%; rasio unik 0%; NULL 0%; bukti isi 100.0; nama 100; kamus nama: ; sinyal nama tambahan: operasional; kardinalitas rendah: bukan kandidat nama orang; 4 nilai unik; kategori, bukan nama orang; bukti isi referensi institusi; asosiasi dengan individu tetap memerlukan kontrol akses</td><td>retain</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P3"><td>public.anggota_protected</td><td>age_band</td><td>character varying</td><td>kategori</td><td>umum</td><td>rendah</td><td>P3</td><td>11</td><td>1</td><td>3</td><td>2</td><td>1</td><td>1</td><td>3</td><td>0.0</td><td>0</td><td>0.0</td><td>low_confidence</td><td></td><td>&lt;5 campuran&gt; | &lt;5 campuran&gt; | &lt;5 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 80% digit; panjang 5-5; panjang tetap 100%; rasio unik 0%; NULL 0%; bukti isi 0.0; nama 0; rawan diskriminasi; UU PDP Pasal 4(3): umum</td><td>encrypt+mask</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>created_at</td><td>timestamp with time zone</td><td>tanggal_lahir</td><td>umum</td><td>sedang</td><td>P2</td><td>18</td><td>3</td><td>3</td><td>2</td><td>4</td><td>3</td><td>3</td><td>90.0</td><td>0</td><td>72.0</td><td>needs_review</td><td></td><td>&lt;32 campuran&gt; | &lt;32 campuran&gt; | &lt;32 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 75% digit; panjang 32-32; panjang tetap 100%; rasio unik 10%; NULL 0%; bukti isi 90.0; nama 0; k-anonymity satu kolom: 0 dari 100000 baris unik (k=1)</td><td>generalize_for_analyst</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr><tr class="P2"><td>public.anggota_protected</td><td>updated_at</td><td>timestamp with time zone</td><td>tanggal_lahir</td><td>umum</td><td>sedang</td><td>P2</td><td>18</td><td>3</td><td>3</td><td>2</td><td>4</td><td>3</td><td>3</td><td>90.0</td><td>0</td><td>72.0</td><td>needs_review</td><td></td><td>&lt;32 campuran&gt; | &lt;32 campuran&gt; | &lt;32 campuran&gt;</td><td class="reason">perlu disimpan? tinjau kebutuhan retensi; 75% digit; panjang 32-32; panjang tetap 100%; rasio unik 10%; NULL 0%; bukti isi 90.0; nama 0; k-anonymity satu kolom: 0 dari 100000 baris unik (k=1)</td><td>generalize_for_analyst</td><td>privacy_reviewer</td><td>needs_review</td><td></td></tr></tbody></table></div>
+<h2 id="review">Perlu tinjauan manusia (34)</h2>
+<ul><li>public.anggota_protected.anggota_id — identifier_lain (20.0): perlu disimpan? tinjau kebutuhan retensi; 56% digit; panjang 36-36; panjang tetap 100%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: id</li><li>public.anggota_protected.legacy_row_id — identifier_lain (72.0): perlu disimpan? tinjau kebutuhan retensi; 100% digit; panjang 2-5; panjang tetap 90%; rasio unik 100%; NULL 0%; bukti isi 65.0; nama 100; kamus nama: id</li><li>public.anggota_protected.protection_version — kategori (0.0): perlu disimpan? tinjau kebutuhan retensi; 100% digit; panjang 1-1; panjang tetap 100%; rasio unik 0%; NULL 0%; bukti isi 0.0; nama 0; distribusi digit berulang; bukti identifier lemah; rawan diskriminasi; UU PDP Pasal 4(3): umum</li><li>public.anggota_protected.nama_ct — nama (20.0): perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 115-257; panjang tetap 3%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: nama; nama berentropi rendah/publik; hash rentan kamus, batasi tampilan analis</li><li>public.anggota_protected.nama_lengkap_ct — nama (20.0): perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 121-250; panjang tetap 3%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: nama; nama berentropi rendah/publik; hash rentan kamus, batasi tampilan analis</li><li>public.anggota_protected.nama_tanpa_gelar_ct — nama (20.0): perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 124-251; panjang tetap 4%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: nama; nama berentropi rendah/publik; hash rentan kamus, batasi tampilan analis</li><li>public.anggota_protected.tempat_lahir_ct — tempat_lahir (20.0): perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 81-141; panjang tetap 6%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: tempat_lahir</li><li>public.anggota_protected.tanggal_lahir_ct — tanggal_lahir (20.0): perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 85-144; panjang tetap 8%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: lahir; k-anonymity satu kolom: 100000 dari 100000 baris unik (k=1)</li><li>public.anggota_protected.tanggal_pernikahan_ct — status_perkawinan (20.0): perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 88-144; panjang tetap 10%; rasio unik 100%; NULL 52%; bukti isi 0.0; nama 100; kamus nama: pernikahan; sinyal nama tambahan: tanggal_pernikahan</li><li>public.anggota_protected.no_ktp_ct — nik (20.0): perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 96-157; panjang tetap 7%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: ktp, no_ktp; panjang tidak baku untuk NIK; perlu verifikasi</li><li>public.anggota_protected.alamat_jakarta_ct — alamat (20.4): perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 134-203; panjang tetap 6%; rasio unik 100%; NULL 0%; bukti isi 0.5; nama 100; kamus nama: alamat</li><li>public.anggota_protected.alamat_daerah_ct — alamat (20.4): perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 136-223; panjang tetap 5%; rasio unik 100%; NULL 0%; bukti isi 0.5; nama 100; kamus nama: alamat</li><li>public.anggota_protected.telpon_jakarta_ct — telepon (20.0): perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 90-142; panjang tetap 8%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: telp, telpon</li><li>public.anggota_protected.telpon_daerah_ct — telepon (20.0): perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 87-144; panjang tetap 9%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: telp, telpon</li><li>public.anggota_protected.handphone_ct — telepon (20.0): perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 91-144; panjang tetap 9%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: handphone, phone</li><li>public.anggota_protected.email_ct — email (20.0): perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 156-291; panjang tetap 3%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: email</li><li>public.anggota_protected.ruangan_ct — operasional (20.0): perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 85-148; panjang tetap 7%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: ruangan</li><li>public.anggota_protected.status_kawin_ct — status_perkawinan (20.0): perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 66-115; panjang tetap 8%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: kawin</li><li>public.anggota_protected.jumlah_anak_ct — keluarga (20.0): perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 66-117; panjang tetap 9%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: anak</li><li>public.anggota_protected.jumlah_tanggungan_ct — keluarga (20.0): perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 62-111; panjang tetap 11%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: tanggungan</li><li>public.anggota_protected.jumlah_jiwa_ct — keluarga (20.0): perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 67-120; panjang tetap 10%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: jiwa</li><li>public.anggota_protected.rekening_ct — rekening (20.0): perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 100-162; panjang tetap 7%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: rek, rekening</li><li>public.anggota_protected.nama_rekening_ct — nama (20.0): perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 109-176; panjang tetap 6%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: nama; nama berentropi rendah/publik; hash rentan kamus, batasi tampilan analis</li><li>public.anggota_protected.npwp_ct — npwp (20.0): perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 101-159; panjang tetap 6%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: npwp</li><li>public.anggota_protected.kode_bank_ct — identifier_lain (20.0): perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 75-123; panjang tetap 9%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: kode; sinyal nama tambahan: operasional</li><li>public.anggota_protected.nip_kppn_ct — identifier_lain (20.0): perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 98-170; panjang tetap 6%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: nip; sinyal nama tambahan: operasional</li><li>public.anggota_protected.pengguna_ct — identifier_lain (20.0): perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 144-278; panjang tetap 3%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: pengguna</li><li>public.anggota_protected.agama_ct — agama (20.0): perlu disimpan? tinjau kebutuhan retensi; 24% digit; panjang 79-131; panjang tetap 5%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: agama; rawan diskriminasi; UU PDP Pasal 4(3): umum</li><li>public.anggota_protected.no_ktp_bidx — nik (20.0): perlu disimpan? tinjau kebutuhan retensi; 22% digit; panjang 65-123; panjang tetap 9%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: ktp, no_ktp; panjang tidak baku untuk NIK; perlu verifikasi</li><li>public.anggota_protected.email_bidx — email (20.0): perlu disimpan? tinjau kebutuhan retensi; 22% digit; panjang 69-122; panjang tetap 10%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: email</li><li>public.anggota_protected.pengguna_bidx — identifier_lain (20.0): perlu disimpan? tinjau kebutuhan retensi; 23% digit; panjang 53-116; panjang tetap 9%; rasio unik 100%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: id, pengguna</li><li>public.anggota_protected.pekerjaan_terakhir — operasional (20.0): perlu disimpan? tinjau kebutuhan retensi; 0% digit; panjang 4-14; panjang tetap 19%; rasio unik 1%; NULL 0%; bukti isi 0.0; nama 100; kamus nama: pekerjaan; kardinalitas rendah: bukan kandidat nama orang</li><li>public.anggota_protected.created_at — tanggal_lahir (72.0): perlu disimpan? tinjau kebutuhan retensi; 75% digit; panjang 32-32; panjang tetap 100%; rasio unik 10%; NULL 0%; bukti isi 90.0; nama 0; k-anonymity satu kolom: 0 dari 100000 baris unik (k=1)</li><li>public.anggota_protected.updated_at — tanggal_lahir (72.0): perlu disimpan? tinjau kebutuhan retensi; 75% digit; panjang 32-32; panjang tetap 100%; rasio unik 10%; NULL 0%; bukti isi 90.0; nama 0; k-anonymity satu kolom: 0 dari 100000 baris unik (k=1)</li></ul>
+<h2 id="relations">Relasi dan risiko turunan</h2><p>Melindungi kolom sumber saja tidak cukup. Tinjau minimisasi duplikat, turunan, dan akses pada semua jalur.</p><pre>{
+  "dependencies": [
+    {
+      "consistent_group_ratio": 1.0,
+      "groups": 2,
+      "kind": "functional",
+      "source": "jenis_kelamin",
+      "table": "public.anggota_protected",
+      "target": "protection_version"
+    },
+    {
+      "consistent_group_ratio": 1.0,
+      "groups": 6,
+      "kind": "functional",
+      "source": "pekerjaan_terakhir",
+      "table": "public.anggota_protected",
+      "target": "protection_version"
+    },
+    {
+      "consistent_group_ratio": 1.0,
+      "groups": 5,
+      "kind": "functional",
+      "source": "nama_kppn",
+      "table": "public.anggota_protected",
+      "target": "protection_version"
+    },
+    {
+      "consistent_group_ratio": 1.0,
+      "groups": 4,
+      "kind": "functional",
+      "source": "nama_bank",
+      "table": "public.anggota_protected",
+      "target": "protection_version"
+    },
+    {
+      "consistent_group_ratio": 1.0,
+      "groups": 5,
+      "kind": "functional",
+      "source": "age_band",
+      "table": "public.anggota_protected",
+      "target": "protection_version"
+    },
+    {
+      "consistent_group_ratio": 1.0,
+      "groups": 100,
+      "kind": "functional",
+      "source": "created_at",
+      "table": "public.anggota_protected",
+      "target": "protection_version"
+    },
+    {
+      "consistent_group_ratio": 1.0,
+      "groups": 100,
+      "kind": "functional",
+      "source": "updated_at",
+      "table": "public.anggota_protected",
+      "target": "protection_version"
+    },
+    {
+      "consistent_group_ratio": 1.0,
+      "groups": 100,
+      "kind": "functional",
+      "source": "created_at",
+      "table": "public.anggota_protected",
+      "target": "updated_at"
+    },
+    {
+      "consistent_group_ratio": 1.0,
+      "groups": 100,
+      "kind": "functional",
+      "source": "updated_at",
+      "table": "public.anggota_protected",
+      "target": "created_at"
+    }
+  ],
+  "derived_from": [],
+  "foreign_keys": [],
+  "functional_policy": {
+    "maximum_source_unique_ratio": 0.8,
+    "required_consistent_group_ratio": 1.0,
+    "source_ratio_denominator": "non-NULL sample rows"
+  },
+  "join_candidates": [],
+  "join_limit_reached": false,
+  "join_pairs_checked": 0,
+  "near_unique_quasi_identifiers": [
+    {
+      "column": "anggota_id",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "legacy_row_id",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "dek_pii_wrapped",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "dek_fin_wrapped",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "nama_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "nama_lengkap_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "nama_tanpa_gelar_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "tempat_lahir_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "tanggal_lahir_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "tanggal_pernikahan_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 477,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 477
+    },
+    {
+      "column": "no_ktp_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "alamat_jakarta_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "alamat_daerah_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "telpon_jakarta_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "telpon_daerah_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "handphone_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "email_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "ruangan_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "status_kawin_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "jumlah_anak_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "jumlah_tanggungan_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "jumlah_jiwa_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "rekening_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "nama_rekening_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "npwp_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "kode_bank_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "nip_kppn_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "pengguna_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "agama_ct",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "no_ktp_bidx",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "email_bidx",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    },
+    {
+      "column": "pengguna_bidx",
+      "excluded_from": "functional_source",
+      "nonnull_rows": 1000,
+      "reason": "rasio unik non-NULL \u003e 0.8; korelasi tidak membuktikan dependency",
+      "sample_rows": 1000,
+      "table": "public.anggota_protected",
+      "unique_ratio": 1.0,
+      "unique_values": 1000
+    }
+  ],
+  "scope": "sample; correlations are candidates requiring human review"
+}</pre>
+<h2 id="anonymity">K-anonymity</h2><p>Maksimal 15 kombinasi minimal, diurutkan 1, 2, lalu 3 kolom; superset dari kombinasi yang sudah unik ≥95% disembunyikan. Semua 298 kombinasi tetap tersedia di k_anonymity.json.</p><div class="scroll"><table id="k-anonymity-table"><thead><tr><th>Tabel</th><th>Kombinasi</th><th>Unik (k=1)</th><th>Total</th><th>k minimum</th><th>Cakupan</th></tr></thead>
+<tbody><tr><td>public.anggota_protected</td><td>agama_ct</td><td>100000</td><td>100000</td><td>1</td><td>full_database_aggregate</td></tr><tr><td>public.anggota_protected</td><td>status_kawin_ct</td><td>100000</td><td>100000</td><td>1</td><td>full_database_aggregate</td></tr><tr><td>public.anggota_protected</td><td>tanggal_lahir_ct</td><td>100000</td><td>100000</td><td>1</td><td>full_database_aggregate</td></tr><tr><td>public.anggota_protected</td><td>tempat_lahir_ct</td><td>100000</td><td>100000</td><td>1</td><td>full_database_aggregate</td></tr><tr><td>public.anggota_protected</td><td>tanggal_pernikahan_ct</td><td>49994</td><td>100000</td><td>1</td><td>full_database_aggregate</td></tr><tr><td>public.anggota_protected</td><td>age_band</td><td>0</td><td>100000</td><td>14827</td><td>full_database_aggregate</td></tr><tr><td>public.anggota_protected</td><td>created_at</td><td>0</td><td>100000</td><td>1000</td><td>full_database_aggregate</td></tr><tr><td>public.anggota_protected</td><td>jenis_kelamin</td><td>0</td><td>100000</td><td>49867</td><td>full_database_aggregate</td></tr><tr><td>public.anggota_protected</td><td>nama_kppn</td><td>0</td><td>100000</td><td>17294</td><td>full_database_aggregate</td></tr><tr><td>public.anggota_protected</td><td>pekerjaan_terakhir</td><td>0</td><td>100000</td><td>14442</td><td>full_database_aggregate</td></tr><tr><td>public.anggota_protected</td><td>protection_version</td><td>0</td><td>100000</td><td>100000</td><td>full_database_aggregate</td></tr><tr><td>public.anggota_protected</td><td>updated_at</td><td>0</td><td>100000</td><td>1000</td><td>full_database_aggregate</td></tr><tr><td>public.anggota_protected</td><td>protection_version + tanggal_pernikahan_ct</td><td>49994</td><td>100000</td><td>1</td><td>full_database_aggregate</td></tr><tr><td>public.anggota_protected</td><td>tanggal_pernikahan_ct + age_band</td><td>49994</td><td>100000</td><td>1</td><td>full_database_aggregate</td></tr><tr><td>public.anggota_protected</td><td>tanggal_pernikahan_ct + created_at</td><td>49994</td><td>100000</td><td>1</td><td>full_database_aggregate</td></tr></tbody></table></div>
+
+<h2>Metadata</h2><pre>{
+  "change_summary": [
+    "v1.2: functional hanya konsistensi 1.0 dan rasio unik sumber \u003c=0.8; kecocokan komponen teks dicatat terpisah.",
+    "NIK nonstandar dengan bukti isi; kategori, tanggal pernikahan, hitungan keluarga, dan surrogate ID dibedakan.",
+    "Sensitivitas dan dampak per jenis dari impact.yaml; tiga faktor lingkungan tetap terpisah.",
+    "Functional dependency mengecualikan sumber hampir unik dan melaporkannya sebagai quasi-identifier.",
+    "Turunan memakai review_minimization dan consistent_protection_with; rekomendasi nama/tanggal diperbarui.",
+    "K-anonymity diurutkan minimal; superset berlebihan disembunyikan dan HTML dibatasi 15 kombinasi.",
+    "Laporan memiliki tabel ringkas dan tata cetak A4 landscape.",
+    "Evaluasi taksonomi independen melalui label_map.yaml, normalisasi kelas/boolean, F2, dan pengecualian kolom tidak berlabel.",
+    "Kategori institusi memerlukan bukti isi; regex_only memakai kecocokan regex tanpa analisis relasi atau agregat k-anonymity."
+  ],
+  "duration_seconds": 113.565,
+  "inventory_columns": 40,
+  "label": "after",
+  "method": "combined",
+  "privacy": "Only masked samples and aggregate features are exported.",
+  "review_state": "raw_before_human_review",
+  "sample_limit_per_table": 1000,
+  "scanner_version": "1.2.0",
+  "source": {
+    "database": "protected_100k",
+    "environment_factors": {
+      "exposure": 2,
+      "recovery": 3,
+      "volume": 3
+    },
+    "host": "127.0.0.1",
+    "legacy_environment_impact_ignored": false,
+    "mode": "db",
+    "port": "5433",
+    "quasi_limits": {
+      "max_combinations": 300,
+      "max_quasi_candidates": 12
+    },
+    "table_counts": {
+      "public.anggota_protected": {
+        "sample_rows": 1000,
+        "total_rows": 100000
+      }
+    },
+    "type_priority_policy": {
+      "default": {
+        "impact": 3,
+        "sensitivity": 3
+      },
+      "types": {
+        "agama": {
+          "impact": 3,
+          "sensitivity": 3
+        },
+        "alamat": {
+          "impact": 4,
+          "sensitivity": 4
+        },
+        "biometrik": {
+          "impact": 5,
+          "sensitivity": 5
+        },
+        "email": {
+          "impact": 4,
+          "sensitivity": 4
+        },
+        "genetika": {
+          "impact": 5,
+          "sensitivity": 5
+        },
+        "identifier_lain": {
+          "impact": 4,
+          "sensitivity": 4
+        },
+        "kategori": {
+          "impact": 1,
+          "sensitivity": 1
+        },
+        "kejahatan": {
+          "impact": 5,
+          "sensitivity": 5
+        },
+        "keluarga": {
+          "impact": 3,
+          "sensitivity": 3
+        },
+        "kesehatan": {
+          "impact": 5,
+          "sensitivity": 5
+        },
+        "nama": {
+          "impact": 2,
+          "sensitivity": 2
+        },
+        "nik": {
+          "impact": 5,
+          "sensitivity": 5
+        },
+        "npwp": {
+          "impact": 5,
+          "sensitivity": 5
+        },
+        "operasional": {
+          "impact": 1,
+          "sensitivity": 1
+        },
+        "password": {
+          "impact": 5,
+          "sensitivity": 5
+        },
+        "rekening": {
+          "impact": 5,
+          "sensitivity": 5
+        },
+        "status_perkawinan": {
+          "impact": 3,
+          "sensitivity": 3
+        },
+        "tanggal_lahir": {
+          "impact": 3,
+          "sensitivity": 3
+        },
+        "tanggal_pernikahan": {
+          "impact": 3,
+          "sensitivity": 3
+        },
+        "telepon": {
+          "impact": 4,
+          "sensitivity": 4
+        },
+        "tempat_lahir": {
+          "impact": 3,
+          "sensitivity": 3
+        }
+      }
+    }
+  },
+  "table_counts": {
+    "public.anggota_protected": {
+      "sample_rows": 1000,
+      "total_rows": 100000
+    }
+  },
+  "timestamp": "2026-10-28T06:51:46.841667+00:00"
+}</pre></body></html>
