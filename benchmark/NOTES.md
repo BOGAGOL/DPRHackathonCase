@@ -874,3 +874,8 @@ Interval pemeriksaan progres minimal1200 detik (20 menit), menggantikan15 menit.
 ### V2 gate ulang PASS, 28 Oktober2026 22:50 WIB
 
 Perubahan fail-closed sudah dipush566a523 sebelum gate. Token operator terbaru hanya svc-app, TTL14069s saat lookup (minimum10800); tidak membaca root/menerbitkan token. Seluruh gate lulus: AC true, Best performance, sleep AC0, hanya pg-dpr+OpenBao unsealed, tidak ada sesi lain, pg_stat_statements preload+extension4 DB, count/checksum kelima DB cocok, disk51,43 GiB. File produksi identik8a11ff7 dan target8c09a25 ancestor; corpus sama dengan naive_v1, parity cache-off tetap PASS. Worker detached diluncurkan sesudah pencatatan gate ini. Gate sealed/TTL lama tetap diarsipkan, resolusi ditambahkan tanpa menghapus kejadian. Estimasi112 run sekitar2,5 jam; cek progres paling cepat tiap20 menit.
+
+
+## B-P-P-B resmi v2 — hasil worker terpisah
+
+Status COMPLETED; produksi8a11ff7, https_pool, DEK cache OFF. Gate, count/checksum lima DB, resource dan AC per run disimpan di evidence/benchmark/bppb_v2_*. Metode/run sama dengan naive_v1; hanya direktori/metadata dan publikasi otomatis ditambahkan pada orchestration. Seluruh hasil naive_v1 dipertahankan. Tabel lengkap: evidence/benchmark/bppb_versions_summary.md. Integritas akhir: True. Tidak merge ke main.
