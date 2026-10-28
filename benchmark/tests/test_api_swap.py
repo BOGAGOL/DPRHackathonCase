@@ -17,6 +17,7 @@ class Store:
     def rename(self,a,b):self.calls.append(('rename',a,b));self.data[b]=self.data.pop(a)
     def allow(self,n,enabled):self.data[n]['allow_connections']=enabled
     def clone(self,n,t):
+        self.calls.append(('clone',n,t))
         if n==self.fail_clone:raise RuntimeError('synthetic_clone_failure')
         self.data[n]={'oid':self.data[t]['oid']+100,'allow_connections':True}
     def drop_copy(self,n,oid):
@@ -30,6 +31,7 @@ def test_full_swap_journal_and_idempotent_restore_drop_only_copies(tmp_path):
     state=json.loads(p.read_text())
     assert state['status']=='swapped' and state['copies']=={'baseline_100k':111,'protected_100k':122}
     assert not store.data['baseline_100k__official']['allow_connections']
+    assert [call[0] for call in store.calls[:2]]==['rename','rename']
     swap=d.Swap(store,p);swap.restore()
     assert store.entries()==before and store.dropped==[111,122]
     assert swap.state['status']=='names_restored_pending_verification'

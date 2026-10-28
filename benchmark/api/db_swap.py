@@ -84,6 +84,8 @@ class Swap:
             self.save('swapping')
             # Prevent new connections to the archived original. Flags are restored later.
             self.store.allow(name + '__official', False)
+        # Archive both originals before creating either runtime copy.
+        for name in NAMES:
             if self.store.sessions(self.state['originals'][name]['oid']):
                 raise RuntimeError('template_has_sessions')
             self.store.clone(name, name + '__official')
