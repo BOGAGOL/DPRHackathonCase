@@ -277,3 +277,20 @@ serta tidak ada overflow horizontal. Screenshot lokal hanya fixture sintetis, di
 app/web/.local/. Build produksi Next.js/TypeScript lulus dan 14 test browser lulus.
 Preview desktop/mobile sudah diperiksa visual. Tidak ada backend, SQL, izin, scope,
 crypto, atau database yang diubah oleh perbaikan UI.
+
+
+## Penyederhanaan layar layanan — 28 Oktober 2026
+
+Zhafif menandai empat elemen untuk dihapus: panel promosi login, kartu keamanan dan
+footer Modul B di sidebar, indikator Sesi terautentikasi, dan catatan backend pada
+halaman profil. Semua dihapus dari markup, bukan disembunyikan dengan CSS. Login
+menjadi satu kartu terpusat dengan brand ringkas, username/password dan tombol masuk.
+Footer umum juga diringkas ke copyright brand. Identitas/peran akun dan tombol Keluar
+masih ada di header; posisi akun diratakan kanan setelah indikator sesi dihapus.
+CSS banner/sidebar lama yang tidak terpakai dibersihkan, termasuk selector responsif.
+
+Login/CSRF/session, policy backend dan navigasi sesuai role tetap menggunakan flow
+sebelumnya. Patch hanya frontend. Build Next.js/TypeScript lulus; preview login
+1280px/390px diperiksa visual dan 14 test browser lulus. Screenshot sebelum input
+kredensial, hanya memakai API mock sintetis. Tidak ada perubahan DB atau deployment
+langsung ke VM. Rilis memakai paket frontend yang diperbarui dan rebuild/restart web.

@@ -38,3 +38,13 @@ Update VM belum dilakukan. Paket app/.local/dpr-analytics-ui.tar hanya frontend;
 ikuti docs/DEPLOY_ANALYTICS_UI.md, hentikan web, extract/build, jalankan web lagi.
 Backend, akun dan database tidak perlu diprovision/migrasi ulang. Systemd tetap
 pekerjaan deployment terpisah.
+
+
+## Penghapusan elemen UI yang ditandai
+
+Panel promosi login diganti form ringkas di tengah. Kartu keamanan/sidebar footer,
+indikator sesi, dan catatan teknis backend pada profil dihapus. CSS tak terpakai ikut
+dibersihkan; header masih menampilkan akun/peran dan logout. Build dan 14 test browser
+lulus, preview login desktop/mobile diperiksa. VM belum diperbarui otomatis; paket
+app/.local/dpr-analytics-ui.tar kini memuat perubahan ini beserta perbaikan filter.
+Gunakan lagi docs/DEPLOY_ANALYTICS_UI.md; cukup rebuild dan restart frontend.

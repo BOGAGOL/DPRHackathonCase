@@ -28,3 +28,12 @@ Field mempunyai label terpisah dan ruang isi kartu; desktop dua kolom, mobile sa
 kolom. Satu aksi utama Terapkan dan aksi sekunder Reset; tidak menggunakan link
 untuk tindakan form. Hapus kartu total tanpa nilai dan teks berulang; total API tetap
 null sesuai A5. Rilis ini hanya frontend dan tidak memerlukan SQL/migrasi ulang.
+
+
+## 28 Oktober 2026 — hapus dekorasi dan penjelasan teknis
+
+Ikuti screenshot pengguna: hapus panel promosi login, kartu keamanan sidebar,
+indikator sesi dan catatan backend pada profil. Tampilkan form login tunggal dan
+identitas akun/logout yang diperlukan. Hapus markup/CSS yang tidak dipakai; hindari
+sekadar display:none. Pembatasan akses tetap menjadi perilaku sistem, bukan paragraf
+penjelasan pada setiap layar. Source hanya app/, tanpa perubahan backend/database.
