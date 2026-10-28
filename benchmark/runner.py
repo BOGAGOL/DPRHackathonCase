@@ -46,10 +46,11 @@ def worker_run(adapter, conn, scenario, worker, manifest, barrier, measured_barr
     latencies = array("d")
     successful = array("d")
     errors = 0
+    error_types = Counter()
     rng = random.Random(manifest["seed"] + worker)
     warmup_ops = operation_cycle(scenario, manifest, worker)
     barrier.wait()
-    while time.perf_counter() < timing["warmup_end"]:
+    while time.perf_counter() < timing["warmup_end"] and not (timing.get("stop_event") and timing["stop_event"].is_set()):
         try:
             adapter.execute(conn, next(warmup_ops), rng.randrange(2**31), worker)
         except Exception:
@@ -62,36 +63,47 @@ def worker_run(adapter, conn, scenario, worker, manifest, barrier, measured_barr
         writer.writerow(("timestamp_unix_utc", "scenario", "worker", "request_number", "operation", "latency_ms", "ok", "error_code"))
         measured_barrier.wait()
         index = 0
-        while time.perf_counter() < timing["deadline"]:
+        while time.perf_counter() < timing["deadline"] and not (timing.get("stop_event") and timing["stop_event"].is_set()):
             op = next(ops)
             key_index = rng.randrange(2**31)
             started = time.perf_counter()
             timestamp = timing["wall_start"] + started - timing["start"]
             ok = True
+            error_code = ""
             try:
                 adapter.execute(conn, op, key_index, worker)
-            except Exception:
+            except Exception as error:
                 errors += 1
                 ok = False
+                error_code = type(error).__name__
+                if type(getattr(error, "status", None)) is int:
+                    error_code += ":HTTP_" + str(error.status)
+                state = getattr(error, "sqlstate", None)
+                if isinstance(state, str) and len(state) == 5 and state.isascii() and state.isalnum():
+                    error_code += ":SQLSTATE_" + state
+                error_types[error_code] += 1
             latency = (time.perf_counter() - started) * 1000
             latencies.append(latency)
             if ok:
                 successful.append(latency)
             counts[op] += 1
             writer.writerow((f"{timestamp:.6f}", scenario, worker, index, op, f"{latency:.6f}", int(ok),
-                             "" if ok else "operation_failed"))
+                             error_code))
             index += 1
     return {"latencies": latencies, "successful_latencies": successful, "errors": errors,
-            "warmup_errors": warmup_errors, "counts": counts, "ended": time.perf_counter()}
+            "warmup_errors": warmup_errors, "counts": counts, "error_types": dict(error_types), "ended": time.perf_counter()}
 
 
-def one_run(adapter, scenario, run, manifest, concurrency, duration, warmup, directory, db_monitor=None):
+def one_run(adapter, scenario, run, manifest, concurrency, duration, warmup, directory, db_monitor=None,
+            stop_event=None, reset_statistics=False, collector_factory=None):
     directory.mkdir(parents=True, exist_ok=False)
     connections = [adapter.connect() for _ in range(concurrency)]
-    timing = {"warmup_end": 0}
-    collector = Collector(directory / "resources.csv")
+    timing = {"warmup_end": 0, "stop_event": stop_event}
+    collector = (collector_factory or Collector)(directory / "resources.csv")
     def start_measurement():
         if db_monitor is not None:
+            if reset_statistics:
+                db_monitor.reset()
             timing["db_time_before"] = db_monitor.snapshot()
         timing.update(start=time.perf_counter(), wall_start=time.time())
         timing["deadline"] = timing["start"] + duration
@@ -116,16 +128,18 @@ def one_run(adapter, scenario, run, manifest, concurrency, duration, warmup, dir
         all_latencies = array("d")
         success_latencies = array("d")
         counts = Counter()
+        error_types = Counter()
         for result in results:
             all_latencies.extend(result["latencies"])
             success_latencies.extend(result["successful_latencies"])
             counts.update(result["counts"])
+            error_types.update(result.get("error_types", {}))
         summary = summarize(all_latencies, sum(r["errors"] for r in results), elapsed)
         summary.update(scenario=scenario, run=run, duration_s=duration, warmup_s=warmup,
                        started_at_utc=datetime.fromtimestamp(timing["wall_start"], timezone.utc).isoformat(),
                        completed_at_utc=utc_now(),
                        concurrency=concurrency, warmup_errors=sum(r["warmup_errors"] for r in results),
-                       operations=dict(counts), resources=resource,
+                       operations=dict(counts), error_types=dict(error_types), resources=resource,
                        db_time=db_time,
                        successful_requests=summarize(success_latencies, 0, elapsed) if success_latencies else None)
         return summary

@@ -45,6 +45,13 @@ class DbTimeMonitor:
         self.database, self.role = database, role
         self.connection = psycopg.connect(**monitoring_parameters(), autocommit=True)
 
+    def reset(self):
+        """Explicitly authorized shared-counter reset on a separate admin session."""
+        params = monitoring_parameters()
+        params.update(options="-c default_transaction_read_only=off")
+        with psycopg.connect(**params, autocommit=True) as admin:
+            admin.execute("SELECT public.pg_stat_statements_reset()")
+
     def snapshot(self):
         info = self.connection.execute("SELECT stats_reset,dealloc FROM public.pg_stat_statements_info").fetchone()
         rows = self.connection.execute(

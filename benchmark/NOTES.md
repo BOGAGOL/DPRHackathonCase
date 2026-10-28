@@ -1,5 +1,50 @@
 # Modul C — baseline awal level DB, langkah 3
 
+## Sesi resmi B-P-P-B DB — persiapan 28 Oktober 2026
+
+Gate awal lulus; evidence `evidence/benchmark/bppb_preflight.json` merekam
+ancestor target 8c09a25 (13:37:47 WIB), AC psutil + Kernel-Power105, overlay
+Best performance yang dibaca melalui PowerGetEffectiveOverlayScheme, sleep AC=0,
+hanya pg-dpr/OpenBao unsealed, nol sesi workload lain, checksum canonical tiga
+database plaintext, count protected, pg_stat_statements dan disk minimum20 GiB.
+Pemetaan overlay mengacu dokumentasi Microsoft:
+https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/customize-power-slider.
+
+Orkestrasi `python -m benchmark.paired`: 100k kemudian1M, dua blok per skala;
+setiap blok berisi fase B seluruh7 skenario, P seluruh7, P seluruh7, B seluruh7,
+dengan urutan skenario manifest tetap. Total112 run, empat per mode/skenario.
+Concurrency8, warmup10s, measurement60s, corpus privat asli seed42 dipakai bersama.
+Adapter bisnis yang telah lolos parity tidak diubah. Guard pembatalan di runner
+menambahkan pemeriksaan flag di batas request, sama pada kedua mode; error raw
+hanya class exception/HTTP status/SQLSTATE, tidak ada pesan SQL atau parameter.
+
+Reset pg_stat_statements dilakukan admin terpisah sesudah warmup, tepat sebelum
+snapshot awal jendela terukur. Koneksi pembaca counter tetap read-only. db_time
+adalah mean SQL execution per request/per SQL call, bukan percentile server.
+Non-DB = mean client end-to-end dikurangi mean SQL execution dalam run yang sama,
+kemudian median antar-run; mencakup planning, network, crypto, validasi/rollback.
+P01/P01A/P02/P03 dan seluruh ambang lama dinilai terpisah tanpa memilih hasil baik.
+
+Tidak ada VACUUM/ANALYZE, flush cache, restart, migrasi atau restore pada sesi ini.
+Resource client + kedua container dikumpulkan; status AC kontinu2s, guard layanan5s.
+AC putus membatalkan seluruh28 run dalam blok, artefak tetap berlabel terdampak
+baterai, menunggu AC lalu mengulang blok utuh. Docker/Bao mati atau sealed: berhenti,
+tidak start/restart/unseal otomatis. Error operasi tetap dihitung dan run dilanjutkan.
+
+Setup/cleanup principal RLS sementara memakai mekanisme parity sebelumnya; hak role
+workload tidak ditambah. Audit setup/cleanup tidak dihapus. Data anggota dan sequence
+bisnis baseline harus sama; audit operasional/sequence audit nontransactional dapat
+bertambah, sehingga tidak mengklaim semua byte database/WAL identik. Count/checksum
+canonical plaintext dan hash streaming COPY binary seluruh row ciphertext protected
+dibandingkan sebelum/sesudah; bytes row tidak ditulis ke file/log. Kontrol akun/scope
+harus kembali ke count awal. Ukuran DB per run tetap direkam (MVCC/WAL dapat berubah).
+
+Raw non-sensitif CSV dikompres gzip level1 di direktori evidence per run sesuai
+permintaan pengguna; SHA256 hasil dekompresi diverifikasi sebelum CSV sumber milik
+run ini dibuang. Known-values/corpus/token/root material tetap di luar repo.
+Token hanya svc-app, baru4h jika sisa TTL<90menit pada awal blok; tidak menerbitkan
+token migration atau mengubah key/policy. Status API tetap BELUM DIUJI.
+
 ## Sesi utama 1M dan pemeriksaan silang — 27 Oktober 2026
 
 - Parameter sama seperti baseline awal 100k: 7 skenario ×3 run, concurrency8,
