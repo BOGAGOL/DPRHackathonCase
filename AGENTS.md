@@ -7,6 +7,17 @@ Abaikan docs/legacy-md_zhafif/ kecuali diminta secara eksplisit; isinya bukan ac
 
 # Aturan untuk agen AI (Codex / Claude Code) di repo ini
 
+## Struktur aktif dan pemeliharaan pengumpulan
+- Aplikasi aktif hanya `app/`; infrastruktur aktif hanya `infra/` (PostgreSQL 18/OpenBao TLS).
+- Prototipe `apps/`, `infrastructure/`, compose PG17 dan skrip/test lamanya sudah dihapus
+  dari snapshot; konteks historis berada di `archive/` dan tidak menjadi acuan runtime.
+- Panduan pembaca/juri mulai dari `README.md` dan `docs/README.md`. Kesiapan luaran
+  dicatat pada `docs/submission/CHECKLIST.md`, bukan disimpulkan dari jumlah test saja.
+- Maintenansi lintas folder dan penulisan ulang README/Makefile/.gitignore pada branch
+  `chore/submission-polish` secara eksplisit diminta pengguna. Instruksi pengguna itu
+  mengesampingkan batas modul/add-only di bawah untuk pekerjaan perapian ini.
+- Jangan mengubah format kontrak v1, target benchmark atau isi dataset dalam perapian.
+
 Proyek: Final Hackathon DPR RI 2026, Pelindungan Data Pribadi. Baca dulu `docs/contracts/CONTRACT.md`.
 Kontrak itu wajib dipatuhi. Jika tugas tampak bertentangan dengan kontrak, berhenti dan tulis
 pertanyaan di NOTES.md modulmu, jangan mengubah kontrak.

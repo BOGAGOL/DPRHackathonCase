@@ -53,3 +53,12 @@ results/
 
 # Encrypted backup artifacts belong in DPR_BACKUP_DIR outside the checkout.
 *.dprbak
+
+# Submission/private material and generated package output.
+/creds.json
+*.credential.xml
+**/init-material.json
+**/database-credentials.json
+**/service-b-*-accounts.json
+**/.acceptance-private/
+/dist/

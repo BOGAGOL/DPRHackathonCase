@@ -1,4 +1,0 @@
-import Link from "next/link";
-import { ArrowUpRight, Users } from "lucide-react";
-import type { Member } from "@/lib/api";
-export function MemberTable({ members }: { members: Member[] }) { return <div className="table-scroll"><table><thead><tr><th>ANGGOTA</th><th>RUANGAN</th><th>AKSI</th></tr></thead><tbody>{members.map(m => <tr key={m.id}><td><div className="member-cell"><span className="member-avatar">{m.nama.split(" ").slice(0, 2).map(s => s[0]).join("")}</span><div><strong>{m.nama}</strong><small>ID anggota · {String(m.id).padStart(4, "0")}</small></div></div></td><td><span className="room-tag">{m.ruangan || "—"}</span></td><td><Link className="text-link" href={`/anggota/${m.id}`}>Lihat profil <ArrowUpRight size={14} /></Link></td></tr>)}</tbody></table>{!members.length && <div className="empty-state"><Users size={30} /><h3>Belum ada anggota</h3><p>Tidak ada record dalam cakupan akses atau hasil pencarian Anda.</p></div>}</div>; }

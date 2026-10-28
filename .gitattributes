@@ -9,3 +9,7 @@ Dockerfile text eol=lf
 *.pdf binary
 # Organizer dataset must not be included in public attachment archives.
 sql/baseline/02_data.sql export-ignore
+
+# Historical and third-party reference material is not a submission artifact.
+archive/ export-ignore
+docs/reference/ export-ignore
