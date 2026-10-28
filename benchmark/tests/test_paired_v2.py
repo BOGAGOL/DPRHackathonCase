@@ -90,6 +90,27 @@ def test_version_report_uses_plain_from_each_session_and_shows_failures(monkeypa
     assert 'GAGAL | LULUS | GAGAL | LULUS' in text
 
 
+def test_initial_token_failure_stops_before_database_connections(monkeypatch,tmp_path):
+    original_root=v2.ROOT
+    monkeypatch.setattr(v2,'OUT',tmp_path)
+    monkeypatch.setattr(v2,'git',lambda *a:v2.BRANCH if a[0]=='branch' else 'synthetic-time')
+    monkeypatch.setattr(v2,'production_manifest',lambda:{})
+    monkeypatch.setenv('DPR_OPENBAO_HTTP_TRANSPORT','https_pool')
+    monkeypatch.setenv('DPR_BENCH_DEK_CACHE_TTL','0')
+    monkeypatch.setattr(v2.subprocess,'run',lambda *a,**k:SimpleNamespace(returncode=0))
+    monkeypatch.setattr(v2.subprocess,'check_output',lambda *a,**k:(original_root/'docs/targets.md').read_bytes())
+    monkeypatch.setattr(v2,'power_snapshot',lambda:{'passed':True})
+    monkeypatch.setattr(v2.paired,'services',lambda:None)
+    token=MagicMock(side_effect=RuntimeError('benchmark_token_ttl_below_threshold'))
+    monkeypatch.setattr(v2.paired,'ensure_token',token)
+    connection=MagicMock(side_effect=AssertionError('Database must not be reached'))
+    monkeypatch.setattr(v2.psycopg,'connect',connection)
+    report=v2.preflight()
+    token.assert_called_once_with(minimum_ttl_seconds=10800)
+    assert not report['passed'] and report['gates']['benchmark_token']['automatic_issuance'] is False
+    connection.assert_not_called()
+
+
 def test_publication_is_explicit_branch_and_own_paths(monkeypatch,tmp_path):
     monkeypatch.setattr(v2,'ROOT',tmp_path); monkeypatch.setattr(v2,'OUT',tmp_path/'evidence/benchmark')
     v2.OUT.mkdir(parents=True); (tmp_path/'benchmark').mkdir()
@@ -113,6 +134,23 @@ def test_detached_driver_rejects_stale_or_failed_gate_and_duplicate(monkeypatch,
     assert v2.run()['status']=='STOPPED'
     assert 'preserve' in (tmp_path/'benchmark/NOTES.md').read_text()
     with pytest.raises(FileExistsError):v2.run()
+
+
+def test_detached_worker_revalidates_three_hour_token_before_workload(monkeypatch,tmp_path):
+    monkeypatch.setattr(v2,'ROOT',tmp_path);monkeypatch.setattr(v2,'OUT',tmp_path/'evidence/benchmark')
+    v2.OUT.mkdir(parents=True);(tmp_path/'benchmark').mkdir();(tmp_path/'benchmark/NOTES.md').write_text('preserve')
+    (v2.OUT/'bppb_v2_preflight.json').write_text(json.dumps({'passed':True,'completed_at_utc':paired.utc_now()}))
+    monkeypatch.setattr(v2,'production_manifest',lambda:{})
+    monkeypatch.setenv('DPR_OPENBAO_HTTP_TRANSPORT','https_pool');monkeypatch.setenv('DPR_BENCH_DEK_CACHE_TTL','0')
+    monkeypatch.setattr(v2,'power_snapshot',lambda:{'passed':True})
+    token=MagicMock(side_effect=RuntimeError('benchmark_token_ttl_below_threshold'))
+    monkeypatch.setattr(v2.paired,'ensure_token',token)
+    workload=MagicMock(side_effect=AssertionError('Workload must not run'))
+    monkeypatch.setattr(v2.paired,'execute',workload)
+    monkeypatch.setattr(v2,'publish',lambda s:{'status':'PUSHED'})
+    assert v2.run()['status']=='STOPPED'
+    token.assert_called_once_with(minimum_ttl_seconds=10800)
+    workload.assert_not_called()
 
 
 def test_cli_and_prefix_guard(monkeypatch):

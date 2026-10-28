@@ -1,7 +1,6 @@
 """Official paired DB session. No migrations, restarts, unseal or dataset maintenance."""
 
 from collections import Counter
-from datetime import datetime
 import gzip
 import hashlib
 import json
@@ -12,7 +11,6 @@ import statistics
 import subprocess
 import threading
 import time
-from uuid import uuid4
 
 import psutil
 import psycopg
@@ -22,7 +20,6 @@ import yaml
 
 from datagen.model import COLUMNS, checksum
 from infra.openbao.api import from_environment
-from infra.openbao.init import save_response
 from .ac_monitor import ACMonitor, power_events, qualify
 from .adapters.plaintext import PlaintextAdapter, load_keys
 from .adapters.protected import ProtectedAdapter
@@ -58,32 +55,24 @@ def services():
         raise RuntimeError('disk_under_20_GiB')
 
 
-def ensure_token():
-    """Operator-only issuance. Root is never installed in the workload environment."""
-    api = from_environment()
+def ensure_token(minimum_ttl_seconds=5400):
+    """Validate the existing workload token only; issuance/renewal is operator-only."""
+    if type(minimum_ttl_seconds) is not int or minimum_ttl_seconds <= 0:
+        raise ValueError('invalid_token_ttl_threshold')
     token = os.environ.get('OPENBAO_TOKEN')
-    ttl = 0
-    if token:
-        try:
-            info = api.request('/auth/token/lookup-self', token=token)['data']
-            if info['policies'] != ['svc-app']:
-                raise ValueError('Unexpected token policy')
-            ttl = info['ttl']
-        except Exception:
-            ttl = 0
-    issued = False
-    if ttl < 5400:
-        private = Path(os.environ['DPR_SECRETS_DIR']) / 'openbao'
-        root = json.loads((private / 'init-material.json').read_text())['root_token']
-        destination = private / 'tokens' / ('svc-app-bppb-' + datetime.now().strftime('%Y%m%dT%H%M%S') + '-' + uuid4().hex[:8] + '.json')
-        response = save_response(destination, lambda: api.request('/auth/token/create-orphan',
-            {'policies': ['svc-app'], 'no_default_policy': True, 'renewable': False,
-             'ttl': '14400s', 'explicit_max_ttl': '14400s', 'display_name': 'dpr-bppb-svc-app'}, token=root))
-        del root
-        os.environ['OPENBAO_TOKEN'] = response['auth']['client_token']
-        ttl = api.request('/auth/token/lookup-self', token=os.environ['OPENBAO_TOKEN'])['data']['ttl']
-        issued = True
-    return {'policy': 'svc-app', 'ttl_seconds': ttl, 'new_4h_token_issued': issued, 'at_utc': utc_now()}
+    if not token:
+        raise RuntimeError('benchmark_token_missing')
+    try:
+        info = from_environment().request('/auth/token/lookup-self', token=token)['data']
+    except Exception:
+        raise RuntimeError('benchmark_token_lookup_failed') from None
+    if info.get('policies') != ['svc-app']:
+        raise RuntimeError('benchmark_token_policy_not_only_svc_app')
+    ttl = info.get('ttl')
+    if type(ttl) not in (int, float) or not ttl >= minimum_ttl_seconds:
+        raise RuntimeError('benchmark_token_ttl_below_threshold')
+    return {'policy': 'svc-app', 'ttl_seconds': ttl, 'minimum_ttl_seconds': minimum_ttl_seconds,
+            'new_4h_token_issued': False, 'automatic_issuance': False, 'at_utc': utc_now()}
 
 
 def integrity():

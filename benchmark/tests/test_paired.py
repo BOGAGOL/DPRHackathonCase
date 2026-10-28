@@ -35,23 +35,50 @@ def test_service_guard_no_restart_no_unseal(monkeypatch):
     with pytest.raises(RuntimeError):paired.services()
 
 
-def test_token_issuance_is_only_svc_app_and_private(monkeypatch,tmp_path):
-    private=tmp_path/'openbao';(private/'tokens').mkdir(parents=True)
-    (private/'init-material.json').write_text(json.dumps({'root_token':'invented-not-active-root'}))
-    monkeypatch.setenv('DPR_SECRETS_DIR',str(tmp_path));monkeypatch.setenv('OPENBAO_TOKEN','invented-expiring')
-    calls=[]
-    def request(path,payload=None,token=None):
-        calls.append((path,payload,token))
-        if path.endswith('lookup-self'):
-            return {'data':{'policies':['svc-app'],'ttl':20 if token=='invented-expiring' else 14400}}
-        return {'auth':{'client_token':'invented-new-not-active'}}
-    monkeypatch.setattr(paired,'from_environment',lambda:SimpleNamespace(request=request))
-    assert paired.ensure_token()['new_4h_token_issued']
-    assert paired.ensure_token()['new_4h_token_issued'] is False
-    payload=next(p for path,p,t in calls if path.endswith('create-orphan'))
-    assert payload['policies']==['svc-app'] and payload['explicit_max_ttl']=='14400s'
-    assert len(list((private/'tokens').glob('*.json')))==1
-    assert all('unseal' not in path and 'rotate' not in path for path,p,t in calls)
+@pytest.mark.parametrize('ttl,minimum,accepted',[(14400,10800,True),(10800,10800,True),
+    (10799,10800,False),(5400,5400,True),(5399,5400,False),(0,5400,False),
+    ('14400',5400,False),(True,5400,False),(float('nan'),5400,False)])
+def test_token_gate_never_reads_private_files_or_issues(monkeypatch,ttl,minimum,accepted):
+    monkeypatch.setenv('OPENBAO_TOKEN','synthetic-workload-token')
+    monkeypatch.delenv('DPR_SECRETS_DIR',raising=False)
+    forbidden=MagicMock(side_effect=AssertionError('No private file access is authorized'))
+    monkeypatch.setattr(paired.Path,'read_text',forbidden)
+    monkeypatch.setattr(paired.Path,'open',forbidden)
+    api=MagicMock();api.request.return_value={'data':{'policies':['svc-app'],'ttl':ttl}}
+    monkeypatch.setattr(paired,'from_environment',lambda:api)
+    if accepted:
+        result=paired.ensure_token(minimum)
+        assert result['ttl_seconds']==ttl and not result['new_4h_token_issued']
+        assert result['automatic_issuance'] is False
+    else:
+        with pytest.raises(RuntimeError,match='benchmark_token_ttl_below_threshold'):
+            paired.ensure_token(minimum)
+    api.request.assert_called_once_with('/auth/token/lookup-self',token='synthetic-workload-token')
+    forbidden.assert_not_called()
+    assert paired.os.environ['OPENBAO_TOKEN']=='synthetic-workload-token'
+
+
+@pytest.mark.parametrize('policies',[['root'],['svc-app','default'],['svc-migration'],[]])
+def test_token_gate_rejects_any_extra_or_wrong_policy(monkeypatch,policies):
+    monkeypatch.setenv('OPENBAO_TOKEN','synthetic-workload-token')
+    api=MagicMock();api.request.return_value={'data':{'policies':policies,'ttl':14400}}
+    monkeypatch.setattr(paired,'from_environment',lambda:api)
+    with pytest.raises(RuntimeError,match='benchmark_token_policy_not_only_svc_app'):
+        paired.ensure_token()
+    assert api.request.call_count==1
+
+
+def test_token_gate_missing_lookup_failure_and_bad_threshold_are_closed(monkeypatch):
+    api=MagicMock();api.request.side_effect=ValueError('synthetic-private-error')
+    monkeypatch.setattr(paired,'from_environment',lambda:api)
+    monkeypatch.delenv('OPENBAO_TOKEN',raising=False)
+    with pytest.raises(RuntimeError,match='benchmark_token_missing'):paired.ensure_token()
+    api.request.assert_not_called()
+    monkeypatch.setenv('OPENBAO_TOKEN','synthetic-workload-token')
+    with pytest.raises(RuntimeError,match='^benchmark_token_lookup_failed$'):paired.ensure_token()
+    for threshold in (0,-1,True,'10800'):
+        with pytest.raises(ValueError,match='invalid_token_ttl_threshold'):paired.ensure_token(threshold)
+    assert api.request.call_count==1
 
 
 def test_integrity_covers_all_five_databases_and_ciphertext_hash(monkeypatch,tmp_path):

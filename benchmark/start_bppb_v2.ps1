@@ -17,6 +17,6 @@ $cWorker = Start-Process -FilePath 'powershell.exe' -WindowStyle Hidden -Working
 [ordered]@{ launcher_pid=$cWorker.Id; started_at_wib=[datetimeoffset]::Now.ToOffset([timespan]::FromHours(7)).ToString('o');
     detached=$true; transport='https_pool'; dek_cache_ttl_seconds=0;
     stdout='results/bench/bppb_v2/runner.stdout.log'; stderr='results/bench/bppb_v2/runner.stderr.log';
-    polling_interval_seconds=900; completion='Worker writes versions summary, verifies integrity, commits and pushes its own results' } |
+    polling_interval_seconds=1200; completion='Worker writes versions summary, verifies integrity, commits and pushes its own results' } |
     ConvertTo-Json | Set-Content -Encoding UTF8 -LiteralPath (Join-Path $cRepoRoot 'evidence\benchmark\bppb_v2_launch.json')
 Write-Output "Detached v2 launcher PID $($cWorker.Id). Logs: results/bench/bppb_v2/"

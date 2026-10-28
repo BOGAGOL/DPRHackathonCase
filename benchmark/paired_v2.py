@@ -98,6 +98,8 @@ def preflight():
             raise RuntimeError('gate_power')
         paired.services()
         require('services', True, running_containers=paired.CONTAINERS, openbao_unsealed=True)
+        token_gate = paired.ensure_token(minimum_ttl_seconds=10800)
+        require('benchmark_token', True, **token_gate)
         with psycopg.connect(**paired.admin_parameters('baseline_100k'), autocommit=True) as admin:
             others = admin.execute("SELECT usename,application_name,state,count(*) FROM pg_stat_activity "
                 "WHERE backend_type='client backend' AND pid<>pg_backend_pid() AND datname=ANY(%s) "
@@ -131,6 +133,9 @@ def preflight():
         report['passed'] = True
     except Exception as error:
         report.update(error_type=type(error).__name__, error='preflight_failed_private_details_withheld')
+        if isinstance(error, RuntimeError) and str(error).startswith('benchmark_token_'):
+            report['gates']['benchmark_token'] = {'passed':False, 'reason':str(error),
+                'minimum_ttl_seconds':10800, 'automatic_issuance':False}
         if isinstance(error, RuntimeError) and str(error) in (
                 'container_set_changed', 'openbao_unavailable_or_sealed', 'disk_under_20_GiB'):
             report['gates']['services'] = {'passed':False, 'reason':str(error)}
@@ -208,7 +213,9 @@ def run():
             raise RuntimeError('runtime_configuration_changed')
         if not power_snapshot()['passed']:
             raise RuntimeError('power_gate_changed')
+        token_gate = paired.ensure_token(minimum_ttl_seconds=10800)
         metadata = {'variant':'v2','requested_production_commit':REQUESTED,'production_file_sha256':hashes,
+            'initial_token_gate':token_gate,'minimum_progress_check_interval_seconds':1200,
             'orchestration_commit':git('rev-parse','HEAD'),'orchestration_file_sha256':{
                 p:file_hash(ROOT/p) for p in ('benchmark/paired.py','benchmark/paired_v2.py','benchmark/start_bppb_v2.ps1')},
             'http_transport':'https_pool','dek_cache_ttl_seconds':0,'worker_pid':os.getpid(),
