@@ -32,6 +32,38 @@ resmi tim tetap mengikuti runbook. Lihat [bukti verifikasi recovery](../evidence
 dan [runbook cutover](../app/docs/RECOVERY.md). Temuan audit awal di bawah merujuk
 commit ed88ecd; R03–R08 dan kesiapan submit keseluruhan belum dinyatakan selesai.
 
+## Pembaruan acceptance setelah A5 — 28 Oktober 2026
+
+Kode aplikasi terbaru ditarik sampai `112da8d`; dependensi frontend dipasang ulang
+sesuai lockfile (Zod 4.6.7), production build lulus. Acceptance nyata A+B sesudah A5
+lulus **143 pemeriksaan** pada lab PostgreSQL 18.6 + OpenBao 2.5.5 TLS dan Chrome
+nyata: backup tujuh tabel, restore dua mode, akun/sesi, enam role, scope record/field,
+SQL analyst aggregate-only, singleton tersembunyi, raw JSON, cookie/storage/logout,
+update/insert dan blind lookup pada clone hasil restore, penolakan CA/hostname salah,
+tamper dan retensi. Dataset lab hanya **17 record buatan sendiri**, bukan dataset resmi.
+Docker Desktop timeout; transport native menjalankan SQL/tools/crypto/aplikasi produksi
+yang sama pada cluster baru berport loopback acak. Source/baseline/pg-dpr existing
+tidak diubah. Seluruh service fixture milik test dihentikan setelah pengujian.
+
+Deployment `https://43.156.157.247` juga diuji dengan Chrome nyata dan enam akun existing:
+**100 pemeriksaan PASS**, tanpa mock network atau bypass sertifikat. Pengujian hanya
+membaca data anggota dan memakai login/logout/audit normal; tidak menjalankan SSH,
+backup/restore VM, perubahan konfigurasi, atau mutasi anggota. Bukti ini tidak mengesahkan
+ACL SQL/TLS internal VM atau kesamaan commit VM dengan checkout lokal secara langsung.
+
+Regresi A final **327 PASS / 8 SKIP**, termasuk kedua integrasi native nyata. Baca
+[ringkasan acceptance](../evidence/acceptance/post-a5-summary.json),
+[bukti recovery terbaru](../evidence/backup/service-recovery-integration.json),
+[bukti browser deployment](../evidence/acceptance/deployed-browser.json), dan
+[petunjuk reproduksi/scope](../infra/acceptance/README.md). Kendala helper pada percobaan
+awal diarsipkan di evidence/acceptance/history, bukan disembunyikan.
+
+Gap acceptance komponen gabungan setelah A5 kini **diimplementasikan + diuji nyata**
+dengan scope di atas. Ini tidak menyelesaikan benchmark resmi, acceptance lengkap
+seluruh populasi hasil migrasi, DR/key-plane VM, scan privasi menyeluruh, atau paket
+laporan/slide; kesiapan submit keseluruhan tetap perlu ditinjau terpisah. Bagian audit
+awal di bawah merupakan catatan historis, termasuk pernyataan lama tentang analyst_view.
+
 ## Temuan pada commit audit awal (status recovery terbaru di atas)
 
 | ID | Prioritas | Temuan dan bukti | Tindak lanjut / pemilik |

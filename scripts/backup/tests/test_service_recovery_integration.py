@@ -92,6 +92,7 @@ def test_service_backup_restore_https_flow(laboratory, monkeypatch):
             query={"sslmode":"verify-full", "sslrootcert":params["sslrootcert"]}).render_as_string(hide_password=False)
     report = {"schema_version":1, "passed":False,
         "scope":"17 invented rows; disposable PG18/OpenBao TLS, actual A+B seven-table schema, live HTTPS backend; not official migrated datasets or benchmark", "checks":{}}
+    report["transport"]=lab.get("transport","docker_pg18_openbao_tls")
     checks = report["checks"]; created = []
     try:
         engine = create_engine(url("dpr_bootstrap", "protected_734"), hide_parameters=True)
@@ -171,6 +172,30 @@ def test_service_backup_restore_https_flow(laboratory, monkeypatch):
                 checks["missing_key_identity_fails_closed"] = response.status_code == 500 and response.json() == {"detail":"Operasi data gagal"}
             checks["capability_restored_after_reinjection"] = http.get("/anggota/1").status_code == 200
             checks["https_transport_verified"] = http.get("/auth/me").status_code == 200
+        if lab.get("browser_acceptance"):
+            analyst_parameters={**params,"dbname":target,"user":"analyst_user","password":lab["passwords"]["analyst_user"]}
+            with psycopg.connect(**analyst_parameters,autocommit=True) as analyst:
+                checks["sql_analyst_identity_and_tls"]=analyst.execute("SELECT current_user='analyst_user' AND ssl FROM pg_stat_ssl WHERE pid=pg_backend_pid()").fetchone()[0]
+                for relation in ("analyst_view","anggota_protected"):
+                    try:analyst.execute(sql.SQL("SELECT * FROM public.{}").format(sql.Identifier(relation)))
+                    except psycopg.errors.InsufficientPrivilege as error:checks["sql_analyst_denied:"+relation]=error.sqlstate=="42501"
+                    else:checks["sql_analyst_denied:"+relation]=False
+                released=analyst.execute("SELECT dimension,value,anggota_count FROM public.analyst_summary").fetchall()
+                checks["sql_groups_at_least_5"]=bool(released) and all(n>=5 for _,_,n in released)
+                checks["sql_known_small_label_absent"]=not any(value==lab["small_label"] for _,value,_ in released)
+            for label,changed_parameters in (("wrong_ca",{"sslrootcert":str(lab["root"]/"wrong-ca/ca.crt")}),
+                ("wrong_hostname",{"host":"not-this-server.invalid","hostaddr":"127.0.0.1"})):
+                try:
+                    with psycopg.connect(**{**analyst_parameters,**changed_parameters}):pass
+                except psycopg.OperationalError:checks["postgres_rejects:"+label]=True
+                else:checks["postgres_rejects:"+label]=False
+            from infra.acceptance.browser import exercise
+            accounts={role:{"username":role+".recovery","password":password} for role in ROLES}
+            observed=exercise(settings,accounts,lab["root"],small_label=lab.get("small_label"))
+            report["browser_acceptance"]={"status":observed["status"],"coverage":observed.get("coverage",{}),"certificate_trust":observed.get("certificate_trust"),"error_type":observed.get("error_type")}
+            checks.update({"browser:"+name:value for name,value in observed["checks"].items()})
+            checks["restored_real_chrome_passed"]=observed["status"]=="PASSED"
+            checks["restored_api_and_web_tls_verified"]=observed["api_tls_verified"] and observed["web_tls_verified"]
         checks["seven_table_tamper_test"] = tamper_test(artifact["manifest"],params,lab["keys"],container=container)["passed"]
         checks["seven_table_retention_and_sequence"] = retention_test(artifact["manifest"],params,lab["backup_params"],lab["keys"],lab["store"],container=container)["passed"]
         with psycopg.connect(**lab["backup_params"]) as source:
