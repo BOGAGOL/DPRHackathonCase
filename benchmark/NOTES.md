@@ -599,3 +599,44 @@ uji ulang pengecualian baseline non-TLS (a)-(d) sesudah merge/apply final.
 Evidence: evidence/overnight/recovery_20261028.json. Tidak menjalankan benchmark.
 Fetch menemukan origin/main ed88ecd berisi PR #5 Alby b8e9998 dan PR #6 B 9029b77;
 merge berikutnya mengikuti union dokumentasi dan STOP konflik kode/konfigurasi.
+
+## TLS final diterapkan; STOP prasyarat db_time, 28 Oktober 2026
+
+Merge origin/main ed88ecd (PR #5 b8e9998 dan PR #6) ke run/overnight-28okt
+selesai tanpa konflik pada 0ba90db. Setelah membaca implementasi final,
+enable_tls apply lalu verify dijalankan dengan credential bench/scanner DPAPI
+existing dan DPR_BASELINE_CLIENT_ADDRESS=auto. Keduanya PASS, alamat teramati
+172.17.0.1/32. Tidak ada restart postmaster; ID container dan OID DB tetap.
+
+Uji nyata (a)-(d) PASS: bench_user/scanner_user ke kedua baseline tanpa TLS;
+role lain ke baseline tanpa TLS ditolak; app_user ke protected_100k/protected_1m
+tanpa TLS ditolak; app_user verify-full ke kedua protected berhasil. Protected_734
+belum dibuat sehingga connection_matrix_complete global tetap false; ini bukan
+klaim login app ke protected_734 sudah diuji. Evidence apply/verify dan matrix
+khusus (a)-(d) ada di evidence/overnight/tls_final_20261028/; laporan TLS lama
+dipertahankan sebagai previous.json, canonical infra/postgres-tls.json diperbarui.
+
+Konfigurasi final diterapkan sekarang. Migrasi semalam memakai konfigurasi
+fix-branch yang setara dalam mempertahankan kondisi baseline non-TLS untuk
+bench/scanner serta mewajibkan TLS pada protected. Perbedaan final yang disengaja:
+pengecualian hostnossl (sebelumnya host) mempertahankan precedence metode auth
+koneksi terenkripsi; deteksi alamat tetap melalui login verify-full. Tidak
+mengklaim kedua berkas konfigurasi identik byte demi byte.
+
+Pada prasyarat langkah 2 ditemukan shared_preload_libraries kosong, konteks
+parameter postmaster, compute_query_id=auto. Paket pg_stat_statements versi 1.12
+tersedia tetapi extension/view tidak terpasang pada kedua baseline dan kedua
+protected. Karena itu db_time dari pg_stat_statements belum dapat diukur.
+Dokumentasi PostgreSQL 18 menyatakan preload membutuhkan restart server:
+https://www.postgresql.org/docs/18/pgstatstatements.html . CREATE EXTENSION saja
+tidak mengaktifkan preload. Statistik mencakup semua database; kelak view dapat
+dipasang di database monitoring tanpa mengubah skema baseline. Aktivasi akan
+mengubah konfigurasi dibanding sesi baseline awal dan harus dicatat eksplisit.
+
+Sesuai aturan gerbang terbaru, BERHENTI pada prasyarat ini, tanpa restart,
+ALTER SYSTEM, CREATE EXTENSION, retry otomatis, implementasi adapter/parity,
+amandemen target, verifikasi after, atau benchmark B-P-P-B. db_time=null berarti
+NOT_MEASURED, bukan nol atau hasil EXPLAIN pengganti yang dilabel ulang.
+Evidence: evidence/overnight/db_time_preflight_20261028.json. Kelanjutan menunggu
+instruksi penyiapan pg_stat_statements dan pelanjutan langkah 2; seluruh hasil
+migrasi dan dataset yang sudah lulus dipertahankan.

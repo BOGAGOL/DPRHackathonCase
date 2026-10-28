@@ -48,3 +48,21 @@ Kelanjutan memerlukan implementasi adapter protected dan instrumentasi db_time d
 - [91 unit test sesuai lingkungan modul](overnight/merge_verification.json)
 
 Collection gabungan awal salah memilih venv benchmark untuk verifier (Jinja2 tidak tersedia); suite dijalankan dalam lingkungan modul yang sesuai: 67 benchmark/datagen + 24 verify lulus. Collection error tetap dicatat, bukan diklaim sebagai test lulus. Tidak ada pengulangan gerbang bisnis. Laporan terdahulu diarsipkan pada overnight/history/.
+# Pembaruan kelanjutan 28 Oktober 2026, 13:15 WIB
+
+Pemulihan PostgreSQL/OpenBao PASS, unsealed dan Transit siap; token svc-app dan
+svc-migration baru TTL 4 jam tersimpan di luar repo. Count read-only kelima DB
+sesuai 734/100000/1000000/100000/1000000, TLS verify-full aktif. Origin/main
+ed88ecd (PR #5 b8e9998 dan PR #6) sudah digabung tanpa konflik melalui 0ba90db.
+TLS final apply + verify PASS dan matriks (a)-(d) untuk kedua baseline/kedua
+protected PASS; protected_734 belum dibuat dan tetap pending secara eksplisit.
+Test regresi TLS: 19 PASS.
+
+**Status terbaru: STOP prasyarat langkah 2.** shared_preload_libraries kosong;
+pg_stat_statements belum aktif dan belum ada extension/view pada keempat DB.
+db_time belum dapat diukur. Tidak mengubah konfigurasi preload, memasang
+extension atau restart otomatis. Adapter/parity, target, verifikasi after dan
+benchmark belum dilanjutkan. Migrasi 1M yang telah lulus tetap dipertahankan.
+Evidence pemulihan: overnight/recovery_20261028.json; TLS: overnight/
+tls_final_20261028/; hambatan: overnight/db_time_preflight_20261028.json.
+Bagian berikut mempertahankan laporan sesi semalam sebagai riwayat.
