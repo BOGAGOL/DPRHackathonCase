@@ -72,3 +72,9 @@ db_time adalah mean SQL execution/request, bukan percentile server; non-DB tetap
 **BELUM DIUJI**, skala100k: api_list_page, api_read_profile, api_search_nik dan api_search_email. Token svc-app terbaru ditolak lookup-self HTTP403; syarat policy hanya svc-app dan sisa TTL >=2 jam belum terverifikasi. Seluruh metrik latency/throughput/error dan P01/P01A/P02/P03 API belum dinilai. Tidak ada parity atau workload dijalankan, salinan api_* belum dibuat.
 
 Rancangan API memakai TLS DB pada kedua mode, HTTPS+FastAPI+audit log dan DTO endpoint; kondisi ini berbeda dari DB v2 (baseline DB tanpa TLS), sehingga tidak boleh mencampur percentile/rasio lintas level. Hasil DB di atas tetap dipertahankan. Bukti gate: evidence/benchmark/api_bppb_100k/preflight_20261029T050503WIB.json; snapshot kode51c8ca3. Lanjut hanya setelah operator menyediakan token yang memenuhi syarat dan semua gate awal diulang.
+
+### Pembaruan 29 Oktober 2026, 05:27 WIB
+
+Seluruh gate awal ulang PASS pada snapshotb77142d: token operator hanya svc-app, TTL14373s; AC/power/container/OpenBao/count/checksum resmi cocok; disk49,21GiB. Namun **API tetap BELUM DIUJI**: validator runtime app dan CLI setup tidak mendukung api_plain_100k/api_protected_100k. Pengecualian env disposable hanya prefixdpr_b_test_. Berhenti sebelum membuat salinan atau menyalakan app, sesuai larangan mengubah kode app. Sumber diperiksa statik, bukan mengklaim uji layanan berjalan.
+
+Bukti: api_bppb_100k/preflight_20261029T052428WIB.json dan app_target_check_20261029T052722WIB.json. Tidak ada parity/run untuk dilaporkan; hasil DBv2 di atas tidak diganti. Dukungan target clone/setup perlu diselesaikan Modul B atau instruksi alternatif eksplisit, lalu gate diulang sebelum measurement.
