@@ -41,6 +41,17 @@ APP_PYTHON = ROOT / 'app/.venv/Scripts/python.exe'
 K6 = Path('C:/Program Files/k6/k6.exe')
 CA = Path('C:/dev/dpr-private/openbao/tls/ca.crt')
 PORT = 8100
+BLOCK_COUNT = 1
+RUNS_PER_MODE = 2 * BLOCK_COUNT
+DESIGN_CHANGE = {
+    'authorized_on_wib_date': '2026-10-29',
+    'reason': 'Operator time limit; explicitly reduced from two B-P-P-B blocks to one before measurement.',
+    'previous_blocks': 2, 'blocks': BLOCK_COUNT,
+    'previous_runs_per_mode_per_endpoint': 4, 'runs_per_mode_per_endpoint': RUNS_PER_MODE,
+    'median_over_runs': RUNS_PER_MODE, 'total_runs': BLOCK_COUNT * 4 * len(ENDPOINTS),
+    'targets_changed': False,
+    'limitation': 'Two repetitions per mode are below the original three-run minimum; reduced API evidence must be reported with this limitation.'
+}
 
 
 def production_hashes():
@@ -107,8 +118,9 @@ def preflight():
         if not record['power']['passed']:raise RuntimeError('api_power_gate_failed')
         services()
         record['token'] = paired.ensure_token(7200)
-        # One account + 8 VUs needs login cooldowns. Budget the entire session safely.
-        record['session_token_budget'] = paired.ensure_token(10400)
+        # One block including login cooldowns fits within the unchanged two-hour gate.
+        record['session_token_budget'] = paired.ensure_token(7200)
+        record['design_change'] = DESIGN_CHANGE
         record['before'] = official_snapshot()
         reference = json.loads((ROOT/'evidence/benchmark/bppb_v2_session.json').read_text())['final_integrity']
         if not paired_v2.members_match(reference, record['before']):raise RuntimeError('official_data_changed')
@@ -368,7 +380,7 @@ def compare(rows):
     for endpoint in ENDPOINTS:
         b=[r for r in rows if r['mode']=='plain' and r['endpoint']==endpoint and r['valid']]
         p=[r for r in rows if r['mode']=='protected' and r['endpoint']==endpoint and r['valid']]
-        if len(b)!=4 or len(p)!=4:raise RuntimeError('api_four_runs_per_mode_required')
+        if len(b)!=RUNS_PER_MODE or len(p)!=RUNS_PER_MODE:raise RuntimeError('api_two_runs_per_mode_required')
         before,after=medians(b),medians(p)
         ratio=after['p95_ms']/before['p95_ms'] if before['p95_ms'] else None
         throughput=after['throughput_rps']/before['throughput_rps'] if before['throughput_rps'] else None
@@ -376,7 +388,8 @@ def compare(rows):
             'p95_ratio':ratio,'throughput_ratio':throughput,'P01_ratio_passed':ratio is not None and ratio<=1.5,
             'P01_absolute_passed':after['p95_ms']<=before['p95_ms']+5,'P02_passed':throughput is not None and throughput>=.7,
             'P03_passed':after['error_rate']<=before['error_rate']})
-    return {'level':'API','scale':'100k','target_commit':paired.TARGET,'scenarios':result,
+    return {'status':'COMPLETED','level':'API','scale':'100k','target_commit':paired.TARGET,
+            'design_change':DESIGN_CHANGE,'scenarios':result,
             'scope':'GET read paths only; write/mixed API targets remain untested','db_comparison':'Side by side only; API DB TLS both modes, HTTPS/FastAPI/auth/audit/DTO differ from direct DB v2.'}
 
 
@@ -412,7 +425,7 @@ def publish(report):
     if report['status']=='COMPLETED':
         comparison=json.loads((ROOT/'evidence/benchmark/api_bppb_compare.json').read_text())
         with (ROOT/'evidence/benchmark/bppb_versions_summary.md').open('a',encoding='utf-8') as h:
-            h.write('\n\n### Level API — hasil resmi 100k\n\nTLS DB kedua mode, HTTPS/FastAPI/auth/audit ikut terukur; DTO berbeda dari DB. Median empat run per mode.\n\n'
+            h.write('\n\n### Level API — hasil 100k, satu blok atas batas waktu operator\n\nTLS DB kedua mode, HTTPS/FastAPI/auth/audit ikut terukur; DTO berbeda dari DB. Median dua run per mode (satu B-P-P-B); di bawah minimum awal tiga pengulangan. Target tidak diubah.\n\n'
                     '| Endpoint | p50 B/P ms | p95 B/P ms | req/s B/P | Rasio p95 | P01/P01A/P02/P03 |\n|---|---:|---:|---:|---:|---|\n')
             for r in comparison['scenarios']:
                 b,p=r['before'],r['after'];statuses='/'.join('LULUS' if r[k] else 'GAGAL' for k in ('P01_ratio_passed','P01_absolute_passed','P02_passed','P03_passed'))
@@ -434,7 +447,8 @@ def run():
     private=secure_directory(Path(os.environ['DPR_PRIVATE_DIR'])/'benchmark'/('api_'+str(time.time_ns())))
     store=PGStore();swap=Swap(store,JOURNAL);app=App(swap,private)
     report={'status':'RUNNING','code_commit':gate['code_commit'],'production_sha256':gate['production_sha256'],
-        'started_at_utc':utc_now(),'rows':[],'attempts':[],'parameters':{'vus':8,'duration_seconds':60,'warmup_after_start_seconds':30,'blocks':2,'order':['B','P','P','B'],
+        'started_at_utc':utc_now(),'rows':[],'attempts':[],'design_change':DESIGN_CHANGE,
+        'parameters':{'vus':8,'duration_seconds':60,'warmup_after_start_seconds':30,'blocks':BLOCK_COUNT,'order':['B','P','P','B'],
         'login_cooldown_seconds':310,'why_cooldown':'one account, 8 logins/run, limiter 10 per 300s'},
         'tool':subprocess.check_output([str(K6),'version'],text=True).strip(),'app_python':str(APP_PYTHON.relative_to(ROOT)),
         'database_transport_both_modes':'app_user verify-full same CA','dek_cache':'OFF','http_transport':'https_pool',
@@ -449,7 +463,7 @@ def run():
         report['stage']='parity'
         report['parity']=parity(app,keys,accounts)
         report['stage']='measurement'
-        for block in (1,2):
+        for block in range(1,BLOCK_COUNT+1):
             attempt=0
             while True:
                 attempt+=1;directory=OUT/f'block_{block}'/f'attempt_{attempt}'

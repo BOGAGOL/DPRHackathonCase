@@ -1,0 +1,78 @@
+{
+  "archived_at_utc": "2026-10-28T23:58:42.671137+00:00",
+  "previous_status": "STOPPED_PREPARE_CLONES",
+  "restoration_passed": true,
+  "measured_runs": 0,
+  "files": [
+    {
+      "source": "evidence/benchmark/api_bppb_100k/active_preflight.json",
+      "archived": "evidence/benchmark/api_bppb_100k/history/setup_failure_20261029T0610/active_preflight.json",
+      "sha256": "dbee9d367bc4de7fdb549f703aaf245e627f645629934274c98331f853f98df9"
+    },
+    {
+      "source": "evidence/benchmark/api_bppb_100k/official_before.json",
+      "archived": "evidence/benchmark/api_bppb_100k/history/setup_failure_20261029T0610/official_before.json",
+      "sha256": "7ce201e32826c2da209c10b70f5ed4b41ac184eae5192ca768ce008ed79f193b"
+    },
+    {
+      "source": "evidence/benchmark/api_bppb_100k/db_swap_state.json",
+      "archived": "evidence/benchmark/api_bppb_100k/history/setup_failure_20261029T0610/db_swap_state.json",
+      "sha256": "3904aed82e4fd5e354135ac0f084a0b29558d448a62a553e5e1bc791aa3c120b"
+    },
+    {
+      "source": "evidence/benchmark/api_bppb_100k/setup_progress.json",
+      "archived": "evidence/benchmark/api_bppb_100k/history/setup_failure_20261029T0610/setup_progress.json",
+      "sha256": "e36ef894ed6369da02749f9035c422692a76b4d4d5788ad9805d551086a60e48"
+    },
+    {
+      "source": "evidence/benchmark/api_bppb_100k/session.json",
+      "archived": "evidence/benchmark/api_bppb_100k/history/setup_failure_20261029T0610/session.json",
+      "sha256": "ea9801954abba217c192eb38c43adee209b46779bda7f21695fb8dbd4f444560"
+    },
+    {
+      "source": "evidence/benchmark/api_bppb_100k/final_integrity.json",
+      "archived": "evidence/benchmark/api_bppb_100k/history/setup_failure_20261029T0610/final_integrity.json",
+      "sha256": "81f24a4ea349ec1dd851e0d25cdade86d186f272c57547a77c76db748cd93a53"
+    },
+    {
+      "source": "evidence/benchmark/api_bppb_100k/setup_readonly_diagnosis.json",
+      "archived": "evidence/benchmark/api_bppb_100k/history/setup_failure_20261029T0610/setup_readonly_diagnosis.json",
+      "sha256": "9a768ccaf958249debffefe4bdb969c73218265e3df79060b3fe4427a947b33c"
+    },
+    {
+      "source": "evidence/benchmark/api_bppb_100k/token_budget_check.json",
+      "archived": "evidence/benchmark/api_bppb_100k/history/setup_failure_20261029T0610/token_budget_check.json",
+      "sha256": "3a9b4d5ce461e1a31da2f10ebe97266313b96a6d30afc8f2f5f3b4281a7318d2"
+    },
+    {
+      "source": "evidence/benchmark/api_bppb_100k/setup_fix_verification.json",
+      "archived": "evidence/benchmark/api_bppb_100k/history/setup_failure_20261029T0610/setup_fix_verification.json",
+      "sha256": "d192b7cacc02336ab1790752ae1c4d9ac403b89ff3dedb68cb6a9dabe773e3ff"
+    },
+    {
+      "source": "results/bench/api_bppb_100k/launcher.json",
+      "archived": "results/bench/api_bppb_100k/history/setup_failure_20261029T0610/launcher.json",
+      "sha256": "dbfc5be9abde30858d20d531e82674434d8d641b78f1952027e74e18ca34a58d"
+    },
+    {
+      "source": "results/bench/api_bppb_100k/worker.stdout.log",
+      "archived": "results/bench/api_bppb_100k/history/setup_failure_20261029T0610/worker.stdout.log",
+      "sha256": "6c6ae4219a37c0934bd29ceddf8d669978e733f544d15819ac207373726a0da3"
+    },
+    {
+      "source": "results/bench/api_bppb_100k/worker.stderr.log",
+      "archived": "results/bench/api_bppb_100k/history/setup_failure_20261029T0610/worker.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "results/bench/api_bppb_100k/publication.json",
+      "archived": "results/bench/api_bppb_100k/history/setup_failure_20261029T0610/publication.json",
+      "sha256": "da5c30ec507efac0e255b89055c18930334f5ab4f82307a42ae4d54a3e48029a"
+    },
+    {
+      "source": "results/bench/api_bppb_100k/ca_trust.json",
+      "archived": "results/bench/api_bppb_100k/history/setup_failure_20261029T0610/ca_trust.json",
+      "sha256": "98f0a2dd8cc3cbf5b7801d809d646fe287a6f9e711bab968c45ba139dafcc752"
+    }
+  ]
+}

@@ -52,15 +52,20 @@ def test_raw_parser_only_measurement_points_and_all_errors(tmp_path):
     assert report['p95_ms']>9
 
 
-def test_comparison_requires_four_runs_and_shows_ratio_absolute_independently():
+def test_comparison_requires_two_runs_and_records_operator_design_change():
     rows=[]
     for endpoint in c.ENDPOINTS:
         for mode in ('plain','protected'):
-            for _ in range(4):rows.append({'endpoint':endpoint,'mode':mode,'valid':True,
+            for _ in range(2):rows.append({'endpoint':endpoint,'mode':mode,'valid':True,
                 'p50_ms':1,'p95_ms':2 if mode=='plain' else 6,'p99_ms':7,'mean_ms':3,'throughput_rps':100,'error_rate':0})
-    record=r.compare(rows)['scenarios'][0]
+    comparison=r.compare(rows);record=comparison['scenarios'][0]
     assert not record['P01_ratio_passed'] and record['P01_absolute_passed'] and record['P02_passed'] and record['P03_passed']
+    assert comparison['design_change']['total_runs']==16
+    assert comparison['design_change']['blocks']==1
+    assert comparison['design_change']['targets_changed'] is False
+    assert 'three-run minimum' in comparison['design_change']['limitation']
     with pytest.raises(RuntimeError):r.compare(rows[:-1])
+    with pytest.raises(RuntimeError):r.compare(rows+rows)
 
 
 def test_supervisor_recovers_only_unfinished_worker_not_failed_recovery(monkeypatch,tmp_path):

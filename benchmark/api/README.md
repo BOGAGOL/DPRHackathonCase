@@ -36,11 +36,14 @@ Ini prasyarat koneksi; CLI B tetap membuat tabel/grant tabel dan akun resmi.
 Ringkasan resource utama memakai sampel dalam window pengukuran; statistik yang
 termasuk login/warmup juga disimpan terpisah sebagai resources_including_setup.
 
-Dua blok B/P/P/B, empat endpoint GET, 8VU dan60s per run. App restart hanya saat mode
+Satu blok B/P/P/B (perubahan operator29Okt karena batas waktu), empat endpoint GET,
+dua run per mode/endpoint, total16 run. Median dua run dilaporkan dengan keterbatasan
+di bawah minimum awal tiga pengulangan; ambang targets.md tetap.
+8VU dan60s per run. App restart hanya saat mode
 berubah; warmup30s sesudah tiap start. K6 login8x sebelum pengukuran setiap run.
 Satu akun dibatasi10 login/300s oleh app, sehingga jeda login310s dilakukan di luar
-window ukur. Estimasi2,5–3 jam; gate token minimum2jam ditambah anggaran sesi10400s
-sebelum swap agar cukup untuk cooldown. Tidak auto-issue/renew/read root.
+window ukur. Estimasi75–90menit; gate token minimum2jam untuk sesi satu blok,
+termasuk cooldown. Tidak auto-issue/renew/read root.
 
 K6 tags URL/error-message dinonaktifkan, nama request diset label endpoint; body
 respons dibuang. Custom latency hanya sampel terukur, blocked+duration. K6 logs
