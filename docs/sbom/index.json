@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "format": "CycloneDX 1.6",
+  "inputs_sha256_lf": {
+    "app/requirements.txt": "850be532384067203e5ef58cf39ce6773fd3f68129caa870ebfa5247e979090d",
+    "infra/requirements.txt": "357fa7659f9a9c5a0201e097ee8694253028104f249cd55686293e7536c95c74",
+    "scanner/requirements.txt": "eace95fccd2cefee5dff40caad7345003b68515f0e0c7a65ff82346fcf33b7db",
+    "datagen/requirements.txt": "ccbd0aadc5c500ee0c564f6ee412a3400b898f62a1646ec028f2e0861259c0ee",
+    "benchmark/requirements.txt": "704f8cf275f9ec7d55b705f68b9cc03822548b4d1f85aa4f99c7eae3ccef9f4f",
+    "infra/submission/requirements.txt": "7e1c5884438d533e8f05d6cfc5b973f9e251efb63329d9fe69579e58fcd4d823",
+    "toolkit/pyproject.toml": "9e922ee67992ce44d3b444b5821e36fb271096b4abb417af1b6a026775c33e30",
+    "app/web/package-lock.json": "0fe5b23a861095b033e8ec1755ab2ee6b530bccb8459b3b65d731048682ea2da",
+    "infra/compose.yaml": "2878d855b2fc646c4db5844848b80a28456990e1ea684665a5f3a2cc41d41ff5",
+    "infra/vm/compose.yaml": "21d4c882419302c39dee3e65ed822b9eda9f92c12944741b8357dbf4540a0dbc",
+    "infra/tests/compose.postgres.yaml": "7686613708c67c8175562e70cc0fa2d342785a969b012653a257f457211b3cb3"
+  },
+  "inventories": {
+    "python-declared.cdx.json": {
+      "components": 23,
+      "scope": "Declared direct/runtime/build/test requirements only; ranges remain unresolved; no transitive/deployed-environment completeness claim",
+      "sha256_lf": "6a177ac7292c4c69bf17ce9d746192408b3d2bc38cef60090187fc7349d5139b"
+    },
+    "service-web-lock.cdx.json": {
+      "components": 114,
+      "scope": "All packages in the active frontend npm lockfile, including development/optional entries; integrity is declared by the lockfile, not independently fetched",
+      "sha256_lf": "ff8ba65d7393daaeb9b5e6463875b21d6d3f756b4a0af721b5fb1f90316fcfe8"
+    },
+    "infrastructure.cdx.json": {
+      "components": 2,
+      "scope": "Compose image references; container OS packages and resolved image digests are not inventoried",
+      "sha256_lf": "ee52c4029d3d12f25351f0af24f4dcac160b395bcd4bfbdddaf72ee7a63af8e6"
+    }
+  }
+}

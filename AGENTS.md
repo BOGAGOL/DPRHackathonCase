@@ -3,7 +3,7 @@
 2. docs/contracts/CONTRACT.md (aturan teknis mengikat)
 3. docs/TEAM_PLAN.md (pembagian dan jadwal)
 4. Prompt modul di docs/ai-prompts/
-Abaikan docs/legacy-md_zhafif/ kecuali diminta secara eksplisit; isinya bukan acuan.
+Abaikan archive/ kecuali diminta secara eksplisit; isinya bukan acuan runtime aktif.
 
 # Aturan untuk agen AI (Codex / Claude Code) di repo ini
 

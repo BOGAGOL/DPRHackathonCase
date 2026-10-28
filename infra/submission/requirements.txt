@@ -1,0 +1,2 @@
+packaging>=24,<27
+PyYAML>=6,<7

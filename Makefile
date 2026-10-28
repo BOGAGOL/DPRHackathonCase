@@ -25,3 +25,13 @@ test-core:
 
 test-service:
 	$(PYTHON) -m pytest -c app/pytest.ini app/tests -q
+
+.PHONY: submission-check submission-sbom submission-build
+submission-check:
+	$(PYTHON) -m infra.submission check
+
+submission-sbom:
+	$(PYTHON) -m infra.submission sbom
+
+submission-build:
+	$(PYTHON) -m infra.submission build --output dist/submission

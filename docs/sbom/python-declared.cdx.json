@@ -1,0 +1,684 @@
+{
+  "$schema": "https://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:d7d13b97-7827-5004-bfeb-0543fa7757cf",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "type": "application",
+      "bom-ref": "dpr-project",
+      "name": "DPR Data Protection Prototype",
+      "version": "contract-v1"
+    },
+    "properties": [
+      {
+        "name": "dpr:inventory-scope",
+        "value": "Declared direct/runtime/build/test requirements only; ranges remain unresolved; no transitive/deployed-environment completeness claim"
+      },
+      {
+        "name": "dpr:input-sha256-lf",
+        "value": "{\"app/requirements.txt\": \"850be532384067203e5ef58cf39ce6773fd3f68129caa870ebfa5247e979090d\", \"app/web/package-lock.json\": \"0fe5b23a861095b033e8ec1755ab2ee6b530bccb8459b3b65d731048682ea2da\", \"benchmark/requirements.txt\": \"704f8cf275f9ec7d55b705f68b9cc03822548b4d1f85aa4f99c7eae3ccef9f4f\", \"datagen/requirements.txt\": \"ccbd0aadc5c500ee0c564f6ee412a3400b898f62a1646ec028f2e0861259c0ee\", \"infra/compose.yaml\": \"2878d855b2fc646c4db5844848b80a28456990e1ea684665a5f3a2cc41d41ff5\", \"infra/requirements.txt\": \"357fa7659f9a9c5a0201e097ee8694253028104f249cd55686293e7536c95c74\", \"infra/submission/requirements.txt\": \"7e1c5884438d533e8f05d6cfc5b973f9e251efb63329d9fe69579e58fcd4d823\", \"infra/tests/compose.postgres.yaml\": \"7686613708c67c8175562e70cc0fa2d342785a969b012653a257f457211b3cb3\", \"infra/vm/compose.yaml\": \"21d4c882419302c39dee3e65ed822b9eda9f92c12944741b8357dbf4540a0dbc\", \"scanner/requirements.txt\": \"eace95fccd2cefee5dff40caad7345003b68515f0e0c7a65ff82346fcf33b7db\", \"toolkit/pyproject.toml\": \"9e922ee67992ce44d3b444b5821e36fb271096b4abb417af1b6a026775c33e30\"}"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "python:cb60aff728efb4f9a21c",
+      "name": "argon2-cffi",
+      "purl": "pkg:pypi/argon2-cffi",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "<26,>=25.1.0"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "infra/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "unresolved-range"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:80e70ba1f15a67be63b2",
+      "name": "argon2-cffi",
+      "purl": "pkg:pypi/argon2-cffi@25.1.0",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "==25.1.0"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "app/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "declared-pin"
+        }
+      ],
+      "version": "25.1.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:483943bed955d6a5087e",
+      "name": "cryptography",
+      "purl": "pkg:pypi/cryptography",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "<47,>=46.0.3"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "infra/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "unresolved-range"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:59ffce8d07e41ec89a50",
+      "name": "cryptography",
+      "purl": "pkg:pypi/cryptography",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "<47,>=46.0.5"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "toolkit/pyproject.toml:runtime"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "unresolved-range"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:5cd2bb320b447dfb797d",
+      "name": "fastapi",
+      "purl": "pkg:pypi/fastapi@0.134.0",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "==0.134.0"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "app/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "declared-pin"
+        }
+      ],
+      "version": "0.134.0"
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:14ba8f40a377b4a502b8",
+      "name": "httpx",
+      "purl": "pkg:pypi/httpx",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "<0.29,>=0.28.1"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "toolkit/pyproject.toml:runtime"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "unresolved-range"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:1023a0af2efe42b49257",
+      "name": "httpx",
+      "purl": "pkg:pypi/httpx@0.28.1",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "==0.28.1"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "app/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "declared-pin"
+        }
+      ],
+      "version": "0.28.1"
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:c17b87342727b3b594b2",
+      "name": "jinja2",
+      "purl": "pkg:pypi/jinja2@3.1.6",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "==3.1.6"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "scanner/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "declared-pin"
+        }
+      ],
+      "version": "3.1.6"
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:652a31602ec71f9d180b",
+      "name": "packaging",
+      "purl": "pkg:pypi/packaging",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "<27,>=24"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "infra/submission/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "unresolved-range"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:ecf8e142092af255f514",
+      "name": "psutil",
+      "purl": "pkg:pypi/psutil",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "<8,>=7.2.2"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "infra/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "unresolved-range"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:c88eee3495f0d5dfdf41",
+      "name": "psutil",
+      "purl": "pkg:pypi/psutil@7.2.2",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "==7.2.2"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "benchmark/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "declared-pin"
+        }
+      ],
+      "version": "7.2.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:0d3bdee0f85ec91654ce",
+      "name": "psycopg",
+      "purl": "pkg:pypi/psycopg",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "<4,>=3.3.3"
+        },
+        {
+          "name": "dpr:extras",
+          "value": "binary"
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "infra/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "unresolved-range"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:be3919fff81956fa6ca1",
+      "name": "psycopg",
+      "purl": "pkg:pypi/psycopg@3.3.3",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "==3.3.3"
+        },
+        {
+          "name": "dpr:extras",
+          "value": "binary"
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "app/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "declared-pin"
+        }
+      ],
+      "version": "3.3.3"
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:0074fd890e143dc780f0",
+      "name": "psycopg",
+      "purl": "pkg:pypi/psycopg@3.3.6",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "==3.3.6"
+        },
+        {
+          "name": "dpr:extras",
+          "value": "binary"
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "benchmark/requirements.txt;datagen/requirements.txt;scanner/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "declared-pin"
+        }
+      ],
+      "version": "3.3.6"
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:e2533f2f8b7d5f11cb01",
+      "name": "pydantic",
+      "purl": "pkg:pypi/pydantic@2.12.5",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "==2.12.5"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "app/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "declared-pin"
+        }
+      ],
+      "version": "2.12.5"
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:4b360606fb4fdcb8e99a",
+      "name": "pytest",
+      "purl": "pkg:pypi/pytest",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "<10,>=8"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "infra/requirements.txt;toolkit/pyproject.toml:test"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "unresolved-range"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:9f2a31c27bab883d155e",
+      "name": "pytest",
+      "purl": "pkg:pypi/pytest@8.4.2",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "==8.4.2"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "benchmark/requirements.txt;datagen/requirements.txt;scanner/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "declared-pin"
+        }
+      ],
+      "version": "8.4.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:34581ca5ca3aa7c4530f",
+      "name": "pytest",
+      "purl": "pkg:pypi/pytest@9.0.2",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "==9.0.2"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "app/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "declared-pin"
+        }
+      ],
+      "version": "9.0.2"
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:fb424c2cd786488b784b",
+      "name": "pyyaml",
+      "purl": "pkg:pypi/pyyaml",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "<7,>=6"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "infra/requirements.txt;infra/submission/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "unresolved-range"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:47b60d7fed891b56e6e5",
+      "name": "pyyaml",
+      "purl": "pkg:pypi/pyyaml@6.0.3",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "==6.0.3"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "benchmark/requirements.txt;scanner/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "declared-pin"
+        }
+      ],
+      "version": "6.0.3"
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:b63a3c834b944016a4fc",
+      "name": "setuptools",
+      "purl": "pkg:pypi/setuptools",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": ">=77"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "toolkit/pyproject.toml:build"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "unresolved-range"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:cc8a03df041bff007213",
+      "name": "sqlalchemy",
+      "purl": "pkg:pypi/sqlalchemy@2.0.47",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "==2.0.47"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "app/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "declared-pin"
+        }
+      ],
+      "version": "2.0.47"
+    },
+    {
+      "type": "library",
+      "bom-ref": "python:7f46f60c9507c8b2ba36",
+      "name": "uvicorn",
+      "purl": "pkg:pypi/uvicorn@0.41.0",
+      "properties": [
+        {
+          "name": "dpr:constraint",
+          "value": "==0.41.0"
+        },
+        {
+          "name": "dpr:extras",
+          "value": ""
+        },
+        {
+          "name": "dpr:environment-marker",
+          "value": ""
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "app/requirements.txt"
+        },
+        {
+          "name": "dpr:resolution",
+          "value": "declared-pin"
+        }
+      ],
+      "version": "0.41.0"
+    }
+  ]
+}

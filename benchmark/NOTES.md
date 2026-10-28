@@ -211,3 +211,9 @@ Raw1M: 133.678.973 byte CSV menjadi28.953.920 byte gzip level1. Hash dekompresi 
 Rasio throughput pgbench/Python = 29.239?. Hash corpus2048 key identik; semua3 run pgbench tanpa error, data/sequence100k tetap. Query mengembalikan30 field; pgbench memakai clientC, jalurTCP di container dan tidak mengonversi/membandingkan field Python tiap request. Angka tersebut mencakup overhead client, validasi/logging dan perbedaan transport/penempatan, bukan estimasi murni overhead interpreter.
 CPU client1M dari psutil: median per skenario 12.575?16.169% kapasitas8 logicalCPU; peak sampel tertinggi 17.988%. CPU keseluruhan mesin tidak jenuh pada sampel, tetapi ini tidak membuktikan ketiadaan batas GIL/satu inti atau bottleneck transport. CPU client100k read_by_nik historis 15.094% kapasitas mesin. Resource mentah berada dalam gzip; ringkasan client_cpu.json menyimpan definisi dan cakupan.
 Evidence: evidence/benchmark/baseline_1m/ (summary, per-run, env, backup_restore, raw_validation, client_cpu); crosscheck_pgbench.json; session_1m_crosscheck.json. Raw pgbench di results/bench/crosscheck_pgbench/ tanpa key; seluruh log sementara container serta script privat sudah dihapus.
+
+## Portabilitas test pada paket pengumpulan — 28 Oktober 2026
+
+Unit test environment memakai sensor baterai buatan sendiri untuk kasus charger
+tersambung dan tidak tersambung. Guard charger pada runtime tetap diuji menolak
+kondisi tidak tersambung; benchmark aktual dan angka evidence tidak berubah.

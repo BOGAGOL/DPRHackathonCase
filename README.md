@@ -1,78 +1,125 @@
 # Pelindungan Data Pribadi ketika Database Bocor
 
-Prototipe Tim BOGAGOL untuk Final Hackathon DPR RI 2026. Aplikasi aktif berada di
-`app/`, memakai PostgreSQL **18** di `pg-dpr:5433` dan OpenBao **2.5.5** dengan TLS.
-Format data, enkripsi dan kewenangan mengikuti [kontrak teknis](docs/contracts/CONTRACT.md).
+Prototipe Tim BOGAGOL untuk Final Hackathon DPR RI 2026: menemukan data pribadi,
+melindungi nilai sensitif, membatasi akses aplikasi, serta menguji kebocoran,
+kinerja dan pemulihan. Studi kasus memakai data sintetis panitia.
 
-## Panduan aktif
+**Jalur aktif:** Next.js + FastAPI di `app/`, PostgreSQL **18** di `pg-dpr:5433`,
+OpenBao **2.5.5** dengan TLS. Format enkripsi dan kewenangan mengikuti
+[kontrak teknis](docs/contracts/CONTRACT.md). Enkripsi field AES-256-GCM memakai DEK
+per record/domain dan AAD; exact lookup menggunakan blind index HMAC.
 
-| Kebutuhan | Panduan |
+## Mulai membaca
+
+| Kebutuhan | Dokumen |
 |---|---|
-| Instalasi PostgreSQL/OpenBao pada VM baru | [Fresh VM](infra/vm/README.md) |
-| Aplikasi backend/frontend | [Service App](app/README.md) |
-| Scanner dan inventaris | [Scanner](scanner/README.md) |
-| Migrasi ke database baru | [Migrasi](migration/README.md) |
-| Backup/restore terenkripsi | [Backup](scripts/backup/README.md) |
-| Rotasi kunci | [Rotasi](infra/rotation/README.md) |
-| Upgrade analis A5 pada server existing | [A5](infra/protected/ANALYST_SUPPRESSION.md) |
-| Uji browser dan pemulihan nyata | [Acceptance](infra/acceptance/README.md) |
-| Kesiapan pengumpulan dan scope bukti | [Readiness](docs/SUBMISSION_READINESS.md) |
+| Peta dokumentasi dan luaran | [Indeks dokumentasi](docs/README.md) |
+| Arsitektur dan batas kepercayaan | [Arsitektur](docs/architecture/README.md) |
+| Instalasi VM baru | [Paket PostgreSQL/OpenBao TLS](infra/vm/README.md) |
+| Menjalankan aplikasi | [README Service App](app/README.md) |
+| Server yang sudah berjalan | [Rilis A5](app/docs/DEPLOY_A5.md), [pemulihan](app/docs/RECOVERY.md) |
+| Perintah uji dan reproduksi | [Panduan reproduksi](docs/operations/REPRODUCTION.md) |
+| Bukti yang mendukung klaim | [Indeks evidence](docs/evidence_index.md) |
+| Pekerjaan sebelum submit | [Checklist pengumpulan](docs/submission/CHECKLIST.md) |
+| Konteks penulisan laporan | [Konteks laporan](docs/report/CONTEXT.md) |
+| Risiko yang masih tersisa | [Keterbatasan](docs/security/LIMITATIONS.md) |
 
-## Struktur
+## Status dan cakupan bukti
+
+- Toolkit, profile, migrasi, role/RLS, backup/restore, rotasi kunci, dan aplikasi
+  mempunyai kode dan evidence. Setiap hasil harus dibaca bersama dataset/lingkungannya.
+- Acceptance setelah A5 lulus **143 pemeriksaan** pada lab PG18/OpenBao TLS dengan
+  **17 record buatan sendiri**, termasuk restore dan Chrome nyata.
+- Deployment web lulus **100 pemeriksaan** dengan enam akun existing, tanpa mutasi
+  data anggota; konfigurasi SQL/TLS internal VM tidak diperiksa langsung lewat SSH.
+- Benchmark yang ada pada snapshot ini adalah **baseline awal**. Hasil protected,
+  leakage, dan pekerjaan lain di branch anggota tim belum otomatis menjadi bagian paket.
+- Laporan PDF, slide final, review manusia, dan akses folder pengumpulan harus
+  difinalisasi tim. Ini belum merupakan klaim seluruh persyaratan lomba sudah selesai.
+
+Bukti: [ringkasan acceptance](evidence/acceptance/post-a5-summary.json).
+Jangan memakai evidence prototipe lama atau hasil mock sebagai pengganti pengujian nyata.
+
+## Struktur proyek
 
 ```text
-app/             Satu aplikasi aktif: Next.js, FastAPI, enam peran
-infra/           PostgreSQL 18, OpenBao TLS, acceptance dan operasi
-scanner/         Inventaris, klasifikasi dan evaluasi deteksi
-policy/          Keputusan per kolom dan protection profile
-migration/       Migrasi resumable dan decrypt-and-compare
-sql/             Skema dan role minimum
+app/             Service App aktif: backend, frontend, provisioning dan test B
+infra/           OpenBao/TLS, PostgreSQL, role bootstrap, acceptance, alat pengumpulan
+scanner/         Inventarisasi, klasifikasi dan evaluasi deteksi
+policy/          Protection profile dan keputusan per kolom
+migration/       Migrasi ke database baru, resume dan decrypt-and-compare
+sql/             Skema baseline/protected dan role minimum
+scripts/backup/  Backup streaming terenkripsi, restore, tamper dan retention drill
 toolkit/         Paket Python dprcrypto
-scripts/backup/  Backup streaming, restore, tamper dan retensi
-datagen/         Pembesaran data sintetis
-benchmark/       Pengukuran kinerja; baseline awal pada snapshot ini
-verify/          Verifikasi dan konfigurasi cakupan
-docs/            Kontrak, panduan dan dokumentasi lomba
-evidence/        Hasil mesin tanpa rahasia/data pribadi
-archive/         Dokumen/evidence prototipe lama, bukan acuan runtime
+benchmark/       Pengukuran performa; baca status dan scope tiap hasil
+datagen/         Dataset sintetis reproducible
+verify/          Verifikasi; fitur yang belum tersedia ditandai pada checklist
+docs/            Dokumentasi dan bahan pengumpulan
+evidence/        Hasil mesin dengan scope; bukan tempat rahasia/dump
+archive/         Dokumen/evidence lama, dikecualikan dari paket pengumpulan
 ```
 
-Runtime PostgreSQL 17 (`apps/`, `infrastructure/`, compose dan skrip lama) sudah
-retired; versi sebelumnya tersedia di riwayat Git. Lihat [arsip](archive/README.md).
-Tidak ada perubahan format enkripsi, isi database, kunci atau target benchmark
-sebagai bagian dari perapian struktur ini.
+Path modul aktif dipertahankan agar skrip, deployment dan pekerjaan tim tetap kompatibel.
+Runtime PG17 yang lama sudah dihapus dari snapshot; lihat [catatan struktur](docs/submission/STRUCTURE.md).
 
-## Lingkungan dan test
+## Menyiapkan lingkungan pengembang
 
-Python **3.11+**, Node.js yang mendukung Next.js proyek, Docker/Compose V2 untuk
-container dan Chrome untuk acceptance browser. Dari root repo:
+Python **3.11+**, Git untuk checkout/test, Node.js yang mendukung Next.js proyek, Docker Engine/Compose V2
+untuk stack container, dan Google Chrome untuk acceptance browser. Jalankan dari root:
 
 ```powershell
 python -m venv .venv
 .venv/Scripts/python -m pip install -r infra/requirements.txt
 .venv/Scripts/python -m pip install -r app/requirements.txt
+.venv/Scripts/python -m pip install -r infra/submission/requirements.txt
 .venv/Scripts/python -m pip install -e toolkit
-.venv/Scripts/python -m pytest -q
-.venv/Scripts/python -m pytest -c app/pytest.ini app/tests -q
+Push-Location app/web
+npm ci
+npm run build
+Pop-Location
 ```
 
-Default pytest menjalankan suite A. Jalankan B dan setiap modul C sebagai proses
-terpisah agar conftest/import tetap terisolasi. Scanner/datagen/benchmark mempunyai
-requirements tersendiri; gunakan environment modul untuk mencocokkan pin versinya.
-Untuk frontend: `cd app/web`, `npm ci`, lalu `npm run build`.
+Scanner/datagen/benchmark memiliki requirements tersendiri. Gunakan environment modul
+untuk reproduksi yang ketat karena sebagian pin versinya berbeda; lihat
+[panduan reproduksi](docs/operations/REPRODUCTION.md) dan [SBOM](docs/sbom/README.md).
 
-Ikuti runbook fresh VM hanya untuk stack baru. Pada server existing jangan mengulang
-init, import atau prepare/provision untuk sekadar memperbarui aplikasi. Service App
-membaca environment eksplisit; contoh di [app/.env.example](app/.env.example).
+Untuk **VM baru**, ikuti [runbook fresh VM](infra/vm/README.md). Untuk **database
+existing**, inventaris dahulu dan gunakan upgrade spesifik; jangan mengulang init,
+import, prepare/provision, atau mengganti material kunci yang sudah dipakai.
+Aplikasi memakai environment eksplisit; contoh ada di [app/.env.example](app/.env.example).
 
-## Status bukti dan kerahasiaan
+## Pengujian
 
-Acceptance setelah A5 mencatat 143 pemeriksaan pada lab PG18/OpenBao TLS berisi
-17 record buatan sendiri serta 100 pemeriksaan pada deployment melalui enam akun.
-Lihat [ringkasan](evidence/acceptance/post-a5-summary.json). Ini tidak menggantikan
-benchmark resmi, pengujian seluruh dataset atau inspeksi internal VM lewat SSH.
+```powershell
+# Default pytest menjalankan suite inti A; integrasi eksternal tetap opt-in.
+.venv/Scripts/python -m pytest -q
+# B dijalankan terpisah untuk menghindari benturan conftest/import.
+.venv/Scripts/python -m pytest -c app/pytest.ini app/tests -q
+# Validasi struktur dokumentasi dan paket sumber.
+.venv/Scripts/python -m infra.submission check
+```
 
-Repo tetap PRIVATE. Dataset panitia bukan bahan publik. Rahasia, file akun demo,
-kunci, token, dump dan material pemulihan disimpan di luar checkout, tidak ikut Git
-atau paket pengumpulan. Kode mengikuti [MIT](LICENSE); lisensi dokumentasi dan
-atribusi pihak ketiga akan dirinci pada paket dokumentasi pengumpulan.
+Perintah untuk scanner, benchmark, datagen, browser dan acceptance nyata ada di
+[panduan reproduksi](docs/operations/REPRODUCTION.md). Pengujian tidak menjalankan
+benchmark resmi atau mengubah database tim secara otomatis.
+
+## Paket pengumpulan
+
+```powershell
+.venv/Scripts/python -m infra.submission sbom
+.venv/Scripts/python -m infra.submission check
+.venv/Scripts/python -m infra.submission build --output dist/submission
+```
+
+Paket berisi source aktif, dokumentasi, evidence dan manifest SHA256. Dataset panitia,
+`.git`, environment lokal, kredensial, kunci, dump, cache, arsip lama dan referensi buku
+mentah dikecualikan. Build paket tidak berarti paket sudah memenuhi seluruh luaran;
+[checklist](docs/submission/CHECKLIST.md) menyebut yang masih perlu diselesaikan.
+
+## Data, lisensi dan atribusi
+
+Kode: [MIT](LICENSE). Dokumentasi orisinal: [CC BY-NC 4.0](LICENSE-DOCS.md).
+Komponen pihak ketiga mengikuti lisensi asal; lihat [atribusi](THIRD_PARTY_NOTICES.md).
+Dataset panitia hanya untuk kompetisi dan tidak boleh dipublikasikan. Repo tetap PRIVATE.
+Simpan password, token, kunci, unseal share, root token dan material pemulihan di lokasi
+privat di luar checkout; material tersebut tidak boleh masuk lampiran pengumpulan.

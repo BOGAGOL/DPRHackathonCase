@@ -88,7 +88,7 @@ mitigasi. BUKAN eksploitasi server atau serangan jaringan. Hanya data sintetis.
 ## 5. Luaran, jadwal, penilaian
 
 **Dikumpulkan (satu folder Google Drive, via Google Form panitia):**
-1. Laporan/panduan teknis PDF (gaya tesis, 40-70 halaman): analisis, rancangan, prioritas, langkah
+1. Laporan/panduan teknis PDF (40-70 halaman adalah target internal, bukan batas wajib dua PDF panitia): analisis, rancangan, prioritas, langkah
    implementasi, hasil pengujian, keterbatasan, referensi.
 2. Slide presentasi (PDF/Google Slides). File yang dikirim = file yang dipresentasikan (berubah = gugur).
 3. Lampiran reproduksi: kode, konfigurasi tanpa rahasia aktif, README, skrip pengujian, hasil mentah.
@@ -122,7 +122,7 @@ Juri diminta tidak terpukau jargon tanpa solusi yang berjalan dan tidak menuntut
 - Temuan penting: kolom yang awalnya dianggap aman dibiarkan plaintext (`jenis_kelamin`,
   `pekerjaan_terakhir`, `nama_kppn`, `nama_bank`, `kode_bank`) bersama-sama unik untuk 734/734;
   `kode_bank` saja unik 373. Karena itu `kode_bank` dimasukkan domain FIN (dienkripsi).
-- Ground truth independen (Alby): `scanner/ground_truth.csv` + metodologi; 29 kolom (26 pribadi, 3 non-pribadi:
+- Ground truth independen (Alby): `scanner/ground_truth_eval.csv` + metodologi; 29 kolom (26 pribadi, 3 non-pribadi:
   `nama_kppn`, `nama_bank`, `kode_bank` sebagai nilai institusi); label memakai taksonomi sendiri
   (PERSON_NAME, NATIONAL_ID, ...) sehingga evaluator butuh label map.
 
@@ -191,8 +191,9 @@ backup.sh meninggalkan file plaintext; TLS dimatikan di quick-start; integrasi b
   anggota lain (bukti verifikasi hasil AI).
 - Jangan menjalankan migrasi terhadap `baseline_100k` sebelum Modul C mengonfirmasi baseline benchmark
   terekam. Code freeze Rabu 28 Okt 20.00.
-- Database `postgres` (734 baris asli) tidak boleh diubah. Dataset panitia dan `sql/baseline/02_data.sql`
-  tidak di-commit. Repo tetap private.
+- Database `postgres` (734 baris asli) tidak boleh diubah. Dataset panitia `sql/baseline/02_data.sql`
+  hanya boleh ada di repo PRIVATE sesuai amandemen 27 Oktober pada CONTRACT bagian 11,
+  dan dikecualikan dari paket publik. Jangan mengunggah riwayat Git atau folder kerja privat.
 - Platform tim: Windows + PowerShell; Docker Desktop; PostgreSQL di container `pg-dpr` port 5433.
 
 ## 12. Glosarium singkat

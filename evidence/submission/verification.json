@@ -1,0 +1,162 @@
+{
+  "schema_version": 1,
+  "status": "PASSED_WITH_STATED_SCOPE",
+  "checked_at_utc": "2026-10-28T14:52:21.806401+00:00",
+  "branch": "chore/submission-polish",
+  "base_commit": "88b1de7991662fc6ee6abbde6f18add22640a7f5",
+  "scope": "Repository cleanup, working submission documents and source-only packaging; not certification of all competition deliverables",
+  "runtime_application_crypto_sql_profile_unchanged": true,
+  "existing_database_and_vm_configuration_changed": false,
+  "tests": {
+    "core_A_and_submission": {
+      "tests": 379,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 10,
+      "passed": 369
+    },
+    "submission_tests_included_in_core": 44,
+    "service_B": {
+      "passed": 328,
+      "skipped": 1,
+      "evidence": "evidence/submission/cleanup-stage1.json",
+      "scope": "Regression after legacy cleanup; active app unchanged since that run"
+    },
+    "scanner": {
+      "passed": 193,
+      "skipped": 1,
+      "scope": "Separate unit/evaluation suite; no database benchmark"
+    },
+    "datagen": {
+      "passed": 25,
+      "skipped": 0,
+      "scope": "Unit suite; no dataset generation requested"
+    },
+    "benchmark_and_verify": {
+      "tests": 29,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 29
+    },
+    "earlier_extracted_core": {
+      "tests": 378,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 10,
+      "passed": 368
+    },
+    "final_extracted_packaging_benchmark_verify": {
+      "tests": 73,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 73
+    },
+    "native_tls_recovery_browser": {
+      "junit": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 1
+      },
+      "checks": 143,
+      "rows": 17,
+      "passed": true,
+      "evidence": "evidence/backup/service-recovery-integration.json",
+      "scope": "17 invented rows; disposable PG18/OpenBao TLS, actual A+B seven-table schema, live HTTPS backend; not official migrated datasets or benchmark"
+    }
+  },
+  "source_package_smoke": {
+    "passed": true,
+    "quality_without_git": true,
+    "archive_crc_and_manifest_verified": true,
+    "verify_module_included": true,
+    "dataset_supplied": false,
+    "git_history_supplied": false,
+    "source_tree_dirty_for_smoke_only": true,
+    "scope": "Extracted source: packaging and benchmark/verify unit tests; no benchmark workload or member dataset"
+  },
+  "resolved_first_package_test_attempt": {
+    "passed": false,
+    "failures": 2,
+    "causes": [
+      "Benchmark unit test read physical battery state",
+      "Git attribute test assumed .git was shipped"
+    ],
+    "resolution": [
+      "Mocked charger states and retained negative guard test",
+      "Tested shipped .gitattributes in an isolated fixture Git repo"
+    ],
+    "final_extracted_tests_passed": 73,
+    "production_benchmark_guard_changed": false
+  },
+  "sbom_schema_validation": {
+    "schema_url": "https://raw.githubusercontent.com/CycloneDX/specification/master/schema/bom-1.6.schema.json",
+    "schema_sha256": "18f57f7482593bad9f21b4feed09084640cbeff419d62ad5090c5ceccca5b37d",
+    "files": {
+      "infrastructure.cdx.json": {
+        "valid": true,
+        "sha256_lf": "ee52c4029d3d12f25351f0af24f4dcac160b395bcd4bfbdddaf72ee7a63af8e6",
+        "error_count": 0
+      },
+      "python-declared.cdx.json": {
+        "valid": true,
+        "sha256_lf": "6a177ac7292c4c69bf17ce9d746192408b3d2bc38cef60090187fc7349d5139b",
+        "error_count": 0
+      },
+      "service-web-lock.cdx.json": {
+        "valid": true,
+        "sha256_lf": "ff8ba65d7393daaeb9b5e6463875b21d6d3f756b4a0af721b5fb1f90316fcfe8",
+        "error_count": 0
+      }
+    },
+    "passed": true
+  },
+  "bounded_known_value_scan": {
+    "schema_version": 1,
+    "passed": true,
+    "scope": "Exact high-signal organizer values >=8 characters in selected source/package files only; no Git history, logs, screenshots/OCR or physical data scan",
+    "fields": [
+      "nama",
+      "no_ktp",
+      "rekening",
+      "npwp",
+      "nip_kppn",
+      "pengguna",
+      "email",
+      "alamat_jakarta",
+      "alamat_daerah",
+      "handphone"
+    ],
+    "selected_files": 551,
+    "findings": [],
+    "source_values_written": false
+  },
+  "diagram": {
+    "source": "docs/architecture/architecture.svg",
+    "export": "docs/architecture/architecture.png",
+    "png_pixels": [
+      2800,
+      1800
+    ],
+    "visual_reviewed": true,
+    "text_bounding_boxes_inside_canvas": true
+  },
+  "pending_deliverables": [
+    "D03",
+    "D04",
+    "D05",
+    "D10",
+    "D11",
+    "D15"
+  ],
+  "limitations": [
+    "PDF report and final slides are not supplied by the Markdown drafts",
+    "Human classification/risk review and protected/API results remain pending",
+    "Secret/PII checks do not cover full Git history, logs, physical files or screenshots",
+    "Native restore fixture is not a full VM/key-plane disaster-recovery drill",
+    "Dependencies for extracted-source tests reused the local environment; no offline dependency bundle supplied"
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "backup_seconds": 0.382091,
+  "backup_seconds": 0.735792,
   "browser_acceptance": {
     "certificate_trust": "verified private CA for service clients; exact ephemeral SPKI pin for local Chrome only",
     "coverage": {
@@ -12,7 +12,7 @@
     "error_type": null,
     "status": "PASSED"
   },
-  "checked_at_utc": "2026-10-28T13:25:51.573214+00:00",
+  "checked_at_utc": "2026-10-28T14:32:02.786082+00:00",
   "checks": {
     "browser:analyst:analytics_role_boundary": true,
     "browser:analyst:api_no_store": true,
@@ -160,10 +160,10 @@
   },
   "official_benchmark": false,
   "passed": true,
-  "restore_seconds": 1.121058,
+  "restore_seconds": 1.285381,
   "schema_version": 1,
   "scope": "17 invented rows; disposable PG18/OpenBao TLS, actual A+B seven-table schema, live HTTPS backend; not official migrated datasets or benchmark",
-  "size_bytes": 85471,
+  "size_bytes": 85478,
   "source_rows": 17,
   "transport": "native_pg18_openbao_tls"
 }

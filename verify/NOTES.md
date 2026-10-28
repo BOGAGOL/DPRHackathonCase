@@ -124,3 +124,10 @@ Audit literal credential/token/share/private-key dan verifier SCRAM pada 29 file
 keluaran yang berubah serta log Docker PostgreSQL/OpenBao sejak bootstrap tidak
 menemukan kecocokan. Evidence laptop-output-audit.json menyatakan batas scope;
 ini bukan pengganti scan S06 seluruh repo/riwayat/host.
+
+## Test atribut pada source ZIP — 28 Oktober 2026
+
+Test export-ignore menyalin .gitattributes yang dikirim ke repository Git sementara
+milik fixture. Karena itu test tetap memeriksa perilaku Git yang nyata ketika
+dijalankan dari source ZIP tanpa .git/dataset panitia. Tidak menginisialisasi Git
+atau mengubah atribut di checkout operator; aturan pengecualian tetap persis sama.
