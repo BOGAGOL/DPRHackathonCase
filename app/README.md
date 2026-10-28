@@ -238,3 +238,16 @@ Jangan menjalankan full migration prepare, provisioning akun, atau mengubah pg-d
 selama benchmark. Kode saja tidak menerapkan perubahan SQL. Fixture unit adalah
 sintetis SQLite; pengujian UI memakai API mock. Keduanya tidak menyatakan A5 VM PASS.
 Evidence khusus: `app/evidence/access-control/analytics-a5.json`.
+
+## Kit pentest VM Zhafif
+
+Panduan [PENTEST_SETUP.md](docs/PENTEST_SETUP.md) menyediakan provisioning8 akun
+`pt.*` terpisah, login6 demo existing, systemd dua proses aplikasi, inventory metadata,
+template golden dan reset cadangan yang dibatasi ke protected_734.
+[Brief Delf](../docs/deploy/PENTEST_BRIEF.md) berisi D1–D12 dan peta scope tanpa password.
+File credential tetap di private server mode600, bukan repo. Restore utama tetap
+tooling Alby; golden tidak menggantikan backup atau key plane OpenBao.
+Pengujian lokal memakai fixture/fake katalog dan dipisahkan dari bukti live.
+**Reset VM PASSED** satu kali; laporan aktual tersimpan di
+`app/evidence/access-control/vm-golden-reset.json`: members734 dan14 akun lulus.
+Inventory/A5/provision/golden berasal dari VM nyata; SG provider tetap belum diverifikasi.

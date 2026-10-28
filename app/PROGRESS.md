@@ -48,3 +48,34 @@ dibersihkan; header masih menampilkan akun/peran dan logout. Build dan 14 test b
 lulus, preview login desktop/mobile diperiksa. VM belum diperbarui otomatis; paket
 app/.local/dpr-analytics-ui.tar kini memuat perubahan ini beserta perbaikan filter.
 Gunakan lagi docs/DEPLOY_ANALYTICS_UI.md; cukup rebuild dan restart frontend.
+
+## Persiapan whitebox pentest — 28 Oktober 2026
+
+- IMPLEMENTED:8 akun pt terpisah, dua scope operator disjoint5+5, dua owner dengan
+  pengguna_bidx unik; role lain sesuai ACCESS_MATRIX, private600, idempotent verify,
+  satu perintah disable berikut invalidasi sesi. Tidak provision/rotate demo.
+- IMPLEMENTED: login-only6 demo + read-only pt policy/IDOR/A5 smoke; inventory
+  metadata runtime tanpa environment/token/body. Output manual VM tersimpan
+  vm-inventory-operator.json, dengan cloud SG dan unknown36577 belum terverifikasi.
+- IMPLEMENTED: dua unit systemd DPR dan launcher environment minimum; installer
+  menolak proses foreground yang masih memakai port dan unit bukan milik kit.
+- IMPLEMENTED: template protected_734_golden, audit private export, guarded reset
+  fixed target, cluster/OID identity/role/TLS/RLS/A5 checks, post-restore14 login.
+  Restore utama tetap Alby, golden bergantung pada key plane/versi Bao.
+- DOCUMENTED: docs/deploy/PENTEST_BRIEF.md D1–D12, app/docs/PENTEST_SETUP.md,
+  scripts/deploy helpers sesuai tambahan scope eksplisit pada prompt revisi.
+- TESTED LOCAL:390 passed,1 skipped (suite backend lengkap);4 Bash syntax checks,
+  wrong-target/unknown-action refusal,4 CLI help checks. Fixture sintetis/FakeCrypto
+  dan fake katalog, bukan operasi DROP/CREATE PostgreSQL18 nyata.
+- VM PASSED: operator menjalankan provision8 pt, dua unit enabled/active, A5verify,
+  inventory, golden-create dan **satu reset nyata**. Raw metadata diunduh via SCP;
+  vm-golden-reset.json passed:true, reset_test_statusPASSED, members734,
+  smoke.accounts_checked14/demo_login_roles6 dan seluruh checkstrue. Private audit
+  export7849 event; tidak ada nilai anggota/password di evidence publik.
+- VM CONFIRMED: sourcepostgres734 migratedvalidated734, PG18.6/TLS dan MODEprotected,
+  app_user/analyst_user/auditor_user verify-full; runtime Node24.22.1/Python3.12.3/
+  Nginx1.24.0/Bao2.5.5. Peta akun/UUID aktual dan D1–D12 ada di brief. Unknown36577
+  telah teridentifikasi containerd, excluded bersama tat_agent dan OS services.
+- NEXT: pentest Delf memakai pt, hasil disimpan terpisah; primary restore Alby,
+  disable pt setelah restore akhir. Cloud SG, custody kunci dan renewal penuh tetap
+  belum dikonfirmasi. Jangan benchmark/migrasi laptop pg-dpr.
