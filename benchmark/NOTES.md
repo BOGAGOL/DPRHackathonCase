@@ -779,3 +779,8 @@ bukan kegagalan gerbang nyata; tidak mengulang pengukuran yang gagal. Test fokus
 codec/monitor/compare/rollback setelah review juga PASS. Seluruh detail/JUnit
 dirujuk evidence/overnight/implementation_tests_20261028.json. API performance
 dan seluruh penilaian P01/P01A/P02/P03 terhadap pengukuran after tetap BELUM DIUJI.
+
+
+## 28 Oktober 2026 ? sesi resmi naive_v1 dipertahankan
+
+Sesi B-P-P-B awal selesai secara alami sebelum permintaan diagnosis overhead diproses: 56 run pada 100k dan 56 run pada 1M, masing-masing empat run per mode per skenario. Tidak ada proses yang perlu dihentikan. Seluruh hasil/raw dipertahankan di bppb_100k dan bppb_1m, dengan label naive_v1 melalui metadata dan evidence/benchmark/naive_v1.json. Kedua skala tidak memiliki error workload; validasi akhir dataset tidak berubah lulus. Hasil ini tidak diganti oleh smoke optimasi. Diagnosis/perbaikan berikutnya berada di perf/keyservice-latency; B-P-P-B ulang menunggu instruksi.
