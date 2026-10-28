@@ -32,3 +32,19 @@ Koneksi data anggota memakai DB role `app_user`. Analytics membuka koneksi berbe
 Daftar hanya mengembalikan `anggota_id` dan `nama`, dengan pagination 50 record. Detail memakai allowlist per peran pada backend; kolom yang dilarang tidak dikirim sebagai null/placeholder maupun tersembunyi dalam JSON. Kontak baru divalidasi, hanya dua field yang dapat diubah, dan email blind index diperbarui dalam transaksi yang sama pada MODE=protected. Keputusan deny merupakan default jika peran, record, field, atau dependensi crypto tidak cocok.
 
 Policy svc-app OpenBao yang sama dapat unwrap PII dan FIN; pembatasan FIN adalah kewajiban policy aplikasi. Jangan mengklaim policy Transit mengetahui peran pengguna atau endpoint HTTP.
+
+## Penyelarasan scope protected — 28 Oktober 2026
+
+Pada schema A terbaru, semua staff juga memerlukan penugasan `access_scope` eksplisit.
+Read/list/search memerlukan read atau update; PATCH memerlukan update; insert memerlukan
+scope insert global (anggota_id NULL) dan role privileged_officer. Anggota memerlukan
+scope record **dan** pengguna_bidx yang cocok dengan binding akun. Tidak ada scope = deny.
+
+Protected `SET LOCAL app.principal` berisi UUID `app_users.user_id`, bukan hex pengguna_bidx.
+Binding bidx berada di tabel B terpisah. Audit A mengisi actor/role melalui trigger;
+B tidak mengirim actor buatan sendiri dalam INSERT. UUID resource audit adalah UUID internal,
+sementara locator URL tetap legacy_row_id. Plain mempertahankan model kontrol baseline.
+
+Analyst menerima agregat tersensor server: 1–4 menjadi "<5", secondary suppression/total
+menjadi null bila diperlukan. Endpoint anggota tetap ditolak untuk analyst dan auditor.
+Pembatasan DB analyst_view menjadi aggregate-only merupakan perubahan milik A, bukan B.

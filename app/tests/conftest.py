@@ -18,6 +18,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "backend"))
 from service_app.config import Settings
 from service_app.main import create_app
 from service_app.models import Base, User, baseline_members, protected_members
+from service_app.protected_control import ProtectedBase, ProtectedUser, bindings, scopes, audit_table
 
 COLUMNS = "nama nama_lengkap nama_tanpa_gelar jenis_kelamin tempat_lahir tanggal_lahir tanggal_pernikahan no_ktp pekerjaan_terakhir alamat_jakarta telpon_jakarta alamat_daerah telpon_daerah handphone email ruangan status_kawin jumlah_anak jumlah_tanggungan jumlah_jiwa rekening nama_rekening npwp nama_kppn nip_kppn nama_bank kode_bank pengguna agama".split()
 REF = {"jenis_kelamin", "pekerjaan_terakhir", "nama_kppn", "nama_bank"}
@@ -107,6 +108,18 @@ class Lab:
     crypto: FakeCrypto
     mode: str
 
+    def audit_entries(self):
+        from types import SimpleNamespace
+        from sqlalchemy import select
+        from service_app.models import AuditLog
+        with DBSession(self.engine) as db:
+            if self.mode == "plain":
+                return db.scalars(select(AuditLog)).all()
+            return [SimpleNamespace(id=r.event_id, actor=r.actor, role=r.actor_role, action=r.action,
+                    anggota_id=r.anggota_id, field_class=[r.field_class], decision=r.decision,
+                    request_id=r.request_id, created_at=r.occurred_at)
+                    for r in db.execute(select(audit_table))]
+
     def add_member(self, number, values=None):
         row = invented_row(number)
         if values:
@@ -128,6 +141,10 @@ class Lab:
             for field in ("no_ktp", "email", "pengguna"):
                 protected[field + "_bidx"] = self.crypto.blind_index(field, row[field])
             connection.execute(protected_members.insert().values(**protected))
+            for role, user_id in self.users.items():
+                if role in {"operator", "privileged_officer", "finance_officer"} or (role == "anggota" and number == 1):
+                    for permission in (["read"] if role == "finance_officer" else ["read", "update"]):
+                        connection.execute(scopes.insert().values(principal=user_id, anggota_id=identifier, permission=permission))
         return row
 
 
@@ -136,9 +153,12 @@ def lab(request, tmp_path):
     url = "sqlite:///" + str(tmp_path / "service-isolated.sqlite")
     settings = Settings(mode=request.param, database_url=url, testing=True)
     engine = create_engine(url, connect_args={"check_same_thread": False})
-    Base.metadata.create_all(engine, tables=[table for table in Base.metadata.sorted_tables if table.name != "analyst_view"])
+    Base.metadata.create_all(engine, tables=[table for table in Base.metadata.sorted_tables if table.name not in {"analyst_view", "audit_log"}])
+    ProtectedBase.metadata.create_all(engine, tables=[table for table in ProtectedBase.metadata.sorted_tables if table.name != "audit_log"])
+    (Base.metadata.tables["audit_log"] if request.param == "plain" else audit_table).create(engine)
     with engine.begin() as connection:
         connection.execute(text("CREATE VIEW analyst_view AS SELECT jenis_kelamin, pekerjaan_terakhir, nama_kppn, nama_bank, '40-49' AS age_band FROM anggota"))
+        connection.execute(text("CREATE TRIGGER test_creator_scope AFTER INSERT ON anggota_protected BEGIN INSERT INTO access_scope(principal,anggota_id,permission) SELECT principal,NEW.anggota_id,'read' FROM access_scope WHERE permission='insert' AND anggota_id IS NULL; INSERT INTO access_scope(principal,anggota_id,permission) SELECT principal,NEW.anggota_id,'update' FROM access_scope WHERE permission='insert' AND anggota_id IS NULL; END"))
     crypto = FakeCrypto()
     app = create_app(settings, crypto=crypto)
     password = secrets.token_urlsafe(24)
@@ -150,6 +170,12 @@ def lab(request, tmp_path):
                         principal="pengguna-uji-1", active=True)
             db.add(user)
             users[role] = user.id
+            db.add(ProtectedUser(id=user.id, username=user.username, password_hash=password_hash, role=role, active=True))
+            db.flush()
+            if role == "anggota":
+                db.execute(bindings.insert().values(user_id=user.id, pengguna_bidx=crypto.blind_index("pengguna", "pengguna-uji-1")))
+            if role == "privileged_officer":
+                db.execute(scopes.insert().values(principal=user.id, anggota_id=None, permission="insert"))
         db.commit()
     with TestClient(app, base_url="https://localhost:3443", raise_server_exceptions=False) as client:
         fixture = Lab(app, client, engine, password, users, [], crypto, request.param)

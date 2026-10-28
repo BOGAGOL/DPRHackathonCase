@@ -161,7 +161,6 @@ def test_missing_module_a_adapter_does_not_fallback(monkeypatch, tmp_path):
     ca.touch()
     settings = SimpleNamespace(crypto_factory="dprcrypto:create_service", openbao_addr="https://bao.example.test",
                                openbao_token=secrets.token_urlsafe(24), openbao_cacert=str(ca))
-    monkeypatch.setattr("service_app.crypto.ssl.create_default_context", lambda **kwargs: object())
     def unavailable(name):
         raise ModuleNotFoundError(name)
     monkeypatch.setattr("service_app.crypto.importlib.import_module", unavailable)
@@ -199,13 +198,13 @@ def test_toolkit_contract_enforces_methods_and_fails_closed(monkeypatch, tmp_pat
     ca.touch()
     expected_token = secrets.token_urlsafe(24)
     expected_index = secrets.token_bytes(32)
-    context = object()
     settings = SimpleNamespace(crypto_factory="dprcrypto:create_service", openbao_addr="https://bao.example.test",
                                openbao_token=expected_token, openbao_cacert=str(ca))
-    monkeypatch.setattr("service_app.crypto.ssl.create_default_context", lambda **kwargs: context)
+    monkeypatch.setenv("OPENBAO_ADDR", settings.openbao_addr)
+    monkeypatch.setenv("OPENBAO_CACERT", settings.openbao_cacert)
     calls = []
     class Driver:
-        def blind_index(self, *args, **kwargs):
+        def digest(self, *args, **kwargs):
             calls.append((args, kwargs))
             return expected_index
         def unwrap_many(self, *args, **kwargs):
@@ -216,11 +215,13 @@ def test_toolkit_contract_enforces_methods_and_fails_closed(monkeypatch, tmp_pat
             raise RuntimeError("Synthetic failure")
         def new_record_keys(self, *args, **kwargs):
             raise RuntimeError("Synthetic failure")
-    def factory(**kwargs):
-        assert kwargs["openbao_addr"].startswith("https://")
-        assert kwargs["token"] == expected_token and kwargs["ssl_context"] is context
-        return Driver()
-    monkeypatch.setattr("service_app.crypto.importlib.import_module", lambda name: SimpleNamespace(create_service=factory))
+    driver = Driver()
+    def keys(client, **kwargs):
+        assert kwargs == {"cache_ttl": 0, "max_entries": 0}
+        return driver
+    module = SimpleNamespace(OpenBaoClient=lambda: object(), KeyManager=keys,
+                             BlindIndexer=lambda client, key_version: driver)
+    monkeypatch.setattr("service_app.crypto.importlib.import_module", lambda name: module)
     adapter = ToolkitAdapter(settings)
     assert adapter.blind_index("email", "test@example.test") == expected_index
     assert len(calls) == 1

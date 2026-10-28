@@ -1,8 +1,8 @@
 """Bridge only. AES, AAD, DEK handling and HMAC implementation belong to Module A."""
 import importlib
+import os
 from pathlib import Path
 import re
-import ssl
 
 
 class CryptoUnavailable(Exception):
@@ -34,17 +34,19 @@ class ToolkitAdapter:
     METHODS = ("blind_index", "unwrap_many", "decrypt_field", "encrypt_field", "new_record_keys")
 
     def __init__(self, settings):
-        module, separator, name = settings.crypto_factory.partition(":")
-        if not separator or not (module == "dprcrypto" or module.startswith("dprcrypto.")):
-            raise ValueError("Only the Module A dprcrypto factory may be loaded")
+        if settings.crypto_factory not in {"dprcrypto:public-v1", "dprcrypto:create_service"}:
+            raise ValueError("Only the reviewed Module A public API may be loaded")
         if not settings.openbao_addr.startswith("https://") or not settings.openbao_token or not Path(settings.openbao_cacert).is_file():
             raise CryptoUnavailable("Verified OpenBao identity/CA required")
-        context = ssl.create_default_context(cafile=settings.openbao_cacert)
         try:
-            factory = getattr(importlib.import_module(module), name)
-            self.driver = factory(openbao_addr=settings.openbao_addr, token=settings.openbao_token, ssl_context=context)
-            if not all(callable(getattr(self.driver, method, None)) for method in self.METHODS):
-                raise TypeError()
+            # A reads process env, validates workload identity and verifies TLS.
+            # Never mutate global env per request or inject a literal token into A.
+            if os.environ.get("OPENBAO_ADDR") != settings.openbao_addr or os.environ.get("OPENBAO_CACERT") != settings.openbao_cacert:
+                raise ValueError()
+            self.toolkit = importlib.import_module("dprcrypto")
+            self.client = self.toolkit.OpenBaoClient()
+            self.keys = self.toolkit.KeyManager(self.client, cache_ttl=0, max_entries=0)
+            self.index = self.toolkit.BlindIndexer(self.client, key_version=1)
         except Exception:
             raise CryptoUnavailable("Module A dprcrypto service interface unavailable") from None
 
@@ -53,7 +55,20 @@ class ToolkitAdapter:
             raise AttributeError(name)
         def operation(*args, **kwargs):
             try:
-                return checked_result(name, getattr(self.driver, name)(*args, **kwargs), args)
+                if name == "blind_index":
+                    result = self.index.digest(*args)
+                elif name == "unwrap_many":
+                    result = self.keys.unwrap_many({"pii": "pii-kek", "fin": "finance-kek"}[args[0]], args[1])
+                elif name in {"decrypt_field", "encrypt_field"}:
+                    result = getattr(self.toolkit, "decrypt" if name == "decrypt_field" else "encrypt")(*args, **kwargs)
+                else:
+                    keys = self.keys.create_record_keys()
+                    result = {"pii": (keys.pii.dek, keys.pii.wrapped), "fin": (keys.finance.dek, keys.finance.wrapped)}
+                return checked_result(name, result, args)
             except Exception:
                 raise CryptoUnavailable("Protected operation failed") from None
         return operation
+
+    def close(self):
+        self.keys.close()
+        self.client.close()

@@ -1,5 +1,6 @@
 from datetime import date, datetime
 import re
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
@@ -158,7 +159,7 @@ class AuditDTO(Strict):
     anggota_id: str | None
     field_class: list[str]
     decision: str
-    request_id: str
+    request_id: str | None
     created_at: datetime
 
 
@@ -172,9 +173,17 @@ class AuditPage(Strict):
 class AggregateGroup(Strict):
     dimension: str
     value: str | None
-    count: int
+    count: int | Literal["<5"] | None
 
 
 class Analytics(Strict):
-    total: int
+    total: int | Literal["<5"] | None
     groups: list[AggregateGroup]
+
+
+class AnalyticsFilters(Strict):
+    jenis_kelamin: Literal["L", "P"] | None = None
+    pekerjaan_terakhir: str | None = Field(default=None, min_length=1, max_length=50)
+    nama_kppn: str | None = Field(default=None, min_length=1, max_length=50)
+    nama_bank: str | None = Field(default=None, min_length=1, max_length=50)
+    age_band: str | None = Field(default=None, pattern=r"^[0-9]{1,3}-[0-9]{1,3}$")

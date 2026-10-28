@@ -278,13 +278,16 @@ def exercise_live_https(settings, accounts, private, checks):
     # The plain service needs only its runtime DB identities. Never inherit
     # setup/migration/root/OpenBao credentials into either web process.
     base_env = {k: v for k, v in os.environ.items() if not any(word in k.upper() for word in ["DATABASE_URL", "PASSWORD", "TOKEN", "SECRET", "PRIVATE_DIR"])}
-    api_env = {**base_env, "MODE": "plain", "DATABASE_URL": settings.database_url,
+    api_env = {**base_env, "MODE": settings.mode, "DATABASE_URL": settings.database_url,
                "AUTH_DATABASE_URL": settings.auth_database_url or settings.database_url,
                "ANALYST_DATABASE_URL": settings.analyst_database_url,
                "AUDITOR_DATABASE_URL": settings.auditor_database_url,
                "DPR_ALLOW_DISPOSABLE_DATABASE": "1", "APP_ORIGIN": base_url,
                "SESSION_TTL_SECONDS": "900", "API_PORT": str(api_port),
                "TLS_CERT_FILE": str(private / "tls/server.crt"), "TLS_KEY_FILE": str(private / "tls/server.key")}
+    if settings.mode == "protected":
+        api_env.update(OPENBAO_ADDR=settings.openbao_addr, OPENBAO_TOKEN=os.environ.get("OPENBAO_TOKEN", ""),
+                       OPENBAO_CACERT=settings.openbao_cacert, DPR_CRYPTO_FACTORY="dprcrypto:public-v1")
     web_env = {**base_env, "APP_ORIGIN": base_url, "WEB_PORT": str(web_port), "WEB_HOST": "127.0.0.1",
                "API_INTERNAL_URL": f"https://127.0.0.1:{api_port}", "NODE_EXTRA_CA_CERTS": str(ca),
                "NODE_ENV": "production", "NEXT_TELEMETRY_DISABLED": "1",

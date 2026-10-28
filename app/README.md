@@ -1,3 +1,12 @@
+> **Pembaruan 28 Oktober 2026:** bagian lama di bawah dipertahankan sebagai riwayat.
+> Toolkit/schema/test vectors A kini tersedia dan integrasi protected disposable telah diuji.
+> Gunakan Python **3.11+ (diuji 3.12.10)** dan `dprcrypto:public-v1`.
+> Panduan terbaru yang menggantikan asumsi factory, akun/audit dan principal lama:
+> [Integrasi A/B](docs/INTEGRATION_A.md), [adapter aktual](docs/CRYPTO_ADAPTER.md).
+> `app.principal` protected adalah **UUID akun**, bukan hex blind index.
+> Target yang didukung juga mencakup `baseline_1m` dan `protected_1m`;
+> dataset 1M/migrated protected lokal belum diuji. Tidak ada regenerasi baseline_1m.
+
 # Modul B — Service Application dan Access Control
 
 Pemilik: Zhafif, branch `feat/service-app`. Aplikasi ini mempertahankan Python/FastAPI dan Next.js/TypeScript dari aplikasi sebelumnya, dengan kode Modul B seluruhnya di `app/`. Folder `apps/` lama, scanner, infra, toolkit, migrasi dan benchmark A/C tidak diubah.
@@ -178,3 +187,36 @@ Default evidence berada di **`app/evidence/access-control/`** untuk mematuhi bat
 Benchmark resmi tetap milik C: transport/auth/DTO sama untuk plain/protected, 50 record per halaman, workload/seed/record mapping sama, dan reset fixture tulis antar-run. Re-login sebelum run bila session akan kedaluwarsa; jangan menambah auth bypass atau menonaktifkan audit/CSRF demi angka. Jangan menjalankan browser mutasi bersamaan dengan benchmark.
 
 Setelah selesai, tutup proses Node/Python milik terminal dan hapus environment secret dari sesi. Data/kunci privat tetap mengikuti custody dan retensi yang disepakati A/C. Daftar keterbatasan terbaru berada di `NOTES.md`; tidak ada klaim production-ready atau kelulusan kontrak protected dari mock test.
+
+## Instalasi dan verifikasi setelah integrasi main b8e9998
+
+Gunakan venv Python 3.11+; jangan memakai venv lama Python 3.10 untuk toolkit A.
+Perintah berikut dijalankan dari root repo, dengan Docker Desktop aktif untuk probe.
+
+```powershell
+py -3.12 -m venv app/.venv
+app/.venv/Scripts/python -m pip install -r app/requirements.txt -r infra/requirements.txt -e ./toolkit
+Push-Location app/web
+npm ci
+npm run build
+npx playwright install chromium
+npm run test:ui
+Pop-Location
+app/.venv/Scripts/python -m pytest -c app/pytest.ini --basetemp app/.local/testtmp app/tests -q --junitxml=app/.local/security-tests.xml
+app/.venv/Scripts/python app/tests/export_results.py
+app/.venv/Scripts/python -m dprcrypto.vectors verify --evidence app/evidence/access-control/crypto-vectors.json
+app/.venv/Scripts/python app/scripts/protected_probe.py
+app/.venv/Scripts/python app/scripts/check_ready.py
+```
+
+Untuk lab plain existing, gunakan `app/.venv/Scripts/python app/scripts/local_lab.py verify`.
+Tidak perlu menjalankan setup/datagen ulang. Hindari benchmark bersamaan dengan probe mutasi.
+Protected memakai `app_users`, `access_scope`, `audit_log` milik A; setup B hanya menambah
+`service_sessions`, `service_member_bindings`, dan sequence locator. Provisioning protected
+memerlukan kredensial setup terpisah dan `DEMO_ASSIGNED_IDS` eksplisit, sesuai panduan integrasi.
+
+Analytics mendukung filter equality `jenis_kelamin`, `pekerjaan_terakhir`, `nama_kppn`,
+`nama_bank`, `age_band`. Jumlah 1–4 dikirim sebagai string `"<5"`, bukan angka mentah;
+jumlah sekunder/total yang perlu disembunyikan menjadi `null`. UI menampilkan null sebagai
+“Disembunyikan”. Konsumen DTO harus menerima `number | "<5" | null`; kunci respons tetap
+`total` dan `groups`. Pengujian filter, batas 4/5 dan rendering tercakup di evidence.

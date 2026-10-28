@@ -7,6 +7,7 @@ from sqlalchemy import func, select, update
 from .crypto import CryptoUnavailable, checked_result
 from .models import FIN, PII, REF, SOURCE_FIELDS, baseline_members, protected_members, utcnow
 from .policy import owns_only
+from .protected_control import scopes
 
 PLAIN_TABLE, PROTECTED_TABLE = baseline_members, protected_members
 
@@ -30,11 +31,14 @@ class MemberRepository:
         self.table = PLAIN_TABLE if mode == "plain" else PROTECTED_TABLE
         self.identifier = self.table.c.id if mode == "plain" else self.table.c.legacy_row_id
 
-    def scope(self, user):
-        if not owns_only(user.role):
-            return True
+    def scope(self, user, permission="read"):
         if self.mode == "plain":
-            return self.table.c.pengguna == user.principal
+            return self.table.c.pengguna == user.principal if owns_only(user.role) else True
+        permitted = scopes.c.permission.in_(["read", "update"]) if permission == "read" else scopes.c.permission == permission
+        assigned = select(scopes.c.scope_id).where(scopes.c.principal == user.id,
+            scopes.c.anggota_id == self.table.c.anggota_id, permitted).exists()
+        if not owns_only(user.role):
+            return assigned
         if user.principal.startswith("bidx:v1:"):
             try:
                 index = bytes.fromhex(user.principal[8:])
@@ -42,11 +46,8 @@ class MemberRepository:
                     raise ValueError()
             except ValueError:
                 raise CryptoUnavailable("Invalid member binding") from None
-            return self.table.c.pengguna_bidx == index
-        if not self.testing:
-            raise CryptoUnavailable("Protected member binding must use a blind index")
-        # Legacy raw bindings exist only in shared test fixtures for mode parity.
-        return self.table.c.pengguna_bidx == self._crypto("blind_index", "pengguna", user.principal)
+            return assigned & (self.table.c.pengguna_bidx == index)
+        raise CryptoUnavailable("Protected member binding must use a blind index")
 
     def _crypto(self, method, *args, **kwargs):
         try:
@@ -116,7 +117,7 @@ class MemberRepository:
     def patch(self, db, user, identifier, changes):
         # Lock and project only changed fields + required wrapping metadata; no FIN decryption.
         columns = [self.identifier] if self.mode == "plain" else [self.identifier, self.table.c.anggota_id, self.table.c.protection_version, self.table.c.dek_pii_wrapped]
-        row = db.execute(select(*columns).where(self.identifier == identifier, self.scope(user)).with_for_update()).mappings().first()
+        row = db.execute(select(*columns).where(self.identifier == identifier, self.scope(user, "update")).with_for_update()).mappings().first()
         if row is None:
             return False
         if self.mode == "plain":
@@ -130,21 +131,26 @@ class MemberRepository:
                 if field == "email":
                     values["email_bidx"] = None if value is None else self._crypto("blind_index", "email", value)
             values["updated_at"] = utcnow()
-        db.execute(update(self.table).where(self.identifier == identifier, self.scope(user)).values(**values))
+        db.execute(update(self.table).where(self.identifier == identifier, self.scope(user, "update")).values(**values))
         return True
 
-    def insert(self, db, payload):
+    def insert(self, db, payload, user=None):
         source = {f: payload.get(f) for f in SOURCE_FIELDS}
         if self.mode == "plain":
             # Actual team's baseline stores dates/integers in native PostgreSQL types.
             if db.bind.dialect.name != "postgresql":
                 source = {k: text_value(v) for k, v in source.items()}
             return db.execute(self.table.insert().values(**source).returning(self.identifier)).scalar_one()
-        # A owns the protected schema. Serialize allocation without adding/changing its DDL.
+        if user is None or not db.scalar(select(scopes.c.scope_id).where(scopes.c.principal == user.id,
+                scopes.c.permission == "insert", scopes.c.anggota_id.is_(None)).limit(1)):
+            return None
+        # A's RLS hides unassigned IDs: MAX(id) cannot allocate a globally unique locator.
+        # B's setup creates this separate sequence after migration, never resets an existing one.
         if db.bind.dialect.name == "postgresql":
             from sqlalchemy import text
-            db.execute(text("SELECT pg_advisory_xact_lock(76321017)"))
-        identifier = db.scalar(select(func.coalesce(func.max(self.identifier), 0) + 1))
+            identifier = db.scalar(text("SELECT nextval('service_legacy_id_seq')"))
+        else:
+            identifier = db.scalar(select(func.coalesce(func.max(self.identifier), 0) + 1))
         record_id = str(uuid.uuid4())
         keys = self._crypto("new_record_keys")
         values = {"anggota_id": record_id, "legacy_row_id": identifier, "protection_version": 1,

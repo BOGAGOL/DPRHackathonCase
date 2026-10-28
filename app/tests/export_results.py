@@ -44,8 +44,8 @@ def main():
     result.update(checked_at_utc=datetime.now(timezone.utc).isoformat(), source_commit=commit,
                   app_worktree_dirty=dirty, app_source_sha256_at_export=snapshot.hexdigest(),
                   command="python -m pytest -c app/pytest.ini app/tests -q --junitxml=app/.local/security-tests.xml",
-                  scope="Isolated invented SQLite fixtures; protected HTTP/authorization adapter uses a non-cryptographic opaque-reference test double",
-                  not_tested=["Live Module A dprcrypto crypto, test_vectors.json and protected database integration", "Live baseline_100k or organizer data", "Browser XSS and transport TLS (reported separately)"],
+                  scope="Isolated invented SQLite fixtures; protected policy uses opaque-reference test double; shared Module A vectors additionally verified when installed",
+                  not_tested=["Live PostgreSQL/OpenBao integration (reported separately)", "Live baseline_100k or migrated datasets (reported separately)", "Browser XSS and transport TLS (reported separately)"],
                   skipped_scope="Plain-mode ciphertext-swap test is not applicable; protected-mode swap is exercised",
                   privacy="No failure messages, request bodies, response values, cookies, credentials or crypto material exported")
     args.output.parent.mkdir(parents=True, exist_ok=True)

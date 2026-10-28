@@ -11,17 +11,49 @@ from sqlalchemy.engine import make_url
 from psycopg import sql
 import psycopg
 from service_app.models import AuditLog, Session, User
+from service_app.protected_control import ProtectedSession, bindings
+
+
+def setup_protected(engine):
+    # A owns app_users/access_scope/audit_log. B adds only session/binding/ID allocation objects.
+    with engine.begin() as db:
+        for name in ("app_users", "access_scope", "audit_log", "anggota_protected"):
+            if not db.scalar(text("SELECT to_regclass(:name)"), {"name": "public." + name}):
+                raise ValueError("Apply Module A schema before service setup")
+        for table in (ProtectedSession.__table__, bindings):
+            table.create(db, checkfirst=True)
+        for statement in (
+            "ALTER TABLE service_sessions OWNER TO schema_owner",
+            "ALTER TABLE service_member_bindings OWNER TO schema_owner",
+            "REVOKE ALL ON service_sessions,service_member_bindings FROM PUBLIC",
+            "GRANT SELECT,INSERT,DELETE ON service_sessions TO app_user",
+            "GRANT SELECT ON service_member_bindings TO app_user",
+            "GRANT SELECT,INSERT,UPDATE,DELETE ON service_member_bindings TO admin_user",
+            "GRANT SELECT ON service_sessions,service_member_bindings TO backup_user"):
+            db.execute(text(statement))
+        if not db.scalar(text("SELECT to_regclass('public.service_legacy_id_seq')")):
+            # Trusted setup sees every row; runtime RLS may only expose a subset.
+            maximum = db.scalar(text("SELECT coalesce(max(legacy_row_id),0) FROM anggota_protected"))
+            db.execute(text("CREATE SEQUENCE service_legacy_id_seq"))
+            db.execute(text("SELECT setval('service_legacy_id_seq', :next, false)"), {"next": maximum + 1})
+            db.execute(text("ALTER SEQUENCE service_legacy_id_seq OWNER TO schema_owner"))
+        db.execute(text("GRANT USAGE ON SEQUENCE service_legacy_id_seq TO app_user"))
 
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--database", choices=["baseline_100k", "protected_100k", "protected_734"], required=True)
+    parser.add_argument("--database", choices=["baseline_100k", "baseline_1m", "protected_100k", "protected_734", "protected_1m"], required=True)
     args = parser.parse_args()
     url = make_url(os.environ["APP_SETUP_DATABASE_URL"])
     if url.database != args.database or url.query.get("sslmode") != "verify-full" or not url.query.get("sslrootcert"):
         raise ValueError("Setup requires the explicit authorized database and verify-full TLS")
     # Role creation and source/protected RLS policies belong to A; never grant broader roles here.
     engine = create_engine(url, hide_parameters=True)
+    if args.database.startswith("protected_"):
+        setup_protected(engine)
+        engine.dispose()
+        print("Module B protected session/binding/locator objects ready; A accounts/audit/RLS retained.")
+        return
     for model in [User, Session, AuditLog]:
         model.__table__.create(engine, checkfirst=True)
     with engine.begin() as connection:
@@ -32,7 +64,7 @@ def main():
                           "GRANT SELECT ON audit_log TO auditor_user"]:
             connection.execute(text(statement))
         # Baseline table exists and belongs to C; only its approved service grants are added.
-        if args.database == "baseline_100k":
+        if args.database in {"baseline_100k", "baseline_1m"}:
             connection.execute(text("GRANT SELECT, INSERT, UPDATE ON anggota TO app_user"))
             sequence = connection.execute(text("SELECT c.oid FROM pg_class c WHERE c.oid=pg_get_serial_sequence('anggota','id')::regclass")).scalar()
             if sequence:
