@@ -63,7 +63,7 @@ def test_live_https_accepts_default_auth_database_without_nonstring_env(monkeypa
     monkeypatch.setattr(probe.shutil, "which", lambda name: "node")
     ports = iter([3443, 8100])
     monkeypatch.setattr(probe, "free_loopback_port", lambda: next(ports))
-    settings = SimpleNamespace(database_url="test-primary-database", auth_database_url=None,
+    settings = SimpleNamespace(mode="plain", database_url="test-primary-database", auth_database_url=None,
                                analyst_database_url="test-analyst-database", auditor_database_url="test-auditor-database")
     def capture(*args, **kwargs):
         assert kwargs["env"]["AUTH_DATABASE_URL"] == settings.database_url

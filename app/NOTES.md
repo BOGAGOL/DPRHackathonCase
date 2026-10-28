@@ -112,3 +112,58 @@ principal hex tidak diubah; lihat `docs/LOCAL_LAB.md` untuk tiga titik sinkronis
 
 Perubahan lanjutan tetap hanya `app/`. PR #1 disiapkan untuk review Alby; merge ke main menunggu
 review anggota lain sebagaimana TEAM_PLAN, bukan dianggap sudah selesai dari bukti lokal saja.
+
+## Integrasi setelah pull main b8e9998 — 28 Oktober 2026 WIB
+
+Pembaruan ini menggantikan blocker toolkit belum tersedia dan asumsi principal hex pada catatan
+historis di atas. Instruksi/kontrak/panduan migration serta perubahan A diperiksa sebelum edit.
+Seluruh perubahan source, dokumentasi dan evidence tetap di app/. Tidak menjalankan migrasi A,
+regenerasi baseline_1m, benchmark C, atau perubahan SQL/toolkit/infra bersama.
+
+Keputusan implementasi:
+
+1. Adapter memanggil API publik A aktual (OpenBaoClient, KeyManager, BlindIndexer, encrypt/decrypt).
+   Default public-v1, alias lama hanya kompatibilitas konfigurasi; tidak ada factory arbitrer.
+   KeyManager tanpa cache agar revoke token menyebabkan operasi berikutnya gagal tertutup.
+2. Protected menggunakan app_users/access_scope/audit_log A; B menambah hanya sessions, binding
+   anggota, dan sequence legacy locator. app.principal adalah UUID akun. Anggota memerlukan
+   binding bidx DAN scope; staff juga memerlukan scope. PATCH harus update, bukan sekadar read.
+3. Insert tanpa RETURNING mengikuti trigger scope A. Sequence B dialokasikan dari MAX seluruh
+   dataset saat trusted setup pertama, tidak dari subset RLS runtime. Tidak mereset sequence
+   existing. Sesudah migrasi tambahan, admin perlu koordinasi alokasi sebelum insert B dibuka.
+4. Audit hanya mengirim kolom yang diizinkan A; actor/role berasal dari trigger. Error dekripsi
+   menjadi 500 generik dan audit error, tanpa plaintext fallback atau nilai pencarian.
+5. Analytics menerapkan filter SQL berparameter sebelum suppression. Count1–4 menjadi "<5";
+   total/sibling tertentu null untuk secondary suppression. Frontend tidak menerima angka asli.
+   Count5 tetap 5 bila tidak menjadi secondary suppression. DTO count menjadi number|"<5"|null.
+6. Python3.12.10 dipakai dalam app/.venv, karena toolkit A memerlukan minimal3.11. Versi utama
+   diuji: FastAPI0.134.0, SQLAlchemy2.0.47, Pydantic2.12.5, Psycopg3.3.3, cryptography46.0.7,
+   Starlette1.10.0, pytest9.0.2. Ada warning deprecation TestClient/httpx; bukan test failure.
+
+Hasil run terakhir (bukan perkiraan):
+
+- Pytest: **276 passed, 1 skipped**, total277, exit0. Skip ciphertext swap pada plain yang tidak
+  berlaku; protected swap benar-benar diuji. Raw JUnit lokal, ringkasan disanitasi diekspor.
+- Next production build: lulus. Playwright UI mock: **13 passed**, termasuk rendering <5/null
+  dan filter kombinasi. Evidence UI tidak diklaim sebagai bukti database/crypto.
+- Baseline100k existing: **181 checks PASS**, six-role HTTPS browser/API, checksum baseline dan
+  source kembali sama setelah mutasi uji. Datagen tidak dijalankan ulang.
+- Protected disposable: **93 checks PASS**, actual schema/toolkit A + PG18/OpenBao TLS, AAD swap,
+  revoke token, record scopes, akun/audit A, insert trigger, PATCH+bidx, six-role HTTPS browser.
+  Cleanup project Docker acak PASS. Ini fixture sintetis kecil, bukan migrasi dataset target.
+- Shared vectors A: **8 checks PASS**, evidence dari CLI A. AAD/blob/tamper/record swap/column swap/
+  nonce sample/normalisasi/bidx. Tidak mengimplementasikan kripto kedua di B.
+
+Run awal Python3.12 dalam sandbox Windows gagal akses direktori temporer; run akhir memakai
+izin eksekusi yang sesuai dan menghasilkan JUnit baru. Probe protected pertama menemukan
+missing dependency sebelum membuat resource; dependencies dipasang, lalu run penuh lulus.
+Kegagalan awal tidak disembunyikan sebagai PASS; evidence final berasal dari run ulang nyata.
+
+Keterbatasan/handoff: local pg-dpr hanya postgres dan baseline_100k. Protected_734/100k/1m hasil
+migrasi lokal dan benchmark API resmi masih **NOT TESTED**. Tidak ada klaim rows_compared1M.
+Readiness tetap PARTIAL meskipun protected disposable lulus. A masih perlu membatasi akses
+langsung analyst_user ke agregat; schema saat diperiksa mengekspos REF per record melalui view.
+Small-cell suppression B tidak menjamin perlindungan terhadap seluruh query differencing
+lintas filter/waktu. Samakan scope akun/workload sebelum benchmark plain vs protected C.
+Panduan PowerShell lengkap: docs/INTEGRATION_A.md. PR1 sudah merged; perubahan ini PR lanjutan,
+merge ke main tetap memerlukan review anggota lain sesuai TEAM_PLAN.

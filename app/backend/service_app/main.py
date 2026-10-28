@@ -1,4 +1,5 @@
 from collections import defaultdict, deque
+from contextlib import asynccontextmanager
 from datetime import timedelta
 import hashlib
 import hmac
@@ -19,11 +20,13 @@ from sqlalchemy.orm import sessionmaker
 
 from .config import Settings
 from .crypto import CryptoUnavailable, ToolkitAdapter
-from .models import AuditLog, Session, User, analyst_view, utcnow
+from .models import AuditLog, Session as PlainSession, User as PlainUser, protected_members, utcnow
+from .protected_control import ProtectedUser, ProtectedSession, audit_table
+from .analytics import summary
 from .policy import ROLES, can_access, detail_policy, mask, mask_list_name
 from .repository import MemberRepository, normalized
 from .schemas import (Analytics, AuditDTO, AuditPage, ContactPatch, FinanceDetail, Login, MemberDetail,
-                      MemberInsert, MemberPage, Message, OperatorDetail, PrivilegedDetail, UserDTO, email_check, ktp_check)
+                      MemberInsert, MemberPage, Message, OperatorDetail, PrivilegedDetail, UserDTO, AnalyticsFilters, email_check, ktp_check)
 
 PASSWORDS = PasswordHasher(time_cost=3, memory_cost=65536, parallelism=2)
 DUMMY_HASH = PASSWORDS.hash(secrets.token_urlsafe(32))
@@ -63,6 +66,8 @@ def create_app(settings=None, crypto=None):
         if not all(p.exists() for p in [root / "toolkit/dprcrypto", root / "policy/protection_profile.yaml", root / "docs/contracts/test_vectors.json"]):
             raise CryptoUnavailable("Module A toolkit, profile and shared test vectors are required")
     protection = crypto if settings.mode == "protected" and crypto is not None else ToolkitAdapter(settings) if settings.mode == "protected" else None
+    User = ProtectedUser if settings.mode == "protected" else PlainUser
+    Session = ProtectedSession if settings.mode == "protected" else PlainSession
     repository = MemberRepository(settings.mode, protection, settings.testing)
     engines = {}
     def engine_for(url):
@@ -78,7 +83,15 @@ def create_app(settings=None, crypto=None):
     auditor_engine = engine_for(settings.auditor_database_url or (settings.auth_database_url or settings.database_url if settings.testing else None))
     data_factory = sessionmaker(data_engine, expire_on_commit=False)
     auth_factory = sessionmaker(auth_engine, expire_on_commit=False)
-    app = FastAPI(title="DPR Service Application — Module B", version="1.0.0", docs_url=None, redoc_url=None)
+    @asynccontextmanager
+    async def lifespan(application):
+        yield
+        if protection is not None and callable(getattr(protection, "close", None)):
+            protection.close()
+        for engine in engines.values():
+            engine.dispose()
+    app = FastAPI(title="DPR Service Application — Module B", version="1.1.0", docs_url=None, redoc_url=None, lifespan=lifespan)
+    app.state.User, app.state.Session = User, Session
     app.state.engine, app.state.data_factory = data_engine, data_factory
     app.state.auth_engine, app.state.auth_factory = auth_engine, auth_factory
     app.state.protection, app.state.settings = protection, settings
@@ -86,6 +99,24 @@ def create_app(settings=None, crypto=None):
     limiter = LoginLimiter()
 
     def audit(request, user, action, decision="allowed", identifier=None, classes=None, db=None):
+        if settings.mode == "protected":
+            def append(connection):
+                if user:
+                    principal(connection, user)
+                record_id = connection.scalar(select(protected_members.c.anggota_id).where(protected_members.c.legacy_row_id == int(identifier))) if identifier is not None else None
+                for field_class in sorted(classes or ["AUTH"]):
+                    values = dict(action=action, anggota_id=record_id, field_class=field_class,
+                                  decision="error" if decision == "failed" else decision, request_id=request.state.request_id)
+                    if connection.bind.dialect.name == "sqlite":
+                        # SQLite fixture has no A audit-context trigger.
+                        values.update(actor=user.id if user else None, actor_role=user.role if user else "anonymous")
+                    connection.execute(audit_table.insert().values(**values).inline())
+            if db is not None:
+                append(db)
+            else:
+                with auth_factory.begin() as log_db:
+                    append(log_db)
+            return
         event = AuditLog(actor=user.id if user else None, role=user.role if user else "anonymous", action=action,
                          anggota_id=str(identifier) if identifier is not None else None, field_class=sorted(classes or []),
                          decision=decision, request_id=request.state.request_id)
@@ -134,7 +165,7 @@ def create_app(settings=None, crypto=None):
         if db.bind.dialect.name == "postgresql":
             # set_config(..., true) is parameterized SET LOCAL and resets on transaction end.
             db.execute(text("SELECT set_config('app.principal', :principal, true), set_config('app.role', :role, true), set_config('app.actor', :actor, true)"),
-                       {"principal": user.principal[8:] if user.principal.startswith("bidx:v1:") else user.principal, "role": user.role, "actor": user.id})
+                       {"principal": user.id if settings.mode == "protected" else user.principal, "role": user.role, "actor": user.id})
 
     def auth(request: Request):
         token = request.cookies.get("dpr_session")
@@ -225,7 +256,7 @@ def create_app(settings=None, crypto=None):
             if PASSWORDS.check_needs_rehash(user.password_hash):
                 user.password_hash = PASSWORDS.hash(payload.password)
             # Same control transaction for session + its audit.
-            db.add(AuditLog(actor=user.id, role=user.role, action="login", decision="allowed", field_class=[], request_id=request.state.request_id))
+            audit(request, user, "login", db=db)
         cookie(response, "dpr_session", token, True)
         cookie(response, "dpr_csrf", csrf_token, False)
         return UserDTO(id=user.id, username=user.username, role=user.role)
@@ -239,7 +270,7 @@ def create_app(settings=None, crypto=None):
         csrf(request)
         with auth_factory.begin() as db:
             db.execute(delete(Session).where(Session.token_hash == request.state.session.token_hash))
-            db.add(AuditLog(actor=user.id, role=user.role, action="logout", decision="allowed", field_class=[], request_id=request.state.request_id))
+            audit(request, user, "logout", db=db)
         for name in ["dpr_session", "dpr_csrf"]:
             response.delete_cookie(name, path="/", secure=True, httponly=name == "dpr_session", samesite="strict")
         return Message(message="Berhasil keluar")
@@ -305,27 +336,25 @@ def create_app(settings=None, crypto=None):
         allowed(request, user, "insert")
         with data_factory() as db:
             principal(db, user)
-            identifier = repository.insert(db, payload.model_dump())
+            identifier = repository.insert(db, payload.model_dump(), user)
+            if identifier is None:
+                audit(request, user, "insert", "denied")
+                raise HTTPException(403, "Akses tidak diizinkan")
             result = detail(db, request, user, identifier)
             audit(request, user, "insert", identifier=identifier, classes=["PII", "FIN", "REF"], db=db)
             db.commit()
         return result
 
     @app.get("/analytics/summary", response_model=Analytics)
-    def analytics(request: Request, user=Depends(auth)):
+    def analytics(request: Request, filters: AnalyticsFilters = Query(), user=Depends(auth)):
         allowed(request, user, "analytics")
         if analyst_engine is None:
             raise HTTPException(503, "Identitas analyst belum dikonfigurasi")
-        groups = []
         with sessionmaker(analyst_engine)() as db:
             principal(db, user)
-            total = db.scalar(select(func.count()).select_from(analyst_view))
-            for field in ["jenis_kelamin", "pekerjaan_terakhir", "nama_kppn", "nama_bank", "age_band"]:
-                column = analyst_view.c[field]
-                rows = db.execute(select(column, func.count()).select_from(analyst_view).group_by(column).order_by(column).limit(100)).all()
-                groups.extend({"dimension": field, "value": value, "count": count} for value, count in rows)
+            result = summary(db, filters.model_dump(exclude_none=True))
         audit(request, user, "analytics", classes=["REF"])
-        return Analytics(total=total, groups=groups)
+        return Analytics(**result)
 
     @app.get("/audit", response_model=AuditPage)
     def events(request: Request, page: int = Query(1, ge=1, le=1000000), user=Depends(auth)):
@@ -334,9 +363,16 @@ def create_app(settings=None, crypto=None):
             raise HTTPException(503, "Identitas auditor belum dikonfigurasi")
         with sessionmaker(auditor_engine)() as db:
             principal(db, user)
-            total = db.scalar(select(func.count()).select_from(AuditLog))
-            rows = db.scalars(select(AuditLog).order_by(AuditLog.id.desc()).offset((page-1)*50).limit(50)).all()
-            items = [AuditDTO.model_validate(row, from_attributes=True) for row in rows]
+            if settings.mode == "protected":
+                total = db.scalar(select(func.count()).select_from(audit_table))
+                rows = db.execute(select(audit_table).order_by(audit_table.c.event_id.desc()).offset((page-1)*50).limit(50)).mappings()
+                items = [AuditDTO(id=r["event_id"], actor=r["actor"], role=r["actor_role"], action=r["action"],
+                    anggota_id=r["anggota_id"], field_class=[r["field_class"]], decision=r["decision"],
+                    request_id=r["request_id"], created_at=r["occurred_at"]) for r in rows]
+            else:
+                total = db.scalar(select(func.count()).select_from(AuditLog))
+                rows = db.scalars(select(AuditLog).order_by(AuditLog.id.desc()).offset((page-1)*50).limit(50)).all()
+                items = [AuditDTO.model_validate(row, from_attributes=True) for row in rows]
         audit(request, user, "audit.read")
         return AuditPage(items=items, total=total, page=page, page_size=50)
 

@@ -94,3 +94,17 @@ Tidak ada angka latency/throughput/CPU/RAM yang diklaim: benchmark API resmi mas
   sebagai pengganti uji API pada laptop benchmark. Gunakan endpoint/DTO/pagination/session/CSRF/audit
   yang sama pada kedua mode. Kredensial `bench_user` lokal berada di custody state, bukan source.
 - PR #1 perlu review anggota lain sesuai TEAM_PLAN. Jangan merge sendiri sebelum review tersebut.
+
+## Koreksi setelah pull main b8e9998 — 28 Oktober 2026
+
+Bagian handoff lama di atas mencatat keadaan sebelum toolkit A tersedia. Sekarang toolkit,
+schema dan vectors A telah diintegrasikan; gunakan [INTEGRATION_A.md](INTEGRATION_A.md).
+Protected app.principal adalah UUID akun A, bukan hex bidx. Insert protected menggunakan
+sequence B setelah migrasi, bukan MAX atas subset RLS. Lab lokal plain tetap memakai binding
+pengguna baseline. Jalankan perintah lab dengan **app/.venv/Scripts/python** Python3.11+
+(diuji3.12.10), menggantikan venv root lama Python3.10. Tidak perlu setup/datagen ulang.
+
+Verifikasi ulang plain100k dan checksum lulus pada 28 Oktober. Protected diuji terpisah di
+PostgreSQL/OpenBao sementara; ini tidak memasang OpenBao atau protected_1m pada pg-dpr lokal.
+Tidak ada perubahan ke baseline_1m atau aturan pengecualian nonTLS milik A/C. Aplikasi tetap
+memerlukan verify-full untuk seluruh koneksi, termasuk baseline.
