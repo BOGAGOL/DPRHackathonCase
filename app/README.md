@@ -221,3 +221,20 @@ Analytics mendukung filter equality `jenis_kelamin`, `pekerjaan_terakhir`, `nama
 jumlah sekunder/total yang perlu disembunyikan menjadi `null`. UI menampilkan null sebagai
 “Disembunyikan”. Konsumen DTO harus menerima `number | "<5" | null`; kunci respons tetap
 `total` dan `groups`. Pengujian filter, batas 4/5 dan rendering tercakup di evidence.
+
+
+## Revisi analytics A5/B4 — 28 Oktober 2026
+
+Bagian ini menggantikan petunjuk analytics/filter/suppression lama di atas.
+Sesuai CONTRACT 10.1, endpoint kini membaca `public.analyst_summary` sebagai
+`analyst_user`. Response tetap `{total, groups}`: total selalu null dan groups hanya
+berisi dimension/value/count dengan count integer >=5. Kelompok 1–4 beserta labelnya
+hilang seluruhnya; tidak dikirim sebagai `<5`, null-count, atau label kosong.
+Filter yang tersedia hanya `dimension` dan `value` untuk marginal yang sudah dirilis;
+value memerlukan dimension. Semua filter cohort anggota lama ditolak 422.
+
+SQL A5 dan aplikasi harus dirilis bersama. Lihat [panduan VM](docs/DEPLOY_A5.md).
+Jangan menjalankan full migration prepare, provisioning akun, atau mengubah pg-dpr
+selama benchmark. Kode saja tidak menerapkan perubahan SQL. Fixture unit adalah
+sintetis SQLite; pengujian UI memakai API mock. Keduanya tidak menyatakan A5 VM PASS.
+Evidence khusus: `app/evidence/access-control/analytics-a5.json`.

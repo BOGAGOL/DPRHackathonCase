@@ -55,23 +55,35 @@ secara eksplisit; skrip demo bukan migrator akun. Pengelolaan akun UI belum dise
 Setelah migrasi lanjutan menambahkan legacy ID, koordinasikan sequence sebelum membuka
 insert aplikasi; setup idempotent tidak mereset sequence existing secara otomatis.
 
-## Sensor analytics dan kontrak konsumen
+## Analytics A5 dan kontrak konsumen — 28 Oktober 2026
 
-GET /analytics/summary hanya analyst, menggunakan analyst_user dan analyst_view.
-Filter equality diizinkan pada jenis_kelamin, pekerjaan_terakhir, nama_kppn, nama_bank,
-age_band. Filter diterapkan di SQL sebelum aggregation dan suppression, dengan parameter
-terikat. Role lain ditolak. Browser tidak menerima record individual dari endpoint ini.
+Mengikuti CONTRACT bagian 10.1 dan PR A #10. GET /analytics/summary hanya analyst,
+menggunakan analyst_user untuk SELECT dimension, value, anggota_count dari
+public.analyst_summary, diurutkan dimension dan value NULLS LAST. Backend tidak
+membaca analyst_view atau tabel anggota untuk endpoint ini dan tidak melakukan count(*)
+atau penjumlahan antar-marginal. Anggota_count dipetakan ke groups[].count (integer >=5).
+Total selalu null; kelompok 1–4 termasuk labelnya tidak dikirim, tanpa placeholder <5.
+Predicate anggota_count >=5 di query B juga menahan baris kecil dari view yang salah.
 
-count 1–4 menjadi string "<5"; count >=5 tetap angka kecuali perlu suppression sekunder.
-Jika satu bucket kecil ada, satu bucket lain disembunyikan sebagai null untuk menghambat
-pengurangan langsung dari sibling. Total menjadi null jika terdapat bucket kecil; cohort
-1–4 memakai "<5". Nol tetap 0. UI menampilkan null sebagai “Disembunyikan”. Tidak ada raw_count.
-Shape total/groups tetap, tetapi tipe count/total sekarang number | "<5" | null.
+Query yang didukung: tanpa filter, ?dimension=nama_kppn, atau
+?dimension=pekerjaan_terakhir&value=Guru. Pemilihan ini hanya memilih marginal yang
+sudah dirilis SQL, bukan menghitung ulang cohort. Value memerlukan dimension.
+Parameter anggota lama (nama_kppn, pekerjaan_terakhir, jenis_kelamin, nama_bank,
+age_band) dan gabungannya ditolak 422; tidak ada fallback ke role atau proyeksi lama.
+View hilang/permission ditolak menghasilkan 503 generik. Frontend menyediakan pemilih
+dimensi/label saja; menampilkan total sebagai Tidak disediakan dan tidak merender
+label kecil. NULL yang dirilis dengan count >=5 tetap didukung.
 
-Batas: ini small-cell suppression, bukan differential privacy atau jaminan terhadap
-serangkaian query filter tumpang tindih. Pembatasan query lintas waktu dan DB-level aggregate-only
-analyst_view tetap perlu keputusan lintas tim. Schema A saat diperiksa masih memberikan
-analyst_user view REF per record; B tidak mengubah SQL A atau mengklaim celah DB itu selesai.
+SQL A5 harus diterapkan terpisah dan terkoordinasi; pull/extract kode tidak mengubah
+DB. Runbook VM B: [DEPLOY_A5.md](DEPLOY_A5.md), memanggil CLI kanonis A, tidak prepare
+ulang. VM target hanya protected_734. Jangan menjalankan perubahan pada pg-dpr,
+baseline_100k/protected_100k/protected_1m selama benchmark Delf berlangsung.
+Baseline plain baru/disposable disiapkan B dengan view agregat ekuivalen. Perubahan
+setup itu belum dijalankan pada lab existing; tunggu persetujuan waktu benchmark.
+
+Batas: lima marginal ini bukan differential privacy, k-anonymity gabungan semua REF,
+atau perlindungan mutlak dari inferensi lintas waktu/pengetahuan tambahan. Ciphertext,
+AAD, bidx, protection_version, akun dan assignment tidak perlu diubah untuk A5.
 
 ## Bukti dan pekerjaan lintas tim
 

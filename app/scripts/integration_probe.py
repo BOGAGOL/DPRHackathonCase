@@ -103,6 +103,9 @@ def prepare_database(owner_engine, passwords, rows):
     with owner_engine.begin() as connection:
         connection.execute(table.insert(), values)
         connection.execute(text("CREATE VIEW analyst_view WITH (security_barrier=true) AS SELECT jenis_kelamin, pekerjaan_terakhir, nama_kppn, nama_bank, '40-49'::text AS age_band FROM anggota"))
+        from service_app.analytics import DIMENSIONS
+        marginals = [f"SELECT '{field}'::text AS dimension, {field}::text AS value, count(*) AS anggota_count FROM public.analyst_view GROUP BY {field} HAVING count(*) >= 5" for field in DIMENSIONS]
+        connection.execute(text("CREATE VIEW public.analyst_summary WITH (security_barrier=true) AS " + " UNION ALL ".join(marginals)))
     # Every account password is generated at runtime and never printed.
     hasher = PasswordHasher()
     accounts = {}
@@ -127,7 +130,7 @@ def prepare_database(owner_engine, passwords, rows):
             cursor.execute(sql.SQL("GRANT SELECT, INSERT, DELETE ON {} TO app_user").format(sql.Identifier(Session.__table__.name)))
             cursor.execute(sql.SQL("GRANT SELECT, INSERT ON {} TO app_user").format(sql.Identifier(AuditLog.__table__.name)))
             cursor.execute(sql.SQL("GRANT SELECT ON {} TO auditor_user").format(sql.Identifier(AuditLog.__table__.name)))
-            cursor.execute("GRANT SELECT ON analyst_view TO analyst_user")
+            cursor.execute("GRANT SELECT ON public.analyst_summary TO analyst_user")
             cursor.execute("ALTER TABLE anggota ENABLE ROW LEVEL SECURITY")
             cursor.execute("ALTER TABLE anggota FORCE ROW LEVEL SECURITY")
             cursor.execute("CREATE POLICY probe_object_scope ON anggota TO app_user USING (current_setting('app.role',true) IS DISTINCT FROM 'anggota' OR pengguna=current_setting('app.principal',true)) WITH CHECK (current_setting('app.role',true) IS DISTINCT FROM 'anggota' OR pengguna=current_setting('app.principal',true))")

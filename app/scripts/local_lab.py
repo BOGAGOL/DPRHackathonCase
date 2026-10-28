@@ -178,7 +178,11 @@ def setup(directory, ref):
             db.execute(sql.SQL("GRANT CONNECT ON DATABASE baseline_100k TO {}").format(sql.Identifier(role)))
             db.execute(sql.SQL("GRANT USAGE ON SCHEMA public TO {}").format(sql.Identifier(role)))
         db.execute("CREATE OR REPLACE VIEW analyst_view WITH (security_barrier=true) AS SELECT jenis_kelamin,pekerjaan_terakhir,nama_kppn,nama_bank,CASE WHEN tanggal_lahir IS NULL THEN NULL ELSE ((extract(year from age(DATE '2026-10-01',tanggal_lahir))::int / 10)*10)::text || '-' || ((extract(year from age(DATE '2026-10-01',tanggal_lahir))::int / 10)*10+9)::text END AS age_band FROM anggota")
-        db.execute("GRANT SELECT ON analyst_view TO analyst_user")
+        from service_app.analytics import DIMENSIONS
+        marginals = [f"SELECT '{field}'::text AS dimension, {field}::text AS value, count(*) AS anggota_count FROM public.analyst_view GROUP BY {field} HAVING count(*) >= 5" for field in DIMENSIONS]
+        db.execute("CREATE OR REPLACE VIEW public.analyst_summary WITH (security_barrier=true) AS " + " UNION ALL ".join(marginals))
+        db.execute("REVOKE ALL ON public.analyst_view FROM analyst_user")
+        db.execute("GRANT SELECT ON public.analyst_summary TO analyst_user")
         db.execute("GRANT SELECT,INSERT,UPDATE ON anggota TO bench_user")
         db.execute("GRANT USAGE,SELECT ON SEQUENCE anggota_id_seq TO bench_user")
         db.execute("GRANT SELECT ON anggota TO scanner_user")
@@ -300,7 +304,10 @@ def verify(directory):
                     response = client.get("/analytics/summary" if role == "analyst" else "/audit")
                     checks["own_endpoint:" + role] = response.status_code == 200
                     if role == "analyst":
-                        checks["aggregate_count"] = response.json().get("total") == 100000
+                        body = response.json()
+                        checks["A5_total_unavailable"] = body.get("total") is None
+                        checks["A5_threshold"] = all(g["count"] >= 5 for g in body.get("groups", []))
+                        checks["A5_released_group"] = bool(body.get("groups"))
                     continue
                 policy = detail_policy(role)
                 checks["exact_dto:" + role] = detail.status_code == 200 and set(detail.json()) == {"anggota_id", *policy.fields}

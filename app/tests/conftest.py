@@ -19,6 +19,7 @@ from service_app.config import Settings
 from service_app.main import create_app
 from service_app.models import Base, User, baseline_members, protected_members
 from service_app.protected_control import ProtectedBase, ProtectedUser, bindings, scopes, audit_table
+from service_app.analytics import DIMENSIONS
 
 COLUMNS = "nama nama_lengkap nama_tanpa_gelar jenis_kelamin tempat_lahir tanggal_lahir tanggal_pernikahan no_ktp pekerjaan_terakhir alamat_jakarta telpon_jakarta alamat_daerah telpon_daerah handphone email ruangan status_kawin jumlah_anak jumlah_tanggungan jumlah_jiwa rekening nama_rekening npwp nama_kppn nip_kppn nama_bank kode_bank pengguna agama".split()
 REF = {"jenis_kelamin", "pekerjaan_terakhir", "nama_kppn", "nama_bank"}
@@ -158,6 +159,9 @@ def lab(request, tmp_path):
     (Base.metadata.tables["audit_log"] if request.param == "plain" else audit_table).create(engine)
     with engine.begin() as connection:
         connection.execute(text("CREATE VIEW analyst_view AS SELECT jenis_kelamin, pekerjaan_terakhir, nama_kppn, nama_bank, '40-49' AS age_band FROM anggota"))
+        source = "anggota_protected" if request.param == "protected" else "analyst_view"
+        marginals = [f"SELECT '{field}' AS dimension, CAST({field} AS TEXT) AS value, count(*) AS anggota_count FROM {source} GROUP BY {field} HAVING count(*) >= 5" for field in DIMENSIONS]
+        connection.execute(text("CREATE VIEW analyst_summary AS " + " UNION ALL ".join(marginals)))
         connection.execute(text("CREATE TRIGGER test_creator_scope AFTER INSERT ON anggota_protected BEGIN INSERT INTO access_scope(principal,anggota_id,permission) SELECT principal,NEW.anggota_id,'read' FROM access_scope WHERE permission='insert' AND anggota_id IS NULL; INSERT INTO access_scope(principal,anggota_id,permission) SELECT principal,NEW.anggota_id,'update' FROM access_scope WHERE permission='insert' AND anggota_id IS NULL; END"))
     crypto = FakeCrypto()
     app = create_app(settings, crypto=crypto)

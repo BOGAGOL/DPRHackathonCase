@@ -216,3 +216,35 @@ ke Zhafif. Kelulusan instalasi backend/server ada pada log pengguna; upgrade Zod
 serta build server belum diklaim PASS sebelum hasil aktual diterima.
 Rujukan: https://github.com/advisories/GHSA-mrhx-c7xc-m3w5 dan
 https://github.com/colinhacks/zod/commit/a0ebf970f2d752e5f58527cd2942ff48be4f46bd
+
+
+## A5/B4: interface analis terbaru — 28 Oktober 2026
+
+Instruksi Alby/Delf melalui Zhafif dan CONTRACT 10.1/PR A #10 mengganti perilaku
+analytics lama. Query hanya public.analyst_summary via analyst_user, proyeksi
+3 kolom dan bind parameter. Count >=5 (juga predicate pertahanan B), total selalu
+null. Kelompok kecil tidak dikirim sama sekali termasuk labelnya. Tidak ada
+placeholder <5 atau fallback per-record/role/decrypt. Filter cohort anggota lama
+422 eksplisit; dimension/value memilih hanya marginal yang sudah dirilis.
+
+DTO Python/TypeScript, form UI, fixture kedua mode, dan probe integrasi diselaraskan.
+Setup plain baru/disposable menghasilkan marginal ekuivalen; tidak dijalankan ke
+pg-dpr existing. Readiness tidak menerima evidence pre-A5 sebagai pengesahan versi
+baru. Bukti historical baseline/protected tetap disimpan, bukan diubah menjadi PASS
+A5. SHA provenance profile/format ciphertext tidak diubah oleh B.
+
+Validasi final: pytest 328 lulus, 1 skip (swap ciphertext tidak berlaku pada plain),
+termasuk 64 kasus analytics dua mode dan 2 gate readiness A5; Next production build
+lulus; Playwright 14 lulus, termasuk filter marginal, empty state, dan escaping XSS
+label yang dirilis. Evidence hanya status/metadata, bukan nilai anggota/rahasia.
+Empat script setup/probe berubah juga diperiksa parse; integrasi PG18/OpenBao baru
+belum dijalankan pada revisi ini. Mesin ini menyediakan PG17 native, bukan PG18;
+tidak ada startup Docker, migrasi, SQL upgrade, atau akses VM dalam pekerjaan ini.
+
+Panduan rilis: app/docs/DEPLOY_A5.md. Source yang diubah hanya app/. Paket VM
+mengikutsertakan dependensi A5 yang sudah merged tanpa mengubah source A. Terapkan
+SQL melalui infra.protected.analyst hanya pada protected_734 VM saat maintenance,
+bukan migration prepare/full provisioning. Jangan menerapkan perubahan pada laptop
+Delf/pg-dpr atau database benchmark selama benchmark berlangsung. Deployment A5 VM,
+acceptance enam akun pasca-upgrade, sertifikat renew dry-run, dan systemd tetap
+pekerjaan berikutnya, bukan PASS dari unit/browser mock.
