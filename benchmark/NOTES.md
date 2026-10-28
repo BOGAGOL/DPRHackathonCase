@@ -851,3 +851,8 @@ Instruksi pengguna28 Oktober2026: ulang resmi100k lalu1M, produksi8a11ff7 tetap,
 python -m benchmark.paired_v2 preflight menulis gate baru, bukan memakai gate naive lama. Launcher PowerShell Start-Process Hidden menjalankan helper DPAPI privat sebagai proses terpisah; log di results/bench/bppb_v2. Worker tidak bergantung pada sesi/token konteks Codex: menyelesaikan kedua skala, memverifikasi integritas, membuat tabel versi, commit path sesi saja lalu push perf/keyservice-latency tanpa merge. Receipt publikasi lokal di results/bench/bppb_v2/publication.json, tidak self-reference dalam commit. Tidak retry publikasi otomatis jika gagal. Token svc-app4h diperbarui pada awal blok bila TTL<90menit; root hanya pada jalur operator, tidak dipasang pada workload.
 
 Output bppb_v2_100k/,bppb_v2_1m/,bppb_v2_compare.json terpisah total dari naive_v1. Memantau progres paling sering tiap15menit; tidak menjalankan test/scan berat selama workload. Persiapan test188 PASS/1 SKIP disposable; test ulang setelah perubahan orchestration diperlukan, tidak mengulang benchmark untuk test.
+
+
+### V2 berhenti pada gate awal ?28 Oktober2026,20:41 WIB
+
+OpenBao initialized=true tetapi sealed=true. Hanya container pg-dpr dan OpenBao berjalan; disk51,41 GiB, AC/Best performance/sleep AC0 PASS, target dan produksi8a11ff7 sesuai. Tidak ada run v2 atau worker background dimulai. Gate DB/pg_stat_statements/checksum belum dicapai setelah service gate gagal. Tidak unseal atau restart otomatis sesuai aturan penghentian benchmark. Kegagalan diarsipkan permanen di evidence/benchmark/bppb_v2_gate_failures/20261028T204139WIB.json; preflight baru pada instruksi lanjut tidak menghapus arsip ini. Tabel versi saat ini menyatakan v2 BELUM DIUJI.

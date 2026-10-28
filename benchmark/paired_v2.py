@@ -131,6 +131,9 @@ def preflight():
         report['passed'] = True
     except Exception as error:
         report.update(error_type=type(error).__name__, error='preflight_failed_private_details_withheld')
+        if isinstance(error, RuntimeError) and str(error) in (
+                'container_set_changed', 'openbao_unavailable_or_sealed', 'disk_under_20_GiB'):
+            report['gates']['services'] = {'passed':False, 'reason':str(error)}
     finally:
         report['completed_at_utc'] = utc_now()
         write_json(OUT / (PREFIX + '_preflight.json'), report)

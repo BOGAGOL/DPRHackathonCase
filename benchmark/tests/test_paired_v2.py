@@ -56,6 +56,26 @@ def test_failed_gate_stops_before_network_and_writes_evidence(monkeypatch,tmp_pa
     forbidden.assert_not_called()
 
 
+def test_sealed_service_reason_is_saved_without_any_database_connection(monkeypatch,tmp_path):
+    original_root = v2.ROOT
+    monkeypatch.setattr(v2,'OUT',tmp_path)
+    monkeypatch.setattr(v2,'git',lambda *a:v2.BRANCH if a[0]=='branch' else 'synthetic-commit-time')
+    monkeypatch.setattr(v2,'production_manifest',lambda:{})
+    monkeypatch.setenv('DPR_OPENBAO_HTTP_TRANSPORT','https_pool')
+    monkeypatch.setenv('DPR_BENCH_DEK_CACHE_TTL','0')
+    monkeypatch.setattr(v2.subprocess,'run',lambda *a,**k:SimpleNamespace(returncode=0))
+    target=(original_root/'docs/targets.md').read_bytes()
+    monkeypatch.setattr(v2.subprocess,'check_output',lambda *a,**k:target)
+    monkeypatch.setattr(v2,'power_snapshot',lambda:{'passed':True})
+    monkeypatch.setattr(v2.paired,'services',MagicMock(side_effect=RuntimeError('openbao_unavailable_or_sealed')))
+    connection=MagicMock(side_effect=AssertionError('Database must not be reached'))
+    monkeypatch.setattr(v2.psycopg,'connect',connection)
+    report=v2.preflight()
+    assert not report['passed']
+    assert report['gates']['services']=={'passed':False,'reason':'openbao_unavailable_or_sealed'}
+    connection.assert_not_called()
+
+
 def test_version_report_uses_plain_from_each_session_and_shows_failures(monkeypatch,tmp_path):
     monkeypatch.setattr(v2,'OUT',tmp_path)
     before={'p50_ms':1.,'p95_ms':2.,'throughput_rps':100.,'error_rate':0.,'db_time_ms_per_request':.1}
