@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "timestamp_utc": "2026-10-28T07:16:00.718417+00:00",
   "passed": true,
-  "files_scanned": 61,
+  "timestamp_utc": "2026-10-28T08:05:14.409298+00:00",
+  "files_scanned": 39,
   "secret_literals_checked": 24,
   "matched_paths": [],
-  "scope": "Changed/new repository outputs only; exact private credential/token/unseal/private-key literals, not complete S05/S06 or Git history scan"
+  "scope": "Final changed/new repository outputs only; exact private credential/token/unseal/private-key literals, not complete S05/S06 or Git history scan"
 }

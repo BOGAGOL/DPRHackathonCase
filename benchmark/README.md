@@ -99,6 +99,7 @@ Instal dependensi modul dan toolkit publik A dari root repo:
 .\.venv\Scripts\python.exe -m pip install -r benchmark/requirements.txt -e ./toolkit
 .\.venv\Scripts\python.exe -m benchmark.parity
 .\.venv\Scripts\python.exe -m benchmark.compare --before <summary-B.json> --after <summary-P.json> --out results/bench/compare
+# Alias: python -m benchmark compare --before ... --after ... --out ...
 ```
 
 Parity membutuhkan `DPR_PRIVATE_DIR`, `BENCH_DATABASE_URL` (bench_user, baseline,
@@ -123,3 +124,10 @@ per dataset, ditambah probe rollback tulis; bukan pengganti benchmark 3 run.
 Perintah `benchmark run` lama tetap khusus baseline awal. Jangan menjalankannya
 untuk membuat hasil after atau menimpa artefak historis; B-P-P-B membutuhkan
 instruksi pengguna terpisah dan kondisi daya/perangkat yang memenuhi syarat.
+
+Test komponen dijalankan terpisah untuk menghindari konflik basename test/conftest:
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest benchmark/tests datagen/tests verify/tests -q
+.\.venv\Scripts\python.exe -m pytest scanner/tests -q
+```

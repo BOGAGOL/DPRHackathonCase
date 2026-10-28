@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "passed": true,
-  "timestamp_utc": "2026-10-28T07:07:43.320542+00:00",
+  "timestamp_utc": "2026-10-28T07:59:54.631068+00:00",
   "final_suite_counts": {
     "scanner_passed": 193,
     "scanner_skipped": 1,
@@ -43,6 +43,33 @@
         "errors": 0,
         "skipped": 0
       }
+    },
+    {
+      "junit": "results/overnight-28okt/final_compare_dispatch_tests.xml",
+      "counts": {
+        "tests": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "junit": "results/overnight-28okt/final_update_minimization_tests.xml",
+      "counts": {
+        "tests": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "junit": "results/overnight-28okt/final_rollback_probe_tests.xml",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
     }
   ],
   "historical_test_setup_issues": [
@@ -64,17 +91,17 @@
     "benchmark/backup_restore.py": "3c48ceb6a90058277e297ef7b0bfc7ad70a5df643f1ef5ca5b36052f8294a478",
     "benchmark/collect_metrics.py": "c2f3b2550fc9f031996f751f0e17737028721287687aff9641e390dfa871e26f",
     "benchmark/common.py": "e16a7962e62c9b20d64175fba1f92e1dd4ecfcbd32554016b5a94706210a0238",
-    "benchmark/compare.py": "82f324b2761571ecb384746fe60dc3e00d1e76c67ddb0bbb1a2dbd6bb2597b38",
+    "benchmark/compare.py": "cfce61c6d0a9c5e306cd40756f4ae6baed678bc3b785f24e8862ca1f7b5fa0ac",
     "benchmark/db_time.py": "54907b99ecd54d17ded61908179ed2f7c8e88cde3de9c76b3b01eeb92c97dd69",
     "benchmark/diagnose_overhead.py": "3bd664acbe63663b51be6e0b314c9f8a8ddd07779dd1e1cb98548f160902431c",
-    "benchmark/parity.py": "9874092dd075855049c5473e0bda01d84aafc10cf949b5d024fab56b3b146dcf",
+    "benchmark/parity.py": "0e9016c2664ac36d44ab77935c8b634f39c4303bc3bf2b8c5e1458f18607a037",
     "benchmark/pgbench_crosscheck.py": "d4674e375017d43e004a80080023863be420a7cbf6edfae3c05c9c06494b73e8",
     "benchmark/power_incident.py": "aa1e300a30cd68b0cdd864e3b618f4fed8d6fa0372c30cc92404f24711ade156",
     "benchmark/replacement_ac.py": "6b41247ce482518c3a943127b10c68e193b744ce048455f85f9837dd6f054b90",
     "benchmark/runner.py": "9c5e368237c3042a18e89f11e4b55748f929f7ad1dc902e60ed1ddd2af88bed2",
     "benchmark/stats.py": "f5f4231164c1cdac029eadd931cb4b062d953be58fdf60663c0c220111be305c",
     "benchmark/__init__.py": "375e94901a990be47e4dffee081aafa3204e277d74fd145fbde6ef128c577d97",
-    "benchmark/__main__.py": "b37a3e76a7b2dbab9639b4d43107c48c9e544477be657bee745e61305e23e34f",
+    "benchmark/__main__.py": "f01887ca549abf5013c88b737cc096cb2f4309b78dfe4e054a58525a9e59f057",
     "verify/after_comparison.py": "c38b554875a1439464866e018de7b4a930ce7d87696689dcd1ec6bae13ab400b",
     "verify/artifacts.py": "e3fce09ca04954c3c6442ddf6c1f2c36854332fbb5ccb8ce57b9d32a06856fbf",
     "verify/artifact_scanner.py": "c1bc847329ee34a71712a334ca3e82d4af39e401a0747ab3c88cba1f7f44d666",
@@ -90,5 +117,6 @@
   },
   "real_parity_evidence": "evidence/benchmark/adapter_parity.json",
   "real_scanner_evidence": "evidence/overnight/after_artifacts_20261028.json",
-  "official_benchmark_executed": false
+  "official_benchmark_executed": false,
+  "post_review_real_probe": "evidence/benchmark/post_review_write_probe.json"
 }

@@ -32,12 +32,12 @@ def compare_reports(before, after, out):
     return rows
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--before", type=Path, required=True)
     parser.add_argument("--after", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     summaries = []
     for path in (args.before, args.after):
         payload = json.loads((path / "summary.json" if path.is_dir() else path).read_text(encoding="utf-8"))

@@ -140,18 +140,21 @@ class ProtectedAdapter:
         elif operation == "update_contact":
             contact = self.keys["insert_templates"][worker]["handphone"]
             with session.connection.transaction(force_rollback=True):
-                records, _ = self.select(session, ("id", "handphone"), sql.SQL("WHERE legacy_row_id=%s FOR UPDATE"), (row["id"],))
-                if len(records) != 1:
+                record = session.connection.execute(
+                    "SELECT anggota_id,legacy_row_id,protection_version,dek_pii_wrapped "
+                    "FROM public.anggota_protected WHERE legacy_row_id=%s FOR UPDATE", (row["id"],)).fetchone()
+                if record is None:
                     raise ValueError("Protected update target unavailable")
-                record = records[0]
                 dek = session.manager.unwrap_many("pii-kek", [record["dek_pii_wrapped"]])[0]
                 ciphertext = encrypt(contact, dek, column="handphone", anggota_id=record["anggota_id"],
                                      protection_version=record["protection_version"])
-                cursor = session.connection.execute("UPDATE public.anggota_protected SET handphone_ct=%s WHERE anggota_id=%s",
-                                                    (ciphertext, record["anggota_id"]))
-                if cursor.rowcount != 1:
+                updated = session.connection.execute(
+                    "UPDATE public.anggota_protected SET handphone_ct=%s WHERE anggota_id=%s RETURNING legacy_row_id,handphone_ct",
+                    (ciphertext, record["anggota_id"])).fetchone()
+                if updated is None:
                     raise ValueError("Protected update denied")
-                _, actual = self.select(session, ("id", "handphone"), sql.SQL("WHERE legacy_row_id=%s"), (row["id"],))
+                actual = [(updated["legacy_row_id"], decrypt(updated["handphone_ct"], dek, column="handphone",
+                           anggota_id=record["anggota_id"], protection_version=record["protection_version"]))]
                 expected = [(row["id"], contact)]
         elif operation == "insert_member":
             template = dict(self.keys["insert_templates"][worker], id=-(worker + 1))

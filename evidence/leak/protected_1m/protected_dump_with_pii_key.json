@@ -1,0 +1,874 @@
+{
+  "schema_version": 1,
+  "status": "PASSED",
+  "scenario": "protected_dump_with_pii_key",
+  "dataset": "protected_1m",
+  "measurement_only": true,
+  "timestamp_utc": "2026-10-28T07:28:03.003950+00:00",
+  "artifact_sha256": "932f89019aa776d51c26ccec597f55ff07c9bceeb6e2ab0181df7dae14c6356f",
+  "artifact_bytes": 1669260065,
+  "code_commit": "a4a8844986751bf00d0ed2b1863fbd1c5402d429",
+  "worktree_code_sha256": {
+    "verify/after_comparison.py": "c38b554875a1439464866e018de7b4a930ce7d87696689dcd1ec6bae13ab400b",
+    "verify/artifacts.py": "e3fce09ca04954c3c6442ddf6c1f2c36854332fbb5ccb8ce57b9d32a06856fbf",
+    "verify/artifact_scanner.py": "c1bc847329ee34a71712a334ca3e82d4af39e401a0747ab3c88cba1f7f44d666",
+    "verify/attacker_setup.py": "8a722f5c94e8719b5693de856fc863c68540be932a6b5c9d7f1f4a7f5368017d",
+    "verify/known_values.py": "4e8c0d10989f53cd9286fb18caf4ef35e1271bbfde3c6df09d45bc28f9e137c5",
+    "verify/leakage_budget.py": "8f3f813632212b2599f2ab8df81ebd825a21f611d7ced927dee232e36106c727",
+    "verify/leak_sim.py": "7023f1a756029672467e3b7af18c7dfa6b181d83a4df8d1a08bb7e6ec6ccf526",
+    "verify/output_audit.py": "52a0eb1ba62080cddc71212977a716f40bdfefdb6aa44522bc82c82afd67e4b8",
+    "verify/profile.py": "bd6192b9f4a9dcb588876135a5142d6a8d2ac731df475ce6302eba5b1f7293aa",
+    "verify/protected_artifact.py": "36116697be17998dfddc6835ccff62d67d73b70955d4da5f97798260eb586ba1",
+    "verify/residual.py": "f5bd0d108860c89123bf073c2faf38bb4c240734b5037d58e576285506c658b5",
+    "verify/__init__.py": "1720470dfc77ae745cc8a5a1b0994051c7754fc0fad7b09b9894245c31dc8d00"
+  },
+  "profile_sha256": "bb1542e2adf41903f12afa17caeadbd7d4860ad045e25e7e209078be27c1751e",
+  "targets_commit": "8c09a25ccb6d415a231f692b68b9674495c31faf",
+  "profile": {
+    "scenario": "protected_dump_with_pii_key",
+    "profile_source": "policy/protection_profile.yaml",
+    "profile_version": 1,
+    "sensitive": [
+      "nama",
+      "nama_lengkap",
+      "nama_tanpa_gelar",
+      "tempat_lahir",
+      "tanggal_lahir",
+      "tanggal_pernikahan",
+      "no_ktp",
+      "alamat_jakarta",
+      "telpon_jakarta",
+      "alamat_daerah",
+      "telpon_daerah",
+      "handphone",
+      "email",
+      "ruangan",
+      "status_kawin",
+      "jumlah_anak",
+      "jumlah_tanggungan",
+      "jumlah_jiwa",
+      "rekening",
+      "nama_rekening",
+      "npwp",
+      "nip_kppn",
+      "kode_bank",
+      "pengguna",
+      "agama"
+    ],
+    "domains": {
+      "PII": [
+        "nama",
+        "nama_lengkap",
+        "nama_tanpa_gelar",
+        "tempat_lahir",
+        "tanggal_lahir",
+        "tanggal_pernikahan",
+        "no_ktp",
+        "alamat_jakarta",
+        "telpon_jakarta",
+        "alamat_daerah",
+        "telpon_daerah",
+        "handphone",
+        "email",
+        "ruangan",
+        "status_kawin",
+        "jumlah_anak",
+        "jumlah_tanggungan",
+        "jumlah_jiwa",
+        "nip_kppn",
+        "pengguna",
+        "agama"
+      ],
+      "FIN": [
+        "rekening",
+        "nama_rekening",
+        "npwp",
+        "kode_bank"
+      ]
+    },
+    "plaintext": [
+      "jenis_kelamin",
+      "pekerjaan_terakhir",
+      "nama_kppn",
+      "nama_bank"
+    ],
+    "storage_columns": {
+      "nama": "nama_ct",
+      "nama_lengkap": "nama_lengkap_ct",
+      "nama_tanpa_gelar": "nama_tanpa_gelar_ct",
+      "jenis_kelamin": "jenis_kelamin",
+      "tempat_lahir": "tempat_lahir_ct",
+      "tanggal_lahir": "tanggal_lahir_ct",
+      "tanggal_pernikahan": "tanggal_pernikahan_ct",
+      "no_ktp": "no_ktp_ct",
+      "pekerjaan_terakhir": "pekerjaan_terakhir",
+      "alamat_jakarta": "alamat_jakarta_ct",
+      "alamat_daerah": "alamat_daerah_ct",
+      "telpon_jakarta": "telpon_jakarta_ct",
+      "telpon_daerah": "telpon_daerah_ct",
+      "handphone": "handphone_ct",
+      "email": "email_ct",
+      "ruangan": "ruangan_ct",
+      "status_kawin": "status_kawin_ct",
+      "jumlah_anak": "jumlah_anak_ct",
+      "jumlah_tanggungan": "jumlah_tanggungan_ct",
+      "jumlah_jiwa": "jumlah_jiwa_ct",
+      "rekening": "rekening_ct",
+      "nama_rekening": "nama_rekening_ct",
+      "npwp": "npwp_ct",
+      "kode_bank": "kode_bank_ct",
+      "nama_kppn": "nama_kppn",
+      "nama_bank": "nama_bank",
+      "nip_kppn": "nip_kppn_ct",
+      "pengguna": "pengguna_ct",
+      "agama": "agama_ct"
+    },
+    "bidx": [
+      "no_ktp_bidx",
+      "email_bidx",
+      "pengguna_bidx"
+    ],
+    "authorized_decrypt_domain": "PII",
+    "requires_decryption_hook": true,
+    "search_key_only": false,
+    "direct_identifiers": [
+      "nama",
+      "nama_lengkap",
+      "nama_tanpa_gelar",
+      "nama_rekening",
+      "no_ktp",
+      "npwp",
+      "nip_kppn",
+      "rekening",
+      "email",
+      "pengguna",
+      "handphone",
+      "telpon_jakarta",
+      "telpon_daerah"
+    ]
+  },
+  "ESCE_scope": "25 contract AEAD columns, excluding REF and operational metadata",
+  "method": "Actual COPY artifact; indexed private known-value batch lookup; actual AEAD decrypt or HMAC dictionary oracle",
+  "populations": {
+    "all": {
+      "rows": 1000000,
+      "ESCE": {
+        "numerator": 20500005,
+        "denominator": 24500005,
+        "ratio": 0.8367347271969945
+      },
+      "DIE": {
+        "numerator": 1000000,
+        "denominator": 1000000,
+        "ratio": 1.0
+      },
+      "columns": [
+        {
+          "column": "nama",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "nama_lengkap",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "nama_tanpa_gelar",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "tempat_lahir",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "tanggal_lahir",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "tanggal_pernikahan",
+          "numerator": 500005,
+          "denominator": 500005,
+          "ratio": 1.0
+        },
+        {
+          "column": "no_ktp",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "alamat_jakarta",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "telpon_jakarta",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "alamat_daerah",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "telpon_daerah",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "handphone",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "email",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "ruangan",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "status_kawin",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_anak",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_tanggungan",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_jiwa",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "rekening",
+          "numerator": 0,
+          "denominator": 1000000,
+          "ratio": 0.0
+        },
+        {
+          "column": "nama_rekening",
+          "numerator": 0,
+          "denominator": 1000000,
+          "ratio": 0.0
+        },
+        {
+          "column": "npwp",
+          "numerator": 0,
+          "denominator": 1000000,
+          "ratio": 0.0
+        },
+        {
+          "column": "nip_kppn",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "kode_bank",
+          "numerator": 0,
+          "denominator": 1000000,
+          "ratio": 0.0
+        },
+        {
+          "column": "pengguna",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        },
+        {
+          "column": "agama",
+          "numerator": 1000000,
+          "denominator": 1000000,
+          "ratio": 1.0
+        }
+      ]
+    },
+    "source_734": {
+      "rows": 734,
+      "ESCE": {
+        "numerator": 15047,
+        "denominator": 17983,
+        "ratio": 0.8367346938775511
+      },
+      "DIE": {
+        "numerator": 734,
+        "denominator": 734,
+        "ratio": 1.0
+      },
+      "columns": [
+        {
+          "column": "nama",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "nama_lengkap",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "nama_tanpa_gelar",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "tempat_lahir",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "tanggal_lahir",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "tanggal_pernikahan",
+          "numerator": 367,
+          "denominator": 367,
+          "ratio": 1.0
+        },
+        {
+          "column": "no_ktp",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "alamat_jakarta",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "telpon_jakarta",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "alamat_daerah",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "telpon_daerah",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "handphone",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "email",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "ruangan",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "status_kawin",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_anak",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_tanggungan",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_jiwa",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "rekening",
+          "numerator": 0,
+          "denominator": 734,
+          "ratio": 0.0
+        },
+        {
+          "column": "nama_rekening",
+          "numerator": 0,
+          "denominator": 734,
+          "ratio": 0.0
+        },
+        {
+          "column": "npwp",
+          "numerator": 0,
+          "denominator": 734,
+          "ratio": 0.0
+        },
+        {
+          "column": "nip_kppn",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "kode_bank",
+          "numerator": 0,
+          "denominator": 734,
+          "ratio": 0.0
+        },
+        {
+          "column": "pengguna",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        },
+        {
+          "column": "agama",
+          "numerator": 734,
+          "denominator": 734,
+          "ratio": 1.0
+        }
+      ]
+    },
+    "synthetic": {
+      "rows": 999266,
+      "ESCE": {
+        "numerator": 20484958,
+        "denominator": 24482022,
+        "ratio": 0.8367347272214689
+      },
+      "DIE": {
+        "numerator": 999266,
+        "denominator": 999266,
+        "ratio": 1.0
+      },
+      "columns": [
+        {
+          "column": "nama",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "nama_lengkap",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "nama_tanpa_gelar",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "tempat_lahir",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "tanggal_lahir",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "tanggal_pernikahan",
+          "numerator": 499638,
+          "denominator": 499638,
+          "ratio": 1.0
+        },
+        {
+          "column": "no_ktp",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "alamat_jakarta",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "telpon_jakarta",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "alamat_daerah",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "telpon_daerah",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "handphone",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "email",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "ruangan",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "status_kawin",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_anak",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_tanggungan",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "jumlah_jiwa",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "rekening",
+          "numerator": 0,
+          "denominator": 999266,
+          "ratio": 0.0
+        },
+        {
+          "column": "nama_rekening",
+          "numerator": 0,
+          "denominator": 999266,
+          "ratio": 0.0
+        },
+        {
+          "column": "npwp",
+          "numerator": 0,
+          "denominator": 999266,
+          "ratio": 0.0
+        },
+        {
+          "column": "nip_kppn",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "kode_bank",
+          "numerator": 0,
+          "denominator": 999266,
+          "ratio": 0.0
+        },
+        {
+          "column": "pengguna",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        },
+        {
+          "column": "agama",
+          "numerator": 999266,
+          "denominator": 999266,
+          "ratio": 1.0
+        }
+      ]
+    }
+  },
+  "ELS": {
+    "bidx_count": 3,
+    "plaintext_equality_column_count": 5,
+    "columns": [
+      {
+        "column": "jenis_kelamin",
+        "storage": "plaintext",
+        "equality_classes": 2,
+        "largest_class": 501371,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 498629,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 501371,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "pekerjaan_terakhir",
+        "storage": "plaintext",
+        "equality_classes": 6,
+        "largest_class": 197556,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 144415,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 155321,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 156674,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 170290,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 175744,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 197556,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "nama_kppn",
+        "storage": "plaintext",
+        "equality_classes": 5,
+        "largest_class": 222075,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 173022,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 193458,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 197548,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 213897,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 222075,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "nama_bank",
+        "storage": "plaintext",
+        "equality_classes": 4,
+        "largest_class": 262946,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 227521,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 253405,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 256128,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 262946,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "age_band",
+        "storage": "plaintext",
+        "equality_classes": 5,
+        "largest_class": 218053,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 147335,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 199727,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 217205,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 217680,
+            "number_of_classes": 1
+          },
+          {
+            "class_size": 218053,
+            "number_of_classes": 1
+          }
+        ]
+      },
+      {
+        "column": "no_ktp_bidx",
+        "storage": "blind_index",
+        "equality_classes": 1000000,
+        "largest_class": 1,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 1000000
+          }
+        ]
+      },
+      {
+        "column": "email_bidx",
+        "storage": "blind_index",
+        "equality_classes": 1000000,
+        "largest_class": 1,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 1000000
+          }
+        ]
+      },
+      {
+        "column": "pengguna_bidx",
+        "storage": "blind_index",
+        "equality_classes": 1000000,
+        "largest_class": 1,
+        "non_null_cells": 1000000,
+        "frequency_histogram": [
+          {
+            "class_size": 1,
+            "number_of_classes": 1000000
+          }
+        ]
+      }
+    ]
+  },
+  "DBR": {
+    "policy": "modc-leak-pii",
+    "domains_decrypted": [
+      "PII"
+    ],
+    "forbidden_decrypt_probes": {
+      "finance-kek": true
+    },
+    "recovered_columns": [
+      "nama",
+      "nama_lengkap",
+      "nama_tanpa_gelar",
+      "tempat_lahir",
+      "tanggal_lahir",
+      "tanggal_pernikahan",
+      "no_ktp",
+      "alamat_jakarta",
+      "telpon_jakarta",
+      "alamat_daerah",
+      "telpon_daerah",
+      "handphone",
+      "email",
+      "ruangan",
+      "status_kawin",
+      "jumlah_anak",
+      "jumlah_tanggungan",
+      "jumlah_jiwa",
+      "nip_kppn",
+      "pengguna",
+      "agama"
+    ],
+    "crypto_client_constructed": true
+  },
+  "search_dictionary": {
+    "scope": "All baseline known values for 3 indexed columns; deliberately exhaustive synthetic dictionary upper-bound experiment, not assumed attacker knowledge",
+    "active": false
+  },
+  "elapsed_s": 730.2042720000027,
+  "target_status": {
+    "S03": "TIDAK BERLAKU"
+  },
+  "limitations": [
+    "Logical dump only, not physical files/WAL",
+    "REF, NULL patterns, legacy locator and equality remain visible",
+    "ESCE reports directly recovered exact linked cells; derived/inferred values are not included",
+    "No raw values, dictionary, digests, DEKs or tokens exported"
+  ]
+}

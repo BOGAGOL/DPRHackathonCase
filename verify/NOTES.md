@@ -405,3 +405,48 @@ scan operasional S05/S06; tidak ada klaim itu dari langkah ini.
 Test implementasi gabungan awal 109 PASS; test operator setup tambahan 2 PASS;
 validasi tambahan proyeksi/CLI/comparison 6 PASS. JUnit lokal di
 results/overnight-28okt/; ringkasan final akan mencatat suite terakhir.
+
+## Hasil artefak after: lengkap, 28 Oktober 2026
+
+Scanner v1.2 protected_100k mode DB dan dump PASS. Dump full database disimpan
+privat: protected_100k 169099571 byte, protected_1m 1669260065 byte; hash dan
+provenance di overnight/after_artifacts_20261028.json. Metrik leakage membaca
+COPY anggota_protected saja, bukan mengklaim seluruh tabel audit/metadata
+adalah kolom AEAD. Kedelapan pengukuran sekali jalan selesai, tanpa retry.
+
+| Skenario | ESCE AEAD 100k | ESCE AEAD 1M | DIE keduanya | Domain didekripsi |
+| --- | ---: | ---: | ---: | --- |
+| no_key | 0% | 0% | 0% | Tidak ada |
+| with_pii_key | 83.673429% | 83.673473% | 100% | PII saja |
+| with_finance_key | 16.326571% | 16.326527% | 100% | FIN saja |
+| with_search_key | 12.244928% | 12.244895% | 100% | Tidak ada; dictionary HMAC 3 kolom |
+
+Numerator/denominator persis dan kelompok all/source_734/synthetic tersedia pada
+evidence/leakage/protected_100k/ dan protected_1m/ (salinan leak di evidence/leak/).
+ESCE memakai 25 kolom kontrak AEAD sama dengan before; tidak menyebutnya ESCE
+global seluruh taksonomi ground truth. REF/age_band berada di ELS/residual.
+Search bukan memecahkan AES: token HMAC dan kamus lengkap memulihkan exact NIK,
+email dan pengguna. Probe decrypt domain lain ditolak. DIE 100% saat FIN bocor
+karena rekening/nama_rekening/npwp adalah identifier dalam daftar frozen; jangan
+mengklaim seluruh identitas tetap tersembunyi saat kemampuan finance dicuri.
+Inferensi turunan nama tetap di luar numerator langsung, sehingga angka ini
+bukan batas atas untuk seluruh serangan inferensi lintas kolom.
+
+Residual plaintext 1-3 atribut (REF4 + age_band + is_null_tanggal_pernikahan),
+41 kombinasi per populasi: min k all100k=136, all1M=1362; source_734=1 pada
+kedua target, synthetic100k=135 dan synthetic1M=1361. Proyeksi REF/age_band sama
+dengan before yang bersesuaian. Besarnya k populasi penuh sebagian berasal dari
+pengulangan pola sintetis; legacy locator/cohort sumber tetap tampak. Tidak
+menjanjikan anonimitas sumber734 atau menyamakan k ciphertext dengan privasi.
+Panjang ciphertext, NULL, REF, legacy mapping dan equality tetap terlihat.
+
+before_after.csv kini 88 baris untuk kedua skala/4 skenario/3 populasi. CSV before
+lama dipertahankan byte-identik di history/before_after_before_protected_20261028.csv.
+after_summary.json menautkan ESCE/DIE/DBR; residual_after.json memuat seluruh
+proyeksi tanpa nilai grup. Tiga token simulasi dicabut; lookup 403 diverifikasi.
+Proses terpisah memisahkan penggunaan credential dalam simulasi, bukan sandbox
+OS terhadap kode penyerang yang dapat membaca semua file akun operator.
+
+Checksum penuh source734 dan kedua baseline tetap cocok generation; count
+protected tepat dan principal parity dibersihkan. Tidak ada benchmark dijalankan.
+Ringkasan final: evidence/overnight/resume_completion_20261028.json.

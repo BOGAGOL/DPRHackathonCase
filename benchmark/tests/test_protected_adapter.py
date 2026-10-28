@@ -95,12 +95,13 @@ def test_all_operations_bindings_rollback_and_results(source,profile,protected_r
         assert adapter.execute(session,op,0,0)
     assert session.indexer.digest.call_count==2
     original=adapter.select
-    monkeypatch.setattr(adapter,'select',MagicMock(side_effect=[([record],[]),([],[ (source[0]['id'],source[0]['handphone']) ])]))
+    manager.reset_mock()
+    session.connection.execute.return_value.fetchone.side_effect=[record,record]
     assert adapter.execute(session,'update_contact',0,0)
-    monkeypatch.setattr(adapter,'select',MagicMock(return_value=([],[])))
+    assert manager.unwrap_many.call_count==1
+    session.connection.execute.return_value.fetchone.side_effect=[None]
     with pytest.raises(ValueError): adapter.execute(session,'update_contact',0,0)
-    monkeypatch.setattr(adapter,'select',MagicMock(return_value=([record],[])))
-    session.connection.execute.return_value.rowcount=0
+    session.connection.execute.return_value.fetchone.side_effect=[record,None]
     with pytest.raises(ValueError): adapter.execute(session,'update_contact',0,0)
     template=dict(source[0],id=-1)
     monkeypatch.setattr(protected,'protect_batch',lambda *a:[dict.fromkeys(protected.target_columns(profile),'synthetic')])
@@ -159,6 +160,9 @@ def test_compare_cli(monkeypatch,tmp_path):
     monkeypatch.setattr(sys,'argv',['compare','--before',str(source),'--after',str(source/'summary.json'),'--out',str(tmp_path/'out')])
     compare.main()
     assert (tmp_path/'out/comparison.json').is_file()
+    from benchmark.__main__ import main
+    assert main(['compare','--before',str(source),'--after',str(source),'--out',str(tmp_path/'dispatch')])==0
+    assert main(['compare','--before',str(tmp_path/'missing'),'--after',str(source),'--out',str(tmp_path/'failure')])==2
 
 
 def test_runner_collects_db_time_outside_request_loop(monkeypatch,tmp_path):

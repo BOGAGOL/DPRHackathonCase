@@ -96,6 +96,8 @@ def check_dataset(baseline, protected, rows, samples=1000):
             for scenario in ("update_contact", "insert_member"):
                 plain.execute(plain_connection, scenario, 0, 0)
                 adapter.execute(protected_session, scenario, 0, 0)
+            if plain.execute(plain_connection, "read_profile", 0, 0) != adapter.execute(protected_session, "read_profile", 0, 0):
+                raise ValueError("Business profile differs after rollback probes")
             report["write_rollback_probes"] = {"update_contact": "PASS", "insert_member": "PASS"}
             report["passed"] = True
             return report

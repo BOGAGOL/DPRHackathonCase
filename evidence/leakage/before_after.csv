@@ -1,15 +1,89 @@
-population,metric,before,numerator,denominator,after
-all,ESCE,1.0,24500005,24500005,BELUM DIUJI
-all,DIE,1.0,1000000,1000000,BELUM DIUJI
-all,residual_min_k_across_1_to_3_attributes,1362,,,BELUM DIUJI
-all,birth_reference_unique_ratio,0.003123,3123,1000000,BELUM DIUJI
-source_734,ESCE,1.0,17983,17983,BELUM DIUJI
-source_734,DIE,1.0,734,734,BELUM DIUJI
-source_734,residual_min_k_across_1_to_3_attributes,1,,,BELUM DIUJI
-source_734,birth_reference_unique_ratio,0.9945504087193461,730,734,BELUM DIUJI
-synthetic,ESCE,1.0,24482022,24482022,BELUM DIUJI
-synthetic,DIE,1.0,999266,999266,BELUM DIUJI
-synthetic,residual_min_k_across_1_to_3_attributes,1361,,,BELUM DIUJI
-synthetic,birth_reference_unique_ratio,0.0031383035147798484,3136,999266,BELUM DIUJI
-all,ELS_plaintext_equality_columns,29,,,BELUM DIUJI
-all,ELS_bidx_columns,0,,,BELUM DIUJI
+dataset,scenario,population,metric,before,after,numerator,denominator
+protected_100k,protected_dump_no_key,all,ESCE,1.0,0.0,0,2449994
+protected_100k,protected_dump_no_key,all,DIE,1.0,0.0,0,100000
+protected_100k,protected_dump_no_key,all,residual_min_k_across_1_to_3_plaintext_attributes,136,136,,
+protected_100k,protected_dump_no_key,source_734,ESCE,1.0,0.0,0,17983
+protected_100k,protected_dump_no_key,source_734,DIE,1.0,0.0,0,734
+protected_100k,protected_dump_no_key,source_734,residual_min_k_across_1_to_3_plaintext_attributes,1,1,,
+protected_100k,protected_dump_no_key,synthetic,ESCE,1.0,0.0,0,2432011
+protected_100k,protected_dump_no_key,synthetic,DIE,1.0,0.0,0,99266
+protected_100k,protected_dump_no_key,synthetic,residual_min_k_across_1_to_3_plaintext_attributes,135,135,,
+protected_100k,protected_dump_no_key,all,ELS_bidx_columns,0,3,,
+protected_100k,protected_dump_no_key,all,ELS_plaintext_equality_columns,29,5,,
+protected_100k,protected_dump_with_pii_key,all,ESCE,1.0,0.8367342940431691,2049994,2449994
+protected_100k,protected_dump_with_pii_key,all,DIE,1.0,1.0,100000,100000
+protected_100k,protected_dump_with_pii_key,all,residual_min_k_across_1_to_3_plaintext_attributes,136,136,,
+protected_100k,protected_dump_with_pii_key,source_734,ESCE,1.0,0.8367346938775511,15047,17983
+protected_100k,protected_dump_with_pii_key,source_734,DIE,1.0,1.0,734,734
+protected_100k,protected_dump_with_pii_key,source_734,residual_min_k_across_1_to_3_plaintext_attributes,1,1,,
+protected_100k,protected_dump_with_pii_key,synthetic,ESCE,1.0,0.8367342910866769,2034947,2432011
+protected_100k,protected_dump_with_pii_key,synthetic,DIE,1.0,1.0,99266,99266
+protected_100k,protected_dump_with_pii_key,synthetic,residual_min_k_across_1_to_3_plaintext_attributes,135,135,,
+protected_100k,protected_dump_with_pii_key,all,ELS_bidx_columns,0,3,,
+protected_100k,protected_dump_with_pii_key,all,ELS_plaintext_equality_columns,29,5,,
+protected_100k,protected_dump_with_finance_key,all,ESCE,1.0,0.1632657059568309,400000,2449994
+protected_100k,protected_dump_with_finance_key,all,DIE,1.0,1.0,100000,100000
+protected_100k,protected_dump_with_finance_key,all,residual_min_k_across_1_to_3_plaintext_attributes,136,136,,
+protected_100k,protected_dump_with_finance_key,source_734,ESCE,1.0,0.16326530612244897,2936,17983
+protected_100k,protected_dump_with_finance_key,source_734,DIE,1.0,1.0,734,734
+protected_100k,protected_dump_with_finance_key,source_734,residual_min_k_across_1_to_3_plaintext_attributes,1,1,,
+protected_100k,protected_dump_with_finance_key,synthetic,ESCE,1.0,0.16326570891332318,397064,2432011
+protected_100k,protected_dump_with_finance_key,synthetic,DIE,1.0,1.0,99266,99266
+protected_100k,protected_dump_with_finance_key,synthetic,residual_min_k_across_1_to_3_plaintext_attributes,135,135,,
+protected_100k,protected_dump_with_finance_key,all,ELS_bidx_columns,0,3,,
+protected_100k,protected_dump_with_finance_key,all,ELS_plaintext_equality_columns,29,5,,
+protected_100k,protected_dump_with_search_key,all,ESCE,1.0,0.12244927946762318,300000,2449994
+protected_100k,protected_dump_with_search_key,all,DIE,1.0,1.0,100000,100000
+protected_100k,protected_dump_with_search_key,all,residual_min_k_across_1_to_3_plaintext_attributes,136,136,,
+protected_100k,protected_dump_with_search_key,source_734,ESCE,1.0,0.12244897959183673,2202,17983
+protected_100k,protected_dump_with_search_key,source_734,DIE,1.0,1.0,734,734
+protected_100k,protected_dump_with_search_key,source_734,residual_min_k_across_1_to_3_plaintext_attributes,1,1,,
+protected_100k,protected_dump_with_search_key,synthetic,ESCE,1.0,0.12244928168499238,297798,2432011
+protected_100k,protected_dump_with_search_key,synthetic,DIE,1.0,1.0,99266,99266
+protected_100k,protected_dump_with_search_key,synthetic,residual_min_k_across_1_to_3_plaintext_attributes,135,135,,
+protected_100k,protected_dump_with_search_key,all,ELS_bidx_columns,0,3,,
+protected_100k,protected_dump_with_search_key,all,ELS_plaintext_equality_columns,29,5,,
+protected_1m,protected_dump_no_key,all,ESCE,1.0,0.0,0,24500005
+protected_1m,protected_dump_no_key,all,DIE,1.0,0.0,0,1000000
+protected_1m,protected_dump_no_key,all,residual_min_k_across_1_to_3_plaintext_attributes,1362,1362,,
+protected_1m,protected_dump_no_key,source_734,ESCE,1.0,0.0,0,17983
+protected_1m,protected_dump_no_key,source_734,DIE,1.0,0.0,0,734
+protected_1m,protected_dump_no_key,source_734,residual_min_k_across_1_to_3_plaintext_attributes,1,1,,
+protected_1m,protected_dump_no_key,synthetic,ESCE,1.0,0.0,0,24482022
+protected_1m,protected_dump_no_key,synthetic,DIE,1.0,0.0,0,999266
+protected_1m,protected_dump_no_key,synthetic,residual_min_k_across_1_to_3_plaintext_attributes,1361,1361,,
+protected_1m,protected_dump_no_key,all,ELS_bidx_columns,0,3,,
+protected_1m,protected_dump_no_key,all,ELS_plaintext_equality_columns,29,5,,
+protected_1m,protected_dump_with_pii_key,all,ESCE,1.0,0.8367347271969945,20500005,24500005
+protected_1m,protected_dump_with_pii_key,all,DIE,1.0,1.0,1000000,1000000
+protected_1m,protected_dump_with_pii_key,all,residual_min_k_across_1_to_3_plaintext_attributes,1362,1362,,
+protected_1m,protected_dump_with_pii_key,source_734,ESCE,1.0,0.8367346938775511,15047,17983
+protected_1m,protected_dump_with_pii_key,source_734,DIE,1.0,1.0,734,734
+protected_1m,protected_dump_with_pii_key,source_734,residual_min_k_across_1_to_3_plaintext_attributes,1,1,,
+protected_1m,protected_dump_with_pii_key,synthetic,ESCE,1.0,0.8367347272214689,20484958,24482022
+protected_1m,protected_dump_with_pii_key,synthetic,DIE,1.0,1.0,999266,999266
+protected_1m,protected_dump_with_pii_key,synthetic,residual_min_k_across_1_to_3_plaintext_attributes,1361,1361,,
+protected_1m,protected_dump_with_pii_key,all,ELS_bidx_columns,0,3,,
+protected_1m,protected_dump_with_pii_key,all,ELS_plaintext_equality_columns,29,5,,
+protected_1m,protected_dump_with_finance_key,all,ESCE,1.0,0.16326527280300554,4000000,24500005
+protected_1m,protected_dump_with_finance_key,all,DIE,1.0,1.0,1000000,1000000
+protected_1m,protected_dump_with_finance_key,all,residual_min_k_across_1_to_3_plaintext_attributes,1362,1362,,
+protected_1m,protected_dump_with_finance_key,source_734,ESCE,1.0,0.16326530612244897,2936,17983
+protected_1m,protected_dump_with_finance_key,source_734,DIE,1.0,1.0,734,734
+protected_1m,protected_dump_with_finance_key,source_734,residual_min_k_across_1_to_3_plaintext_attributes,1,1,,
+protected_1m,protected_dump_with_finance_key,synthetic,ESCE,1.0,0.16326527277853112,3997064,24482022
+protected_1m,protected_dump_with_finance_key,synthetic,DIE,1.0,1.0,999266,999266
+protected_1m,protected_dump_with_finance_key,synthetic,residual_min_k_across_1_to_3_plaintext_attributes,1361,1361,,
+protected_1m,protected_dump_with_finance_key,all,ELS_bidx_columns,0,3,,
+protected_1m,protected_dump_with_finance_key,all,ELS_plaintext_equality_columns,29,5,,
+protected_1m,protected_dump_with_search_key,all,ESCE,1.0,0.12244895460225416,3000000,24500005
+protected_1m,protected_dump_with_search_key,all,DIE,1.0,1.0,1000000,1000000
+protected_1m,protected_dump_with_search_key,all,residual_min_k_across_1_to_3_plaintext_attributes,1362,1362,,
+protected_1m,protected_dump_with_search_key,source_734,ESCE,1.0,0.12244897959183673,2202,17983
+protected_1m,protected_dump_with_search_key,source_734,DIE,1.0,1.0,734,734
+protected_1m,protected_dump_with_search_key,source_734,residual_min_k_across_1_to_3_plaintext_attributes,1,1,,
+protected_1m,protected_dump_with_search_key,synthetic,ESCE,1.0,0.12244895458389835,2997798,24482022
+protected_1m,protected_dump_with_search_key,synthetic,DIE,1.0,1.0,999266,999266
+protected_1m,protected_dump_with_search_key,synthetic,residual_min_k_across_1_to_3_plaintext_attributes,1361,1361,,
+protected_1m,protected_dump_with_search_key,all,ELS_bidx_columns,0,3,,
+protected_1m,protected_dump_with_search_key,all,ELS_plaintext_equality_columns,29,5,,

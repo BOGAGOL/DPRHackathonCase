@@ -63,6 +63,34 @@ menunggu artefak serta hook OpenBao/toolkit nyata sebelum menghasilkan skor.
 .\.venv\Scripts\python.exe -m verify.after_comparison
 ```
 
+Issuance dilakukan hanya pada proses operator terpisah. Contoh memuat material
+existing tanpa memasukkan nilainya ke history/output:
+
+```powershell
+$env:DPR_SECRETS_DIR = 'C:\dev\dpr-private\openbao'
+$env:OPENBAO_ADDR = 'https://127.0.0.1:8200'
+$env:OPENBAO_CACERT = Join-Path $env:DPR_SECRETS_DIR 'tls\ca.crt'
+$dprBootstrap = Get-Content -LiteralPath (Join-Path $env:DPR_SECRETS_DIR 'openbao\init-material.json') -Raw | ConvertFrom-Json
+try {
+  $env:OPENBAO_TOKEN = $dprBootstrap.root_token
+  .\.venv\Scripts\python.exe -m verify.attacker_setup
+  if ($LASTEXITCODE -ne 0) { throw 'Issuance gagal; berhenti.' }
+} finally {
+  Remove-Item Env:OPENBAO_TOKEN -ErrorAction SilentlyContinue
+  $dprBootstrap = $null
+}
+# Pilih token yang baru diterbitkan untuk SATU skenario, contoh PII:
+$dprLeakFile = Get-ChildItem -LiteralPath (Join-Path $env:DPR_SECRETS_DIR 'openbao\tokens') -Filter 'modc-leak-pii-*.json' | Sort-Object Name | Select-Object -Last 1
+$env:DPR_LEAK_TOKEN = (Get-Content -LiteralPath $dprLeakFile.FullName -Raw | ConvertFrom-Json).auth.client_token
+# Jalankan skenario PII di atas, kemudian cabut token via API operator:
+.\.venv\Scripts\python.exe -c "import os; from infra.openbao.api import from_environment; from_environment().request('/auth/token/revoke-self', {}, token=os.environ['DPR_LEAK_TOKEN'])"
+Remove-Item Env:DPR_LEAK_TOKEN
+```
+
+Ulangi pemilihan token untuk policy finance/search hanya ketika skenarionya
+dijalankan, dan cabut semua token simulasi yang diterbitkan, termasuk yang tidak
+dipakai. Untuk no-key, hapus token dari environment sebelum menjalankan worker.
+
 Setiap skenario berjalan pada proses tersendiri. No-key tidak membuat client
 dekripsi dan tidak membaca token. Untuk skenario dengan kemampuan kunci, operator
 menyediakan token terbatas `DPR_LEAK_TOKEN` dengan tepat satu policy khusus C:

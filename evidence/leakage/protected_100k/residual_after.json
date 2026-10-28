@@ -1,0 +1,1485 @@
+{
+  "method": "exact hash-counter projection of full artifact, no row/group values exported",
+  "age_band": {
+    "reference_date": "2026-10-01",
+    "width_years": 10,
+    "after_storage": "actual plaintext age_band from protected dump"
+  },
+  "attributes": [
+    "jenis_kelamin",
+    "pekerjaan_terakhir",
+    "nama_kppn",
+    "nama_bank",
+    "age_band",
+    "is_null_tanggal_pernikahan"
+  ],
+  "omitted_constant_null_indicators": [
+    "nama",
+    "nama_lengkap",
+    "nama_tanpa_gelar",
+    "tempat_lahir",
+    "tanggal_lahir",
+    "no_ktp",
+    "alamat_jakarta",
+    "telpon_jakarta",
+    "alamat_daerah",
+    "telpon_daerah",
+    "handphone",
+    "email",
+    "ruangan",
+    "status_kawin",
+    "jumlah_anak",
+    "jumlah_tanggungan",
+    "jumlah_jiwa",
+    "rekening",
+    "nama_rekening",
+    "npwp",
+    "nip_kppn",
+    "kode_bank",
+    "pengguna",
+    "agama"
+  ],
+  "constant_null_counts": {
+    "nama": 0,
+    "nama_lengkap": 0,
+    "nama_tanpa_gelar": 0,
+    "tempat_lahir": 0,
+    "tanggal_lahir": 0,
+    "no_ktp": 0,
+    "alamat_jakarta": 0,
+    "telpon_jakarta": 0,
+    "alamat_daerah": 0,
+    "telpon_daerah": 0,
+    "handphone": 0,
+    "email": 0,
+    "ruangan": 0,
+    "status_kawin": 0,
+    "jumlah_anak": 0,
+    "jumlah_tanggungan": 0,
+    "jumlah_jiwa": 0,
+    "rekening": 0,
+    "nama_rekening": 0,
+    "npwp": 0,
+    "nip_kppn": 0,
+    "kode_bank": 0,
+    "pengguna": 0,
+    "agama": 0
+  },
+  "constant_omission_reason": "Adding a constant never changes groups, unique rows or k_min",
+  "null_policy": "NULL forms a group; indicators represent every contract AEAD column",
+  "populations": {
+    "all": {
+      "combinations": [
+        {
+          "columns": [
+            "jenis_kelamin"
+          ],
+          "total_rows": 100000,
+          "groups": 2,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 49867
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir"
+          ],
+          "total_rows": 100000,
+          "groups": 6,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 14442
+        },
+        {
+          "columns": [
+            "nama_kppn"
+          ],
+          "total_rows": 100000,
+          "groups": 5,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 17294
+        },
+        {
+          "columns": [
+            "nama_bank"
+          ],
+          "total_rows": 100000,
+          "groups": 4,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 22760
+        },
+        {
+          "columns": [
+            "age_band"
+          ],
+          "total_rows": 100000,
+          "groups": 5,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 14827
+        },
+        {
+          "columns": [
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 100000,
+          "groups": 2,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 49994
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "pekerjaan_terakhir"
+          ],
+          "total_rows": 100000,
+          "groups": 12,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 6946
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_kppn"
+          ],
+          "total_rows": 100000,
+          "groups": 10,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 7489
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_bank"
+          ],
+          "total_rows": 100000,
+          "groups": 8,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 11177
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "age_band"
+          ],
+          "total_rows": 100000,
+          "groups": 10,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 7394
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 100000,
+          "groups": 4,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 24663
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_kppn"
+          ],
+          "total_rows": 100000,
+          "groups": 30,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 2180
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_bank"
+          ],
+          "total_rows": 100000,
+          "groups": 24,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 2730
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "age_band"
+          ],
+          "total_rows": 100000,
+          "groups": 30,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 2149
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 100000,
+          "groups": 12,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 7084
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "nama_bank"
+          ],
+          "total_rows": 100000,
+          "groups": 20,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 2995
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "age_band"
+          ],
+          "total_rows": 100000,
+          "groups": 25,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 2551
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 100000,
+          "groups": 10,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 8580
+        },
+        {
+          "columns": [
+            "nama_bank",
+            "age_band"
+          ],
+          "total_rows": 100000,
+          "groups": 20,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 3410
+        },
+        {
+          "columns": [
+            "nama_bank",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 100000,
+          "groups": 8,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 10907
+        },
+        {
+          "columns": [
+            "age_band",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 100000,
+          "groups": 10,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 7372
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "pekerjaan_terakhir",
+            "nama_kppn"
+          ],
+          "total_rows": 100000,
+          "groups": 60,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 681
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "pekerjaan_terakhir",
+            "nama_bank"
+          ],
+          "total_rows": 100000,
+          "groups": 48,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1089
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "pekerjaan_terakhir",
+            "age_band"
+          ],
+          "total_rows": 100000,
+          "groups": 60,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1019
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "pekerjaan_terakhir",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 100000,
+          "groups": 24,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 3132
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_kppn",
+            "nama_bank"
+          ],
+          "total_rows": 100000,
+          "groups": 40,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1089
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_kppn",
+            "age_band"
+          ],
+          "total_rows": 100000,
+          "groups": 50,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1068
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_kppn",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 100000,
+          "groups": 20,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 3403
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_bank",
+            "age_band"
+          ],
+          "total_rows": 100000,
+          "groups": 40,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1672
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_bank",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 100000,
+          "groups": 16,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 5452
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "age_band",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 100000,
+          "groups": 20,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 3635
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_kppn",
+            "nama_bank"
+          ],
+          "total_rows": 100000,
+          "groups": 120,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 136
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_kppn",
+            "age_band"
+          ],
+          "total_rows": 100000,
+          "groups": 150,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 300
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_kppn",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 100000,
+          "groups": 60,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 816
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_bank",
+            "age_band"
+          ],
+          "total_rows": 100000,
+          "groups": 120,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 419
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_bank",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 100000,
+          "groups": 48,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1093
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "age_band",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 100000,
+          "groups": 60,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1049
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "nama_bank",
+            "age_band"
+          ],
+          "total_rows": 100000,
+          "groups": 100,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 453
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "nama_bank",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 100000,
+          "groups": 40,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1361
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "age_band",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 100000,
+          "groups": 50,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1240
+        },
+        {
+          "columns": [
+            "nama_bank",
+            "age_band",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 100000,
+          "groups": 40,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1663
+        }
+      ],
+      "birth_reference_status": "NOT_AVAILABLE: birth place/date encrypted"
+    },
+    "source_734": {
+      "combinations": [
+        {
+          "columns": [
+            "jenis_kelamin"
+          ],
+          "total_rows": 734,
+          "groups": 2,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 366
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir"
+          ],
+          "total_rows": 734,
+          "groups": 6,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 106
+        },
+        {
+          "columns": [
+            "nama_kppn"
+          ],
+          "total_rows": 734,
+          "groups": 5,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 127
+        },
+        {
+          "columns": [
+            "nama_bank"
+          ],
+          "total_rows": 734,
+          "groups": 4,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 167
+        },
+        {
+          "columns": [
+            "age_band"
+          ],
+          "total_rows": 734,
+          "groups": 5,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 109
+        },
+        {
+          "columns": [
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 734,
+          "groups": 2,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 367
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "pekerjaan_terakhir"
+          ],
+          "total_rows": 734,
+          "groups": 12,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 51
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_kppn"
+          ],
+          "total_rows": 734,
+          "groups": 10,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 55
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_bank"
+          ],
+          "total_rows": 734,
+          "groups": 8,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 82
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "age_band"
+          ],
+          "total_rows": 734,
+          "groups": 10,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 52
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 734,
+          "groups": 4,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 181
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_kppn"
+          ],
+          "total_rows": 734,
+          "groups": 30,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 16
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_bank"
+          ],
+          "total_rows": 734,
+          "groups": 24,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 20
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "age_band"
+          ],
+          "total_rows": 734,
+          "groups": 30,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 14
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 734,
+          "groups": 12,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 52
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "nama_bank"
+          ],
+          "total_rows": 734,
+          "groups": 20,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 22
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "age_band"
+          ],
+          "total_rows": 734,
+          "groups": 25,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 18
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 734,
+          "groups": 10,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 63
+        },
+        {
+          "columns": [
+            "nama_bank",
+            "age_band"
+          ],
+          "total_rows": 734,
+          "groups": 20,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 24
+        },
+        {
+          "columns": [
+            "nama_bank",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 734,
+          "groups": 8,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 80
+        },
+        {
+          "columns": [
+            "age_band",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 734,
+          "groups": 10,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 49
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "pekerjaan_terakhir",
+            "nama_kppn"
+          ],
+          "total_rows": 734,
+          "groups": 60,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 5
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "pekerjaan_terakhir",
+            "nama_bank"
+          ],
+          "total_rows": 734,
+          "groups": 48,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 8
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "pekerjaan_terakhir",
+            "age_band"
+          ],
+          "total_rows": 734,
+          "groups": 60,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 5
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "pekerjaan_terakhir",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 734,
+          "groups": 24,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 23
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_kppn",
+            "nama_bank"
+          ],
+          "total_rows": 734,
+          "groups": 40,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 8
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_kppn",
+            "age_band"
+          ],
+          "total_rows": 734,
+          "groups": 50,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 8
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_kppn",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 734,
+          "groups": 20,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 25
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_bank",
+            "age_band"
+          ],
+          "total_rows": 734,
+          "groups": 40,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 9
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_bank",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 734,
+          "groups": 16,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 40
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "age_band",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 734,
+          "groups": 20,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 23
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_kppn",
+            "nama_bank"
+          ],
+          "total_rows": 734,
+          "groups": 120,
+          "unique_rows": 3,
+          "unique_ratio": 0.004087193460490463,
+          "k_min": 1
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_kppn",
+            "age_band"
+          ],
+          "total_rows": 734,
+          "groups": 150,
+          "unique_rows": 11,
+          "unique_ratio": 0.014986376021798364,
+          "k_min": 1
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_kppn",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 734,
+          "groups": 60,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 6
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_bank",
+            "age_band"
+          ],
+          "total_rows": 734,
+          "groups": 119,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 2
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_bank",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 734,
+          "groups": 48,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 8
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "age_band",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 734,
+          "groups": 60,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 4
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "nama_bank",
+            "age_band"
+          ],
+          "total_rows": 734,
+          "groups": 99,
+          "unique_rows": 1,
+          "unique_ratio": 0.0013623978201634877,
+          "k_min": 1
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "nama_bank",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 734,
+          "groups": 40,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 10
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "age_band",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 734,
+          "groups": 50,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 5
+        },
+        {
+          "columns": [
+            "nama_bank",
+            "age_band",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 734,
+          "groups": 40,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 10
+        }
+      ],
+      "birth_reference_status": "NOT_AVAILABLE: birth place/date encrypted"
+    },
+    "synthetic": {
+      "combinations": [
+        {
+          "columns": [
+            "jenis_kelamin"
+          ],
+          "total_rows": 99266,
+          "groups": 2,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 49501
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir"
+          ],
+          "total_rows": 99266,
+          "groups": 6,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 14336
+        },
+        {
+          "columns": [
+            "nama_kppn"
+          ],
+          "total_rows": 99266,
+          "groups": 5,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 17167
+        },
+        {
+          "columns": [
+            "nama_bank"
+          ],
+          "total_rows": 99266,
+          "groups": 4,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 22593
+        },
+        {
+          "columns": [
+            "age_band"
+          ],
+          "total_rows": 99266,
+          "groups": 5,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 14718
+        },
+        {
+          "columns": [
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 99266,
+          "groups": 2,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 49627
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "pekerjaan_terakhir"
+          ],
+          "total_rows": 99266,
+          "groups": 12,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 6895
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_kppn"
+          ],
+          "total_rows": 99266,
+          "groups": 10,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 7434
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_bank"
+          ],
+          "total_rows": 99266,
+          "groups": 8,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 11095
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "age_band"
+          ],
+          "total_rows": 99266,
+          "groups": 10,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 7342
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 99266,
+          "groups": 4,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 24482
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_kppn"
+          ],
+          "total_rows": 99266,
+          "groups": 30,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 2164
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_bank"
+          ],
+          "total_rows": 99266,
+          "groups": 24,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 2710
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "age_band"
+          ],
+          "total_rows": 99266,
+          "groups": 30,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 2131
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 99266,
+          "groups": 12,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 7032
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "nama_bank"
+          ],
+          "total_rows": 99266,
+          "groups": 20,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 2973
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "age_band"
+          ],
+          "total_rows": 99266,
+          "groups": 25,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 2531
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 99266,
+          "groups": 10,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 8517
+        },
+        {
+          "columns": [
+            "nama_bank",
+            "age_band"
+          ],
+          "total_rows": 99266,
+          "groups": 20,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 3384
+        },
+        {
+          "columns": [
+            "nama_bank",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 99266,
+          "groups": 8,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 10827
+        },
+        {
+          "columns": [
+            "age_band",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 99266,
+          "groups": 10,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 7312
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "pekerjaan_terakhir",
+            "nama_kppn"
+          ],
+          "total_rows": 99266,
+          "groups": 60,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 676
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "pekerjaan_terakhir",
+            "nama_bank"
+          ],
+          "total_rows": 99266,
+          "groups": 48,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1081
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "pekerjaan_terakhir",
+            "age_band"
+          ],
+          "total_rows": 99266,
+          "groups": 60,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1011
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "pekerjaan_terakhir",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 99266,
+          "groups": 24,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 3109
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_kppn",
+            "nama_bank"
+          ],
+          "total_rows": 99266,
+          "groups": 40,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1081
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_kppn",
+            "age_band"
+          ],
+          "total_rows": 99266,
+          "groups": 50,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1057
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_kppn",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 99266,
+          "groups": 20,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 3378
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_bank",
+            "age_band"
+          ],
+          "total_rows": 99266,
+          "groups": 40,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1663
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "nama_bank",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 99266,
+          "groups": 16,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 5412
+        },
+        {
+          "columns": [
+            "jenis_kelamin",
+            "age_band",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 99266,
+          "groups": 20,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 3609
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_kppn",
+            "nama_bank"
+          ],
+          "total_rows": 99266,
+          "groups": 120,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 135
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_kppn",
+            "age_band"
+          ],
+          "total_rows": 99266,
+          "groups": 150,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 295
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_kppn",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 99266,
+          "groups": 60,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 810
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_bank",
+            "age_band"
+          ],
+          "total_rows": 99266,
+          "groups": 120,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 419
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "nama_bank",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 99266,
+          "groups": 48,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1085
+        },
+        {
+          "columns": [
+            "pekerjaan_terakhir",
+            "age_band",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 99266,
+          "groups": 60,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1039
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "nama_bank",
+            "age_band"
+          ],
+          "total_rows": 99266,
+          "groups": 100,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 451
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "nama_bank",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 99266,
+          "groups": 40,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1351
+        },
+        {
+          "columns": [
+            "nama_kppn",
+            "age_band",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 99266,
+          "groups": 50,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1228
+        },
+        {
+          "columns": [
+            "nama_bank",
+            "age_band",
+            "is_null_tanggal_pernikahan"
+          ],
+          "total_rows": 99266,
+          "groups": 40,
+          "unique_rows": 0,
+          "unique_ratio": 0.0,
+          "k_min": 1653
+        }
+      ],
+      "birth_reference_status": "NOT_AVAILABLE: birth place/date encrypted"
+    }
+  },
+  "dataset": "protected_100k",
+  "artifact_sha256": "0169e23bf8d53524b3f831b298d23880baaa465f85f00b52b6c37897f2f137b4",
+  "status": "PASSED"
+}

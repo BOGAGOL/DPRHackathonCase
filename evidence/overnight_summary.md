@@ -1,3 +1,45 @@
+# Kelanjutan 28 Oktober 2026: seluruh gerbang yang diminta PASS
+
+pg_stat_statements diaktifkan dengan restart yang disetujui; extension pada empat
+DB, workload role tanpa grant monitoring tambahan. Count kelima DB dan TLS
+apply/verify/matriks (a)-(d) PASS, OpenBao tetap unsealed. Protected_734 belum
+tersedia dan tidak diklaim telah diuji. Hanya B-P-P-B dengan konfigurasi baru
+kelak boleh dibandingkan langsung; baseline awal tanpa extension dipertahankan.
+
+Adapter protected toolkit A: gate baca 1000 kunci berbeda per skenario per skala,
+8000 request/106000 baris hasil dibandingkan, 0 mismatch, db_time terukur terpisah.
+Review update mengurangi unwrap menjadi satu; unit dan probe rollback/profile
+nyata ulang yang terbatas PASS pada kedua skala. Target absolut +5ms baca/+10ms
+tulis/mixed sudah commit/push 8c09a25 (13:37:47 WIB), ledger menyimpan semua entri.
+Rasio 1.5x/P02/P03 tetap. Tidak menjalankan benchmark B-P-P-B atau benchmark lain.
+
+Scanner v1.2 DB + dump protected_100k PASS. Delapan skenario leakage 100k/1M PASS:
+ESCE AEAD no-key=0%, PII~83.67%, FIN~16.33%, search-kamus-lengkap~12.24%; DIE
+no-key=0%, dengan kemampuan kunci/HMAC=100%. Domain terlarang ditolak; FIN masih
+mengungkap identifier finansial/nama_rekening, sehingga bukan identitas global nol.
+Ketiga token simulasi dicabut dan lookup-self ditolak 403. Tidak ada token root
+pada proses attacker. Dump/ledger/kunci tetap privat di luar repo.
+
+Residual REF+age_band+pola NULL, 41 kombinasi per populasi: min k full100k=136,
+full1M=1362, source734=1, synthetic100k=135/synthetic1M=1361. Angka populasi penuh
+terpengaruh pola sintetis berulang; tidak menjamin anonimitas subset sumber.
+Ciphertext quasi candidates pada output scanner mentah tidak dijadikan bukti
+re-identifikasi. Tabel before_after.csv 88 baris; CSV before lama diarsipkan.
+
+Test komponen: scanner 193 PASS/1 SKIP opsional; verify/benchmark/datagen 111 PASS;
+test fokus setelah review PASS. Masalah collection lintas folder dicatat, suite
+final dipisah. Checksum penuh source734 dan kedua baseline cocok generation
+setelah probe terakhir; count protected tepat dan principal sementara dibersihkan.
+Sisa disk akhir sekitar 49.24 GiB (lihat byte aktual di evidence runtime/integrity).
+
+Ringkasan mesin: evidence/overnight/resume_completion_20261028.json. Data leakage:
+evidence/leakage/after_summary.json dan before_after.csv. API performance serta
+P01/P01A/P02/P03 after tetap BELUM DIUJI sampai instruksi benchmark terpisah.
+
+---
+
+Laporan terdahulu berikut dipertahankan sebagai riwayat, bukan status terkini.
+
 # Ringkasan overnight - 28 Oktober 2026
 
 **Status akhir: BERHENTI pada gerbang 2; adapter protected belum tersedia.**

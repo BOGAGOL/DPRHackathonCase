@@ -693,3 +693,44 @@ halaman). Setup admin membuat principal/scope sementara hanya pada protected;
 workload selalu app_user dan scope dihapus saat selesai. Audit setup/cleanup
 tercatat, bukan dihapus; tidak mengubah data anggota. Ini pemeriksaan kebenaran
 terbatas, bukan pengukuran performa atau benchmark B-P-P-B.
+
+## Hasil gerbang dan penutupan kelanjutan 28 Oktober 2026
+
+Parity lengkap PASS pada kedua skala: 1000 kunci berbeda untuk masing-masing
+read_by_nik/read_by_email/read_profile/list_page, total 8000 request baca dan
+106000 baris hasil bisnis dibandingkan, 0 mismatch. db_time nyata tersedia
+untuk setiap skenario pada protected, melalui koneksi admin terpisah. Nilainya
+adalah diagnostik gerbang kebenaran, bukan hasil benchmark p50/p95/throughput.
+Ringkasan: evidence/benchmark/adapter_parity.json. Versi prasyarat gagal lama
+dipertahankan di history/pre_protected_parity_20261028/.
+
+Review sebelum benchmark mengurangi update_contact dari tiga unwrap menjadi
+satu unwrap dalam request yang sama: SELECT metadata UUID/DEK saja, encrypt
+kontak baru, UPDATE RETURNING ciphertext, lalu validasi dengan DEK yang sama.
+Tidak membuka kontak lama atau domain FIN. Tidak menambah cache antarrequest.
+Unit 12 PASS dan probe kecil nyata pada kedua skala PASS, termasuk membaca
+profil kembali sesudah rollback; evidence/benchmark/post_review_write_probe.json.
+Gerbang baca 1000 kunci tidak diulang; algoritma baca tidak berubah. Tambahan
+probe ini pemeriksaan correctness, bukan rerun benchmark. Alias CLI
+python -m benchmark compare juga tersedia; 13 test dispatch/compare PASS.
+
+Target P01A baca +5ms/tulis/mixed +10ms sudah commit/push 8c09a25 pada
+2026-10-28 13:37:47 WIB; ledger caa0770 mempertahankan semua entri sebelumnya.
+P01 rasio 1.5x tetap dinilai terpisah, P02/P03 tidak diubah. Tidak ada benchmark
+B-P-P-B, benchmark API, backup-restore, atau baseline resmi yang dijalankan ulang.
+Seluruh workload21 run awal serta sesi pengganti AC tetap sebagai historis.
+
+Scanner protected_100k DB/dump dan delapan skenario kebocoran 100k/1M PASS.
+S03 ESCE AEAD tanpa kunci 0% pada kedua skala; metrik/keterbatasan ada di
+verify/NOTES.md dan evidence/leakage/after_summary.json. Ketiga token simulasi
+dicabut dan lookup-self ditolak 403. Checksum penuh postgres/baseline100k/1M
+cocok generation; jumlah protected tetap 100000/1000000 dan principal sementara
+dibersihkan. Metadata: evidence/overnight/post_verification_integrity_20261028.json.
+
+Suite komponen final dipisah karena scanner/datagen memiliki basename test sama
+dan importlib mengakibatkan konflik registrasi conftest/plugin: scanner 193 PASS,
+1 SKIP opsional; verify/benchmark/datagen 111 PASS. Ini kegagalan collection awal,
+bukan kegagalan gerbang nyata; tidak mengulang pengukuran yang gagal. Test fokus
+codec/monitor/compare/rollback setelah review juga PASS. Seluruh detail/JUnit
+dirujuk evidence/overnight/implementation_tests_20261028.json. API performance
+dan seluruh penilaian P01/P01A/P02/P03 terhadap pengukuran after tetap BELUM DIUJI.

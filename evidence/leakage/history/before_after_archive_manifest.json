@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "old_file": "evidence/leakage/before_after.csv",
+  "old_git_commit": "a4a8844986751bf00d0ed2b1863fbd1c5402d429",
+  "archive": "evidence/leakage/history/before_after_before_protected_20261028.csv",
+  "archive_sha256": "5092bb682f2de512825144a12ec4dbefa5ddb09f64a91bccff675f62a0ca4cde",
+  "canonical_lf_matches_original_git_content": true,
+  "preservation_method": "shutil.copyfile of original working-tree file before rewriting table; unchanged bytes including original line endings",
+  "new_comparison_rows": 88
+}
