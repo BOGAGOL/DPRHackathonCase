@@ -279,21 +279,24 @@ def invalidate_block(info, folder):
         'attempt':info['attempt'], 'excluded_runs':len(info['runs']), 'repeat':'whole B-P-P-B block'})
 
 
-def execute():
+def execute(prefix='bppb', metadata=None):
     """Two whole B/P/P/B blocks per scale; an AC incident invalidates all 28 runs."""
     out = ROOT / 'evidence/benchmark'
-    preflight = json.loads((out / 'bppb_preflight.json').read_text())
+    if prefix not in ('bppb', 'bppb_v2'):
+        raise ValueError('Unauthorized session prefix')
+    session_file = out / (prefix + '_session.json')
+    preflight = json.loads((out / (prefix + '_preflight.json')).read_text())
     if not preflight['passed']:
         raise ValueError('Initial gate failed')
-    if any((out / ('bppb_' + s) / 'session.json').exists() for s in SCALES):
+    if session_file.exists() or any((out / (prefix + '_' + s) / 'session.json').exists() for s in SCALES):
         raise ValueError('Existing paired session; refusing automatic overwrite/resume')
     manifest = yaml.safe_load((ROOT / 'benchmark/workloads.yaml').read_text())
     session = {'status': 'RUNNING', 'started_at_utc': utc_now(), 'target_commit': TARGET,
                'code_commit': subprocess.run(['git','rev-parse','HEAD'], capture_output=True,text=True,check=True).stdout.strip(),
                'parameters': {'concurrency':8,'duration_s':60,'warmup_s':10,'blocks':2,'order':['B','P','P','B']},
                'control_audit_note':'Temporary RLS setup/cleanup is retained in append-only audit_log; member rows and business sequences must be identical. No workload write commits.',
-               'scales': {}}
-    write_json(out / 'bppb_session.json', session)
+               'scales': {}, 'variant_metadata': metadata or {}}
+    write_json(session_file, session)
     summaries = {}
     try:
         services()
@@ -302,14 +305,15 @@ def execute():
             services()
             base, protected = 'baseline_' + scale, 'protected_' + scale
             keys, corpus = load_keys(manifest, 8, base)
-            destination = out / ('bppb_' + scale)
+            destination = out / (prefix + '_' + scale)
             rows, attempts, principal = [], [], None
             with psycopg.connect(**admin_parameters(protected, True), autocommit=True) as admin:
                 principal, authorized = prepare_scope(admin, keys)
                 try:
                     os.environ['DPR_BENCH_PRINCIPAL'] = principal
                     adapters = {'B':PlaintextAdapter(keys,base), 'P':ProtectedAdapter(keys,protected)}
-                    session['scales'][scale] = {'key_corpus':corpus,'authorized_records':authorized,'attempts':attempts,'rows':rows}
+                    session['scales'][scale] = {'key_corpus':corpus,'authorized_records':authorized,'attempts':attempts,'rows':rows,
+                                               'variant_metadata':metadata or {}}
                     for block in (1,2):
                         attempt = 0
                         while True:
@@ -332,7 +336,7 @@ def execute():
                                         r.update(block=block,attempt=attempt,phase=phase,raw=directory.relative_to(ROOT).as_posix())
                                         current.append(r)
                                         write_json(destination / 'session.json',session['scales'][scale])
-                                        write_json(out / 'bppb_session.json',session)
+                                        write_json(session_file,session)
                                         print(json.dumps({'phase':'finished','scale':scale,'block':block,'mode':mode,'scenario':scenario,'p95_ms':r.get('p95_ms'),'throughput_rps':r.get('throughput_rps'),'errors':r.get('errors'),'valid':r.get('valid')}),flush=True)
                                         if r.get('interrupted') or not r.get('valid'):
                                             raise InterruptedError('AC interrupted; invalidate whole block')
@@ -356,7 +360,8 @@ def execute():
                     flat=[{k:v for k,v in r.items() if not isinstance(v,(dict,list))} for r in rows]
                     write_csv(destination/'summary.csv',flat)
                     write_csv(destination/'per_mode.csv',summaries[scale])
-                    write_json(destination/'summary.json',{'median_between_runs':summaries[scale],'all_runs':rows})
+                    write_json(destination/'summary.json',{'median_between_runs':summaries[scale],'all_runs':rows,
+                                                          'variant_metadata':metadata or {}})
                 finally:
                     remove_scope(admin,principal)
                     os.environ.pop('DPR_BENCH_PRINCIPAL',None)
@@ -366,8 +371,8 @@ def execute():
         if not session['datasets_unchanged']:
             raise ValueError('Final dataset checksum/sequence mismatch')
         report=comparison(summaries)
-        report.update(completed_at_utc=utc_now(),datasets_unchanged=True)
-        write_json(out/'bppb_compare.json',report)
+        report.update(completed_at_utc=utc_now(),datasets_unchanged=True,variant_metadata=metadata or {})
+        write_json(out/(prefix+'_compare.json'),report)
         session['status']='COMPLETED'
     except Exception as error:
         session.update(status='STOPPED',error_type=type(error).__name__,error='paired_session_stopped_details_withheld')
@@ -375,7 +380,7 @@ def execute():
     finally:
         session['completed_at_utc']=utc_now()
         session['free_disk_bytes']=shutil.disk_usage(ROOT).free
-        write_json(out/'bppb_session.json',session)
+        write_json(session_file,session)
     return session
 
 

@@ -131,3 +131,19 @@ Test komponen dijalankan terpisah untuk menghindari konflik basename test/confte
 .\.venv\Scripts\python.exe -m pytest benchmark/tests datagen/tests verify/tests -q
 .\.venv\Scripts\python.exe -m pytest scanner/tests -q
 ```
+
+
+## B-P-P-B resmi v2 terpisah dari sesi Codex
+
+Memerlukan kredensial DPAPI yang sudah disimpan dan helper privat yang sudah digunakan di laptop ini. Helper membaca secret dari luar repo, tanpa argumen password. Jalankan sekali; output/worker yang ada ditolak.
+
+```powershell
+$env:DPR_OPENBAO_HTTP_TRANSPORT = 'https_pool'
+$env:DPR_BENCH_DEK_CACHE_TTL = '0'
+$env:DPR_BENCH_DEK_CACHE_ENTRIES = '0'
+powershell -NoProfile -NonInteractive -File C:\dev\dpr-private\benchmark\bppb-launch.ps1 -m benchmark.paired_v2 preflight
+if ($LASTEXITCODE -ne 0) { throw 'Gate awal gagal; benchmark tidak dimulai' }
+.\benchmark\start_bppb_v2.ps1
+```
+
+Proses baru tersembunyi tetap berjalan setelah terminal/sesi agen selesai. Progres/log: results/bench/bppb_v2/runner.stdout.log; jangan menampilkan env atau isi secret. Cek paling sering15menit. Worker menyimpan setiap run, menyusun perbandingan versi dan memverifikasi lima DB, kemudian commit+push hasil ke branch perf/keyservice-latency. Receipt status/hash di results/bench/bppb_v2/publication.json. Tidak merge main.

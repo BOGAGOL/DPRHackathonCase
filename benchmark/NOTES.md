@@ -842,3 +842,12 @@ Seluruh12 smoke (cohort HTTPX awal dan pool final) nol error; tidak ada run dibu
 Rekomendasi final: pool HTTPS baru + HMAC batch, **cache DEK benchmark tetap OFF**. Cache dievaluasi, tetapi p95 memburuk pada kedua cohort; jangan mengklaim cache menyelesaikan overhead. Hit rate hanya statistik lookup DEK, tidak menghitung warmup. Korpus2048 dan total40s per run menguntungkan cache; TTL60s belum kedaluwarsa dalam smoke. P95 protected tetap di atas ambang rasio/absolut terhadap plain dalam smoke; target tidak diubah, tidak ada klaim kelulusan resmi.
 
 Evidence ringkas evidence/benchmark/keyservice_latency/verification.json; cohort final https_pool_v2/smoke.json; seluruh hasil awal tetap ada. Tidak memulai B-P-P-B ulang; sediakan2,5 jam satu varian,5 jam untuk dua eksperimen cache-off/on penuh.
+
+
+## B-P-P-B resmi v2 ? persiapan worker terpisah
+
+Instruksi pengguna28 Oktober2026: ulang resmi100k lalu1M, produksi8a11ff7 tetap, https_pool dan DPR_BENCH_DEK_CACHE_TTL=0. Tidak mengubah targets.md atau data. paired.execute hanya mendapat prefix output/metadata opsional; loop, parameter, corpus, reset statistik, rollback dan aturan ulang blok sama. Seluruh file adapter/runner/toolkit/profile/workload dibuktikan identik dengan8a11ff7 (normalisasi LF untuk perbandingan Git); hash byte aktual dicatat. Kode orchestration/launcher dibekukan pada commit terpisah sebelum measurement.
+
+python -m benchmark.paired_v2 preflight menulis gate baru, bukan memakai gate naive lama. Launcher PowerShell Start-Process Hidden menjalankan helper DPAPI privat sebagai proses terpisah; log di results/bench/bppb_v2. Worker tidak bergantung pada sesi/token konteks Codex: menyelesaikan kedua skala, memverifikasi integritas, membuat tabel versi, commit path sesi saja lalu push perf/keyservice-latency tanpa merge. Receipt publikasi lokal di results/bench/bppb_v2/publication.json, tidak self-reference dalam commit. Tidak retry publikasi otomatis jika gagal. Token svc-app4h diperbarui pada awal blok bila TTL<90menit; root hanya pada jalur operator, tidak dipasang pada workload.
+
+Output bppb_v2_100k/,bppb_v2_1m/,bppb_v2_compare.json terpisah total dari naive_v1. Memantau progres paling sering tiap15menit; tidak menjalankan test/scan berat selama workload. Persiapan test188 PASS/1 SKIP disposable; test ulang setelah perubahan orchestration diperlukan, tidak mengulang benchmark untuk test.
