@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-10-28T08:48:59.225886+00:00",
+  "stage": "a",
+  "passed": true,
+  "counts": {
+    "tests": 74,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 2,
+    "passed": 72
+  },
+  "base_commit": "ed88ecde71107ae3180b055eecefed3b9ad1f60b",
+  "worktree_changes_under_test": true,
+  "scope": "unit/regression tests; Docker integration reported separately",
+  "raw_report": "results/recovery/stage-a.xml"
+}

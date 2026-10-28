@@ -1,5 +1,11 @@
 # Infra Tahap 1 (Windows / PowerShell)
 
+**Recovery A+B:** updater TLS terbaru juga menolak koneksi plaintext ke nama
+`dpr_restore_<32 hex>` (IPv4/IPv6), termasuk bench/scanner. Apply diperlukan sekali
+pada server existing sebelum menggunakan restore versi ini; pull kode saja tidak
+mengubah HBA. Pengecualian baseline tetap hanya untuk pasangan role/database/IP yang
+disepakati. Lihat [runbook recovery](../app/docs/RECOVERY.md).
+
 Jalankan dari root repo. Python 3.11+ dan Docker Desktop (Linux containers).
 Jangan jalankan Compose referensi buku untuk quick-start ini.
 

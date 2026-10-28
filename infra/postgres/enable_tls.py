@@ -34,10 +34,13 @@ LEGACY_HBA_BLOCK = ("# BEGIN DPR PROJECT TLS\n"
              "hostnossl baseline_100k,protected_734,protected_100k all 0.0.0.0/0 reject\n"
              "hostnossl baseline_100k,protected_734,protected_100k all ::/0 reject\n"
              "# END DPR PROJECT TLS\n")
-HBA_BLOCK = ("# BEGIN DPR PROJECT TLS\n"
+PRE_RESTORE_HBA_BLOCK = ("# BEGIN DPR PROJECT TLS\n"
              f"hostnossl {','.join(DATABASES)} all 0.0.0.0/0 reject\n"
              f"hostnossl {','.join(DATABASES)} all ::/0 reject\n"
              "# END DPR PROJECT TLS\n")
+RESTORE_HBA_RULES = ('hostnossl "/^dpr_restore_[0-9a-f]{32}$" all 0.0.0.0/0 reject\n'
+                     'hostnossl "/^dpr_restore_[0-9a-f]{32}$" all ::/0 reject\n')
+HBA_BLOCK = PRE_RESTORE_HBA_BLOCK.replace("# END DPR PROJECT TLS\n", RESTORE_HBA_RULES + "# END DPR PROJECT TLS\n")
 
 
 class TLSUpdateError(RuntimeError):
@@ -63,13 +66,13 @@ def split_managed_hba(original: bytes) -> tuple[bytes, str | None]:
     if content.startswith(begin) and end in content:
         stop = content.index(end)+len(end)
         block, suffix = content[:stop], content[stop:]
-        if block not in (HBA_BLOCK, LEGACY_HBA_BLOCK):
+        if block not in (HBA_BLOCK, PRE_RESTORE_HBA_BLOCK, LEGACY_HBA_BLOCK):
             match = re.fullmatch(r"host(?:nossl)? baseline_100k,baseline_1m bench_user,scanner_user ([^\s/]+)/(32|128) scram-sha-256", block.splitlines()[1])
             try:
                 if not match: raise ValueError()
                 candidate = baseline_hba_block(match[1])
                 legacy = candidate.replace("hostnossl baseline_", "host baseline_", 1)
-                if block not in (candidate, legacy): raise ValueError()
+                if block not in (candidate, legacy, candidate.replace(RESTORE_HBA_RULES, ""), legacy.replace(RESTORE_HBA_RULES, "")): raise ValueError()
                 address = str(ipaddress.ip_address(match[1]))
             except ValueError:
                 raise TLSUpdateError("unexpected_managed_hba_block") from None
@@ -172,6 +175,8 @@ def connection_matrix(root: Path, host: str, port: int, existing_databases: dict
             except psycopg.Error:
                 verified = False
             checks["protected_verify_full:" + database] = verified
+    for role in ("app_user", "backup_user", "analyst_user", "auditor_user", *BASELINE_ROLES):
+        checks["restore_plaintext_rejected:"+role] = plaintext_rejected(host, port, "dpr_restore_"+"0"*32, role)
     return checks
 
 

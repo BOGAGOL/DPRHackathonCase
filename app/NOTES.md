@@ -1,5 +1,35 @@
 # Catatan implementasi Modul B
 
+## Perbaikan recovery A/B oleh Alby — 28 Oktober 2026
+
+Pengguna secara eksplisit mengizinkan pengerjaan kedua modul karena Zhafif berhalangan.
+`DPR_RESTORED_DATABASE` menerima satu nama dpr_restore_<32 hex> yang sama dengan seluruh
+URL runtime, hanya MODE=protected. Guard role dan TLS verify-full tetap berlaku.
+Startup menggunakan app_user read-only untuk memeriksa nama/role/TLS, provenance marker
+restore yang telah dipublish A, tepat tujuh tabel dan owner/FORCE RLS anggota.
+Marker saja tidak membuktikan integritas arsip; pemeriksaan HMAC/SHA/AEAD adalah tugas
+restore A. Kredensial admin/setup tidak diperlukan atau diteruskan ke aplikasi.
+
+Setup B yang idempoten menambah SELECT pada service_legacy_id_seq kepada backup_user,
+tanpa memberikan UPDATE sequence (setval), DDL, atau akses OpenBao. Sequence existing
+tidak di-reset. Restore mempertahankan akun/scope/binding/sesi dan allocator, sehingga
+tidak perlu provision ulang akun setelah cutover. Backup data-only lima tabel lama
+tidak dianggap backup layanan B lengkap dan ditolak oleh gate startup recovery.
+
+Pengujian recovery memakai data buatan sendiri di PostgreSQL/OpenBao TLS sementara;
+HTTPS backend membuktikan alur aplikasi. Ini tidak menggantikan benchmark resmi,
+acceptance pada dataset hasil migrasi tim, atau bukti browser/frontend terpisah.
+
+Setelah restart Windows, recovery tujuh tabel benar-benar dijalankan pada container
+sementara: 33 pemeriksaan lulus melalui HTTPS backend dengan schema/toolkit A asli.
+Akun dan sesi hasil restore bekerja; enam peran, scope record, kebijakan FIN, pencarian,
+update kontak/bidx dan insert allocator tervalidasi. Hilangnya identitas OpenBao
+menghasilkan 500 generik, lalu layanan dapat membaca lagi setelah identitas sah
+diinjeksi ulang. Tamper dan retention tujuh tabel juga lulus. Bukti mesin pada
+`evidence/backup/service-recovery-integration.json`; rangkuman empat test integrasi
+di `evidence/recovery/verification.json`. Pengujian ini memakai 17 record buatan
+sendiri dan bukan acceptance pada dataset resmi atau benchmark.
+
 Pemilik: Zhafif. Platform: Windows PowerShell. Branch kerja: `feat/service-app`. Acuan mengikat: `AGENTS.md`, `docs/PROJECT_CONTEXT.md`, `docs/contracts/CONTRACT.md`, `docs/TEAM_PLAN.md`, dan `docs/ai-prompts/PROMPT_B_SERVICE_APP.md`.
 
 ## Batas perubahan dan penggunaan ulang

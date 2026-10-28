@@ -38,6 +38,7 @@ def setup_protected(engine):
             db.execute(text("SELECT setval('service_legacy_id_seq', :next, false)"), {"next": maximum + 1})
             db.execute(text("ALTER SEQUENCE service_legacy_id_seq OWNER TO schema_owner"))
         db.execute(text("GRANT USAGE ON SEQUENCE service_legacy_id_seq TO app_user"))
+        db.execute(text("GRANT SELECT ON SEQUENCE service_legacy_id_seq TO backup_user"))
 
 
 def main():
