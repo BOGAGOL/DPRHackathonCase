@@ -784,3 +784,61 @@ dan seluruh penilaian P01/P01A/P02/P03 terhadap pengukuran after tetap BELUM DIU
 ## 28 Oktober 2026 ? sesi resmi naive_v1 dipertahankan
 
 Sesi B-P-P-B awal selesai secara alami sebelum permintaan diagnosis overhead diproses: 56 run pada 100k dan 56 run pada 1M, masing-masing empat run per mode per skenario. Tidak ada proses yang perlu dihentikan. Seluruh hasil/raw dipertahankan di bppb_100k dan bppb_1m, dengan label naive_v1 melalui metadata dan evidence/benchmark/naive_v1.json. Kedua skala tidak memiliki error workload; validasi akhir dataset tidak berubah lulus. Hasil ini tidak diganti oleh smoke optimasi. Diagnosis/perbaikan berikutnya berada di perf/keyservice-latency; B-P-P-B ulang menunggu instruksi.
+
+
+## 28 Oktober 2026 ? diagnosis dan optimasi key service
+
+Branch perf/keyservice-latency berasal dari run/overnight-28okt setelah hasil naive_v1 disimpan/push di c16d3c4. Tidak ada benchmark yang masih hidup saat tugas diagnosis dimulai. Kedua skala lengkap, masing-masing 56 run (4 per mode per skenario), nol error; checksum/count akhir tidak berubah. Tidak ada hasil yang dibuang.
+
+Diagnosis sebelum perubahan produksi selesai dalam 56.77 detik, 200 panggilan per kasus pada concurrency 1 dan 8. TLS verify tetap; token datakey svc-migration sementara TTL 900 detik dicabut sesudah pengukuran. Semua nilai/key hanya di memori; evidence berisi agregat dan nama event trace saja.
+
+| Komponen | c=1 mean / p95 ms | c=8 mean / p95 ms |
+|---|---:|---:|
+| hmac | 8.429 / 32.292 | 19.602 / 32.562 |
+| unwrap | 4.752 / 8.759 | 20.718 / 42.208 |
+| datakey_wrapped | 4.626 / 9.001 | 23.177 / 37.405 |
+| aes_gcm_local | 0.024 / 0.045 | 0.029 / 0.064 |
+| sql_plain | 13.334 / 29.718 | 5.135 / 10.831 |
+| hmac_batch_3 | 5.079 / 9.372 | 16.325 / 27.028 |
+| unwrap_batch_50 | 7.250 / 10.485 | 35.658 / 84.753 |
+
+SQL mikro di atas memakai full-profile plain lewat bench_user tanpa TLS; waktu server protected terpisah dari naive_v1: mean end-to-end 55,435 ms, SQL execution 0,156 ms, sisanya 55,279 ms. Angka mikro tidak dijumlahkan sebagai dekomposisi request yang identik karena diukur di jendela berbeda.
+
+Client HTTP dan koneksi DB sudah persisten per worker. Semua trace RPC terukur menunjukkan nol TCP connect/handshake TLS baru; startup menunjukkan satu handshake per client. Bukan koneksi TLS baru per request. Tiga RPC berurutan diperlukan untuk full lookup (HMAC, unwrap PII, unwrap FIN). read_profile dua; list_page satu batch hingga 50 DEK PII; update satu; insert tujuh (wrap dua domain, tiga HMAC, unwrap dua). Mixed ekspektasi 2,9 RPC/request berdasarkan bobot tetap. PII/FIN memakai endpoint/kunci berbeda sehingga tidak digabung ke satu decrypt batch.
+
+CPU OpenBao pada run naive read_by_nik protected pertama: median 54,02% satu core, peak 79,36%; client median 113% satu core. Tidak ada bukti OpenBao jenuh CPU. Durasi RPC mencakup framing HTTP/TLS, network dan scheduling klien/server; trace tidak memisahkan semuanya menjadi biaya kripto server. Sampel mikro resource pendek dan kurang representatif dibanding run 60 detik.
+
+Perbaikan berurutan: pool yang sudah ada dibatasi eksplisit 8 koneksi/keep-alive, expiry idle 60 detik (tidak diklaim mempercepat beban kontinu); batch HMAC tiga kolom insert menjadi satu RPC, sehingga insert cache-off 7 menjadi 5 RPC. Karena dua langkah ini tidak mengurangi tiga RPC full-read, varian DEK cache yang sudah ada pada toolkit diuji secara opt-in, TTL 60 detik, maksimum 4096 entri/worker; default benchmark tetap cache mati. Tidak ada cache plaintext/result/bidx, perubahan KEK/search key, penurunan TLS, atau perubahan ciphertext/AAD/normalisasi.
+
+Cache delapan worker terpisah: maksimum 32768 DEK. TTL absolut tidak diperpanjang oleh hit, dibatasi token expiry; perubahan scope/gagal unwrap/close membersihkan cache. Pengosongan bytearray best effort bukan jaminan menghapus semua salinan memori Python. Revokasi jarak jauh untuk request yang hanya memakai DEK cache dapat terlambat hingga sisa TTL 60 detik. Korpus 2048 profil membatasi representativitas hit rate. Statistik hit rate measurement tidak menghitung warmup, yang tetap dilaporkan terpisah. Review Alby: toolkit/REVIEW_KEY_SERVICE_LATENCY.md.
+
+B-P-P-B resmi ulang tidak dimulai. Perkiraan satu eksperimen lengkap dua skala sekitar 2 jam 20 menit (naive_v1 aktual 140,86 menit), sediakan 2,5 jam termasuk verifikasi; dua varian cache mati/aktif sebagai eksperimen lengkap sekitar 5 jam. Target tidak diubah; smoke bukan bukti kelulusan P01/P01A/P02.
+
+
+Catatan TTL cache: batas60 detik berlaku pada validitas pemakaian; penghapusan entri expired bersifat lazy saat unwrap berikutnya/close, bukan jaminan seluruh byte/salinan Python hilang dari RAM tepat detik60. Tidak ada cache bersama antarworker; RLock client masing-masing tidak menserialkan delapan worker. CSV runner buffered dan terpisah perworker.
+
+
+### Transport final: session HTTPS lebih ringan
+
+Cohort HTTPX awal dipertahankan di evidence/benchmark/keyservice_latency/smoke.json (httpx_pool_v1): median p95 plain8,400 ms, protected cache-off83,203 ms dan cache-on90,196 ms. Cache meningkatkan throughput147,46 menjadi162,26 req/s, tetapi tail memburuk; hasil yang kurang baik ini tidak dibuang.
+
+Probe tambahan menunjukkan overhead dispatch HTTPX/httpcore pada jalur RPC. VerifiedHTTPSPool memakai session http.client.HTTPSConnection dengan SSLContext tervalidasi yang sama, pool maksimal8/idle60s, tanpa retry/redirect. OpenBaoClient menggunakan request_bytes untuk menghindari dispatch objek HTTPX per request. Jalur lama tetap tersedia melalui DPR_OPENBAO_HTTP_TRANSPORT=httpx; default final https_pool. Tidak memakai perubahan switch interval GIL, cache HMAC/plaintext, atau format kripto. API penuh c8 pada jendela probe yang sama: HTTPX mean9,559 ms versus pool4,564 ms/HMAC,200 panggilan. CA tak dipercaya ditolak nyata. HTTPX awal sudah keep-alive, sehingga perubahan ini mengurangi overhead session/dispatch, bukan memperbaiki handshake per request. Tidak mengklaim http.client menggabungkan header/body menjadi satu TLS write.
+
+Cohort final memakai path https_pool_v2 terpisah dan parity diulang setelah perubahan runtime. Scan no-key penuh sebelumnya tetap berlaku karena codec/profile/dump tidak berubah; evidence disalin dengan referensi dan alasan reuse, timestamp asal dipertahankan. B-P-P-B resmi tidak dijalankan ulang.
+
+
+### Hasil verifikasi final https_pool_v2
+
+Test toolkit+benchmark180 PASS/1 SKIP disposable; test vector PASS. Parity final16.000 request pada dua skala dan dua konfigurasi cache,0 mismatch; kedua probe tulis rollback PASS. No-key scan penuh100k/1M ESCE0%, dipakai ulang sesudah perubahan transport dengan alasan dan fingerprint yang dicatat. Integritas akhir kelima DB cocok terhadap naive_v1: count/checksum/sequence/logical ciphertext tetap; principal dan scope kembali ke count awal. Audit setup/cleanup tetap disimpan.
+
+| Varian final (100k,read_by_nik) | p50 ms | p95 ms | Mean ms | req/s | DEK hit rate |
+|---|---:|---:|---:|---:|---:|
+| plain | 3.595 | 6.774 | 3.901 | 2038.26 | 0.00% |
+| protected_cache_off | 29.056 | 43.447 | 30.229 | 264.27 | 0.00% |
+| protected_cache_60 | 33.072 | 60.255 | 34.722 | 230.14 | 49.57% |
+
+Seluruh12 smoke (cohort HTTPX awal dan pool final) nol error; tidak ada run dibuang. Final AC/Kernel-Power qualified sepanjang sesi. Pool final tidak membuka koneksi TLS baru dalam jendela terukur; delapan koneksi sudah hangat sebelum measurement. HTTPX tetap opsi pembanding, tidak dipilih otomatis saat gagal.
+
+Rekomendasi final: pool HTTPS baru + HMAC batch, **cache DEK benchmark tetap OFF**. Cache dievaluasi, tetapi p95 memburuk pada kedua cohort; jangan mengklaim cache menyelesaikan overhead. Hit rate hanya statistik lookup DEK, tidak menghitung warmup. Korpus2048 dan total40s per run menguntungkan cache; TTL60s belum kedaluwarsa dalam smoke. P95 protected tetap di atas ambang rasio/absolut terhadap plain dalam smoke; target tidak diubah, tidak ada klaim kelulusan resmi.
+
+Evidence ringkas evidence/benchmark/keyservice_latency/verification.json; cohort final https_pool_v2/smoke.json; seluruh hasil awal tetap ada. Tidak memulai B-P-P-B ulang; sediakan2,5 jam satu varian,5 jam untuk dua eksperimen cache-off/on penuh.

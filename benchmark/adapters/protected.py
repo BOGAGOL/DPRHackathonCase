@@ -3,7 +3,7 @@
 from datetime import date
 import os
 from pathlib import Path
-from uuid import UUID
+from uuid import UUID, uuid4
 
 import psycopg
 from psycopg import sql
@@ -13,7 +13,7 @@ import yaml
 
 from dprcrypto import BlindIndexer, KeyManager, OpenBaoClient, decrypt, encrypt
 from datagen.model import COLUMNS
-from migration.model import protect_batch, target_columns
+from migration.model import age_band, canonical_value, target_columns
 from verify.profile import protection_plan
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -74,7 +74,8 @@ def decrypt_rows(rows, fields, profile, manager):
 class ProtectedConnection:
     def __init__(self, connection, client):
         self.connection, self.client = connection, client
-        self.manager = KeyManager(client, cache_ttl=0, max_entries=0)
+        ttl, entries = cache_configuration()
+        self.manager = KeyManager(client, cache_ttl=ttl, max_entries=entries)
         self.indexer = BlindIndexer(client, key_version=1)
 
     def close(self):
@@ -85,11 +86,55 @@ class ProtectedConnection:
             self.connection.close()
 
 
+def cache_configuration():
+    """Explicit opt-in; cache-off remains the default and a reproducible variant."""
+    try:
+        ttl = float(os.environ.get('DPR_BENCH_DEK_CACHE_TTL', '0'))
+        entries = int(os.environ.get('DPR_BENCH_DEK_CACHE_ENTRIES', '4096'))
+        if not 0 <= ttl <= 60 or not 0 <= entries <= 4096:
+            raise ValueError()
+        return ttl, entries if ttl else 0
+    except (TypeError, ValueError):
+        raise ValueError('Invalid bounded DEK cache configuration') from None
+
+
+def protect_insert(template, profile, session):
+    """Use toolkit AEAD/envelope APIs and one cross-column HMAC batch, v1 unchanged."""
+    identity = str(uuid4())
+    keys = session.manager.create_record_keys()
+    result = {'anggota_id': identity, 'legacy_row_id': template['id'], 'protection_version': 1,
+              'dek_pii_wrapped': keys.pii.wrapped, 'dek_fin_wrapped': keys.finance.wrapped,
+              'age_band': age_band(template['tanggal_lahir'], profile)}
+    indexed = []
+    for column, config in profile['columns'].items():
+        value = canonical_value(template[column])
+        result[config['storage_column']] = encrypt(value,
+            keys.pii.dek if config['domain'] == 'PII' else keys.finance.dek,
+            column=column, anggota_id=identity) if config['aead'] else value
+        if config['bidx']:
+            indexed.append((column, value))
+    digests = session.indexer.digests(indexed)
+    for (column, _), value in zip(indexed, digests):
+        result[profile['columns'][column]['bidx_column']] = value
+    return result
+
+
 class ProtectedAdapter:
     def __init__(self, keys, database="protected_100k", *, profile=None):
         protection_plan("protected_dump_no_key")
         self.profile = profile or yaml.safe_load((ROOT / "policy/protection_profile.yaml").read_text(encoding="utf-8"))
         self.keys, self.database = keys, database
+
+    def telemetry(self, sessions):
+        stats = [session.manager.cache_stats() for session in sessions]
+        counts = {key: sum(item[key] for item in stats) for key in
+                  ('hits', 'misses', 'remote_batches', 'entries', 'max_entries')}
+        counts.update(ttl_seconds=max((item['ttl_seconds'] for item in stats), default=0),
+                      workers=len(sessions))
+        wire = [s.client.connection_stats() for s in sessions]
+        for field in ('opened_connections', 'reused_connections', 'requests'):
+            counts['http_' + field] = sum(s.get(field, 0) for s in wire if isinstance(s, dict))
+        return counts
 
     def connect(self):
         principal = str(UUID(os.environ["DPR_BENCH_PRINCIPAL"]))
@@ -158,7 +203,7 @@ class ProtectedAdapter:
                 expected = [(row["id"], contact)]
         elif operation == "insert_member":
             template = dict(self.keys["insert_templates"][worker], id=-(worker + 1))
-            protected = protect_batch([template], self.profile, session.client)[0]
+            protected = protect_insert(template, self.profile, session)
             columns = target_columns(self.profile)
             query = sql.SQL("INSERT INTO public.anggota_protected ({}) VALUES ({})").format(
                 sql.SQL(",").join(map(sql.Identifier, columns)), sql.SQL(",").join(sql.Placeholder() for _ in columns))

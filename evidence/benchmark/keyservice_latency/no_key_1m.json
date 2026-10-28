@@ -1,0 +1,15 @@
+{
+  "database": "protected_1m",
+  "passed": true,
+  "ESCE": {
+    "numerator": 0,
+    "denominator": 24500005,
+    "ratio": 0.0
+  },
+  "artifact_sha256": "932f89019aa776d51c26ccec597f55ff07c9bceeb6e2ab0181df7dae14c6356f",
+  "rows_checked": 1000000,
+  "crypto_client_constructed": false,
+  "storage_format_changed": false,
+  "scope": "Existing actual protected dump; historical evidence retained",
+  "timestamp_utc": "2026-10-28T12:38:47.678064+00:00"
+}

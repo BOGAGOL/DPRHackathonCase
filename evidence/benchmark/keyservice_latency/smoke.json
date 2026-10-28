@@ -1,0 +1,1070 @@
+{
+  "kind": "nonofficial_smoke",
+  "started_at_utc": "2026-10-28T12:39:15.258557+00:00",
+  "passed": true,
+  "duration_s": 30,
+  "warmup_s": 10,
+  "concurrency": 8,
+  "scenario": "read_by_nik",
+  "key_corpus": {
+    "version": 1,
+    "seed": 42,
+    "sha256": "b38b8f59819b1eee314fac75c510417f7945c8d1b9b4e52f95839bf865e92ea5",
+    "profile_count": 2048,
+    "page_count": 64,
+    "location": "DPR_PRIVATE_DIR/benchmark (not exported)"
+  },
+  "runs": [
+    {
+      "requests": 53198,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 3.8535499916179106,
+      "p95_ms": 8.517060005397068,
+      "p99_ms": 14.526435015141027,
+      "mean_ms": 4.478129910903102,
+      "throughput_rps": 1772.8127734130305,
+      "elapsed_s": 30.007680899987463,
+      "scenario": "read_by_nik",
+      "run": 1,
+      "duration_s": 30,
+      "warmup_s": 10,
+      "started_at_utc": "2026-10-28T12:39:33.476376+00:00",
+      "completed_at_utc": "2026-10-28T12:40:03.604158+00:00",
+      "concurrency": 8,
+      "warmup_errors": 0,
+      "operations": {
+        "read_by_nik": 53198
+      },
+      "error_types": {},
+      "resources": {
+        "samples": 7,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 44.25,
+        "db_ram_bytes_median": 1328218636,
+        "client_cpu_percent_one_core_median": 114.0,
+        "client_ram_bytes_median": 62541824,
+        "openbao_cpu_percent_one_core_median": 0.68,
+        "openbao_ram_bytes_median": 128031129,
+        "db_cpu_percent_one_core_peak": 52.71,
+        "db_ram_bytes_peak": 1328218636,
+        "client_cpu_percent_one_core_peak": 121.2,
+        "client_ram_bytes_peak": 63234048,
+        "openbao_cpu_percent_one_core_peak": 30.23,
+        "openbao_ram_bytes_peak": 128240844
+      },
+      "db_time": {
+        "source": "pg_stat_statements",
+        "calls": 53198,
+        "requests": 53198,
+        "total_exec_time_ms": 2335.5906259999356,
+        "db_time_ms_per_request": 0.04390372995225263,
+        "db_time_ms_per_sql_call": 0.04390372995225263,
+        "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+        "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+      },
+      "successful_requests": {
+        "requests": 53198,
+        "errors": 0,
+        "error_rate": 0.0,
+        "p50_ms": 3.8535499916179106,
+        "p95_ms": 8.517060005397068,
+        "p99_ms": 14.526435015141027,
+        "mean_ms": 4.478129910903102,
+        "throughput_rps": 1772.8127734130305,
+        "elapsed_s": 30.007680899987463
+      },
+      "variant": "plain",
+      "official": false
+    },
+    {
+      "requests": 4636,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 48.44125000818167,
+      "p95_ms": 78.92310000170255,
+      "p99_ms": 119.681065007171,
+      "mean_ms": 51.75965122962272,
+      "throughput_rps": 154.3966418690588,
+      "elapsed_s": 30.026559799996903,
+      "scenario": "read_by_nik",
+      "run": 2,
+      "duration_s": 30,
+      "warmup_s": 10,
+      "started_at_utc": "2026-10-28T12:40:15.050784+00:00",
+      "completed_at_utc": "2026-10-28T12:40:45.094323+00:00",
+      "concurrency": 8,
+      "warmup_errors": 0,
+      "operations": {
+        "read_by_nik": 4636
+      },
+      "error_types": {},
+      "resources": {
+        "samples": 7,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 8.21,
+        "db_ram_bytes_median": 1355062181,
+        "client_cpu_percent_one_core_median": 110.7,
+        "client_ram_bytes_median": 64348160,
+        "openbao_cpu_percent_one_core_median": 55.82,
+        "openbao_ram_bytes_median": 135266304,
+        "db_cpu_percent_one_core_peak": 9.94,
+        "db_ram_bytes_peak": 1366873341,
+        "client_cpu_percent_one_core_peak": 118.2,
+        "client_ram_bytes_peak": 64745472,
+        "openbao_cpu_percent_one_core_peak": 103.07,
+        "openbao_ram_bytes_peak": 135895449
+      },
+      "db_time": {
+        "source": "pg_stat_statements",
+        "calls": 4636,
+        "requests": 4636,
+        "total_exec_time_ms": 941.2894919999935,
+        "db_time_ms_per_request": 0.20303914840379497,
+        "db_time_ms_per_sql_call": 0.20303914840379497,
+        "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+        "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+      },
+      "successful_requests": {
+        "requests": 4636,
+        "errors": 0,
+        "error_rate": 0.0,
+        "p50_ms": 48.44125000818167,
+        "p95_ms": 78.92310000170255,
+        "p99_ms": 119.681065007171,
+        "mean_ms": 51.75965122962272,
+        "throughput_rps": 154.3966418690588,
+        "elapsed_s": 30.026559799996903
+      },
+      "adapter_telemetry": {
+        "before_measurement": {
+          "hits": 0,
+          "misses": 2894,
+          "remote_batches": 2894,
+          "entries": 0,
+          "max_entries": 0,
+          "ttl_seconds": 0.0,
+          "workers": 8
+        },
+        "after_measurement": {
+          "hits": 0,
+          "misses": 12166,
+          "remote_batches": 12166,
+          "entries": 0,
+          "max_entries": 0,
+          "ttl_seconds": 0.0,
+          "workers": 8
+        },
+        "measurement": {
+          "hits": 0,
+          "misses": 9272,
+          "remote_batches": 9272,
+          "hit_rate": 0.0
+        }
+      },
+      "variant": "protected_cache_off",
+      "official": false
+    },
+    {
+      "requests": 5278,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 45.280250007635914,
+      "p95_ms": 78.7853199930396,
+      "p99_ms": 100.09127999917827,
+      "mean_ms": 45.469185828153016,
+      "throughput_rps": 175.72795480066546,
+      "elapsed_s": 30.03506190000917,
+      "scenario": "read_by_nik",
+      "run": 3,
+      "duration_s": 30,
+      "warmup_s": 10,
+      "started_at_utc": "2026-10-28T12:40:56.005290+00:00",
+      "completed_at_utc": "2026-10-28T12:41:27.879988+00:00",
+      "concurrency": 8,
+      "warmup_errors": 0,
+      "operations": {
+        "read_by_nik": 5278
+      },
+      "error_types": {},
+      "resources": {
+        "samples": 8,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 7.42,
+        "db_ram_bytes_median": 1367947083.0,
+        "client_cpu_percent_one_core_median": 113.35,
+        "client_ram_bytes_median": 67160064.0,
+        "openbao_cpu_percent_one_core_median": 44.995000000000005,
+        "openbao_ram_bytes_median": 135266303.5,
+        "db_cpu_percent_one_core_peak": 12.65,
+        "db_ram_bytes_peak": 1367947083,
+        "client_cpu_percent_one_core_peak": 118.4,
+        "client_ram_bytes_peak": 69050368,
+        "openbao_cpu_percent_one_core_peak": 65.76,
+        "openbao_ram_bytes_peak": 148688076
+      },
+      "db_time": {
+        "source": "pg_stat_statements",
+        "calls": 5278,
+        "requests": 5278,
+        "total_exec_time_ms": 772.9124400000101,
+        "db_time_ms_per_request": 0.14644040166730013,
+        "db_time_ms_per_sql_call": 0.14644040166730013,
+        "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+        "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+      },
+      "successful_requests": {
+        "requests": 5278,
+        "errors": 0,
+        "error_rate": 0.0,
+        "p50_ms": 45.280250007635914,
+        "p95_ms": 78.7853199930396,
+        "p99_ms": 100.09127999917827,
+        "mean_ms": 45.469185828153016,
+        "throughput_rps": 175.72795480066546,
+        "elapsed_s": 30.03506190000917
+      },
+      "adapter_telemetry": {
+        "before_measurement": {
+          "hits": 134,
+          "misses": 2878,
+          "remote_batches": 2878,
+          "entries": 2878,
+          "max_entries": 32768,
+          "ttl_seconds": 60.0,
+          "workers": 8
+        },
+        "after_measurement": {
+          "hits": 4516,
+          "misses": 9052,
+          "remote_batches": 9052,
+          "entries": 9052,
+          "max_entries": 32768,
+          "ttl_seconds": 60.0,
+          "workers": 8
+        },
+        "measurement": {
+          "hits": 4382,
+          "misses": 6174,
+          "remote_batches": 6174,
+          "hit_rate": 0.4151193633952255
+        }
+      },
+      "variant": "protected_cache_60",
+      "official": false
+    },
+    {
+      "requests": 4469,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 50.61899998690933,
+      "p95_ms": 101.60671999910835,
+      "p99_ms": 141.13371599582015,
+      "mean_ms": 53.70391951236988,
+      "throughput_rps": 148.78352654405813,
+      "elapsed_s": 30.036927500012098,
+      "scenario": "read_by_nik",
+      "run": 4,
+      "duration_s": 30,
+      "warmup_s": 10,
+      "started_at_utc": "2026-10-28T12:41:38.890761+00:00",
+      "completed_at_utc": "2026-10-28T12:42:10.308577+00:00",
+      "concurrency": 8,
+      "warmup_errors": 0,
+      "operations": {
+        "read_by_nik": 4469
+      },
+      "error_types": {},
+      "resources": {
+        "samples": 8,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 6.9350000000000005,
+        "db_ram_bytes_median": 1367947083.0,
+        "client_cpu_percent_one_core_median": 105.75,
+        "client_ram_bytes_median": 68225024.0,
+        "openbao_cpu_percent_one_core_median": 39.64,
+        "openbao_ram_bytes_median": 135213875.0,
+        "db_cpu_percent_one_core_peak": 17.46,
+        "db_ram_bytes_peak": 1367947083,
+        "client_cpu_percent_one_core_peak": 110.3,
+        "client_ram_bytes_peak": 69115904,
+        "openbao_cpu_percent_one_core_peak": 77.85,
+        "openbao_ram_bytes_peak": 135685734
+      },
+      "db_time": {
+        "source": "pg_stat_statements",
+        "calls": 4469,
+        "requests": 4469,
+        "total_exec_time_ms": 683.4048110000149,
+        "db_time_ms_per_request": 0.1529211928843175,
+        "db_time_ms_per_sql_call": 0.1529211928843175,
+        "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+        "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+      },
+      "successful_requests": {
+        "requests": 4469,
+        "errors": 0,
+        "error_rate": 0.0,
+        "p50_ms": 50.61899998690933,
+        "p95_ms": 101.60671999910835,
+        "p99_ms": 141.13371599582015,
+        "mean_ms": 53.70391951236988,
+        "throughput_rps": 148.78352654405813,
+        "elapsed_s": 30.036927500012098
+      },
+      "adapter_telemetry": {
+        "before_measurement": {
+          "hits": 142,
+          "misses": 2960,
+          "remote_batches": 2960,
+          "entries": 2960,
+          "max_entries": 32768,
+          "ttl_seconds": 60.0,
+          "workers": 8
+        },
+        "after_measurement": {
+          "hits": 4214,
+          "misses": 7826,
+          "remote_batches": 7826,
+          "entries": 7826,
+          "max_entries": 32768,
+          "ttl_seconds": 60.0,
+          "workers": 8
+        },
+        "measurement": {
+          "hits": 4072,
+          "misses": 4866,
+          "remote_batches": 4866,
+          "hit_rate": 0.45558290445289773
+        }
+      },
+      "variant": "protected_cache_60",
+      "official": false
+    },
+    {
+      "requests": 4221,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 52.86369999521412,
+      "p95_ms": 87.4822000041604,
+      "p99_ms": 128.69047999265646,
+      "mean_ms": 56.87403501547532,
+      "throughput_rps": 140.51445768432902,
+      "elapsed_s": 30.039613500004634,
+      "scenario": "read_by_nik",
+      "run": 5,
+      "duration_s": 30,
+      "warmup_s": 10,
+      "started_at_utc": "2026-10-28T12:42:21.488769+00:00",
+      "completed_at_utc": "2026-10-28T12:42:51.539393+00:00",
+      "concurrency": 8,
+      "warmup_errors": 0,
+      "operations": {
+        "read_by_nik": 4221
+      },
+      "error_types": {},
+      "resources": {
+        "samples": 7,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 7.49,
+        "db_ram_bytes_median": 1367947083,
+        "client_cpu_percent_one_core_median": 108.6,
+        "client_ram_bytes_median": 68448256,
+        "openbao_cpu_percent_one_core_median": 53.19,
+        "openbao_ram_bytes_median": 135371161,
+        "db_cpu_percent_one_core_peak": 9.8,
+        "db_ram_bytes_peak": 1367947083,
+        "client_cpu_percent_one_core_peak": 114.2,
+        "client_ram_bytes_peak": 68698112,
+        "openbao_cpu_percent_one_core_peak": 70.43,
+        "openbao_ram_bytes_peak": 147324928
+      },
+      "db_time": {
+        "source": "pg_stat_statements",
+        "calls": 4221,
+        "requests": 4221,
+        "total_exec_time_ms": 657.2416169999906,
+        "db_time_ms_per_request": 0.15570756147832043,
+        "db_time_ms_per_sql_call": 0.15570756147832043,
+        "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+        "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+      },
+      "successful_requests": {
+        "requests": 4221,
+        "errors": 0,
+        "error_rate": 0.0,
+        "p50_ms": 52.86369999521412,
+        "p95_ms": 87.4822000041604,
+        "p99_ms": 128.69047999265646,
+        "mean_ms": 56.87403501547532,
+        "throughput_rps": 140.51445768432902,
+        "elapsed_s": 30.039613500004634
+      },
+      "adapter_telemetry": {
+        "before_measurement": {
+          "hits": 0,
+          "misses": 2982,
+          "remote_batches": 2982,
+          "entries": 0,
+          "max_entries": 0,
+          "ttl_seconds": 0.0,
+          "workers": 8
+        },
+        "after_measurement": {
+          "hits": 0,
+          "misses": 11424,
+          "remote_batches": 11424,
+          "entries": 0,
+          "max_entries": 0,
+          "ttl_seconds": 0.0,
+          "workers": 8
+        },
+        "measurement": {
+          "hits": 0,
+          "misses": 8442,
+          "remote_batches": 8442,
+          "hit_rate": 0.0
+        }
+      },
+      "variant": "protected_cache_off",
+      "official": false
+    },
+    {
+      "requests": 53248,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 4.0151000139303505,
+      "p95_ms": 8.283759989717508,
+      "p99_ms": 12.31047099456191,
+      "mean_ms": 4.473931764660112,
+      "throughput_rps": 1774.709991995223,
+      "elapsed_s": 30.003775400022278,
+      "scenario": "read_by_nik",
+      "run": 6,
+      "duration_s": 30,
+      "warmup_s": 10,
+      "started_at_utc": "2026-10-28T12:43:02.065990+00:00",
+      "completed_at_utc": "2026-10-28T12:43:32.175822+00:00",
+      "concurrency": 8,
+      "warmup_errors": 0,
+      "operations": {
+        "read_by_nik": 53248
+      },
+      "error_types": {},
+      "resources": {
+        "samples": 7,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 42.9,
+        "db_ram_bytes_median": 1357209665,
+        "client_cpu_percent_one_core_median": 121.6,
+        "client_ram_bytes_median": 70647808,
+        "openbao_cpu_percent_one_core_median": 1.49,
+        "openbao_ram_bytes_median": 135161446,
+        "db_cpu_percent_one_core_peak": 43.91,
+        "db_ram_bytes_peak": 1357209665,
+        "client_cpu_percent_one_core_peak": 136.2,
+        "client_ram_bytes_peak": 71528448,
+        "openbao_cpu_percent_one_core_peak": 35.5,
+        "openbao_ram_bytes_peak": 135685734
+      },
+      "db_time": {
+        "source": "pg_stat_statements",
+        "calls": 53248,
+        "requests": 53248,
+        "total_exec_time_ms": 2327.45025899987,
+        "db_time_ms_per_request": 0.04370962776066463,
+        "db_time_ms_per_sql_call": 0.04370962776066463,
+        "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+        "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+      },
+      "successful_requests": {
+        "requests": 53248,
+        "errors": 0,
+        "error_rate": 0.0,
+        "p50_ms": 4.0151000139303505,
+        "p95_ms": 8.283759989717508,
+        "p99_ms": 12.31047099456191,
+        "mean_ms": 4.473931764660112,
+        "throughput_rps": 1774.709991995223,
+        "elapsed_s": 30.003775400022278
+      },
+      "variant": "plain",
+      "official": false
+    }
+  ],
+  "cache_caveat": "2048 fixed profiles; temporal reuse can inflate cache benefit versus larger/changing keys",
+  "order": [
+    "plain",
+    "protected_cache_off",
+    "protected_cache_60",
+    "protected_cache_60",
+    "protected_cache_off",
+    "plain"
+  ],
+  "medians": {
+    "protected_cache_off": {
+      "p50_ms": 50.652475001697894,
+      "p95_ms": 83.20265000293148,
+      "p99_ms": 124.18577249991372,
+      "mean_ms": 54.31684312254902,
+      "throughput_rps": 147.4555497766939,
+      "error_rate": 0.0
+    },
+    "plain": {
+      "p50_ms": 3.9343250027741306,
+      "p95_ms": 8.400409997557288,
+      "p99_ms": 13.418453004851468,
+      "mean_ms": 4.476030837781607,
+      "throughput_rps": 1773.7613827041268,
+      "error_rate": 0.0
+    },
+    "protected_cache_60": {
+      "p50_ms": 47.94962499727262,
+      "p95_ms": 90.19601999607397,
+      "p99_ms": 120.61249799749922,
+      "mean_ms": 49.58655267026145,
+      "throughput_rps": 162.2557406723618,
+      "error_rate": 0.0
+    }
+  },
+  "completed_at_utc": "2026-10-28T12:43:32.892235+00:00",
+  "power_verification": {
+    "started_at_utc": "2026-10-28T12:39:18.364302+00:00",
+    "completed_at_utc": "2026-10-28T12:43:32.892235+00:00",
+    "sample_interval_s": 2,
+    "qualified": true,
+    "samples": 127,
+    "samples_not_confirmed_ac": 0,
+    "kernel_power_false_events": 0,
+    "prior_kernel_event_ac_online": true,
+    "kernel_power": {
+      "provider": "Microsoft-Windows-Kernel-Power",
+      "log_name": "System",
+      "query_start_utc": "2026-10-28T12:39:18.3643020+00:00",
+      "query_end_utc": "2026-10-28T12:43:32.8922350+00:00",
+      "latest_event_at_or_before_start": {
+        "record_id": 28342,
+        "event_id": 105,
+        "time_utc": "2026-10-28T06:45:03.6387491+00:00",
+        "time_wib": "2026-10-28T13:45:03.6387491+07:00",
+        "ac_online": true
+      },
+      "events_in_window": []
+    },
+    "collection_failure": null,
+    "scope": "AC samples every 2s and phase guards; prior Kernel-Power105 AC=true and no AC=false event in whole session; not electrical fault instrumentation"
+  },
+  "power_samples": [
+    {
+      "timestamp_utc": "2026-10-28T12:39:18.365307+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:22.773912+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:24.783406+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:26.793051+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:28.794539+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:30.803642+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:32.818514+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:34.820279+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:36.823368+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:38.831889+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:40.843024+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:42.846928+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:44.849738+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:46.860186+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:48.875852+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:50.882136+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:52.893851+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:54.900352+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:56.903883+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:39:58.922526+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:00.925450+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:02.931738+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:04.944724+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:06.959979+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:08.970261+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:10.988697+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:13.002118+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:15.017528+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:17.023757+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:19.029414+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:21.039982+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:23.056324+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:25.086992+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:27.106911+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:29.123070+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:31.139920+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:33.146840+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:35.166172+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:37.182113+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:39.191561+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:41.197135+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:43.207016+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:45.218853+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:47.227318+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:49.244258+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:51.258881+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:53.267169+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:55.282946+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:57.289754+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:40:59.299531+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:01.315254+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:03.319781+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:05.327315+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:07.332497+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:09.344816+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:11.363919+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:13.376853+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:15.385227+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:17.403167+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:19.412297+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:21.429872+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:23.438989+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:25.461682+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:27.464616+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:29.470750+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:31.485044+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:33.502169+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:35.520443+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:37.530384+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:39.540862+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:41.561615+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:43.575051+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:45.579031+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:47.593943+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:49.614114+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:51.631587+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:53.659618+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:55.691157+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:57.710454+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:41:59.727079+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:01.750910+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:03.773218+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:05.784097+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:07.830166+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:09.842375+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:11.859515+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:13.898070+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:15.903239+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:17.916943+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:19.929103+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:21.952374+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:23.958006+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:25.968896+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:27.975057+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:29.987830+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:31.993299+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:34.010649+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:36.018448+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:38.040726+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:40.053705+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:42.059405+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:44.069106+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:46.091424+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:48.102920+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:50.117705+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:52.123348+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:54.129036+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:56.145116+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:42:58.158005+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:00.163240+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:02.178204+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:04.195239+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:06.199682+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:08.207710+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:10.219653+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:12.260993+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:14.281036+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:16.287951+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:18.304475+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:20.309910+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:22.316350+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:24.332284+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:26.343575+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:28.353273+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:30.363378+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:32.371103+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T12:43:32.892235+00:00",
+      "ac_online": true
+    }
+  ],
+  "http_transport": "httpx",
+  "cohort": "httpx_pool_v1",
+  "retained_unfavorable_result": true
+}

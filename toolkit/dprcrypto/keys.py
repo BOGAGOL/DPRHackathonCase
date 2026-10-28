@@ -36,6 +36,16 @@ class KeyManager:
         self._scope = None
         self._lock = threading.RLock()
         self._closed = False
+        self._hits = self._misses = self._remote_batches = 0
+
+    def cache_stats(self) -> dict:
+        """Aggregate counters only; no identifiers, wrapped keys, or plaintext DEKs."""
+        with self._lock:
+            total = self._hits + self._misses
+            return {"hits": self._hits, "misses": self._misses,
+                    "hit_rate": self._hits / total if total else 0.0,
+                    "remote_batches": self._remote_batches, "entries": len(self._cache),
+                    "max_entries": self._maximum, "ttl_seconds": self._ttl}
 
     def wrap(self, kek: str, dek: bytes) -> str:
         with self._lock:
@@ -79,14 +89,17 @@ class KeyManager:
                 for value in dict.fromkeys(wrapped):
                     key = (kek, value)
                     if key in self._cache:
+                        self._hits += 1
                         values[value] = bytes(self._cache[key][0])
                         self._cache.move_to_end(key)
                     else:
+                        self._misses += 1
                         missing.append(value)
                 # No cache insertions or partial results until every batch succeeds.
                 for start in range(0, len(missing), self._batch_size):
                     chunk = missing[start:start + self._batch_size]
                     decoded = self._client.unwrap_batch(kek, chunk)
+                    self._remote_batches += 1
                     if not isinstance(decoded, list) or len(decoded) != len(chunk):
                         raise OpenBaoError()
                     values.update(zip(chunk, (validate_dek(dek) for dek in decoded)))

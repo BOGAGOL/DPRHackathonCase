@@ -104,7 +104,7 @@ def test_all_operations_bindings_rollback_and_results(source,profile,protected_r
     session.connection.execute.return_value.fetchone.side_effect=[record,None]
     with pytest.raises(ValueError): adapter.execute(session,'update_contact',0,0)
     template=dict(source[0],id=-1)
-    monkeypatch.setattr(protected,'protect_batch',lambda *a:[dict.fromkeys(protected.target_columns(profile),'synthetic')])
+    monkeypatch.setattr(protected,'protect_insert',lambda *a:dict.fromkeys(protected.target_columns(profile),'synthetic'))
     monkeypatch.setattr(adapter,'select',MagicMock(return_value=([],[tuple(template[c] for c in COLUMNS)])))
     assert adapter.execute(session,'insert_member',0,0)
     assert all(call.kwargs['force_rollback'] for call in session.connection.transaction.call_args_list)

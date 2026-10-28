@@ -14,8 +14,8 @@ import psycopg
 import yaml
 
 from .adapters.plaintext import PlaintextAdapter, load_keys
-from .adapters.protected import ProtectedAdapter, READS
-from .common import ROOT, parameters, utc_now, write_json
+from .adapters.protected import ProtectedAdapter, READS, cache_configuration
+from .common import ROOT, parameters, utc_now, write_json, file_hash
 from .db_time import DbTimeMonitor, db_time_delta, monitoring_parameters
 
 
@@ -114,10 +114,17 @@ def check_dataset(baseline, protected, rows, samples=1000):
 
 
 def run(output=ROOT / "evidence/benchmark/adapter_parity.json", samples=1000):
+    ttl, entries = cache_configuration()
     report = {"schema_version": 2, "gate": 3, "passed": False, "started_at_utc": utc_now(),
               "measurement_kind": "correctness_only", "official_benchmark_executed": False,
               "samples_required_per_read_scenario_per_dataset": samples, "datasets": [],
-              "dek_cache_ttl_seconds": 0, "workload_role": "app_user", "rls_bypassed": False,
+              "dek_cache_ttl_seconds": ttl, "dek_cache_max_entries_per_worker": entries,
+              "http_transport": os.environ.get('DPR_OPENBAO_HTTP_TRANSPORT', 'https_pool'),
+              "production_files_sha256": {p: file_hash(ROOT / p) for p in (
+                  'benchmark/adapters/protected.py', 'toolkit/dprcrypto/openbao.py',
+                  'toolkit/dprcrypto/keys.py', 'toolkit/dprcrypto/bidx.py',
+                  'toolkit/dprcrypto/https_pool.py')},
+              "workload_role": "app_user", "rls_bypassed": False,
               "monitoring": "separate admin connection; no workload role grants", "values_withheld": True}
     try:
         for size, rows in (("100k", 100000), ("1m", 1000000)):

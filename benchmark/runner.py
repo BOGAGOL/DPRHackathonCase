@@ -101,6 +101,8 @@ def one_run(adapter, scenario, run, manifest, concurrency, duration, warmup, dir
     timing = {"warmup_end": 0, "stop_event": stop_event}
     collector = (collector_factory or Collector)(directory / "resources.csv")
     def start_measurement():
+        if callable(getattr(type(adapter), 'telemetry', None)):
+            timing['adapter_telemetry_before'] = adapter.telemetry(connections)
         if db_monitor is not None:
             if reset_statistics:
                 db_monitor.reset()
@@ -142,6 +144,17 @@ def one_run(adapter, scenario, run, manifest, concurrency, duration, warmup, dir
                        operations=dict(counts), error_types=dict(error_types), resources=resource,
                        db_time=db_time,
                        successful_requests=summarize(success_latencies, 0, elapsed) if success_latencies else None)
+        if 'adapter_telemetry_before' in timing:
+            before_cache = timing['adapter_telemetry_before']
+            after_cache = adapter.telemetry(connections)
+            delta = {k: after_cache[k] - before_cache[k] for k in ('hits', 'misses', 'remote_batches')}
+            for field in ('http_opened_connections', 'http_reused_connections', 'http_requests'):
+                if field in before_cache:
+                    delta[field] = after_cache[field] - before_cache[field]
+            total = delta['hits'] + delta['misses']
+            delta['hit_rate'] = delta['hits'] / total if total else 0.0
+            summary['adapter_telemetry'] = {'before_measurement': before_cache,
+                                           'after_measurement': after_cache, 'measurement': delta}
         return summary
     finally:
         if collector.thread and collector.thread.is_alive():

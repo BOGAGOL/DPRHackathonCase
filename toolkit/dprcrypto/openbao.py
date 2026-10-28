@@ -2,6 +2,7 @@
 
 import base64
 import hashlib
+import json
 import math
 import os
 import re
@@ -13,6 +14,7 @@ from urllib.parse import urlsplit
 import httpx
 
 from .errors import CryptoError, OpenBaoError
+from .https_pool import VerifiedHTTPSPool
 
 
 KEKS = frozenset({"pii-kek", "finance-kek"})
@@ -50,8 +52,16 @@ class OpenBaoClient:
                 raise ValueError()
             context = ssl.create_default_context(cafile=ca_file)
             context.minimum_version = ssl.TLSVersion.TLSv1_2
+            kind = os.environ.get('DPR_OPENBAO_HTTP_TRANSPORT', 'https_pool')
+            if kind not in ('https_pool', 'httpx'):
+                raise ValueError()
+            self._transport_kind = 'custom' if transport is not None else kind
+            self._transport = transport or (VerifiedHTTPSPool(address, context, timeout=timeout)
+                                            if kind == 'https_pool' else None)
             self._http = httpx.Client(base_url=address.rstrip("/"), verify=context,
-                trust_env=False, follow_redirects=False, timeout=timeout, transport=transport)
+                trust_env=False, follow_redirects=False, timeout=timeout, transport=self._transport,
+                limits=httpx.Limits(max_connections=8, max_keepalive_connections=8,
+                                    keepalive_expiry=60.0))
         except (ValueError, TypeError, KeyError, OSError):
             raise OpenBaoError() from None
         self._token_env = token_env
@@ -75,13 +85,17 @@ class OpenBaoClient:
 
     def _send(self, method: str, path: str, token: str, payload=None) -> dict:
         try:
-            response = self._http.request(method, "/v1/" + path, json=payload,
-                headers={"X-Vault-Token": token, "X-Vault-Request": "true"})
-            if not 200 <= response.status_code < 300:
-                raise OpenBaoError(response.status_code)
-            if response.status_code == 204 and not response.content:
+            headers = {"X-Vault-Token": token, "X-Vault-Request": "true"}
+            if isinstance(self._transport, VerifiedHTTPSPool):
+                status, content = self._transport.request_bytes(method, '/v1/' + path, payload, headers)
+            else:
+                response = self._http.request(method, "/v1/" + path, json=payload, headers=headers)
+                status, content = response.status_code, response.content
+            if not 200 <= status < 300:
+                raise OpenBaoError(status)
+            if status == 204 and not content:
                 return {}
-            result = response.json()["data"]
+            result = json.loads(content)["data"]
             if not isinstance(result, dict):
                 raise ValueError()
             return result
@@ -287,6 +301,12 @@ class OpenBaoClient:
             self._closed = True
             self._reset()
             self._http.close()
+
+    def connection_stats(self) -> dict:
+        """Only aggregate connection counts; no TLS sessions, tokens, or key material."""
+        with self._lock:
+            return {'implementation': self._transport_kind,
+                    **(self._transport.stats() if isinstance(self._transport, VerifiedHTTPSPool) else {})}
 
     def __enter__(self):
         return self
