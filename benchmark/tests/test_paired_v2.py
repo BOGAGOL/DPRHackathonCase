@@ -11,11 +11,30 @@ import pytest
 from benchmark import paired, paired_v2 as v2
 
 
-def test_measured_sources_are_exact_requested_commit():
+def test_measured_snapshot_is_accepted_and_later_edits_are_rejected(monkeypatch,tmp_path):
+    # The completed v2 session is pinned to 8a11ff7. Main may legitimately advance
+    # (e.g. A5 policy), so exercise the strict historical gate on its own snapshot.
+    session=json.loads((v2.OUT/'bppb_v2_session.json').read_text())
+    paths=session['variant_metadata']['production_file_sha256']
+    original_root=v2.ROOT
+    original_check_output=v2.subprocess.check_output
+    sources={p:original_check_output(['git','show',v2.REQUESTED+':'+p],cwd=original_root) for p in paths}
+    for path,content in sources.items():
+        target=tmp_path/path;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(content)
+    def frozen_show(args,**kwargs):
+        assert args[:2]==['git','show'] and args[2].startswith(v2.REQUESTED+':')
+        return sources[args[2].split(':',1)[1]]
+    monkeypatch.setattr(v2,'ROOT',tmp_path)
+    monkeypatch.setattr(v2.subprocess,'check_output',frozen_show)
     hashes = v2.production_manifest()
     assert 'benchmark/adapters/protected.py' in hashes
     assert 'toolkit/dprcrypto/https_pool.py' in hashes
     assert all(len(h) == 64 for h in hashes.values())
+    assert set(hashes)==set(paths)
+    profile=tmp_path/'policy/protection_profile.yaml'
+    profile.write_bytes(profile.read_bytes()+b'\n# Later policy revision must not pass the old gate.\n')
+    with pytest.raises(RuntimeError,match='production_differs_from_requested_commit'):
+        v2.production_manifest()
 
 
 def test_power_gate_requires_ac_best_performance_and_no_sleep(monkeypatch):

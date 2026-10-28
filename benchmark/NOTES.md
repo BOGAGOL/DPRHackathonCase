@@ -879,3 +879,11 @@ Perubahan fail-closed sudah dipush566a523 sebelum gate. Token operator terbaru h
 ## B-P-P-B resmi v2 — hasil worker terpisah
 
 Status COMPLETED; produksi8a11ff7, https_pool, DEK cache OFF. Gate, count/checksum lima DB, resource dan AC per run disimpan di evidence/benchmark/bppb_v2_*. Metode/run sama dengan naive_v1; hanya direktori/metadata dan publikasi otomatis ditambahkan pada orchestration. Seluruh hasil naive_v1 dipertahankan. Tabel lengkap: evidence/benchmark/bppb_versions_summary.md. Integritas akhir: True. Tidak merge ke main.
+
+## 29 Oktober 2026 — integrasi main dan handoff untuk review
+
+Origin/main a746c6c (A5, penyesuaian analytics B, UI/deploy/pentest) digabung ke perf/keyservice-latency melalui f370e13 tanpa konflik. Tidak mengubah main atau menjalankan benchmark/migrasi/apply DB/OpenBao pada sesi ini. Panduan untuk tim: docs/handoff/MODUL_C_UNTUK_TIM.md. PR diminta menunggu approval albyarto; tidak merge otomatis.
+
+Regresi pascamerge: toolkit108 PASS/1 SKIP, benchmark96 PASS, verify32 PASS, scanner193 PASS/1 SKIP; total429 PASS/2 SKIP, nol failure/error. Skip disposable OpenBao dan scanner DB opt-in; bukan bukti live baru. JUnit/JSON evidence/integration/modC_pr_*_20261029.xml dan modC_handoff_20261029.json. Percobaan awal core235 PASS/1 SKIP/1 FAIL dipertahankan di modC_pr_core_20261029_initial_failure.xml: test lama menyamakan HEAD dengan snapshot8a11ff7, padahal main kini membawa profil A5. Test diubah agar memeriksa snapshot Git historis dan menolak edit berikutnya; production_manifest runtime tetap ketat. Hasil resmi tetap snapshot6077b10/produksi8a11ff7, tidak dilabel ulang sebagai hasil kode setelah merge.
+
+Cache OFF adalah default benchmark dan sudah eksplisit pada bridge app terbaru; default KeyManager toolkit15s/256 entri tidak diubah. Handoff mencatat seluruh kegagalan P01/P01A/P02, P03 lulus, residual sumber734 tetapk1, dan API/scan final/SBOM/indeks evidence yang masih terbuka. Audit tim lama adalah snapshoted88ecd, bukan status main terbaru.
