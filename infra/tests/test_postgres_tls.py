@@ -77,6 +77,15 @@ def test_hba_upgrade_adds_1m_and_preserves_existing_tail():
     with pytest.raises(pg.TLSUpdateError):pg.managed_hba(upgraded+pg.LEGACY_HBA_BLOCK.encode())
 
 
+def test_hba_upgrade_covers_restore_names_and_preserves_previous_baseline_exception():
+    tail = b"hostssl all all 0.0.0.0/0 cert\n"
+    old = pg.baseline_hba_block("172.17.0.1").replace(pg.RESTORE_HBA_RULES, "").encode()+tail
+    assert pg.managed_hba(old, "172.17.0.1") == pg.baseline_hba_block("172.17.0.1").encode()+tail
+    assert pg.managed_hba(pg.PRE_RESTORE_HBA_BLOCK.encode()+tail) == pg.HBA_BLOCK.encode()+tail
+    assert pg.RESTORE_HBA_RULES.count('"/^dpr_restore_[0-9a-f]{32}$"') == 2
+    assert "baseline_" not in pg.RESTORE_HBA_RULES
+
+
 @pytest.mark.parametrize("address,cidr", [("172.17.0.1", "172.17.0.1/32"), ("::1", "::1/128")])
 def test_baseline_exception_is_exact_and_precedes_reject(address, cidr):
     tail = b"local all all trust\nhost all all all scram-sha-256\n"
@@ -133,7 +142,8 @@ def test_connection_matrix_checks_real_baseline_roles_and_protected_tls(tmp_path
     assert calls[-1]["user"] == "app_user" and calls[-1]["sslmode"] == "verify-full"
     assert calls[-1]["sslrootcert"] == str(tmp_path / "postgres/tls/ca.crt")
     assert "protected_verify_full:protected_734" not in checks  # not yet prepared
-    assert rejected.call_count == len(pg.BASELINES)*9+(len(pg.DATABASES)-len(pg.BASELINES))*11
+    assert rejected.call_count == len(pg.BASELINES)*9+(len(pg.DATABASES)-len(pg.BASELINES))*11+6
+    assert all(checks["restore_plaintext_rejected:"+role] for role in ("app_user", "backup_user", "analyst_user", "auditor_user", *pg.BASELINE_ROLES))
     assert ("127.0.0.1",5433,"protected_100k","bench_user") in [call.args for call in rejected.call_args_list]
     assert not pg.matrix_coverage(existing,checks,"172.17.0.1")["connection_matrix_complete"]
     monkeypatch.setattr(pg.psycopg, "connect", Mock(side_effect=pg.psycopg.OperationalError("withheld")))
@@ -164,7 +174,7 @@ def test_strict_matrix_does_not_require_benchmark_roles_or_credentials(tmp_path,
     monkeypatch.setattr(pg,"optional_role_password",Mock(return_value=None))
     rejected=Mock(return_value=True);monkeypatch.setattr(pg,"plaintext_rejected",rejected)
     checks=pg.connection_matrix(tmp_path,"127.0.0.1",5433,{})
-    assert all(checks.values()) and rejected.call_count==len(pg.DATABASES)*11
+    assert all(checks.values()) and rejected.call_count==len(pg.DATABASES)*11+6
     assert not any(name.startswith("baseline_plaintext_allowed:") for name in checks)
     assert pg.matrix_coverage({},checks,None)["protected_databases_pending_prepare"]==["protected_734","protected_100k","protected_1m"]
 

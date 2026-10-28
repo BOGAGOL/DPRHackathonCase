@@ -1,5 +1,44 @@
 # Keputusan tahap 5
 
+## Integrasi A/B recovery — 28 Oktober 2026
+
+Pengguna mengizinkan perubahan A dan B dalam sesi ini karena pemilik B berhalangan.
+Backup/manifest v1 menerima tepat layout A lima tabel atau A+B tujuh tabel; subset B
+dan tabel tambahan lain tetap ditolak. Seluruh row count berada di payload HMAC.
+Arsip lima tabel lama tetap dapat dipulihkan sebagai data, tanpa klaim akun/sesi B tersedia.
+
+Layout B memerlukan ownership schema_owner, grant minimum (termasuk tidak ada grant
+kolom tersembunyi/PUBLIC), serta service_legacy_id_seq yang tidak cycle dan next value
+di atas seluruh legacy_row_id. B setup menambah SELECT sequence untuk backup_user;
+operator existing perlu menjalankan ulang setup B yang idempoten, tanpa reset sequence.
+Drill retensi memakai allocator B pada clone miliknya agar insert sintetis tidak
+membuat sequence tertinggal. State sequence tidak dianggap snapshot MVCC; restore
+memeriksa kelayakan next value, bukan menyamakan state racy dengan pengukuran count.
+
+Restore menolak sebelum CREATE DB bila HBA belum menolak plaintext untuk target
+dpr_restore_<32 hex>. Jalankan updater TLS terbaru terlebih dahulu. Setelah validasi
+data/schema, marker dpr-service-restore-v1:<artifact UUID> dan grant CONNECT dipublish
+dalam transaksi yang sama. Marker merupakan provenance operator DB, bukan tanda tangan
+kriptografi dan bukan pertahanan terhadap operator superuser yang berbahaya. Hash/HMAC/
+AEAD arsip tetap diperiksa terpisah sebelum alokasi target. Guard cleanup mengikuti
+marker baru, nama dan OID; target/data existing tidak ditimpa.
+
+Mode tanpa OpenBao memulihkan ciphertext dan kontrol B; startup/dekripsi layanan tetap
+memerlukan identitas svc-app dan key plane yang benar. Akun, scope, binding dan sesi
+dipulihkan beserta TTL sesi yang sudah ada. Mengakhiri sesi existing saat cutover adalah
+keputusan operator terpisah; tidak diam-diam mengubah row count manifest. Uji HTTPS
+backend memiliki evidence tersendiri, bukan diperoleh dari smoke_decrypt saja.
+
+Verifikasi setelah WSL pulih, 28 Oktober: empat test integrasi lulus. TLS mencatat
+90 pemeriksaan, backup lima tabel 15, dan recovery tujuh tabel 33. Akun/sesi existing,
+enam peran, pembatasan record/FIN, pencarian, update bidx/kontak, insert ID berikutnya,
+key identity fail closed, tamper dan retention terbukti melalui HTTPS backend nyata.
+Fixture berisi 17 record buatan sendiri; container/volume sementara dibersihkan.
+Evidence: `evidence/backup/service-recovery-integration.json` dan
+`evidence/recovery/verification.json`. Source yang diuji `5214829`; bukan benchmark
+resmi atau klaim pengujian database tim 734/100k/1M. Tidak ada perubahan source
+implementasi setelah run ini; pembaruan berikutnya hanya dokumentasi/evidence.
+
 ## Adaptasi referensi dan format
 
 Referensi dibaca: `docs/reference/onno-code/data-leak-proof-postgresql/scripts/backup.sh`

@@ -68,7 +68,11 @@ def retention_test(manifest, admin_parameters, backup_parameters, keys, store, *
                 actual = connection.execute("SELECT oid,shobj_description(oid,'pg_database') FROM pg_database WHERE datname=current_database()").fetchone()
                 if actual != (scratch["oid"], scratch["marker"]):
                     raise BackupError("retention_requires_own_scratch_database")
-                legacy = connection.execute("SELECT coalesce(max(legacy_row_id),0)+1 FROM public.anggota_protected").fetchone()[0]
+                if "service_sessions" in row_counts(connection):
+                    # Keep B's allocator ahead of a synthetic insert in our own clone.
+                    legacy = connection.execute("SELECT nextval('public.service_legacy_id_seq')").fetchone()[0]
+                else:
+                    legacy = connection.execute("SELECT coalesce(max(legacy_row_id),0)+1 FROM public.anggota_protected").fetchone()[0]
                 protected = protect_batch([synthetic_member(profile, legacy)], profile, client)[0]
                 columns = target_columns(profile)
                 connection.execute(sql.SQL("INSERT INTO public.anggota_protected ({}) VALUES ({})").format(
