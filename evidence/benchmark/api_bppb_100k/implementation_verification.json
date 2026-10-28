@@ -1,0 +1,26 @@
+{
+  "status": "PASSED",
+  "at_wib": "2026-10-29T06:05:25.394276+07:00",
+  "core_tests": {
+    "passed": 260,
+    "skipped": 1,
+    "evidence": "all_tests.xml"
+  },
+  "real_k6_tls_fixture": {
+    "passed": 1,
+    "evidence": "k6_fixture_tests.xml",
+    "fixture_duration_seconds": 2,
+    "production_duration_seconds": 60,
+    "scope": "invented local TLS data; no PostgreSQL/OpenBao"
+  },
+  "initial_failure": {
+    "evidence": "implementation_initial_failure.xml",
+    "reason": "Windows fsync requires writable descriptor; corrected rb to r+b before any database mutation."
+  },
+  "initial_fixture_aborted": {
+    "reason": "First 60s synthetic fixture produced 835666619 bytes; interrupted during fixture cleanup. Owned fixture processes stopped and fixture CA removed. Test then bounded to 2s and TLS accept made cancellation safe; passed.",
+    "official_data_or_benchmark_activity": false
+  },
+  "windows_process_guard": "Track actual Python server children and parent identities; stop all owned processes and require port closed before restoring database names.",
+  "runtime_gate": "Original OID/content/control/sequence preserved; unknown copy OID refused; restore_failed stops without automatic retry."
+}
