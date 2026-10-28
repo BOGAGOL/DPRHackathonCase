@@ -856,3 +856,10 @@ Output bppb_v2_100k/,bppb_v2_1m/,bppb_v2_compare.json terpisah total dari naive_
 ### V2 berhenti pada gate awal ?28 Oktober2026,20:41 WIB
 
 OpenBao initialized=true tetapi sealed=true. Hanya container pg-dpr dan OpenBao berjalan; disk51,41 GiB, AC/Best performance/sleep AC0 PASS, target dan produksi8a11ff7 sesuai. Tidak ada run v2 atau worker background dimulai. Gate DB/pg_stat_statements/checksum belum dicapai setelah service gate gagal. Tidak unseal atau restart otomatis sesuai aturan penghentian benchmark. Kegagalan diarsipkan permanen di evidence/benchmark/bppb_v2_gate_failures/20261028T204139WIB.json; preflight baru pada instruksi lanjut tidak menghapus arsip ini. Tabel versi saat ini menyatakan v2 BELUM DIUJI.
+
+
+### V2 berhenti pada gate token -28 Oktober2026,21:06:56 WIB
+
+Operator telah unseal manual; verifikasi read-only menunjukkan sealed=false. Token svc-app yang dimuat helper privat memiliki TTL10509 detik (2:55:09), kurang dari minimum3 jam yang baru diwajibkan pengguna. Expiry29 Oktober2026,00:02:05 WIB. Tidak menerbitkan, memperbarui atau mencabut token; tidak meluncurkan worker atau workload. Gate lain tidak dilanjutkan. Bukti evidence/benchmark/bppb_v2_token_gate.json dan arsip bppb_v2_gate_failures/20261028T210656WIB_token.json. Gate sealed sebelumnya tetap diarsipkan.
+
+Arahan pengguna terbaru menggantikan kebijakan awal: dilarang auto-issue/renew token; saat peluncuran berikutnya, callback ensure_token yang lama harus diganti pemeriksaan read-only, dan interval cek progres menjadi paling cepat20 menit (1200s). Preflight tetap false dan memblokir launcher sampai token dari operator memenuhi minimum3 jam dan seluruh gate baru lulus.

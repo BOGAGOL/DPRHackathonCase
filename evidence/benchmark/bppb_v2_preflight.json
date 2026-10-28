@@ -1,94 +1,35 @@
 {
-  "started_at_utc": "2026-10-28T13:41:36.612986+00:00",
+  "started_at_utc": "2026-10-28T14:06:56.323586+00:00",
+  "completed_at_utc": "2026-10-28T14:09:06.343093+00:00",
   "passed": false,
   "official_runs_started": false,
   "requested_production_commit": "8a11ff7dd39d66317a9802a7224d5ab044210798",
   "gates": {
-    "branch": {
-      "passed": true
-    },
-    "commit_ancestor": {
+    "openbao_status": {
       "passed": true,
-      "commit": "8a11ff7dd39d66317a9802a7224d5ab044210798",
-      "committed_at_wib": "2026-10-28T20:12:30+07:00"
+      "sealed": false
     },
-    "production": {
-      "passed": true,
-      "sha256": {
-        "benchmark/adapters/plaintext.py": "5640d7f0b613dd043c646575b1f69f3b84cb68860626afd19b8d748ec966eb37",
-        "benchmark/adapters/protected.py": "6205f24519c5c1d879faec41b6ccaefe89ac9f049be6c369cc3027cc146fe7ee",
-        "benchmark/runner.py": "769c0e8d51f374a62c59122f96a41eaf38c4ec9931101d87b8a15d39ec51d765",
-        "benchmark/stats.py": "f5f4231164c1cdac029eadd931cb4b062d953be58fdf60663c0c220111be305c",
-        "benchmark/collect_metrics.py": "63aedffd7ed64c54a6c7460d3df81e44a8822c8409f6efbe7fd934cc4c01ce2b",
-        "benchmark/db_time.py": "94a5d9445574de138b7f4e94d637f296542e22265bd598e9da9bfd2e51878855",
-        "benchmark/workloads.yaml": "6d71ea286a45ddd57df7c0f807262dd8fd554b6296963611ae78b0fcf0d9fef7",
-        "migration/model.py": "483bc87e642074ac542f428557f5abec6953e29995eeaf692cbb7f546f82d1fb",
-        "policy/protection_profile.yaml": "bb1542e2adf41903f12afa17caeadbd7d4860ad045e25e7e209078be27c1751e",
-        "docs/targets.md": "204f5b91cfc86c4cf479daaac3e79b1bde08f78ec5133d701070fe0ac8ece272",
-        "toolkit/dprcrypto/__init__.py": "1b1ba2df145a66223af6431ccb947a8e18f554752313f91d8a82c45ed8542d84",
-        "toolkit/dprcrypto/bidx.py": "e08a2e7d73849207d63f663ee3447879dec7885468d00b66f5401a66865d2a74",
-        "toolkit/dprcrypto/codec.py": "3f3a4cd9ffe4800923b3dd65209c15cb3c7d5602041f2185c97881bc2f0f81a2",
-        "toolkit/dprcrypto/errors.py": "36f2b085846fb6642ef7c30200cd407bad9a71ac71bbfd7b30563ad22901bd56",
-        "toolkit/dprcrypto/https_pool.py": "742de22c843cf6be1a984d157f5b9e03bfbbc168d711e437a20ea4792f07e3f3",
-        "toolkit/dprcrypto/keys.py": "ecab552cce19cf3206e25afc1993c1fbc9f14e1463b4ec1c169a02f2990b91b8",
-        "toolkit/dprcrypto/masking.py": "346c859f7240153b7d1770c10149c0116326724477490451e50247900e29fa16",
-        "toolkit/dprcrypto/openbao.py": "30883591bbe0d7d140d438c8371521677228cdea4043430e123c9d0e9815b477",
-        "toolkit/dprcrypto/vectors.py": "bb4905e764507d60449ccc226da1903fd5555961326607648e9aae012c9710cd"
-      },
-      "transport": "https_pool",
-      "dek_cache_ttl_seconds": 0
-    },
-    "runtime_config": {
-      "passed": true
-    },
-    "target": {
-      "passed": true,
-      "commit": "8c09a25ccb6d415a231f692b68b9674495c31faf",
-      "committed_at_wib": "2026-10-28T13:37:47+07:00",
-      "before_first_run": true
-    },
-    "power": {
-      "passed": true,
-      "sample": {
-        "timestamp_utc": "2026-10-28T13:41:37.909508+00:00",
-        "ac_online": true
-      },
-      "kernel_power": {
-        "provider": "Microsoft-Windows-Kernel-Power",
-        "log_name": "System",
-        "query_start_utc": "2026-10-28T13:41:37.9095080+00:00",
-        "query_end_utc": "2026-10-28T13:41:37.9095080+00:00",
-        "latest_event_at_or_before_start": {
-          "record_id": 28342,
-          "event_id": 105,
-          "time_utc": "2026-10-28T06:45:03.6387491+00:00",
-          "time_wib": "2026-10-28T13:45:03.6387491+07:00",
-          "ac_online": true
-        },
-        "events_in_window": []
-      },
-      "effective_overlay_guid": "ded574b5-45a0-4f42-8737-46345c09c238",
-      "power_mode": "Best performance",
-      "sleep_ac_seconds": 0
-    },
-    "services": {
-      "passed": false,
-      "reason": "openbao_unavailable_or_sealed",
+    "benchmark_token": {
+      "checked_at_utc": "2026-10-28T14:06:56.323586+00:00",
+      "checked_at_wib": "2026-10-28T21:06:56+07:00",
       "openbao_initialized": true,
-      "openbao_sealed": true,
-      "running_containers": [
-        "dpr-infra-openbao-1",
-        "pg-dpr"
-      ]
+      "openbao_sealed": false,
+      "minimum_ttl_seconds": 10800,
+      "token_issued": false,
+      "policy": [
+        "svc-app"
+      ],
+      "ttl_seconds": 10509,
+      "explicit_max_ttl": 14400,
+      "passed": false,
+      "expires_at_wib": "2026-10-29T00:02:05.361247+07:00",
+      "method": "Read-only auth/token/lookup-self; no token value/accessor exported",
+      "background_worker_started": false,
+      "official_runs_started": false,
+      "reason": "Existing token TTL below user-required 3 hours; stop without issuing or renewing"
     }
   },
-  "error_type": "RuntimeError",
-  "error": "preflight_failed_private_details_withheld",
-  "completed_at_utc": "2026-10-28T13:41:39.761328+00:00",
-  "follow_up_diagnosis": {
-    "recorded_at_utc": "2026-10-28T13:44:00.244303+00:00",
-    "observation": "Read-only seal-status query immediately after initial gate; no unseal attempted",
-    "free_disk_bytes": 55201116160,
-    "disk_minimum_bytes": 21474836480
-  }
+  "remaining_gates": "Not continued after token TTL failure; no fresh count/checksum/pg_stat_statements claim",
+  "token_auto_issuance_authorized": false,
+  "minimum_progress_check_interval_seconds": 1200
 }

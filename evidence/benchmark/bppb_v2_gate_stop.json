@@ -1,12 +1,11 @@
 {
-  "status": "STOPPED_INITIAL_GATE",
-  "at_utc": "2026-10-28T13:44:00.247303+00:00",
-  "reason": "OpenBao sealed",
+  "status": "STOPPED_INITIAL_TOKEN_GATE",
+  "at_utc": "2026-10-28T14:09:06.345093+00:00",
+  "reason": "Token svc-app remaining TTL10509s below10800s",
   "official_runs_started": false,
   "v2_runs_completed": 0,
   "background_worker_started": false,
-  "unseal_attempted": false,
-  "requested_production_commit": "8a11ff7dd39d66317a9802a7224d5ab044210798",
-  "archive": "evidence/benchmark/bppb_v2_gate_failures/20261028T204139WIB.json",
-  "remaining_gates": "Other workload sessions, pg_stat_statements and five-DB integrity were not executed after service gate failed"
+  "token_issued": false,
+  "archive": "evidence/benchmark/bppb_v2_gate_failures/20261028T210656WIB_token.json",
+  "next_requirement": "Operator-provided svc-app token with at least3 hours remaining; automatic issuance/renewal prohibited"
 }
