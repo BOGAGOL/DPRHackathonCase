@@ -66,3 +66,9 @@ perubahan antarsesi menggambarkan hasil dua sesi terpisah, bukan pasangan run si
 V2 status: COMPLETED; integritas akhir: True; error terukur: 0; blok invalid/disimpan: 0.
 Semua raw gzip dan metadata berada di direktori masing-masing versi. Tidak menghapus run buruk.
 db_time adalah mean SQL execution/request, bukan percentile server; non-DB tetap tersedia dalam JSON.
+
+## Level API — gate awal 29 Oktober 2026, 05:05 WIB
+
+**BELUM DIUJI**, skala100k: api_list_page, api_read_profile, api_search_nik dan api_search_email. Token svc-app terbaru ditolak lookup-self HTTP403; syarat policy hanya svc-app dan sisa TTL >=2 jam belum terverifikasi. Seluruh metrik latency/throughput/error dan P01/P01A/P02/P03 API belum dinilai. Tidak ada parity atau workload dijalankan, salinan api_* belum dibuat.
+
+Rancangan API memakai TLS DB pada kedua mode, HTTPS+FastAPI+audit log dan DTO endpoint; kondisi ini berbeda dari DB v2 (baseline DB tanpa TLS), sehingga tidak boleh mencampur percentile/rasio lintas level. Hasil DB di atas tetap dipertahankan. Bukti gate: evidence/benchmark/api_bppb_100k/preflight_20261029T050503WIB.json; snapshot kode51c8ca3. Lanjut hanya setelah operator menyediakan token yang memenuhi syarat dan semua gate awal diulang.
