@@ -1,0 +1,36 @@
+{
+  "label": "before",
+  "timestamp": "2026-10-27T13:14:25.101165+00:00",
+  "scanner_version": "1.2.0",
+  "change_summary": [
+    "v1.2: functional hanya konsistensi 1.0 dan rasio unik sumber <=0.8; kecocokan komponen teks dicatat terpisah.",
+    "NIK nonstandar dengan bukti isi; kategori, tanggal pernikahan, hitungan keluarga, dan surrogate ID dibedakan.",
+    "Sensitivitas dan dampak per jenis dari impact.yaml; tiga faktor lingkungan tetap terpisah.",
+    "Functional dependency mengecualikan sumber hampir unik dan melaporkannya sebagai quasi-identifier.",
+    "Turunan memakai review_minimization dan consistent_protection_with; rekomendasi nama/tanggal diperbarui.",
+    "K-anonymity diurutkan minimal; superset berlebihan disembunyikan dan HTML dibatasi 15 kombinasi.",
+    "Laporan memiliki tabel ringkas dan tata cetak A4 landscape.",
+    "Evaluasi taksonomi independen melalui label_map.yaml, normalisasi kelas/boolean, F2, dan pengecualian kolom tidak berlabel.",
+    "Kategori institusi memerlukan bukti isi; regex_only memakai kecocokan regex tanpa analisis relasi atau agregat k-anonymity."
+  ],
+  "source": {
+    "mode": "dump",
+    "artifact": "DPR_PRIVATE_DIR/baseline_1m.dump",
+    "artifact_sha256": "477299e821462d274690dc7e21b9882eb2b3c3109681a63001e56d38f75e2dd6",
+    "preprocessing": "pg_restore data-only stdout; non-executing streaming text COPY",
+    "sampling": "uniform reservoir seed=42 over all rows of same artifact; scanner engine v1.2",
+    "k_anonymity": "full-artifact REF + virtual age_band + variable NULL indicators; see residual_before.json",
+    "table_counts": {
+      "public.anggota": 1000000
+    }
+  },
+  "sample_limit_per_table": 1000,
+  "duration_seconds": 246.506,
+  "method": "combined",
+  "review_state": "raw_before_human_review",
+  "inventory_columns": 30,
+  "table_counts": {
+    "public.anggota": 1000000
+  },
+  "privacy": "Only masked samples and aggregate features are exported."
+}

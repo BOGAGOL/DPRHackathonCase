@@ -1,0 +1,165 @@
+{
+  "variant": "naive_v1",
+  "status": "COMPLETED",
+  "production_commit": "b70f849d39a10887a39486b2c9ade4a532c3d715",
+  "started_at_utc": "2026-10-28T09:13:37.874729+00:00",
+  "completed_at_utc": "2026-10-28T11:34:29.367269+00:00",
+  "datasets_unchanged": true,
+  "stop_requested_after_completion": true,
+  "scales": {
+    "100k": {
+      "runs": 56,
+      "counts": [
+        {
+          "scenario": "read_by_nik",
+          "mode": "B",
+          "runs": 4
+        },
+        {
+          "scenario": "read_by_email",
+          "mode": "B",
+          "runs": 4
+        },
+        {
+          "scenario": "read_profile",
+          "mode": "B",
+          "runs": 4
+        },
+        {
+          "scenario": "list_page",
+          "mode": "B",
+          "runs": 4
+        },
+        {
+          "scenario": "update_contact",
+          "mode": "B",
+          "runs": 4
+        },
+        {
+          "scenario": "insert_member",
+          "mode": "B",
+          "runs": 4
+        },
+        {
+          "scenario": "mixed",
+          "mode": "B",
+          "runs": 4
+        },
+        {
+          "scenario": "read_by_nik",
+          "mode": "P",
+          "runs": 4
+        },
+        {
+          "scenario": "read_by_email",
+          "mode": "P",
+          "runs": 4
+        },
+        {
+          "scenario": "read_profile",
+          "mode": "P",
+          "runs": 4
+        },
+        {
+          "scenario": "list_page",
+          "mode": "P",
+          "runs": 4
+        },
+        {
+          "scenario": "update_contact",
+          "mode": "P",
+          "runs": 4
+        },
+        {
+          "scenario": "insert_member",
+          "mode": "P",
+          "runs": 4
+        },
+        {
+          "scenario": "mixed",
+          "mode": "P",
+          "runs": 4
+        }
+      ],
+      "errors": 0,
+      "all_valid": true
+    },
+    "1m": {
+      "runs": 56,
+      "counts": [
+        {
+          "scenario": "read_by_nik",
+          "mode": "B",
+          "runs": 4
+        },
+        {
+          "scenario": "read_by_email",
+          "mode": "B",
+          "runs": 4
+        },
+        {
+          "scenario": "read_profile",
+          "mode": "B",
+          "runs": 4
+        },
+        {
+          "scenario": "list_page",
+          "mode": "B",
+          "runs": 4
+        },
+        {
+          "scenario": "update_contact",
+          "mode": "B",
+          "runs": 4
+        },
+        {
+          "scenario": "insert_member",
+          "mode": "B",
+          "runs": 4
+        },
+        {
+          "scenario": "mixed",
+          "mode": "B",
+          "runs": 4
+        },
+        {
+          "scenario": "read_by_nik",
+          "mode": "P",
+          "runs": 4
+        },
+        {
+          "scenario": "read_by_email",
+          "mode": "P",
+          "runs": 4
+        },
+        {
+          "scenario": "read_profile",
+          "mode": "P",
+          "runs": 4
+        },
+        {
+          "scenario": "list_page",
+          "mode": "P",
+          "runs": 4
+        },
+        {
+          "scenario": "update_contact",
+          "mode": "P",
+          "runs": 4
+        },
+        {
+          "scenario": "insert_member",
+          "mode": "P",
+          "runs": 4
+        },
+        {
+          "scenario": "mixed",
+          "mode": "P",
+          "runs": 4
+        }
+      ],
+      "errors": 0,
+      "all_valid": true
+    }
+  }
+}

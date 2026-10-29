@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="11.262" timestamp="2026-10-29T05:58:31.629534+07:00" hostname="LAPTOP-NBI71N88"><testcase classname="benchmark.tests.test_api_k6" name="test_real_k6_setup_load_summary_and_no_values_in_raw" time="10.557" /></testsuite></testsuites>

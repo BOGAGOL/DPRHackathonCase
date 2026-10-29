@@ -1,0 +1,705 @@
+{
+  "derived_from": [],
+  "dependencies": [
+    {
+      "table": "public.anggota_protected",
+      "kind": "functional",
+      "source": "jenis_kelamin",
+      "target": "protection_version",
+      "consistent_group_ratio": 1.0,
+      "groups": 2
+    },
+    {
+      "table": "public.anggota_protected",
+      "kind": "functional",
+      "source": "pekerjaan_terakhir",
+      "target": "protection_version",
+      "consistent_group_ratio": 1.0,
+      "groups": 6
+    },
+    {
+      "table": "public.anggota_protected",
+      "kind": "functional",
+      "source": "nama_kppn",
+      "target": "protection_version",
+      "consistent_group_ratio": 1.0,
+      "groups": 5
+    },
+    {
+      "table": "public.anggota_protected",
+      "kind": "functional",
+      "source": "nama_bank",
+      "target": "protection_version",
+      "consistent_group_ratio": 1.0,
+      "groups": 4
+    },
+    {
+      "table": "public.anggota_protected",
+      "kind": "functional",
+      "source": "age_band",
+      "target": "protection_version",
+      "consistent_group_ratio": 1.0,
+      "groups": 5
+    },
+    {
+      "table": "public.anggota_protected",
+      "kind": "functional",
+      "source": "created_at",
+      "target": "protection_version",
+      "consistent_group_ratio": 1.0,
+      "groups": 100
+    },
+    {
+      "table": "public.anggota_protected",
+      "kind": "functional",
+      "source": "updated_at",
+      "target": "protection_version",
+      "consistent_group_ratio": 1.0,
+      "groups": 100
+    },
+    {
+      "table": "public.anggota_protected",
+      "kind": "functional",
+      "source": "created_at",
+      "target": "updated_at",
+      "consistent_group_ratio": 1.0,
+      "groups": 100
+    },
+    {
+      "table": "public.anggota_protected",
+      "kind": "functional",
+      "source": "updated_at",
+      "target": "created_at",
+      "consistent_group_ratio": 1.0,
+      "groups": 100
+    },
+    {
+      "table": "public.audit_log",
+      "kind": "functional",
+      "source": "database_user",
+      "target": "actor_role",
+      "consistent_group_ratio": 1.0,
+      "groups": 2
+    },
+    {
+      "table": "public.audit_log",
+      "kind": "functional",
+      "source": "effective_role",
+      "target": "actor_role",
+      "consistent_group_ratio": 1.0,
+      "groups": 2
+    },
+    {
+      "table": "public.audit_log",
+      "kind": "functional",
+      "source": "action",
+      "target": "actor_role",
+      "consistent_group_ratio": 1.0,
+      "groups": 3
+    },
+    {
+      "table": "public.audit_log",
+      "kind": "functional",
+      "source": "field_class",
+      "target": "actor_role",
+      "consistent_group_ratio": 1.0,
+      "groups": 2
+    },
+    {
+      "table": "public.audit_log",
+      "kind": "functional",
+      "source": "database_user",
+      "target": "effective_role",
+      "consistent_group_ratio": 1.0,
+      "groups": 2
+    },
+    {
+      "table": "public.audit_log",
+      "kind": "functional",
+      "source": "effective_role",
+      "target": "database_user",
+      "consistent_group_ratio": 1.0,
+      "groups": 2
+    },
+    {
+      "table": "public.audit_log",
+      "kind": "functional",
+      "source": "action",
+      "target": "database_user",
+      "consistent_group_ratio": 1.0,
+      "groups": 3
+    },
+    {
+      "table": "public.audit_log",
+      "kind": "functional",
+      "source": "database_user",
+      "target": "field_class",
+      "consistent_group_ratio": 1.0,
+      "groups": 2
+    },
+    {
+      "table": "public.audit_log",
+      "kind": "functional",
+      "source": "field_class",
+      "target": "database_user",
+      "consistent_group_ratio": 1.0,
+      "groups": 2
+    },
+    {
+      "table": "public.audit_log",
+      "kind": "functional",
+      "source": "database_user",
+      "target": "decision",
+      "consistent_group_ratio": 1.0,
+      "groups": 2
+    },
+    {
+      "table": "public.audit_log",
+      "kind": "functional",
+      "source": "action",
+      "target": "effective_role",
+      "consistent_group_ratio": 1.0,
+      "groups": 3
+    },
+    {
+      "table": "public.audit_log",
+      "kind": "functional",
+      "source": "effective_role",
+      "target": "field_class",
+      "consistent_group_ratio": 1.0,
+      "groups": 2
+    },
+    {
+      "table": "public.audit_log",
+      "kind": "functional",
+      "source": "field_class",
+      "target": "effective_role",
+      "consistent_group_ratio": 1.0,
+      "groups": 2
+    },
+    {
+      "table": "public.audit_log",
+      "kind": "functional",
+      "source": "effective_role",
+      "target": "decision",
+      "consistent_group_ratio": 1.0,
+      "groups": 2
+    },
+    {
+      "table": "public.audit_log",
+      "kind": "functional",
+      "source": "action",
+      "target": "field_class",
+      "consistent_group_ratio": 1.0,
+      "groups": 3
+    },
+    {
+      "table": "public.audit_log",
+      "kind": "functional",
+      "source": "action",
+      "target": "decision",
+      "consistent_group_ratio": 1.0,
+      "groups": 3
+    },
+    {
+      "table": "public.audit_log",
+      "kind": "functional",
+      "source": "field_class",
+      "target": "decision",
+      "consistent_group_ratio": 1.0,
+      "groups": 2
+    }
+  ],
+  "join_candidates": [],
+  "near_unique_quasi_identifiers": [
+    {
+      "table": "public.anggota_protected",
+      "column": "anggota_id",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "legacy_row_id",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "dek_pii_wrapped",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "dek_fin_wrapped",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "nama_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "nama_lengkap_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "nama_tanpa_gelar_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "tempat_lahir_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "tanggal_lahir_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "tanggal_pernikahan_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 492,
+      "nonnull_rows": 492,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "no_ktp_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "alamat_jakarta_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "alamat_daerah_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "telpon_jakarta_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "telpon_daerah_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "handphone_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "email_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "ruangan_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "status_kawin_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "jumlah_anak_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "jumlah_tanggungan_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "jumlah_jiwa_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "rekening_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "nama_rekening_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "npwp_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "kode_bank_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "nip_kppn_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "pengguna_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "agama_ct",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "no_ktp_bidx",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "email_bidx",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.anggota_protected",
+      "column": "pengguna_bidx",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.audit_log",
+      "column": "event_id",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.audit_log",
+      "column": "occurred_at",
+      "unique_ratio": 1.0,
+      "unique_values": 1000,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.audit_log",
+      "column": "anggota_id",
+      "unique_ratio": 0.998,
+      "unique_values": 998,
+      "nonnull_rows": 1000,
+      "sample_rows": 1000,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.migration_jobs",
+      "column": "job_id",
+      "unique_ratio": 1.0,
+      "unique_values": 1,
+      "nonnull_rows": 1,
+      "sample_rows": 1,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.migration_jobs",
+      "column": "source_database",
+      "unique_ratio": 1.0,
+      "unique_values": 1,
+      "nonnull_rows": 1,
+      "sample_rows": 1,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.migration_jobs",
+      "column": "source_identity",
+      "unique_ratio": 1.0,
+      "unique_values": 1,
+      "nonnull_rows": 1,
+      "sample_rows": 1,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.migration_jobs",
+      "column": "profile_sha256",
+      "unique_ratio": 1.0,
+      "unique_values": 1,
+      "nonnull_rows": 1,
+      "sample_rows": 1,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.migration_jobs",
+      "column": "source_sha256",
+      "unique_ratio": 1.0,
+      "unique_values": 1,
+      "nonnull_rows": 1,
+      "sample_rows": 1,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.migration_jobs",
+      "column": "source_rows",
+      "unique_ratio": 1.0,
+      "unique_values": 1,
+      "nonnull_rows": 1,
+      "sample_rows": 1,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.migration_jobs",
+      "column": "migrated_rows",
+      "unique_ratio": 1.0,
+      "unique_values": 1,
+      "nonnull_rows": 1,
+      "sample_rows": 1,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.migration_jobs",
+      "column": "last_legacy_id",
+      "unique_ratio": 1.0,
+      "unique_values": 1,
+      "nonnull_rows": 1,
+      "sample_rows": 1,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.migration_jobs",
+      "column": "batch_count",
+      "unique_ratio": 1.0,
+      "unique_values": 1,
+      "nonnull_rows": 1,
+      "sample_rows": 1,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.migration_jobs",
+      "column": "status",
+      "unique_ratio": 1.0,
+      "unique_values": 1,
+      "nonnull_rows": 1,
+      "sample_rows": 1,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.migration_jobs",
+      "column": "started_at",
+      "unique_ratio": 1.0,
+      "unique_values": 1,
+      "nonnull_rows": 1,
+      "sample_rows": 1,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.migration_jobs",
+      "column": "updated_at",
+      "unique_ratio": 1.0,
+      "unique_values": 1,
+      "nonnull_rows": 1,
+      "sample_rows": 1,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    },
+    {
+      "table": "public.migration_jobs",
+      "column": "validated_at",
+      "unique_ratio": 1.0,
+      "unique_values": 1,
+      "nonnull_rows": 1,
+      "sample_rows": 1,
+      "excluded_from": "functional_source",
+      "reason": "rasio unik non-NULL > 0.8; korelasi tidak membuktikan dependency"
+    }
+  ],
+  "functional_policy": {
+    "maximum_source_unique_ratio": 0.8,
+    "required_consistent_group_ratio": 1.0,
+    "source_ratio_denominator": "non-NULL sample rows"
+  },
+  "join_pairs_checked": 500,
+  "join_limit_reached": true,
+  "scope": "sample; correlations are candidates requiring human review",
+  "foreign_keys": []
+}

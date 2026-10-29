@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "command": "check",
+  "checked_at_utc": "2026-10-27T17:37:40.190330+00:00",
+  "checks": {
+    "profile_current": true,
+    "openbao_initialized": true,
+    "openbao_unsealed": true,
+    "migration_token_present": true,
+    "validation_token_present": true,
+    "migration_policy_valid": true,
+    "validation_policy_valid": true,
+    "source_tls_connection": true,
+    "source_read_only": true,
+    "source_expected_rows": true,
+    "target_tls_connection": true,
+    "target_control_table": true,
+    "target_migration_login": true
+  },
+  "data_migrated": false,
+  "source": "baseline_100k",
+  "target": "protected_100k",
+  "expected_rows": 100000
+}

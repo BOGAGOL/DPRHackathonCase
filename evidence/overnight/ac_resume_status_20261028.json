@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-10-27T18:01:46.1680035Z",
+  "scope": "read-only status and AC incident inspection before any resumed workload",
+  "provider": "Microsoft-Windows-Kernel-Power",
+  "log": "System",
+  "events": [
+    {
+      "record_id": 27552,
+      "event_id": 105,
+      "at_utc": "2026-10-27T16:56:51.5286817Z",
+      "at_wib": "2026-10-27T23:56:51.5286817+07:00",
+      "ac_online": true,
+      "fields": {
+        "RemainingCapacity": "20259",
+        "AcOnline": "true",
+        "FullChargeCapacity": "26494"
+      }
+    },
+    {
+      "record_id": 27568,
+      "event_id": 105,
+      "at_utc": "2026-10-27T17:58:21.8764242Z",
+      "at_wib": "2026-10-28T00:58:21.8764242+07:00",
+      "ac_online": false,
+      "fields": {
+        "RemainingCapacity": "26494",
+        "AcOnline": "false",
+        "FullChargeCapacity": "26494"
+      }
+    },
+    {
+      "record_id": 27569,
+      "event_id": 105,
+      "at_utc": "2026-10-27T17:58:54.6027659Z",
+      "at_wib": "2026-10-28T00:58:54.6027659+07:00",
+      "ac_online": true,
+      "fields": {
+        "RemainingCapacity": "26355",
+        "AcOnline": "true",
+        "FullChargeCapacity": "26494"
+      }
+    }
+  ],
+  "windows_workload_processes": [],
+  "database_status": {
+    "protected_1m_exists": false,
+    "relevant_sessions": []
+  },
+  "current_ac_online": true,
+  "protected_1m_progress": {
+    "database_exists": false,
+    "migrated_rows": 0,
+    "state": "NOT_STARTED",
+    "checkpoint_present": false
+  },
+  "last_executed_step": "gate 0 merge; stopped on verify/NOTES.md conflict; no migration/benchmark started",
+  "free_disk_bytes": 64844414976,
+  "battery_incidents": [
+    {
+      "started_at_wib": "2026-10-28T00:58:21.8764242+07:00",
+      "ended_at_wib": "2026-10-28T00:58:54.6027659+07:00",
+      "duration_seconds": 32.726341,
+      "start_record_id": 27568,
+      "end_record_id": 27569,
+      "affected_overnight_runs": [],
+      "classification": "environment incident after gate 0 stop; no measurement overlap"
+    }
+  ],
+  "benchmark_reruns_required": 0,
+  "continuation_blocker": "Unresolved gate 0 documentation conflict; awaiting explicit authorization to preserve both sections and complete merge."
+}

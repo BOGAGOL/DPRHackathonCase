@@ -1,0 +1,153 @@
+{
+  "status": "PASSED",
+  "database": "baseline_100k",
+  "started_at_utc": "2026-10-27T15:16:30.129929+00:00",
+  "runs": [
+    {
+      "run": 1,
+      "measurement_started_at_utc": "2026-10-27T15:16:40.597029+00:00",
+      "measurement_completed_at_utc": "2026-10-27T15:17:40.878233+00:00",
+      "requests": 2635377,
+      "errors": 0,
+      "throughput_rps": 43932.214572,
+      "mean_ms": 0.182,
+      "p50_ms": 0.1,
+      "p95_ms": 0.167,
+      "error_rate": 0.0,
+      "container_temporary_logs_removed": true,
+      "raw_sha256": {
+        "run_1/dpr_pgbench_10b700e029ba465c8d167737cae5cc70_r1.1654.1": "d04dfa52215b71fa170a0a36b0eba7f07e1020654d5037402764e0701bef5872",
+        "run_1/dpr_pgbench_10b700e029ba465c8d167737cae5cc70_r1.1654.6": "dfc6ad84fb53f38dad353eb5a93aeab5b32a8f26455958dcc67b96636296a95a",
+        "run_1/dpr_pgbench_10b700e029ba465c8d167737cae5cc70_r1.1654.4": "7bf91dcf5d810aceba489732ea63b493afd58c37d30c1bf131291425b8b973a7",
+        "run_1/dpr_pgbench_10b700e029ba465c8d167737cae5cc70_r1.1654": "169c112a309abc1c589ca56f532a5ba4fd929a54198adad95484e3b7a0803c10",
+        "run_1/dpr_pgbench_10b700e029ba465c8d167737cae5cc70_r1.1654.2": "f9d750b17cddac1ef17832b77f80f19fb75efaeee99596eca5b0e5b60ad31033",
+        "run_1/dpr_pgbench_10b700e029ba465c8d167737cae5cc70_r1.1654.7": "a4f65b74b761d6f86edd225134e4fb321586c5749a10ffa296985a52d6c65f94",
+        "run_1/dpr_pgbench_10b700e029ba465c8d167737cae5cc70_r1.1654.5": "c48e3b7a1d3b6ff1f7e81158d5e79b9ea28eeee115317cf7893e1803d419b4d3",
+        "run_1/dpr_pgbench_10b700e029ba465c8d167737cae5cc70_r1.1654.3": "f2d52279a398c1b23d9172f8d437e6f9862f6a8906f7091fd88bd8a9588a1e5d"
+      }
+    },
+    {
+      "run": 2,
+      "measurement_started_at_utc": "2026-10-27T15:18:02.060135+00:00",
+      "measurement_completed_at_utc": "2026-10-27T15:19:02.278123+00:00",
+      "requests": 2952125,
+      "errors": 0,
+      "throughput_rps": 49205.763924,
+      "mean_ms": 0.163,
+      "p50_ms": 0.099,
+      "p95_ms": 0.158,
+      "error_rate": 0.0,
+      "container_temporary_logs_removed": true,
+      "raw_sha256": {
+        "run_2/dpr_pgbench_7af37cf86dc7419abb6a0c6f239122df_r2.1715.2": "80c32ba51da1decea42caa2834bb0bf16fd00cbe4f545d3374b237e1009b90df",
+        "run_2/dpr_pgbench_7af37cf86dc7419abb6a0c6f239122df_r2.1715.1": "b39e3516aaaa6e874948e8620ed9c7446cae8cf338eda545cbbca83a28d8b3b7",
+        "run_2/dpr_pgbench_7af37cf86dc7419abb6a0c6f239122df_r2.1715.5": "77301f4e6120667f63763785ae3e56b9eb353e2234f5655ffd7859f7597d05e9",
+        "run_2/dpr_pgbench_7af37cf86dc7419abb6a0c6f239122df_r2.1715.3": "4a4d9d6ce87ca4f836a9ddd66e9df51cd8403dc95088e9f817f8412e0193cbbe",
+        "run_2/dpr_pgbench_7af37cf86dc7419abb6a0c6f239122df_r2.1715.7": "bf7c34584beee0b9384c690b634437d378dd2adf14e6530a54107c432715ea14",
+        "run_2/dpr_pgbench_7af37cf86dc7419abb6a0c6f239122df_r2.1715": "152bc64a917a01f61a5964f9ce60f3c26dc8945b4864579984c6a8e8823db138",
+        "run_2/dpr_pgbench_7af37cf86dc7419abb6a0c6f239122df_r2.1715.4": "b0f9ae61ac62f27fc6ea3a33f3be1c8539be09cf3cb011d0894e2c0a256821e6",
+        "run_2/dpr_pgbench_7af37cf86dc7419abb6a0c6f239122df_r2.1715.6": "9581823f0ccae507bfd403f9339ab15cab52e4adc051164a0ea274344fc46957"
+      }
+    },
+    {
+      "run": 3,
+      "measurement_started_at_utc": "2026-10-27T15:19:22.078500+00:00",
+      "measurement_completed_at_utc": "2026-10-27T15:20:22.306722+00:00",
+      "requests": 3054390,
+      "errors": 0,
+      "throughput_rps": 50908.947023,
+      "mean_ms": 0.157,
+      "p50_ms": 0.098,
+      "p95_ms": 0.154,
+      "error_rate": 0.0,
+      "container_temporary_logs_removed": true,
+      "raw_sha256": {
+        "run_3/dpr_pgbench_cbe1673534bf45f69d5656fc842db9ae_r3.1776.3": "f1b9724765062820a6b02b002f7772c2874d3877b57448145f51189e20853781",
+        "run_3/dpr_pgbench_cbe1673534bf45f69d5656fc842db9ae_r3.1776.4": "0378838a62192f5e11d9d45bb4f83050aa354f66b88f75149f72c3fa6c3d7c21",
+        "run_3/dpr_pgbench_cbe1673534bf45f69d5656fc842db9ae_r3.1776.2": "95e9f8d028f2caa63249834f18fa66a12861c8e19ad4a015c41285d1b88f5c59",
+        "run_3/dpr_pgbench_cbe1673534bf45f69d5656fc842db9ae_r3.1776.1": "72414b3bea113f75ad0b42e9658ffd86881c8bf485a8f3e9fdc42f1c1837787e",
+        "run_3/dpr_pgbench_cbe1673534bf45f69d5656fc842db9ae_r3.1776.7": "edc42c6113c1c44203673757daa3638c29a6877c95f1e23ee763ba046cf9de37",
+        "run_3/dpr_pgbench_cbe1673534bf45f69d5656fc842db9ae_r3.1776": "fc2d3f14f4c71fd5122322bf5ab21fa9ef3fad07c413379ff7a3ed2b8e11f48d",
+        "run_3/dpr_pgbench_cbe1673534bf45f69d5656fc842db9ae_r3.1776.6": "86436fe96032c5f995081a55f2a876834462833c4e6371afba7052cf78747a0b",
+        "run_3/dpr_pgbench_cbe1673534bf45f69d5656fc842db9ae_r3.1776.5": "93010efd7f6dcf1b94e198ca455f12393013624784d9cc15f498b6c3d0362bdc"
+      }
+    }
+  ],
+  "parameters": {
+    "runs": 3,
+    "duration_s": 60,
+    "concurrency": 8,
+    "untimed_warmup_s": 10,
+    "protocol": "prepared"
+  },
+  "key_corpus": {
+    "version": 1,
+    "seed": 42,
+    "sha256": "b38b8f59819b1eee314fac75c510417f7945c8d1b9b4e52f95839bf865e92ea5",
+    "profile_count": 2048,
+    "page_count": 64,
+    "location": "DPR_PRIVATE_DIR/benchmark (not exported)"
+  },
+  "lookup_pool_matches_original_python": true,
+  "script_sha256": "07c33061f3f5f4df92cd33a9f85d93d0e3b604631aa5f6664469dcccb850efa1",
+  "script_location": "DPR_PRIVATE_DIR/benchmark; fed over stdin, no key material in argv/repo",
+  "transport": "pgbench in pg-dpr, TCP 127.0.0.1:5432, no TLS",
+  "python_transport": "Windows host TCP 127.0.0.1:5433 through Docker Desktop",
+  "comparability_limits": [
+    "Same 2048-key pool and full 30-column SELECT; PRNG stream differs.",
+    "pgbench C client does not materialize Python objects or validate each row; Python runner does.",
+    "Container TCP and Windows Docker port path differ; delta cannot isolate Python overhead alone.",
+    "Balanced CASE lookup and lpad restore the fixed 14-digit key; these add small client/server work.",
+    "CPU percentages describe utilization, not proof excluding GIL/client bottlenecks."
+  ],
+  "reference": "https://www.postgresql.org/docs/18/pgbench.html",
+  "data_and_sequence_unchanged": true,
+  "median_between_runs": {
+    "p50_ms": 0.099,
+    "p95_ms": 0.158,
+    "mean_ms": 0.163,
+    "throughput_rps": 49205.763924,
+    "error_rate": 0.0
+  },
+  "python_original_medians": {
+    "p50_ms": 3.806699998676777,
+    "p95_ms": 7.7970599988475415,
+    "mean_ms": 4.327668632085153,
+    "throughput_rps": 1835.2674459912614,
+    "error_rate": 0.0
+  },
+  "ratios_pgbench_over_python": {
+    "p50_ms": 0.0260067775328796,
+    "p95_ms": 0.0202640482468204,
+    "mean_ms": 0.037664621267794136,
+    "throughput_rps": 26.811222544964323
+  },
+  "private_temporary_script_removed": true,
+  "completed_at_utc": "2026-10-27T15:20:36.996084+00:00",
+  "replacement_session": "ac_20261027T150728Z",
+  "measurement_label": "pengukuran pengganti AC",
+  "code_commit": "748fa0d71d66079244c17161f13a7dd426b80449",
+  "targets_commit": "a412ce8e4c1045c72cdf2e77af6bfe77a7ef5b5f",
+  "ac_verified_entire_session": true,
+  "power_verification_file": "evidence/benchmark/replacements/ac_20261027T150728Z/power_verification.json",
+  "original_battery_affected_evidence": "evidence/benchmark/history/battery_affected_ac_20261027T150728Z/crosscheck_pgbench.json",
+  "original_measurement_label": "terdampak baterai",
+  "raw_location": "results/bench/replacements/ac_20261027T150728Z/crosscheck_pgbench",
+  "pgbench_version": "pgbench (PostgreSQL) 18.6 (Debian 18.6-1.pgdg13+2)",
+  "python_original_code_commit": "776d420845d17ace5d96aacf702a17d7e562d0d4",
+  "python_original_client_cpu": {
+    "percent_one_core_median": 120.75,
+    "logical_cpus": 8,
+    "percent_machine_median": 15.09375
+  },
+  "baseline_1m_client_cpu_summary": {
+    "median_percent_machine_range": [
+      12.575,
+      16.16875
+    ],
+    "peak_percent_machine": 17.9875,
+    "sampled_machine_cpu_saturation_observed": false,
+    "bottleneck_assessment": "Whole-machine client CPU was not saturated in samples; GIL/single-core, transport, or client overhead not isolated."
+  },
+  "historical_client_cpu_scope": "Original unaffected Python workload samples; not resource telemetry of this replacement pgbench session"
+}

@@ -2,7 +2,7 @@
 
 import re
 
-from .errors import CryptoError
+from .errors import CryptoError, OpenBaoError
 
 
 def normalize(column: str, value: str | None) -> str | None:
@@ -34,3 +34,25 @@ class BlindIndexer:
     def digest(self, column: str, value: str | None) -> bytes | None:
         message = index_message(column, value)
         return None if message is None else self._client.hmac(message, key_version=self.key_version)
+
+    def digests(self, items: list[tuple[str, str | None]]) -> list[bytes | None]:
+        """Batch different columns with their original v1 domain-separated messages."""
+        if not isinstance(items, list) or len(items) > 100:
+            raise CryptoError("Invalid blind index batch")
+        messages, positions = [], []
+        for i, item in enumerate(items):
+            if not isinstance(item, (list, tuple)) or len(item) != 2:
+                raise CryptoError("Invalid blind index batch")
+            message = index_message(*item)
+            if message is not None:
+                messages.append(message)
+                positions.append(i)
+        result = [None] * len(items)
+        if messages:
+            values = self._client.hmac_batch(messages, key_version=self.key_version)
+            if (not isinstance(values, list) or len(values) != len(positions)
+                    or any(not isinstance(v, bytes) or len(v) != 32 for v in values)):
+                raise OpenBaoError()
+            for i, value in zip(positions, values):
+                result[i] = value
+        return result

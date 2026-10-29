@@ -513,3 +513,22 @@ transaksi read-only, koneksi non-TLS sesuai kondisi baseline. Operasi migrasi
 menggunakan role scanner yang sama sebagai source SELECT-only dengan verify-full.
 Percobaan awal hanya gagal pada query metadata sebelum ALTER ROLE; diperbaiki
 tanpa rotasi berulang. Evidence: evidence/scanner/credential_rotation.json.
+
+## Scanner after v1.2, 28 Oktober 2026
+
+Scanner dijalankan pada protected_100k nyata memakai scanner_user verify-full,
+label after, dan dump custom database yang diekspansi tanpa mengeksekusi SQL.
+Environment memakai faktor heuristik environment_after.yaml yang sudah ada;
+bukan pengukuran empiris probabilitas kebocoran. TEMP/TMP proses dump diarahkan
+ke DPR_PRIVATE_DIR/tmp agar SQLite sementara tetap di direktori privat.
+
+Keterbatasan v1.2: nama agama_ct/status_kawin_ct/tanggal_lahir_ct dan sejenisnya
+masih dapat masuk kandidat quasi karena heuristik nama, walaupun berisi bytea
+ciphertext acak. k=1 ciphertext bukan bukti identitas pribadi terbuka. Output
+scanner mentah dipertahankan dengan versi 1.2.0 tanpa mengubah heuristik untuk
+menguntungkan hasil after. Penilaian residual yang relevan memakai pengukuran
+terpisah verify.protected_artifact pada REF + age_band + pola NULL saja, penuh
+untuk source_734/synthetic/all pada kedua skala. Scanner DB hanya melihat tabel
+yang diizinkan ke scanner_user; dump mencakup pula metadata/audit. Cakupan ini
+berbeda dan dicatat di run_meta masing-masing, bukan dibandingkan sebagai
+accuracy/F1 terhadap ground truth plaintext 29 kolom.

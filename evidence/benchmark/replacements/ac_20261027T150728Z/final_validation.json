@@ -1,0 +1,36 @@
+{
+  "status": "PASSED",
+  "timestamp_utc": "2026-10-27T15:22:40.850145+00:00",
+  "measurement_code_commit": "748fa0d71d66079244c17161f13a7dd426b80449",
+  "tests_before_measurement": {
+    "passed": 42,
+    "suite": "benchmark/tests",
+    "fixtures": "unit/regression, no timed workload"
+  },
+  "historical_evidence_byte_identical": true,
+  "historical_pgbench_raw_files_hash_verified": 24,
+  "replacement_pgbench_raw_files_hash_verified": 24,
+  "workload21_and_targets_ground_truth_unchanged": true,
+  "remaining_own_restore_databases": 0,
+  "remaining_own_private_dumps": 0,
+  "generation_snapshot_retained": true,
+  "replacement_baseline_checksum_matches_generation": true,
+  "source_checksum_matches_generation": true,
+  "three_restores_full_checksum_sequence_verified": true,
+  "same_original_lookup_pool_and_script": true,
+  "power_qualified": true,
+  "power_samples": 414,
+  "kernel_power_false_events": 0,
+  "runtime": {
+    "python": "3.11.3",
+    "postgresql": "18.6 (Debian 18.6-1.pgdg13+2)",
+    "shared_buffers": "128MB",
+    "pgbench": "pgbench (PostgreSQL) 18.6 (Debian 18.6-1.pgdg13+2)",
+    "dependencies": {
+      "psycopg": "3.3.6",
+      "psutil": "7.2.2",
+      "PyYAML": "6.0.3"
+    }
+  },
+  "no_retries_no_workload21_repeat": true
+}

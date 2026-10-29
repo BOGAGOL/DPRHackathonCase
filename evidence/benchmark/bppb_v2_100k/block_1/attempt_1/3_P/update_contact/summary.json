@@ -1,0 +1,110 @@
+{
+  "requests": 24270,
+  "errors": 0,
+  "error_rate": 0.0,
+  "p50_ms": 18.653749999430147,
+  "p95_ms": 27.95385000072201,
+  "p99_ms": 39.337961999644904,
+  "mean_ms": 19.737473184997054,
+  "throughput_rps": 404.4034574366044,
+  "elapsed_s": 60.014323700001114,
+  "scenario": "update_contact",
+  "run": 2,
+  "duration_s": 60,
+  "warmup_s": 10,
+  "started_at_utc": "2026-10-28T16:13:41.771645+00:00",
+  "completed_at_utc": "2026-10-28T16:14:42.408832+00:00",
+  "concurrency": 8,
+  "warmup_errors": 0,
+  "operations": {
+    "update_contact": 24270
+  },
+  "error_types": {},
+  "resources": {
+    "samples": 14,
+    "failed_samples": 0,
+    "db_cpu_percent_one_core_median": 232.67000000000002,
+    "db_ram_bytes_median": 2837899640.0,
+    "client_cpu_percent_one_core_median": 122.80000000000001,
+    "client_ram_bytes_median": 69427200.0,
+    "openbao_cpu_percent_one_core_median": 70.47,
+    "openbao_ram_bytes_median": 127873843.0,
+    "db_cpu_percent_one_core_peak": 244.63,
+    "db_ram_bytes_peak": 2841120866,
+    "client_cpu_percent_one_core_peak": 130.4,
+    "client_ram_bytes_peak": 70496256,
+    "openbao_cpu_percent_one_core_peak": 96.48,
+    "openbao_ram_bytes_peak": 141977190
+  },
+  "db_time": {
+    "source": "pg_stat_statements",
+    "calls": 97080,
+    "requests": 24270,
+    "total_exec_time_ms": 40889.49733200005,
+    "db_time_ms_per_request": 1.6847753330037103,
+    "db_time_ms_per_sql_call": 0.4211938332509276,
+    "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+    "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+  },
+  "successful_requests": {
+    "requests": 24270,
+    "errors": 0,
+    "error_rate": 0.0,
+    "p50_ms": 18.653749999430147,
+    "p95_ms": 27.95385000072201,
+    "p99_ms": 39.337961999644904,
+    "mean_ms": 19.737473184997054,
+    "throughput_rps": 404.4034574366044,
+    "elapsed_s": 60.014323700001114
+  },
+  "adapter_telemetry": {
+    "before_measurement": {
+      "hits": 0,
+      "misses": 4198,
+      "remote_batches": 4198,
+      "entries": 0,
+      "max_entries": 0,
+      "ttl_seconds": 0.0,
+      "workers": 8,
+      "http_opened_connections": 8,
+      "http_reused_connections": 4206,
+      "http_requests": 4214
+    },
+    "after_measurement": {
+      "hits": 0,
+      "misses": 28468,
+      "remote_batches": 28468,
+      "entries": 0,
+      "max_entries": 0,
+      "ttl_seconds": 0.0,
+      "workers": 8,
+      "http_opened_connections": 8,
+      "http_reused_connections": 28476,
+      "http_requests": 28484
+    },
+    "measurement": {
+      "hits": 0,
+      "misses": 24270,
+      "remote_batches": 24270,
+      "http_opened_connections": 0,
+      "http_reused_connections": 24270,
+      "http_requests": 24270,
+      "hit_rate": 0.0
+    }
+  },
+  "mode": "P",
+  "adapter": "protected",
+  "database": "protected_100k",
+  "ac": {
+    "qualified": true,
+    "samples": 36,
+    "samples_not_confirmed_ac": 0,
+    "kernel_power_false_events": 0,
+    "prior_kernel_event_ac_online": true
+  },
+  "free_disk_bytes": 55203057664,
+  "valid": true,
+  "client_non_db_mean_ms": 18.052697851993344,
+  "non_db_definition": "mean client end-to-end minus mean SQL execution; includes planning/network/crypto/validation/rollback; not percentile subtraction",
+  "database_bytes": 463197887
+}

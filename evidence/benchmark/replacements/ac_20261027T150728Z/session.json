@@ -1,0 +1,67 @@
+{
+  "session": "ac_20261027T150728Z",
+  "status": "PASSED",
+  "started_at_utc": "2026-10-27T15:07:28.750794+00:00",
+  "generator_version": "1.0.0",
+  "code_commit": "748fa0d71d66079244c17161f13a7dd426b80449",
+  "datagen_worktree_dirty": false,
+  "targets_commit": "a412ce8e4c1045c72cdf2e77af6bfe77a7ef5b5f",
+  "targets_committed_at_wib": "2026-10-27T12:39:29+07:00",
+  "scope": "baseline_1m backup/restore 3 runs; pgbench baseline_100k 3x60s, 8 clients/threads, 10s warmup, seed42, prepared, no TLS",
+  "workload_21_runs_repeated": false,
+  "automatic_retries": 0,
+  "disk_free_bytes_before": 65873915904,
+  "protected_files_sha256_before": {
+    "evidence/benchmark/baseline_1m/run_summaries.json": "10e123be0d099455963939cdf931de7b2251bac04faf83dd6dce7158827af5c7",
+    "evidence/benchmark/baseline_1m/summary.csv": "801c37736990e2c1bd574c9a178e8af08609cbd01fcfb1577cfc9160ee952b0d",
+    "evidence/benchmark/baseline_1m/raw_validation.json": "2191893c6832318b790c7dd283d52a8745b82749bedec9bf8120fcaca8a07101",
+    "evidence/benchmark/baseline/summary.json": "d15b68b0416076d01b8f1569757b1edaf29e539079a58d28153e18d1f5062aa1",
+    "scanner/ground_truth_eval.csv": "e741e3f6874f154d2e4b7a71a5810dfacc97ad6d2954a766b3fb8dabf6607f77",
+    "docs/ground_truth_methodology.md": "675f70b6ae421780b0b07a93279205e973a38a0c78d4b55a1133cf92cb52db27",
+    "docs/targets.md": "c6d06f1e3cc65e37c5046ee2e673313644563b3497dc6fcb2ccdc3a8cce62423"
+  },
+  "historical_manifest": "evidence/benchmark/history/battery_affected_ac_20261027T150728Z/manifest.json",
+  "backup_restore_1m": {
+    "status": "PASSED",
+    "elapsed_s": 531.4002714999951
+  },
+  "pgbench_crosscheck_100k": {
+    "status": "PASSED",
+    "elapsed_s": 255.20766340001137
+  },
+  "power_qualified": true,
+  "completed_at_utc": "2026-10-27T15:20:39.155968+00:00",
+  "protected_files_unchanged": true,
+  "active_measurements": {
+    "replacement_session": "ac_20261027T150728Z",
+    "power_verification_file": "evidence/benchmark/replacements/ac_20261027T150728Z/power_verification.json",
+    "workload_21_runs_repeated": false,
+    "workload_1m": {
+      "file": "evidence/benchmark/baseline_1m/summary.json",
+      "measurement": "original unaffected 21 runs"
+    },
+    "backup_restore_1m": {
+      "file": "evidence/benchmark/baseline_1m/backup_restore.json",
+      "medians": {
+        "backup_s": 33.39072339999257,
+        "restore_s": 47.39628559999983,
+        "dump_bytes": 150429543
+      }
+    },
+    "pgbench_crosscheck_100k": {
+      "file": "evidence/benchmark/crosscheck_pgbench.json",
+      "medians": {
+        "p50_ms": 0.099,
+        "p95_ms": 0.158,
+        "mean_ms": 0.163,
+        "throughput_rps": 49205.763924,
+        "error_rate": 0.0
+      }
+    },
+    "historical_measurements": {
+      "label": "terdampak baterai",
+      "manifest": "evidence/benchmark/history/battery_affected_ac_20261027T150728Z/manifest.json"
+    }
+  },
+  "disk_free_bytes_after": 59593289728
+}

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="7" skipped="0" tests="18" time="1.068" timestamp="2026-10-29T05:47:45.548772+07:00" hostname="LAPTOP-NBI71N88"><testcase classname="benchmark.tests.test_api_swap" name="test_full_swap_journal_and_idempotent_restore_drop_only_copies" time="0.016"><failure message="OSError: [Errno 9] Bad file descriptor">tmp_path = WindowsPath('C:/Users/Ahmad Dzulfikar/AppData/Local/Temp/pytest-of-Ahmad Dzulfikar/pytest-86/test_full_swap_journal_and_ide0')
+
+    def test_full_swap_journal_and_idempotent_restore_drop_only_copies(tmp_path):
+        store=Store();before=store.entries();p=tmp_path/'state.json';swap=d.Swap(store,p)
+&gt;       swap.swap()
+
+benchmark\tests\test_api_swap.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+benchmark\api\db_swap.py:80: in swap
+    self.save('swapping')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;benchmark.api.db_swap.Swap object at 0x000001F567EEFF90&gt;
+status = 'swapping'
+
+    def save(self, status):
+        self.state.update(status=status, updated_at_utc=utc_now())
+        write_json(self.path, self.state)
+        with self.path.open('rb') as handle:
+&gt;           os.fsync(handle.fileno())
+E           OSError: [Errno 9] Bad file descriptor
+
+benchmark\api\db_swap.py:68: OSError</failure></testcase><testcase classname="benchmark.tests.test_api_swap" name="test_partial_clone_failure_restores_both_original_names" time="0.012"><failure message="OSError: [Errno 9] Bad file descriptor">tmp_path = WindowsPath('C:/Users/Ahmad Dzulfikar/AppData/Local/Temp/pytest-of-Ahmad Dzulfikar/pytest-86/test_partial_clone_failure_res0')
+
+    def test_partial_clone_failure_restores_both_original_names(tmp_path):
+        store=Store();before=store.entries();store.fail_clone='protected_100k'
+        swap=d.Swap(store,tmp_path/'state.json')
+&gt;       with pytest.raises(RuntimeError):swap.swap()
+                                         ^^^^^^^^^^^
+
+benchmark\tests\test_api_swap.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+benchmark\api\db_swap.py:80: in swap
+    self.save('swapping')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;benchmark.api.db_swap.Swap object at 0x000001F567F80190&gt;
+status = 'swapping'
+
+    def save(self, status):
+        self.state.update(status=status, updated_at_utc=utc_now())
+        write_json(self.path, self.state)
+        with self.path.open('rb') as handle:
+&gt;           os.fsync(handle.fileno())
+E           OSError: [Errno 9] Bad file descriptor
+
+benchmark\api\db_swap.py:68: OSError</failure></testcase><testcase classname="benchmark.tests.test_api_swap" name="test_initial_gate_refuses_mutation_on_sessions_or_collisions[session]" time="0.003" /><testcase classname="benchmark.tests.test_api_swap" name="test_initial_gate_refuses_mutation_on_sessions_or_collisions[archive]" time="0.003" /><testcase classname="benchmark.tests.test_api_swap" name="test_initial_gate_refuses_mutation_on_sessions_or_collisions[missing]" time="0.003" /><testcase classname="benchmark.tests.test_api_swap" name="test_recovery_fails_closed_without_dropping_unknown_oid[unknown_copy]" time="0.012"><failure message="OSError: [Errno 9] Bad file descriptor">tmp_path = WindowsPath('C:/Users/Ahmad Dzulfikar/AppData/Local/Temp/pytest-of-Ahmad Dzulfikar/pytest-86/test_recovery_fails_closed_wit0')
+failure = 'unknown_copy'
+
+    @pytest.mark.parametrize('failure',['unknown_copy','wrong_original','missing_original','unknown_copy_after_crash'])
+    def test_recovery_fails_closed_without_dropping_unknown_oid(tmp_path,failure):
+&gt;       store=Store();swap=d.Swap(store,tmp_path/'state.json');swap.swap()
+                                                               ^^^^^^^^^^^
+
+benchmark\tests\test_api_swap.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+benchmark\api\db_swap.py:80: in swap
+    self.save('swapping')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;benchmark.api.db_swap.Swap object at 0x000001F567FE9A50&gt;
+status = 'swapping'
+
+    def save(self, status):
+        self.state.update(status=status, updated_at_utc=utc_now())
+        write_json(self.path, self.state)
+        with self.path.open('rb') as handle:
+&gt;           os.fsync(handle.fileno())
+E           OSError: [Errno 9] Bad file descriptor
+
+benchmark\api\db_swap.py:68: OSError</failure></testcase><testcase classname="benchmark.tests.test_api_swap" name="test_recovery_fails_closed_without_dropping_unknown_oid[wrong_original]" time="0.012"><failure message="OSError: [Errno 9] Bad file descriptor">tmp_path = WindowsPath('C:/Users/Ahmad Dzulfikar/AppData/Local/Temp/pytest-of-Ahmad Dzulfikar/pytest-86/test_recovery_fails_closed_wit1')
+failure = 'wrong_original'
+
+    @pytest.mark.parametrize('failure',['unknown_copy','wrong_original','missing_original','unknown_copy_after_crash'])
+    def test_recovery_fails_closed_without_dropping_unknown_oid(tmp_path,failure):
+&gt;       store=Store();swap=d.Swap(store,tmp_path/'state.json');swap.swap()
+                                                               ^^^^^^^^^^^
+
+benchmark\tests\test_api_swap.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+benchmark\api\db_swap.py:80: in swap
+    self.save('swapping')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;benchmark.api.db_swap.Swap object at 0x000001F567FA7910&gt;
+status = 'swapping'
+
+    def save(self, status):
+        self.state.update(status=status, updated_at_utc=utc_now())
+        write_json(self.path, self.state)
+        with self.path.open('rb') as handle:
+&gt;           os.fsync(handle.fileno())
+E           OSError: [Errno 9] Bad file descriptor
+
+benchmark\api\db_swap.py:68: OSError</failure></testcase><testcase classname="benchmark.tests.test_api_swap" name="test_recovery_fails_closed_without_dropping_unknown_oid[missing_original]" time="0.014"><failure message="OSError: [Errno 9] Bad file descriptor">tmp_path = WindowsPath('C:/Users/Ahmad Dzulfikar/AppData/Local/Temp/pytest-of-Ahmad Dzulfikar/pytest-86/test_recovery_fails_closed_wit2')
+failure = 'missing_original'
+
+    @pytest.mark.parametrize('failure',['unknown_copy','wrong_original','missing_original','unknown_copy_after_crash'])
+    def test_recovery_fails_closed_without_dropping_unknown_oid(tmp_path,failure):
+&gt;       store=Store();swap=d.Swap(store,tmp_path/'state.json');swap.swap()
+                                                               ^^^^^^^^^^^
+
+benchmark\tests\test_api_swap.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+benchmark\api\db_swap.py:80: in swap
+    self.save('swapping')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;benchmark.api.db_swap.Swap object at 0x000001F567FDD690&gt;
+status = 'swapping'
+
+    def save(self, status):
+        self.state.update(status=status, updated_at_utc=utc_now())
+        write_json(self.path, self.state)
+        with self.path.open('rb') as handle:
+&gt;           os.fsync(handle.fileno())
+E           OSError: [Errno 9] Bad file descriptor
+
+benchmark\api\db_swap.py:68: OSError</failure></testcase><testcase classname="benchmark.tests.test_api_swap" name="test_recovery_fails_closed_without_dropping_unknown_oid[unknown_copy_after_crash]" time="0.013"><failure message="OSError: [Errno 9] Bad file descriptor">tmp_path = WindowsPath('C:/Users/Ahmad Dzulfikar/AppData/Local/Temp/pytest-of-Ahmad Dzulfikar/pytest-86/test_recovery_fails_closed_wit3')
+failure = 'unknown_copy_after_crash'
+
+    @pytest.mark.parametrize('failure',['unknown_copy','wrong_original','missing_original','unknown_copy_after_crash'])
+    def test_recovery_fails_closed_without_dropping_unknown_oid(tmp_path,failure):
+&gt;       store=Store();swap=d.Swap(store,tmp_path/'state.json');swap.swap()
+                                                               ^^^^^^^^^^^
+
+benchmark\tests\test_api_swap.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+benchmark\api\db_swap.py:80: in swap
+    self.save('swapping')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;benchmark.api.db_swap.Swap object at 0x000001F567F84B90&gt;
+status = 'swapping'
+
+    def save(self, status):
+        self.state.update(status=status, updated_at_utc=utc_now())
+        write_json(self.path, self.state)
+        with self.path.open('rb') as handle:
+&gt;           os.fsync(handle.fileno())
+E           OSError: [Errno 9] Bad file descriptor
+
+benchmark\api\db_swap.py:68: OSError</failure></testcase><testcase classname="benchmark.tests.test_api_swap" name="test_existing_journal_is_never_overwritten" time="0.013"><failure message="OSError: [Errno 9] Bad file descriptor">tmp_path = WindowsPath('C:/Users/Ahmad Dzulfikar/AppData/Local/Temp/pytest-of-Ahmad Dzulfikar/pytest-86/test_existing_journal_is_never0')
+
+    def test_existing_journal_is_never_overwritten(tmp_path):
+&gt;       store=Store();p=tmp_path/'state.json';swap=d.Swap(store,p);swap.swap()
+                                                                   ^^^^^^^^^^^
+
+benchmark\tests\test_api_swap.py:71: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+benchmark\api\db_swap.py:80: in swap
+    self.save('swapping')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;benchmark.api.db_swap.Swap object at 0x000001F567F98CD0&gt;
+status = 'swapping'
+
+    def save(self, status):
+        self.state.update(status=status, updated_at_utc=utc_now())
+        write_json(self.path, self.state)
+        with self.path.open('rb') as handle:
+&gt;           os.fsync(handle.fileno())
+E           OSError: [Errno 9] Bad file descriptor
+
+benchmark\api\db_swap.py:68: OSError</failure></testcase><testcase classname="benchmark.tests.test_api_swap" name="test_pg_store_uses_local_separate_admin_and_identifier_guards" time="0.002" /><testcase classname="benchmark.tests.test_api_runner" name="test_http_login_and_all_get_routes_never_log_private_values" time="0.004" /><testcase classname="benchmark.tests.test_api_runner" name="test_environment_separates_admin_and_workload_credentials" time="0.001" /><testcase classname="benchmark.tests.test_api_runner" name="test_raw_parser_only_measurement_points_and_all_errors" time="0.012" /><testcase classname="benchmark.tests.test_api_runner" name="test_comparison_requires_four_runs_and_shows_ratio_absolute_independently" time="0.001" /><testcase classname="benchmark.tests.test_api_runner" name="test_supervisor_recovers_only_unfinished_worker_not_failed_recovery" time="0.027" /><testcase classname="benchmark.tests.test_api_runner" name="test_worker_setup_failure_always_restores_before_publication" time="0.011" /><testcase classname="benchmark.tests.test_api_runner" name="test_services_are_read_only_and_fail_on_seal_or_extra_container" time="0.002" /></testsuite></testsuites>

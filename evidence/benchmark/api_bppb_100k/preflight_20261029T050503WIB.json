@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "status": "STOPPED_INITIAL_GATE",
+  "started_at_utc": "2026-10-28T22:05:03.574430+00:00",
+  "checked_at_wib": "2026-10-29T05:05:03.574430+07:00",
+  "code_commit": "51c8ca359d227d720ae71265b07053cba463b169",
+  "branch": "perf/keyservice-latency",
+  "gates": {
+    "power": {
+      "passed": true,
+      "sample": {
+        "timestamp_utc": "2026-10-28T22:05:03.644881+00:00",
+        "ac_online": true
+      },
+      "kernel_power": {
+        "provider": "Microsoft-Windows-Kernel-Power",
+        "log_name": "System",
+        "query_start_utc": "2026-10-28T22:05:03.6448810+00:00",
+        "query_end_utc": "2026-10-28T22:05:03.6448810+00:00",
+        "latest_event_at_or_before_start": {
+          "record_id": 29544,
+          "event_id": 105,
+          "time_utc": "2026-10-28T22:02:34.5166798+00:00",
+          "time_wib": "2026-10-29T05:02:34.5166798+07:00",
+          "ac_online": true
+        },
+        "events_in_window": []
+      },
+      "effective_overlay_guid": "ded574b5-45a0-4f42-8737-46345c09c238",
+      "power_mode": "Best performance",
+      "sleep_ac_seconds": 0
+    },
+    "containers": {
+      "passed": true,
+      "running": [
+        "dpr-infra-openbao-1",
+        "pg-dpr"
+      ]
+    },
+    "openbao": {
+      "passed": true,
+      "initialized": true,
+      "sealed": false
+    },
+    "token": {
+      "passed": false,
+      "lookup_http_status": 403,
+      "policy_and_ttl_verified": false,
+      "minimum_ttl_seconds": 7200,
+      "reason": "lookup_self_denied_validity_cannot_be_confirmed",
+      "automatic_issuance": false
+    }
+  },
+  "official_runs_started": 0,
+  "copies_created": false,
+  "app_started": false,
+  "root_token_accessed": false,
+  "token_issued": false,
+  "production_server_contacted": false,
+  "failed_gate": "token",
+  "error_type": "BaoError",
+  "error": "initial_gate_failed_private_details_withheld",
+  "http_status": 403,
+  "completed_at_utc": "2026-10-28T22:05:04.554993+00:00",
+  "not_executed_gates": [
+    "disk",
+    "official_database_integrity"
+  ],
+  "official_database_changes_attempted": false,
+  "benchmark_api_status": "BELUM DIUJI",
+  "parity_status": "BELUM DIUJI"
+}

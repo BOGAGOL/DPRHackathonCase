@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-10-29T00:31:55.069561+00:00",
+  "status": "MERGE_TESTS_PASSED_SUBMISSION_STILL_IN_PROGRESS",
+  "destination_branch": "chore/submission-polish",
+  "incoming_main_commit": "96c9edb080f6e88c6af15cbdd80b4576d974b42c",
+  "submission_parent_commit": "4eaaa645c2f533f043f1820622cb784e282fd23d",
+  "resolved_conflicts": [
+    "benchmark/NOTES.md",
+    "benchmark/tests/test_sessions_cli_backup.py",
+    "verify/NOTES.md"
+  ],
+  "resolution": "Kept both sets of module notes and positive/negative battery fixture; no unresolved paths",
+  "tests": {
+    "core": {
+      "tests": 387,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 10,
+      "passed": 377
+    },
+    "benchmark_and_verify": {
+      "tests": 156,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "passed": 155
+    }
+  },
+  "scope": "Unit/regression on merged working tree; no database benchmark, migration, deployment or live acceptance rerun",
+  "database_or_server_configuration_changed": false,
+  "upstream_failure_evidence_preserved": true,
+  "upstream_failure_xml_whitespace_preserved": true,
+  "submission_still_requires": [
+    "Review README/report/checklist/evidence index against newly merged results",
+    "Regenerate and validate SBOM after new requirements",
+    "Review source-package scope for new deployment scripts and artifacts",
+    "Rebuild source ZIP after submission corrections; previous ZIP belongs to earlier commit"
+  ],
+  "merged_back_to_main": false
+}

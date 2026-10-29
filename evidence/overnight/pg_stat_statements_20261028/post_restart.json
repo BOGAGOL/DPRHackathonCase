@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "counts": {
+    "postgres": {
+      "expected": 734,
+      "actual": 734,
+      "passed": true
+    },
+    "baseline_100k": {
+      "expected": 100000,
+      "actual": 100000,
+      "passed": true
+    },
+    "baseline_1m": {
+      "expected": 1000000,
+      "actual": 1000000,
+      "passed": true
+    },
+    "protected_100k": {
+      "expected": 100000,
+      "actual": 100000,
+      "passed": true
+    },
+    "protected_1m": {
+      "expected": 1000000,
+      "actual": 1000000,
+      "passed": true
+    }
+  },
+  "benchmark_executed": false,
+  "openbao_unsealed": true,
+  "matrix_a_to_d": {
+    "a": true,
+    "b": true,
+    "c": true,
+    "d": true
+  },
+  "protected_734_pending": true
+}

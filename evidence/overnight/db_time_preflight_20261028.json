@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-10-28T06:15:14.006999+00:00",
+  "step": 2,
+  "passed": false,
+  "status": "STOPPED_PRECONDITION",
+  "reason": "required_pg_stat_statements_not_preloaded",
+  "configuration": {
+    "shared_preload_libraries": "",
+    "compute_query_id": "auto",
+    "shared_preload_context": "postmaster",
+    "pending_restart": false,
+    "available_extension_version": "1.12"
+  },
+  "databases": {
+    "baseline_100k": {
+      "extension_installed": false,
+      "view_available": false
+    },
+    "baseline_1m": {
+      "extension_installed": false,
+      "view_available": false
+    },
+    "protected_100k": {
+      "extension_installed": false,
+      "view_available": false
+    },
+    "protected_1m": {
+      "extension_installed": false,
+      "view_available": false
+    }
+  },
+  "db_time_ms": null,
+  "db_time_status": "NOT_MEASURED",
+  "server_restart_performed": false,
+  "shared_preload_libraries_changed": false,
+  "extension_created": false,
+  "baseline_data_or_schema_modified": false,
+  "adapter_implemented": false,
+  "parity_executed": false,
+  "targets_amended": false,
+  "after_verification_executed": false,
+  "benchmark_executed": false,
+  "automatic_retry": false,
+  "documentation": "https://www.postgresql.org/docs/18/pgstatstatements.html",
+  "required_environment_change": "Preload pg_stat_statements and restart PostgreSQL, then expose its views in a suitable monitoring database; the statistics cover all databases, so the baseline schemas need not be changed. Document this configuration difference from historical baseline measurements."
+}

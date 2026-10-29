@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "status": "PASSED_INITIAL_GATES",
+  "started_at_utc": "2026-10-28T22:24:28.531929+00:00",
+  "checked_at_wib": "2026-10-29T05:24:28.531929+07:00",
+  "code_commit": "b77142d1d198a9606c45070663004b2c8bd0cf1b",
+  "branch": "perf/keyservice-latency",
+  "gates": {
+    "power": {
+      "passed": true,
+      "sample": {
+        "timestamp_utc": "2026-10-28T22:24:28.603498+00:00",
+        "ac_online": true
+      },
+      "kernel_power": {
+        "provider": "Microsoft-Windows-Kernel-Power",
+        "log_name": "System",
+        "query_start_utc": "2026-10-28T22:24:28.6034980+00:00",
+        "query_end_utc": "2026-10-28T22:24:28.6034980+00:00",
+        "latest_event_at_or_before_start": {
+          "record_id": 29544,
+          "event_id": 105,
+          "time_utc": "2026-10-28T22:02:34.5166798+00:00",
+          "time_wib": "2026-10-29T05:02:34.5166798+07:00",
+          "ac_online": true
+        },
+        "events_in_window": []
+      },
+      "effective_overlay_guid": "ded574b5-45a0-4f42-8737-46345c09c238",
+      "power_mode": "Best performance",
+      "sleep_ac_seconds": 0
+    },
+    "containers": {
+      "passed": true,
+      "running": [
+        "dpr-infra-openbao-1",
+        "pg-dpr"
+      ]
+    },
+    "openbao": {
+      "passed": true,
+      "initialized": true,
+      "sealed": false
+    },
+    "token": {
+      "passed": true,
+      "policies": [
+        "svc-app"
+      ],
+      "ttl_seconds": 14373,
+      "minimum_ttl_seconds": 7200,
+      "selection": "latest svc-app-*.json by LastWriteTime from private launcher",
+      "automatic_issuance": false
+    },
+    "disk": {
+      "passed": true,
+      "free_bytes": 52840816640,
+      "minimum_bytes": 10737418240
+    },
+    "official_database_integrity": {
+      "passed": true,
+      "reference": "evidence/benchmark/bppb_v2_session.json final_integrity"
+    }
+  },
+  "official_runs_started": 0,
+  "copies_created": false,
+  "app_started": false,
+  "root_token_accessed": false,
+  "token_issued": false,
+  "production_server_contacted": false,
+  "databases": {
+    "postgres": {
+      "rows": 734,
+      "rows_match": true,
+      "checksum_sha256": "5113038953aea9383f600de725b4267ecbf93de47c2a603a68bde6ad7e5c17e8",
+      "sequence": {
+        "last_value": 734,
+        "is_called": true
+      },
+      "database_bytes": 8640191
+    },
+    "baseline_100k": {
+      "rows": 100000,
+      "rows_match": true,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "database_bytes": 114521791
+    },
+    "baseline_1m": {
+      "rows": 1000000,
+      "rows_match": true,
+      "checksum_sha256": "39812166a18ed61a6c45787d8af1a84a61c561c44955855c4681c9c02c5186f0",
+      "sequence": {
+        "last_value": 1000000,
+        "is_called": true
+      },
+      "database_bytes": 906376895
+    },
+    "protected_100k": {
+      "rows": 100000,
+      "rows_match": true,
+      "ciphertext_rows_binary_sha256": "def969d165c8047dcc9ac30f5c02c52253978bae0e0c64bbf0d9e2beff398d04",
+      "control_counts": {
+        "app_users": 0,
+        "access_scope": 0,
+        "audit_log": 656846
+      },
+      "database_bytes": 452605631
+    },
+    "protected_1m": {
+      "rows": 1000000,
+      "rows_match": true,
+      "ciphertext_rows_binary_sha256": "b3b1a927aa9b5121d9e93fe9a7ac48de05b635a92e8b22a9958aed367a2d1cfc",
+      "control_counts": {
+        "app_users": 0,
+        "access_scope": 0,
+        "audit_log": 1530622
+      },
+      "database_bytes": 2879698623
+    }
+  },
+  "completed_at_utc": "2026-10-28T22:25:26.506162+00:00"
+}

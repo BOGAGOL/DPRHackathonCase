@@ -1,0 +1,21 @@
+{
+  "status": "PLANNED",
+  "level": "API",
+  "scale": "100k",
+  "target_commit": "8c09a25ccb6d415a231f692b68b9674495c31faf",
+  "design_change": {
+    "authorized_on_wib_date": "2026-10-29",
+    "reason": "Operator time limit; explicitly reduced from two B-P-P-B blocks to one before measurement.",
+    "previous_blocks": 2,
+    "blocks": 1,
+    "previous_runs_per_mode_per_endpoint": 4,
+    "runs_per_mode_per_endpoint": 2,
+    "median_over_runs": 2,
+    "total_runs": 16,
+    "targets_changed": false,
+    "limitation": "Two repetitions per mode are below the original three-run minimum; reduced API evidence must be reported with this limitation."
+  },
+  "scenarios": [],
+  "declared_at_utc": "2026-10-28T23:59:06.430385+00:00",
+  "scope": "GET read paths only; write/mixed API targets remain untested"
+}

@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "gate": 1,
+  "passed": true,
+  "status": "complete",
+  "source": "baseline_1m",
+  "target": "protected_1m",
+  "expected_rows": 1000000,
+  "started_at_utc": "2026-10-27T18:11:26.610074+00:00",
+  "operations": [
+    {
+      "stage": "prepare",
+      "started_at_utc": "2026-10-27T18:11:29.868281+00:00",
+      "pid": 3044,
+      "finished_at_utc": "2026-10-27T18:11:37.882220+00:00",
+      "duration_seconds": 8.011588,
+      "exit_code": 0
+    },
+    {
+      "stage": "check",
+      "started_at_utc": "2026-10-27T18:11:37.885416+00:00",
+      "pid": 33148,
+      "finished_at_utc": "2026-10-27T18:11:41.901740+00:00",
+      "duration_seconds": 4.014382,
+      "exit_code": 0
+    },
+    {
+      "stage": "run",
+      "started_at_utc": "2026-10-27T18:11:41.904749+00:00",
+      "pid": 34392,
+      "finished_at_utc": "2026-10-27T18:53:47.447468+00:00",
+      "duration_seconds": 2525.540631,
+      "exit_code": 0
+    }
+  ],
+  "token_ttl_seconds": 14400,
+  "automatic_retry": false,
+  "minimum_free_disk_bytes": 10737418240,
+  "git_commit": "07fbf4a47ff0e41258b75ced9d8c91151ef982b5",
+  "tokens": {
+    "svc-migration": {
+      "ttl_seconds": 14400,
+      "policies": [
+        "svc-migration"
+      ],
+      "renewable": false,
+      "private_file": "C:\\dev\\dpr-private\\openbao\\openbao\\tokens\\svc-migration-20261027T181129Z-6387e7d7.json"
+    },
+    "svc-app": {
+      "ttl_seconds": 14400,
+      "policies": [
+        "svc-app"
+      ],
+      "renewable": false,
+      "private_file": "C:\\dev\\dpr-private\\openbao\\openbao\\tokens\\svc-app-20261027T181129Z-6387e7d7.json"
+    }
+  },
+  "free_disk_bytes_before": 64738390016,
+  "rows_compared": 1000000,
+  "validation_file": "evidence/migration/validation-protected_1m.json",
+  "migration_token_revoked": true,
+  "completed_at_utc": "2026-10-27T18:53:47.481002+00:00",
+  "elapsed_seconds": 2540.822885,
+  "free_disk_bytes_after": 58432155648,
+  "power_qualified": true
+}

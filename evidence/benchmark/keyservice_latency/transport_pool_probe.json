@@ -1,0 +1,139 @@
+{
+  "started_at_utc": "2026-10-28T12:55:13.936334+00:00",
+  "calls_per_case": 200,
+  "kind": "bounded_verified_https_transport_probe",
+  "cases": [
+    {
+      "transport": "httpx",
+      "concurrency": 1,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 1.8230499990750104,
+      "p95_ms": 4.168495004705618,
+      "p99_ms": 6.56832202570512,
+      "mean_ms": 2.193214501166949,
+      "throughput_rps": 454.5954600635916,
+      "elapsed_s": 0.4399515999830328,
+      "pools": []
+    },
+    {
+      "transport": "httpx",
+      "concurrency": 8,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 9.084999997867271,
+      "p95_ms": 16.167774976929646,
+      "p99_ms": 19.143276000395364,
+      "mean_ms": 9.558591000386514,
+      "throughput_rps": 788.435853705981,
+      "elapsed_s": 0.25366679998114705,
+      "pools": []
+    },
+    {
+      "transport": "https_pool",
+      "concurrency": 1,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 1.2319500092417002,
+      "p95_ms": 1.734764990396796,
+      "p99_ms": 2.8462840084102923,
+      "mean_ms": 1.2759870002628304,
+      "throughput_rps": 781.3110398753053,
+      "elapsed_s": 0.2559800000162795,
+      "pools": [
+        {
+          "opened_connections": 1,
+          "reused_connections": 201,
+          "requests": 202,
+          "failures": 0,
+          "live_connections": 1,
+          "maximum_connections": 8
+        }
+      ]
+    },
+    {
+      "transport": "https_pool",
+      "concurrency": 8,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 4.134399991016835,
+      "p95_ms": 7.9942499985918385,
+      "p99_ms": 9.415880996966733,
+      "mean_ms": 4.5643715003097896,
+      "throughput_rps": 1631.9043832166524,
+      "elapsed_s": 0.1225562000181526,
+      "pools": [
+        {
+          "opened_connections": 1,
+          "reused_connections": 26,
+          "requests": 27,
+          "failures": 0,
+          "live_connections": 1,
+          "maximum_connections": 8
+        },
+        {
+          "opened_connections": 1,
+          "reused_connections": 26,
+          "requests": 27,
+          "failures": 0,
+          "live_connections": 1,
+          "maximum_connections": 8
+        },
+        {
+          "opened_connections": 1,
+          "reused_connections": 26,
+          "requests": 27,
+          "failures": 0,
+          "live_connections": 1,
+          "maximum_connections": 8
+        },
+        {
+          "opened_connections": 1,
+          "reused_connections": 26,
+          "requests": 27,
+          "failures": 0,
+          "live_connections": 1,
+          "maximum_connections": 8
+        },
+        {
+          "opened_connections": 1,
+          "reused_connections": 26,
+          "requests": 27,
+          "failures": 0,
+          "live_connections": 1,
+          "maximum_connections": 8
+        },
+        {
+          "opened_connections": 1,
+          "reused_connections": 26,
+          "requests": 27,
+          "failures": 0,
+          "live_connections": 1,
+          "maximum_connections": 8
+        },
+        {
+          "opened_connections": 1,
+          "reused_connections": 26,
+          "requests": 27,
+          "failures": 0,
+          "live_connections": 1,
+          "maximum_connections": 8
+        },
+        {
+          "opened_connections": 1,
+          "reused_connections": 26,
+          "requests": 27,
+          "failures": 0,
+          "live_connections": 1,
+          "maximum_connections": 8
+        }
+      ]
+    }
+  ],
+  "completed_at_utc": "2026-10-28T12:55:15.530929+00:00",
+  "untrusted_ca_rejected": true
+}

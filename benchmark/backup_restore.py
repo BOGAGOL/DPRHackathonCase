@@ -22,11 +22,16 @@ def guard_restore(name):
     return name
 
 
-def backup_restore(runs=3, keep=False, database="baseline_100k"):
+def backup_restore(runs=3, keep=False, database="baseline_100k", session=None, power_guard=None):
     if runs < 3:
         raise ValueError("At least three backup/restore runs required")
     from .common import session_paths, require_disk_space
     raw, evidence = (RAW, EVIDENCE) if database == "baseline_100k" else session_paths(database)
+    if session is not None:
+        from .common import replacement_paths
+        if database != "baseline_1m" or runs != 3:
+            raise ValueError("AC replacement requires baseline_1m and three runs")
+        raw, evidence = (p / "baseline_1m" for p in replacement_paths(session))
     if database == "baseline_1m":
         require_disk_space()
     if (raw / "backup_restore/runs.csv").exists():
@@ -37,17 +42,24 @@ def backup_restore(runs=3, keep=False, database="baseline_100k"):
     original = checksum(source_rows())
     rows = []
     for run in range(1, runs + 1):
+        if power_guard:
+            power_guard()
         if database == "baseline_1m":
             require_disk_space()
         name = guard_restore(f"bench_restore_{run}_{uuid4().hex[:12]}")
         path = private_directory() / (name + ".dump")
         row = {"run": run, "temporary_database": name, "status": "FAILED", "started_at_utc": utc_now()}
         try:
+            row["backup_started_at_utc"] = utc_now()
             started = time.perf_counter()
             with path.open("xb") as handle:
                 subprocess.run(["docker", "exec", "pg-dpr", "pg_dump", "-U", "postgres", "-Fc", "--no-owner", "--no-acl",
                                 "--dbname", database], stdout=handle, stderr=subprocess.PIPE, check=True)
             row.update(backup_s=time.perf_counter() - started, dump_bytes=path.stat().st_size)
+            row["backup_completed_at_utc"] = utc_now()
+            if power_guard:
+                power_guard()
+            row["restore_started_at_utc"] = utc_now()
             started = time.perf_counter()
             with psycopg.connect(**parameters("postgres", admin=True), autocommit=True) as admin:
                 admin.execute(sql.SQL("CREATE DATABASE {} TEMPLATE template0 ENCODING 'UTF8'").format(sql.Identifier(name)))
@@ -56,6 +68,9 @@ def backup_restore(runs=3, keep=False, database="baseline_100k"):
                                 "--single-transaction", "--no-owner", "--no-acl", "--dbname", name], stdin=handle,
                                stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, check=True)
             row["restore_s"] = time.perf_counter() - started
+            row["restore_completed_at_utc"] = utc_now()
+            if power_guard:
+                power_guard()
             verified = state(name, admin=True)
             row.update(restored_rows=verified["rows"], checksum_matches=before["checksum_sha256"] == verified["checksum_sha256"],
                        sequence_matches=before["sequence"] == verified["sequence"], dump_sha256=file_hash(path))
@@ -87,6 +102,8 @@ def backup_restore(runs=3, keep=False, database="baseline_100k"):
               "transport": "container Unix socket, no TLS", "backup_boundary": "Docker exec + pg_dump + writing private custom archive",
               "restore_boundary": "CREATE new database + Docker exec + pg_restore; validation and cleanup excluded",
               "completed_at_utc": utc_now(), **provenance()}
+    if session is not None:
+        report.update(replacement_session=session, measurement_label="pengukuran pengganti AC")
     for directory in (raw, evidence):
         write_json(directory / "backup_restore.json", report)
         write_csv(directory / "backup_restore/runs.csv", rows)

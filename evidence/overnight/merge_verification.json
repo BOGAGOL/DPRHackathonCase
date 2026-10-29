@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "checked_at_utc": "2026-10-27T18:12:06.354095+00:00",
+  "suites": [
+    {
+      "suite": "benchmark+datagen",
+      "venv": "benchmark/.venv",
+      "junit": "results/overnight-28okt/merge-benchmark-datagen.xml",
+      "tests": 67,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "suite": "verify",
+      "venv": "scanner/.venv",
+      "junit": "results/overnight-28okt/merge-verify.xml",
+      "tests": 24,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "initial_combined_collection": {
+    "status": "DEPENDENCY_SETUP_ERROR",
+    "venv": "benchmark/.venv",
+    "reason": "Verifier imports scanner.reporting; Jinja2 is declared in verify/scanner requirements and absent from benchmark venv. No functional tests executed during that collection.",
+    "junit": "results/overnight-28okt/merge-tests.xml"
+  },
+  "functional_gate_retries": 0
+}

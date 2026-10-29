@@ -37,3 +37,21 @@ indikator sesi dan catatan backend pada profil. Tampilkan form login tunggal dan
 identitas akun/logout yang diperlukan. Hapus markup/CSS yang tidak dipakai; hindari
 sekadar display:none. Pembatasan akses tetap menjadi perilaku sistem, bukan paragraf
 penjelasan pada setiap layar. Source hanya app/, tanpa perubahan backend/database.
+
+## 28 Oktober 2026 — pentest accounts dan template recovery VM
+
+Ikuti prompt revisi: demo tetap,8 pt terpisah dengan scope minimal5+5/owner unik,
+tanpa endpoint provisioning publik. Gunakan schema akun/binding/scope existing A/B
+dan Argon2id resmi, tidak menyentuh row anggota saat persiapan. Golden memakai
+PostgreSQL18 CREATE DATABASE TEMPLATE sesuai permintaan, bukan implementasi crypto
+atau backup baru. Identitas cluster/live/golden/OID diperiksa sebelum DROP target
+fixed protected_734; ALLOW_CONNECTIONSfalse mencegah koneksi baru saat reset.
+
+Karena VM masih memakai foreground, sediakan hanya dua unit DPR yang dapat
+dikendalikan skrip, tidak pkill, reboot, stop Docker/Nginx atau menyentuh service Ardi.
+Browser web tidak menerima token/DB URL melalui environment Node, tetapi user OS
+masih ubuntu bersama; tidak mengklaim isolasi RCE penuh. Dua source path tambahan
+docs/deploy/ dan scripts/deploy/ berasal dari permintaan eksplisit terbaru pengguna.
+Golden mengembalikan pt aktif; disable terakhir sesudah restore. Bukti unit dan
+VM dipisahkan: operator kemudian menjalankan satu reset nyata PASSED dan metadata
+diunduh; vm-golden-reset.json menjadi bukti, bukan test fake catalogue.

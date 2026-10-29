@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "started_at_utc": "2026-10-28T06:45:26.462175+00:00",
+  "passed": true,
+  "stages": {
+    "known_values_100k": "PASS",
+    "protected_100k": {
+      "dump_bytes": 169099571,
+      "sha256": "0169e23bf8d53524b3f831b298d23880baaa465f85f00b52b6c37897f2f137b4",
+      "storage": "DPR_PRIVATE_DIR/verify/after_20261028"
+    },
+    "protected_1m": {
+      "dump_bytes": 1669260065,
+      "sha256": "932f89019aa776d51c26ccec597f55ff07c9bceeb6e2ab0181df7dae14c6356f",
+      "storage": "DPR_PRIVATE_DIR/verify/after_20261028"
+    },
+    "scanner_db": "PASS",
+    "scanner_dump": "PASS"
+  },
+  "benchmark_executed": false,
+  "completed_at_utc": "2026-10-28T07:04:02.968868+00:00"
+}

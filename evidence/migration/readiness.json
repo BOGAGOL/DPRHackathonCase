@@ -2,7 +2,7 @@
   "schema_version": 1,
   "passed": true,
   "command": "check",
-  "checked_at_utc": "2026-10-27T17:37:40.190330+00:00",
+  "checked_at_utc": "2026-10-27T18:11:39.097344+00:00",
   "checks": {
     "profile_current": true,
     "openbao_initialized": true,
@@ -19,7 +19,7 @@
     "target_migration_login": true
   },
   "data_migrated": false,
-  "source": "baseline_100k",
-  "target": "protected_100k",
-  "expected_rows": 100000
+  "source": "baseline_1m",
+  "target": "protected_1m",
+  "expected_rows": 1000000
 }

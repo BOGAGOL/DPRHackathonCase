@@ -1,0 +1,24 @@
+# DPR_SERVICE_APP_UNIT_V1
+[Unit]
+Description=DPR Service App API (Zhafif)
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/juara1onno
+ExecStart=/bin/bash /home/ubuntu/juara1onno/app/scripts/run_runtime.sh api
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=30
+KillMode=control-group
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+InaccessiblePaths=-/home/ubuntu/dpr-demo-zhafif/private/module-a/openbao -/home/ubuntu/dpr-demo-zhafif/private/module-a/database-credentials.json -/home/ubuntu/dpr-demo-zhafif/private/module-a/operator.env -/home/ubuntu/dpr-demo-zhafif/private/module-a/migration.env -/home/ubuntu/dpr-demo-zhafif/private/module-a/handoff/setup.env -/home/ubuntu/dpr-demo-zhafif/private/service-b
+
+[Install]
+WantedBy=multi-user.target

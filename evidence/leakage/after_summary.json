@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "status": "PASSED",
+  "timestamp_utc": "2026-10-28T07:48:48.113845+00:00",
+  "scenarios": [
+    {
+      "dataset": "protected_100k",
+      "scenario": "protected_dump_no_key",
+      "ESCE": {
+        "numerator": 0,
+        "denominator": 2449994,
+        "ratio": 0.0
+      },
+      "DIE": {
+        "numerator": 0,
+        "denominator": 100000,
+        "ratio": 0.0
+      },
+      "DBR": {
+        "policy": null,
+        "domains_decrypted": [],
+        "forbidden_decrypt_probes": {},
+        "recovered_columns": [],
+        "crypto_client_constructed": false
+      }
+    },
+    {
+      "dataset": "protected_100k",
+      "scenario": "protected_dump_with_pii_key",
+      "ESCE": {
+        "numerator": 2049994,
+        "denominator": 2449994,
+        "ratio": 0.8367342940431691
+      },
+      "DIE": {
+        "numerator": 100000,
+        "denominator": 100000,
+        "ratio": 1.0
+      },
+      "DBR": {
+        "policy": "modc-leak-pii",
+        "domains_decrypted": [
+          "PII"
+        ],
+        "forbidden_decrypt_probes": {
+          "finance-kek": true
+        },
+        "recovered_columns": [
+          "nama",
+          "nama_lengkap",
+          "nama_tanpa_gelar",
+          "tempat_lahir",
+          "tanggal_lahir",
+          "tanggal_pernikahan",
+          "no_ktp",
+          "alamat_jakarta",
+          "telpon_jakarta",
+          "alamat_daerah",
+          "telpon_daerah",
+          "handphone",
+          "email",
+          "ruangan",
+          "status_kawin",
+          "jumlah_anak",
+          "jumlah_tanggungan",
+          "jumlah_jiwa",
+          "nip_kppn",
+          "pengguna",
+          "agama"
+        ],
+        "crypto_client_constructed": true
+      }
+    },
+    {
+      "dataset": "protected_100k",
+      "scenario": "protected_dump_with_finance_key",
+      "ESCE": {
+        "numerator": 400000,
+        "denominator": 2449994,
+        "ratio": 0.1632657059568309
+      },
+      "DIE": {
+        "numerator": 100000,
+        "denominator": 100000,
+        "ratio": 1.0
+      },
+      "DBR": {
+        "policy": "modc-leak-finance",
+        "domains_decrypted": [
+          "FIN"
+        ],
+        "forbidden_decrypt_probes": {
+          "pii-kek": true
+        },
+        "recovered_columns": [
+          "rekening",
+          "nama_rekening",
+          "npwp",
+          "kode_bank"
+        ],
+        "crypto_client_constructed": true
+      }
+    },
+    {
+      "dataset": "protected_100k",
+      "scenario": "protected_dump_with_search_key",
+      "ESCE": {
+        "numerator": 300000,
+        "denominator": 2449994,
+        "ratio": 0.12244927946762318
+      },
+      "DIE": {
+        "numerator": 100000,
+        "denominator": 100000,
+        "ratio": 1.0
+      },
+      "DBR": {
+        "policy": "modc-leak-search",
+        "domains_decrypted": [],
+        "forbidden_decrypt_probes": {
+          "pii-kek": true,
+          "finance-kek": true
+        },
+        "recovered_columns": [
+          "no_ktp",
+          "email",
+          "pengguna"
+        ],
+        "crypto_client_constructed": true
+      }
+    },
+    {
+      "dataset": "protected_1m",
+      "scenario": "protected_dump_no_key",
+      "ESCE": {
+        "numerator": 0,
+        "denominator": 24500005,
+        "ratio": 0.0
+      },
+      "DIE": {
+        "numerator": 0,
+        "denominator": 1000000,
+        "ratio": 0.0
+      },
+      "DBR": {
+        "policy": null,
+        "domains_decrypted": [],
+        "forbidden_decrypt_probes": {},
+        "recovered_columns": [],
+        "crypto_client_constructed": false
+      }
+    },
+    {
+      "dataset": "protected_1m",
+      "scenario": "protected_dump_with_pii_key",
+      "ESCE": {
+        "numerator": 20500005,
+        "denominator": 24500005,
+        "ratio": 0.8367347271969945
+      },
+      "DIE": {
+        "numerator": 1000000,
+        "denominator": 1000000,
+        "ratio": 1.0
+      },
+      "DBR": {
+        "policy": "modc-leak-pii",
+        "domains_decrypted": [
+          "PII"
+        ],
+        "forbidden_decrypt_probes": {
+          "finance-kek": true
+        },
+        "recovered_columns": [
+          "nama",
+          "nama_lengkap",
+          "nama_tanpa_gelar",
+          "tempat_lahir",
+          "tanggal_lahir",
+          "tanggal_pernikahan",
+          "no_ktp",
+          "alamat_jakarta",
+          "telpon_jakarta",
+          "alamat_daerah",
+          "telpon_daerah",
+          "handphone",
+          "email",
+          "ruangan",
+          "status_kawin",
+          "jumlah_anak",
+          "jumlah_tanggungan",
+          "jumlah_jiwa",
+          "nip_kppn",
+          "pengguna",
+          "agama"
+        ],
+        "crypto_client_constructed": true
+      }
+    },
+    {
+      "dataset": "protected_1m",
+      "scenario": "protected_dump_with_finance_key",
+      "ESCE": {
+        "numerator": 4000000,
+        "denominator": 24500005,
+        "ratio": 0.16326527280300554
+      },
+      "DIE": {
+        "numerator": 1000000,
+        "denominator": 1000000,
+        "ratio": 1.0
+      },
+      "DBR": {
+        "policy": "modc-leak-finance",
+        "domains_decrypted": [
+          "FIN"
+        ],
+        "forbidden_decrypt_probes": {
+          "pii-kek": true
+        },
+        "recovered_columns": [
+          "rekening",
+          "nama_rekening",
+          "npwp",
+          "kode_bank"
+        ],
+        "crypto_client_constructed": true
+      }
+    },
+    {
+      "dataset": "protected_1m",
+      "scenario": "protected_dump_with_search_key",
+      "ESCE": {
+        "numerator": 3000000,
+        "denominator": 24500005,
+        "ratio": 0.12244895460225416
+      },
+      "DIE": {
+        "numerator": 1000000,
+        "denominator": 1000000,
+        "ratio": 1.0
+      },
+      "DBR": {
+        "policy": "modc-leak-search",
+        "domains_decrypted": [],
+        "forbidden_decrypt_probes": {
+          "pii-kek": true,
+          "finance-kek": true
+        },
+        "recovered_columns": [
+          "no_ktp",
+          "email",
+          "pengguna"
+        ],
+        "crypto_client_constructed": true
+      }
+    }
+  ],
+  "comparison_rows": 88,
+  "official_benchmark_executed": false
+}

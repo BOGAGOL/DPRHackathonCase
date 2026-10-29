@@ -1,0 +1,27 @@
+{
+  "started_at_utc": "2026-10-28T12:31:31.992229+00:00",
+  "passed": true,
+  "datasets": [
+    {
+      "database": "protected_100k",
+      "passed": true,
+      "ESCE": {
+        "numerator": 0,
+        "denominator": 2449994,
+        "ratio": 0.0
+      },
+      "artifact_sha256": "0169e23bf8d53524b3f831b298d23880baaa465f85f00b52b6c37897f2f137b4"
+    },
+    {
+      "database": "protected_1m",
+      "passed": true,
+      "ESCE": {
+        "numerator": 0,
+        "denominator": 24500005,
+        "ratio": 0.0
+      },
+      "artifact_sha256": "932f89019aa776d51c26ccec597f55ff07c9bceeb6e2ab0181df7dae14c6356f"
+    }
+  ],
+  "completed_at_utc": "2026-10-28T12:38:47.769610+00:00"
+}

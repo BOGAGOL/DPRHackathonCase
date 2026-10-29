@@ -1,0 +1,3287 @@
+{
+  "started_at_utc": "2026-10-28T12:18:15.573803+00:00",
+  "kind": "bounded_diagnosis_not_official_benchmark",
+  "production_code_changed_before_measurement": false,
+  "calls_per_case": 200,
+  "concurrency": [
+    1,
+    8
+  ],
+  "components": [
+    {
+      "component": "hmac",
+      "concurrency": 1,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 4.931199990096502,
+      "p95_ms": 32.29212498408741,
+      "p99_ms": 37.311569989542434,
+      "mean_ms": 8.429201500839554,
+      "throughput_rps": 118.44044258073146,
+      "elapsed_s": 1.688612399972044,
+      "resources": {
+        "samples": 1,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 0.0,
+        "db_ram_bytes_median": 85542830,
+        "client_cpu_percent_one_core_median": 18.8,
+        "client_ram_bytes_median": 55009280,
+        "openbao_cpu_percent_one_core_median": 71.79,
+        "openbao_ram_bytes_median": 124885401,
+        "db_cpu_percent_one_core_peak": 0.0,
+        "db_ram_bytes_peak": 85542830,
+        "client_cpu_percent_one_core_peak": 18.8,
+        "client_ram_bytes_peak": 55009280,
+        "openbao_cpu_percent_one_core_peak": 71.79,
+        "openbao_ram_bytes_peak": 124885401
+      },
+      "wire_measured": [
+        {
+          "events": {
+            "http11.send_request_headers.started": 200,
+            "http11.send_request_headers.complete": 200,
+            "http11.send_request_body.started": 200,
+            "http11.send_request_body.complete": 200,
+            "http11.receive_response_headers.started": 200,
+            "http11.receive_response_headers.complete": 200,
+            "http11.receive_response_body.started": 200,
+            "http11.receive_response_body.complete": 200,
+            "http11.response_closed.started": 200,
+            "http11.response_closed.complete": 200
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 0.6892004993278533,
+            "http11.send_request_body": 0.3921240009367466,
+            "http11.receive_response_headers": 5.641112501471071,
+            "http11.receive_response_body": 0.12902600079542026,
+            "http11.response_closed": 0.026480500673642382
+          }
+        }
+      ],
+      "wire_startup": [
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.2725999986287206,
+            "connection.start_tls": 12.431800016202033,
+            "http11.send_request_headers": 0.5372999973284701,
+            "http11.send_request_body": 0.4712999992383023,
+            "http11.receive_response_headers": 12.519766663899645,
+            "http11.receive_response_body": 0.13809999412236115,
+            "http11.response_closed": 0.03363334690220654
+          }
+        }
+      ]
+    },
+    {
+      "component": "unwrap",
+      "concurrency": 1,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 4.158749987254851,
+      "p95_ms": 8.75855000631418,
+      "p99_ms": 13.535082996240803,
+      "mean_ms": 4.75209799973527,
+      "throughput_rps": 210.17636109117552,
+      "elapsed_s": 0.9515817999781575,
+      "resources": {
+        "samples": 1,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 0.0,
+        "db_ram_bytes_median": 85626716,
+        "client_cpu_percent_one_core_median": 26.2,
+        "client_ram_bytes_median": 55169024,
+        "openbao_cpu_percent_one_core_median": 23.35,
+        "openbao_ram_bytes_median": 127401984,
+        "db_cpu_percent_one_core_peak": 0.0,
+        "db_ram_bytes_peak": 85626716,
+        "client_cpu_percent_one_core_peak": 26.2,
+        "client_ram_bytes_peak": 55169024,
+        "openbao_cpu_percent_one_core_peak": 23.35,
+        "openbao_ram_bytes_peak": 127401984
+      },
+      "wire_measured": [
+        {
+          "events": {
+            "http11.send_request_headers.started": 200,
+            "http11.send_request_headers.complete": 200,
+            "http11.send_request_body.started": 200,
+            "http11.send_request_body.complete": 200,
+            "http11.receive_response_headers.started": 200,
+            "http11.receive_response_headers.complete": 200,
+            "http11.receive_response_body.started": 200,
+            "http11.receive_response_body.complete": 200,
+            "http11.response_closed.started": 200,
+            "http11.response_closed.complete": 200
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 0.5543145000410732,
+            "http11.send_request_body": 0.2917284991417546,
+            "http11.receive_response_headers": 2.3661015000834595,
+            "http11.receive_response_body": 0.10268599988194183,
+            "http11.response_closed": 0.024123000621329993
+          }
+        }
+      ],
+      "wire_startup": [
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 5.409899982623756,
+            "connection.start_tls": 20.31859999988228,
+            "http11.send_request_headers": 0.39926666067913175,
+            "http11.send_request_body": 0.8068333360521743,
+            "http11.receive_response_headers": 4.119400002916033,
+            "http11.receive_response_body": 0.09403332175376515,
+            "http11.response_closed": 0.023166678147390485
+          }
+        }
+      ]
+    },
+    {
+      "component": "datakey_wrapped",
+      "concurrency": 1,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 3.7986999814165756,
+      "p95_ms": 9.001474986143869,
+      "p99_ms": 13.850429017038481,
+      "mean_ms": 4.625600499421125,
+      "throughput_rps": 215.83694986226413,
+      "elapsed_s": 0.926625399995828,
+      "resources": {
+        "samples": 1,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 1.32,
+        "db_ram_bytes_median": 86014689,
+        "client_cpu_percent_one_core_median": 28.7,
+        "client_ram_bytes_median": 55275520,
+        "openbao_cpu_percent_one_core_median": 19.31,
+        "openbao_ram_bytes_median": 127611699,
+        "db_cpu_percent_one_core_peak": 1.32,
+        "db_ram_bytes_peak": 86014689,
+        "client_cpu_percent_one_core_peak": 28.7,
+        "client_ram_bytes_peak": 55275520,
+        "openbao_cpu_percent_one_core_peak": 19.31,
+        "openbao_ram_bytes_peak": 127611699
+      },
+      "wire_measured": [
+        {
+          "events": {
+            "http11.send_request_headers.started": 200,
+            "http11.send_request_headers.complete": 200,
+            "http11.send_request_body.started": 200,
+            "http11.send_request_body.complete": 200,
+            "http11.receive_response_headers.started": 200,
+            "http11.receive_response_headers.complete": 200,
+            "http11.receive_response_body.started": 200,
+            "http11.receive_response_body.complete": 200,
+            "http11.response_closed.started": 200,
+            "http11.response_closed.complete": 200
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 0.4347959997539874,
+            "http11.send_request_body": 0.34476550019462593,
+            "http11.receive_response_headers": 2.35346749832388,
+            "http11.receive_response_body": 0.10699699996621348,
+            "http11.response_closed": 0.02324299974134192
+          }
+        }
+      ],
+      "wire_startup": [
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 25.512200023513287,
+            "connection.start_tls": 14.081899978918955,
+            "http11.send_request_headers": 0.33570001445089775,
+            "http11.send_request_body": 0.1364666677545756,
+            "http11.receive_response_headers": 4.611166659742594,
+            "http11.receive_response_body": 0.06693331912780802,
+            "http11.response_closed": 0.016733344333867233
+          }
+        }
+      ]
+    },
+    {
+      "component": "aes_gcm_local",
+      "concurrency": 1,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 0.020400009816512465,
+      "p95_ms": 0.04502999217947941,
+      "p99_ms": 0.08705799235030995,
+      "mean_ms": 0.023547499731648713,
+      "throughput_rps": 35520.824061274056,
+      "elapsed_s": 0.005630500003462657,
+      "resources": {
+        "samples": 0,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": null,
+        "db_ram_bytes_median": null,
+        "client_cpu_percent_one_core_median": null,
+        "client_ram_bytes_median": null,
+        "openbao_cpu_percent_one_core_median": null,
+        "openbao_ram_bytes_median": null,
+        "db_cpu_percent_one_core_peak": null,
+        "db_ram_bytes_peak": null,
+        "client_cpu_percent_one_core_peak": null,
+        "client_ram_bytes_peak": null,
+        "openbao_cpu_percent_one_core_peak": null,
+        "openbao_ram_bytes_peak": null
+      },
+      "wire_measured": [
+        {
+          "events": {},
+          "mean_event_ms": {}
+        }
+      ],
+      "wire_startup": [
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.4573000080417842,
+            "connection.start_tls": 11.60540001001209,
+            "http11.send_request_headers": 0.4423999780556187,
+            "http11.send_request_body": 0.15779999375808984,
+            "http11.receive_response_headers": 3.9299000054597855,
+            "http11.receive_response_body": 0.10250000923406333,
+            "http11.response_closed": 0.02500001573935151
+          }
+        }
+      ]
+    },
+    {
+      "component": "sql_plain",
+      "concurrency": 1,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 11.38609999907203,
+      "p95_ms": 29.718305009009732,
+      "p99_ms": 41.445301008352516,
+      "mean_ms": 13.33375949994661,
+      "throughput_rps": 74.92613126362271,
+      "elapsed_s": 2.669295700005023,
+      "resources": {
+        "samples": 2,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 5.925,
+        "db_ram_bytes_median": 90948239.0,
+        "client_cpu_percent_one_core_median": 3.3499999999999996,
+        "client_ram_bytes_median": 55592960.0,
+        "openbao_cpu_percent_one_core_median": 0.685,
+        "openbao_ram_bytes_median": 127506841.0,
+        "db_cpu_percent_one_core_peak": 7.93,
+        "db_ram_bytes_peak": 92400517,
+        "client_cpu_percent_one_core_peak": 3.9,
+        "client_ram_bytes_peak": 55627776,
+        "openbao_cpu_percent_one_core_peak": 0.69,
+        "openbao_ram_bytes_peak": 127506841
+      },
+      "wire_measured": [
+        {
+          "events": {},
+          "mean_event_ms": {}
+        }
+      ],
+      "wire_startup": [
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 3.9505999884568155,
+            "connection.start_tls": 10.19629999063909,
+            "http11.send_request_headers": 0.4512999876169488,
+            "http11.send_request_body": 0.14674999692942947,
+            "http11.receive_response_headers": 1.8210999842267483,
+            "http11.receive_response_body": 0.0939499877858907,
+            "http11.response_closed": 0.0210499856621027
+          }
+        }
+      ]
+    },
+    {
+      "component": "hmac_batch_3",
+      "concurrency": 1,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 4.081149992998689,
+      "p95_ms": 9.372199993231334,
+      "p99_ms": 24.051137013011598,
+      "mean_ms": 5.078999500401551,
+      "throughput_rps": 193.11707568285544,
+      "elapsed_s": 1.035641199996462,
+      "resources": {
+        "samples": 1,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 0.05,
+        "db_ram_bytes_median": 91635056,
+        "client_cpu_percent_one_core_median": 31.0,
+        "client_ram_bytes_median": 55734272,
+        "openbao_cpu_percent_one_core_median": 90.73,
+        "openbao_ram_bytes_median": 142606336,
+        "db_cpu_percent_one_core_peak": 0.05,
+        "db_ram_bytes_peak": 91635056,
+        "client_cpu_percent_one_core_peak": 31.0,
+        "client_ram_bytes_peak": 55734272,
+        "openbao_cpu_percent_one_core_peak": 90.73,
+        "openbao_ram_bytes_peak": 142606336
+      },
+      "wire_measured": [
+        {
+          "events": {
+            "http11.send_request_headers.started": 200,
+            "http11.send_request_headers.complete": 200,
+            "http11.send_request_body.started": 200,
+            "http11.send_request_body.complete": 200,
+            "http11.receive_response_headers.started": 200,
+            "http11.receive_response_headers.complete": 200,
+            "http11.receive_response_body.started": 200,
+            "http11.receive_response_body.complete": 200,
+            "http11.response_closed.started": 200,
+            "http11.response_closed.complete": 200
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 0.5248030005895998,
+            "http11.send_request_body": 0.27687650130246766,
+            "http11.receive_response_headers": 2.628173499542754,
+            "http11.receive_response_body": 0.13075449911411852,
+            "http11.response_closed": 0.02390950030530803
+          }
+        }
+      ],
+      "wire_startup": [
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 19.200500013539568,
+            "connection.start_tls": 6.1184999940451235,
+            "http11.send_request_headers": 0.23473333567380905,
+            "http11.send_request_body": 0.0845333367275695,
+            "http11.receive_response_headers": 1.7955999937839806,
+            "http11.receive_response_body": 0.04896666117322942,
+            "http11.response_closed": 0.012499998168398937
+          }
+        }
+      ]
+    },
+    {
+      "component": "unwrap_batch_50",
+      "concurrency": 1,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 6.326899994746782,
+      "p95_ms": 10.485224978765455,
+      "p99_ms": 16.95229400385868,
+      "mean_ms": 7.249690000899136,
+      "throughput_rps": 136.72596950496617,
+      "elapsed_s": 1.4627799000008963,
+      "resources": {
+        "samples": 1,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 0.04,
+        "db_ram_bytes_median": 91981086,
+        "client_cpu_percent_one_core_median": 27.6,
+        "client_ram_bytes_median": 56324096,
+        "openbao_cpu_percent_one_core_median": 8.26,
+        "openbao_ram_bytes_median": 128660275,
+        "db_cpu_percent_one_core_peak": 0.04,
+        "db_ram_bytes_peak": 91981086,
+        "client_cpu_percent_one_core_peak": 27.6,
+        "client_ram_bytes_peak": 56324096,
+        "openbao_cpu_percent_one_core_peak": 8.26,
+        "openbao_ram_bytes_peak": 128660275
+      },
+      "wire_measured": [
+        {
+          "events": {
+            "http11.send_request_headers.started": 200,
+            "http11.send_request_headers.complete": 200,
+            "http11.send_request_body.started": 200,
+            "http11.send_request_body.complete": 200,
+            "http11.receive_response_headers.started": 200,
+            "http11.receive_response_headers.complete": 200,
+            "http11.receive_response_body.started": 200,
+            "http11.receive_response_body.complete": 200,
+            "http11.response_closed.started": 200,
+            "http11.response_closed.complete": 200
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 0.5124905009870417,
+            "http11.send_request_body": 0.4341574995487463,
+            "http11.receive_response_headers": 3.869747500430094,
+            "http11.receive_response_body": 0.3122425006586127,
+            "http11.response_closed": 0.026406998513266444
+          }
+        }
+      ],
+      "wire_startup": [
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 4,
+            "http11.send_request_headers.complete": 4,
+            "http11.send_request_body.started": 4,
+            "http11.send_request_body.complete": 4,
+            "http11.receive_response_headers.started": 4,
+            "http11.receive_response_headers.complete": 4,
+            "http11.receive_response_body.started": 4,
+            "http11.receive_response_body.complete": 4,
+            "http11.response_closed.started": 4,
+            "http11.response_closed.complete": 4
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.633200008654967,
+            "connection.start_tls": 29.190999979618937,
+            "http11.send_request_headers": 0.5451249962789007,
+            "http11.send_request_body": 0.3444500034675002,
+            "http11.receive_response_headers": 11.215300000912976,
+            "http11.receive_response_body": 1.1273250056547113,
+            "http11.response_closed": 0.027874993975274265
+          }
+        }
+      ]
+    },
+    {
+      "component": "hmac",
+      "concurrency": 8,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 18.252649999340065,
+      "p95_ms": 32.561980013269924,
+      "p99_ms": 41.53986298915687,
+      "mean_ms": 19.601794498885283,
+      "throughput_rps": 384.30631365196376,
+      "elapsed_s": 0.5204182000015862,
+      "resources": {
+        "samples": 1,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 0.11,
+        "db_ram_bytes_median": 102875791,
+        "client_cpu_percent_one_core_median": 32.4,
+        "client_ram_bytes_median": 56057856,
+        "openbao_cpu_percent_one_core_median": 38.96,
+        "openbao_ram_bytes_median": 127506841,
+        "db_cpu_percent_one_core_peak": 0.11,
+        "db_ram_bytes_peak": 102875791,
+        "client_cpu_percent_one_core_peak": 32.4,
+        "client_ram_bytes_peak": 56057856,
+        "openbao_cpu_percent_one_core_peak": 38.96,
+        "openbao_ram_bytes_peak": 127506841
+      },
+      "wire_measured": [
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 4.997067999793217,
+            "http11.send_request_body": 4.550343998707831,
+            "http11.receive_response_headers": 7.272723999340087,
+            "http11.receive_response_body": 0.09887200314551592,
+            "http11.response_closed": 0.02575600054115057
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 4.316131999948993,
+            "http11.send_request_body": 3.5506240057293326,
+            "http11.receive_response_headers": 6.710568004054949,
+            "http11.receive_response_body": 0.1141920022200793,
+            "http11.response_closed": 0.022904000943526626
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 4.470827999757603,
+            "http11.send_request_body": 4.1037639998830855,
+            "http11.receive_response_headers": 5.530819998821244,
+            "http11.receive_response_body": 0.08961200015619397,
+            "http11.response_closed": 0.026983998250216246
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 4.162352001294494,
+            "http11.send_request_body": 4.306011999724433,
+            "http11.receive_response_headers": 7.074291999451816,
+            "http11.receive_response_body": 0.1079319987911731,
+            "http11.response_closed": 0.023315997095778584
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 4.579531998606399,
+            "http11.send_request_body": 4.009811998112127,
+            "http11.receive_response_headers": 6.518300001043826,
+            "http11.receive_response_body": 0.09640400414355099,
+            "http11.response_closed": 0.022287997417151928
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 3.266352005302906,
+            "http11.send_request_body": 3.47574400017038,
+            "http11.receive_response_headers": 7.875859997002408,
+            "http11.receive_response_body": 0.11795200174674392,
+            "http11.response_closed": 0.02671200199984014
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 5.059064000379294,
+            "http11.send_request_body": 3.7139319954439998,
+            "http11.receive_response_headers": 7.650951996911317,
+            "http11.receive_response_body": 0.094352001324296,
+            "http11.response_closed": 0.022736001992598176
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 4.06453600153327,
+            "http11.send_request_body": 4.301755998749286,
+            "http11.receive_response_headers": 6.637931998120621,
+            "http11.receive_response_body": 0.08833999745547771,
+            "http11.response_closed": 0.021580002503469586
+          }
+        }
+      ],
+      "wire_startup": [
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.4147000038065016,
+            "connection.start_tls": 41.588000021874905,
+            "http11.send_request_headers": 0.5445333372335881,
+            "http11.send_request_body": 0.19463334077348313,
+            "http11.receive_response_headers": 5.028033338021487,
+            "http11.receive_response_body": 0.12563332954111198,
+            "http11.response_closed": 0.029099988751113415
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 21.573000005446374,
+            "connection.start_tls": 16.652799997245893,
+            "http11.send_request_headers": 0.45630000143622357,
+            "http11.send_request_body": 0.16760000532182553,
+            "http11.receive_response_headers": 12.586633344956985,
+            "http11.receive_response_body": 0.1039333389295886,
+            "http11.response_closed": 0.02550000014404456
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.2580000038724393,
+            "connection.start_tls": 22.80020000762306,
+            "http11.send_request_headers": 0.4010666743852198,
+            "http11.send_request_body": 0.44473333400674164,
+            "http11.receive_response_headers": 1.6092999915902813,
+            "http11.receive_response_body": 0.09166667587123811,
+            "http11.response_closed": 0.024300000707929332
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 2.91429998469539,
+            "connection.start_tls": 11.518999992404133,
+            "http11.send_request_headers": 0.4482666651407878,
+            "http11.send_request_body": 0.23809999887210628,
+            "http11.receive_response_headers": 2.293099998496473,
+            "http11.receive_response_body": 0.09676666619877021,
+            "http11.response_closed": 0.023500004317611456
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.2963000044692308,
+            "connection.start_tls": 16.325400007190183,
+            "http11.send_request_headers": 0.3782000082234542,
+            "http11.send_request_body": 0.1534000039100647,
+            "http11.receive_response_headers": 2.300333338401591,
+            "http11.receive_response_body": 0.08523332265516122,
+            "http11.response_closed": 0.027633320617799956
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 0.95420001889579,
+            "connection.start_tls": 9.95929999044165,
+            "http11.send_request_headers": 0.4044666711706668,
+            "http11.send_request_body": 0.17333333380520344,
+            "http11.receive_response_headers": 1.6195666588221986,
+            "http11.receive_response_body": 0.06366665669096012,
+            "http11.response_closed": 0.015566659082348147
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.0349999938625842,
+            "connection.start_tls": 8.824099990306422,
+            "http11.send_request_headers": 0.2793000021483749,
+            "http11.send_request_body": 0.3217999959209313,
+            "http11.receive_response_headers": 1.9460000136556725,
+            "http11.receive_response_body": 0.05096665699966252,
+            "http11.response_closed": 0.012800000452746948
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 0.986300001386553,
+            "connection.start_tls": 15.325600019423291,
+            "http11.send_request_headers": 0.29760000567572814,
+            "http11.send_request_body": 0.1310333318542689,
+            "http11.receive_response_headers": 1.3216333366775264,
+            "http11.receive_response_body": 0.07283334465076526,
+            "http11.response_closed": 0.018066668417304754
+          }
+        }
+      ]
+    },
+    {
+      "component": "unwrap",
+      "concurrency": 8,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 18.781699996907264,
+      "p95_ms": 42.207720001169946,
+      "p99_ms": 55.120646996074264,
+      "mean_ms": 20.718359002057696,
+      "throughput_rps": 342.80574159248727,
+      "elapsed_s": 0.583420799986925,
+      "resources": {
+        "samples": 1,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 0.04,
+        "db_ram_bytes_median": 102435389,
+        "client_cpu_percent_one_core_median": 22.4,
+        "client_ram_bytes_median": 56549376,
+        "openbao_cpu_percent_one_core_median": 1.35,
+        "openbao_ram_bytes_median": 127506841,
+        "db_cpu_percent_one_core_peak": 0.04,
+        "db_ram_bytes_peak": 102435389,
+        "client_cpu_percent_one_core_peak": 22.4,
+        "client_ram_bytes_peak": 56549376,
+        "openbao_cpu_percent_one_core_peak": 1.35,
+        "openbao_ram_bytes_peak": 127506841
+      },
+      "wire_measured": [
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 4.666764005087316,
+            "http11.send_request_body": 5.186580000445247,
+            "http11.receive_response_headers": 5.271404000231996,
+            "http11.receive_response_body": 0.09280000231228769,
+            "http11.response_closed": 0.026295999996364117
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 8.070743998978287,
+            "http11.send_request_body": 5.178243999835104,
+            "http11.receive_response_headers": 4.825072000967339,
+            "http11.receive_response_body": 0.10042799636721611,
+            "http11.response_closed": 0.023740000324323773
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 6.445291998097673,
+            "http11.send_request_body": 7.066367998486385,
+            "http11.receive_response_headers": 4.625071999616921,
+            "http11.receive_response_body": 0.0952160032466054,
+            "http11.response_closed": 0.02337999758310616
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 4.972060000291094,
+            "http11.send_request_body": 4.281855997396633,
+            "http11.receive_response_headers": 4.536823999369517,
+            "http11.receive_response_body": 0.09750400669872761,
+            "http11.response_closed": 0.025172001915052533
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 5.208167999517173,
+            "http11.send_request_body": 4.974516002694145,
+            "http11.receive_response_headers": 3.511712000472471,
+            "http11.receive_response_body": 0.10297199944034219,
+            "http11.response_closed": 0.028140000067651272
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 4.749492006376386,
+            "http11.send_request_body": 3.988763995002955,
+            "http11.receive_response_headers": 5.21779999951832,
+            "http11.receive_response_body": 0.09321999968960881,
+            "http11.response_closed": 0.025512001011520624
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 5.388811997836456,
+            "http11.send_request_body": 4.308800002327189,
+            "http11.receive_response_headers": 6.139543999452144,
+            "http11.receive_response_body": 0.10787600185722113,
+            "http11.response_closed": 0.026723999762907624
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 5.0341519981157035,
+            "http11.send_request_body": 4.695300002349541,
+            "http11.receive_response_headers": 5.318132000975311,
+            "http11.receive_response_body": 0.10830800281837583,
+            "http11.response_closed": 0.02782799769192934
+          }
+        }
+      ],
+      "wire_startup": [
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 16.072800004621968,
+            "connection.start_tls": 12.48699999996461,
+            "http11.send_request_headers": 0.4014666677297403,
+            "http11.send_request_body": 0.14739998732693493,
+            "http11.receive_response_headers": 1.8033333374963452,
+            "http11.receive_response_body": 0.0822000050296386,
+            "http11.response_closed": 0.020433333702385426
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.0949999850708991,
+            "connection.start_tls": 9.524300025077537,
+            "http11.send_request_headers": 0.42683333352518577,
+            "http11.send_request_body": 0.20393334367933372,
+            "http11.receive_response_headers": 1.5713666701534141,
+            "http11.receive_response_body": 0.0862666735580812,
+            "http11.response_closed": 0.017966657954578597
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 19.299999985378236,
+            "connection.start_tls": 8.051399985561147,
+            "http11.send_request_headers": 0.4362666610783587,
+            "http11.send_request_body": 0.1835333435640981,
+            "http11.receive_response_headers": 1.6068000113591552,
+            "http11.receive_response_body": 0.07063333760015666,
+            "http11.response_closed": 0.018866655106345814
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 25.742600002558902,
+            "connection.start_tls": 9.12080000853166,
+            "http11.send_request_headers": 0.3211666674663623,
+            "http11.send_request_body": 0.13403333529519537,
+            "http11.receive_response_headers": 1.4983333239797503,
+            "http11.receive_response_body": 0.4308666684664786,
+            "http11.response_closed": 0.01886667450889945
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.042200019583106,
+            "connection.start_tls": 14.712800009874627,
+            "http11.send_request_headers": 0.44870000177373487,
+            "http11.send_request_body": 0.17786667255374292,
+            "http11.receive_response_headers": 1.6948333165297906,
+            "http11.receive_response_body": 0.09606666086862485,
+            "http11.response_closed": 0.022499996703118086
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.2575000000651926,
+            "connection.start_tls": 14.876400004141033,
+            "http11.send_request_headers": 0.4449333258283635,
+            "http11.send_request_body": 0.31100000099589425,
+            "http11.receive_response_headers": 2.9617999971378595,
+            "http11.receive_response_body": 0.1104333399174114,
+            "http11.response_closed": 0.0233999938548853
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.0086999973282218,
+            "connection.start_tls": 14.202099991962314,
+            "http11.send_request_headers": 0.44403331897531945,
+            "http11.send_request_body": 0.18790000467561185,
+            "http11.receive_response_headers": 2.020133319698895,
+            "http11.receive_response_body": 0.09540000852818291,
+            "http11.response_closed": 0.02346665132790804
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.2506000057328492,
+            "connection.start_tls": 11.092100001405925,
+            "http11.send_request_headers": 0.4167000006418675,
+            "http11.send_request_body": 0.17873333611836037,
+            "http11.receive_response_headers": 1.9051666701367747,
+            "http11.receive_response_body": 0.09546666600120564,
+            "http11.response_closed": 0.0240333320107311
+          }
+        }
+      ]
+    },
+    {
+      "component": "datakey_wrapped",
+      "concurrency": 8,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 21.399650009698234,
+      "p95_ms": 37.40525498578789,
+      "p99_ms": 50.8840330157545,
+      "mean_ms": 23.176914002397098,
+      "throughput_rps": 327.40399246064163,
+      "elapsed_s": 0.6108661000034772,
+      "resources": {
+        "samples": 1,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 0.0,
+        "db_ram_bytes_median": 102802391,
+        "client_cpu_percent_one_core_median": 26.6,
+        "client_ram_bytes_median": 56451072,
+        "openbao_cpu_percent_one_core_median": 25.46,
+        "openbao_ram_bytes_median": 128031129,
+        "db_cpu_percent_one_core_peak": 0.0,
+        "db_ram_bytes_peak": 102802391,
+        "client_cpu_percent_one_core_peak": 26.6,
+        "client_ram_bytes_peak": 56451072,
+        "openbao_cpu_percent_one_core_peak": 25.46,
+        "openbao_ram_bytes_peak": 128031129
+      },
+      "wire_measured": [
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 5.4132079996634275,
+            "http11.send_request_body": 6.475668002385646,
+            "http11.receive_response_headers": 5.122539998264983,
+            "http11.receive_response_body": 0.18802399979904294,
+            "http11.response_closed": 0.03471200237981975
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 6.76193599589169,
+            "http11.send_request_body": 6.39299999922514,
+            "http11.receive_response_headers": 4.991652002790943,
+            "http11.receive_response_body": 0.1765639998484403,
+            "http11.response_closed": 0.02474800101481378
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 5.728788002161309,
+            "http11.send_request_body": 5.9937159973196685,
+            "http11.receive_response_headers": 5.598572000162676,
+            "http11.receive_response_body": 0.16040400136262178,
+            "http11.response_closed": 0.023339997278526425
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 5.484579999465495,
+            "http11.send_request_body": 6.817299998365343,
+            "http11.receive_response_headers": 5.346059998264536,
+            "http11.receive_response_body": 0.3649320045951754,
+            "http11.response_closed": 0.026919995434582233
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 5.943303999956697,
+            "http11.send_request_body": 5.670168000506237,
+            "http11.receive_response_headers": 5.7119359949138016,
+            "http11.receive_response_body": 0.1273639954160899,
+            "http11.response_closed": 0.03244399907998741
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 5.186443999409676,
+            "http11.send_request_body": 5.332467998377979,
+            "http11.receive_response_headers": 5.92507200082764,
+            "http11.receive_response_body": 0.11635200120508671,
+            "http11.response_closed": 0.027020002016797662
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 6.243415994103998,
+            "http11.send_request_body": 4.810375998495147,
+            "http11.receive_response_headers": 5.176679996075109,
+            "http11.receive_response_body": 0.11927200364880264,
+            "http11.response_closed": 0.029136004159227014
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 6.841355999931693,
+            "http11.send_request_body": 5.4004360001999885,
+            "http11.receive_response_headers": 5.560575994895771,
+            "http11.receive_response_body": 0.14045599848031998,
+            "http11.response_closed": 0.035163997672498226
+          }
+        }
+      ],
+      "wire_startup": [
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 6.212700012838468,
+            "connection.start_tls": 32.39549999125302,
+            "http11.send_request_headers": 0.43030000718620914,
+            "http11.send_request_body": 0.1670333343402793,
+            "http11.receive_response_headers": 2.499933344855284,
+            "http11.receive_response_body": 0.09759999617623787,
+            "http11.response_closed": 0.02550000014404456
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.56460001016967,
+            "connection.start_tls": 20.469300012337044,
+            "http11.send_request_headers": 1.284733327338472,
+            "http11.send_request_body": 0.2551666693761945,
+            "http11.receive_response_headers": 2.104133328733345,
+            "http11.receive_response_body": 0.10253332826929788,
+            "http11.response_closed": 0.02373332972638309
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 13.815000012982637,
+            "connection.start_tls": 11.337700008880347,
+            "http11.send_request_headers": 0.4546999892530342,
+            "http11.send_request_body": 0.20170000304157534,
+            "http11.receive_response_headers": 1.864599985613798,
+            "http11.receive_response_body": 0.08439999267769356,
+            "http11.response_closed": 0.023233335620413225
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 14.104400004725903,
+            "connection.start_tls": 12.6927999954205,
+            "http11.send_request_headers": 0.4528666710636268,
+            "http11.send_request_body": 0.1865666611896207,
+            "http11.receive_response_headers": 7.581100013339892,
+            "http11.receive_response_body": 0.10953334276564419,
+            "http11.response_closed": 0.02370000584051013
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.5263999812304974,
+            "connection.start_tls": 16.761700011556968,
+            "http11.send_request_headers": 0.4675666762826343,
+            "http11.send_request_body": 0.964700011536479,
+            "http11.receive_response_headers": 1.723999991857757,
+            "http11.receive_response_body": 0.13766667689196765,
+            "http11.response_closed": 0.02623332936006288
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.271400018595159,
+            "connection.start_tls": 15.621400001691654,
+            "http11.send_request_headers": 0.4027666679273049,
+            "http11.send_request_body": 0.18673331942409277,
+            "http11.receive_response_headers": 1.8594666714003931,
+            "http11.receive_response_body": 0.09076666901819408,
+            "http11.response_closed": 0.021766677188376587
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 21.03430000715889,
+            "connection.start_tls": 8.610000018961728,
+            "http11.send_request_headers": 0.4094666607367496,
+            "http11.send_request_body": 0.19390000185618797,
+            "http11.receive_response_headers": 1.7191000030531238,
+            "http11.receive_response_body": 0.07639999967068434,
+            "http11.response_closed": 0.018833331220472854
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.1158999986946583,
+            "connection.start_tls": 10.451800015289336,
+            "http11.send_request_headers": 0.5017333411766837,
+            "http11.send_request_body": 0.23603333587137362,
+            "http11.receive_response_headers": 1.719999990503614,
+            "http11.receive_response_body": 0.08236667296538751,
+            "http11.response_closed": 0.02223333770719667
+          }
+        }
+      ]
+    },
+    {
+      "component": "aes_gcm_local",
+      "concurrency": 8,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 0.022549997083842754,
+      "p95_ms": 0.06351501506287593,
+      "p99_ms": 0.1205820144969037,
+      "mean_ms": 0.028790501382900402,
+      "throughput_rps": 9231.90546534201,
+      "elapsed_s": 0.02166399999987334,
+      "resources": {
+        "samples": 1,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 1.71,
+        "db_ram_bytes_median": 102928220,
+        "client_cpu_percent_one_core_median": 0.6,
+        "client_ram_bytes_median": 56967168,
+        "openbao_cpu_percent_one_core_median": 0.75,
+        "openbao_ram_bytes_median": 127506841,
+        "db_cpu_percent_one_core_peak": 1.71,
+        "db_ram_bytes_peak": 102928220,
+        "client_cpu_percent_one_core_peak": 0.6,
+        "client_ram_bytes_peak": 56967168,
+        "openbao_cpu_percent_one_core_peak": 0.75,
+        "openbao_ram_bytes_peak": 127506841
+      },
+      "wire_measured": [
+        {
+          "events": {},
+          "mean_event_ms": {}
+        },
+        {
+          "events": {},
+          "mean_event_ms": {}
+        },
+        {
+          "events": {},
+          "mean_event_ms": {}
+        },
+        {
+          "events": {},
+          "mean_event_ms": {}
+        },
+        {
+          "events": {},
+          "mean_event_ms": {}
+        },
+        {
+          "events": {},
+          "mean_event_ms": {}
+        },
+        {
+          "events": {},
+          "mean_event_ms": {}
+        },
+        {
+          "events": {},
+          "mean_event_ms": {}
+        }
+      ],
+      "wire_startup": [
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 2.1237999899312854,
+            "connection.start_tls": 23.122299986425787,
+            "http11.send_request_headers": 0.4735999973490834,
+            "http11.send_request_body": 0.3110499819740653,
+            "http11.receive_response_headers": 1.5414500085171312,
+            "http11.receive_response_body": 0.09444999159313738,
+            "http11.response_closed": 0.02155001857317984
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 17.283900000620633,
+            "connection.start_tls": 8.372100011911243,
+            "http11.send_request_headers": 0.33480000274721533,
+            "http11.send_request_body": 0.1262500009033829,
+            "http11.receive_response_headers": 1.2999500031583011,
+            "http11.receive_response_body": 0.06650001159869134,
+            "http11.response_closed": 0.01650000922381878
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 15.334399999119341,
+            "connection.start_tls": 9.360600000945851,
+            "http11.send_request_headers": 0.3493999975034967,
+            "http11.send_request_body": 0.15485001495108008,
+            "http11.receive_response_headers": 1.516600008471869,
+            "http11.receive_response_body": 0.0771000050008297,
+            "http11.response_closed": 0.026399997295811772
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.1184999893885106,
+            "connection.start_tls": 8.487500017508864,
+            "http11.send_request_headers": 0.3248499851906672,
+            "http11.send_request_body": 0.12004999734926969,
+            "http11.receive_response_headers": 1.5340000099968165,
+            "http11.receive_response_body": 0.06580000626854599,
+            "http11.response_closed": 0.01589999010320753
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 15.800799999851733,
+            "connection.start_tls": 9.26900000195019,
+            "http11.send_request_headers": 0.5588999920291826,
+            "http11.send_request_body": 0.158949987962842,
+            "http11.receive_response_headers": 1.4284000062616542,
+            "http11.receive_response_body": 0.09744999988470227,
+            "http11.response_closed": 0.021050014765933156
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.7302999913226813,
+            "connection.start_tls": 16.532700014067814,
+            "http11.send_request_headers": 0.8063499990385026,
+            "http11.send_request_body": 0.26679999427869916,
+            "http11.receive_response_headers": 3.372699997271411,
+            "http11.receive_response_body": 0.12754999625030905,
+            "http11.response_closed": 0.029449991416186094
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 2.322099986486137,
+            "connection.start_tls": 21.594699996057898,
+            "http11.send_request_headers": 0.48349999997299165,
+            "http11.send_request_body": 0.15330000314861536,
+            "http11.receive_response_headers": 2.1112000104039907,
+            "http11.receive_response_body": 0.09684999531600624,
+            "http11.response_closed": 0.024800014216452837
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.508000015746802,
+            "connection.start_tls": 11.90029998542741,
+            "http11.send_request_headers": 0.5458499945234507,
+            "http11.send_request_body": 0.1773999974830076,
+            "http11.receive_response_headers": 2.5052499840967357,
+            "http11.receive_response_body": 0.09380001574754715,
+            "http11.response_closed": 0.02474999928381294
+          }
+        }
+      ]
+    },
+    {
+      "component": "sql_plain",
+      "concurrency": 8,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 3.816500015091151,
+      "p95_ms": 10.830545004864659,
+      "p99_ms": 27.3189620085759,
+      "mean_ms": 5.13475899992045,
+      "throughput_rps": 1341.7937903554036,
+      "elapsed_s": 0.14905420001014136,
+      "resources": {
+        "samples": 1,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 0.02,
+        "db_ram_bytes_median": 106640179,
+        "client_cpu_percent_one_core_median": 5.2,
+        "client_ram_bytes_median": 57155584,
+        "openbao_cpu_percent_one_core_median": 0.6,
+        "openbao_ram_bytes_median": 127087411,
+        "db_cpu_percent_one_core_peak": 0.02,
+        "db_ram_bytes_peak": 106640179,
+        "client_cpu_percent_one_core_peak": 5.2,
+        "client_ram_bytes_peak": 57155584,
+        "openbao_cpu_percent_one_core_peak": 0.6,
+        "openbao_ram_bytes_peak": 127087411
+      },
+      "wire_measured": [
+        {
+          "events": {},
+          "mean_event_ms": {}
+        },
+        {
+          "events": {},
+          "mean_event_ms": {}
+        },
+        {
+          "events": {},
+          "mean_event_ms": {}
+        },
+        {
+          "events": {},
+          "mean_event_ms": {}
+        },
+        {
+          "events": {},
+          "mean_event_ms": {}
+        },
+        {
+          "events": {},
+          "mean_event_ms": {}
+        },
+        {
+          "events": {},
+          "mean_event_ms": {}
+        },
+        {
+          "events": {},
+          "mean_event_ms": {}
+        }
+      ],
+      "wire_startup": [
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 19.730900006834418,
+            "connection.start_tls": 7.36060002236627,
+            "http11.send_request_headers": 0.2987500047311187,
+            "http11.send_request_body": 0.11414999607950449,
+            "http11.receive_response_headers": 1.095950006856583,
+            "http11.receive_response_body": 0.06839999696239829,
+            "http11.response_closed": 0.01854999572969973
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 0.9568000095896423,
+            "connection.start_tls": 6.886899995151907,
+            "http11.send_request_headers": 0.2691000117920339,
+            "http11.send_request_body": 0.09329998283647001,
+            "http11.receive_response_headers": 1.0325499897589907,
+            "http11.receive_response_body": 0.061650003772228956,
+            "http11.response_closed": 0.01680001150816679
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 17.8087999811396,
+            "connection.start_tls": 9.663299977546558,
+            "http11.send_request_headers": 0.31550000130664557,
+            "http11.send_request_body": 0.14370000280905515,
+            "http11.receive_response_headers": 1.4384500100277364,
+            "http11.receive_response_body": 0.0778499961597845,
+            "http11.response_closed": 0.01930000144056976
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 12.658299994654953,
+            "connection.start_tls": 6.982099992455915,
+            "http11.send_request_headers": 0.3373000072315335,
+            "http11.send_request_body": 0.12879999121651053,
+            "http11.receive_response_headers": 1.2957500148331746,
+            "http11.receive_response_body": 0.04680000711232424,
+            "http11.response_closed": 0.011800002539530396
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 14.794799993978813,
+            "connection.start_tls": 5.500100000062957,
+            "http11.send_request_headers": 0.21660000493284315,
+            "http11.send_request_body": 0.08100000559352338,
+            "http11.receive_response_headers": 1.1003499967046082,
+            "http11.receive_response_body": 0.060649996157735586,
+            "http11.response_closed": 0.015599987818859518
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.0566999844741076,
+            "connection.start_tls": 6.268099998123944,
+            "http11.send_request_headers": 0.26840000646188855,
+            "http11.send_request_body": 0.09839999256655574,
+            "http11.receive_response_headers": 0.9695999906398356,
+            "http11.receive_response_body": 0.06120001489762217,
+            "http11.response_closed": 0.01575000351294875
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 19.230600009905174,
+            "connection.start_tls": 7.347100006882101,
+            "http11.send_request_headers": 0.38845000381115824,
+            "http11.send_request_body": 0.2001999964704737,
+            "http11.receive_response_headers": 1.3010499969823286,
+            "http11.receive_response_body": 0.06559999019373208,
+            "http11.response_closed": 0.021850020857527852
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 2,
+            "http11.send_request_headers.complete": 2,
+            "http11.send_request_body.started": 2,
+            "http11.send_request_body.complete": 2,
+            "http11.receive_response_headers.started": 2,
+            "http11.receive_response_headers.complete": 2,
+            "http11.receive_response_body.started": 2,
+            "http11.receive_response_body.complete": 2,
+            "http11.response_closed.started": 2,
+            "http11.response_closed.complete": 2
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 16.40860000043176,
+            "connection.start_tls": 5.898100003832951,
+            "http11.send_request_headers": 0.182400006451644,
+            "http11.send_request_body": 0.06874999962747097,
+            "http11.receive_response_headers": 0.9281499951612204,
+            "http11.receive_response_body": 0.04220000118948519,
+            "http11.response_closed": 0.00990001717582345
+          }
+        }
+      ]
+    },
+    {
+      "component": "hmac_batch_3",
+      "concurrency": 8,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 16.19669998763129,
+      "p95_ms": 27.027765015373006,
+      "p99_ms": 36.48745498911006,
+      "mean_ms": 16.325341499759816,
+      "throughput_rps": 458.05970946070033,
+      "elapsed_s": 0.43662429999676533,
+      "resources": {
+        "samples": 1,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 0.02,
+        "db_ram_bytes_median": 104553512,
+        "client_cpu_percent_one_core_median": 18.4,
+        "client_ram_bytes_median": 56541184,
+        "openbao_cpu_percent_one_core_median": 0.54,
+        "openbao_ram_bytes_median": 128345702,
+        "db_cpu_percent_one_core_peak": 0.02,
+        "db_ram_bytes_peak": 104553512,
+        "client_cpu_percent_one_core_peak": 18.4,
+        "client_ram_bytes_peak": 56541184,
+        "openbao_cpu_percent_one_core_peak": 0.54,
+        "openbao_ram_bytes_peak": 128345702
+      },
+      "wire_measured": [
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 3.3307959977537394,
+            "http11.send_request_body": 4.504323999863118,
+            "http11.receive_response_headers": 3.1869840004947037,
+            "http11.receive_response_body": 0.08375200442969799,
+            "http11.response_closed": 0.019707996398210526
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 4.769692003028467,
+            "http11.send_request_body": 3.9600960013922304,
+            "http11.receive_response_headers": 3.1478120072279125,
+            "http11.receive_response_body": 0.0903840025421232,
+            "http11.response_closed": 0.03733600256964564
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 4.253639995586127,
+            "http11.send_request_body": 4.006679999874905,
+            "http11.receive_response_headers": 4.211955997161567,
+            "http11.receive_response_body": 0.12052800040692091,
+            "http11.response_closed": 0.024960003793239594
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 5.100543999578804,
+            "http11.send_request_body": 4.145323997363448,
+            "http11.receive_response_headers": 3.2204360037576407,
+            "http11.receive_response_body": 0.09970400016754866,
+            "http11.response_closed": 0.01829199492931366
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 4.944535999093205,
+            "http11.send_request_body": 3.6503080010879785,
+            "http11.receive_response_headers": 4.863496001344174,
+            "http11.receive_response_body": 0.10048800148069859,
+            "http11.response_closed": 0.025759999407455325
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 3.5663559986278415,
+            "http11.send_request_body": 4.544267999008298,
+            "http11.receive_response_headers": 3.3063000009860843,
+            "http11.receive_response_body": 0.125815998762846,
+            "http11.response_closed": 0.02066400251351297
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 4.930715999798849,
+            "http11.send_request_body": 3.968487997772172,
+            "http11.receive_response_headers": 3.9920599991455674,
+            "http11.receive_response_body": 0.0992640049662441,
+            "http11.response_closed": 0.01890400191769004
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 3.7727040017489344,
+            "http11.send_request_body": 4.560411999700591,
+            "http11.receive_response_headers": 4.247892000712454,
+            "http11.receive_response_body": 0.07606399827636778,
+            "http11.response_closed": 0.021424000151455402
+          }
+        }
+      ],
+      "wire_startup": [
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 5.080600007204339,
+            "connection.start_tls": 10.803500015754253,
+            "http11.send_request_headers": 0.403233328446125,
+            "http11.send_request_body": 0.16583333490416408,
+            "http11.receive_response_headers": 2.0536000083666295,
+            "http11.receive_response_body": 0.08196667962086697,
+            "http11.response_closed": 0.021599999551350873
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.4977000246290118,
+            "connection.start_tls": 9.842700004810467,
+            "http11.send_request_headers": 0.3598333472230782,
+            "http11.send_request_body": 0.1473333298539122,
+            "http11.receive_response_headers": 1.8921333248727024,
+            "http11.receive_response_body": 0.08086667124492426,
+            "http11.response_closed": 0.02030000905506313
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 17.85780000500381,
+            "connection.start_tls": 10.824199998751283,
+            "http11.send_request_headers": 0.4615333358136316,
+            "http11.send_request_body": 0.1983666734304279,
+            "http11.receive_response_headers": 1.9296333193778992,
+            "http11.receive_response_body": 0.09299999995467563,
+            "http11.response_closed": 0.025366665795445442
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.3410999963525683,
+            "connection.start_tls": 22.348099999362603,
+            "http11.send_request_headers": 0.5065333292198678,
+            "http11.send_request_body": 0.18773333673986295,
+            "http11.receive_response_headers": 2.140266675269231,
+            "http11.receive_response_body": 0.12316665379330516,
+            "http11.response_closed": 0.026599989117433626
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 17.56169999134727,
+            "connection.start_tls": 11.470800003735349,
+            "http11.send_request_headers": 0.44099999164852005,
+            "http11.send_request_body": 0.16609998419880867,
+            "http11.receive_response_headers": 3.01259999590305,
+            "http11.receive_response_body": 0.08800000068731606,
+            "http11.response_closed": 0.021066671858231228
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 19.364300009328872,
+            "connection.start_tls": 8.57560001895763,
+            "http11.send_request_headers": 0.3523333192182084,
+            "http11.send_request_body": 0.12329999784318109,
+            "http11.receive_response_headers": 1.254500006325543,
+            "http11.receive_response_body": 0.06783333568212886,
+            "http11.response_closed": 0.019566650735214353
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 0.8897999941837043,
+            "connection.start_tls": 7.9341999953612685,
+            "http11.send_request_headers": 0.4319999910270174,
+            "http11.send_request_body": 0.15383334054301182,
+            "http11.receive_response_headers": 1.7381333357964952,
+            "http11.receive_response_body": 0.09070000184389453,
+            "http11.response_closed": 0.020066664243737858
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 3,
+            "http11.send_request_headers.complete": 3,
+            "http11.send_request_body.started": 3,
+            "http11.send_request_body.complete": 3,
+            "http11.receive_response_headers.started": 3,
+            "http11.receive_response_headers.complete": 3,
+            "http11.receive_response_body.started": 3,
+            "http11.receive_response_body.complete": 3,
+            "http11.response_closed.started": 3,
+            "http11.response_closed.complete": 3
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 14.292100007878616,
+            "connection.start_tls": 6.533000007038936,
+            "http11.send_request_headers": 0.3487999977854391,
+            "http11.send_request_body": 0.17906666228858134,
+            "http11.receive_response_headers": 1.4292000075026106,
+            "http11.receive_response_body": 0.07063333760015666,
+            "http11.response_closed": 0.016433332348242402
+          }
+        }
+      ]
+    },
+    {
+      "component": "unwrap_batch_50",
+      "concurrency": 8,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 25.770449996343814,
+      "p95_ms": 84.7530350001761,
+      "p99_ms": 212.9761119832983,
+      "mean_ms": 35.65794999929494,
+      "throughput_rps": 216.78912542361297,
+      "elapsed_s": 0.9225555000011809,
+      "resources": {
+        "samples": 1,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 0.03,
+        "db_ram_bytes_median": 104647884,
+        "client_cpu_percent_one_core_median": 26.2,
+        "client_ram_bytes_median": 57978880,
+        "openbao_cpu_percent_one_core_median": 0.83,
+        "openbao_ram_bytes_median": 129708851,
+        "db_cpu_percent_one_core_peak": 0.03,
+        "db_ram_bytes_peak": 104647884,
+        "client_cpu_percent_one_core_peak": 26.2,
+        "client_ram_bytes_peak": 57978880,
+        "openbao_cpu_percent_one_core_peak": 0.83,
+        "openbao_ram_bytes_peak": 129708851
+      },
+      "wire_measured": [
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 5.193555997684598,
+            "http11.send_request_body": 6.683728004572913,
+            "http11.receive_response_headers": 4.863347997888923,
+            "http11.receive_response_body": 10.034439999144524,
+            "http11.response_closed": 0.02836399944499135
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 5.689019995043054,
+            "http11.send_request_body": 5.431059998227283,
+            "http11.receive_response_headers": 8.313008002005517,
+            "http11.receive_response_body": 3.8712439965456724,
+            "http11.response_closed": 0.026275996351614594
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 9.272575998911634,
+            "http11.send_request_body": 9.010999999009073,
+            "http11.receive_response_headers": 8.022559999953955,
+            "http11.receive_response_body": 3.38731600320898,
+            "http11.response_closed": 0.024815999204292893
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 6.219263994134963,
+            "http11.send_request_body": 9.745859997346997,
+            "http11.receive_response_headers": 4.544112000148743,
+            "http11.receive_response_body": 4.411731999134645,
+            "http11.response_closed": 0.022440003231167793
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 7.57306799874641,
+            "http11.send_request_body": 7.086580001050606,
+            "http11.receive_response_headers": 6.97020799969323,
+            "http11.receive_response_body": 4.496784000657499,
+            "http11.response_closed": 0.024492002557963133
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 6.965764000779018,
+            "http11.send_request_body": 6.11703600268811,
+            "http11.receive_response_headers": 9.766875999048352,
+            "http11.receive_response_body": 4.310252002906054,
+            "http11.response_closed": 0.051455998327583075
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 8.186975996941328,
+            "http11.send_request_body": 5.215307999169454,
+            "http11.receive_response_headers": 8.622292003128678,
+            "http11.receive_response_body": 5.278299996862188,
+            "http11.response_closed": 0.023732001427561045
+          }
+        },
+        {
+          "events": {
+            "http11.send_request_headers.started": 25,
+            "http11.send_request_headers.complete": 25,
+            "http11.send_request_body.started": 25,
+            "http11.send_request_body.complete": 25,
+            "http11.receive_response_headers.started": 25,
+            "http11.receive_response_headers.complete": 25,
+            "http11.receive_response_body.started": 25,
+            "http11.receive_response_body.complete": 25,
+            "http11.response_closed.started": 25,
+            "http11.response_closed.complete": 25
+          },
+          "mean_event_ms": {
+            "http11.send_request_headers": 6.018891998101026,
+            "http11.send_request_body": 9.117499998537824,
+            "http11.receive_response_headers": 7.63200799934566,
+            "http11.receive_response_body": 5.035612001083791,
+            "http11.response_closed": 0.024463997688144445
+          }
+        }
+      ],
+      "wire_startup": [
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 4,
+            "http11.send_request_headers.complete": 4,
+            "http11.send_request_body.started": 4,
+            "http11.send_request_body.complete": 4,
+            "http11.receive_response_headers.started": 4,
+            "http11.receive_response_headers.complete": 4,
+            "http11.receive_response_body.started": 4,
+            "http11.receive_response_body.complete": 4,
+            "http11.response_closed.started": 4,
+            "http11.response_closed.complete": 4
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 23.67140000569634,
+            "connection.start_tls": 10.646300012012944,
+            "http11.send_request_headers": 0.4994750051992014,
+            "http11.send_request_body": 0.24227500398410484,
+            "http11.receive_response_headers": 4.9697499998728745,
+            "http11.receive_response_body": 0.2253500060760416,
+            "http11.response_closed": 0.022024993086233735
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 4,
+            "http11.send_request_headers.complete": 4,
+            "http11.send_request_body.started": 4,
+            "http11.send_request_body.complete": 4,
+            "http11.receive_response_headers.started": 4,
+            "http11.receive_response_headers.complete": 4,
+            "http11.receive_response_body.started": 4,
+            "http11.receive_response_body.complete": 4,
+            "http11.response_closed.started": 4,
+            "http11.response_closed.complete": 4
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 1.094800012651831,
+            "connection.start_tls": 8.792900014668703,
+            "http11.send_request_headers": 0.3482249958324246,
+            "http11.send_request_body": 0.2285250011482276,
+            "http11.receive_response_headers": 1.8424500012770295,
+            "http11.receive_response_body": 0.17137500981334597,
+            "http11.response_closed": 0.015749996236991137
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 4,
+            "http11.send_request_headers.complete": 4,
+            "http11.send_request_body.started": 4,
+            "http11.send_request_body.complete": 4,
+            "http11.receive_response_headers.started": 4,
+            "http11.receive_response_headers.complete": 4,
+            "http11.receive_response_body.started": 4,
+            "http11.receive_response_body.complete": 4,
+            "http11.response_closed.started": 4,
+            "http11.response_closed.complete": 4
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 21.481300005689263,
+            "connection.start_tls": 7.589699991513044,
+            "http11.send_request_headers": 0.36485000600805506,
+            "http11.send_request_body": 0.21530000230995938,
+            "http11.receive_response_headers": 1.3912250069552101,
+            "http11.receive_response_body": 0.1433750003343448,
+            "http11.response_closed": 0.018349994206801057
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 4,
+            "http11.send_request_headers.complete": 4,
+            "http11.send_request_body.started": 4,
+            "http11.send_request_body.complete": 4,
+            "http11.receive_response_headers.started": 4,
+            "http11.receive_response_headers.complete": 4,
+            "http11.receive_response_body.started": 4,
+            "http11.receive_response_body.complete": 4,
+            "http11.response_closed.started": 4,
+            "http11.response_closed.complete": 4
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 0.8630999946035445,
+            "connection.start_tls": 5.257899989373982,
+            "http11.send_request_headers": 0.24214999575633556,
+            "http11.send_request_body": 0.1539999939268455,
+            "http11.receive_response_headers": 2.063399995677173,
+            "http11.receive_response_body": 0.2725750018726103,
+            "http11.response_closed": 0.011725001968443394
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 4,
+            "http11.send_request_headers.complete": 4,
+            "http11.send_request_body.started": 4,
+            "http11.send_request_body.complete": 4,
+            "http11.receive_response_headers.started": 4,
+            "http11.receive_response_headers.complete": 4,
+            "http11.receive_response_body.started": 4,
+            "http11.receive_response_body.complete": 4,
+            "http11.response_closed.started": 4,
+            "http11.response_closed.complete": 4
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 0.6210999854374677,
+            "connection.start_tls": 5.363000003853813,
+            "http11.send_request_headers": 0.25830000231508166,
+            "http11.send_request_body": 0.15787500160513446,
+            "http11.receive_response_headers": 3.9204000058816746,
+            "http11.receive_response_body": 0.10464999650139362,
+            "http11.response_closed": 0.012775002687703818
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 4,
+            "http11.send_request_headers.complete": 4,
+            "http11.send_request_body.started": 4,
+            "http11.send_request_body.complete": 4,
+            "http11.receive_response_headers.started": 4,
+            "http11.receive_response_headers.complete": 4,
+            "http11.receive_response_body.started": 4,
+            "http11.receive_response_body.complete": 4,
+            "http11.response_closed.started": 4,
+            "http11.response_closed.complete": 4
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 0.8760000055190176,
+            "connection.start_tls": 6.0406000120565295,
+            "http11.send_request_headers": 0.2021750115090981,
+            "http11.send_request_body": 0.10917499457718804,
+            "http11.receive_response_headers": 3.521250000630971,
+            "http11.receive_response_body": 0.11140000424347818,
+            "http11.response_closed": 0.011999989510513842
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 4,
+            "http11.send_request_headers.complete": 4,
+            "http11.send_request_body.started": 4,
+            "http11.send_request_body.complete": 4,
+            "http11.receive_response_headers.started": 4,
+            "http11.receive_response_headers.complete": 4,
+            "http11.receive_response_body.started": 4,
+            "http11.receive_response_body.complete": 4,
+            "http11.response_closed.started": 4,
+            "http11.response_closed.complete": 4
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 11.00399999995716,
+            "connection.start_tls": 6.470299995271489,
+            "http11.send_request_headers": 0.23327499366132542,
+            "http11.send_request_body": 0.12949998927069828,
+            "http11.receive_response_headers": 1.5295000048354268,
+            "http11.receive_response_body": 0.17055000353138894,
+            "http11.response_closed": 0.012575001164805144
+          }
+        },
+        {
+          "events": {
+            "connection.connect_tcp.started": 1,
+            "connection.connect_tcp.complete": 1,
+            "connection.start_tls.started": 1,
+            "connection.start_tls.complete": 1,
+            "http11.send_request_headers.started": 4,
+            "http11.send_request_headers.complete": 4,
+            "http11.send_request_body.started": 4,
+            "http11.send_request_body.complete": 4,
+            "http11.receive_response_headers.started": 4,
+            "http11.receive_response_headers.complete": 4,
+            "http11.receive_response_body.started": 4,
+            "http11.receive_response_body.complete": 4,
+            "http11.response_closed.started": 4,
+            "http11.response_closed.complete": 4
+          },
+          "mean_event_ms": {
+            "connection.connect_tcp": 15.47230000142008,
+            "connection.start_tls": 6.726199993863702,
+            "http11.send_request_headers": 0.3833250011666678,
+            "http11.send_request_body": 0.17927499720826745,
+            "http11.receive_response_headers": 1.592649998201523,
+            "http11.receive_response_body": 0.167199999850709,
+            "http11.response_closed": 0.017899998056236655
+          }
+        }
+      ]
+    }
+  ],
+  "scenario_rpc_counts": {
+    "read_by_nik": {
+      "transit/hmac/search-hmac/sha2-256": 1,
+      "transit/decrypt/pii-kek": 1,
+      "transit/decrypt/finance-kek": 1
+    },
+    "read_by_email": {
+      "transit/hmac/search-hmac/sha2-256": 1,
+      "transit/decrypt/pii-kek": 1,
+      "transit/decrypt/finance-kek": 1
+    },
+    "read_profile": {
+      "transit/decrypt/pii-kek": 1,
+      "transit/decrypt/finance-kek": 1
+    },
+    "list_page": {
+      "transit/decrypt/pii-kek": 1
+    },
+    "update_contact": {
+      "transit/decrypt/pii-kek": 1
+    },
+    "insert_member": {
+      "transit/encrypt/pii-kek": 1,
+      "transit/encrypt/finance-kek": 1,
+      "transit/hmac/search-hmac/sha2-256": 3,
+      "transit/decrypt/pii-kek": 1,
+      "transit/decrypt/finance-kek": 1
+    },
+    "mixed_expected_per_request": 2.9000000000000004
+  },
+  "passed": true,
+  "key_corpus": {
+    "version": 1,
+    "seed": 42,
+    "sha256": "b38b8f59819b1eee314fac75c510417f7945c8d1b9b4e52f95839bf865e92ea5",
+    "profile_count": 2048,
+    "page_count": 64,
+    "location": "DPR_PRIVATE_DIR/benchmark (not exported)"
+  },
+  "diagnosis_token_revoked": true,
+  "completed_at_utc": "2026-10-28T12:19:12.338866+00:00",
+  "diagnosis_elapsed_s": 56.765063,
+  "naive_source_commit": "b70f849d39a10887a39486b2c9ade4a532c3d715",
+  "production_source_provenance": "Production sources were unchanged during initial component measurements; naive_source_commit identifies their exact Git blobs.",
+  "datakey_note": "wrapped datakey endpoint measured with temporary svc-migration token (900s), revoked after measurement; adapter instead generates a local CSPRNG DEK then wraps it.",
+  "sql_note": "sql_plain component measures full-profile driver round trip using bench_user without TLS; protected server db_time is separately anchored by pg_stat_statements from naive_v1.",
+  "naive_read_by_nik_reference": {
+    "mean_ms": 55.43515800114343,
+    "p95_ms": 85.01856999937445,
+    "throughput_rps": 144.18712936505833,
+    "db_time": {
+      "source": "pg_stat_statements",
+      "calls": 8655,
+      "requests": 8655,
+      "total_exec_time_ms": 1351.210899000002,
+      "db_time_ms_per_request": 0.15611911022530353,
+      "db_time_ms_per_sql_call": 0.15611911022530353,
+      "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+      "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+    },
+    "resources": {
+      "samples": 15,
+      "failed_samples": 0,
+      "db_cpu_percent_one_core_median": 7.73,
+      "db_ram_bytes_median": 894435328,
+      "client_cpu_percent_one_core_median": 113.0,
+      "client_ram_bytes_median": 68919296,
+      "openbao_cpu_percent_one_core_median": 54.02,
+      "openbao_ram_bytes_median": 141452902,
+      "db_cpu_percent_one_core_peak": 8.39,
+      "db_ram_bytes_peak": 894959616,
+      "client_cpu_percent_one_core_peak": 120.5,
+      "client_ram_bytes_peak": 69476352,
+      "openbao_cpu_percent_one_core_peak": 79.36,
+      "openbao_ram_bytes_peak": 141872332
+    }
+  },
+  "interpretation": {
+    "persistent_http_already_present": true,
+    "persistent_db_already_present": true,
+    "tls_handshakes_in_measured_rpc_cases": 0,
+    "rpc_serial_per_full_lookup": 3,
+    "insert_hmac_serial_before": 3,
+    "list_page_unwrap_already_batched": true,
+    "cross_domain_unwrap_note": "PII and FIN use distinct Transit key paths; not combined into one decrypt batch. No weaker key separation introduced.",
+    "cpu_note": "Naive first protected read_by_nik OpenBao median 54.02% of one core, peak 79.36%; client median 113% of one core. Micro-case CPU samples are short and not evidence of server saturation. Network/TLS HTTP framing and client/server scheduling are included in RPC times.",
+    "bounded_cache_justification": "Pool already reuses TLS. Insert HMAC batch reduces RPCs but does not reduce the three-RPC full read path. Therefore optional existing bounded DEK cache is evaluated, without caching plaintext or blind-index values.",
+    "locking": "OpenBaoClient holds a per-client RLock over the HTTP call, but each benchmark worker has its own client, so no shared OpenBao lock serializes all eight workers. PII and FIN calls remain serial within a request.",
+    "streaming_logging": "Runner has persistent PostgreSQL sessions and buffered per-worker CSV logging; no per-request connect or shared synchronous CSV lock."
+  },
+  "post_change_transport_probes": {
+    "direct_stdlib_reference": "evidence/benchmark/keyservice_latency/transport_probe.json",
+    "intermediate_httpx_dispatch": "evidence/benchmark/keyservice_latency/transport_intermediate_retained.json",
+    "final_api_probe": "evidence/benchmark/keyservice_latency/transport_pool_probe.json"
+  }
+}

@@ -102,3 +102,4 @@ class PlaintextAdapter:
             raise ValueError("Unknown business operation")
         if not ok:
             raise ValueError("Business result mismatch (values withheld)")
+        return actual

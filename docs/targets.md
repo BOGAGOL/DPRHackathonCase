@@ -100,8 +100,21 @@ tetap dinilai. Kelulusan DB tidak mengubah status API menjadi lulus.
 | ID | Metrik dan target | Perhitungan |
 | --- | --- | --- |
 | P01 | **p95 protected ≤ 1,5 × baseline (API dan DB terpisah)** | Median p95 per-run protected / median p95 per-run plain ≤ 1,5. |
+| P01A | **Selisih absolut p95: baca ≤ +5 ms; tulis ≤ +10 ms** | Median p95 protected ≤ median p95 plain + 5 ms untuk read_by_nik/read_by_email/read_profile/list_page; +10 ms untuk update_contact/insert_member/mixed. Dilaporkan berdampingan dengan P01. |
 | P02 | **Throughput protected ≥ 70% baseline** | Median throughput sukses per-run protected / median throughput sukses per-run plain ≥ 0,70. |
 | P03 | **Error rate tidak meningkat** | Median error rate per-run protected ≤ median error rate per-run plain, tanpa toleransi tambahan; baseline 0 berarti protected harus 0. |
+
+**Amandemen 28 Oktober 2026, disetujui pengguna/tim sebelum benchmark B-P-P-B:**
+tambahkan P01A di atas tanpa mengganti ambang rasio P01, throughput P02, atau error P03.
+Laporkan status rasio dan absolut secara terpisah; kelulusan absolut tidak menghapus kegagalan rasio.
+Mixed memakai batas tulis +10 ms karena mengandung 30% operasi tulis. Ambang ini berlaku untuk DB
+dan API secara terpisah pada pasangan workload yang sama; API belum tersedia tetap BELUM DIUJI.
+`db_time` dilaporkan berdampingan melalui koneksi admin/monitoring terpisah ke pg_stat_statements,
+tanpa menambah hak role workload. Counter memberi mean execution time per request/per SQL call,
+bukan p50/p95 server; reset/counter tidak lengkap dinyatakan tidak dapat dinilai.
+pg_stat_statements aktif pada persiapan sesi berpasangan; baseline awal 100k/1M diukur tanpa
+extension/preload tersebut. Hanya B vs P dalam blok B-P-P-B dengan konfigurasi sama dibandingkan
+langsung. Hasil baseline awal tetap disimpan sebagai historis.
 
 Latency diukur dari pemanggilan operasi sampai hasil bisnis selesai diterima dan divalidasi, termasuk
 biaya crypto/unwrap untuk protected. Throughput sukses = jumlah operasi berhasil / durasi pengukuran;

@@ -1,0 +1,17 @@
+{
+  "database": "protected_100k",
+  "passed": true,
+  "ESCE": {
+    "numerator": 0,
+    "denominator": 2449994,
+    "ratio": 0.0
+  },
+  "artifact_sha256": "0169e23bf8d53524b3f831b298d23880baaa465f85f00b52b6c37897f2f137b4",
+  "rows_checked": 100000,
+  "crypto_client_constructed": false,
+  "storage_format_changed": false,
+  "scope": "Existing actual protected dump; historical evidence retained",
+  "timestamp_utc": "2026-10-28T12:32:12.804984+00:00",
+  "reused_evidence_from": "evidence/benchmark/keyservice_latency/no_key_100k.json",
+  "reuse_reason": "Only HTTPS transport changed after full no-key artifact scan; cipher codec, protection profile and immutable artifact hashes unchanged."
+}

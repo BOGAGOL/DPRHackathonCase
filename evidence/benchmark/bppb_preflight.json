@@ -1,0 +1,96 @@
+{
+  "started_at_utc": "2026-10-28T09:01:06.106593+00:00",
+  "passed": true,
+  "official_runs_started": false,
+  "gates": {
+    "target": {
+      "passed": true,
+      "commit": "8c09a25ccb6d415a231f692b68b9674495c31faf",
+      "committed_at_wib": "2026-10-28T13:37:47+07:00",
+      "before_first_run": true
+    },
+    "power": {
+      "passed": true,
+      "sample": {
+        "timestamp_utc": "2026-10-28T09:01:06.143416+00:00",
+        "ac_online": true
+      },
+      "kernel_power": {
+        "provider": "Microsoft-Windows-Kernel-Power",
+        "log_name": "System",
+        "query_start_utc": "2026-10-28T09:01:06.1434160+00:00",
+        "query_end_utc": "2026-10-28T09:01:06.1434160+00:00",
+        "latest_event_at_or_before_start": {
+          "record_id": 28342,
+          "event_id": 105,
+          "time_utc": "2026-10-28T06:45:03.6387491+00:00",
+          "time_wib": "2026-10-28T13:45:03.6387491+07:00",
+          "ac_online": true
+        },
+        "events_in_window": []
+      },
+      "effective_overlay_guid": "ded574b5-45a0-4f42-8737-46345c09c238",
+      "power_mode": "Best performance",
+      "sleep_ac_seconds": 0,
+      "mapping_source": "https://learn.microsoft.com/en-us/windows-hardware/customize/desktop/customize-power-slider"
+    },
+    "services": {
+      "passed": true,
+      "running_containers": [
+        "dpr-infra-openbao-1",
+        "pg-dpr"
+      ],
+      "openbao_unsealed": true
+    },
+    "workload_sessions": {
+      "passed": true,
+      "other_sessions": 0
+    },
+    "pg_stat_statements": {
+      "passed": true,
+      "shared_preload_libraries": "pg_stat_statements"
+    },
+    "integrity": {
+      "passed": true
+    },
+    "disk": {
+      "passed": true,
+      "free_bytes": 52457623552,
+      "minimum_bytes": 21474836480
+    }
+  },
+  "databases": {
+    "baseline_100k": {
+      "rows": 100000,
+      "rows_match": true,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "checksum_matches_generation": true,
+      "database_bytes": 104822463
+    },
+    "baseline_1m": {
+      "rows": 1000000,
+      "rows_match": true,
+      "checksum_sha256": "39812166a18ed61a6c45787d8af1a84a61c561c44955855c4681c9c02c5186f0",
+      "checksum_matches_generation": true,
+      "database_bytes": 825284287
+    },
+    "postgres": {
+      "rows": 734,
+      "rows_match": true,
+      "checksum_sha256": "5113038953aea9383f600de725b4267ecbf93de47c2a603a68bde6ad7e5c17e8",
+      "checksum_matches_generation": true,
+      "database_bytes": 8640191
+    },
+    "protected_100k": {
+      "rows": 100000,
+      "rows_match": true,
+      "database_bytes": 262657727
+    },
+    "protected_1m": {
+      "rows": 1000000,
+      "rows_match": true,
+      "database_bytes": 2243573439
+    }
+  },
+  "completed_at_utc": "2026-10-28T09:01:44.809661+00:00"
+}

@@ -294,3 +294,46 @@ sebelumnya. Patch hanya frontend. Build Next.js/TypeScript lulus; preview login
 1280px/390px diperiksa visual dan 14 test browser lulus. Screenshot sebelum input
 kredensial, hanya memakai API mock sintetis. Tidak ada perubahan DB atau deployment
 langsung ke VM. Rilis memakai paket frontend yang diperbarui dan rebuild/restart web.
+
+## Kit persiapan whitebox pentest — 28 Oktober 2026
+
+Prompt revisi pengguna secara eksplisit meminta docs/deploy/PENTEST_BRIEF.md dan
+scripts/deploy/reset_to_golden.sh di luar app/. Perubahan dibatasi ke file tersebut
+dan helper deploy B; tidak mengubah source/tooling A/C, SQL A5 atau dataset asal.
+Audit historis docs/team_status_20261028.md dibaca dari remote run/overnight-28okt;
+statusnya mendahului rilis A5 dan deployment VM, bukan bukti terbaru VM.
+
+Delapan pt accounts memakai Argon2id/random, operator scope disjoint5+5, dua owner
+bound ke pengguna_bidx unik. Admin setup URL harus protected_734, endpoint sama dan
+verify-full. Existing file/scope diverifikasi tanpa rotate/regrant; demo/member rows
+tidak ditulis. Private credential file600 di private/service-b/pentest/pt-accounts.json,
+peta UUID/legacy metadata terpisah tanpa password. Disable8 pt membersihkan sesi.
+
+Reset memerlukan dua unit systemd DPR yang isinya sama dengan source review,
+lokasi checkout fixed, container berlabel vm-demo, PG18 TLS dan metadata identitas
+cluster/OID. Golden immutable dibuat saat app berhenti, ALLOW_CONNECTIONSfalse;
+reset hanya DROP/CREATE protected_734. Audit ekspor allowlist ke private600 sebelum
+stop dan sesudah stop; CONNECT ACL dipulihkan, count734/A5/FORCE RLS dan14 login
+diverifikasi. Fail stop tidak memaksa start app setelah kegagalan CREATE.
+Setting database kustom ditolak sebelum golden karena tidak ikut CREATE TEMPLATE.
+Golden satu volume bukan backup bencana, kehilangan kunci Bao tidak dipulihkan oleh
+golden. Freeze key deletion/rotation; old versions yang tetap tersedia masih valid.
+Restore utama Alby; disable pt sesudah restore agar tidak kembali aktif dari golden.
+
+Output operator VM: localhost5433/8200/8100/3443, Nginx80/443, UFW inactive, unit DPR0,
+unknown localhost36577 dikeluarkan dari scope. Cloud SG/iptables belum diverifikasi.
+Operator telah mengupload kit melalui sesi SSH miliknya dan menjalankan provisioning,
+install unit, A5 verify, inventory, create golden dan satu reset; semua PASS.
+Laporan diunduh melalui SCP ke cache lokal dan disimpan terpisah sebagai vm-*.json.
+Inventory nyata: PG18.6/Python3.12.3/Node24.22.1/Nginx1.24.0; modeprotected target734,
+migration_jobs validated734, verifiedTLS seluruh URL role, Bao2.5.5 unsealed policy
+svc-app TTL5648s pada21:24:57WIB. Reset count734 dan14 login/policy/IDOR/A5 checks
+true. Metadata audit7849 event diekspor sebelum DROP. Unit test tidak dipakai untuk
+mengklaim hasil VM. Peta10 UUID/legacy dan8 akun dimasukkan ke brief.
+
+Inventory sudo mengidentifikasi localhost36577 sebagai containerd; tat_agent.service
+dan daemon OS/Ardi excluded. iptables INPUTACCEPT/FORWARDDROP/OUTPUTACCEPT, nft raw
+menolak akses non-loopback ke127.0.0.1 ports5433/8200. Cloud SG tetap NOT VERIFIED.
+Certificate Let's Encrypt YE2 aktif sampai4Nov09:03:49WIB. Private custody/renewal
+end-to-end dan pentest penuh Delf bukan hasil kit. Jangan disable pt sebelum pentest;
+disable terakhir sesudah restore. Frontend tidak diubah, npm build tidak diperlukan.
