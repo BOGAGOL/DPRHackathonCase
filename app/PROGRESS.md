@@ -79,3 +79,18 @@ Gunakan lagi docs/DEPLOY_ANALYTICS_UI.md; cukup rebuild dan restart frontend.
 - NEXT: pentest Delf memakai pt, hasil disimpan terpisah; primary restore Alby,
   disable pt setelah restore akhir. Cloud SG, custody kunci dan renewal penuh tetap
   belum dikonfirmasi. Jangan benchmark/migrasi laptop pg-dpr.
+
+## Target clone benchmark — 29 Oktober 2026
+
+- IMPLEMENTED: exact opt-in DPR_BENCHMARK_DATABASE untuk api_ clone di kedua MODE,
+  same-target semua URL, role/CA/verify-full dan pemisahan recovery tetap berlaku.
+- IMPLEMENTED: setup schema/provision mendukung clone sesuai MODE; setup CONNECT/
+  USAGE/marker terbatas; startup read-only mengecek user/TLS/schema/owner/FORCE RLS.
+- TESTED:437 passed,1 skipped backend;47 tes baru target/env/setup/provision/gate.
+  Fixture sintetis/mocked metadata, tanpa koneksi benchmark atau database tim.
+- HANDOFF: app/docs/BENCHMARK_CLONES.md. C harus mengirim env baru ke child process,
+  mengarahkan seluruh URL dan CLI ke clone, memakai CA file di loader dan memastikan
+  recovery cleanup sebelumnya selesai. Tidak mengubah benchmark/ atau infra/.
+- NOT TESTED: clone PostgreSQL18 nyata, pengukuran API/performa dan C integration.
+  VM demo tetap menggunakan konfigurasi existing; belum ada deployment patch ini.
+- WORKTREE: fix/service-b-benchmark-targets, terpisah dari merge root pengguna.
