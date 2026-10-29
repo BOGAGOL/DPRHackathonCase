@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "basis_commit": "4877fc7395f0f8dc9a118bbd2330313bdab12629",
+  "basis_commit": "3bbe7206ff58ce97225153d3a9751342cd366609",
   "hash_mode": "SHA256 with CRLF normalized to LF",
   "source_files": {
     "app/backend/service_app/analytics.py": "2774133850c8ef8d7b342fc5fb0aaf5971f195106d4811aa6780ca7b576d128e",

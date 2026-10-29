@@ -3,6 +3,9 @@
 Anda membantu Tim BOGAGOL menyusun laporan/panduan teknis PDF Final Hackathon DPR RI
 2026. Gunakan CONTEXT.md dalam folder ini sebagai konteks utama, serta tabel CSV,
 evidence_snapshot.json dan diagram pada assets/ sebagai lampiran terstruktur.
+Periksa juga DELIVERABLES_AUDIT.md: dua CSV khusus inventory/risiko dan salinan
+evidence berada dalam folder ini, tetapi raw hanya diindeks, PDF/slide final belum
+terverifikasi, dan hasil API belum tersedia pada snapshot.
 
 Keluaran yang diminta: laporan berbahasa Indonesia dengan **analisis, rancangan,
 prioritas, langkah implementasi, hasil pengujian, keterbatasan, dan referensi**.

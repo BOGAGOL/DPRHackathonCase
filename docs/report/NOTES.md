@@ -22,6 +22,11 @@
   salinan sementara untuk membuktikan kesalahan ditolak.
 - Buku lengkap tidak dibaca ulang pada sesi ini. Nomor halaman buku dan sign-off
   reviewer manusia tetap perlu verifikasi sebelum PDF final.
+- Audit luaran menambahkan inventory-report.csv, risk-matrix.csv dengan enam
+  faktor awal,18 salinan evidence JSON dan indeks2.016 raw gzip. Sampel anggota
+  pada inventory tidak disalin; pola menjadi deskripsi skematis berlabel.
+  Inventory v1.2 dan assessment before_v1 pada provenance profile dibedakan.
+  Raw tetap di repo; calon PDF eksternal belum dinyatakan final.
 
 Perintah reproduksi dan cara memakai paket berada di [README.md](README.md).
 Ringkasan pemeriksaan: [context_validation.json](context_validation.json) dan

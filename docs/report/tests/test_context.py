@@ -79,6 +79,47 @@ def test_changed_sbom_cannot_reuse_old_schema_validation(report_copy):
     assert any(error["kind"] == "sbom_schema_proof_stale" for error in result["errors"])
 
 
+def test_inventory_excludes_surrogate_and_replaces_samples():
+    scanner = [
+        {"column": "id", "sample_masked": "invented id"},
+        {
+            "column": "nama",
+            "sample_masked": "invented source sample",
+            "risk_level": "tinggi",
+        },
+    ]
+    columns = [
+        {
+            "column": "nama",
+            "safe_pattern_description": "UTF-8 name shape",
+            "truth_pdp_class": "umum",
+        }
+    ]
+    rows = load("build_appendix").inventory_rows(scanner, columns)
+    assert len(rows) == 1 and rows[0]["column"] == "nama"
+    assert rows[0]["sample_masked"] == "UTF-8 name shape"
+    assert "invented source sample" not in json.dumps(rows)
+    assert scanner[1]["sample_masked"] == "invented source sample"
+
+
+def test_copied_access_evidence_tamper_is_rejected(report_copy):
+    path = report_copy / "evidence/access-control/analyst_suppression.json"
+    path.write_text("{}", encoding="utf-8")
+    result = load("verify_context").validate(report_copy)
+    assert any(
+        error["kind"] == "appendix_evidence_changed" for error in result["errors"]
+    )
+
+
+def test_appendix_text_hash_is_portable_but_raw_hash_is_exact(tmp_path):
+    lf, crlf = tmp_path / "lf.txt", tmp_path / "crlf.txt"
+    lf.write_bytes(b"invented fixture\n")
+    crlf.write_bytes(b"invented fixture\r\n")
+    builder = load("build_appendix")
+    assert builder.sha(lf, text=True) == builder.sha(crlf, text=True)
+    assert builder.sha(lf) != builder.sha(crlf)
+
+
 def test_changed_source_hash_is_reported(report_copy):
     path = report_copy / "source_manifest.json"
     data = json.loads(path.read_text(encoding="utf-8"))

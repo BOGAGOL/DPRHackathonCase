@@ -5,6 +5,11 @@ Paket ini disusun pada **29 Oktober 2026 WIB**, berdasarkan branch
 Ini sumber penulisan, **bukan PDF final, pengesahan manusia, atau hasil benchmark baru**.
 Seluruh materi baru untuk penulis dikumpulkan di folder ini. ZIP ditunda.
 
+Untuk mengecek kesiapan setiap luaran, baca
+**[DELIVERABLES_AUDIT.md](DELIVERABLES_AUDIT.md)**. Inventory dan risk matrix kini
+punya CSV khusus;18 salinan evidence metadata ada di evidence/. Raw benchmark
+tetap di repo dan mempunyai indeks path/ukuran/hash pada tables/.
+
 ## Cara memakai
 
 1. Untuk AI yang menerima satu berkas: berikan **[CONTEXT.md](CONTEXT.md)** dan
@@ -59,6 +64,7 @@ yang dibaca, bukan menjamin hasil historis telah dijalankan ulang pada commit ba
 
 Untuk regenerasi tabel setelah sumber berubah, gunakan environment dengan
 `infra/submission/requirements.txt` dan jalankan
-`python docs/report/build_context.py`, lalu ulangi pemeriksaan. Builder hanya
+`python docs/report/build_context.py`, lalu `python docs/report/build_appendix.py`
+dan ulangi pemeriksaan. Builder hanya
 membaca kode/metadata terpilih dan menulis di folder report. Regenerasi tabel
 tidak otomatis memperbarui interpretasi manusia atau validasi schema eksternal.

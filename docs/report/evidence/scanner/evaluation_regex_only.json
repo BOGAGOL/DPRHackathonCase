@@ -1,0 +1,621 @@
+{
+  "evaluation_stage": "raw_before_human_review",
+  "in_sample": true,
+  "method": "regex_only",
+  "scanner_version": "1.1.0",
+  "is_personal_rule": "regex content_score >= configured threshold and supported regex type; absence is not proof of non-personal data",
+  "regex_only_rule": {
+    "min_content_score": 60,
+    "personal_types": [
+      "email",
+      "telepon",
+      "nik",
+      "npwp",
+      "rekening",
+      "alamat",
+      "tanggal_lahir"
+    ]
+  },
+  "precision": 1.0,
+  "recall": 0.4230769230769231,
+  "f1": 0.5945945945945946,
+  "f2": 0.4782608695652174,
+  "detected_type_accuracy": 0.3103448275862069,
+  "pdp_class_accuracy": 0.6896551724137931,
+  "confusion_matrix": {
+    "tp": 11,
+    "fp": 0,
+    "fn": 15,
+    "tn": 3
+  },
+  "detected_type_confusion_matrix": {
+    "nama": {
+      "tidak_diketahui": 4
+    },
+    "kategori": {
+      "kategori": 4,
+      "tidak_diketahui": 1
+    },
+    "tempat_lahir": {
+      "kategori": 1
+    },
+    "tanggal_lahir": {
+      "tanggal_lahir": 1
+    },
+    "tanggal_pernikahan": {
+      "tanggal_lahir": 1
+    },
+    "nik": {
+      "rekening": 1
+    },
+    "alamat": {
+      "alamat": 2
+    },
+    "telepon": {
+      "rekening": 3
+    },
+    "email": {
+      "email": 1
+    },
+    "identifier_lain": {
+      "tidak_diketahui": 2,
+      "rekening": 1
+    },
+    "status_perkawinan": {
+      "kategori": 1
+    },
+    "keluarga": {
+      "kategori": 3
+    },
+    "rekening": {
+      "nik": 1
+    },
+    "npwp": {
+      "npwp": 1
+    },
+    "agama": {
+      "kategori": 1
+    }
+  },
+  "pdp_class_confusion_matrix": {
+    "umum": {
+      "umum": 20,
+      "spesifik": 5
+    },
+    "spesifik": {
+      "umum": 1
+    },
+    "non_pribadi": {
+      "umum": 3
+    }
+  },
+  "false_positive": [],
+  "false_negative": [
+    {
+      "table": "public.anggota",
+      "column": "nama"
+    },
+    {
+      "table": "public.anggota",
+      "column": "nama_lengkap"
+    },
+    {
+      "table": "public.anggota",
+      "column": "nama_tanpa_gelar"
+    },
+    {
+      "table": "public.anggota",
+      "column": "jenis_kelamin"
+    },
+    {
+      "table": "public.anggota",
+      "column": "tempat_lahir"
+    },
+    {
+      "table": "public.anggota",
+      "column": "pekerjaan_terakhir"
+    },
+    {
+      "table": "public.anggota",
+      "column": "email"
+    },
+    {
+      "table": "public.anggota",
+      "column": "ruangan"
+    },
+    {
+      "table": "public.anggota",
+      "column": "status_kawin"
+    },
+    {
+      "table": "public.anggota",
+      "column": "jumlah_anak"
+    },
+    {
+      "table": "public.anggota",
+      "column": "jumlah_tanggungan"
+    },
+    {
+      "table": "public.anggota",
+      "column": "jumlah_jiwa"
+    },
+    {
+      "table": "public.anggota",
+      "column": "nama_rekening"
+    },
+    {
+      "table": "public.anggota",
+      "column": "pengguna"
+    },
+    {
+      "table": "public.anggota",
+      "column": "agama"
+    }
+  ],
+  "missing_predictions": [],
+  "mismatches": [
+    {
+      "table": "public.anggota",
+      "column": "nama",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "nama",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "tidak_diketahui",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal",
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "nama_lengkap",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "nama",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "tidak_diketahui",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal",
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "nama_tanpa_gelar",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "nama",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "tidak_diketahui",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal",
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "jenis_kelamin",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "kategori",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "kategori",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "tempat_lahir",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "tempat_lahir",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "kategori",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal",
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "tanggal_pernikahan",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "tanggal_pernikahan",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "tanggal_lahir",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "no_ktp",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "nik",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "rekening",
+        "pdp_class": "spesifik"
+      },
+      "fields": [
+        "detected_type",
+        "pdp_class"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "pekerjaan_terakhir",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "kategori",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "kategori",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "telpon_jakarta",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "telepon",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "rekening",
+        "pdp_class": "spesifik"
+      },
+      "fields": [
+        "detected_type",
+        "pdp_class"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "telpon_daerah",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "telepon",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "rekening",
+        "pdp_class": "spesifik"
+      },
+      "fields": [
+        "detected_type",
+        "pdp_class"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "handphone",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "telepon",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "rekening",
+        "pdp_class": "spesifik"
+      },
+      "fields": [
+        "detected_type",
+        "pdp_class"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "email",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "email",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "email",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "ruangan",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "identifier_lain",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "tidak_diketahui",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal",
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "status_kawin",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "status_perkawinan",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "kategori",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal",
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "jumlah_anak",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "keluarga",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "kategori",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal",
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "jumlah_tanggungan",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "keluarga",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "kategori",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal",
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "jumlah_jiwa",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "keluarga",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "kategori",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal",
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "rekening",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "rekening",
+        "pdp_class": "spesifik"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "nik",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "detected_type",
+        "pdp_class"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "nama_rekening",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "nama",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "tidak_diketahui",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal",
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "nama_kppn",
+      "expected": {
+        "is_personal": false,
+        "detected_type": "kategori",
+        "pdp_class": "non_pribadi"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "kategori",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "pdp_class"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "nip_kppn",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "identifier_lain",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "rekening",
+        "pdp_class": "spesifik"
+      },
+      "fields": [
+        "detected_type",
+        "pdp_class"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "nama_bank",
+      "expected": {
+        "is_personal": false,
+        "detected_type": "kategori",
+        "pdp_class": "non_pribadi"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "kategori",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "pdp_class"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "kode_bank",
+      "expected": {
+        "is_personal": false,
+        "detected_type": "kategori",
+        "pdp_class": "non_pribadi"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "tidak_diketahui",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "detected_type",
+        "pdp_class"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "pengguna",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "identifier_lain",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "tidak_diketahui",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal",
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "agama",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "agama",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": false,
+        "detected_type": "kategori",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal",
+        "detected_type"
+      ]
+    }
+  ],
+  "unmapped_labels": [],
+  "all_labels_mapped": true,
+  "truth_rows": 29,
+  "prediction_rows": 30,
+  "evaluated_prediction_rows": 29,
+  "unlabelled_predictions": [
+    {
+      "table": "public.anggota",
+      "column": "id"
+    }
+  ],
+  "unlabelled_predictions_excluded": true,
+  "input_sha256": {
+    "predictions": "5b683c575ab400887445e5ef40c1a00a891e04645467ae47955b6e7e1dcfa641",
+    "ground_truth": "e741e3f6874f154d2e4b7a71a5810dfacc97ad6d2954a766b3fb8dabf6607f77",
+    "label_map": "3aefa415c087f358a5063a02d39bca7fb9c278ca32c49f53d4d20b091e22a1ed"
+  },
+  "evaluator_code_commit": "12e4064a399c2eef26e043c8de8a39c566f093be",
+  "evaluated_at_utc": "2026-10-27T07:45:21.509560+00:00"
+}

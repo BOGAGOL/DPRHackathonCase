@@ -68,6 +68,17 @@ Kode, raw benchmark, dan slide **bukan seluruhnya isi bab laporan**. PDF harus b
 menjelaskan dan menautkan reproduksi; lampiran membawa detail yang terlalu besar.
 Jangan menambahkan data panitia utuh untuk membuktikan inventory.
 
+### Audit keberadaan bahan lokal
+
+Pemeriksaan per luaran, status lampiran dan kekurangan aktual ada pada
+[DELIVERABLES_AUDIT.md](DELIVERABLES_AUDIT.md). CSV khusus:
+[inventory-report.csv](tables/inventory-report.csv) dan
+[risk-matrix.csv](tables/risk-matrix.csv). Salinan evidence checks/compare tersedia
+di evidence/; raw DB B-P-P-B ditemukan di repo dan diindeks pada
+[raw-benchmark-index.csv](tables/raw-benchmark-index.csv). Jangan menyebut raw
+tersebut telah disalin ke folder report. PDF/slide final dan review manusia
+tetap merupakan pekerjaan terpisah.
+
 ## Hal teknis wajib yang sering terlewat
 
 - Inventory: lokasi, pola tanpa nilai lengkap, jenis, kelas, risiko, alasan dan

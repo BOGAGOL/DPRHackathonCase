@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "scope": "Report companion copies/derived tables; no new experiment or human approval",
+  "source_files_sha256_lf": {
+    "evidence/scanner/before_v1_2/inventory.csv": "8bfd0d2755fc623bcab4b6d97636012e43183d4492092fc98010b0ebd614a910",
+    "evidence/scanner/before_v1/inventory.csv": "8e2c24558a33caf52826f653c52a49982dae685364abfa24dee6a265750dc639",
+    "docs/security/risk-matrix.csv": "13d4e9ab41c0766caf69e248fe21f5d72fc8ff1c47eaba0defdd990ed101c075"
+  },
+  "copies": {
+    "evidence/scanner/evaluation_v1_2.json": {
+      "source": "evidence/scanner/evaluation_v1_2.json",
+      "sha256_lf": "d5805484c6a8416769a1525e526ea6bda011ca8069569c7fc3fea5f5109dca10",
+      "bytes_at_copy": 3744
+    },
+    "evidence/scanner/evaluation_regex_only.json": {
+      "source": "evidence/scanner/evaluation_regex_only.json",
+      "sha256_lf": "c33b79820e6a9b50f1db7698965d50c6f8b61b18a9332e3c2a7074d74cfb9218",
+      "bytes_at_copy": 14150
+    },
+    "evidence/scanner/disguised_names.json": {
+      "source": "evidence/scanner/disguised_names.json",
+      "sha256_lf": "232b4c9124cafce87099bc4f90be91fc3500670d342f7bfd737713ab7fdab03c",
+      "bytes_at_copy": 659
+    },
+    "evidence/benchmark/bppb_compare.json": {
+      "source": "evidence/benchmark/bppb_compare.json",
+      "sha256_lf": "2f66b29d069936708d8c290f89cd707affe21d2fbcb3089f1a272948422a3748",
+      "bytes_at_copy": 24991
+    },
+    "evidence/benchmark/bppb_v2_compare.json": {
+      "source": "evidence/benchmark/bppb_v2_compare.json",
+      "sha256_lf": "207dd53801c69756225651443cb30eafa911ee80409c28e62e1b9c191d653f1a",
+      "bytes_at_copy": 28099
+    },
+    "evidence/benchmark/api_bppb_compare.json": {
+      "source": "evidence/benchmark/api_bppb_compare.json",
+      "sha256_lf": "8368f0e2fd207f0bba0b10cd67a60ff84c22751b86f69c6fa7723909aa792e1c",
+      "bytes_at_copy": 828
+    },
+    "evidence/benchmark/bppb_session.json": {
+      "source": "evidence/benchmark/bppb_session.json",
+      "sha256_lf": "147b0b1a8527c3513b991d49618da74d05a34e05bed977ea14c8ca27f8380acc",
+      "bytes_at_copy": 785204
+    },
+    "evidence/benchmark/bppb_v2_session.json": {
+      "source": "evidence/benchmark/bppb_v2_session.json",
+      "sha256_lf": "2b13f71396cd1ec9396738534e3ae5c845dccdbb7abfda08c3881431d50fbe16",
+      "bytes_at_copy": 936573
+    },
+    "evidence/benchmark/bppb_100k/summary.json": {
+      "source": "evidence/benchmark/bppb_100k/summary.json",
+      "sha256_lf": "c8ed19755b11308db11d37f85fc3a264accef76fa83c1de7867b9c9950033b34",
+      "bytes_at_copy": 173769
+    },
+    "evidence/benchmark/bppb_1m/summary.json": {
+      "source": "evidence/benchmark/bppb_1m/summary.json",
+      "sha256_lf": "a188add1ce21286ea06fe960f14f576d34c9609a2bd3974ccea12fe1b1420f48",
+      "bytes_at_copy": 173662
+    },
+    "evidence/benchmark/bppb_v2_100k/summary.json": {
+      "source": "evidence/benchmark/bppb_v2_100k/summary.json",
+      "sha256_lf": "05a7c2eda4852b787d181532c22c7f8b5ad3e29eaf617aee6939ddd8ba5521ac",
+      "bytes_at_copy": 206498
+    },
+    "evidence/benchmark/bppb_v2_1m/summary.json": {
+      "source": "evidence/benchmark/bppb_v2_1m/summary.json",
+      "sha256_lf": "e11070357dc9dc23735293713f14a945e429031e026b614af09856636e4c1df2",
+      "bytes_at_copy": 206029
+    },
+    "evidence/benchmark/active_measurements.json": {
+      "source": "evidence/benchmark/active_measurements.json",
+      "sha256_lf": "54a24617cfecb4cde8ffa35dbaf258a6890059b3e6baf77cd87668f4332260ba",
+      "bytes_at_copy": 999
+    },
+    "evidence/access-control/analyst_suppression.json": {
+      "source": "evidence/access-control/analyst_suppression.json",
+      "sha256_lf": "ef93b511364349aa324c5c5cc51b8fc25471f4fe3c89dcc7c9e7434e397aca29",
+      "bytes_at_copy": 3554
+    },
+    "evidence/backup/service-recovery-integration.json": {
+      "source": "evidence/backup/service-recovery-integration.json",
+      "sha256_lf": "21cd3e4c1f9657ad87b01a5386ecc6caf529c64663e585b0ce0af808a166ba51",
+      "bytes_at_copy": 8089
+    },
+    "evidence/acceptance/deployed-browser.json": {
+      "source": "evidence/acceptance/deployed-browser.json",
+      "sha256_lf": "2e0ed6256d22aca42075abba55322279c5206479f2b1458548daa1e1b981b115",
+      "bytes_at_copy": 4979
+    },
+    "evidence/service-app/access-control/vm-pentest-summary.json": {
+      "source": "app/evidence/access-control/vm-pentest-summary.json",
+      "sha256_lf": "55941e3e1eb57f2d925f8f9d81be38a0e3da1676a82df02df681dd57f271b999",
+      "bytes_at_copy": 1989
+    },
+    "evidence/service-app/access-control/vm-a5-verify.json": {
+      "source": "app/evidence/access-control/vm-a5-verify.json",
+      "sha256_lf": "c63fbd58e436b8e1fbe3f00839a867309a117dd4e552fab4c9a34b22768d601f",
+      "bytes_at_copy": 365
+    }
+  },
+  "derived_tables_sha256_lf": {
+    "tables/inventory-report.csv": "69f17fd2c6daa5aaf7ca60df43e02f4a7bc3c8c930cca82b362349b689a11d1b",
+    "tables/risk-matrix.csv": "7181a320abf594531eaf74c4437b13f1a4741a6c95d6b8854c7a1b217222ec08",
+    "tables/raw-benchmark-index.csv": "267a828388661fad35c3148abc65f1d9b984bdd36393fda94b5e27480418a09c"
+  },
+  "inventory": {
+    "rows": 29,
+    "source_surrogate_id_excluded": true,
+    "actual_sample_values_copied": false,
+    "scanner_version": "1.2 inventory"
+  },
+  "risk": {
+    "rows": 29,
+    "factor_source": "evidence/scanner/before_v1/inventory.csv",
+    "human_approved": false
+  },
+  "raw_benchmark": {
+    "files_found": 2016,
+    "compressed_bytes": 196559219,
+    "copied": false,
+    "reason": "Retained in repository; report folder contains path/size/hash index, not another raw-data copy"
+  }
+}

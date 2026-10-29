@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "passed": true,
-  "basis_commit": "4877fc7395f0f8dc9a118bbd2330313bdab12629",
+  "basis_commit": "3bbe7206ff58ce97225153d3a9751342cd366609",
   "source_hashes_checked": true,
   "source_files": 89,
   "chapters_consolidated": 11,
@@ -9,6 +9,8 @@
   "benchmark_rows": 28,
   "leakage_rows": 10,
   "sbom_schema_proofs_checked": 3,
+  "appendix_evidence_copies_checked": 18,
+  "raw_benchmark_files_indexed": 2016,
   "errors": [],
   "scope": "Source hashes, local links, consolidated chapters, CSV/JSON equality and arithmetic/targets; not a fresh runtime audit or full PII/secret-history scan"
 }

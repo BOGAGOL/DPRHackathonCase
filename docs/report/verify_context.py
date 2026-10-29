@@ -115,6 +115,24 @@ def validate(here, root=None):
         path = here / "appendix/sbom" / name
         if not result["passed"] or normalized_hash(path) != result["sha256_lf"]:
             errors.append({"kind": "sbom_schema_proof_stale", "path": name})
+    appendix = json.loads((here / "appendix_manifest.json").read_text(encoding="utf-8"))
+    for name, item in appendix["copies"].items():
+        path = here / name
+        if not path.is_file() or normalized_hash(path) != item["sha256_lf"]:
+            errors.append({"kind": "appendix_evidence_changed", "path": name})
+        if root is not None:
+            source = root / item["source"]
+            if not source.is_file() or normalized_hash(source) != item["sha256_lf"]:
+                errors.append(
+                    {"kind": "appendix_source_changed", "path": item["source"]}
+                )
+    for name, digest in appendix["derived_tables_sha256_lf"].items():
+        if normalized_hash(here / name) != digest:
+            errors.append({"kind": "appendix_table_changed", "path": name})
+    if root is not None:
+        for name, digest in appendix["source_files_sha256_lf"].items():
+            if normalized_hash(root / name) != digest:
+                errors.append({"kind": "appendix_source_changed", "path": name})
     return {
         "schema_version": 1,
         "passed": not errors,
@@ -126,6 +144,8 @@ def validate(here, root=None):
         "benchmark_rows": len(snapshot["db_benchmark"]),
         "leakage_rows": len(snapshot["leakage"]),
         "sbom_schema_proofs_checked": len(schema_validation["files"]),
+        "appendix_evidence_copies_checked": len(appendix["copies"]),
+        "raw_benchmark_files_indexed": appendix["raw_benchmark"]["files_found"],
         "errors": errors,
         "scope": "Source hashes, local links, consolidated chapters, CSV/JSON equality and arithmetic/targets; not a fresh runtime audit or full PII/secret-history scan",
     }
