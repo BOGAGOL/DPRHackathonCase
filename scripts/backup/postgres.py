@@ -122,6 +122,11 @@ class Tools:
             raise BackupError("invalid_container_name")
         self.container = container
         self.parameters = parameters
+        self.native_bin = os.environ.get("DPR_BACKUP_NATIVE_PG_BIN")
+        if self.native_bin is not None:
+            self.native_bin = Path(self.native_bin)
+            if not self.native_bin.is_absolute() or not self.native_bin.is_dir():
+                raise BackupError("invalid_native_pg_directory")
         self.ca = "/tmp/dpr-backup-ca-" + uuid4().hex + ".crt"
         allowed = {"PATH", "SystemRoot", "SYSTEMROOT", "WINDIR", "COMSPEC", "PATHEXT", "USERPROFILE", "HOME",
                    "APPDATA", "LOCALAPPDATA", "TEMP", "TMP", "HOMEDRIVE", "HOMEPATH", "DOCKER_HOST",
@@ -133,6 +138,10 @@ class Tools:
             PGAPPNAME=parameters.get("application_name", "dpr-backup-"+uuid4().hex))
 
     def __enter__(self):
+        if self.native_bin is not None:
+            self.environment.update(PGHOST=self.parameters["host"], PGPORT=str(self.parameters["port"]),
+                                    PGSSLROOTCERT=self.parameters["sslrootcert"])
+            return self
         result = subprocess.run(["docker", "cp", str(Path(self.parameters["sslrootcert"]).resolve()), self.container+":"+self.ca],
             env=self.environment, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30)
         if result.returncode:
@@ -140,12 +149,19 @@ class Tools:
         return self
 
     def __exit__(self, *_):
+        if self.native_bin is not None:
+            return
         subprocess.run(["docker", "exec", self.container, "rm", "-f", "--", self.ca],
             env=self.environment, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=30)
 
     def command(self, program, arguments):
         if program not in {"pg_dump", "pg_restore", "psql"}:
             raise BackupError("invalid_pg_program")
+        if self.native_bin is not None:
+            executable = self.native_bin / (program + (".exe" if os.name == "nt" else ""))
+            if not executable.is_file():
+                raise BackupError("native_pg_program_missing")
+            return [str(executable), "--no-password", *arguments]
         command = ["docker", "exec", "-i"]
         for name in self.environment:
             if name.startswith("PG"):

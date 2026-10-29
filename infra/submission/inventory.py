@@ -38,6 +38,8 @@ ROOTS = {
 PRIVATE_PARTS = {
     ".git",
     ".venv",
+    ".venv-assessment",
+    ".venv-benchmark",
     "venv",
     "node_modules",
     ".next",
@@ -91,7 +93,7 @@ PRIVATE_SUFFIXES = {
     ".pid",
     ".sock",
 }
-EXCLUDE_PREFIXES = ("docs/reference/", "evidence/submission/generated/")
+EXCLUDE_PREFIXES = ("docs/reference/", "evidence/submission/generated/", "evidence/reproduction/generated/")
 
 
 def text_sha(path):

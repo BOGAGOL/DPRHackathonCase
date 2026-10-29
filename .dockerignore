@@ -7,6 +7,8 @@
 **/.local
 **/.secrets
 **/.venv
+**/.venv-assessment
+**/.venv-benchmark
 **/venv
 **/node_modules
 **/.next

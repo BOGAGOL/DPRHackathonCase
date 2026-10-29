@@ -2,6 +2,21 @@ PYTHON ?= python
 LABEL ?= before
 SCANNER_OUT = results/scanner/$(LABEL)
 
+# Cross-platform launcher; DATA is optional when DPR_DEMO_DATA is injected.
+DATA_ARG = $(if $(DATA),--data "$(DATA)",)
+.PHONY: setup demo verify test
+setup:
+	$(PYTHON) -m infra.reproduce setup
+
+demo:
+	$(PYTHON) -m infra.reproduce demo $(DATA_ARG)
+
+verify:
+	$(PYTHON) -m infra.reproduce verify $(DATA_ARG)
+
+test:
+	$(PYTHON) -m infra.reproduce test
+
 .PHONY: scanner-install scan scan-dump scan-eval scanner-test
 scanner-install:
 	$(PYTHON) -m pip install -r scanner/requirements.txt
