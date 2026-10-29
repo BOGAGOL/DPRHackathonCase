@@ -1,3 +1,6 @@
+> **Pembaca baru/juri:** mulai dari [panduan reproduksi lengkap](../../docs/operations/REPRODUCTION.md).
+> Dokumen ini adalah runbook modul/lingkungan tertentu; jangan menerapkannya ke server existing tanpa memilih prosedur yang sesuai.
+
 # Backup / restore tahap 5
 
 **Pembaruan recovery A+B, 28 Oktober 2026:** backup menerima layout A lima tabel

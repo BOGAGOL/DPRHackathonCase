@@ -1,3 +1,7 @@
+> **Snapshot konteks awal belum diselaraskan seluruhnya dengan HEAD.**
+> Baca [pembaruan final 29 Oktober](UPDATES_20261029.md) terlebih dahulu.
+> Manifest/tabel/evidence salinan lama dipertahankan sebagai snapshot bertanggal.
+
 # Paket konteks presentasi — Tim BOGAGOL
 
 Disusun 29 Oktober 2026 WIB pada branch `chore/submission-polish`, menggunakan

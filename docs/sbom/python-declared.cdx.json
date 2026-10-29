@@ -2,7 +2,7 @@
   "$schema": "https://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:d7d13b97-7827-5004-bfeb-0543fa7757cf",
+  "serialNumber": "urn:uuid:6f3748af-6af3-5a00-a3f4-720799765d9f",
   "version": 1,
   "metadata": {
     "component": {
@@ -18,7 +18,7 @@
       },
       {
         "name": "dpr:input-sha256-lf",
-        "value": "{\"app/requirements.txt\": \"850be532384067203e5ef58cf39ce6773fd3f68129caa870ebfa5247e979090d\", \"app/web/package-lock.json\": \"0fe5b23a861095b033e8ec1755ab2ee6b530bccb8459b3b65d731048682ea2da\", \"benchmark/requirements.txt\": \"704f8cf275f9ec7d55b705f68b9cc03822548b4d1f85aa4f99c7eae3ccef9f4f\", \"datagen/requirements.txt\": \"ccbd0aadc5c500ee0c564f6ee412a3400b898f62a1646ec028f2e0861259c0ee\", \"infra/compose.yaml\": \"2878d855b2fc646c4db5844848b80a28456990e1ea684665a5f3a2cc41d41ff5\", \"infra/requirements.txt\": \"357fa7659f9a9c5a0201e097ee8694253028104f249cd55686293e7536c95c74\", \"infra/submission/requirements.txt\": \"7e1c5884438d533e8f05d6cfc5b973f9e251efb63329d9fe69579e58fcd4d823\", \"infra/tests/compose.postgres.yaml\": \"7686613708c67c8175562e70cc0fa2d342785a969b012653a257f457211b3cb3\", \"infra/vm/compose.yaml\": \"21d4c882419302c39dee3e65ed822b9eda9f92c12944741b8357dbf4540a0dbc\", \"scanner/requirements.txt\": \"eace95fccd2cefee5dff40caad7345003b68515f0e0c7a65ff82346fcf33b7db\", \"toolkit/pyproject.toml\": \"9e922ee67992ce44d3b444b5821e36fb271096b4abb417af1b6a026775c33e30\"}"
+        "value": "{\"app/requirements.txt\": \"278f1a35d18259e3f2e70fb210f1a63e6cc46dd82774e7bf03eabbf820bc522b\", \"app/web/package-lock.json\": \"0fe5b23a861095b033e8ec1755ab2ee6b530bccb8459b3b65d731048682ea2da\", \"benchmark/requirements.txt\": \"b5d9e7d5daceb516eeacc801384215d040eb0027bd55238578fbcaf3cb593def\", \"datagen/requirements.txt\": \"89993d01fe0af6f12a87dadcb3168900ea05698381f6eb8fa518536b61447a6c\", \"infra/compose.yaml\": \"2878d855b2fc646c4db5844848b80a28456990e1ea684665a5f3a2cc41d41ff5\", \"infra/reproduce/compose.yaml\": \"6dabd5cbf0e685c1376ab00293b9bf368fb96d7a82d48f533384da86ce0ffe41\", \"infra/requirements.txt\": \"4cab30d10323c26e3f802243ac6cb93ee50a43e00e39524d4b6a220949e89800\", \"infra/submission/requirements.txt\": \"7e1c5884438d533e8f05d6cfc5b973f9e251efb63329d9fe69579e58fcd4d823\", \"infra/tests/compose.postgres.yaml\": \"7686613708c67c8175562e70cc0fa2d342785a969b012653a257f457211b3cb3\", \"infra/vm/compose.yaml\": \"21d4c882419302c39dee3e65ed822b9eda9f92c12944741b8357dbf4540a0dbc\", \"scanner/requirements.txt\": \"4e02b32f8865afe10194d59063bdd60fbc23acb0320fec2cfb42f3d53366b611\", \"toolkit/pyproject.toml\": \"f7770271240d3812f11d55ca568a9865884d0a04a43ef0300217d5d7e3b5e178\", \"verify/requirements.txt\": \"5086bbedaf9cf4ec9f0aff8a3dab6583474331db2ff557b7639e99956657dceb\"}"
       }
     ]
   },
@@ -71,7 +71,7 @@
         },
         {
           "name": "dpr:declared-in",
-          "value": "app/requirements.txt"
+          "value": "app/requirements.txt;benchmark/requirements.txt"
         },
         {
           "name": "dpr:resolution",
@@ -82,13 +82,13 @@
     },
     {
       "type": "library",
-      "bom-ref": "python:483943bed955d6a5087e",
+      "bom-ref": "python:ac212c9ae22c88736152",
       "name": "cryptography",
       "purl": "pkg:pypi/cryptography",
       "properties": [
         {
           "name": "dpr:constraint",
-          "value": "<47,>=46.0.3"
+          "value": "<51,>=50.0.2"
         },
         {
           "name": "dpr:extras",
@@ -100,7 +100,7 @@
         },
         {
           "name": "dpr:declared-in",
-          "value": "infra/requirements.txt"
+          "value": "app/requirements.txt;infra/requirements.txt;toolkit/pyproject.toml:runtime"
         },
         {
           "name": "dpr:resolution",
@@ -110,13 +110,13 @@
     },
     {
       "type": "library",
-      "bom-ref": "python:59ffce8d07e41ec89a50",
+      "bom-ref": "python:04d6bcc2b3bb22c1068d",
       "name": "cryptography",
-      "purl": "pkg:pypi/cryptography",
+      "purl": "pkg:pypi/cryptography@50.0.2",
       "properties": [
         {
           "name": "dpr:constraint",
-          "value": "<47,>=46.0.5"
+          "value": "==50.0.2"
         },
         {
           "name": "dpr:extras",
@@ -128,13 +128,14 @@
         },
         {
           "name": "dpr:declared-in",
-          "value": "toolkit/pyproject.toml:runtime"
+          "value": "benchmark/requirements.txt;verify/requirements.txt"
         },
         {
           "name": "dpr:resolution",
-          "value": "unresolved-range"
+          "value": "declared-pin"
         }
-      ]
+      ],
+      "version": "50.0.2"
     },
     {
       "type": "library",
@@ -213,7 +214,7 @@
         },
         {
           "name": "dpr:declared-in",
-          "value": "app/requirements.txt"
+          "value": "app/requirements.txt;benchmark/requirements.txt;verify/requirements.txt"
         },
         {
           "name": "dpr:resolution",
@@ -242,7 +243,7 @@
         },
         {
           "name": "dpr:declared-in",
-          "value": "scanner/requirements.txt"
+          "value": "scanner/requirements.txt;verify/requirements.txt"
         },
         {
           "name": "dpr:resolution",
@@ -413,7 +414,7 @@
         },
         {
           "name": "dpr:declared-in",
-          "value": "benchmark/requirements.txt;datagen/requirements.txt;scanner/requirements.txt"
+          "value": "benchmark/requirements.txt;datagen/requirements.txt;scanner/requirements.txt;verify/requirements.txt"
         },
         {
           "name": "dpr:resolution",
@@ -453,13 +454,13 @@
     },
     {
       "type": "library",
-      "bom-ref": "python:4b360606fb4fdcb8e99a",
+      "bom-ref": "python:0f6dc82864d79c59d271",
       "name": "pytest",
       "purl": "pkg:pypi/pytest",
       "properties": [
         {
           "name": "dpr:constraint",
-          "value": "<10,>=8"
+          "value": "<10,>=9.0.3"
         },
         {
           "name": "dpr:extras",
@@ -481,13 +482,13 @@
     },
     {
       "type": "library",
-      "bom-ref": "python:9f2a31c27bab883d155e",
+      "bom-ref": "python:78e8e0b2752843c3180c",
       "name": "pytest",
-      "purl": "pkg:pypi/pytest@8.4.2",
+      "purl": "pkg:pypi/pytest@9.0.3",
       "properties": [
         {
           "name": "dpr:constraint",
-          "value": "==8.4.2"
+          "value": "==9.0.3"
         },
         {
           "name": "dpr:extras",
@@ -499,43 +500,14 @@
         },
         {
           "name": "dpr:declared-in",
-          "value": "benchmark/requirements.txt;datagen/requirements.txt;scanner/requirements.txt"
+          "value": "app/requirements.txt;benchmark/requirements.txt;datagen/requirements.txt;scanner/requirements.txt;verify/requirements.txt"
         },
         {
           "name": "dpr:resolution",
           "value": "declared-pin"
         }
       ],
-      "version": "8.4.2"
-    },
-    {
-      "type": "library",
-      "bom-ref": "python:34581ca5ca3aa7c4530f",
-      "name": "pytest",
-      "purl": "pkg:pypi/pytest@9.0.2",
-      "properties": [
-        {
-          "name": "dpr:constraint",
-          "value": "==9.0.2"
-        },
-        {
-          "name": "dpr:extras",
-          "value": ""
-        },
-        {
-          "name": "dpr:environment-marker",
-          "value": ""
-        },
-        {
-          "name": "dpr:declared-in",
-          "value": "app/requirements.txt"
-        },
-        {
-          "name": "dpr:resolution",
-          "value": "declared-pin"
-        }
-      ],
-      "version": "9.0.2"
+      "version": "9.0.3"
     },
     {
       "type": "library",
@@ -585,7 +557,7 @@
         },
         {
           "name": "dpr:declared-in",
-          "value": "benchmark/requirements.txt;scanner/requirements.txt"
+          "value": "benchmark/requirements.txt;scanner/requirements.txt;verify/requirements.txt"
         },
         {
           "name": "dpr:resolution",

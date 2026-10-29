@@ -11,7 +11,7 @@ simulasi kebocoran baseline pada sisi feature. Tidak ada isi yang dipilih atau
 konflik yang diselesaikan otomatis.
 
 Potongan kedua sisi dan identitas commit ada di
-[gate0_merge.json](overnight/gate0_merge.json). Diff lengkap lokal:
+[gate0_merge.json](../gate0_merge.json). Diff lengkap lokal:
 `results/overnight-28okt/gate0-merge-conflict.diff`. Merge yang belum selesai
 dibatalkan memakai `git merge --abort` setelah evidence disimpan, agar laporan
 bisa di-commit. Kedua branch sumber tetap utuh; branch run belum memuat merge.
@@ -51,6 +51,6 @@ Kernel-Power ID 105, RecordId 27568–27569: AC terputus pada **28 Oktober 2026,
 Insiden ini terjadi setelah rangkaian berhenti. **Tidak ada run terdampak baterai;
 0 run perlu diulang.** AC pada pemeriksaan berikutnya terpasang.
 
-Detail mesin: [ac_resume_status_20261028.json](overnight/ac_resume_status_20261028.json).
+Detail mesin: [ac_resume_status_20261028.json](../ac_resume_status_20261028.json).
 Kelanjutan masih menunggu keputusan penggabungan kedua bagian `verify/NOTES.md`
 agar gerbang 0 dapat diselesaikan sesuai aturan konflik pengguna.

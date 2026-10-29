@@ -38,7 +38,7 @@ seluruh riwayat atau scan data pribadi/log.
 
 Paket dapat berstatus `REVIEW_REQUIRED` meskipun struktur/hash/link lulus. Status
 luaran ada di [checklist](CHECKLIST.md); ZIP sumber tidak menggantikan PDF laporan,
-slide final, hasil benchmark after, atau review manusia yang belum selesai.
+slide final, seri benchmark API yang belum lengkap, atau review manusia yang belum selesai.
 Kumpulkan raw benchmark yang sah dari laptop pemiliknya secara terpisah setelah
 review privasi; `results/` lokal tidak disalin otomatis.
 
@@ -52,3 +52,21 @@ review privasi; `results/` lokal tidak disalin otomatis.
 5. Upload hanya paket yang direview ke folder pengumpulan dengan akses juri yang benar.
    Jangan mengunggah seluruh folder kerja atau `.git`, karena riwayat repo private
    dapat memuat dataset panitia. Pengumpulan/upload tidak dijalankan tool ini.
+
+## Launcher dan perapihan final 29 Oktober
+
+Entry point baru `python -m infra.reproduce {setup,demo,verify,test}`;
+[panduan tunggal](../operations/REPRODUCTION.md) menggantikan petunjuk quick-start
+tersebar. Runbook modul dipertahankan untuk operasi terarah pada lingkungan existing.
+
+Cache Python, build frontend usang bila tidak ada Node service berjalan, dan ZIP
+lama dibersihkan; environment/dependency lokal tetap diabaikan paket. Nama source
+modul dan seluruh raw/hasil numerik historis dipertahankan. Dua tautan Markdown
+riwayat diperbaiki setelah perpindahan folder, tanpa mengubah hasil uji.
+
+`accounts.md` dari main terbaru dikeluarkan dari snapshot dan disimpan privat.
+Jangan memasukkannya kembali ke repo/lampiran. Riwayat Git masih memuat file itu;
+rotation kredensial deployment bila masih berlaku menjadi tindakan operator.
+
+Schema SBOM deklarasi/lock/image diregenerasi dan diverifikasi; BOM environment
+serta audit lain tetap snapshot terpisah. Tidak ada ZIP baru dibuat pada tahap ini.

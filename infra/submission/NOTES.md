@@ -15,3 +15,8 @@
 
 Uji: `python -m pytest infra/submission/tests -q`. Panduan penggunaan dan cakupan:
 [struktur paket](../../docs/submission/STRUCTURE.md).
+
+Pembaruan final 29 Okt: denylist mencakup environment assessment/benchmark baru
+dan accounts.md. Satu exception path persis evidence/secrets/plaintext-scan.json
+mengikutsertakan receipt metadata S06 yang direview; sibling secrets lainnya tetap
+ditolak. Content screen tetap berjalan. Composer reproduksi ikut freshness SBOM.

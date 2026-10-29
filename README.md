@@ -1,125 +1,64 @@
 # Pelindungan Data Pribadi ketika Database Bocor
 
-Prototipe Tim BOGAGOL untuk Final Hackathon DPR RI 2026: menemukan data pribadi,
-melindungi nilai sensitif, membatasi akses aplikasi, serta menguji kebocoran,
-kinerja dan pemulihan. Studi kasus memakai data sintetis panitia.
+Prototipe **Tim BOGAGOL — Final Hackathon DPR RI 2026**. Scanner menginventarisasi
+29 kolom; profile mengendalikan enkripsi 25 kolom dengan AES-256-GCM, envelope DEK
+per record/domain, AAD dan tiga blind index. FastAPI + Next.js menerapkan enam
+peran, scope record, masking dan analytics dengan suppression k≥5.
 
-**Jalur aktif:** Next.js + FastAPI di `app/`, PostgreSQL **18** di `pg-dpr:5433`,
-OpenBao **2.5.5** dengan TLS. Format enkripsi dan kewenangan mengikuti
-[kontrak teknis](docs/contracts/CONTRACT.md). Enkripsi field AES-256-GCM memakai DEK
-per record/domain dan AAD; exact lookup menggunakan blind index HMAC.
+## Jalankan demo 734 record
 
-## Mulai membaca
+Prasyarat: **Python 3.11+, Node.js ≥20.9/npm, Docker Engine + Compose V2, Google
+Chrome**. Dataset panitia `02_data.sql` harus tersedia secara privat; tidak
+termasuk paket sumber untuk publik. Dari root checkout:
 
-| Kebutuhan | Dokumen |
+```powershell
+python -m infra.reproduce setup
+python -m infra.reproduce verify --data "C:/private/02_data.sql"
+python -m infra.reproduce demo --data "C:/private/02_data.sql"
+```
+
+Di Linux gunakan path dataset Linux. Alternatif GNU Make yang tersedia:
+`make setup`, `make verify DATA=/private/02_data.sql`, `make demo DATA=/private/02_data.sql`.
+Variabel `DPR_DEMO_DATA` juga dapat menunjuk input privat. Jika dataset private-repo
+ada pada `sql/baseline/02_data.sql`, argumen `--data` boleh dihilangkan.
+
+`verify` menjalankan **setup service → import → assessment → hardening → enam akun
+aplikasi → verifikasi keamanan/browser → backup/restore → cleanup service**.
+`demo` menjalankan pemeriksaan yang sama lalu menahan aplikasi HTTPS sampai Ctrl+C.
+Semua service milik run baru pada port loopback acak; tidak menyentuh pg-dpr,
+server deployment atau database/evidence benchmark existing. Kredensial hanya
+pada folder privat di luar repo. Hasil baru: `evidence/reproduction/<run-id>/`.
+
+**[Panduan reproduksi lengkap](docs/operations/REPRODUCTION.md)** menjelaskan
+prasyarat, sertifikat browser, lokasi akun, jalur native jika Docker tidak tersedia,
+troubleshooting, unit test, operasi existing dan benchmark terpisah.
+
+## Peta repository
+
+| Lokasi | Isi |
 |---|---|
-| Peta dokumentasi dan luaran | [Indeks dokumentasi](docs/README.md) |
-| Arsitektur dan batas kepercayaan | [Arsitektur](docs/architecture/README.md) |
-| Instalasi VM baru | [Paket PostgreSQL/OpenBao TLS](infra/vm/README.md) |
-| Menjalankan aplikasi | [README Service App](app/README.md) |
-| Server yang sudah berjalan | [Rilis A5](app/docs/DEPLOY_A5.md), [pemulihan](app/docs/RECOVERY.md) |
-| Perintah uji dan reproduksi | [Panduan reproduksi](docs/operations/REPRODUCTION.md) |
-| Bukti yang mendukung klaim | [Indeks evidence](docs/evidence_index.md) |
-| Pekerjaan sebelum submit | [Checklist pengumpulan](docs/submission/CHECKLIST.md) |
-| Konteks penulisan laporan | [Konteks laporan](docs/report/CONTEXT.md) |
-| Risiko yang masih tersisa | [Keterbatasan](docs/security/LIMITATIONS.md) |
+| `scanner/`, `policy/` | Assessment, klasifikasi, override dan protection profile |
+| `toolkit/`, `migration/`, `sql/` | Kripto v1, migrasi resumable, skema, ACL/RLS |
+| `app/` | Backend/frontend, provisioning, enam peran dan pengujian |
+| `infra/`, `scripts/backup/` | TLS/OpenBao, launcher reproduksi, rotasi, backup/restore |
+| `datagen/`, `benchmark/`, `verify/` | Pembesaran data, kinerja, leakage/security verification |
+| `evidence/` | Hasil mesin dan raw historis dengan cakupan/lingkungan masing-masing |
+| `docs/` | [Indeks](docs/README.md), laporan, presentasi, arsitektur, runbook dan SBOM |
+| `archive/` | Riwayat prototipe; tidak dipakai runtime/paket submission |
 
-## Status dan cakupan bukti
+## Bukti dan batas klaim
 
-- Toolkit, profile, migrasi, role/RLS, backup/restore, rotasi kunci, dan aplikasi
-  mempunyai kode dan evidence. Setiap hasil harus dibaca bersama dataset/lingkungannya.
-- Acceptance setelah A5 lulus **143 pemeriksaan** pada lab PG18/OpenBao TLS dengan
-  **17 record buatan sendiri**, termasuk restore dan Chrome nyata.
-- Deployment web lulus **100 pemeriksaan** dengan enam akun existing, tanpa mutasi
-  data anggota; konfigurasi SQL/TLS internal VM tidak diperiksa langsung lewat SSH.
-- Benchmark yang ada pada snapshot ini adalah **baseline awal**. Hasil protected,
-  leakage, dan pekerjaan lain di branch anggota tim belum otomatis menjadi bagian paket.
-- Laporan PDF, slide final, review manusia, dan akses folder pengumpulan harus
-  difinalisasi tim. Ini belum merupakan klaim seluruh persyaratan lomba sudah selesai.
+Migrasi 734/100k/1M, leakage dan perbandingan DB before/after sudah tersedia;
+baca [indeks evidence](docs/evidence_index.md). **Benchmark DB belum memenuhi target
+latensi/throughput**; keberhasilan keamanan bukan kelulusan target kinerja.
+Bukti web, lab, native dan VM mempunyai scope berbeda. Status benchmark API
+mengikuti evidence sesi; jangan menyebut rencana/percobaan setup sebagai hasil ukur.
 
-Bukti: [ringkasan acceptance](evidence/acceptance/post-a5-summary.json).
-Jangan memakai evidence prototipe lama atau hasil mock sebagai pengganti pengujian nyata.
+Daftar 15 luaran dan pekerjaan final: **[checklist submission](docs/submission/CHECKLIST.md)**.
+Laporan Markdown/konteks presentasi belum merupakan PDF laporan/slide final.
+[Keterbatasan](docs/security/LIMITATIONS.md) meliputi equality leakage, metadata REF/NULL,
+kompromi aplikasi+kunci, retensi backup lama, custody dan DR key-plane.
 
-## Struktur proyek
-
-```text
-app/             Service App aktif: backend, frontend, provisioning dan test B
-infra/           OpenBao/TLS, PostgreSQL, role bootstrap, acceptance, alat pengumpulan
-scanner/         Inventarisasi, klasifikasi dan evaluasi deteksi
-policy/          Protection profile dan keputusan per kolom
-migration/       Migrasi ke database baru, resume dan decrypt-and-compare
-sql/             Skema baseline/protected dan role minimum
-scripts/backup/  Backup streaming terenkripsi, restore, tamper dan retention drill
-toolkit/         Paket Python dprcrypto
-benchmark/       Pengukuran performa; baca status dan scope tiap hasil
-datagen/         Dataset sintetis reproducible
-verify/          Verifikasi; fitur yang belum tersedia ditandai pada checklist
-docs/            Dokumentasi dan bahan pengumpulan
-evidence/        Hasil mesin dengan scope; bukan tempat rahasia/dump
-archive/         Dokumen/evidence lama, dikecualikan dari paket pengumpulan
-```
-
-Path modul aktif dipertahankan agar skrip, deployment dan pekerjaan tim tetap kompatibel.
-Runtime PG17 yang lama sudah dihapus dari snapshot; lihat [catatan struktur](docs/submission/STRUCTURE.md).
-
-## Menyiapkan lingkungan pengembang
-
-Python **3.11+**, Git untuk checkout/test, Node.js yang mendukung Next.js proyek, Docker Engine/Compose V2
-untuk stack container, dan Google Chrome untuk acceptance browser. Jalankan dari root:
-
-```powershell
-python -m venv .venv
-.venv/Scripts/python -m pip install -r infra/requirements.txt
-.venv/Scripts/python -m pip install -r app/requirements.txt
-.venv/Scripts/python -m pip install -r infra/submission/requirements.txt
-.venv/Scripts/python -m pip install -e toolkit
-Push-Location app/web
-npm ci
-npm run build
-Pop-Location
-```
-
-Scanner/datagen/benchmark memiliki requirements tersendiri. Gunakan environment modul
-untuk reproduksi yang ketat karena sebagian pin versinya berbeda; lihat
-[panduan reproduksi](docs/operations/REPRODUCTION.md) dan [SBOM](docs/sbom/README.md).
-
-Untuk **VM baru**, ikuti [runbook fresh VM](infra/vm/README.md). Untuk **database
-existing**, inventaris dahulu dan gunakan upgrade spesifik; jangan mengulang init,
-import, prepare/provision, atau mengganti material kunci yang sudah dipakai.
-Aplikasi memakai environment eksplisit; contoh ada di [app/.env.example](app/.env.example).
-
-## Pengujian
-
-```powershell
-# Default pytest menjalankan suite inti A; integrasi eksternal tetap opt-in.
-.venv/Scripts/python -m pytest -q
-# B dijalankan terpisah untuk menghindari benturan conftest/import.
-.venv/Scripts/python -m pytest -c app/pytest.ini app/tests -q
-# Validasi struktur dokumentasi dan paket sumber.
-.venv/Scripts/python -m infra.submission check
-```
-
-Perintah untuk scanner, benchmark, datagen, browser dan acceptance nyata ada di
-[panduan reproduksi](docs/operations/REPRODUCTION.md). Pengujian tidak menjalankan
-benchmark resmi atau mengubah database tim secara otomatis.
-
-## Paket pengumpulan
-
-```powershell
-.venv/Scripts/python -m infra.submission sbom
-.venv/Scripts/python -m infra.submission check
-.venv/Scripts/python -m infra.submission build --output dist/submission
-```
-
-Paket berisi source aktif, dokumentasi, evidence dan manifest SHA256. Dataset panitia,
-`.git`, environment lokal, kredensial, kunci, dump, cache, arsip lama dan referensi buku
-mentah dikecualikan. Build paket tidak berarti paket sudah memenuhi seluruh luaran;
-[checklist](docs/submission/CHECKLIST.md) menyebut yang masih perlu diselesaikan.
-
-## Data, lisensi dan atribusi
-
-Kode: [MIT](LICENSE). Dokumentasi orisinal: [CC BY-NC 4.0](LICENSE-DOCS.md).
-Komponen pihak ketiga mengikuti lisensi asal; lihat [atribusi](THIRD_PARTY_NOTICES.md).
-Dataset panitia hanya untuk kompetisi dan tidak boleh dipublikasikan. Repo tetap PRIVATE.
-Simpan password, token, kunci, unseal share, root token dan material pemulihan di lokasi
-privat di luar checkout; material tersebut tidak boleh masuk lampiran pengumpulan.
+Kode [MIT](LICENSE), dokumentasi [CC BY-NC 4.0](LICENSE-DOCS.md), komponen pihak
+ketiga mengikuti [atribusi](THIRD_PARTY_NOTICES.md). Dataset panitia tidak boleh
+dipublikasikan; repo tetap **PRIVATE**, termasuk riwayatnya. Tidak ada secret di lampiran.

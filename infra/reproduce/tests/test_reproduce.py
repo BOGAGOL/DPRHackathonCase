@@ -194,3 +194,42 @@ def test_current_scanner_recommendations_keep_contract_override(recommendation, 
 def test_contract_vectors_are_utf8_independent_of_windows_default_codec():
     checks = workflow.contract_checks()
     assert len(checks) == 8 and all(checks.values())
+
+
+def test_reproduction_compose_is_in_sbom_freshness_inputs():
+    from infra.submission.sbom import inputs
+    assert "infra/reproduce/compose.yaml" in inputs(bootstrap.ROOT)
+
+
+def test_only_reviewed_plaintext_scan_receipt_can_use_secrets_directory():
+    from infra.submission.inventory import allowed
+    assert allowed("evidence/secrets/plaintext-scan.json")
+    assert not allowed("evidence/secrets/credentials.json")
+    assert not allowed("evidence/secrets/another-report.json")
+    assert not allowed("infra/secrets/plaintext-scan.json")
+    assert not allowed("docs/accounts.md")
+
+
+@pytest.mark.parametrize("scope", ["submission-reproduction", "vm-demo"])
+def test_docker_tls_apply_refuses_unowned_container(tmp_path, monkeypatch, scope):
+    from infra.postgres import enable_tls
+    owned = stack.Stack(tmp_path / "owned")
+    applied = []
+    class MetadataOnlyPostgres:
+        info = {"Config": {"Labels": {"dpr.scope": scope}}}
+        def __init__(self, container, *, port):
+            assert container == owned.container and port == 23456
+        def metadata(self):
+            return {}
+        def apply(self, root, *, baseline_address):
+            applied.append((root, baseline_address))
+    monkeypatch.setattr(enable_tls, "ExistingPostgres", MetadataOnlyPostgres)
+    monkeypatch.setattr(owned, "command", lambda *a, **kw: b"18.6")
+    monkeypatch.setattr(owned, "compose", lambda *a: b"127.0.0.1:23456" if a[0] == "port" else b"")
+    if scope == "vm-demo":
+        with pytest.raises(ValueError, match="ownership"):
+            owned.start_docker()
+        assert not applied
+    else:
+        owned.start_docker()
+        assert applied == [(owned.root, "disabled")]

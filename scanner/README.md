@@ -1,3 +1,6 @@
+> **Pembaca baru/juri:** mulai dari [panduan reproduksi lengkap](../docs/operations/REPRODUCTION.md).
+> Dokumen ini adalah runbook modul/lingkungan tertentu; jangan menerapkannya ke server existing tanpa memilih prosedur yang sesuai.
+
 # Scanner 1.2.0 dan evaluasi independen
 
 Scanner membaca sampel dan agregat dalam transaksi REPEATABLE READ READ ONLY.

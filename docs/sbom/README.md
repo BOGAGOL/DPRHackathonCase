@@ -78,3 +78,8 @@ npm audit --package-lock-only --json | Out-File -Encoding utf8 ..\..\docs\sbom\a
 Audit exit 1 dapat berarti ditemukan advisory; baca JSON. Kegagalan jaringan
 atau resolusi tidak boleh dicatat sebagai nol temuan. Regenerasi dan periksa pula
 hash/ringkasan evidence jika artefak ini berubah.
+
+Generator deklarasi sumber kini juga mencatat `infra/reproduce/compose.yaml`.
+BOM sumber diregenerasi pada cleanup final; hasil validasi schema terpisah pada
+`evidence/reproduction/sbom-schema.json`. BOM/audit environment bertanggal di bawah
+tetap bukti environment asal, bukan klaim pengukuran ulang seluruh sistem.

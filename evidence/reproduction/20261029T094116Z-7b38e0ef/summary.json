@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "passed": false,
+  "run_id": "20261029T094116Z-7b38e0ef",
+  "checked_at_utc": "2026-10-29T09:41:16.072026+00:00",
+  "stages": {
+    "setup": {
+      "status": "PASS"
+    },
+    "import": {
+      "status": "PASS",
+      "rows": 734
+    },
+    "assessment": {
+      "status": "FAIL"
+    },
+    "hardening": {
+      "status": "NOT_RUN"
+    },
+    "service_application": {
+      "status": "NOT_RUN"
+    },
+    "security_verification": {
+      "status": "NOT_RUN"
+    }
+  },
+  "source_rows": 734,
+  "official_benchmark": false,
+  "scope": "Fresh isolated 734-record reproduction, no existing team database/service accessed",
+  "transport": "native_pg18_openbao_tls",
+  "failed_stage": "assessment",
+  "error_type": "ValueError",
+  "error_locations": [
+    {
+      "file": "workflow.py",
+      "function": "run",
+      "line": 326
+    },
+    {
+      "file": "workflow.py",
+      "function": "assess",
+      "line": 94
+    },
+    {
+      "file": "build_profile.py",
+      "function": "build",
+      "line": 94
+    },
+    {
+      "file": "build_profile.py",
+      "function": "assessment",
+      "line": 66
+    }
+  ],
+  "details": "withheld; no DSN, SQL values or credentials emitted"
+}

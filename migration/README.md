@@ -1,3 +1,6 @@
+> **Pembaca baru/juri:** mulai dari [panduan reproduksi lengkap](../docs/operations/REPRODUCTION.md).
+> Dokumen ini adalah runbook modul/lingkungan tertentu; jangan menerapkannya ke server existing tanpa memilih prosedur yang sesuai.
+
 # Migrasi tahap 4 — PowerShell
 
 Status clone development Alby: kedua target sudah dimigrasikan dan tervalidasi

@@ -1,6 +1,6 @@
 # Frontend Modul B
 
-Next.js App Router / TypeScript / Tailwind, disalin dan disesuaikan dari aplikasi lama tanpa mengubah `apps/web`. Semua browser request menggunakan origin yang sama (`/api`) dan DTO backend; frontend tidak melakukan keputusan otorisasi terhadap nilai lengkap yang disembunyikan. Nilai tidak disimpan di localStorage/sessionStorage.
+Next.js App Router / TypeScript / Tailwind; satu-satunya frontend aktif berada di folder ini. Untuk alur lengkap gunakan [panduan reproduksi](../../docs/operations/REPRODUCTION.md). Semua browser request menggunakan origin yang sama (`/api`) dan DTO backend; frontend tidak melakukan keputusan otorisasi terhadap nilai lengkap yang disembunyikan. Nilai tidak disimpan di localStorage/sessionStorage.
 
 PowerShell dari `app/web`:
 

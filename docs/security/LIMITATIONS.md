@@ -22,10 +22,11 @@ kolom, artefak, penyerang, kemampuan kunci, dan lingkungan yang sedang dibahas.
 | Dataset | Data sintetis panitia; tidak memvalidasi data produksi instansi atau dasar hukum pemrosesan nyata |
 | Bukti A5/restore | 143 pemeriksaan nyata memakai 17 record buatan sendiri; tidak menggantikan pengujian seluruh dataset 734/100k/1m |
 | Deployment web | 100 pemeriksaan melalui enam akun, tanpa SSH; commit, ACL SQL dan TLS backend internal VM tidak diperiksa langsung dalam bukti ini |
-| Kinerja | Snapshot ini mempunyai baseline awal; belum mempunyai before/after protected/API resmi lengkap. Hasil branch lain belum menjadi hasil branch ini |
+| Kinerja | Perbandingan DB before/after naive/v2 100k/1M tersedia dan gagal target latensi/throughput; API belum memiliki seri pengukuran lengkap. Sesi setup/gagal bukan hasil ukur |
 | TLS benchmark | Non-TLS hanya pengecualian dua role pada baseline/IP terkontrol; bukan konfigurasi produksi dan tidak berlaku pada protected |
 | Operasional | Token svc-app berbatas TTL, manual unseal, rotasi/revokasi dan pembaruan sertifikat perlu operator; ketersediaan tanpa operator tidak dijamin |
-| Supply chain | Python SBOM direct-only; tag postgres:18 belum berupa patch/digest tetap; inventaris bukan audit CVE menyeluruh |
+| Supply chain | BOM sumber, environment dan audit 29 Okt mempunyai scope berbeda; cryptography ≥50.0.2. Tag postgres:18 belum mengunci patch/digest; OS/image/CPython SSL tidak otomatis diaudit oleh upgrade wheel |
+| S02/S06 | S02 historis salinan API mencatat kegagalan analis dan belum mengesahkan DB resmi; S06 adalah scan operasional terbatas |
 | Pengumpulan | Draf Markdown dan source ZIP bukan PDF laporan/slide final; akses Drive dan kesamaan berkas presentasi perlu diperiksa tim |
 
 Jangan mengganti status yang belum diuji menjadi PASS agar checklist terlihat penuh.

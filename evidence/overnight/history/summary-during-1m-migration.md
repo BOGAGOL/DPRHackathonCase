@@ -19,4 +19,4 @@ Token svc-migration dan svc-app baru memiliki TTL 14.400 detik dan tersimpan di 
 
 Gangguan AC terdahulu: 00:58:21,876-00:58:54,603 WIB (32,73 detik), terjadi saat rangkaian belum berjalan; 0 run terdampak/diulang.
 
-Evidence berjalan: [migration_1m/session.json](overnight/migration_1m/session.json). Resolusi merge: [gate0_resolution.json](overnight/gate0_resolution.json). Test: [merge_verification.json](overnight/merge_verification.json). Laporan berhenti sebelumnya tetap di [history](overnight/history/summary-before-authorized-union.md).
+Evidence berjalan: [migration_1m/session.json](../migration_1m/session.json). Resolusi merge: [gate0_resolution.json](../gate0_resolution.json). Test: [merge_verification.json](../merge_verification.json). Laporan berhenti sebelumnya tetap di [history](../history/summary-before-authorized-union.md).

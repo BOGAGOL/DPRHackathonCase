@@ -1,3 +1,6 @@
+> **Pembaca baru/juri:** mulai dari [panduan reproduksi lengkap](../../docs/operations/REPRODUCTION.md).
+> Dokumen ini adalah runbook modul/lingkungan tertentu; jangan menerapkannya ke server existing tanpa memilih prosedur yang sesuai.
+
 # Acceptance sistem gabungan setelah A5
 
 Pekerjaan ini membedakan dua bukti: lab terisolasi dengan semua service nyata dan

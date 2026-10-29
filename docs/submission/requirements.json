@@ -110,7 +110,9 @@
       "owner": "C",
       "paths": [
         "evidence/benchmark/baseline/summary.json",
-        "evidence/benchmark/baseline_1m/summary.json"
+        "evidence/benchmark/baseline_1m/summary.json",
+        "evidence/benchmark/bppb_v2_100k/summary.json",
+        "evidence/benchmark/bppb_v2_1m/summary.json"
       ]
     },
     {

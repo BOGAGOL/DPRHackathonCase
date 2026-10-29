@@ -2,6 +2,8 @@
 
 Mulai dari [README proyek](../README.md). Dokumen ini memetakan implementasi aktif,
 bukti yang tersedia, dan bahan yang masih perlu direview tim sebelum dikirim.
+Quick-start tunggal: `python -m infra.reproduce setup`, lalu `verify`/`demo` dengan
+input SQL privat. Hasil clone bersih ada di [indeks reproduksi](../evidence/reproduction/README.md).
 
 | Bagian | Isi |
 |---|---|

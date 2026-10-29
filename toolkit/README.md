@@ -146,6 +146,6 @@ Remove-Item Env:DPR_INFRA_INTEGRATION, Env:DPR_CRYPTO_INTEGRATION
 ```
 
 Modul B perlu mengimpor paket ini atau lulus vector di backend bahasa lain.
-Adaptor lama `apps/api/app/crypto.py` belum memakai format kontrak baru dan
+Prototipe `apps/api/app/crypto.py` sudah dihapus dari snapshot aktif; formatnya tidak kompatibel dan
 tidak diubah oleh Tahap 2. Migrasi/penggantian adaptor aplikasi dilakukan pemilik
 Modul B; jangan mencampur envelope JSON lama dengan bytea blob v1.

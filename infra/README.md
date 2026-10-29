@@ -1,3 +1,6 @@
+> **Pembaca baru/juri:** mulai dari [panduan reproduksi lengkap](../docs/operations/REPRODUCTION.md).
+> Dokumen ini adalah runbook modul/lingkungan tertentu; jangan menerapkannya ke server existing tanpa memilih prosedur yang sesuai.
+
 # Infra Tahap 1 (Windows / PowerShell)
 
 **VM Ubuntu baru:** gunakan [paket/prosedur Modul A untuk Zhafif](vm/README.md):

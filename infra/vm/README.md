@@ -1,3 +1,6 @@
+> **Pembaca baru/juri:** mulai dari [panduan reproduksi lengkap](../../docs/operations/REPRODUCTION.md).
+> Dokumen ini adalah runbook modul/lingkungan tertentu; jangan menerapkannya ke server existing tanpa memilih prosedur yang sesuai.
+
 # Paket Modul A untuk VM Ubuntu baru
 
 Untuk Zhafif: jalankan dari `~/juara1onno` pada VM baru, sebagai user biasa yang

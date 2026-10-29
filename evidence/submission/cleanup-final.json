@@ -1,0 +1,411 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-10-29T09:42:05.118436+00:00",
+  "source_main": "e2d28f8",
+  "tracked_files_audited": 3772,
+  "readmes_reviewed": [
+    {
+      "path": "README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "app/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "app/web/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "benchmark/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "benchmark/api/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "datagen/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "docs/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "docs/architecture/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "docs/presentation/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "docs/report/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "docs/report/appendix/sbom/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "docs/sbom/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "infra/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "infra/acceptance/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "infra/postgres/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "infra/rotation/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "infra/vm/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "migration/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "scanner/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "scripts/backup/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "sql/baseline/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "toolkit/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    },
+    {
+      "path": "verify/README.md",
+      "reviewed": true,
+      "disposition": "canonical entry or scoped module/runbook; history retained explicitly"
+    }
+  ],
+  "removed_local_outputs": [
+    {
+      "path": ".pytest_cache",
+      "files": 6,
+      "bytes": 78799,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "app/backend/service_app/__pycache__",
+      "files": 11,
+      "bytes": 108895,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "app/scripts/__pycache__",
+      "files": 6,
+      "bytes": 119037,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "app/tests/__pycache__",
+      "files": 14,
+      "bytes": 441021,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "benchmark/__pycache__",
+      "files": 19,
+      "bytes": 282845,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "benchmark/adapters/__pycache__",
+      "files": 3,
+      "bytes": 32843,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "benchmark/api/__pycache__",
+      "files": 4,
+      "bytes": 86971,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "benchmark/tests/__pycache__",
+      "files": 17,
+      "bytes": 550763,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "datagen/__pycache__",
+      "files": 4,
+      "bytes": 51618,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "datagen/tests/__pycache__",
+      "files": 4,
+      "bytes": 84103,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "docs/presentation/__pycache__",
+      "files": 2,
+      "bytes": 37983,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "docs/presentation/tests/__pycache__",
+      "files": 1,
+      "bytes": 20956,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "docs/report/__pycache__",
+      "files": 3,
+      "bytes": 51786,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "docs/report/tests/__pycache__",
+      "files": 1,
+      "bytes": 31083,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "infra/__pycache__",
+      "files": 3,
+      "bytes": 5349,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "infra/acceptance/__pycache__",
+      "files": 3,
+      "bytes": 28039,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "infra/openbao/__pycache__",
+      "files": 4,
+      "bytes": 29764,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "infra/postgres/__pycache__",
+      "files": 5,
+      "bytes": 78595,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "infra/protected/__pycache__",
+      "files": 4,
+      "bytes": 31940,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "infra/reproduce/__pycache__",
+      "files": 5,
+      "bytes": 66048,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "infra/reproduce/tests/__pycache__",
+      "files": 2,
+      "bytes": 55461,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "infra/rotation/__pycache__",
+      "files": 5,
+      "bytes": 40441,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "infra/rotation/tests/__pycache__",
+      "files": 4,
+      "bytes": 67846,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "infra/submission/__pycache__",
+      "files": 5,
+      "bytes": 37293,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "infra/submission/tests/__pycache__",
+      "files": 3,
+      "bytes": 88487,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "infra/tests/__pycache__",
+      "files": 14,
+      "bytes": 412659,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "infra/tls/__pycache__",
+      "files": 2,
+      "bytes": 7125,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "infra/vm/__pycache__",
+      "files": 3,
+      "bytes": 37464,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "infra/vm/tests/__pycache__",
+      "files": 3,
+      "bytes": 88135,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "migration/__pycache__",
+      "files": 7,
+      "bytes": 57254,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "migration/tests/__pycache__",
+      "files": 4,
+      "bytes": 125388,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "policy/__pycache__",
+      "files": 2,
+      "bytes": 16070,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "policy/tests/__pycache__",
+      "files": 2,
+      "bytes": 26489,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "scanner/__pycache__",
+      "files": 10,
+      "bytes": 143273,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "scanner/tests/__pycache__",
+      "files": 15,
+      "bytes": 273958,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "scripts/__pycache__",
+      "files": 2,
+      "bytes": 33597,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "scripts/backup/__pycache__",
+      "files": 8,
+      "bytes": 82529,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "scripts/backup/tests/__pycache__",
+      "files": 11,
+      "bytes": 242167,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "toolkit/__pycache__",
+      "files": 1,
+      "bytes": 272,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "toolkit/dprcrypto/__pycache__",
+      "files": 9,
+      "bytes": 76437,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "toolkit/tests/__pycache__",
+      "files": 12,
+      "bytes": 221010,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "verify/__pycache__",
+      "files": 12,
+      "bytes": 118818,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "verify/tests/__pycache__",
+      "files": 6,
+      "bytes": 148090,
+      "reason": "regenerable Python cache"
+    },
+    {
+      "path": "dist/submission/dpr-source-4eaaa645c2f5.zip",
+      "files": 1,
+      "bytes": 1316696,
+      "reason": "obsolete submission output; user postponed ZIP"
+    },
+    {
+      "path": "dist/submission/build-report.json",
+      "files": 1,
+      "bytes": 500,
+      "reason": "obsolete submission output; user postponed ZIP"
+    }
+  ],
+  "preserved": [
+    "all tracked historical/final evidence and raw benchmark",
+    "source SQL/config/module paths",
+    "developer environments and installed dependencies",
+    "private local operational material",
+    "report/presentation frozen source snapshots",
+    "book references and legacy archive outside source package"
+  ],
+  "scope": "Tracked inventory, README review and narrowly selected local regenerable outputs. Not a whole-history secret or whole-host PII audit.",
+  "credential_document_removed": "accounts.md; preserved outside checkout, deployment rotation remains operator action",
+  "historical_markdown_link_repairs": [
+    "evidence/overnight/history/summary-before-authorized-union.md",
+    "evidence/overnight/history/summary-during-1m-migration.md"
+  ],
+  "historical_numeric_results_modified": false,
+  "preserved_running_node_build_output": true
+}

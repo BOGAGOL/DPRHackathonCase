@@ -1,3 +1,6 @@
+> **Pembaca baru/juri:** mulai dari [panduan reproduksi lengkap](../docs/operations/REPRODUCTION.md).
+> Dokumen ini adalah runbook modul/lingkungan tertentu; jangan menerapkannya ke server existing tanpa memilih prosedur yang sesuai.
+
 # Datagen Modul C — PowerShell
 
 Jalankan dari `C:\dev\juara1onno`. Aktifkan Docker Desktop dan `pg-dpr` yang sudah ada;

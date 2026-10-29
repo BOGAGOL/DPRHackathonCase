@@ -1,4 +1,17 @@
-# Benchmark baseline awal — PowerShell
+# Benchmark DB — baseline dan protected
+
+**Status 29 Oktober 2026:** hasil DB B-P-P-B naive dan v2 pada 100k/1M sudah ada
+pada `evidence/benchmark/bppb_*` dan `bppb_v2_*`, termasuk raw, median, resource
+serta target comparison. Semua skenario DB gagal target latensi/throughput
+P01/P01A/P02; P03 error-rate lulus. Jangan mengganti target atau menghapus hasil gagal.
+Benchmark API mempunyai [runbook/status terpisah](api/README.md); percobaan setup
+bukan hasil pengukuran API. Demo 734 tidak menjalankan benchmark otomatis.
+
+Untuk setup/reproduksi awal gunakan [panduan utama](../docs/operations/REPRODUCTION.md).
+Bagian berikut mempertahankan perintah per sesi dan prasyarat operasional. Jangan
+menjalankan ulang output existing; gunakan sesi baru yang disetujui pemilik benchmark.
+
+## Baseline awal — PowerShell
 
 Jalankan dari root repo, pg-dpr sudah berjalan. Ini sesi DB plain; jangan menjalankan
 migrasi, aplikasi/demo, test berat atau container lain selama measurement berlangsung.

@@ -1,3 +1,7 @@
+> Jalur pengumpulan: [panduan reproduksi 734](../docs/operations/REPRODUCTION.md).
+> Hasil leakage protected/no-key/domain-key sekarang tersedia di `evidence/leakage/`.
+> Scope baseline historis di bawah tidak menggantikan hasil skenario protected.
+
 # Verifikasi kebocoran baseline
 
 Gunakan Python 3.11 dan dependensi `verify/requirements.txt`. Venv scanner yang
@@ -34,7 +38,7 @@ SQL ekspansi unik dibersihkan melalui finally, snapshot asli dan ledger dipertah
 Ringkasan: `evidence/leak/baseline_dump.json`, laporan engine scanner v1.2 pada
 reservoir seragam 1.000 baris dari artefak yang sama di `baseline_dump_scanner/`,
 `evidence/leakage/{baseline_dump,residual_before,protected_pending}.json`.
-Tabel ringkas before/after ada di `evidence/leakage/before_after.csv` (after BELUM DIUJI).
+Tabel ringkas before/after ada di `evidence/leakage/before_after.csv`. Paragraf ini menjelaskan sesi baseline historis; hasil protected berikutnya dijelaskan di bagian bawah dan pada evidence terkait.
 Scanner dijalankan lewat engine Python bersama, bukan CLI dump yang membuat
 ulang SQLite plaintext; semua baris artefak ikut agregasi residual k dan validasi.
 Sampling tidak dipakai sebagai denominator ESCE/DIE/k. Lihat metodologi dan
@@ -50,9 +54,10 @@ Hitung ulang budget saja dari ledger dan evidence yang cocok:
 ```
 
 Adapter profile membaca format kolom A (`columns.<name>.aead/domain/storage_column/bidx_column`).
-File belum diintegrasikan berarti BELUM DIUJI. Skenario protected/backup tidak
-menggunakan fallback baseline, tidak menerima decrypt tak terbatas, dan tetap
-menunggu artefak serta hook OpenBao/toolkit nyata sebelum menghasilkan skor.
+Status BELUM DIUJI berlaku pada percobaan yang belum mempunyai artefak/hook nyata,
+bukan status seluruh implementasi saat ini. Skenario protected/backup tidak memakai
+fallback baseline atau decrypt tak terbatas. Hasil protected nyata berikutnya
+memakai artefak dan kapabilitas OpenBao yang disebut pada setiap laporan.
 # Verifikasi artefak protected (28 Oktober 2026)
 
 ```powershell

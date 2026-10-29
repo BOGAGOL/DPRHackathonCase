@@ -1,3 +1,6 @@
+> **Pembaca baru/juri:** mulai dari [panduan reproduksi lengkap](../../docs/operations/REPRODUCTION.md).
+> Dokumen ini adalah runbook modul/lingkungan tertentu; jangan menerapkannya ke server existing tanpa memilih prosedur yang sesuai.
+
 # Tahap 6: rotate / rewrap PII
 
 Jalankan dari root repo dengan venv yang sudah dipakai tahap 1–5. Tidak perlu dependency

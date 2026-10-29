@@ -1,3 +1,6 @@
+> **Pembaca baru/juri:** mulai dari [panduan reproduksi lengkap](../../docs/operations/REPRODUCTION.md).
+> Dokumen ini adalah runbook modul/lingkungan tertentu; jangan menerapkannya ke server existing tanpa memilih prosedur yang sesuai.
+
 # PostgreSQL proyek: pg-dpr:5433, TLS tanpa recreate
 
 ## Pengecualian kondisi awal benchmark (28 Oktober 2026)

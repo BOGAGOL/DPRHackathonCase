@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "checked_at_utc": "2026-10-29T09:53:20.896934+00:00",
+  "schema": "https://raw.githubusercontent.com/CycloneDX/specification/master/schema/bom-1.6.schema.json",
+  "files": [
+    {
+      "path": "docs/sbom/python-declared.cdx.json",
+      "passed": true,
+      "errors": 0,
+      "sha256_lf": "f055f31872a73afc82173a409ce21ce5f5bcf98a4a60e16f14897f2c6e3b904a"
+    },
+    {
+      "path": "docs/sbom/service-web-lock.cdx.json",
+      "passed": true,
+      "errors": 0,
+      "sha256_lf": "3aa047def56c0be05dc871daee4fbd89ea2da9e83f5a12984fe5ac79522b9904"
+    },
+    {
+      "path": "docs/sbom/infrastructure.cdx.json",
+      "passed": true,
+      "errors": 0,
+      "sha256_lf": "5df67fdc3213c5478d8ba49d0a19f526bd350e6a857707552542df985c6405ba"
+    }
+  ],
+  "scope": "Current declared/lockfile/image SBOM schema validation, not CVE/OS/deployment audit"
+}

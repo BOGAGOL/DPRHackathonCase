@@ -1,3 +1,7 @@
+> **Snapshot konteks awal belum diselaraskan seluruhnya dengan HEAD.**
+> Baca [pembaruan final 29 Oktober](UPDATES_20261029.md) terlebih dahulu.
+> Manifest/tabel/evidence salinan lama dipertahankan sebagai snapshot bertanggal.
+
 # Prompt untuk AI pembuat slide
 
 Buat rancangan presentasi Tim BOGAGOL berdasarkan CONTEXT.md, deck_plan.json,

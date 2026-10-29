@@ -56,6 +56,7 @@ PRIVATE_PARTS = {
 PRIVATE_NAMES = {
     "creds.json",
     "credentials.json",
+    "accounts.md",
     "database-credentials.json",
     "init-material.json",
     "operator.env",
@@ -94,6 +95,7 @@ PRIVATE_SUFFIXES = {
     ".sock",
 }
 EXCLUDE_PREFIXES = ("docs/reference/", "evidence/submission/generated/", "evidence/reproduction/generated/")
+PUBLIC_REPORTS = {"evidence/secrets/plaintext-scan.json"}
 
 
 def text_sha(path):
@@ -165,7 +167,9 @@ def allowed(name):
         return False
     parts = tuple(part.lower() for part in path.parts)
     base = parts[-1]
-    if any(part in PRIVATE_PARTS for part in parts) or base in PRIVATE_NAMES:
+    # One reviewed metadata-only scan receipt lives under a directory called
+    # 'secrets'. Do not admit arbitrary neighbours or private operational folders.
+    if any(part in PRIVATE_PARTS and not (name in PUBLIC_REPORTS and part == "secrets") for part in parts) or base in PRIVATE_NAMES:
         return False
     if name.startswith(EXCLUDE_PREFIXES) or name == "sql/baseline/02_data.sql":
         return False

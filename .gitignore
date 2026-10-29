@@ -30,6 +30,7 @@ playwright-report/
 .acceptance-private/
 creds.json
 credentials.json
+accounts.md
 .pgpass
 pgpass.conf
 .netrc

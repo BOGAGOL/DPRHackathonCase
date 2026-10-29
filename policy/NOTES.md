@@ -50,3 +50,9 @@ dataset panitia pada repo private. Profile dibangun ulang agar hash provenance
 kontrak sesuai versi terbaru; keputusan perlindungan/format v1 tidak berubah.
 Dataset lokal sama dengan file yang kini dilacak di main. Pengecualian dataset
 tidak berlaku bagi credential, kunci, log, atau artefak hasil migrasi.
+
+Reproduksi clone bersih 29 Okt menemukan vocabulary scanner terbaru belum diterima:
+generalize_for_analyst, mask_for_analyst, review_minimization. Builder kini mengenali
+label metadata tersebut; review_minimization adalah kandidat minimisasi, bukan
+penghapusan otomatis. Override storage/domain/AAD/bidx kontrak tetap sama. Profile
+run baru tidak menimpa profile/hashes benchmark yang sudah dibekukan.

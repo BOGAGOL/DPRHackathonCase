@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "created_at": "2026-10-29T09:44:02.792609+00:00",
+  "scope": "new invented member in invocation-owned restore clone only",
+  "control_backup_contains_member": true,
+  "new_backup_restore_member_absent": true,
+  "rows_before_delete": 735,
+  "rows_after_delete": 734,
+  "before_artifact_id": "e80c7077-c710-4a9b-b32d-8fd911fbedcd",
+  "after_artifact_id": "b3aadb69-9ce0-4f06-b968-1db7f3264263",
+  "original_source_not_modified": true,
+  "old_backup_still_contains_member_until_expiry": true,
+  "physical_secure_erasure_claimed": false,
+  "decryption_smoke": {
+    "performed": true,
+    "records": 16,
+    "authenticated_non_null_fields": 392,
+    "domains": [
+      "PII",
+      "FIN"
+    ],
+    "plaintext_written": false
+  },
+  "scratch_databases_removed": 3
+}

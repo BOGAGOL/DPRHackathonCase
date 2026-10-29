@@ -1,3 +1,7 @@
+> **Snapshot konteks awal belum diselaraskan seluruhnya dengan HEAD.**
+> Baca [pembaruan final 29 Oktober](UPDATES_20261029.md) terlebih dahulu.
+> Manifest/tabel/evidence salinan lama dipertahankan sebagai snapshot bertanggal.
+
 # Prompt serah-terima kepada penulis/AI lain
 
 Anda membantu Tim BOGAGOL menyusun laporan/panduan teknis PDF Final Hackathon DPR RI

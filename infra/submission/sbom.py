@@ -32,6 +32,7 @@ def inputs(root):
         "app/web/package-lock.json",
         "infra/compose.yaml",
         "infra/vm/compose.yaml",
+        "infra/reproduce/compose.yaml",
         "infra/tests/compose.postgres.yaml",
     ]
     return {name: text_sha(root / name) for name in names if (root / name).is_file()}

@@ -28,3 +28,9 @@
   berhenti tetapi folder privat dipertahankan agar material tidak hilang diam-diam;
   operator boleh menghapus direktori run setelah tidak diperlukan. Tidak ada prune
   Docker global dan tidak ada penghapusan volume/container existing.
+
+Hasil akhir: setup clone baru PASS; verify dan demo native 734 PASS (100 pemeriksaan
+Chrome per run). Core394/10skip, B473/12skip, scanner/datagen218/1skip,
+benchmark/verify155/1skip; targeted launcher/profile/packaging75 PASS (bertumpang
+tindih, jangan dijumlahkan sebagai test unik). Docker runtime gagal engine500;
+Compose syntax PASS. Lihat evidence/reproduction/final-verification.json.
