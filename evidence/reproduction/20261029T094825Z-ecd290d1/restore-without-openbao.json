@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "artifact_id": "6e2485b6-3abd-4346-9781-84fb2b7af6de",
+  "created_at": "2026-10-29T09:48:45.994509+00:00",
+  "database": "dpr_restore_09c7c6d2610841e693f20ed3920c2785",
+  "mode": "without_openbao",
+  "source_database": "protected_734",
+  "table_rows": {
+    "access_scope": 13,
+    "anggota_protected": 734,
+    "app_users": 6,
+    "audit_log": 753,
+    "migration_jobs": 1,
+    "service_member_bindings": 1,
+    "service_sessions": 0
+  },
+  "source_rows": 734,
+  "manifest_hmac_verified": true,
+  "sha256_verified": true,
+  "all_frames_authenticated_before_restore": true,
+  "security": {
+    "schema_owner_and_forced_rls": true,
+    "app_has_no_ddl": true,
+    "analyst_cannot_select_base": true,
+    "backup_can_select_base": true,
+    "app_principal_rls_present": true,
+    "public_database_connect_revoked": true,
+    "analyst_no_per_record_select": true,
+    "analyst_can_select_aggregate": true,
+    "analyst_aggregate_owner_and_barrier": true,
+    "analyst_aggregate_contract_columns": true,
+    "service_tables_owned_by_schema_owner": true,
+    "service_table_grants_minimal": true,
+    "service_locator_sequence_safe": true,
+    "service_locator_sequence_grants": true
+  },
+  "decryption_smoke": {
+    "performed": false,
+    "reason": "without_openbao",
+    "data_remains_field_ciphertext": true
+  },
+  "size_bytes": 1252940,
+  "backup_seconds": 0.462235,
+  "restore_seconds": 0.743056,
+  "created_database": {
+    "name": "dpr_restore_09c7c6d2610841e693f20ed3920c2785",
+    "oid": 16633,
+    "marker": "dpr-service-restore-v1:6e2485b6-3abd-4346-9781-84fb2b7af6de"
+  },
+  "plaintext_dump_files": 0,
+  "service_schema_restored": true,
+  "service_recovery_environment": {
+    "DPR_RESTORED_DATABASE": "dpr_restore_09c7c6d2610841e693f20ed3920c2785"
+  },
+  "service_scope": "database, ACL/RLS and optional field decryption; HTTP app integration is separate"
+}

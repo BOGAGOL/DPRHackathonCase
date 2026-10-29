@@ -43,9 +43,8 @@ def test_initial_session_all_runs_and_aggregate_outputs(monkeypatch,tmp_path,sou
     assert not any(row["email"] in (tmp_path / "raw/summary.json").read_text() for row in source)
 
 
-def test_environment_without_exposing_inspect_env(monkeypatch,tmp_path):
-    # This is a metadata unit test; host battery state belongs to live preflight.
-    monkeypatch.setattr(runner.psutil, "sensors_battery", lambda: SimpleNamespace(power_plugged=True))
+@pytest.mark.parametrize("power_plugged", [True, False])
+def test_environment_without_exposing_inspect_env(monkeypatch,tmp_path,power_plugged):
     (tmp_path / "benchmark").mkdir()
     (tmp_path / "benchmark/workloads.yaml").write_text(json.dumps(MANIFEST))
     monkeypatch.setattr(runner,"ROOT",tmp_path)
@@ -56,12 +55,18 @@ def test_environment_without_exposing_inspect_env(monkeypatch,tmp_path):
     monkeypatch.setattr(runner,"parameters",lambda *a,**k:{})
     monkeypatch.setattr(runner,"provenance",lambda:{"targets_commit":"a"*40})
     monkeypatch.setattr(runner,"running_containers",lambda:["pg-dpr"])
+    # Unit tests model hardware; real benchmark runs still enforce the charger.
+    monkeypatch.setattr(runner.psutil,"sensors_battery",lambda:SimpleNamespace(power_plugged=power_plugged))
     def call(cmd,**kwargs):
         if cmd[:2]==["docker","inspect"]:
             return SimpleNamespace(stdout=json.dumps([{"Config":{"Image":"postgres:18","Env":["not-to-export"]},
                 "Image":"sha256:image","HostConfig":{"Memory":0,"NanoCpus":0}}]))
         return SimpleNamespace(stdout="hardware version metadata only")
     monkeypatch.setattr(runner.subprocess,"run",call)
+    if not power_plugged:
+        with pytest.raises(ValueError,match="Charger requirement not satisfied"):
+            runner.environment(MANIFEST,{},STATE,{})
+        return
     result=runner.environment(MANIFEST,{},STATE,{})
     assert result["session_kind"]=="baseline_awal" and not result["tls"]
     assert "not-to-export" not in json.dumps(result)

@@ -1,0 +1,9 @@
+{
+  "checked_at_utc": "2026-10-29T10:47:23.419348+00:00",
+  "url": "https://43.156.157.247/login",
+  "scope": "Public login page and HTTPS only; no credentials submitted or role acceptance rerun",
+  "tls_verified": true,
+  "reachable": true,
+  "http_status": 200,
+  "csp_present": true
+}

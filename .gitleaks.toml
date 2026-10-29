@@ -7,7 +7,7 @@ useDefault = true
 description = "Third-party book reference and archived early documentation; excluded by team policy"
 paths = [
   '^docs/reference/',
-  '^docs/legacy-md_zhafif/',
+  '^archive/legacy-service/docs/',
 ]
 
 [[allowlists]]

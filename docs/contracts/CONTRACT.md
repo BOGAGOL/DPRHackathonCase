@@ -1,14 +1,9 @@
-# Kontrak Teknis Bersama (WAJIB dipatuhi semua modul)
+# Spesifikasi data terproteksi v1
 
-Dokumen ini adalah satu-satunya sumber kebenaran untuk format data terproteksi. Migrasi (Python),
-Service App (bahasa apa pun), verifikasi, dan backup harus memakai format yang sama persis.
-Perubahan format data hanya lewat kesepakatan tim dan menaikkan `protection_version`.
-Revisi ACL analis A5 (28 Oktober 2026, disetujui tim melalui instruksi Modul A) di bagian
-10.1 hanya memperketat izin dan interface agregat: format ciphertext/AAD/bidx tetap v1,
-sehingga tidak menaikkan `protection_version` atau mengenkripsi ulang data.
-
-Acuan desain: docs/Rancangan_Hardening_Final (PDF tim), buku Onno W. Purbo *Data Leak-Proof*
-(Bab 3, 5, 6, 7, 9), soal final dan dokumen Detail Hackathon.
+Format field, associated data, blind index dan kewenangan digunakan bersama oleh
+migrator, aplikasi dan verifier. Perubahan format memerlukan protection_version baru.
+Identitas input format lama pada profile dijaga melalui policy/protocol-v1.txt;
+pembersihan dokumentasi tidak mengubah ciphertext atau memerlukan migrasi ulang.
 
 ## 1. Database dan lingkungan
 
@@ -41,7 +36,7 @@ Tidak ada service yang memakai root token.
 
 ## 3. Domain dan perlakuan kolom (protection profile)
 
-File mesin: `policy/protection_profile.yaml` (dibuat modul A dari hasil scanner + keputusan tim).
+File mesin: `policy/protection_profile.yaml` (dibangun dari hasil scanner dan override kebijakan).
 
 | Kolom | Domain | Simpan sebagai | Blind index | Proyeksi analis |
 |---|---|---|---|---|
@@ -68,7 +63,7 @@ Catatan keputusan:
 - `kode_bank` dimasukkan domain FIN (bukan REF seperti di PDF) karena di dump ini nilainya acak
   dan hampir unik per orang (373 baris unik sendirian; bersama kolom plaintext lain unik 100%).
 - Kolom plaintext yang tersisa setelah hardening (jenis_kelamin, pekerjaan_terakhir, nama_kppn,
-  nama_bank, age_band) WAJIB diuji k-anonymity oleh modul verifikasi.
+  nama_bank, age_band) WAJIB diuji k-anonymity oleh verifier.
 - Tidak ada kolom yang dihapus. Kandidat minimisasi (3 kolom nama identik) hanya didokumentasikan.
 - Password akun aplikasi (tabel users aplikasi) memakai Argon2id, bukan enkripsi.
 
@@ -132,11 +127,11 @@ bidx = HMAC-SHA256(key = search key, msg = "bidx|v1|" + <nama_kolom> + "|" + nor
 - Kredensial hanya dari environment variable; `.env` tidak di-commit.
 
 ## 9. Test vector bersama
-Modul A membuat `docs/contracts/test_vectors.json` berisi DEK contoh (khusus test), anggota_id, kolom,
-plaintext, AAD, nonce, blob hasil, dan bidx hasil dengan search key contoh. Service App WAJIB lulus
+`docs/contracts/test_vectors.json` berisi vector uji publik: DEK contoh (khusus test), anggota_id, kolom,
+plaintext, AAD, nonce, blob hasil, dan bidx hasil dengan search key contoh. Aplikasi WAJIB lulus
 test yang mendekripsi vector ini (terutama jika backend bukan Python).
 
-## 10. Role database (wajib panitia + tambahan)
+## 10. Role database
 | Role | Hak |
 |---|---|
 | `schema_owner` | NOLOGIN, pemilik objek |
@@ -171,10 +166,8 @@ ciphertext, wrapped DEK, atau kombinasi atribut per anggota di interface ini.
 `analyst_age_summary()` mempertahankan kolom `(age_band varchar(10), anggota_count bigint)`
 dan kini membaca hanya marginal `age_band` pada view baru, dengan SECURITY INVOKER.
 
-**Handoff Modul B:** `app/backend/service_app/analytics.py` saat revisi ini masih membaca
-`analyst_view` per record. Query tersebut akan ditolak sesudah SQL A5 diterapkan. Modul B
-wajib menggantinya dengan query berparameter berikut dan memetakan `anggota_count` ke
-`groups[].count` pada DTO:
+Endpoint analytics membaca view agregat dengan query berparameter berikut;
+`anggota_count` dipetakan menjadi `groups[].count` pada DTO:
 
 ```sql
 SELECT dimension, value, anggota_count
@@ -190,45 +183,14 @@ view hanya boleh memilih marginal yang sudah dirilis (`dimension`/`value`), buka
 menyimulasikan cohort gabungan. Filter anggota seperti `nama_kppn` + `pekerjaan_terakhir`
 pada endpoint lama harus ditolak secara eksplisit (misalnya HTTP 422) sampai tersedia
 interface SQL agregat terfilter dengan suppression tersendiri; jangan fallback ke query
-per record, role app_user, atau query admin. Penyesuaian `app/` adalah tugas Modul B.
+per record, role app_user, atau query admin. Otorisasi endpoint tetap dilakukan backend.
 
-Penerapan harus dikoordinasikan dengan rilis Modul B (maintenance endpoint analytics
+Penerapan harus dikoordinasikan dengan rilis aplikasi (maintenance endpoint analytics
 sampai query baru aktif). CLI khusus A5 tidak mengubah LOGIN role migrasi, password,
 grant tabel Service App, atau isi anggota. Backup lama yang terautentikasi juga mendapat
-upgrade ACL A5 pada restore sebelum CONNECT runtime dibuka. Runbook:
-`infra/protected/ANALYST_SUPPRESSION.md`.
+upgrade ACL A5 pada restore sebelum CONNECT runtime dibuka. Panduan operasi: `docs/OPERATIONS.md`.
 
 **Batas klaim:** ambang ini berlaku untuk setiap marginal yang dirilis. Ini bukan
 k-anonymity atas seluruh kombinasi REF, differential privacy, atau perlindungan mutlak
 dari inferensi melalui pengetahuan tambahan, perbedaan antarwaktu, dan penggabungan hasil.
 Kolom REF tetap tersimpan pada tabel dasar untuk role yang memang diizinkan/dump.
-
-## 11. Folder dan kepemilikan
-| Folder | Pemilik |
-|---|---|
-| `infra/` (compose, OpenBao config, TLS) | A |
-| `toolkit/` (crypto adapter, openbao client, bidx) | A |
-| `policy/` (protection_profile.yaml) | A |
-| `migration/`, `sql/protected/`, `sql/roles/` | A |
-| `scripts/backup/` (backup, restore, tamper, retention) | A |
-| `app/` (backend + frontend) | B |
-| `datagen/`, `benchmark/` | C |
-| `verify/` (leak sim, leakage budget, access tests runner, k-anon residual) | C |
-| `scanner/` | C |
-| `evidence/` (hasil mesin, sebagian di-.gitignore) | semua, lewat skrip |
-| `docs/` | semua, laporan dikoordinasikan C |
-
-docs/reference/ = rujukan pihak ketiga, dikecualikan dari scan dan evidence
-
-### Pengecualian dataset panitia — keputusan tim 27 Oktober 2026
-
-`sql/baseline/02_data.sql` adalah dataset sintetis milik panitia dan boleh disimpan hanya
-di repo **PRIVATE** ini, sesuai arahan tim 27 Oktober 2026 (mengamendemen larangan commit
-path tersebut pada PROJECT_CONTEXT bagian 11). Dilarang memublikasikan dataset atau
-mengubah repo menjadi public, termasuk setelah file dihapus karena riwayat Git tetap memuatnya.
-Path ini dikecualikan dari paket lampiran publik melalui `.gitattributes` (`export-ignore`),
-dari scan plaintext S06 melalui `verify/scan_config.toml`, dan dari gitleaks melalui allowlist
-path persis di `.gitleaks.toml`: file itu sengaja merepresentasikan kondisi awal plaintext.
-Pengecualian ini tidak berlaku untuk file SQL lain, log, evidence, credential, atau kunci aktif.
-Snapshot hasil generation, known-values, dan rahasia tetap di luar repo melalui `DPR_PRIVATE_DIR`.
-Lihat `sql/baseline/README.md`; pengecualian harus dilaporkan sebagai batas cakupan scan.

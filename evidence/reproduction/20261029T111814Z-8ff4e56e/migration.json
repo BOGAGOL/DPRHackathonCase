@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "rows_compared": 734,
+  "comparison": "all_rows_all_fields",
+  "null_counts": {
+    "nama": 0,
+    "nama_lengkap": 0,
+    "nama_tanpa_gelar": 0,
+    "jenis_kelamin": 0,
+    "tempat_lahir": 0,
+    "tanggal_lahir": 0,
+    "tanggal_pernikahan": 367,
+    "no_ktp": 0,
+    "pekerjaan_terakhir": 0,
+    "alamat_jakarta": 0,
+    "alamat_daerah": 0,
+    "telpon_jakarta": 0,
+    "telpon_daerah": 0,
+    "handphone": 0,
+    "email": 0,
+    "ruangan": 0,
+    "status_kawin": 0,
+    "jumlah_anak": 0,
+    "jumlah_tanggungan": 0,
+    "jumlah_jiwa": 0,
+    "rekening": 0,
+    "nama_rekening": 0,
+    "npwp": 0,
+    "kode_bank": 0,
+    "nama_kppn": 0,
+    "nama_bank": 0,
+    "nip_kppn": 0,
+    "pengguna": 0,
+    "agama": 0
+  },
+  "blind_index_uniqueness": {
+    "no_ktp": {
+      "source_normalized_unique": true,
+      "target_unique": true
+    },
+    "email": {
+      "source_normalized_unique": true,
+      "target_unique": true
+    },
+    "pengguna": {
+      "source_normalized_unique": true,
+      "target_unique": true
+    }
+  },
+  "complete": true,
+  "status": "validated",
+  "source": "postgres",
+  "target": "protected_734",
+  "expected_rows": 734,
+  "source_rows": 734,
+  "migrated_rows": 734,
+  "profile_sha256": "d4bb3fb1758892f7d5fbf19d7b9a9ad9cddcd0d5a289e4e5b20acdada14dad4c",
+  "profile_canonical_sha256": "d4bb3fb1758892f7d5fbf19d7b9a9ad9cddcd0d5a289e4e5b20acdada14dad4c",
+  "source_sha256": "fb1c14b42847d35d066101102f758403cbd051bc4b676fcd0c7157eb67491ac8",
+  "checked_at_utc": "2026-10-29T11:18:42.320179+00:00",
+  "repeat_run_idempotent": true,
+  "migration_token_revoked": true,
+  "migration_role_nologin": true
+}

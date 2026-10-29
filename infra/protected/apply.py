@@ -27,9 +27,9 @@ REF = ("jenis_kelamin", "pekerjaan_terakhir", "nama_kppn", "nama_bank", "age_ban
 def load_profile(path: Path) -> dict:
     profile = yaml.safe_load(path.read_text(encoding="utf-8"))
     inventory = REPO / profile["provenance"]["inventory"]
-    rebuilt = build(inventory, REPO / "policy/overrides.yaml", REPO / "docs/contracts/CONTRACT.md")
+    rebuilt = build(inventory, REPO / "policy/overrides.yaml", REPO / "policy/protocol-v1.txt")
     for key,input_path in (("inventory_sha256",inventory),("overrides_sha256",REPO/"policy/overrides.yaml"),
-                           ("contract_sha256",REPO/"docs/contracts/CONTRACT.md")):
+                           ("contract_sha256",REPO/"policy/protocol-v1.txt")):
         if profile["provenance"][key] not in text_hashes(input_path):
             raise ValueError("Protection profile inputs changed")
         rebuilt["provenance"][key] = profile["provenance"][key]
@@ -55,7 +55,7 @@ END $check$;""").format(sql.Literal(expected)).as_string()
 
 
 def provision(container: str, database: str, admin_user: str, passwords: dict[str,str], profile: dict,
-              *, system_identifier: str | None = None) -> None:
+              *, system_identifier: str | None = None, psql_bin: Path | None = None) -> None:
     if database not in DATABASES or set(passwords) != set(ROLES):
         raise ValueError("Only the declared protected targets and roles may be provisioned")
     if any(len(value) < 20 or "\x00" in value or "\n" in value or "\r" in value for value in passwords.values()):
@@ -89,6 +89,14 @@ THEN RAISE EXCEPTION 'Unmanaged existing objects'; END IF; END $$;
     for role in ROLES:
         command += ["--env", role_environment(role)]
     command += [container, "psql", "-X", "-w", "-q", "-v", "ON_ERROR_STOP=1", "-U", admin_user, "-d", database]
+    if psql_bin is not None:
+        # Explicit local transport for a fresh reproduction cluster. SQL guards,
+        # role inputs, transactions and TLS are identical to the container path.
+        if not psql_bin.is_absolute() or not psql_bin.is_file():
+            raise ValueError("An explicit PostgreSQL psql executable is required")
+        if environment.get("PGSSLMODE") != "verify-full" or not Path(environment.get("PGSSLROOTCERT", "")).is_file():
+            raise ValueError("Verified native provisioning TLS required")
+        command = [str(psql_bin), "-X", "-w", "-q", "-v", "ON_ERROR_STOP=1", "-U", admin_user, "-d", database]
     result = subprocess.run(command, input=script, env=environment, capture_output=True, text=True, timeout=180)
     if result.returncode:
         # Never echo query text: psql variables may have expanded role passwords.

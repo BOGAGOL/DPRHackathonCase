@@ -1,0 +1,162 @@
+{
+  "evaluation_stage": "raw_before_human_review",
+  "in_sample": true,
+  "method": "combined",
+  "scanner_version": "1.2.0",
+  "is_personal_rule": "pdp_class != non_pribadi (including low_confidence)",
+  "regex_only_rule": null,
+  "precision": 0.9629629629629629,
+  "recall": 1.0,
+  "f1": 0.9811320754716981,
+  "f2": 0.9923664122137404,
+  "detected_type_accuracy": 0.896551724137931,
+  "pdp_class_accuracy": 0.9655172413793104,
+  "confusion_matrix": {
+    "tp": 26,
+    "fp": 1,
+    "fn": 0,
+    "tn": 2
+  },
+  "detected_type_confusion_matrix": {
+    "nama": {
+      "nama": 4
+    },
+    "kategori": {
+      "kategori": 3,
+      "operasional": 1,
+      "identifier_lain": 1
+    },
+    "tempat_lahir": {
+      "tempat_lahir": 1
+    },
+    "tanggal_lahir": {
+      "tanggal_lahir": 1
+    },
+    "tanggal_pernikahan": {
+      "tanggal_pernikahan": 1
+    },
+    "nik": {
+      "nik": 1
+    },
+    "alamat": {
+      "alamat": 2
+    },
+    "telepon": {
+      "telepon": 3
+    },
+    "email": {
+      "email": 1
+    },
+    "identifier_lain": {
+      "operasional": 1,
+      "identifier_lain": 2
+    },
+    "status_perkawinan": {
+      "status_perkawinan": 1
+    },
+    "keluarga": {
+      "keluarga": 3
+    },
+    "rekening": {
+      "rekening": 1
+    },
+    "npwp": {
+      "npwp": 1
+    },
+    "agama": {
+      "agama": 1
+    }
+  },
+  "pdp_class_confusion_matrix": {
+    "umum": {
+      "umum": 25
+    },
+    "spesifik": {
+      "spesifik": 1
+    },
+    "non_pribadi": {
+      "non_pribadi": 2,
+      "umum": 1
+    }
+  },
+  "false_positive": [
+    {
+      "table": "public.anggota",
+      "column": "kode_bank"
+    }
+  ],
+  "false_negative": [],
+  "missing_predictions": [],
+  "mismatches": [
+    {
+      "table": "public.anggota",
+      "column": "pekerjaan_terakhir",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "kategori",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "operasional",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "ruangan",
+      "expected": {
+        "is_personal": true,
+        "detected_type": "identifier_lain",
+        "pdp_class": "umum"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "operasional",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "detected_type"
+      ]
+    },
+    {
+      "table": "public.anggota",
+      "column": "kode_bank",
+      "expected": {
+        "is_personal": false,
+        "detected_type": "kategori",
+        "pdp_class": "non_pribadi"
+      },
+      "predicted": {
+        "is_personal": true,
+        "detected_type": "identifier_lain",
+        "pdp_class": "umum"
+      },
+      "fields": [
+        "is_personal",
+        "detected_type",
+        "pdp_class"
+      ]
+    }
+  ],
+  "unmapped_labels": [],
+  "all_labels_mapped": true,
+  "truth_rows": 29,
+  "prediction_rows": 30,
+  "evaluated_prediction_rows": 29,
+  "unlabelled_predictions": [
+    {
+      "table": "public.anggota",
+      "column": "id"
+    }
+  ],
+  "unlabelled_predictions_excluded": true,
+  "input_sha256": {
+    "predictions": "ea84451ed301533673c107cfc49bb7491f091773782fa0376aadfc5218fe1f55",
+    "ground_truth": "e741e3f6874f154d2e4b7a71a5810dfacc97ad6d2954a766b3fb8dabf6607f77",
+    "label_map": "d8b8dec77e1c109b725cfc1f26d77d1ad98e6ba49b7b217219f9455270a292a7"
+  }
+}

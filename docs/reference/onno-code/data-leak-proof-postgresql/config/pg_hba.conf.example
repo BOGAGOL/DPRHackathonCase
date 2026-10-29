@@ -1,7 +1,0 @@
-local   all         postgres                              peer
-hostssl leakproof   app_runtime       10.10.20.0/24       scram-sha-256
-hostssl leakproof   data_migrator     10.10.30.10/32      scram-sha-256
-hostssl leakproof   metrics_exporter  10.10.40.20/32      scram-sha-256
-host    all         all               0.0.0.0/0           reject
-host    all         all               ::/0                reject
-

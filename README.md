@@ -1,257 +1,453 @@
-# DPR Secure Data Management System
+# Pelindungan Data Pribadi
 
-## Keputusan infrastruktur terbaru — 27 Oktober 2026
+Solusi ini melindungi data pribadi anggota dengan enkripsi pada tingkat field,
+pemisahan kunci dari database, dan pembatasan akses melalui aplikasi web. Tujuannya
+adalah mengurangi nilai informasi dari salinan database yang bocor, sambil
+mempertahankan pencarian, pelayanan pengguna yang berwenang, serta pemulihan layanan.
 
-Database proyek memakai **PostgreSQL 18 `pg-dpr`, port host 5433**: `baseline_100k`
-untuk MODE=plain dan `protected_734`/`protected_100k` untuk MODE=protected.
-OpenBao memakai [Compose Modul A](infra/compose.yaml), TLS port 8200.
-Panduan terkini: [TLS pg-dpr dan clone development](infra/postgres/README.md).
-Instruksi PostgreSQL 17/port 554xx pada bagian lab di bawah adalah sistem lama;
-pengalihan konfigurasi API/MODE dikerjakan Modul B. Benchmark resmi tetap pada
-laptop pemilik baseline; clone laptop Alby memakai evidence/development terpisah.
+Alurnya dimulai dari assessment data, menghasilkan profil perlindungan, lalu
+memigrasikan data ke PostgreSQL terproteksi. Aplikasi FastAPI dan Next.js melayani
+enam peran pengguna. OpenBao mengelola kunci pembungkus; backup dienkripsi dengan
+kunci terpisah. Pengujian mencakup ketepatan migrasi, pembatasan akses, simulasi
+kebocoran, integritas backup, pemulihan, dan dampak kinerja.
 
-Aplikasi layanan Next.js + FastAPI untuk melihat, mencari, dan memperbarui data anggota sesuai hak akses. Ini prototipe hackathon dengan dataset sintetis, bukan situs resmi DPR atau Privacy Scanner. Kode scanner/artefak Task 1 di luar checkout tidak diubah.
+**Tim: tetapi di Depok saya sampaikan saya akan lawan**
 
-Sudah dijalankan pada Windows: PostgreSQL baseline/protected terpisah, import **734 × 29** tanpa perubahan nilai, autentikasi, role/record/field authorization, AES-256-GCM, blind lookup, edit kontak, audit, browser flows, backup/restore, dan benchmark tiga pengulangan termasuk **10.000 record sintetis baru**. Status dan evidence rinci ada di [PROGRESS.md](docs/legacy-md_zhafif/PROGRESS.md) dan [evidence/README.md](docs/legacy-md_zhafif/evidence/README.md). Docker Compose tervalidasi konfigurasinya; container runtime belum diuji karena Docker Engine tidak aktif. Live OpenBao dan TLS deployment: **NOT TESTED**.
+- Ahmad Dzulfikar As Shavy
+- Muhammad Albyarto Ghazali
+- Favian Zhafif Rizqullah Permana
 
-## Jalankan lab lokal (Windows / PowerShell)
+Panduan ini ditujukan kepada juri dan pengelola yang ingin mencoba, memasang, dan
+memeriksa solusi. Seluruh perintah dijalankan dari folder utama repositori, yaitu
+folder yang berisi `README.md` ini.
 
-Prasyarat: Python 3.10+, Node.js 24 LTS, PostgreSQL 17 beserta `initdb`, `pg_ctl`, `pg_dump`, `pg_restore` di PATH. Port 3000, 8000, 55432, 55433 harus tersedia. Jalankan dari direktori README ini.
+## Pilih cara evaluasi
 
-```powershell
-python -m venv .venv
-.venv/Scripts/python -m pip install -r apps/api/requirements.txt
-python scripts/configure.py
-.venv/Scripts/python scripts/local_database.py start
-.venv/Scripts/python scripts/bootstrap.py
-.venv/Scripts/python scripts/manage.py import --source "../../Task1_Hackathon_DPR_2026/Task1_Hackathon_DPR_2026/anggota_dummy.sql"
-.venv/Scripts/python scripts/manage.py provision
-Push-Location apps/web
-npm ci
-npm run build
-Pop-Location
-./scripts/start-local.ps1
-```
+| Tujuan | Cara memulai | Yang diperoleh |
+|---|---|---|
+| Memahami hasil tanpa instalasi | Buka [docs/RESULTS.html](docs/RESULTS.html) di browser | Penjelasan hasil, grafik, kegagalan, keterbatasan, dan tautan data mentah; dapat dibaca offline |
+| Mencoba aplikasi yang dideploy | [Buka aplikasi HTTPS](https://43.156.157.247/login), gunakan [accounts.md](accounts.md) | Antarmuka layanan dan perbedaan hak enam akun; lihat status akses di bawah |
+| Menguji alur lengkap secara mandiri | Ikuti [instalasi lokal](#instalasi-lokal-dan-demo-734-record), lalu jalankan `demo` | Import 734 record, assessment, hardening, aplikasi HTTPS, pengujian, dan demo interaktif |
+| Mengulang pengujian tanpa demo interaktif | Jalankan `verify` setelah `setup` | Stack sementara diuji, hasil disimpan, lalu layanan dihentikan |
 
-Buka **http://localhost:3000/login**. Empat username/password demo ada di **`.local/demo-accounts.json`**, dibuat acak saat provisioning dan diabaikan Git. Buka file tersebut secara privat; password tidak dicetak/ditulis pada source. Akun `viewer.demo`, `operator.demo`, `staff.demo`, `admin.demo` mempunyai izin berbeda. Tidak ada fallback login offline/mock.
+Untuk mencari berkas pendukung, buka [lokasi luaran dan bukti teknis](#lokasi-luaran-dan-bukti-teknis).
 
-Jika checkout ini sudah disiapkan, cukup jalankan `./scripts/start-local.ps1`. Jangan menjalankan `configure.py`/`provision` lagi untuk mengganti secret: keduanya menolak overwrite. Folder `.local/pg-*` adalah cluster baru proyek, tidak memakai atau mengubah cluster PostgreSQL yang sudah ada. `stop-local.ps1` menghentikan proses launcher dan kedua cluster lab proyek. Jangan menjalankan native lab dan Compose dengan port yang sama.
+**Status deployment yang tercatat:** pemeriksaan 29 Oktober 2026 menemukan halaman
+HTTPS tersedia, tetapi login browser ditolak HTTP403. Diagnostik menunjukkan
+ketidakcocokan konfigurasi Origin pada VM; akun yang sama berhasil pada diagnostik
+non-browser. Hasil tersebut belum membuktikan login deployment pulih. Demo lokal
+berjalan terpisah dan mempunyai bukti pengujian lulus. Status dan bukti dapat
+dibaca pada [halaman hasil](docs/RESULTS.html#service); perbaikan runtime dijelaskan
+dalam [panduan operator](docs/OPERATIONS.md#login-browser-ditolak-http403).
 
-Untuk development di dua terminal: `.venv/Scripts/python scripts/serve.py`, lalu `cd apps/web; npm run dev`. API langsung tersedia di `http://127.0.0.1:8000`, OpenAPI development `/docs`. UI berkomunikasi melalui `/api` same-origin proxy; tidak membuka CORS. Jangan menampilkan cookie/credential pada screenshot demo.
+## Cara kerja dan ruang lingkup
 
-## Jalur Docker Compose
+![Arsitektur sistem](docs/architecture/architecture.svg)
 
-Aktifkan Docker Desktop Linux Engine. Generate `.env` seperti di atas; dataset tetap di luar repository. Set `DATASET_PATH` di `.env` jika letaknya berbeda. Buat `.local` sebelum mounting.
+1. **Assessment.** Scanner membaca metadata dan sampel data, lalu menghasilkan
+   inventaris, klasifikasi, dan risiko. Keputusan perlindungan disusun dari
+   inventaris dengan override yang eksplisit dan alasan per kolom.
+2. **Hardening.** Dari 29 kolom sumber, 25 field dienkripsi menggunakan
+   AES-256-GCM: 21 dalam domain identitas/PII dan 4 dalam domain keuangan/FIN.
+   Empat kolom referensi/REF dipertahankan sesuai profil. Kunci data dibuat per
+   record dan domain, dibungkus oleh OpenBao, lalu disimpan dalam bentuk terbungkus.
+   AAD mengikat ciphertext ke record dan kolomnya. Tiga blind index memungkinkan
+   pencarian nilai yang sama persis tanpa menyimpan nilai pencarian sebagai plaintext.
+3. **Layanan.** Backend memeriksa peran dan assignment record sebelum mengirim data.
+   Masking dan penghilangan field dilakukan sebelum JSON mencapai browser.
+   Analis hanya menerima agregat dengan jumlah anggota minimal lima per kelompok.
+4. **Pemulihan dan pembuktian.** Migrasi didekripsi dan dibandingkan kembali di
+   memori. Backup mengalir langsung dari `pg_dump` ke enkripsi tanpa file dump
+   plaintext sementara. Restore, perubahan satu byte, dan pemulihan aplikasi diuji.
 
-```powershell
-New-Item -ItemType Directory -Force .local
-docker compose --profile lab up -d protected-db baseline-db
-docker compose --profile lab --profile tools run --rm tools scripts/bootstrap.py
-docker compose --profile lab --profile tools run --rm tools scripts/manage.py import --source /input/anggota_dummy.sql --evidence /workspace/.local/migration.json
-docker compose --profile lab --profile tools run --rm tools scripts/manage.py provision
-docker compose up --build -d api web
-```
+Web merupakan bagian dari solusi. Assessment, migrasi, backup/restore, simulasi
+kebocoran, dan benchmark dijalankan melalui command line. Diagram menunjukkan
+pemisahan komponen; demo lokal menggunakan port acak pada mesin evaluator.
 
-`api` memakai `app_user`, tanpa kredensial owner/baseline. `tools` adalah CLI terpisah untuk operasi privileged, source mount read-only, tidak ada route scanner/baseline. Baseline hanya aktif dengan profile lab dan network berbeda. Port DB hanya loopback. Compose ini development HTTP/local AES; pengaturan HTTPS/TLS/Transit dijelaskan dalam [runbook](docs/legacy-md_zhafif/docs/OPERATIONS.md). Jangan menggunakan `docker compose down -v` untuk menghentikan lab yang datanya perlu disimpan.
+## Instalasi lokal dan demo 734 record
 
-## Pengujian dan reproduksi evidence
+### Prasyarat
 
-```powershell
-.venv/Scripts/python -m pytest -q --junitxml=evidence/security-tests.xml
-.venv/Scripts/python scripts/manage.py verify --source "../../Task1_Hackathon_DPR_2026/Task1_Hackathon_DPR_2026/anggota_dummy.sql"
-.venv/Scripts/python scripts/verify_security.py
-.venv/Scripts/python scripts/backup.py drill
-Push-Location apps/web
-npx playwright install chromium
-npm run test:e2e
-Pop-Location
-```
+| Komponen | Kebutuhan |
+|---|---|
+| Python | 3.11 atau lebih baru; modul `venv` dan `pip` tersedia |
+| Node.js dan npm | Node.js minimal 20.9; npm tersedia di `PATH` |
+| Docker | Engine Linux aktif dan Compose V2; Windows dapat memakai Docker Desktop |
+| Browser | Google Chrome terpasang, termasuk untuk pengujian browser otomatis |
+| Dataset | File privat `02_data.sql` dari panitia, berisi 734 record |
+| Koneksi | Internet saat pemasangan dependency dan pengunduhan image |
 
-Python tests memakai DB SQLite sementara untuk policy/API/crypto; source dataset test benar-benar memverifikasi 734 record bila file tersedia. PostgreSQL/live API diverifikasi oleh tooling tersendiri. Tes browser membutuhkan layanan berjalan, dataset+akun terprovision, dan browser Chromium. Tidak ada trace/screenshot otomatis berisi data. Security tooling tidak boleh diarahkan ke sistem DPR sungguhan.
+Gunakan akun OS biasa. Pada Linux, jangan menjalankan launcher sebagai `root`.
+Installer resmi tersedia melalui [Python](https://www.python.org/downloads/),
+[Node.js](https://nodejs.org/en/download), [Docker](https://docs.docker.com/get-started/get-docker/),
+dan [Chrome](https://www.google.com/chrome/).
 
-Benchmark dijalankan sendiri saat tidak ada mutasi browser/user:
+Dataset tidak disertakan dalam distribusi sumber publik. Letakkan `02_data.sql`
+di folder privat di luar repositori, misalnya `C:/private/02_data.sql` pada Windows
+atau `/home/evaluator/private/02_data.sql` pada Linux. Ganti contoh path pada
+perintah berikut dengan lokasi file yang sebenarnya. Launcher membaca literal
+INSERT yang didukung dari dataset tersebut, bukan menjalankan SQL bebas.
 
-```powershell
-.venv/Scripts/python scripts/benchmark.py --operations 300 --repeats 3 --backup-restore
-.venv/Scripts/python scripts/scale_lab.py --rows 10000
-.venv/Scripts/python scripts/benchmark.py --env-file .local/scale.env --operations 300 --repeats 3 --backup-restore --output evidence/benchmark-scaled.json
-```
+Jika file sudah tersedia pada `sql/baseline/02_data.sql` dalam salinan privat,
+argumen `--data` boleh dihilangkan. Tidak perlu menyalin `.env`, password database,
+token, atau konfigurasi komputer pembuat solusi.
 
-Runner mengukur workload DB read/write 80/20, concurrency 1, output bisnis kontak yang setara, enkripsi/dekripsi, CPU/RAM runner dan native cluster, storage dan encrypted backup/restore. Ini **bukan benchmark HTTP/TLS**. Raw samples dan median disimpan dalam JSON; angka tidak boleh digeneralisasi ke kapasitas produksi. Scale generator membuat dua DB baru, tidak menambah record pada aplikasi demo. DB hasil restore dipertahankan untuk inspeksi.
+### 1. Periksa perangkat dan pasang dependency
 
-## Struktur dan referensi
-
-- `apps/web`: App Router, TypeScript, Tailwind, komponen Button pola shadcn/Radix, React Hook Form, Zod, browser tests.
-- `apps/api`: FastAPI, Pydantic, SQLAlchemy, Alembic, Argon2id, CryptoProvider, explicit DTO/policy.
-- `scripts`: konfigurasi, DB lab, import/provision/grants, verification, rekey, backup/restore, benchmark.
-- `docs`: [arsitektur](docs/legacy-md_zhafif/docs/ARCHITECTURE.md), [operasional](docs/legacy-md_zhafif/docs/OPERATIONS.md), [ancaman & batas kontrol](docs/legacy-md_zhafif/docs/SECURITY.md), [skenario demo](docs/legacy-md_zhafif/docs/DEMO.md), [kinerja](docs/legacy-md_zhafif/docs/PERFORMANCE.md).
-- [DECISIONS.md](docs/legacy-md_zhafif/DECISIONS.md): keputusan, termasuk PostgreSQL sesuai permintaan dan perbedaan ketentuan dua PDF panitia. Tidak mengklaim semua persyaratan MySQL dipenuhi PostgreSQL.
-
-`ENCRYPTION_KEYS`, `BLIND_INDEX_KEY`, credential DB, password dan backup recovery key tidak boleh masuk Git, dump, log, browser storage, atau laporan. Simpan recovery key terpisah dari ciphertext sebelum deployment. Lihat [batas keamanan](docs/legacy-md_zhafif/docs/SECURITY.md): tidak ada klaim production-ready, full disk encryption, live Transit/TLS, RLS, MFA, retensi otomatis atau audit anti-DBA.
-
-Referensi teknis utama: [Next.js App Router](https://nextjs.org/docs/app), [FastAPI](https://fastapi.tiangolo.com/), [SQLAlchemy](https://docs.sqlalchemy.org/en/20/), [cryptography AESGCM](https://cryptography.io/en/latest/hazmat/primitives/aead/), [OpenBao Transit API](https://openbao.org/api-docs/secret/transit/). Dependensi langsung dipin; lockfile frontend menyertakan transitif. Kode mengikuti LICENSE MIT yang sudah ada. Dataset panitia tidak didistribusikan dan tetap mengikuti ketentuan kompetisi.
-
-# juara1onno
-
-## Scanner
-
-Scanner lokal semi-otomatis menemukan kandidat data pribadi melalui isi sampel,
-nama kolom, kamus, bentuk nilai, teks bebas, dan relasi. Hasil wajib ditinjau
-manusia. Seluruh implementasi, konfigurasi, dan pengujian ada di `scanner/`.
-Tidak ada layanan klasifikasi eksternal. Koneksi memakai transaksi read-only;
-dump SQL hanya diparse, tidak dieksekusi.
-
-Gunakan Python 3.11+ dan GNU Make. Di PowerShell, instal dan aktifkan environment:
+Pada PowerShell/Windows:
 
 ```powershell
-python -m venv scanner/.venv
-.\scanner\.venv\Scripts\Activate.ps1
-make scanner-install
+python --version
+node --version
+npm --version
+docker info
+docker compose version
+python -m infra.reproduce setup
 ```
 
-Administrator membuat role melalui `scanner/sql/scanner_role.sql` (sekali saja):
+Pada Linux:
+
+```bash
+python3 --version
+node --version
+npm --version
+docker info
+docker compose version
+python3 -m infra.reproduce setup
+```
+
+`docker info` harus berhasil menghubungi engine. `setup` membuat `.venv` dan
+`.venv-assessment`, memasang dependency yang dideklarasikan, menjalankan `pip check`,
+kemudian menjalankan `npm ci` dan build frontend. Pemisahan environment diperlukan
+karena dependency layanan dan assessment berbeda. Tahap ini belum membuat database
+atau mengakses kunci. Tunggu pesan **`Setup PASS`** sebelum melanjutkan.
+
+### 2. Jalankan alur lengkap dan buka demo
+
+Windows:
 
 ```powershell
-psql -X -W -h 127.0.0.1 -p 5433 -U postgres -d postgres -f scanner/sql/scanner_role.sql
+python -m infra.reproduce demo --data "C:/private/02_data.sql"
 ```
 
-Skrip meminta password role lewat Python `getpass` yang ditangkap langsung ke
-variabel psql `:'scanner_password'`. Aktifkan environment Python terlebih dahulu.
-Jangan menaruh password di argumen, kode, atau riwayat
-terminal. Audit hak `PUBLIC` terlebih dahulu: `NOINHERIT` tidak menghapus hak
-`PUBLIC`. Skrip hanya memberi CONNECT, USAGE public, dan SELECT public.anggota;
-tidak memberi akses otomatis ke tabel baru. Sesuaikan daftar GRANT untuk sumber
-lain setelah ditinjau administrator. Panduan rinci dan pemeriksaan hak ada di
-[scanner/NOTES.md](scanner/NOTES.md).
+Linux:
 
-Isi kredensial hanya melalui environment `SCANNER_DATABASE_URL`. Contoh aman
-berbasis prompt tanpa menuliskan password tersedia di NOTES. `.env` tidak dibaca
-otomatis dan sudah diabaikan Git. Jalankan:
+```bash
+python3 -m infra.reproduce demo --data "/home/evaluator/private/02_data.sql"
+```
+
+Satu perintah ini menjalankan urutan berikut. Tidak perlu menjalankan script setiap
+modul secara manual.
+
+| Tahap | Yang dijalankan | Hasil yang diperiksa |
+|---|---|---|
+| Persiapan layanan | PostgreSQL 18, OpenBao 2.5.5, CA lokal, TLS, dan kredensial baru | Layanan siap dan koneksi tervalidasi |
+| Import | Membaca dataset ke database sumber baru | Tepat 734 record |
+| Assessment | Scanner, klasifikasi, dan penyusunan protection profile | Inventaris 29 kolom dan keputusan perlindungan |
+| Hardening | Skema/role, kunci per record, enkripsi, blind index, dan migrasi | Seluruh 734 record dibandingkan dengan sumber; percobaan resume tidak menggandakan data |
+| Service application | Akun dan assignment untuk enam peran | Aplikasi memakai database terproteksi |
+| Security verification | TLS, izin DB, RLS, kripto, backup/restore, tamper, retensi, dan browser | Pemeriksaan positif serta negatif, termasuk aplikasi pada database hasil restore |
+
+Setelah pengujian berhasil, terminal menampilkan:
+
+```text
+Demo: https://localhost:<port-acak>/login
+Private accounts: <path-privat>/service-b/service-b-protected-accounts.json
+Local browser CA: <path-privat>/tls/ca.crt
+Ctrl+C stops ONLY this demo. Runtime token expires after 1 hour.
+```
+
+Gunakan URL yang **benar-benar dicetak**, termasuk portnya. Biarkan terminal tetap
+terbuka selama mencoba aplikasi. Akun lokal dibuat acak pada setiap run; buka file
+yang ditunjukkan oleh `Private accounts` dengan editor lokal untuk melihat pasangan
+`role`, `username`, dan `password`. `accounts.md` digunakan untuk deployment publik,
+sehingga kredensialnya berbeda dari demo lokal.
+
+Setiap run mempunyai database, kunci, dan port loopback baru. Launcher tidak
+menggunakan `pg-dpr` existing dan tidak mengubah deployment. Init/unseal otomatis
+hanya berlaku untuk OpenBao baru milik demo sementara. Instalasi permanen memakai
+prosedur custody dan unseal manual pada [panduan operasi](docs/OPERATIONS.md).
+
+### 3. Percayai sertifikat lokal untuk akses browser manual
+
+Demo menggunakan HTTPS dengan CA lokal baru. Gunakan file **`ca.crt` dari run yang
+sedang aktif**, sesuai path `Local browser CA`. CA tidak dipasang otomatis ke OS.
+
+- **Windows:** buka `ca.crt`, pilih **Install Certificate → Current User → Place
+  all certificates in the following store → Trusted Root Certification Authorities**.
+  Konfirmasikan pemasangan CA demo tersebut, lalu buka kembali Chrome dan URL demo.
+  Pemasangan juga tersedia melalui [Import-Certificate dari Microsoft](https://learn.microsoft.com/en-us/powershell/module/pki/import-certificate).
+- **Chrome/Linux:** buka `chrome://certificate-manager`, lalu impor CA pada
+  pengaturan sertifikat lokal yang dipercaya untuk server. Pada versi dengan menu
+  lama, gunakan `chrome://settings/certificates` dan bagian **Authorities**.
+  Rujuk [pengelolaan trust lokal Chrome](https://chromium.googlesource.com/chromium/src/+/main/net/data/ssl/chrome_root_store/faq.md)
+  jika label menu berbeda.
+
+Sesudah demo, hapus kembali **sertifikat CA run tersebut** dari daftar CA yang
+dipercaya. Run berikutnya memakai CA baru. Jangan mengimpor `ca.key`/`server.key`
+atau menonaktifkan pemeriksaan TLS untuk melewati peringatan browser.
+
+Uji Chrome otomatis tidak memerlukan pemasangan CA ke OS: uji mem-pin sertifikat
+sementara yang tepat. Klien PostgreSQL/OpenBao dan komunikasi antarservice tetap
+memverifikasi CA; tidak ada penonaktifan verifikasi TLS global.
+
+### 4. Selesai, hentikan demo, dan baca hasil run
+
+Tekan **Ctrl+C** satu kali pada terminal demo. Layanan milik run dihentikan, lalu
+terminal menampilkan ringkasan **LULUS/GAGAL**, hasil tiap tahap, dan lokasi:
+
+```text
+evidence/reproduction/<run-id>/report.html
+```
+
+Buka file tersebut di browser. Pada mode `demo`, laporan akhir ditulis **setelah
+demo dihentikan**. Token demo mempunyai masa berlaku satu jam; mulai run baru jika
+masa berlaku habis. Dataset input dan hasil pengujian tidak dihapus oleh Ctrl+C.
+Volume Docker milik demo dibersihkan saat penghentian normal; direktori privat run
+di folder sementara OS tetap tersimpan dengan akses terbatas, termasuk material
+pemulihan. Direktori privat itu bukan bagian dari sumber yang didistribusikan.
+
+### Alternatif: pengujian otomatis tanpa mempertahankan web
+
+Setelah `setup`, gunakan perintah berikut sebagai pengganti `demo`:
 
 ```powershell
-make scanner-test
-make scan LABEL=before
-make scan-dump FILE=path/ke/dump.sql LABEL=before
-python -m scanner files --file path/ke/aplikasi.log path/ke/ekspor.csv --label before --out results/scanner/files-before
+python -m infra.reproduce verify --data "C:/private/02_data.sql"
 ```
 
-Tanpa Make, gunakan `python -m pip install -r scanner/requirements.txt`,
-`python -m pytest scanner/tests -q`, dan
-`python -m scanner db --schema public --sample 1000 --label before --out results/scanner/before`.
-Mode dump menggunakan `python -m scanner dump --file path/ke/dump.sql --label before --out results/scanner/dump-before`.
-`--sample` membatasi sampel per tabel dan hasil teks per file (default 1000).
-`--label after` memakai `environment_after.yaml`; label lain harus mempunyai
-konfigurasi environment atau menentukan `--environment path.yaml`.
-Tiga faktor lingkungan (volume, exposure, recovery) dalam contoh adalah asumsi
-yang harus diverifikasi. Sensitivitas dan dampak per jenis diatur melalui
-`scanner/config/impact.yaml` (opsional `--impact path.yaml`). Dengan faktor
-before 3/5/5, skor minimum adalah 16 (P2); P3 membutuhkan faktor lingkungan
-lebih rendah yang memang terverifikasi, seperti contoh after.
+Pada Linux gunakan `python3` dan path input Linux. Pemeriksaan yang sama dijalankan,
+layanan dihentikan otomatis, dan `report.html` langsung tersedia setelah selesai.
+Exit code `0` berarti lulus; selain itu berarti gagal. Tidak perlu menjalankan
+`verify` sebelum `demo`, karena `demo` sudah menyertakan verifikasi yang sama.
 
-Setiap scan menghasilkan `inventory.csv`, `relations.json`, `k_anonymity.json`,
-`run_meta.json`, dan `report.html` statis tanpa JS eksternal. `features.json`
-menyimpan semua fitur agregat dan bukti negatif; mode files juga menghasilkan
-`findings.csv` berisi file, nomor baris, jenis, dan nilai termasking. Hasil berada
-di `results/` yang diabaikan Git. Semua sampel dimasking, termasuk pada laporan
-HTML dan temuan relasi; nilai pengelompokan k-anonymity tidak dikeluarkan.
+Jika GNU Make tersedia, padanan command adalah `make setup`,
+`make demo DATA="C:/private/02_data.sql"`, `make verify DATA="C:/private/02_data.sql"`,
+`make test`, dan `make results`. Pada Linux dapat ditambahkan `PYTHON=python3`.
+Make bersifat opsional; perintah Python di atas adalah antarmuka lintas platform.
 
-Arti kolom `inventory.csv`:
+### Alternatif layanan native
 
-| Kolom | Arti |
-| --- | --- |
-| `table`, `column`, `data_type` | Sumber, nama kolom, tipe penyimpanan |
-| `detected_type` | Kandidat jenis data berdasarkan sinyal gabungan |
-| `pdp_class` | Kandidat umum, spesifik, atau non_pribadi |
-| `risk_level` | rendah, sedang, tinggi, kritis, dari rentang prioritas |
-| `priority`, `priority_score` | P0–P3 dan total enam faktor (6–30) |
-| `f_sensitivity`, `f_impact` | Faktor 1–5 per jenis dari impact.yaml |
-| `f_exploitability` | Faktor 1–5 dari bukti isi; kategori, operasional, dan hitungan keluarga bernilai 1 |
-| `f_volume`, `f_exposure`, `f_recovery` | Faktor 1–5 dari konfigurasi lingkungan |
-| `content_score`, `name_score`, `confidence` | Skor jenis terpilih; bobot default 80% isi + 20% nama |
-| `triage` | auto_accept, needs_review, atau low_confidence; semuanya tetap dilaporkan |
-| `derived_from` | Kandidat sumber duplikat/turunan, dipisahkan titik koma |
-| `consistent_protection_with` | Kolom sumber yang membutuhkan perlakuan masking/akses konsisten |
-| `sample_masked` | Maksimal tiga contoh termasking |
-| `reason` | Alasan berbasis fitur, bukti negatif, dan pertanyaan retensi |
-| `recommendation` | Turunan: review_minimization; nama publik: retain+mask_for_analyst; tanggal lahir: generalize_for_analyst; password: hash Argon2id; jenis lain: proteksi sesuai konteks |
-| `allowed_roles`, `search_need` | Default konfigurasi untuk revisi manusia |
+Jika Docker tidak tersedia, sediakan binary PostgreSQL **18** dan OpenBao **2.5.5**
+dari [distribusi PostgreSQL](https://www.postgresql.org/download/) dan
+[rilis OpenBao](https://github.com/openbao/openbao/releases/tag/v2.5.5), lalu
+verifikasi checksum unduhannya. Kedua path native wajib diberikan bersamaan:
 
-Agama dipetakan sebagai umum dan ditandai rawan diskriminasi; data keuangan
-pribadi, kesehatan, biometrik, genetika, catatan kejahatan, dan data anak sebagai
-spesifik, mengikuti [UU PDP Pasal 4](https://peraturan.bpk.go.id/Details/229798/uu-no-27-tahun-2022).
-Klasifikasi kandidat tidak menggantikan penilaian konteks oleh tim.
+```powershell
+python -m infra.reproduce demo --data "C:/private/02_data.sql" --native-pg-bin "C:/tools/pgsql/bin" --native-bao-bin "C:/tools/bao.exe"
+```
 
-Salin `scanner/ground_truth.template.csv` ke `scanner/ground_truth.csv`, isi manual
-oleh anggota tim, lalu jalankan `make scan-eval LABEL=before`. Evaluasi mengukur
-precision/recall/F1 personal, akurasi jenis dan kelas, confusion matrix, serta
-false positive/negative pada output mentah sebelum koreksi manusia. Bandingkan
-dengan `--baseline regex_only` pada perintah db/dump/files dan direktori output
-terpisah. `low_confidence` tetap dihitung sebagai kandidat personal kecuali
-kelasnya `non_pribadi`; keputusan ini tercantum di hasil evaluasi.
+Folder PostgreSQL harus memuat `postgres`, `initdb`, `pg_ctl`, `psql`, `pg_dump`,
+dan `pg_restore`. Argumen yang sama berlaku untuk `verify`; pada Linux sesuaikan
+path dan nama executable. Launcher membuat cluster baru, bukan memakai cluster
+PostgreSQL native yang sudah berisi data.
 
-Keterbatasan: relasi dan deteksi jenis memakai sampel; kamus dan heuristik dapat
-keliru. Format/enkripsi tidak membuktikan anonimitas. k-anonymity memakai agregat
-seluruh tabel database atau seluruh dump, terbatas kombinasi 1–3 kolom kandidat;
-NULL dikelompokkan bersama. Mode teks bebas tidak mempunyai k-anonymity. Parser
-mendukung literal INSERT MySQL/PostgreSQL dan COPY teks PostgreSQL; ekspresi SQL,
-COPY CSV/biner, dump arsip, serta beberapa ekstensi dialect ditolak. Mode dump
-menaruh plaintext sementara di disk lokal sebelum dihapus. Detail keputusan,
-hasil pengujian, batasan, dan validasi database asli: [scanner/NOTES.md](scanner/NOTES.md).
+**Cakupan bukti runtime:** pengujian bersih yang tersimpan berhasil melalui jalur
+native PostgreSQL 18/OpenBao dengan TLS. Engine Docker pada host uji terakhir
+mengalami error; keberhasilan native tidak dinyatakan sebagai keberhasilan runtime
+Docker atau semua sistem operasi.
 
-Versi 1.1.0 mengenali NIK berpanjang tidak baku hanya dengan dukungan isi dan
-kata kunci nama; tanpa konteks nama tetap kandidat identifier. Nama berkardinalitas
-rendah menjadi kategori, tanggal pernikahan dibedakan dengan pola tanggal/NULL
-bersyarat, dan hitungan keluarga tetap umum serta needs_review. ID integer
-berurutan pada sampel menjadi kandidat kunci penghubung operasional. Sumber
-functional dengan rasio unik non-NULL >0.9 dilaporkan terpisah pada
-`near_unique_quasi_identifiers`. Report menyediakan tabel ringkas dan cetak A4
-landscape; k-anonymity diurutkan 1–3 kolom, maksimal 15 kombinasi minimal di HTML,
-sementara semua agregat tetap di JSON. Setiap run mencatat versi, ringkasan
-perubahan, dan kebijakan prioritas yang dipakai. Simpan run v1.1 di folder baru
-agar hasil `before_v1/` tetap dapat dibandingkan.
+## Demonstrasi aplikasi dan hasil yang diharapkan
 
-## Data sintetis Modul C (kontrak PostgreSQL 18)
+Langkah berikut berlaku untuk web deployment jika login tersedia, atau demo lokal
+setelah pesan `Demo:` muncul. Untuk deployment gunakan [accounts.md](accounts.md);
+untuk lokal gunakan file akun run. Klik **Keluar** sebelum berpindah akun, atau
+gunakan profil browser terpisah.
 
-Generator baseline 100k sesuai kontrak tersedia di `datagen/`, terpisah dari generator lab historis
-`scripts/scale_lab.py`. Panduan PowerShell dan prompt password aman ada di
-[datagen/README.md](datagen/README.md); keputusan dan batas ada di [datagen/NOTES.md](datagen/NOTES.md).
-Jalankan `python -m datagen --rows 100000 --seed 42 --target-db baseline_100k` dari environment datagen
-setelah credential env disetel. Jika database sudah ada, gunakan
-`python -m datagen validate --db baseline_100k --rows 100000`; generate menolak overwrite.
-Sumber `postgres`/734 baris tetap hanya dibaca. Snapshot/credential berada di luar repo melalui
-`DPR_PRIVATE_DIR`; ringkasan mesin ke `evidence/datasets/`, raw lokal ke `results/`.
-Target yang disahkan sebelum benchmark: [docs/targets.md](docs/targets.md), dengan bukti commit
-di [evidence/targets_commit.json](evidence/targets_commit.json). Benchmark baru dan restore drill
-Modul C dijalankan pada langkah berikutnya, setelah baseline tervalidasi.
+Pada halaman `/login`, isi **Username** dan **Password**, lalu klik **Masuk ke
+aplikasi**. Menu di sebelah kiri menyesuaikan hak akun. Tombol keluar berupa ikon
+di kanan atas dengan label **Keluar**.
 
-## Policy dan skema protected (Modul A, tahap 3)
+| Urutan | Akun dan tindakan | Hasil yang diharapkan |
+|---|---|---|
+| 1 | `operator`: buka **Daftar anggota**, pilih detail record yang tersedia | Hanya record assignment yang terlihat. Identifier/kontak dimasking sesuai policy; field FIN tidak dikirim |
+| 2 | `privileged_officer`: buka record assignment yang sama | PII sesuai izin dapat dibaca; FIN tetap tidak dikirim |
+| 3 | `finance_officer`: bandingkan record assignment yang sama | FIN tersedia; identitas tertentu tetap dimasking. Akses data anggota bersifat read-only |
+| 4 | `anggota`: buka profil/data sendiri, lalu coba URL detail record lain yang diketahui dari akun staf | Data sendiri tersedia; record orang lain ditolak tanpa mengungkap keberadaannya |
+| 5 | `analyst`: buka **Ringkasan agregat**, pilih dimensi dan klik **Terapkan**, lalu coba `/anggota` atau URL detail | Hanya kelompok berjumlah ≥5 yang ditampilkan; label kelompok 1–4 juga tidak dikirim. Data per record ditolak; total keseluruhan tidak disediakan |
+| 6 | `auditor`: buka **Log audit**, kemudian coba data anggota | Metadata aktivitas tersedia; isi data anggota ditolak |
 
-Profile dari inventory scanner dan override kontrak: [policy/NOTES.md](policy/NOTES.md).
-Penerapan skema/role ke `pg-dpr:5433` dan handoff Service App:
-[sql/protected/NOTES.md](sql/protected/NOTES.md),
-[sql/roles/NOTES.md](sql/roles/NOTES.md). Tahap ini menyiapkan database protected;
-migrasi data dijalankan pada tahap berikutnya.
+Jumlah record pada daftar mengikuti assignment akun, sehingga tidak harus 734.
+Gunakan record yang ditugaskan kepada akun yang sedang diuji. Pada penolakan,
+antarmuka dapat menampilkan pesan tidak berhak/tidak ditemukan; API memberikan
+penolakan sesuai endpoint. [Matriks izin lengkap](docs/ACCESS_CONTROL.md).
 
-## Benchmark Modul C — baseline awal level DB
+**Pencarian:** pada akun staf yang berizin, buka **Pencarian identitas**, pilih
+Nomor KTP atau Email, lalu masukkan nilai yang diketahui dari record assignment.
+Pencarian memakai kesamaan nilai setelah normalisasi, bukan pencarian sebagian
+kata. Hasil tetap dibatasi scope akun; blind index tidak memberi akses tambahan.
 
-Runner tujuh skenario plain pada pg-dpr tersedia di `benchmark/`, terpisah dari
-benchmark lab historis. [Panduan PowerShell](benchmark/README.md) menyiapkan credential
-melalui prompt aman/env; [NOTES](benchmark/NOTES.md) menjelaskan dataset tetap,
-rollback, metrik, keputusan instance bersama, serta batas pengukuran.
-Perintah utama: `python -m benchmark run --db baseline_100k --label before --adapter plain --scenario all --runs 3 --duration 60 --concurrency 8 --warmup 10`,
-lalu `python -m benchmark backup-restore --db baseline_100k --label before --runs 3`.
-Raw lokal berada di `results/bench/before/`; ringkasan di `evidence/benchmark/baseline/`.
-Baseline awal ini terpisah dari eksperimen berpasangan B–P–P–B dan bukan hasil API/protected.
+**Periksa respons:** bila ingin memeriksa bahwa masking bukan sekadar tampilan,
+buka Developer Tools → Network, pilih respons API detail, dan periksa JSON.
+Field FIN harus tidak ada untuk operator/privileged officer/anggota; nilai yang
+dimasking harus sudah termasking dalam respons. Jangan menyalin data sensitif
+atau kredensial ke hasil publik. Pemeriksaan cookie, JSON, dan browser storage
+juga dijalankan oleh uji otomatis.
 
-## Migrasi protected (Modul A, tahap 4)
+**Demonstrasi perubahan data:** gunakan demo lokal, misalnya ubah kontak sendiri
+dengan akun yang berizin dan lihat metadata aktivitas melalui auditor. Hindari
+mutasi pada deployment bersama. Percobaan penghapusan untuk retensi dilakukan
+otomatis pada record sintetis terpisah; tidak menghapus anggota sumber.
 
-CLI prepare/check/run/validate/revoke dan panduan PowerShell tersedia di
-[migration/README.md](migration/README.md). Migrasi memakai source read-only,
-batch dengan checkpoint atomik, dua domain envelope, dan validasi decrypt seluruh
-baris. Dependensi serta batas integrasi Service App dicatat di
-[migration/NOTES.md](migration/NOTES.md). Token dan material recovery tetap di luar repo.
+Untuk menjelaskan pelindungan salinan database dan pemulihan, lanjutkan ke
+[halaman hasil](docs/RESULTS.html#security). Bandingkan skenario tanpa kunci,
+kompromi kemampuan domain, hasil tamper-backup, dan hasil restore. Kontrol tersebut
+dibuktikan melalui pengujian teknis, bukan hanya melalui tampilan web.
 
-Migrator juga mendukung pasangan `baseline_1m` → `protected_1m`. Ekspektasi jumlah
-baris berasal dari konfigurasi dataset dan dapat diatur dengan `--expected-rows`;
-nama source/target tetap dilindungi allowlist. Lihat bagian target 1M pada
-[migration/README.md](migration/README.md) untuk persiapan TLS, resume dan uji skala.
+## Membaca hasil pengujian
+
+[docs/RESULTS.html](docs/RESULTS.html) merangkum pengukuran yang sudah tersimpan
+dalam bahasa biasa. Halaman itu menjelaskan arti metrik, menampilkan grafik dan
+tabel, serta menautkan bukti. Untuk menyusunnya kembali dari data yang sama:
+
+```powershell
+python -m infra.reproduce results
+```
+
+Perintah mencetak path halaman yang harus dibuka; tidak membuka browser atau
+menjalankan benchmark baru. Bukti run yang baru dibuat berada di direktori
+`evidence/reproduction/<run-id>/` masing-masing:
+
+| File | Cara membacanya |
+|---|---|
+| `report.html` | Ringkasan manusia: LULUS/GAGAL dan status setiap tahap |
+| `summary.json` | Ringkasan yang sama dalam format mesin, waktu, transport, dan tahap gagal jika ada |
+| `scanner/`, `protection_profile.yaml` | Hasil assessment dan alasan perlindungan per kolom |
+| `migration.json` | Jumlah record yang dibandingkan, validasi, dan resume |
+| `security.json`, `browser.json` | Hasil kontrol keamanan dan pemeriksaan enam akun |
+| `backup.json`, `restore-without-openbao.json`, `restore-with-openbao.json` | Backup serta pemulihan ciphertext dan layanan dengan akses kunci |
+| `tamper.json`, `retention.json` | Penolakan backup yang diubah dan ketidakhadiran record sintetis yang dihapus pada backup baru |
+
+**PASS/LULUS** berarti pemeriksaan yang dijalankan memenuhi asersi pada lingkungan
+tersebut. **FAIL/GAGAL** berarti ada kegagalan atau prasyarat tidak terpenuhi.
+**NOT_RUN/skip** berarti belum dijalankan, sehingga bukan bukti lulus. File tertentu
+dapat belum ada jika run terhenti pada tahap awal. `false` pada
+`decryption_smoke.performed` untuk restore **tanpa** OpenBao adalah perilaku yang
+disengaja: ciphertext dipulihkan tanpa mencoba membukanya.
+
+### Hasil yang tersimpan dan batas klaimnya
+
+| Aspek | Hasil dan ruang lingkup |
+|---|---|
+| Alur lokal 734 | Run bersih 29 Oktober 2026 lulus enam tahap; seluruh 734 record dibandingkan, resume diuji, dan 100 pemeriksaan Chrome pada layanan hasil restore lulus |
+| Assessment | Precision 96,30%, recall 100%, F1 98,11% terhadap 29 kolom berlabel; evaluasi in-sample |
+| Kripto dan akses | Perubahan bit/pertukaran ciphertext ditolak; hak peran/record/field, TLS dan akses analis diuji dalam scope hasil masing-masing |
+| Salinan bocor tanpa kunci | Sel sensitif AEAD tidak berhasil dipulihkan pada skenario yang diuji; ini bukan klaim seluruh isi DB tidak membocorkan informasi |
+| Backup/restore | Restore dua mode, penolakan artefak yang diubah, dan retensi record sintetis mempunyai bukti pengujian |
+| Migrasi besar | Hasil migrasi/validasi 100k dan 1M tersimpan; pengujian demo default tetap 734 |
+| Kinerja | Before/after DB/toolkit 100k dan 1M beserta raw tersedia. Target latensi/throughput belum tercapai; target error-rate lulus. Seri benchmark API belum lengkap |
+| Deployment publik | Halaman HTTPS tersedia pada pemeriksaan tercatat; login browser belum lulus karena indikasi mismatch Origin runtime |
+
+[Buka laporan run lokal yang lulus](evidence/reproduction/20261029T111814Z-8ff4e56e/report.html)
+dan [hasil regresi](evidence/tests/regression.json). Pengujian lokal yang lulus
+tidak mengganti label gagal pada hasil deployment atau benchmark.
+
+Blind index mengungkap kesetaraan nilai, sedangkan REF, pola NULL, ukuran dan
+metadata tertentu tetap terlihat. Suppression analis bukan differential privacy.
+Kompromi aplikasi beserta kemampuan decrypt dapat membuka data sesuai kapabilitas
+yang dicuri. RLS berbasis principal transaksi adalah lapisan tambahan; pencuri
+kredensial `app_user` dapat mengubah setting principal. Disaster recovery seluruh
+key plane, HA, secure erase, dan seluruh log host belum dibuktikan lengkap.
+[Model ancaman dan keterbatasan](docs/SECURITY.md) menjabarkan batas tersebut.
+
+## Pengujian tambahan, benchmark, dan operasi permanen
+
+Untuk mengulang suite regresi setelah `setup`:
+
+```powershell
+python -m infra.reproduce test
+```
+
+Command menjalankan suite inti, aplikasi, dan assessment pada environment masing-
+masing. Integrasi eksternal yang belum diaktifkan dilaporkan skip. Gunakan `verify`
+untuk pengujian stack nyata 734; unit test saja tidak membuktikan integrasi layanan.
+
+Pemeriksaan integritas sumber dan inventaris dependency pada Windows:
+
+```powershell
+.venv/Scripts/python -m infra.distribution check
+```
+
+Pada Linux gunakan `.venv/bin/python`. Pemeriksaan sumber tidak menggantikan uji
+runtime. [Inventaris dependency dan SBOM](docs/DEPENDENCIES.md) menjelaskan file
+di `docs/sbom/` beserta cakupan dan hasil auditnya.
+
+- [Metodologi](docs/METHODOLOGY.md): pembuatan dataset sintetis 100k/1M dengan seed
+  tetap, perintah pengukuran, urutan B-P-P-B, target, serta lokasi hasil mentah.
+  Benchmark besar dipisahkan dari demo dan tidak dijalankan otomatis.
+- [Reproduksi dataset besar dan simulasi kebocoran](docs/METHODOLOGY.md#reproduksi-dataset-besar-dan-simulasi-kebocoran):
+  urutan datagen, snapshot privat, before, empat skenario protected, dan budget after.
+- [Operasi dan pemulihan](docs/OPERATIONS.md): instalasi permanen, konfigurasi
+  privat, TLS, init/unseal manual, role, migrasi, startup aplikasi, backup/restore,
+  rotasi kunci, dan penanganan Origin. Gunakan prosedur ini untuk penerapan instansi.
+- [Backup dan restore](docs/BACKUP_RESTORE.md): konfigurasi kredensial privat,
+  perintah mandiri, mode pemulihan, serta lokasi hasil pengujian.
+- [Hasil pentest](evidence/pentest/ASSESSMENT.md): temuan identitas duplikat,
+  perbaikan, bukti yang tersedia, dan keterbatasan bukti retest independen.
+- [Refresh token aplikasi](docs/TOKEN_REFRESH.md): pemasangan broker AppRole dan
+  timer opsional pada deployment systemd; masa berlaku token tetap dibatasi dan
+  unseal tetap manual. Penerapan pada VM memerlukan verifikasi tersendiri.
+- [Spesifikasi teknis](docs/contracts/CONTRACT.md): format ciphertext, AAD,
+  normalisasi, skema dan antarmuka antarservice.
+
+## Penanganan kendala
+
+| Gejala | Yang perlu diperiksa |
+|---|---|
+| `python`/`node`/`npm` tidak dikenali | Pasang prasyarat, buka terminal baru, lalu periksa versi dari folder utama |
+| `setup` gagal | Versi Node minimal 20.9, akses unduhan dependency, dan modul Python `venv`/`pip`; setelah diperbaiki ulangi `setup` |
+| Engine Docker tidak terhubung/HTTP500/WSL error | Pastikan engine Linux siap dan `docker info` berhasil; gunakan jalur native jika engine belum dapat digunakan |
+| Run gagal sebelum import | Periksa path privat dataset, isi 734 record yang didukung, serta keberhasilan build frontend dari `setup` |
+| Chrome otomatis tidak tersedia | Pasang Google Chrome; instalasi Playwright saja tidak menggantikan browser Chrome yang dipakai pengujian |
+| Peringatan sertifikat pada demo manual | Impor CA run aktif sesuai langkah di atas dan buka URL/port yang dicetak; jangan gunakan CA dari run lama |
+| Login lokal tidak cocok | Gunakan file `Private accounts` dari run aktif, bukan akun deployment atau run sebelumnya |
+| Login deployment ditolak HTTP403 | Lihat status deployment dan prosedur Origin pada panduan operasi; penonaktifan CSRF/TLS bukan solusi |
+| Layanan demo berhenti merespons setelah lama dibiarkan | Token demo berlaku satu jam; hentikan run dan mulai demo baru |
+| Verifikasi gagal | Buka `report.html` dan `summary.json` run tersebut; periksa tahap pertama yang gagal. Jangan menganggap NOT_RUN sebagai PASS |
+
+## Lokasi luaran dan bukti teknis
+
+Tabel berikut memetakan luaran yang tersedia di repositori. Buka halaman hasil
+untuk penjelasan yang mudah dibaca, lalu gunakan berkas sumber atau hasil mentah
+untuk memeriksa rinciannya. PDF laporan dan slide presentasi tidak tercakup dalam
+tabel ini.
+
+| Luaran | Lokasi | Isi yang tersedia |
+|---|---|---|
+| Kode dan konfigurasi | [app/](app/), [infra/](infra/), [sql/](sql/), [toolkit/](toolkit/) | Layanan web/API, infrastruktur TLS dan OpenBao, skema/role, serta paket kriptografi; rahasia infrastruktur disediakan terpisah |
+| Petunjuk instalasi dan demonstrasi | [Instalasi lokal](#instalasi-lokal-dan-demo-734-record), [demonstrasi enam akun](#demonstrasi-aplikasi-dan-hasil-yang-diharapkan) | Prasyarat, setup, demo, verifikasi, dan hasil yang diharapkan untuk evaluator |
+| Inventaris dan klasifikasi data | [Inventaris ringkas CSV](docs/data/inventory-report.csv), [inventaris scanner CSV](evidence/scanner/before_v1_2/inventory.csv), [profil perlindungan](policy/protection_profile.yaml) | Klasifikasi kolom, hasil assessment, dan keputusan perlindungan per kolom |
+| Matriks risiko | [risk-matrix.csv](docs/data/risk-matrix.csv), [analisis dan prioritas](docs/SECURITY.md#analisis-data-dan-prioritas) | Penilaian risiko kondisi awal dan urutan penanganan |
+| Diagram arsitektur | [SVG](docs/architecture/architecture.svg), [PNG](docs/architecture/architecture.png), [sumber Mermaid](docs/architecture/architecture.mmd) | Komponen aplikasi, database, pengelolaan kunci, dan alur backup; dapat dibuka atau digunakan dalam dokumen |
+| Threat model | [docs/SECURITY.md](docs/SECURITY.md) | Ancaman, kontrol, asumsi, dan batas pelindungan |
+| Skrip dan hasil migrasi | [migration/](migration/), [validasi 734](evidence/migration/validation-protected_734.json), [evidence migrasi](evidence/migration/) | Migrasi batch/resume, decrypt-and-compare, jumlah record, NULL, dan keunikan blind index |
+| Skrip backup dan restore | [scripts/backup/](scripts/backup/), [panduan](docs/BACKUP_RESTORE.md), [evidence backup](evidence/backup/) | Backup terenkripsi, restore dua mode, uji tamper dan retensi, serta waktu/ukuran artefak |
+| Skrip benchmark yang dapat diulang | [benchmark/](benchmark/), [metodologi dan perintah](docs/METHODOLOGY.md), [dataset sintetis](datagen/) | Workload, urutan pengukuran, prasyarat lingkungan, dan pembangkitan data dengan seed tetap |
+| Hasil benchmark sebelum/sesudah | [Halaman hasil](docs/RESULTS.html#performance), [tabel CSV](docs/data/db-benchmark.csv), [hasil mentah](evidence/benchmark/) | Hasil 100k/1M, median, latensi, throughput, resource, dan status pencapaian target |
+| Bukti kontrol akses dan pengujian keamanan | [Matriks izin](docs/ACCESS_CONTROL.md), [uji role DB](evidence/access-control/db-roles.json), [suppression analis](evidence/access-control/analyst_suppression.json), [uji browser enam akun](evidence/reproduction/20261029T111814Z-8ff4e56e/browser.json), [pentest](evidence/pentest/ASSESSMENT.md) | Akses yang diizinkan/ditolak, pembatasan record/field, kelompok kecil, dan temuan beserta batas bukti retest |
+| Simulasi kebocoran dan rotasi kunci | [Perbandingan kebocoran CSV](evidence/leakage/before_after.csv), [kode verifikasi](verify/), [hasil rotasi](evidence/keys/rotation.json) | Paparan data pada skenario kemampuan penyerang dan bukti rewrap kunci |
+| Daftar keterbatasan solusi | [Batas hasil](docs/SECURITY.md#batas-hasil), [ringkasan hasil](docs/RESULTS.html#limits) | Risiko tersisa, scope pengujian, dan kemampuan yang belum dibuktikan |
+| SBOM dan daftar dependency | [Panduan dependency](docs/DEPENDENCIES.md), [indeks SBOM](docs/sbom/index.json), [docs/sbom/](docs/sbom/) | Inventaris CycloneDX, deklarasi/lockfile, snapshot lingkungan, dan hasil audit sesuai cakupannya |
+
+## Struktur sumber
+
+```text
+README.md         Panduan instalasi, evaluasi, dan demonstrasi
+accounts.md       Akun evaluator untuk deployment web
+app/              Backend FastAPI dan frontend Next.js
+infra/            TLS, OpenBao/PostgreSQL, launcher, dan alat distribusi
+scanner/, policy/ Inventarisasi dan profil perlindungan
+migration/, sql/  Migrasi, skema, dan role
+toolkit/          Paket kriptografi dprcrypto
+scripts/backup/   Backup terenkripsi dan restore
+datagen/          Pembangkit dataset sintetis
+benchmark/        Pengukuran yang dapat diulang
+verify/           Verifikasi kebocoran dan penyaji hasil
+evidence/         Hasil pengujian dan hasil mentah
+docs/             Arsitektur, spesifikasi, operasi, analisis, dan SBOM
+```
+
+Kode menggunakan lisensi [MIT](LICENSE), dokumentasi
+[CC BY-NC 4.0](LICENSE-DOCS.md); atribusi pada [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+Dataset panitia tidak dipublikasikan. `accounts.md` berisi akun demo yang memang
+disediakan untuk evaluator. Kredensial PostgreSQL/OpenBao, root token, unseal key,
+SSH, private key sertifikat, dan kunci backup tetap berada di penyimpanan privat.

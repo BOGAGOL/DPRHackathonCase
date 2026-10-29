@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "checks": {
+    "active_sources_present": true,
+    "obsolete_runtime_absent": true,
+    "document_links_valid": true,
+    "required_product_files_present": true,
+    "no_credential_patterns_in_selected_files": true,
+    "sbom_inputs_current": true
+  },
+  "selected_files": 3570,
+  "broken_links": [],
+  "missing_paths": [],
+  "secret_findings": [],
+  "status": "PASS",
+  "scope": "Source integrity and documentation checks; runtime/security results are reported separately"
+}

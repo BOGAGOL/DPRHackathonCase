@@ -79,10 +79,13 @@ def test_supervisor_recovers_only_unfinished_worker_not_failed_recovery(monkeypa
     p.write_text('{"status":"restored"}');r.supervise();assert recovery.call_count==1
 
 
-def test_worker_setup_failure_always_restores_before_publication(monkeypatch,tmp_path):
+@pytest.mark.parametrize('publish_enabled', [False, True])
+def test_worker_setup_failure_always_restores_before_publication(monkeypatch,tmp_path,publish_enabled):
     monkeypatch.setattr(r,'RAW',tmp_path/'raw');monkeypatch.setattr(r,'OUT',tmp_path/'out');r.OUT.mkdir()
     monkeypatch.setattr(r,'JOURNAL',tmp_path/'journal.json')
     monkeypatch.setenv('DPR_PRIVATE_DIR',str(tmp_path))
+    if publish_enabled: monkeypatch.setenv('DPR_BENCH_PUBLISH_RESULTS','1')
+    else: monkeypatch.delenv('DPR_BENCH_PUBLISH_RESULTS',raising=False)
     monkeypatch.setattr(r,'preflight',lambda:{'passed':True,'before':{},'code_commit':'fixture','production_sha256':{}})
     monkeypatch.setattr(r,'secure_directory',lambda p:p)
     store=MagicMock();monkeypatch.setattr(r,'PGStore',lambda:store)
@@ -95,7 +98,9 @@ def test_worker_setup_failure_always_restores_before_publication(monkeypatch,tmp
     result=r.run()
     assert result['status']=='STOPPED'
     swap.restore.assert_called_once();check.assert_called_once_with(swap,{})
-    store.close.assert_called_once();publication.assert_called_once()
+    store.close.assert_called_once()
+    if publish_enabled: publication.assert_called_once()
+    else: publication.assert_not_called()
 
 
 def test_services_are_read_only_and_fail_on_seal_or_extra_container(monkeypatch):

@@ -1,24 +1,9 @@
-# Target verifikasi dan benchmark Modul C
+# Target pengujian
 
-Tanggal penetapan: **26 Oktober 2026 WIB** · Pemilik: **Delf / Modul C** · Branch: `feat/verify-bench`.
-
-Amandemen dataset: **27 Oktober 2026 WIB**. **Perubahan dataset: arahan technical meeting panitia, 27 Okt 2026; disetujui tim.**
-Dataset utama menjadi `baseline_1m`; `baseline_100k` tetap sebagai titik skala dan jaring pengaman.
-Hasil baseline awal 100k yang sudah diterima tetap dipertahankan sebagai sesi tersendiri.
-Seluruh ambang fungsional, keamanan, dan kinerja tetap; amandemen ini tidak mengubah nilai target.
-
-**Status: disetujui tim sebelum benchmark; belum merupakan hasil pengujian.** Semua angka di bawah
-adalah target, bukan hasil. Persetujuan mencakup ambang cadangan level DB dan nama asli ground truth.
-Benchmark baru boleh berjalan setelah dokumen ini beserta berkas yang diminta di-commit dan di-push,
-serta hash/waktu commit dilaporkan.
-Hash commit penetapan dicatat di metadata pengujian; jangan mengisi dokumen ini dengan hash dirinya sendiri.
-
-Acuan: [PROJECT_CONTEXT.md](PROJECT_CONTEXT.md) bagian 3–4, 6–10;
-[CONTRACT.md](contracts/CONTRACT.md);
-[PROMPT_C_VERIFY_EVIDENCE.md](ai-prompts/PROMPT_C_VERIFY_EVIDENCE.md) bagian 6;
-[PROMPT_CODEX_DATAGEN_BENCHMARK.md](ai-prompts/PROMPT_CODEX_DATAGEN_BENCHMARK.md).
-Kontrak format/kewenangan tetap berlaku. Target tidak boleh dilonggarkan berdasarkan hasil pengujian;
-perubahan memerlukan persetujuan tim, commit baru, dan pengujian ulang yang dinyatakan terpisah.
+Ambang ditetapkan sebelum pengukuran pada 26 Oktober 2026; perluasan dataset
+27 Oktober mempertahankan ambang yang sama. Ini definisi target, bukan hasil.
+Protokol asli yang cocok dengan commit pada hasil mentah dipertahankan sebagai
+evidence/benchmark/protocol-20261026.txt agar fingerprint reproduksi tidak berubah.
 
 ## 1. Lingkungan, data, dan batas pengujian
 
@@ -37,9 +22,9 @@ perubahan memerlukan persetujuan tim, commit baru, dan pengujian ulang yang diny
   beri hak minimum SELECT/INSERT/UPDATE dan penggunaan
   identity yang diperlukan. Setelah baseline jadi, **`scanner_user`** mendapat SELECT di sana.
   Koneksi admin untuk membuat/restore DB dipisahkan dari koneksi workload.
-- `protected_100k`/`protected_734`, toolkit, profile, role protected, dan backup produksi dikerjakan A;
-  Service App dan matriks akses dikerjakan B. Migrasi menunggu konfirmasi baseline C sudah terekam.
-  Perbandingan utama 1M harus memakai salinan protected dengan populasi 1M yang sama dari A;
+- `protected_100k`/`protected_734`, toolkit, profile, role protected, dan backup produksi disediakan migrator;
+  Service App dan matriks akses disediakan aplikasi. Migrasi dilakukan sesudah baseline terekam.
+  Perbandingan utama 1M harus memakai salinan protected dengan populasi 1M yang sama dari migrator;
   hasil 100k dilaporkan terpisah dan tidak dipakai sebagai pasangan before/after untuk 1M.
   Seluruh database eksperimen berada di instance `pg-dpr` yang sama; OpenBao memakai compose A.
 - `age_band`: usia tahun penuh terhadap **2026-10-01**, lalu kelompok **10 tahun**: usia 20–29 →
@@ -55,7 +40,7 @@ termasuk isi field yang diizinkan, masking, NULL, nol awal, dan identitas record
 
 | ID | Target | Cara membuktikan |
 | --- | --- | --- |
-| F01 | **100% validasi dataset lulus** | Count utama 1.000.000 (734 sumber + 999.266 sintetis), seed 42; titik skala/jaring pengaman 100.000 tetap valid; 734 sumber tidak berubah; keunikan global; determinisme seed, format/relasi, dan pelaporan distribusi/anomali sesuai prompt datagen. |
+| F01 | **100% validasi dataset lulus** | Count utama 1.000.000 (734 sumber + 999.266 sintetis), seed 42; titik skala/jaring pengaman 100.000 tetap valid; 734 sumber tidak berubah; keunikan global; determinisme seed, format/relasi, dan pelaporan distribusi/anomali sesuai aturan generator. |
 | F02 | **100% fungsi pengguna sah lulus** | Tujuh workload bisnis dan endpoint wajib B; hasil plain/protected setara sesuai role, termasuk pencarian, paging, update dan insert. |
 | F03 | **100% validasi migrasi lulus** | Count dan decrypt-and-compare seluruh kolom/record, NULL, blind index/normalisasi, idempotensi; kumpulkan evidence A. Tidak menghapus kolom sumber. |
 | F04 | **100% restore berhasil** | Baseline minimal 3 backup/restore ke DB sementara, count sama; protected memakai drill A: integritas, ciphertext tetap terlindungi tanpa akses decrypt, dan layanan/data pulih dengan kredensial sah. |
@@ -70,7 +55,7 @@ termasuk isi field yang diizinkan, masking, NULL, nol awal, dan identitas record
 | S03 | **ESCE = 0% untuk kolom AEAD pada dump tanpa kunci** | `protected_dump_no_key`: 0 sel AEAD non-NULL pulih persis / total sel AEAD non-NULL yang diperiksa. Laporkan juga ESCE seluruh sel sensitif; REF/metadata tidak dianggap terenkripsi. |
 | S04 | **100% tamper/swap gagal didekripsi** | Ubah satu bit, tukar antar-record, tukar antar-kolom; harus gagal tertutup karena tag/AAD. Tidak ada fallback/default plaintext; kegagalan API generik dan diaudit tanpa nilai pribadi. |
 | S05 | **0 secret aktif terdeteksi** | Repo dan riwayat Git, dump/backup/evidence/log; tidak ada password/token/DEK/KEK aktif. Fixture kripto sintetis kontrak diberi konteks dan tidak dihitung sebagai secret aktif. |
-| S06 | **0 nilai pribadi plaintext pada keluaran operasional yang dipindai** | Log aplikasi/PostgreSQL general/slow/error, file temp, history, ekspor, dokumentasi/screenshot/evidence. Baseline dan known-values memang plaintext dalam lokasi privat yang ditentukan; path persis `sql/baseline/02_data.sql` dikecualikan sesuai CONTRACT bagian 11 dan `verify/scan_config.toml`; pengecualian dicatat. |
+| S06 | **0 nilai pribadi plaintext pada keluaran operasional yang dipindai** | Log aplikasi/PostgreSQL general/slow/error, file temp, history, ekspor, dokumentasi/screenshot/evidence. Baseline dan known-values memang plaintext dalam lokasi privat yang ditentukan; path persis `sql/baseline/02_data.sql` dikecualikan sesuai kebijakan input privat dan `verify/scan_config.toml`; pengecualian dicatat. |
 | S07 | **100% backup rusak ditolak integritasnya** | Tamper artefak/manifest pada salinan uji A gagal sebelum pemulihan dipakai. Backup protected tidak membuka data tanpa kredensial yang dibutuhkan. |
 | S08 | **100% batas domain kripto yang diuji sesuai kontrak** | Policy finance hanya mendekripsi AEAD FIN; policy PII hanya AEAD PII; search key membuktikan kebocoran equality/dictionary, tidak mendekripsi AEAD. Tidak boleh mendekripsi domain AEAD lain. REF dan inferensi antar-kolom tetap dilaporkan. |
 | S09 | **100% kasus kontrol aplikasi wajib B lulus** | Parameterisasi/SQL injection, validasi, autentikasi/sesi/CSRF, XSS, cookie/header/cache, minimisasi respons, kegagalan crypto; bukti TLS browser/API/DB/OpenBao diverifikasi terpisah dari benchmark. |
@@ -104,7 +89,7 @@ tetap dinilai. Kelulusan DB tidak mengubah status API menjadi lulus.
 | P02 | **Throughput protected ≥ 70% baseline** | Median throughput sukses per-run protected / median throughput sukses per-run plain ≥ 0,70. |
 | P03 | **Error rate tidak meningkat** | Median error rate per-run protected ≤ median error rate per-run plain, tanpa toleransi tambahan; baseline 0 berarti protected harus 0. |
 
-**Amandemen 28 Oktober 2026, disetujui pengguna/tim sebelum benchmark B-P-P-B:**
+**Amandemen 28 Oktober 2026, ditetapkan sebelum benchmark B-P-P-B:**
 tambahkan P01A di atas tanpa mengganti ambang rasio P01, throughput P02, atau error P03.
 Laporkan status rasio dan absolut secara terpisah; kelulusan absolut tidak menghapus kegagalan rasio.
 Mixed memakai batas tulis +10 ms karena mengandung 30% operasi tulis. Ambang ini berlaku untuk DB
@@ -157,12 +142,12 @@ Resource API/OpenBao dicatat jika tersedia dan batas pemantauannya dijelaskan.
    DB/count/seed/checksum/versi generator, workload/parameter, hash kode dan commit target, waktu UTC
    serta padanan WIB. Hindari mutasi pengguna/migrasi/beban lain selama sesi; catat gangguan.
 9. Ukur dump custom/restore baseline ke DB sementara baru; verifikasi count sesudah restore.
-   Pengukuran backup protected A mencatat biaya enkripsi/integritas secara jelas agar batasnya
+   Pengukuran backup protected mencatat biaya enkripsi/integritas secara jelas agar batasnya
    tidak disamakan dengan pg_dump baseline saja. Jangan restore menimpa sumber/baseline.
 
 ## 6. Scanner dan risiko residual yang wajib dilaporkan
 
-- Evaluator memakai acuan Alby **29 kolom tanpa `id`**: `scanner/ground_truth_eval.csv` dan
+- Evaluator memakai acuan independen **29 kolom tanpa `id`**: `scanner/ground_truth_eval.csv` dan
   [ground_truth_methodology.md](ground_truth_methodology.md), tanpa mengubah isinya. Label map di
   evaluator langkah 4 menangani `PERSON_NAME`, `NATIONAL_ID`, dan label lain, `is_personal` 1/0,
   serta `non-pribadi` versus `non_pribadi`. `id` prediksi dicatat tidak berlabel, bukan denominator.
@@ -180,28 +165,3 @@ Resource API/OpenBao dicatat jika tersedia dan batas pemantauannya dijelaskan.
 - Tidak menjanjikan k minimum tertentu, DIE global nol, atau ESCE global nol: REF, pola NULL,
   equality/frekuensi dan inferensi tetap mungkin terbuka. Kebocoran aplikasi beserta kemampuan
   decrypt dapat membuka data; laporkan batas tersebut bersama hasil fisik/TLS yang belum diuji.
-
-## 7. Evidence, status hasil, dan urutan pelaksanaan
-
-- Ringkasan kecil **JSON/CSV ke `evidence/<kategori>/` dan di-commit**: dataset, benchmark,
-  backup-restore, scanner, leakage, access-control. Pertahankan file bersama yang diwajibkan prompt:
-  `evidence/scanner/evaluation.json`, `evidence/access-control/db-roles.json`,
-  `evidence/secrets-and-logs.json`, `evidence/summary.json`. SBOM ke `docs/sbom/`.
-- Raw besar ke **`results/` lokal, tidak di-commit**. Known-values, daftar kunci lookup yang memuat
-  nilai pribadi, snapshot/dump plaintext dan kunci hanya di **`C:\dev\dpr-private\`**, dibaca melalui
-  env **`DPR_PRIVATE_DIR`**. Direktori privat tidak menjadi keluaran log/isi evidence.
-  Pengecualian khusus dataset panitia `sql/baseline/02_data.sql` hanya di repo PRIVATE sesuai
-  CONTRACT bagian 11; dilarang dipublikasikan dan dikeluarkan dari paket lampiran publik.
-- Kredensial dari env, input password PowerShell melalui `Read-Host -AsSecureString`; tidak di kode,
-  argumen proses/history, atau output. Evidence berisi agregat/ID uji, bukan nilai record/secret.
-  Catat pengecualian scan `docs/reference/` sesuai kontrak; jangan mengklaim cakupan yang tidak dipindai.
-- Setiap hasil memuat ID target, status, jumlah kasus/numerator/denominator, waktu, commit dan perintah
-  reproduksi. Status penilaian: **LULUS / GAGAL / BELUM DIUJI / TIDAK DAPAT DINILAI**; status yang
-  belum teruji tidak boleh dianggap lulus. Indeks klaim memakai **Diimplementasikan + Diuji /
-  Diimplementasikan / Rencana** dan menautkan evidence.
-- Kode/evidence benchmark lama dipertahankan sebagai historis; utilitas yang cocok dipakai ulang
-  setelah diperiksa/test. Catat komponen yang diadaptasi dan hasil lama yang digantikan di
-  `benchmark/NOTES.md` saat implementasi, tanpa menghapus file lama.
-- Urutan: persetujuan/commit target → datagen → baseline 3 run + backup/restore → scanner/evaluasi →
-  leakage/residual baseline → integrasi A/B, keamanan dan benchmark after. **Berhenti setelah setiap
-  langkah** dengan ringkasan, hasil test dan perintah PowerShell verifikasi.

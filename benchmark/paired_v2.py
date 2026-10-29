@@ -38,10 +38,11 @@ def production_manifest():
     result = {}
     for path in paths:
         expected = subprocess.check_output(['git', 'show', REQUESTED + ':' + path], cwd=ROOT)
-        current = (ROOT / path).read_bytes()
+        current_path = ROOT / ('evidence/benchmark/protocol-20261026.txt' if path == 'docs/targets.md' else path)
+        current = current_path.read_bytes()
         if expected.replace(b'\r\n', b'\n') != current.replace(b'\r\n', b'\n'):
             raise RuntimeError('production_differs_from_requested_commit')
-        result[path] = file_hash(ROOT / path)
+        result[path] = file_hash(current_path)
     return result
 
 
@@ -90,7 +91,7 @@ def preflight():
                 and os.environ.get('DPR_BENCH_DEK_CACHE_TTL') == '0')
         target = subprocess.check_output(['git', 'show', paired.TARGET + ':docs/targets.md'], cwd=ROOT)
         require('target', subprocess.run(['git', 'merge-base', '--is-ancestor', paired.TARGET, 'HEAD'], cwd=ROOT).returncode == 0
-                and target.replace(b'\r\n', b'\n') == (ROOT / 'docs/targets.md').read_bytes().replace(b'\r\n', b'\n'),
+                and target.replace(b'\r\n', b'\n') == (ROOT / 'evidence/benchmark/protocol-20261026.txt').read_bytes().replace(b'\r\n', b'\n'),
                 commit=paired.TARGET, committed_at_wib=git('show', '-s', '--format=%cI', paired.TARGET),
                 before_first_run=True)
         report['gates']['power'] = power_snapshot()
@@ -182,7 +183,7 @@ def publish(session):
     if git('branch','--show-current') != BRANCH:
         raise RuntimeError('publication_branch_changed')
     paths = [f'evidence/benchmark/{PREFIX}_preflight.json', f'evidence/benchmark/{PREFIX}_session.json',
-             f'evidence/benchmark/{PREFIX}_launch.json', 'benchmark/NOTES.md']
+             f'evidence/benchmark/{PREFIX}_launch.json', 'evidence/benchmark/run-notes.md']
     paths += [str(p.relative_to(ROOT)).replace('\\','/') for p in
               [OUT/'bppb_v2_100k',OUT/'bppb_v2_1m',OUT/'bppb_v2_compare.json',OUT/'bppb_versions_summary.md'] if p.exists()]
     paths = [p for p in paths if (ROOT/p).exists()]
@@ -227,14 +228,17 @@ def run():
     except Exception as error:
         session.update(status='STOPPED',error_type=type(error).__name__,error='v2_driver_stopped_private_details_withheld')
         write_json(OUT/'bppb_v2_session.json',session)
-    with (ROOT/'benchmark/NOTES.md').open('a',encoding='utf-8') as handle:
+    with (ROOT/'evidence/benchmark/run-notes.md').open('a',encoding='utf-8') as handle:
         handle.write('\n\n## B-P-P-B resmi v2 — hasil worker terpisah\n\nStatus '+session['status']+
             '; produksi8a11ff7, https_pool, DEK cache OFF. Gate, count/checksum lima DB, resource dan AC per run disimpan di evidence/benchmark/bppb_v2_*. '
             'Metode/run sama dengan naive_v1; hanya direktori/metadata dan publikasi otomatis ditambahkan pada orchestration. '
             'Seluruh hasil naive_v1 dipertahankan. Tabel lengkap: evidence/benchmark/bppb_versions_summary.md. '
-            'Integritas akhir: '+str(session.get('datasets_unchanged','BELUM LENGKAP'))+'. Tidak merge ke main.\n')
+            'Integritas akhir: '+str(session.get('datasets_unchanged','BELUM LENGKAP'))+'.\n')
     try:
-        receipt = publish(session)
+        # A reproduced measurement remains local unless its operator explicitly
+        # enables publication. Running the product never implicitly pushes Git.
+        receipt = publish(session) if os.environ.get('DPR_BENCH_PUBLISH_RESULTS') == '1' else {
+            'status': 'LOCAL_ONLY', 'published': False, 'reports': 'evidence/benchmark'}
         print(json.dumps({'status':session['status'],'publication':receipt}),flush=True)
     except Exception as error:
         write_json(raw/'publication_failure.json',{'error_type':type(error).__name__,'at_utc':utc_now(),

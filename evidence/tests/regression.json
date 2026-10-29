@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-10-29T11:34:08.521874+00:00",
+  "code_commit": "a891737f46a5f8adf8e06ce30f23cfb807d3e1c4",
+  "scope": "Fresh product clone and newly installed environments; local native PG18/OpenBao TLS. Not a new performance benchmark or deployed browser pass.",
+  "setup": {
+    "passed": true,
+    "existing_venv_or_node_modules_copied": false
+  },
+  "suites": {
+    "core": {
+      "passed": 401,
+      "skipped": 10
+    },
+    "application": {
+      "passed": 473,
+      "skipped": 12,
+      "warnings": 1
+    },
+    "scanner_datagen": {
+      "passed": 218,
+      "skipped": 1
+    },
+    "benchmark_verification": {
+      "passed": 162,
+      "skipped": 1
+    },
+    "launcher_distribution_policy_targeted": {
+      "passed": 79,
+      "skipped": 0,
+      "scope": "Targeted checks after the portable venv dispatch change; overlaps core tests"
+    }
+  },
+  "acceptance": {
+    "passed": true,
+    "source_rows": 734,
+    "rows_compared": 734,
+    "browser_checks": 100,
+    "summary": "evidence/reproduction/20261029T111814Z-8ff4e56e/summary.json"
+  },
+  "deployment": {
+    "public_login_tls": true,
+    "browser_acceptance_passed": false,
+    "observed_login_status": 403,
+    "origin_mismatch_indicated": true,
+    "credentials_unchanged": true,
+    "server_configuration_changed": false
+  },
+  "runtime_format": {
+    "version": 1,
+    "ciphertext_format_changed": false,
+    "aad_changed": false,
+    "domain_decisions_changed": false,
+    "existing_profile_accepted_against_immutable_protocol": true
+  }
+}

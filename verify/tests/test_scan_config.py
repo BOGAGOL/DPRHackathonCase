@@ -28,7 +28,12 @@ def test_gitleaks_dataset_allowlist_is_exact():
         assert not re.search(pattern, other)
 
 
-def test_git_archive_excludes_dataset_from_attachments():
+def test_git_archive_excludes_dataset_from_attachments(tmp_path):
+    # Exercise the shipped attributes in an isolated repo, including when this
+    # test is run from a source ZIP without its original Git history or dataset.
+    (tmp_path / ".gitattributes").write_bytes((ROOT / ".gitattributes").read_bytes())
+    subprocess.run(["git", "init", "-q", str(tmp_path)], check=True,
+                   capture_output=True, text=True)
     result = subprocess.run(["git", "check-attr", "export-ignore", "--", DATASET],
-                            cwd=ROOT, check=True, capture_output=True, text=True)
+                            cwd=tmp_path, check=True, capture_output=True, text=True)
     assert result.stdout.strip() == DATASET + ": export-ignore: set"

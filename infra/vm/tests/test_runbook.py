@@ -29,7 +29,7 @@ def test_compose_cli_renders_without_exporting_passwords(material):
 def test_bash_runbook_syntax_and_private_env_quoting(material,tmp_path):
     bash=Path("C:/Program Files/Git/bin/bash.exe") if os.name=="nt" else Path(shutil.which("bash") or "/missing/bash")
     if not bash.is_file(): pytest.skip("Native Bash unavailable")
-    instructions=(REPO/"infra/vm/README.md").read_text(encoding="utf-8")
+    instructions=(REPO/"docs/OPERATIONS.md").read_text(encoding="utf-8")
     code="\n".join(re.findall(r"```bash\n(.*?)\n```",instructions,re.S))
     script=tmp_path/"runbook.bash";script.write_text(code,encoding="utf-8")
     parsed=subprocess.run([str(bash),"-n",script.as_posix()],capture_output=True,text=True,timeout=15)

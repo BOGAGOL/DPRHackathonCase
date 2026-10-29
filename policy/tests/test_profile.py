@@ -12,7 +12,7 @@ from infra.protected.apply import load_profile
 ROOT = Path(__file__).resolve().parents[2]
 INVENTORY = ROOT / "evidence/scanner/before_v1/inventory.csv"
 OVERRIDES = ROOT / "policy/overrides.yaml"
-CONTRACT = ROOT / "docs/contracts/CONTRACT.md"
+CONTRACT = ROOT / "policy/protocol-v1.txt"
 
 
 def test_assessment_and_overrides_match_every_contract_column_without_samples():
