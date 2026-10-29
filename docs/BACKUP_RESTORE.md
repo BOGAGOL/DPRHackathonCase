@@ -1,11 +1,9 @@
-> Panduan operasional terbaru: [docs/OPERATIONS.md](../../docs/OPERATIONS.md). Dokumen ini mempertahankan catatan historis; tautan aktif diarahkan ke panduan yang tersedia dan path lama tetap dicantumkan.
+# Backup dan restore
 
-# Backup / restore tahap 5
-
-**Pembaruan recovery A+B, 28 Oktober 2026:** backup menerima layout A lima tabel
-atau A+B tujuh tabel secara lengkap. Untuk layanan B, jalankan ulang setup B
-idempoten agar backup_user dapat membaca sequence; apply updater TLS terbaru
-sebelum restore. Panduan langkah lengkap: [recovery layanan](../../docs/OPERATIONS.md#backup-dan-restore) (path historis: `../../app/docs/RECOVERY.md`).
+Backup menerima layout data lima tabel atau layout layanan tujuh tabel secara
+lengkap. Untuk memulihkan layanan aplikasi, pastikan bootstrap skema aplikasi
+memberi backup_user akses sequence dan konfigurasi TLS telah diterapkan sebelum
+restore. Panduan: [pemulihan layanan](OPERATIONS.md#backup-dan-restore).
 Restore menulis `service_schema_restored` dan pilihan `DPR_RESTORED_DATABASE` pada
 laporan untuk layout tujuh tabel. Arsip lima tabel lama tetap dapat dipulihkan sebagai
 data, tetapi tidak membawa akun/sesi/binding B yang belum ada saat backup dibuat.
@@ -33,10 +31,10 @@ Password/kunci tidak memiliki opsi CLI. Jangan gunakan connection URL berisi pas
 `backup_user` tidak memerlukan kredensial OpenBao. Proses pg_dump/pg_restore diberi
 environment PostgreSQL saja; token dan kunci backup tidak diteruskan ke container.
 Docker hanya menyalin **CA publik**, lalu menghapusnya; tidak menyalin dump atau private key.
-Role database harus sudah tersedia sesuai tahap 3. Dump ini tidak berisi global role/password;
+Role database harus sudah tersedia sesuai skema dan GRANT yang ditetapkan. Dump ini tidak berisi global role/password;
 pada cluster pengganti, operator harus bootstrap role lebih dulu dengan password baru.
 
-## Windows lokal yang sudah menjalankan tahap 1–4
+## Windows dengan database dan kredensial yang sudah tersedia
 
 `--local-credentials` adalah pilihan eksplisit untuk memuat kredensial DPAPI yang
 sudah ada di laptop operator. Helper memuatnya ke memori/environment, tidak ke argv.
@@ -72,7 +70,7 @@ Restore hanya membuat database baru bernama `dpr_restore_<UUID hex>`, tidak meni
 `protected_*`, baseline, atau database `postgres`. Nama default tercetak di output
 dan evidence; nama eksplisit melalui `--target` wajib mengikuti pola tersebut dan
 belum ada. Database hasil restore **dipertahankan** untuk pemeriksaan operator.
-Alih koneksi layanan ke nama database hasil restore setelah verifikasi dan koordinasi B.
+Alih koneksi layanan ke nama database hasil restore setelah verifikasi operator aplikasi.
 Uji retensi membersihkan tiga database sementara yang dibuatnya sendiri.
 
 ## Bukti dan benchmark

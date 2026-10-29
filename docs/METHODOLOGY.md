@@ -110,10 +110,9 @@ path launcher credential secara eksplisit, tanpa default path laptop penulis.
 
 ## Reproduksi dataset besar dan simulasi kebocoran
 
-Bagian ini merupakan runbook untuk operator, **bukan perintah yang dijalankan saat
-menyiapkan submission**. Gunakan clone/workspace eksperimen baru dan instance lab
+Bagian ini merupakan prosedur eksperimen untuk operator, terpisah dari demo 734. Gunakan clone/workspace eksperimen baru dan instance lab
 yang diotorisasi. Jangan menjalankannya pada database resmi atau menimpa evidence
-beku dalam submission: CLI menulis ke path `evidence/` tetap dan tidak mempunyai
+hasil yang sudah tersimpan: CLI menulis ke path `evidence/` tetap dan tidak mempunyai
 flag output bebas untuk seluruh pipeline. Simpan hasil eksperimen terpisah sebelum
 membandingkannya dengan hasil tersimpan.
 
