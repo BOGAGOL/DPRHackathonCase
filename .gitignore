@@ -76,6 +76,9 @@ evidence/raw/
 /evidence/reproduction/generated/
 _incoming/
 
+# Output lokal, termasuk scan untuk video demo.
+/out/
+
 # Editor/OS metadata.
 .vscode/
 .idea/
