@@ -30,6 +30,8 @@ folder yang berisi `README.md` ini.
 | Menguji alur lengkap secara mandiri | Ikuti [instalasi lokal](#instalasi-lokal-dan-demo-734-record), lalu jalankan `demo` | Import 734 record, assessment, hardening, aplikasi HTTPS, pengujian, dan demo interaktif |
 | Mengulang pengujian tanpa demo interaktif | Jalankan `verify` setelah `setup` | Stack sementara diuji, hasil disimpan, lalu layanan dihentikan |
 
+Untuk mencari berkas pendukung, buka [lokasi luaran dan bukti teknis](#lokasi-luaran-dan-bukti-teknis).
+
 **Status deployment yang tercatat:** pemeriksaan 29 Oktober 2026 menemukan halaman
 HTTPS tersedia, tetapi login browser ditolak HTTP403. Diagnostik menunjukkan
 ketidakcocokan konfigurasi Origin pada VM; akun yang sama berhasil pada diagnostik
@@ -401,6 +403,30 @@ di `docs/sbom/` beserta cakupan dan hasil auditnya.
 | Login deployment ditolak HTTP403 | Lihat status deployment dan prosedur Origin pada panduan operasi; penonaktifan CSRF/TLS bukan solusi |
 | Layanan demo berhenti merespons setelah lama dibiarkan | Token demo berlaku satu jam; hentikan run dan mulai demo baru |
 | Verifikasi gagal | Buka `report.html` dan `summary.json` run tersebut; periksa tahap pertama yang gagal. Jangan menganggap NOT_RUN sebagai PASS |
+
+## Lokasi luaran dan bukti teknis
+
+Tabel berikut memetakan luaran yang tersedia di repositori. Buka halaman hasil
+untuk penjelasan yang mudah dibaca, lalu gunakan berkas sumber atau hasil mentah
+untuk memeriksa rinciannya. PDF laporan dan slide presentasi tidak tercakup dalam
+tabel ini.
+
+| Luaran | Lokasi | Isi yang tersedia |
+|---|---|---|
+| Kode dan konfigurasi | [app/](app/), [infra/](infra/), [sql/](sql/), [toolkit/](toolkit/) | Layanan web/API, infrastruktur TLS dan OpenBao, skema/role, serta paket kriptografi; rahasia infrastruktur disediakan terpisah |
+| Petunjuk instalasi dan demonstrasi | [Instalasi lokal](#instalasi-lokal-dan-demo-734-record), [demonstrasi enam akun](#demonstrasi-aplikasi-dan-hasil-yang-diharapkan) | Prasyarat, setup, demo, verifikasi, dan hasil yang diharapkan untuk evaluator |
+| Inventaris dan klasifikasi data | [Inventaris ringkas CSV](docs/data/inventory-report.csv), [inventaris scanner CSV](evidence/scanner/before_v1_2/inventory.csv), [profil perlindungan](policy/protection_profile.yaml) | Klasifikasi kolom, hasil assessment, dan keputusan perlindungan per kolom |
+| Matriks risiko | [risk-matrix.csv](docs/data/risk-matrix.csv), [analisis dan prioritas](docs/SECURITY.md#analisis-data-dan-prioritas) | Penilaian risiko kondisi awal dan urutan penanganan |
+| Diagram arsitektur | [SVG](docs/architecture/architecture.svg), [PNG](docs/architecture/architecture.png), [sumber Mermaid](docs/architecture/architecture.mmd) | Komponen aplikasi, database, pengelolaan kunci, dan alur backup; dapat dibuka atau digunakan dalam dokumen |
+| Threat model | [docs/SECURITY.md](docs/SECURITY.md) | Ancaman, kontrol, asumsi, dan batas pelindungan |
+| Skrip dan hasil migrasi | [migration/](migration/), [validasi 734](evidence/migration/validation-protected_734.json), [evidence migrasi](evidence/migration/) | Migrasi batch/resume, decrypt-and-compare, jumlah record, NULL, dan keunikan blind index |
+| Skrip backup dan restore | [scripts/backup/](scripts/backup/), [panduan](docs/BACKUP_RESTORE.md), [evidence backup](evidence/backup/) | Backup terenkripsi, restore dua mode, uji tamper dan retensi, serta waktu/ukuran artefak |
+| Skrip benchmark yang dapat diulang | [benchmark/](benchmark/), [metodologi dan perintah](docs/METHODOLOGY.md), [dataset sintetis](datagen/) | Workload, urutan pengukuran, prasyarat lingkungan, dan pembangkitan data dengan seed tetap |
+| Hasil benchmark sebelum/sesudah | [Halaman hasil](docs/RESULTS.html#performance), [tabel CSV](docs/data/db-benchmark.csv), [hasil mentah](evidence/benchmark/) | Hasil 100k/1M, median, latensi, throughput, resource, dan status pencapaian target |
+| Bukti kontrol akses dan pengujian keamanan | [Matriks izin](docs/ACCESS_CONTROL.md), [uji role DB](evidence/access-control/db-roles.json), [suppression analis](evidence/access-control/analyst_suppression.json), [uji browser enam akun](evidence/reproduction/20261029T111814Z-8ff4e56e/browser.json), [pentest](evidence/pentest/ASSESSMENT.md) | Akses yang diizinkan/ditolak, pembatasan record/field, kelompok kecil, dan temuan beserta batas bukti retest |
+| Simulasi kebocoran dan rotasi kunci | [Perbandingan kebocoran CSV](evidence/leakage/before_after.csv), [kode verifikasi](verify/), [hasil rotasi](evidence/keys/rotation.json) | Paparan data pada skenario kemampuan penyerang dan bukti rewrap kunci |
+| Daftar keterbatasan solusi | [Batas hasil](docs/SECURITY.md#batas-hasil), [ringkasan hasil](docs/RESULTS.html#limits) | Risiko tersisa, scope pengujian, dan kemampuan yang belum dibuktikan |
+| SBOM dan daftar dependency | [Panduan dependency](docs/DEPENDENCIES.md), [indeks SBOM](docs/sbom/index.json), [docs/sbom/](docs/sbom/) | Inventaris CycloneDX, deklarasi/lockfile, snapshot lingkungan, dan hasil audit sesuai cakupannya |
 
 ## Struktur sumber
 
