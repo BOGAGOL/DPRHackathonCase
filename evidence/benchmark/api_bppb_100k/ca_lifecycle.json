@@ -1,0 +1,10 @@
+﻿{
+    "thumbprint":  "FC95F6CA26E050CAB0C16B17B3F4A20441FA8440",
+    "operator_authorized_removal":  true,
+    "status":  "IMPORTED_BY_OPERATOR_OBSERVED",
+    "import_observed_at_wib":  "2026-10-29T07:39:09.8236427+07:00",
+    "removal_verified":  false,
+    "store":  "CurrentUser/Root",
+    "trusted_before_run":  true,
+    "operator_reported_import":  true
+}

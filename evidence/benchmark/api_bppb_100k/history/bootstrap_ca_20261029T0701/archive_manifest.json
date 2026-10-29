@@ -1,0 +1,23 @@
+{
+  "at_utc": "2026-10-29T00:39:10.526896+00:00",
+  "measured_runs": 0,
+  "swap_started": false,
+  "files": [
+    {
+      "file": "active_preflight.json",
+      "sha256": "094791b50bfef10eeb6793c6a8afffa24184a16303b11cbb63f4646f051b59ca"
+    },
+    {
+      "file": "bootstrap_failure.json",
+      "sha256": "b636dc4bc4711460a2674c382ed34da784d29313bdc73bdae062243e808fe451"
+    },
+    {
+      "file": "bootstrap_integrity.json",
+      "sha256": "a6a62a7e0e79bb7f8311e0ec473dbdac2695fb0b34aef6276794ec1153f2a7a9"
+    },
+    {
+      "file": "ca_import_probe.json",
+      "sha256": "02593e5d2d5cb50b41a61ed704a12b461619c99e330d02885cfe303b5a0daf25"
+    }
+  ]
+}

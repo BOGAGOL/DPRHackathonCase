@@ -51,8 +51,13 @@ dinonaktifkan agar error transport tidak mencetak query NIK/email. Raw JSON gzip
 status HTTP, metadata, resource app/server PID asli, k6, PG dan OpenBao disimpan.
 TLS k6 di Windows memakai CurrentUser/Root. Operator harus mempercayai CA lab di sana
 sebelum peluncuran detached. Launcher hanya memeriksa trust secara read-only dan
-menolak start bila belum dipercaya; tidak menambah/menghapus CA. Ini menghindari
+menolak start bila belum dipercaya; tidak menambah CA. Ini menghindari
 dialog Windows Security Warning tersembunyi. Recovery tidak bergantung trust k6.
+Arahan operator terbaru29Okt: sesudah supervisor selesai (juga saat gagal), launcher
+mencabut CA lab FC95F6CA26E050CAB0C16B17B3F4A20441FA8440 via Remove-Item dari
+CurrentUser/Root, memeriksa ketiadaannya dan memublikasikan ca_lifecycle.json + NOTES.
+Import dilakukan operator; waktu tercatat adalah pertama kali teramati, bukan
+perkiraan waktu impor. Cek progres paling cepat30menit.
 Receipt CA dan log supervisor di results/bench/api_bppb_100k; tidak ada private key/token.
 
 ```powershell

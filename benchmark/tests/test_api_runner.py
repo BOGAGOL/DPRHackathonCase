@@ -220,3 +220,27 @@ def test_detached_launcher_rejects_untrusted_ca_before_credentials_or_worker(tmp
     record=json.loads((out/'ca_trust.json').read_text(encoding='utf-8-sig'))
     assert record['status']=='OPERATOR_CA_TRUST_REQUIRED' and not record['added_by_launcher']
     assert not (out/'launcher.json').exists() and not (out/'worker.stdout.log').exists()
+
+
+@pytest.mark.skipif(os.name!='nt',reason='Windows certificate cleanup CLI')
+def test_ca_cleanup_verifies_absence_and_preserves_import_receipt(tmp_path):
+    record=tmp_path/'receipt.json'
+    record.write_text(json.dumps({'import_observed_at_wib':'2026-10-29T07:35:00+07:00','trusted_before_run':True}))
+    result=subprocess.run(['powershell.exe','-NoProfile','-NonInteractive','-File',
+        str(r.ROOT/'benchmark/api/ca_cleanup.ps1'),'-Thumbprint','0'*40,'-EvidenceFile',str(record)],
+        capture_output=True,timeout=15)
+    assert result.returncode==0
+    receipt=json.loads(record.read_text(encoding='utf-8-sig'))
+    assert receipt['status']=='REMOVED_VERIFIED' and receipt['removal_verified']
+    assert receipt['present_before_removal'] is False
+    assert receipt['trusted_before_run'] and receipt['import_observed_at_wib']=='2026-10-29T07:35:00+07:00'
+    assert receipt['removal_command']=='Remove-Item Cert:\\CurrentUser\\Root\\'+'0'*40
+
+
+@pytest.mark.skipif(os.name!='nt',reason='Windows certificate cleanup CLI')
+def test_ca_cleanup_rejects_path_injection_without_creating_receipt(tmp_path):
+    record=tmp_path/'receipt.json'
+    result=subprocess.run(['powershell.exe','-NoProfile','-NonInteractive','-File',
+        str(r.ROOT/'benchmark/api/ca_cleanup.ps1'),'-Thumbprint','..\\Root','-EvidenceFile',str(record)],
+        capture_output=True,timeout=15)
+    assert result.returncode!=0 and not record.exists()

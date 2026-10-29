@@ -2,13 +2,9 @@
   "status": "PASSED",
   "at_wib": "2026-10-29T06:47:38.756175+07:00",
   "core_tests": {
-    "passed": 263,
+    "passed": 265,
     "skipped": 2,
-    "evidence": "all_tests.xml",
-    "skips": [
-      "optional disposable OpenBao",
-      "opt-in k6 TLS fixture changing Windows user certificate store"
-    ]
+    "evidence": "all_tests.xml"
   },
   "real_k6_tls_fixture": {
     "passed": 1,
@@ -28,7 +24,7 @@
   "windows_process_guard": "Track actual Python server children and parent identities; stop all owned processes and require port closed before restoring database names.",
   "runtime_gate": "Original OID/content/control/sequence preserved; unknown copy OID refused; restore_failed stops without automatic retry.",
   "copy_preparation_regressions": {
-    "passed": 27,
+    "passed": 29,
     "evidence": "implementation_tests.xml"
   },
   "latest_fixture_attempt": {
@@ -39,11 +35,13 @@
     "official_database_activity": false,
     "future_test_requirement": "DPR_RUN_K6_TLS_FIXTURE=1; certificate subprocesses now bounded to30s"
   },
-  "latest_validation_at_utc": "2026-10-29T00:30:58.661873+00:00",
+  "latest_validation_at_utc": "2026-10-29T00:40:10.610067+00:00",
   "operator_ca_guard": {
     "passed": true,
     "test": "test_detached_launcher_rejects_untrusted_ca_before_credentials_or_worker",
-    "trust_modification_by_launcher": false,
+    "imports_automatically": false,
+    "removes_authorized_lab_ca_after_session": true,
+    "removal_verification": "ca_lifecycle.json",
     "recovery_depends_on_windows_ca_store": false
   },
   "regression_initial_failure": {
@@ -52,5 +50,13 @@
     "failed": 1,
     "skipped": 2,
     "reason": "Existing mocked DB telemetry test has20ms deadline and obtained zero samples during concurrent read-only checksum verification; one repeat after verification263PASS/2SKIP; no production/test change for this failure."
+  },
+  "cleanup_cli_tests": {
+    "passed": 2,
+    "coverage": [
+      "absence verification/idempotence/import receipt preservation on unregistered synthetic thumbprint",
+      "reject path injection before writing evidence"
+    ],
+    "live_lab_ca_removed_during_tests": false
   }
 }
