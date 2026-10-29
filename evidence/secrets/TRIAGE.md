@@ -50,3 +50,22 @@ Bukti: [sebelum triage](gitleaks-history.json),
 [ignore spesifik](../../.gitleaksignore).
 Pemeriksaan plaintext log S06 yang sudah ada: [plaintext-scan.json](plaintext-scan.json).
 Evidence S06 tersebut tidak dijalankan ulang atau diubah pada pekerjaan ini.
+
+## Scan final setelah perubahan remote
+
+Fetch sebelum push menemukan remote submission maju ke
+`0e505216e1cdc68a19581ff66a186ca845150def`. Lima commit pekerjaan ini direbase ke
+remote tersebut tanpa konflik, sesuai instruksi operator. Karena kode yang masuk
+dari remote menambah fitur refresh token, scan riwayat diulang pada revisi hasil
+rebase **`d58a0210a8656e649d4a6bb4d044770ae5da5345`**. Scan pertama di atas tetap
+dipertahankan; hasil final memakai file baru:
+
+- [Sebelum triage final](gitleaks-history-final.json).
+- [Sesudah triage final](gitleaks-history-final-after-triage.json).
+
+Hasil final tetap **46 sebelum / 10 sesudah**, dengan kategori yang sama: 34 digest
+metadata sumber, 1 fixture kontrak, 1 evidence unit pentest-kit, dan 10 temuan
+riwayat akun evaluator. Tidak ada fingerprint baru dan tidak ada akun demo yang
+di-ignore. Gitleaks tetap 8.30.1 dengan `--redact=100`, exit code 1 pada kedua scan.
+Scan final selesai **29 Oktober 2026 22:10:29 WIB** sebelum triage dan
+**22:12:16 WIB** sesudah triage, berdasarkan metadata kedua file laporan baru.
