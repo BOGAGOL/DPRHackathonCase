@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "schema_url": "https://raw.githubusercontent.com/CycloneDX/specification/master/schema/bom-1.6.schema.json",
+  "files": {
+    "frontend-lock.cdx.json": {
+      "passed": true,
+      "error_count": 0,
+      "sha256_lf": "55c308dd2476e0ff394c708d5d8aca5e99ef9943e4a337da64f3878bae78ed7b"
+    },
+    "infrastructure.cdx.json": {
+      "passed": true,
+      "error_count": 0,
+      "sha256_lf": "f58757fdf11f678f68e9da9a9422c61eed58d56beab438f62dd04098929a9aa0"
+    },
+    "python-declared.cdx.json": {
+      "passed": true,
+      "error_count": 0,
+      "sha256_lf": "0ed99a770fb1a84a23c09e754dafe63eabf1f90a6cbda129743ecdc0923cb55b"
+    }
+  },
+  "passed": true,
+  "scope": "CycloneDX JSON schema only; not vulnerability or completeness certification"
+}

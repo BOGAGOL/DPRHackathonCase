@@ -1,158 +1,165 @@
-# Draf laporan teknis — Tim BOGAGOL
+# Draf narasi laporan teknis — Tim BOGAGOL
 
-**Status: DRAF UNTUK REVIEW TIM.** Dokumen ini bahan sumber, bukan laporan PDF final.
-Hasil yang belum tersedia ditandai jelas; ekspor PDF dilakukan setelah angka, sumber,
-scope, atribusi dan persetujuan reviewer dilengkapi.
+**Draf sumber untuk review; bukan PDF final.** Basis kode 4877fc7/main 96c9edb,
+29 Oktober 2026 WIB. Penulis melengkapi identitas, reviewer, caption, format sitasi,
+dan hasil baru yang benar-benar mempunyai evidence. Rincian lengkap ada di
+[CONTEXT.md](CONTEXT.md) dan [peta bukti](10_PETA_BUKTI.md).
 
-## Ringkasan
+## Judul kerja
 
-Prototipe ini mengurangi nilai salinan database melalui assessment per kolom,
-enkripsi field terautentikasi, envelope key per record/domain, pencarian HMAC,
-pembatasan akses, dan backup terenkripsi. Pertanyaan utamanya mencakup kerahasiaan
-salinan data sekaligus keberlangsungan fungsi layanan dan pemulihan. PostgreSQL 18
-dipilih dengan adaptasi dump sintetis panitia; pengujian membedakan scope komponen,
-lab nyata, deployment dan benchmark. Fondasi serta integrasi memiliki bukti, sedangkan
-perbandingan kinerja protected/API, seluruh leakage artefak dan beberapa aspek DR
-masih perlu dilengkapi dari pekerjaan tim. Klaim dibatasi oleh bukti yang dirujuk.
+**Pelindungan Data Pribadi Berbasis Assessment ketika Salinan Database Bocor:
+Envelope Encryption, Pembatasan Akses dan Pengukuran Leakage pada PostgreSQL 18**
 
-## 1. Masalah, data dan prioritas
+Tim BOGAGOL: Alby, Zhafif, Delf. Studi kasus sintetis panitia, bukan sistem resmi
+operasional DPR RI. Persetujuan reviewer manusia: belum dicatat.
 
-Dump sintetis panitia menggambarkan profil anggota: identitas, alamat, kontak,
-rekening dan atribut keluarga. Salinan plaintext membuka informasi tanpa perlu
-mengeksploitasi aplikasi. Dataset sumber berisi 734 baris dan 29 kolom eksplisit,
-tanpa DDL/PK/FK; tim membentuk schema baseline PostgreSQL, menjaga nol awal identifier
-dan aturan NULL, kemudian menghasilkan target protected baru. `legacy_row_id`
-menjaga pelacakan validasi, sedangkan identitas protected memakai UUIDv4.
+## Ringkasan eksekutif
 
-Prioritas ditentukan oleh sifat/kegunaan data, pola identifier, kemungkinan keterkaitan,
-kebutuhan pencarian, dan dampak domain. Data keuangan dipisahkan dari PII; kode_bank
-ikut diproteksi karena dapat menjadi proxy identitas pada sumber. Tiga kolom nama
-identik dicatat sebagai peluang minimisasi, tetapi kontrak migrasi mempertahankan
-semua kolom. Analisis bukan sekadar mematuhi nama/komentar tabel.
+Prototipe mengurangi pemulihan nilai sensitif dari salinan database melalui
+assessment per kolom, enkripsi field terautentikasi, envelope key per record/domain,
+exact search HMAC, kontrol akses dan backup streaming terenkripsi. Profile memuat
+29 kolom: 21 PII dan 4 FIN dienkripsi, empat REF dipertahankan bersama age_band.
+Backend membatasi scope record dan field, sedangkan analis hanya menerima agregat.
 
-Diagram pada [arsitektur](../architecture/README.md) dan [threat model](../security/THREAT_MODEL.md)
-menjelaskan batas data/app/key-plane. Risiko residual tidak disembunyikan oleh istilah
-"enkripsi database" atau "data leak-proof".
+Migrasi 734/100k/1M mempunyai validasi semua field dan record sesuai lingkungan
+buktinya. Pada artefak protected 100k/1M tanpa key, ESCE atas 25 kolom AEAD non-NULL
+adalah 0%. REF, NULL, equality dan inferensi masih tersisa; subset sumber 734
+masih mempunyai k=1. Capability FIN, PII dan search menghasilkan paparan berbeda.
 
-## 2. Tantangan 1 — penemuan dan klasifikasi
+Pada benchmark DB, v2 memperbaiki p95 lookup NIK protected sekitar 51% dibanding
+sesi naive, tetapi keduanya masih gagal target latensi dan throughput. Error rate
+0 lulus. Hasil API masih PLANNED pada snapshot. Recovery layanan nyata dibuktikan
+pada lab 17 record/143 checks, web deployment 100 checks, dan guarded reset VM
+memiliki bukti operator terpisah. Itu belum membuktikan DR seluruh key-plane.
 
-Scanner semiotomatis menggabungkan struktur, nama, isi, pola, kamus, teks bebas,
-statistik dan relasi/atribut turunan. Inventory mencakup lokasi, pola termasking,
-tipe, kelas, risiko, alasan, rekomendasi, kebutuhan akses dan pencarian. Hasil mesin
-perlu direview manusia; klasifikasi bukan keputusan hukum otomatis.
+## 1. Pendahuluan dan ruang lingkup
 
-Acuan evaluasi 29 kolom dijelaskan secara terpisah; surrogate id tidak dimasukkan
-sebagai atribut sumber. Evaluasi raw scanner 1.2 mencatat precision 0,96296, recall
-1,0 dan F1 0,98113 (TP26/FP1/FN0/TN2), dengan label **in-sample**. Uji nama kolom
-disamarkan tersedia; generalisasi ke database lain tidak disimpulkan dari satu tabel.
-Review akhir kelas ambigu dan matriks risiko masih perlu disahkan tim. Bukti E01/E02.
+Salinan plaintext dapat mengungkap data tanpa login aplikasi. Tujuan solusi adalah
+mengurangi nilai salinan tersebut, menjaga layanan sah, mengukur dampaknya, dan
+menyediakan prosedur penerapan. Enkripsi tidak cukup jika aplikasi sekaligus akses
+key dikuasai. Dataset dan prototipe tidak mewakili seluruh operasi instansi nyata.
 
-## 3. Tantangan 2 — nilai data ketika bocor
+PostgreSQL diizinkan soal dengan penjelasan adaptasi. Input 734 INSERT/29 kolom
+tidak mempunyai DDL/PK/FK. Tim membuat schema dan surrogate id, menjaga string,
+nol awal, NULL dan hubungan data. Kontribusi tim adalah menghubungkan assessment
+ke profile, memisahkan domain capability, dan mengukur leakage serta tradeoff
+layanan dengan evidence yang dapat ditelusuri. [B01–B04; R01 h.1]
 
-Setiap record mempunyai DEK PII dan FIN yang berbeda. Nilai sensitif memakai
-AES-256-GCM dengan nonce acak dan AAD yang mengikat tabel, kolom, UUID serta versi.
-DEK dibungkus Transit OpenBao; tabel tidak menyimpan DEK plaintext. Exact lookup
-no_ktp/email/pengguna memakai HMAC sesuai normalisasi kontrak, tanpa hash tanpa kunci
-untuk identifier berentropi rendah. REF dan age_band dipertahankan untuk fungsi agregat.
+## 2. Analisis kondisi awal dan prioritas
 
-Pengujian kripto membuktikan round-trip, tamper/swap fail-closed dan format bersama.
-Namun ini belum menggantikan simulasi artefak kebocoran. Tim perlu memasukkan hasil
-dump tanpa kunci, capability PII/FIN/search, backup tanpa key, dan residual inference
-dari pekerjaan C yang direview. **Status hasil ESCE/DIE/ELS/DBR final pada snapshot
-ini: BELUM LENGKAP.** Jangan menulis 0% leakage seluruh data hanya dari adanya AEAD.
+Jelaskan NIK-like 14 digit, regex yang dapat salah membaca rekening, anomali
+tanggal, tiga nama identik dan keterkaitan alamat/keluarga. kode_bank masuk FIN
+karena dapat menjadi proxy unik meskipun label acuan jenisnya non-pribadi.
+Bedakan kelas hukum, risiko scanner dan domain kripto. Gunakan matriks 29 kolom
+pada [tabel hasil](11_TABEL_HASIL.md), termasuk alasan dan status review manusia.
+Tidak ada kolom dihapus; minimisasi tiga nama baru rekomendasi. [B01–B05]
 
-Blind index membocorkan equality/frequency; REF dan NULL tetap terlihat. Capability
-search dapat mendukung dictionary attack, sedangkan aplikasi dengan kemampuan
-decrypt yang dikuasai bersama tidak lagi dijamin rahasia. Bukti E02/E03, rencana di
-[indeks evidence](../evidence_index.md).
+## 3. Arsitektur dan threat model
 
-## 4. Tantangan 3 — at rest, in transit, in use
+![Arsitektur sistem](assets/architecture.png)
 
-At rest: field sensitif pada protected dienkripsi, backup di-stream ke enkripsi
-terpisah dengan manifest HMAC. Source/baseline plaintext, metadata, log, file fisik
-dan WAL mempunyai batas berbeda. Tidak ada klaim full-disk encryption atau bahwa
-salinan seluruh instance lab tidak mengandung plaintext.
+Browser, web/API, DB, key-plane, operator dan arsip mempunyai batas berbeda.
+DB menyimpan ciphertext dan wrapped DEK. Aplikasi sah mempunyai kemampuan unwrap
+dan harus menegakkan hak field. Principal RLS dapat diubah pemegang credential
+app_user. Pemisahan kewenangan bukan jaminan terhadap kompromi OS/DB/Bao bersamaan.
+Tabel ancaman mencakup dump, capability PII/FIN/search, tamper, IDOR dan key loss.
+[B01,B15,B24]
 
-In transit: browser/frontend/API menggunakan HTTPS; API-PostgreSQL verify-full
-dengan CA; OpenBao TLS dan CA eksplisit. CA/hostname salah diuji pada lab. Baseline
-benchmark mempunyai pengecualian non-TLS terbatas agar kondisi awal tetap setara,
-bukan konfigurasi yang berlaku pada protected/restore atau aplikasi produksi.
+## 4. T1 — penemuan dan assessment
 
-In use: backend memeriksa peran, scope record dan field, mendekripsi yang diperlukan,
-melakukan masking dan merilis DTO minimal. DEK/cache dibatasi TTL/ukuran, tetapi
-zeroization seluruh salinan Python/OS tidak dijamin. Kunci dan data dipisahkan
-secara kewenangan, bukan otomatis tahan administrator OS yang berkuasa.
+Scanner menggabungkan struktur/nama/isi/pola/kamus/statistik/relasi, dengan inventory
+termasking. Evaluasi 29 label mengecualikan surrogate id. Raw v1.2 precision 96,30%,
+recall 100%, F1 98,11%, in-sample. Regex-only recall 42,31% walaupun precision 100%.
+False positive kode_bank dan ketidakcocokan type tetap dilaporkan. Hasil satu tabel
+bukan generalisasi semua instansi atau persetujuan hukum otomatis. [B02,B03]
 
-Unseal manual, token policy TTL, revokasi migrasi dan rotasi tersedia. Rotasi lab
-Alby membuktikan seluruh 100.734 wrapper PII akhirnya versi target v2 dengan nilai
-tetap; tidak menetapkan versi semua VM. DR key-plane lintas mesin masih rencana.
+## 5. T2 — pengurangan nilai salinan bocor
 
-## 5. Tantangan 4 — backend dan frontend
+AES-256-GCM memakai nonce acak 12 byte, AAD record/kolom/versi, DEK 32 byte per
+record/domain dan Transit wrap. NULL tetap NULL dan dekripsi gagal tertutup.
+HMAC pada tiga kolom memberi exact lookup dengan residual equality/dictionary.
+Sajikan format v1, alasan remote HMAC dan pemisahan PII/FIN. [B01,B06]
 
-Service App menyediakan enam peran dengan autentikasi Argon2id, secure/httpOnly/
-SameSite cookie, CSRF, validasi, parameterisasi, role minimum dan audit metadata.
-Frontend tidak memutuskan hak atas nilai lengkap yang disembunyikan; backend memakai
-allowlist DTO dan masking. Browser storage dan raw JSON diperiksa pada scope pengujian.
+Masukkan tabel sepuluh skenario leakage dua skala dengan numerator/denominator.
+No-key ESCE 0 tidak berarti metadata hilang. PII sekitar 83,67%, FIN 16,33% dan
+search 12,24% sel AEAD pulih pada model capability tersebut. Ketiganya dapat
+DIE 100%; FIN sendiri membawa identifier. Kamus lengkap sintetis merupakan batas
+atas. Residual proyeksi 1–3 atribut populasi penuh mempunyai minimum k 136/1362,
+tetapi sumber 734 tetap k=1. [B22,B23]
 
-RLS pada protected memakai principal transaksi dan access_scope. Pencuri credential
-app_user dapat mengganti setting principal, sehingga RLS bukan pengganti otorisasi.
-Analyst tidak mendapat raw table/view: analyst_summary merilis lima marginal dengan
-count>=5, tanpa label kelompok kecil. Filter cohort lama ditolak dan total API null.
-Suppression marginal bukan differential privacy atau k-anonymity gabungan.
+## 6. T3 — at rest, in transit dan in use
 
-Acceptance setelah A5 mencatat 143 pemeriksaan pada lab 17 record buatan sendiri
-dengan PostgreSQL/OpenBao TLS, backend/frontend dan Chrome nyata setelah restore.
-Deployment web diuji 100 pemeriksaan menggunakan enam akun, tanpa SSH atau mutasi
-anggota. Identitas commit dan konfigurasi SQL/TLS internal VM tidak diklaim terinspeksi
-langsung. Bukti E09–E12 menjelaskan pembatasannya.
+Field protected dan backup dilindungi, sedangkan seluruh disk/WAL/log/temp atau
+instance yang masih membawa baseline plaintext tidak otomatis terlindungi.
+Browser HTTPS, DB verify-full dan Bao CA/hostname memverifikasi transport.
+Pengecualian baseline hanya bench/scanner dari alamat terkontrol. In use membatasi
+field/DTO/scope dan app cache OFF; zeroization Python tidak dijamin. [B01,B24]
 
-## 6. Tantangan 5 — metode dan hasil pengujian
+Unseal manual dua dari tiga share, token policy TTL, revokasi dan rotasi wrapper
+tersedia. Rotasi lab 100.734 wrapper PII v1→v2 mempertahankan nilai field; bukan
+bukti semua VM/1M telah dirotasi. DR key-plane lintas mesin tetap terbuka. [B10]
 
-Pisahkan eksperimen DB dan API, gunakan dataset/hardware/workload sebanding,
-minimal tiga pengulangan, raw yang dipertahankan, median antar-run, serta target
-yang ditetapkan sebelum eksperimen. Ukur p50/p95, throughput, error, CPU/RAM, storage
-dan backup/restore, termasuk biaya crypto dan komunikasi yang dilindungi.
+## 7. T4 — backend dan frontend
 
-| Bagian | Hasil yang tersedia | Status |
-|---|---|---|
-| Scanner | E01, evaluasi in-sample | TERUJI dengan batas |
-| Kripto/migrasi | E03–E06, format dan all-rows validation sesuai laporan | TERUJI sesuai dataset/laptop |
-| Backup/restore | E07/E10, integritas, dua mode, cutover aplikasi lab | TERUJI sesuai scope |
-| Akses/browser | E09–E12 | TERUJI sesuai scope |
-| Baseline awal | E13, DB plain 100k/1m | TERUJI; bukan perbandingan after |
-| Protected/API official comparison | Belum lengkap pada snapshot | BELUM DIUJI/LENGKAPI |
-| Leakage semua capability/artefak | Pekerjaan C belum tergabung lengkap | PARSIAL |
+Jelaskan enam role, assignment sintetis, scope record/field, Argon2id, sesi/CSRF,
+query berparameter, input strict, cookie Secure/HttpOnly/SameSite, CSP/no-store dan
+audit metadata. Analis hanya analyst_summary, lima marginal dengan count>=5,
+total=null dan filter cohort ditolak. Tampilkan negative tests akses tabel/view
+mentah, record asing dan field finansial yang terlarang. [B11–B15]
 
-**Tabel angka kinerja final belum diisi.** Ambil hanya dari hasil before/after yang
-direview bersama raw, commit, dataset, konfigurasi, jumlah run dan status target.
-Hasil gagal tetap dilaporkan; jangan melonggarkan target setelah melihat hasil.
+Masking runtime B berbeda dari toolkit/contoh panitia. Jelaskan variasi itu;
+jangan menyatakan semua tampilan memakai contoh yang sama atau bahwa masking
+adalah enkripsi. Field yang sah dirilis memang dapat dibaca penerimanya.
 
-## 7. Tantangan 6 — penerapan bertahap dan recovery
+## 8. T5 — metode dan hasil pengujian
 
-Urutan penerapan: assessment dan review profile; TLS/key-plane/least privilege;
-baseline; migrasi target baru; validasi; akun/scope dan acceptance; cutover;
-backup/restore; retensi/rotasi/audit; pengukuran ulang. Prasyarat/resource,
-rollback dan pekerjaan kustodian ada di [operasional](../operations/OPERATIONS.md).
+### Desain eksperimen
 
-Restore memverifikasi manifest/digest/frame sebelum membuat DB baru. Tanpa akses
-OpenBao field tetap ciphertext; dengan capability sah aplikasi dapat dipulihkan
-sesuai marker/role/RLS/TLS. Backup lama tetap memuat data yang kemudian dihapus
-sampai retensinya selesai. Kehilangan backup key/HMAC atau key-plane dapat membuat
-data tidak terbuka, sehingga escrow dan drill lintas mesin harus direncanakan.
+DB 100k/1M, hardware/workload/corpus sebanding, dua sesi naive/v2 masing-masing
+112 run, dua blok B-P-P-B dan empat ulangan per mode/skenario. Delapan worker,
+60 detik ukur/10 detik warmup, tulisan rollback, pemeriksaan checksum/sequence,
+guard AC serta resource sampling. Gunakan median per-run dan commit historis
+kode yang benar-benar diukur. [B16–B21]
 
-Kebutuhan biaya/resource belum diekstrapolasi ke produksi. Instansi perlu menghitung
-compute, storage/WAL, salinan backup/restore, latensi Transit, kustodian dan waktu
-pemulihan berdasarkan beban nyata. Tidak ada angka rupiah yang dikarang di sini.
+### Hasil
 
-## 8. Keterbatasan, simpulan dan lampiran
+Masukkan p50/p95, throughput, error, CPU, RAM, storage dan backup/restore. Semua
+skenario pada kedua skala DB gagal P01/P01A/P02, lulus P03. Contoh NIK 100k v2:
+p95 B 5,4945 ms/P 37,7337 ms; throughput 2492,10/300,45 req/s. Optimasi v2 adalah
+perbandingan sekunder antarsesi; jangan mengganti pasangan B/P resminya. db_time
+adalah mean execution SQL per request, bukan p95 server atau biaya AES murni.
+[B17,B18]
 
-Lihat [daftar keterbatasan](../security/LIMITATIONS.md). Prototipe mempunyai fondasi
-dan bukti komponen/integrasi, tetapi keberhasilan komprehensif harus dibatasi oleh
-scope dan pekerjaan yang belum selesai. Nilai inovasi terletak pada assessment
-yang mengendalikan perlindungan, pemisahan blast radius, dan bukti yang bisa ditinjau,
-bukan klaim "kebocoran tidak mungkin berarti apa-apa" tanpa batas.
+143 checks lab, 100 checks web, 31 checks SQL A5 dan 65 VM reset smoke adalah bukti
+terpisah. Backup protected 100k 11,376413 s/165.999.475 byte dan restore 16,415305 s
+adalah satu hasil operasional, bukan median tiga run. Backup/restore baseline 1M
+aktif memakai pengganti AC 33,390723/47,396286 s; percobaan terdampak tetap disimpan.
+API masih PLANNED: dua ulangan rencana kurang dari minimum tiga, GET saja dan
+belum ada hasil ukur. [B09,B11–B14,B16,B20]
 
-Lampiran: inventory/ground truth, matriks risiko, kontrak/vector, evidence index,
-diagram/threat model, runbook reproduksi/recovery, SBOM/atribusi, pernyataan AI dan
-manifest paket. Finalisasi sumber, caption/angka, reviewer, PDF dan slide sesuai
-[checklist](../submission/CHECKLIST.md). Referensi utama ada di [SOURCES](../submission/SOURCES.md).
+## 9. T6 — penerapan, operasi dan pemulihan
+
+Ikuti assessment → TLS/key/role → migrasi baru dan validasi → akun/scope/A5 →
+acceptance → cutover → backup/rotasi/retensi → evaluasi. Sertakan prasyarat,
+environment privat, perintah, checkpoint/resume, rollback dan restore ke DB baru.
+GCM terframe/HMAC memakai key terpisah. Tanpa Bao nilai tetap ciphertext;
+dengan Bao smoke decrypt lulus, tetapi layanan perlu akun/marker/API/UI juga.
+[B07–B10,B24]
+
+Storage snapshot 1M: baseline 825.194.175 byte, protected 2.210.617.023 byte,
+rasio sekitar 2,679×. Rencanakan WAL/index/raw/backup/clone/headroom; biaya produksi,
+RPO/RTO dan rupiah belum tervalidasi. Custody key, certificate renewal dan purge
+arsip tetap membutuhkan operator dan drill. [B08]
+
+## 10. Keterbatasan, simpulan dan lampiran
+
+Gunakan [batas klaim](08_KETERBATASAN_DAN_REVIEW.md) seluruhnya. Tekankan residual
+REF/equality/NULL, FIN/search, principal RLS, OS/memori, scope scanner/acceptance,
+kegagalan target DB/API pending, masking runtime, log/history/physical WAL dan DR.
+Pemisahan kemampuan dan enkripsi mengurangi pemulihan nilai tanpa key pada scope
+bukti, tetapi belum menghilangkan seluruh inferensi atau memenuhi target performa.
+
+Gunakan [referensi](09_REFERENSI_DAN_ATRIBUSI.md), [peta bukti](10_PETA_BUKTI.md),
+[tabel hasil](11_TABEL_HASIL.md), assets/, tables/ dan appendix/sbom/. Laporan tidak
+memuat dump, credential, unseal key atau nilai anggota lengkap. PDF dan slide final
+memerlukan review manusia serta pemeriksaan tata letak terpisah.

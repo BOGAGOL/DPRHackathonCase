@@ -1,0 +1,17 @@
+scale,column,storage,equality_classes,largest_class,non_null_cells
+100k,jenis_kelamin,plaintext,2,50133,100000
+100k,pekerjaan_terakhir,plaintext,6,19757,100000
+100k,nama_kppn,plaintext,5,22210,100000
+100k,nama_bank,plaintext,4,26288,100000
+100k,age_band,plaintext,5,21896,100000
+100k,no_ktp_bidx,blind_index,100000,1,100000
+100k,email_bidx,blind_index,100000,1,100000
+100k,pengguna_bidx,blind_index,100000,1,100000
+1m,jenis_kelamin,plaintext,2,501371,1000000
+1m,pekerjaan_terakhir,plaintext,6,197556,1000000
+1m,nama_kppn,plaintext,5,222075,1000000
+1m,nama_bank,plaintext,4,262946,1000000
+1m,age_band,plaintext,5,218053,1000000
+1m,no_ktp_bidx,blind_index,1000000,1,1000000
+1m,email_bidx,blind_index,1000000,1,1000000
+1m,pengguna_bidx,blind_index,1000000,1,1000000

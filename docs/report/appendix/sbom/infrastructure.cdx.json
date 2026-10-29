@@ -1,0 +1,67 @@
+{
+  "$schema": "https://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:384663b0-dc4a-5227-9a6c-9100feaffbd3",
+  "version": 1,
+  "metadata": {
+    "component": {
+      "type": "application",
+      "bom-ref": "dpr-project",
+      "name": "DPR Data Protection Prototype",
+      "version": "contract-v1"
+    },
+    "properties": [
+      {
+        "name": "dpr:inventory-scope",
+        "value": "Compose image references; no OS packages or resolved image digests"
+      },
+      {
+        "name": "dpr:input-sha256-lf",
+        "value": "{\"app/requirements.txt\": \"850be532384067203e5ef58cf39ce6773fd3f68129caa870ebfa5247e979090d\", \"app/web/package-lock.json\": \"0fe5b23a861095b033e8ec1755ab2ee6b530bccb8459b3b65d731048682ea2da\", \"benchmark/requirements.txt\": \"ce6ca2dfdbfc57315ac12882a72210b1de1e4a5d62b2f7647aab69e1f358c08d\", \"datagen/requirements.txt\": \"ccbd0aadc5c500ee0c564f6ee412a3400b898f62a1646ec028f2e0861259c0ee\", \"infra/compose.yaml\": \"2878d855b2fc646c4db5844848b80a28456990e1ea684665a5f3a2cc41d41ff5\", \"infra/requirements.txt\": \"357fa7659f9a9c5a0201e097ee8694253028104f249cd55686293e7536c95c74\", \"infra/submission/requirements.txt\": \"7e1c5884438d533e8f05d6cfc5b973f9e251efb63329d9fe69579e58fcd4d823\", \"infra/tests/compose.postgres.yaml\": \"7686613708c67c8175562e70cc0fa2d342785a969b012653a257f457211b3cb3\", \"infra/vm/compose.yaml\": \"21d4c882419302c39dee3e65ed822b9eda9f92c12944741b8357dbf4540a0dbc\", \"scanner/requirements.txt\": \"eace95fccd2cefee5dff40caad7345003b68515f0e0c7a65ff82346fcf33b7db\", \"toolkit/pyproject.toml\": \"9e922ee67992ce44d3b444b5821e36fb271096b4abb417af1b6a026775c33e30\", \"verify/requirements.txt\": \"d3dbafca3284f762517b37006ce3d704b28ea97100f3be0643134fc5d64ffae4\"}"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "container",
+      "bom-ref": "image:openbao/openbao:2.5.5",
+      "name": "openbao/openbao",
+      "version": "2.5.5",
+      "properties": [
+        {
+          "name": "dpr:image-reference",
+          "value": "openbao/openbao:2.5.5"
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "infra/compose.yaml:openbao;infra/vm/compose.yaml:openbao"
+        },
+        {
+          "name": "dpr:resolved-image-digest",
+          "value": "NOT_CAPTURED"
+        }
+      ]
+    },
+    {
+      "type": "container",
+      "bom-ref": "image:postgres:18",
+      "name": "postgres",
+      "version": "18",
+      "properties": [
+        {
+          "name": "dpr:image-reference",
+          "value": "postgres:18"
+        },
+        {
+          "name": "dpr:declared-in",
+          "value": "infra/vm/compose.yaml:postgres;infra/vm/compose.yaml:bao-volume;infra/tests/compose.postgres.yaml:postgres"
+        },
+        {
+          "name": "dpr:resolved-image-digest",
+          "value": "NOT_CAPTURED"
+        }
+      ]
+    }
+  ]
+}

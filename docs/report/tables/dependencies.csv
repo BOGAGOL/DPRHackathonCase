@@ -1,0 +1,139 @@
+ecosystem,name,declared_version,constraint,declared_in
+Python,argon2-cffi,UNRESOLVED_RANGE,"<26,>=25.1.0",infra/requirements.txt
+Python,argon2-cffi,25.1.0,==25.1.0,app/requirements.txt;benchmark/requirements.txt
+Python,cryptography,UNRESOLVED_RANGE,"<47,>=46.0.3",infra/requirements.txt
+Python,cryptography,UNRESOLVED_RANGE,"<47,>=46.0.5",toolkit/pyproject.toml:runtime
+Python,cryptography,46.0.7,==46.0.7,benchmark/requirements.txt;verify/requirements.txt
+Python,fastapi,0.134.0,==0.134.0,app/requirements.txt
+Python,httpx,UNRESOLVED_RANGE,"<0.29,>=0.28.1",toolkit/pyproject.toml:runtime
+Python,httpx,0.28.1,==0.28.1,app/requirements.txt;benchmark/requirements.txt;verify/requirements.txt
+Python,jinja2,3.1.6,==3.1.6,scanner/requirements.txt;verify/requirements.txt
+Python,packaging,UNRESOLVED_RANGE,"<27,>=24",infra/submission/requirements.txt
+Python,psutil,UNRESOLVED_RANGE,"<8,>=7.2.2",infra/requirements.txt
+Python,psutil,7.2.2,==7.2.2,benchmark/requirements.txt
+Python,psycopg,UNRESOLVED_RANGE,"<4,>=3.3.3",infra/requirements.txt
+Python,psycopg,3.3.3,==3.3.3,app/requirements.txt
+Python,psycopg,3.3.6,==3.3.6,benchmark/requirements.txt;datagen/requirements.txt;scanner/requirements.txt;verify/requirements.txt
+Python,pydantic,2.12.5,==2.12.5,app/requirements.txt
+Python,pytest,UNRESOLVED_RANGE,"<10,>=8",infra/requirements.txt;toolkit/pyproject.toml:test
+Python,pytest,8.4.2,==8.4.2,benchmark/requirements.txt;datagen/requirements.txt;scanner/requirements.txt;verify/requirements.txt
+Python,pytest,9.0.2,==9.0.2,app/requirements.txt
+Python,pyyaml,UNRESOLVED_RANGE,"<7,>=6",infra/requirements.txt;infra/submission/requirements.txt
+Python,pyyaml,6.0.3,==6.0.3,benchmark/requirements.txt;scanner/requirements.txt;verify/requirements.txt
+Python,setuptools,UNRESOLVED_RANGE,>=77,toolkit/pyproject.toml:build
+Python,sqlalchemy,2.0.47,==2.0.47,app/requirements.txt
+Python,uvicorn,0.41.0,==0.41.0,app/requirements.txt
+npm lock,@alloc/quick-lru,5.3.0,lockfile,app/web/package-lock.json
+npm lock,@emnapi/runtime,1.11.3,lockfile,app/web/package-lock.json
+npm lock,@hookform/resolvers,5.2.2,lockfile,app/web/package-lock.json
+npm lock,@img/colour,1.1.0,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-darwin-arm64,0.35.5,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-darwin-x64,0.35.5,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-freebsd-wasm32,0.35.5,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-libvips-darwin-arm64,1.3.4,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-libvips-darwin-x64,1.3.4,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-libvips-linux-arm,1.3.4,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-libvips-linux-arm64,1.3.4,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-libvips-linux-ppc64,1.3.4,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-libvips-linux-riscv64,1.3.4,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-libvips-linux-s390x,1.3.4,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-libvips-linux-x64,1.3.4,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-libvips-linuxmusl-arm64,1.3.4,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-libvips-linuxmusl-x64,1.3.4,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-linux-arm,0.35.5,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-linux-arm64,0.35.5,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-linux-ppc64,0.35.5,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-linux-riscv64,0.35.5,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-linux-s390x,0.35.5,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-linux-x64,0.35.5,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-linuxmusl-arm64,0.35.5,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-linuxmusl-x64,0.35.5,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-wasm32,0.35.5,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-webcontainers-wasm32,0.35.5,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-win32-arm64,0.35.5,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-win32-ia32,0.35.5,lockfile,app/web/package-lock.json
+npm lock,@img/sharp-win32-x64,0.35.5,lockfile,app/web/package-lock.json
+npm lock,@jridgewell/gen-mapping,0.3.13,lockfile,app/web/package-lock.json
+npm lock,@jridgewell/remapping,2.3.5,lockfile,app/web/package-lock.json
+npm lock,@jridgewell/resolve-uri,3.1.2,lockfile,app/web/package-lock.json
+npm lock,@jridgewell/sourcemap-codec,1.6.0,lockfile,app/web/package-lock.json
+npm lock,@jridgewell/trace-mapping,0.3.31,lockfile,app/web/package-lock.json
+npm lock,@next/env,16.4.2,lockfile,app/web/package-lock.json
+npm lock,@next/swc-darwin-arm64,16.4.2,lockfile,app/web/package-lock.json
+npm lock,@next/swc-darwin-x64,16.4.2,lockfile,app/web/package-lock.json
+npm lock,@next/swc-linux-arm64-gnu,16.4.2,lockfile,app/web/package-lock.json
+npm lock,@next/swc-linux-arm64-musl,16.4.2,lockfile,app/web/package-lock.json
+npm lock,@next/swc-linux-x64-gnu,16.4.2,lockfile,app/web/package-lock.json
+npm lock,@next/swc-linux-x64-musl,16.4.2,lockfile,app/web/package-lock.json
+npm lock,@next/swc-win32-arm64-msvc,16.4.2,lockfile,app/web/package-lock.json
+npm lock,@next/swc-win32-x64-msvc,16.4.2,lockfile,app/web/package-lock.json
+npm lock,@playwright/test,1.58.2,lockfile,app/web/package-lock.json
+npm lock,@radix-ui/react-compose-refs,1.1.2,lockfile,app/web/package-lock.json
+npm lock,@radix-ui/react-slot,1.2.4,lockfile,app/web/package-lock.json
+npm lock,@standard-schema/utils,0.3.0,lockfile,app/web/package-lock.json
+npm lock,@swc/helpers,0.5.23,lockfile,app/web/package-lock.json
+npm lock,@tailwindcss/node,4.2.1,lockfile,app/web/package-lock.json
+npm lock,@tailwindcss/oxide,4.2.1,lockfile,app/web/package-lock.json
+npm lock,@tailwindcss/oxide-android-arm64,4.2.1,lockfile,app/web/package-lock.json
+npm lock,@tailwindcss/oxide-darwin-arm64,4.2.1,lockfile,app/web/package-lock.json
+npm lock,@tailwindcss/oxide-darwin-x64,4.2.1,lockfile,app/web/package-lock.json
+npm lock,@tailwindcss/oxide-freebsd-x64,4.2.1,lockfile,app/web/package-lock.json
+npm lock,@tailwindcss/oxide-linux-arm-gnueabihf,4.2.1,lockfile,app/web/package-lock.json
+npm lock,@tailwindcss/oxide-linux-arm64-gnu,4.2.1,lockfile,app/web/package-lock.json
+npm lock,@tailwindcss/oxide-linux-arm64-musl,4.2.1,lockfile,app/web/package-lock.json
+npm lock,@tailwindcss/oxide-linux-x64-gnu,4.2.1,lockfile,app/web/package-lock.json
+npm lock,@tailwindcss/oxide-linux-x64-musl,4.2.1,lockfile,app/web/package-lock.json
+npm lock,@tailwindcss/oxide-wasm32-wasi,4.2.1,lockfile,app/web/package-lock.json
+npm lock,@tailwindcss/oxide-win32-arm64-msvc,4.2.1,lockfile,app/web/package-lock.json
+npm lock,@tailwindcss/oxide-win32-x64-msvc,4.2.1,lockfile,app/web/package-lock.json
+npm lock,@tailwindcss/postcss,4.2.1,lockfile,app/web/package-lock.json
+npm lock,@types/node,24.10.1,lockfile,app/web/package-lock.json
+npm lock,@types/react,19.2.14,lockfile,app/web/package-lock.json
+npm lock,@types/react-dom,19.2.3,lockfile,app/web/package-lock.json
+npm lock,baseline-browser-mapping,2.11.31,lockfile,app/web/package-lock.json
+npm lock,caniuse-lite,1.0.30001819,lockfile,app/web/package-lock.json
+npm lock,class-variance-authority,0.7.1,lockfile,app/web/package-lock.json
+npm lock,client-only,0.0.1,lockfile,app/web/package-lock.json
+npm lock,clsx,2.1.1,lockfile,app/web/package-lock.json
+npm lock,csstype,3.2.3,lockfile,app/web/package-lock.json
+npm lock,detect-libc,2.1.2,lockfile,app/web/package-lock.json
+npm lock,enhanced-resolve,5.26.0,lockfile,app/web/package-lock.json
+npm lock,fsevents,2.3.2,lockfile,app/web/package-lock.json
+npm lock,graceful-fs,4.2.11,lockfile,app/web/package-lock.json
+npm lock,jiti,2.7.0,lockfile,app/web/package-lock.json
+npm lock,lightningcss,1.31.1,lockfile,app/web/package-lock.json
+npm lock,lightningcss-android-arm64,1.31.1,lockfile,app/web/package-lock.json
+npm lock,lightningcss-darwin-arm64,1.31.1,lockfile,app/web/package-lock.json
+npm lock,lightningcss-darwin-x64,1.31.1,lockfile,app/web/package-lock.json
+npm lock,lightningcss-freebsd-x64,1.31.1,lockfile,app/web/package-lock.json
+npm lock,lightningcss-linux-arm-gnueabihf,1.31.1,lockfile,app/web/package-lock.json
+npm lock,lightningcss-linux-arm64-gnu,1.31.1,lockfile,app/web/package-lock.json
+npm lock,lightningcss-linux-arm64-musl,1.31.1,lockfile,app/web/package-lock.json
+npm lock,lightningcss-linux-x64-gnu,1.31.1,lockfile,app/web/package-lock.json
+npm lock,lightningcss-linux-x64-musl,1.31.1,lockfile,app/web/package-lock.json
+npm lock,lightningcss-win32-arm64-msvc,1.31.1,lockfile,app/web/package-lock.json
+npm lock,lightningcss-win32-x64-msvc,1.31.1,lockfile,app/web/package-lock.json
+npm lock,lucide-react,0.577.0,lockfile,app/web/package-lock.json
+npm lock,magic-string,0.30.21,lockfile,app/web/package-lock.json
+npm lock,nanoid,3.3.20,lockfile,app/web/package-lock.json
+npm lock,next,16.4.2,lockfile,app/web/package-lock.json
+npm lock,postcss,8.5.23,lockfile,app/web/package-lock.json
+npm lock,picocolors,1.1.1,lockfile,app/web/package-lock.json
+npm lock,playwright,1.58.2,lockfile,app/web/package-lock.json
+npm lock,playwright-core,1.58.2,lockfile,app/web/package-lock.json
+npm lock,postcss,8.5.31,lockfile,app/web/package-lock.json
+npm lock,react,19.3.1,lockfile,app/web/package-lock.json
+npm lock,react-dom,19.3.1,lockfile,app/web/package-lock.json
+npm lock,react-hook-form,7.71.2,lockfile,app/web/package-lock.json
+npm lock,scheduler,0.28.0,lockfile,app/web/package-lock.json
+npm lock,semver,7.8.5,lockfile,app/web/package-lock.json
+npm lock,sharp,0.35.5,lockfile,app/web/package-lock.json
+npm lock,source-map-js,1.2.2,lockfile,app/web/package-lock.json
+npm lock,styled-jsx,5.1.6,lockfile,app/web/package-lock.json
+npm lock,tailwind-merge,3.5.0,lockfile,app/web/package-lock.json
+npm lock,tailwindcss,4.2.1,lockfile,app/web/package-lock.json
+npm lock,tapable,2.3.3,lockfile,app/web/package-lock.json
+npm lock,tslib,2.8.1,lockfile,app/web/package-lock.json
+npm lock,typescript,5.9.3,lockfile,app/web/package-lock.json
+npm lock,undici-types,7.16.0,lockfile,app/web/package-lock.json
+npm lock,zod,4.6.7,lockfile,app/web/package-lock.json

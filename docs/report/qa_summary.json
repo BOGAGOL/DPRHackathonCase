@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "status": "PASSED_FOR_REPORT_CONTEXT_SCOPE",
+  "basis_commit": "4877fc7395f0f8dc9a118bbd2330313bdab12629",
+  "pdf_sources_rechecked": 2,
+  "relevant_pdf_pages_visually_checked": [
+    "R01 page 4",
+    "R02 page 7"
+  ],
+  "context_words": 12184,
+  "source_hashes_checked": 89,
+  "chapters": 11,
+  "columns": 29,
+  "db_benchmark_comparisons": 28,
+  "leakage_cases": 10,
+  "python_declarations": 24,
+  "npm_lock_entries": 114,
+  "container_references": 2,
+  "cyclonedx_schema_valid_files": 3,
+  "tests": {
+    "passed": 10,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "credential_pattern_screen": {
+    "findings": [],
+    "scope": "Conservative token/private-key patterns in report files only; no full Git-history, active-secret lookup or complete PII scan"
+  },
+  "database_server_configuration_changed": false,
+  "new_benchmark_or_deployment_test_run": false,
+  "zip_or_final_pdf_created": false,
+  "human_review_completed": false,
+  "deliverable_scope": "Report context, derivation tables, diagrams, declared SBOM, draft and requirements mapping only"
+}
