@@ -14,7 +14,10 @@ def main(argv=None):
     parser.add_argument("--data", type=Path, default=os.environ.get("DPR_DEMO_DATA", str(ROOT / "sql/baseline/02_data.sql")))
     parser.add_argument("--native-pg-bin", type=Path)
     parser.add_argument("--native-bao-bin", type=Path)
+    parser.add_argument("--demo-seconds", type=int, help="Optional bounded demo lifetime for automated smoke checks")
     args = parser.parse_args(argv)
+    if args.demo_seconds is not None and not 1 <= args.demo_seconds <= 86400:
+        parser.error("--demo-seconds must be 1..86400")
     if sys.version_info < (3, 11):
         parser.error("Python 3.11+ required")
     try:

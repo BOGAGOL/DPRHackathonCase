@@ -361,8 +361,9 @@ def run(args):
                     print("Private accounts: " + str(stack.root / "service-b/service-b-protected-accounts.json"), flush=True)
                     print("Local browser CA: " + str(stack.root / "tls/ca.crt"), flush=True)
                     print("Ctrl+C stops ONLY this demo. Runtime token expires after 1 hour.", flush=True)
+                    deadline = time.monotonic() + args.demo_seconds if args.demo_seconds else None
                     try:
-                        while True:
+                        while deadline is None or time.monotonic() < deadline:
                             time.sleep(1)
                     except KeyboardInterrupt:
                         pass

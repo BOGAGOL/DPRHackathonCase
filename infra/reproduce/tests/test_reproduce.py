@@ -125,6 +125,8 @@ def test_cli_setup_and_test_paths(monkeypatch):
     monkeypatch.setattr(cli, "test", lambda: 3)
     assert main(["setup"]) == 0 and called == ["setup"]
     assert main(["test"]) == 3
+    with pytest.raises(SystemExit):
+        main(["demo", "--demo-seconds", "0"])
 
 
 def test_native_backup_uses_same_auth_bind_guard(tmp_path, monkeypatch):
