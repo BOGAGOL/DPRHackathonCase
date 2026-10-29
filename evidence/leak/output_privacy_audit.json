@@ -1,0 +1,33 @@
+{
+  "status": "PASSED",
+  "timestamp_utc": "2026-10-27T13:22:19.415052+00:00",
+  "files_checked": [
+    "evidence/benchmark/runner_overhead.json",
+    "evidence/leak/baseline_dump.json",
+    "evidence/leak/baseline_dump_scanner/features.json",
+    "evidence/leak/baseline_dump_scanner/inventory.csv",
+    "evidence/leak/baseline_dump_scanner/k_anonymity.json",
+    "evidence/leak/baseline_dump_scanner/relations.json",
+    "evidence/leak/baseline_dump_scanner/report.html",
+    "evidence/leak/baseline_dump_scanner/run_meta.json",
+    "evidence/leakage/baseline_dump.json",
+    "evidence/leakage/before_after.csv",
+    "evidence/leakage/protected_pending.json",
+    "evidence/leakage/residual_before.json"
+  ],
+  "known_rows": 1000000,
+  "non_null_sensitive_cells_length_at_least_6_checked": 19196186,
+  "exact_unmasked_field_matches_by_column": {},
+  "public_metadata_exceptions": [
+    {
+      "file": "residual_before.json",
+      "field": "age_band.reference_date",
+      "reason": "public fixed methodological reference date, not a recovered row"
+    }
+  ],
+  "method": "hash-set equality against JSON primitive strings, CSV fields and HTML text nodes",
+  "limitations": [
+    "Only enumerated evidence outputs; not repo history, logs, WAL or secret scanning.",
+    "Does not search arbitrary embedded substrings or short categorical values; not a full S06 claim."
+  ]
+}

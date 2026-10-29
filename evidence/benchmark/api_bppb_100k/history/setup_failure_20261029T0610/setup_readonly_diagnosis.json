@@ -1,0 +1,22 @@
+{
+  "at_utc": "2026-10-28T23:37:43.345064+00:00",
+  "scope": "read-only connection/privilege diagnostics after restoration; no setup retry",
+  "databases": {
+    "baseline_100k": {
+      "app_connect_privilege": false,
+      "app_public_usage": false,
+      "users_table_exists": false,
+      "app_tls_login": false,
+      "error_type": "OperationalError",
+      "sqlstate": null
+    },
+    "protected_100k": {
+      "app_connect_privilege": true,
+      "app_public_usage": true,
+      "users_table_exists": false,
+      "app_tls_login": true,
+      "role": "app_user",
+      "ssl": true
+    }
+  }
+}

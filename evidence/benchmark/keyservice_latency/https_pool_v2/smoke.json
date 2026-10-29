@@ -1,0 +1,1145 @@
+{
+  "kind": "nonofficial_smoke",
+  "started_at_utc": "2026-10-28T13:02:05.153321+00:00",
+  "passed": true,
+  "http_transport": "https_pool",
+  "workload_token": {
+    "policy": "svc-app",
+    "ttl_seconds": 14400,
+    "new_4h_token_issued": true,
+    "at_utc": "2026-10-28T13:02:05.065037+00:00"
+  },
+  "duration_s": 30,
+  "warmup_s": 10,
+  "concurrency": 8,
+  "scenario": "read_by_nik",
+  "key_corpus": {
+    "version": 1,
+    "seed": 42,
+    "sha256": "b38b8f59819b1eee314fac75c510417f7945c8d1b9b4e52f95839bf865e92ea5",
+    "profile_count": 2048,
+    "page_count": 64,
+    "location": "DPR_PRIVATE_DIR/benchmark (not exported)"
+  },
+  "runs": [
+    {
+      "requests": 63459,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 3.4784000017680228,
+      "p95_ms": 6.487950013251973,
+      "p99_ms": 8.677047993405715,
+      "mean_ms": 3.7541983185477537,
+      "throughput_rps": 2115.1253611492198,
+      "elapsed_s": 30.002477000001818,
+      "scenario": "read_by_nik",
+      "run": 1,
+      "duration_s": 30,
+      "warmup_s": 10,
+      "started_at_utc": "2026-10-28T13:02:18.775866+00:00",
+      "completed_at_utc": "2026-10-28T13:02:48.879544+00:00",
+      "concurrency": 8,
+      "warmup_errors": 0,
+      "operations": {
+        "read_by_nik": 63459
+      },
+      "error_types": {},
+      "resources": {
+        "samples": 7,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 46.25,
+        "db_ram_bytes_median": 1511828488,
+        "client_cpu_percent_one_core_median": 129.3,
+        "client_ram_bytes_median": 60727296,
+        "openbao_cpu_percent_one_core_median": 1.22,
+        "openbao_ram_bytes_median": 136419737,
+        "db_cpu_percent_one_core_peak": 52.43,
+        "db_ram_bytes_peak": 1511828488,
+        "client_cpu_percent_one_core_peak": 137.8,
+        "client_ram_bytes_peak": 61730816,
+        "openbao_cpu_percent_one_core_peak": 1.58,
+        "openbao_ram_bytes_peak": 136734310
+      },
+      "db_time": {
+        "source": "pg_stat_statements",
+        "calls": 63459,
+        "requests": 63459,
+        "total_exec_time_ms": 2561.60084499997,
+        "db_time_ms_per_request": 0.04036623402511811,
+        "db_time_ms_per_sql_call": 0.04036623402511811,
+        "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+        "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+      },
+      "successful_requests": {
+        "requests": 63459,
+        "errors": 0,
+        "error_rate": 0.0,
+        "p50_ms": 3.4784000017680228,
+        "p95_ms": 6.487950013251973,
+        "p99_ms": 8.677047993405715,
+        "mean_ms": 3.7541983185477537,
+        "throughput_rps": 2115.1253611492198,
+        "elapsed_s": 30.002477000001818
+      },
+      "variant": "plain",
+      "official": false
+    },
+    {
+      "requests": 7918,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 29.1282000252977,
+      "p95_ms": 43.57866998179814,
+      "p99_ms": 54.97953698824858,
+      "mean_ms": 30.29344393792698,
+      "throughput_rps": 263.7031020660914,
+      "elapsed_s": 30.02619209999102,
+      "scenario": "read_by_nik",
+      "run": 2,
+      "duration_s": 30,
+      "warmup_s": 10,
+      "started_at_utc": "2026-10-28T13:03:00.046115+00:00",
+      "completed_at_utc": "2026-10-28T13:03:30.089468+00:00",
+      "concurrency": 8,
+      "warmup_errors": 0,
+      "operations": {
+        "read_by_nik": 7918
+      },
+      "error_types": {},
+      "resources": {
+        "samples": 7,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 13.47,
+        "db_ram_bytes_median": 1524713390,
+        "client_cpu_percent_one_core_median": 124.3,
+        "client_ram_bytes_median": 62742528,
+        "openbao_cpu_percent_one_core_median": 91.94,
+        "openbao_ram_bytes_median": 138097459,
+        "db_cpu_percent_one_core_peak": 14.73,
+        "db_ram_bytes_peak": 1525787131,
+        "client_cpu_percent_one_core_peak": 128.3,
+        "client_ram_bytes_peak": 62992384,
+        "openbao_cpu_percent_one_core_peak": 129.16,
+        "openbao_ram_bytes_peak": 138726604
+      },
+      "db_time": {
+        "source": "pg_stat_statements",
+        "calls": 7918,
+        "requests": 7918,
+        "total_exec_time_ms": 1329.11731899993,
+        "db_time_ms_per_request": 0.16786023225561125,
+        "db_time_ms_per_sql_call": 0.16786023225561125,
+        "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+        "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+      },
+      "successful_requests": {
+        "requests": 7918,
+        "errors": 0,
+        "error_rate": 0.0,
+        "p50_ms": 29.1282000252977,
+        "p95_ms": 43.57866998179814,
+        "p99_ms": 54.97953698824858,
+        "mean_ms": 30.29344393792698,
+        "throughput_rps": 263.7031020660914,
+        "elapsed_s": 30.02619209999102
+      },
+      "adapter_telemetry": {
+        "before_measurement": {
+          "hits": 0,
+          "misses": 5200,
+          "remote_batches": 5200,
+          "entries": 0,
+          "max_entries": 0,
+          "ttl_seconds": 0.0,
+          "workers": 8,
+          "http_opened_connections": 8,
+          "http_reused_connections": 7808,
+          "http_requests": 7816
+        },
+        "after_measurement": {
+          "hits": 0,
+          "misses": 21036,
+          "remote_batches": 21036,
+          "entries": 0,
+          "max_entries": 0,
+          "ttl_seconds": 0.0,
+          "workers": 8,
+          "http_opened_connections": 8,
+          "http_reused_connections": 31562,
+          "http_requests": 31570
+        },
+        "measurement": {
+          "hits": 0,
+          "misses": 15836,
+          "remote_batches": 15836,
+          "http_opened_connections": 0,
+          "http_reused_connections": 23754,
+          "http_requests": 23754,
+          "hit_rate": 0.0
+        }
+      },
+      "variant": "protected_cache_off",
+      "official": false
+    },
+    {
+      "requests": 7018,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 32.84379998513032,
+      "p95_ms": 58.36882500007047,
+      "p99_ms": 72.97340200195322,
+      "mean_ms": 34.185855243770305,
+      "throughput_rps": 233.70509226602218,
+      "elapsed_s": 30.029298600013135,
+      "scenario": "read_by_nik",
+      "run": 3,
+      "duration_s": 30,
+      "warmup_s": 10,
+      "started_at_utc": "2026-10-28T13:03:41.047298+00:00",
+      "completed_at_utc": "2026-10-28T13:04:11.090582+00:00",
+      "concurrency": 8,
+      "warmup_errors": 0,
+      "operations": {
+        "read_by_nik": 7018
+      },
+      "error_types": {},
+      "resources": {
+        "samples": 7,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 10.45,
+        "db_ram_bytes_median": 1524713390,
+        "client_cpu_percent_one_core_median": 114.6,
+        "client_ram_bytes_median": 66056192,
+        "openbao_cpu_percent_one_core_median": 52.08,
+        "openbao_ram_bytes_median": 138307174,
+        "db_cpu_percent_one_core_peak": 15.98,
+        "db_ram_bytes_peak": 1524713390,
+        "client_cpu_percent_one_core_peak": 117.6,
+        "client_ram_bytes_peak": 68087808,
+        "openbao_cpu_percent_one_core_peak": 82.69,
+        "openbao_ram_bytes_peak": 138516889
+      },
+      "db_time": {
+        "source": "pg_stat_statements",
+        "calls": 7018,
+        "requests": 7018,
+        "total_exec_time_ms": 1040.8659320000515,
+        "db_time_ms_per_request": 0.14831375491593782,
+        "db_time_ms_per_sql_call": 0.14831375491593782,
+        "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+        "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+      },
+      "successful_requests": {
+        "requests": 7018,
+        "errors": 0,
+        "error_rate": 0.0,
+        "p50_ms": 32.84379998513032,
+        "p95_ms": 58.36882500007047,
+        "p99_ms": 72.97340200195322,
+        "mean_ms": 34.185855243770305,
+        "throughput_rps": 233.70509226602218,
+        "elapsed_s": 30.029298600013135
+      },
+      "adapter_telemetry": {
+        "before_measurement": {
+          "hits": 314,
+          "misses": 4392,
+          "remote_batches": 4392,
+          "entries": 4392,
+          "max_entries": 32768,
+          "ttl_seconds": 60.0,
+          "workers": 8,
+          "http_opened_connections": 8,
+          "http_reused_connections": 6753,
+          "http_requests": 6761
+        },
+        "after_measurement": {
+          "hits": 7276,
+          "misses": 11466,
+          "remote_batches": 11466,
+          "entries": 11466,
+          "max_entries": 32768,
+          "ttl_seconds": 60.0,
+          "workers": 8,
+          "http_opened_connections": 8,
+          "http_reused_connections": 20845,
+          "http_requests": 20853
+        },
+        "measurement": {
+          "hits": 6962,
+          "misses": 7074,
+          "remote_batches": 7074,
+          "http_opened_connections": 0,
+          "http_reused_connections": 14092,
+          "http_requests": 14092,
+          "hit_rate": 0.49601025933314336
+        }
+      },
+      "variant": "protected_cache_60",
+      "official": false
+    },
+    {
+      "requests": 6804,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 33.3008999878075,
+      "p95_ms": 62.140210012148565,
+      "p99_ms": 80.22721601068064,
+      "mean_ms": 35.25814423872347,
+      "throughput_rps": 226.57743147852358,
+      "elapsed_s": 30.029469200002495,
+      "scenario": "read_by_nik",
+      "run": 4,
+      "duration_s": 30,
+      "warmup_s": 10,
+      "started_at_utc": "2026-10-28T13:04:21.949857+00:00",
+      "completed_at_utc": "2026-10-28T13:04:51.991649+00:00",
+      "concurrency": 8,
+      "warmup_errors": 0,
+      "operations": {
+        "read_by_nik": 6804
+      },
+      "error_types": {},
+      "resources": {
+        "samples": 7,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 10.44,
+        "db_ram_bytes_median": 1524713390,
+        "client_cpu_percent_one_core_median": 113.2,
+        "client_ram_bytes_median": 67555328,
+        "openbao_cpu_percent_one_core_median": 50.36,
+        "openbao_ram_bytes_median": 138307174,
+        "db_cpu_percent_one_core_peak": 15.59,
+        "db_ram_bytes_peak": 1524713390,
+        "client_cpu_percent_one_core_peak": 116.4,
+        "client_ram_bytes_peak": 68104192,
+        "openbao_cpu_percent_one_core_peak": 67.8,
+        "openbao_ram_bytes_peak": 138516889
+      },
+      "db_time": {
+        "source": "pg_stat_statements",
+        "calls": 6804,
+        "requests": 6804,
+        "total_exec_time_ms": 1016.905688999972,
+        "db_time_ms_per_request": 0.14945703835978424,
+        "db_time_ms_per_sql_call": 0.14945703835978424,
+        "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+        "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+      },
+      "successful_requests": {
+        "requests": 6804,
+        "errors": 0,
+        "error_rate": 0.0,
+        "p50_ms": 33.3008999878075,
+        "p95_ms": 62.140210012148565,
+        "p99_ms": 80.22721601068064,
+        "mean_ms": 35.25814423872347,
+        "throughput_rps": 226.57743147852358,
+        "elapsed_s": 30.029469200002495
+      },
+      "adapter_telemetry": {
+        "before_measurement": {
+          "hits": 306,
+          "misses": 4298,
+          "remote_batches": 4298,
+          "entries": 4298,
+          "max_entries": 32768,
+          "ttl_seconds": 60.0,
+          "workers": 8,
+          "http_opened_connections": 8,
+          "http_reused_connections": 6608,
+          "http_requests": 6616
+        },
+        "after_measurement": {
+          "hits": 7046,
+          "misses": 11166,
+          "remote_batches": 11166,
+          "entries": 11166,
+          "max_entries": 32768,
+          "ttl_seconds": 60.0,
+          "workers": 8,
+          "http_opened_connections": 8,
+          "http_reused_connections": 20280,
+          "http_requests": 20288
+        },
+        "measurement": {
+          "hits": 6740,
+          "misses": 6868,
+          "remote_batches": 6868,
+          "http_opened_connections": 0,
+          "http_reused_connections": 13672,
+          "http_requests": 13672,
+          "hit_rate": 0.49529688418577306
+        }
+      },
+      "variant": "protected_cache_60",
+      "official": false
+    },
+    {
+      "requests": 7949,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 28.984300006413832,
+      "p95_ms": 43.31524001318029,
+      "p99_ms": 53.69612399139429,
+      "mean_ms": 30.165250559323614,
+      "throughput_rps": 264.8304740641951,
+      "elapsed_s": 30.015427900012583,
+      "scenario": "read_by_nik",
+      "run": 5,
+      "duration_s": 30,
+      "warmup_s": 10,
+      "started_at_utc": "2026-10-28T13:05:03.067333+00:00",
+      "completed_at_utc": "2026-10-28T13:05:33.097651+00:00",
+      "concurrency": 8,
+      "warmup_errors": 0,
+      "operations": {
+        "read_by_nik": 7949
+      },
+      "error_types": {},
+      "resources": {
+        "samples": 7,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 14.02,
+        "db_ram_bytes_median": 1524713390,
+        "client_cpu_percent_one_core_median": 119.4,
+        "client_ram_bytes_median": 66813952,
+        "openbao_cpu_percent_one_core_median": 92.79,
+        "openbao_ram_bytes_median": 138831462,
+        "db_cpu_percent_one_core_peak": 15.31,
+        "db_ram_bytes_peak": 1525787131,
+        "client_cpu_percent_one_core_peak": 126.2,
+        "client_ram_bytes_peak": 67989504,
+        "openbao_cpu_percent_one_core_peak": 97.45,
+        "openbao_ram_bytes_peak": 143340339
+      },
+      "db_time": {
+        "source": "pg_stat_statements",
+        "calls": 7949,
+        "requests": 7949,
+        "total_exec_time_ms": 1293.5629130000325,
+        "db_time_ms_per_request": 0.1627327856334171,
+        "db_time_ms_per_sql_call": 0.1627327856334171,
+        "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+        "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+      },
+      "successful_requests": {
+        "requests": 7949,
+        "errors": 0,
+        "error_rate": 0.0,
+        "p50_ms": 28.984300006413832,
+        "p95_ms": 43.31524001318029,
+        "p99_ms": 53.69612399139429,
+        "mean_ms": 30.165250559323614,
+        "throughput_rps": 264.8304740641951,
+        "elapsed_s": 30.015427900012583
+      },
+      "adapter_telemetry": {
+        "before_measurement": {
+          "hits": 0,
+          "misses": 5446,
+          "remote_batches": 5446,
+          "entries": 0,
+          "max_entries": 0,
+          "ttl_seconds": 0.0,
+          "workers": 8,
+          "http_opened_connections": 8,
+          "http_reused_connections": 8177,
+          "http_requests": 8185
+        },
+        "after_measurement": {
+          "hits": 0,
+          "misses": 21344,
+          "remote_batches": 21344,
+          "entries": 0,
+          "max_entries": 0,
+          "ttl_seconds": 0.0,
+          "workers": 8,
+          "http_opened_connections": 8,
+          "http_reused_connections": 32024,
+          "http_requests": 32032
+        },
+        "measurement": {
+          "hits": 0,
+          "misses": 15898,
+          "remote_batches": 15898,
+          "http_opened_connections": 0,
+          "http_reused_connections": 23847,
+          "http_requests": 23847,
+          "hit_rate": 0.0
+        }
+      },
+      "variant": "protected_cache_off",
+      "official": false
+    },
+    {
+      "requests": 58849,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 3.712500008987263,
+      "p95_ms": 7.059560000197962,
+      "p99_ms": 9.652171994093795,
+      "mean_ms": 4.04847793667202,
+      "throughput_rps": 1961.4039340672405,
+      "elapsed_s": 30.003508699999657,
+      "scenario": "read_by_nik",
+      "run": 6,
+      "duration_s": 30,
+      "warmup_s": 10,
+      "started_at_utc": "2026-10-28T13:05:43.563241+00:00",
+      "completed_at_utc": "2026-10-28T13:06:13.925397+00:00",
+      "concurrency": 8,
+      "warmup_errors": 0,
+      "operations": {
+        "read_by_nik": 58849
+      },
+      "error_types": {},
+      "resources": {
+        "samples": 7,
+        "failed_samples": 0,
+        "db_cpu_percent_one_core_median": 44.91,
+        "db_ram_bytes_median": 1513975971,
+        "client_cpu_percent_one_core_median": 126.8,
+        "client_ram_bytes_median": 69287936,
+        "openbao_cpu_percent_one_core_median": 1.37,
+        "openbao_ram_bytes_median": 138097459,
+        "db_cpu_percent_one_core_peak": 51.35,
+        "db_ram_bytes_peak": 1513975971,
+        "client_cpu_percent_one_core_peak": 135.2,
+        "client_ram_bytes_peak": 70123520,
+        "openbao_cpu_percent_one_core_peak": 2.85,
+        "openbao_ram_bytes_peak": 140299468
+      },
+      "db_time": {
+        "source": "pg_stat_statements",
+        "calls": 58849,
+        "requests": 58849,
+        "total_exec_time_ms": 2490.4936490000146,
+        "db_time_ms_per_request": 0.042320067443797085,
+        "db_time_ms_per_sql_call": 0.042320067443797085,
+        "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+        "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+      },
+      "successful_requests": {
+        "requests": 58849,
+        "errors": 0,
+        "error_rate": 0.0,
+        "p50_ms": 3.712500008987263,
+        "p95_ms": 7.059560000197962,
+        "p99_ms": 9.652171994093795,
+        "mean_ms": 4.04847793667202,
+        "throughput_rps": 1961.4039340672405,
+        "elapsed_s": 30.003508699999657
+      },
+      "variant": "plain",
+      "official": false
+    }
+  ],
+  "cache_caveat": "2048 fixed profiles; temporal reuse can inflate cache benefit versus larger/changing keys",
+  "order": [
+    "plain",
+    "protected_cache_off",
+    "protected_cache_60",
+    "protected_cache_60",
+    "protected_cache_off",
+    "plain"
+  ],
+  "medians": {
+    "protected_cache_off": {
+      "p50_ms": 29.056250015855767,
+      "p95_ms": 43.446954997489215,
+      "p99_ms": 54.337830489821435,
+      "mean_ms": 30.229347248625295,
+      "throughput_rps": 264.26678806514326,
+      "error_rate": 0.0,
+      "cache_hit_rate": 0.0,
+      "db_time_ms_per_request": 0.16529650894451417,
+      "mean_non_db_ms": 30.064050739680784,
+      "http_connections_opened_during_measurement": 0,
+      "p95_each_run_ms": [
+        43.57866998179814,
+        43.31524001318029
+      ],
+      "hit_rate_each_run": [
+        0.0,
+        0.0
+      ]
+    },
+    "plain": {
+      "p50_ms": 3.595450005377643,
+      "p95_ms": 6.773755006724968,
+      "p99_ms": 9.164609993749755,
+      "mean_ms": 3.901338127609887,
+      "throughput_rps": 2038.26464760823,
+      "error_rate": 0.0,
+      "cache_hit_rate": 0.0,
+      "db_time_ms_per_request": 0.0413431507344576,
+      "mean_non_db_ms": 3.859994976875429,
+      "http_connections_opened_during_measurement": 0,
+      "p95_each_run_ms": [
+        6.487950013251973,
+        7.059560000197962
+      ],
+      "hit_rate_each_run": [
+        0,
+        0
+      ]
+    },
+    "protected_cache_60": {
+      "p50_ms": 33.07234998646891,
+      "p95_ms": 60.25451750610952,
+      "p99_ms": 76.60030900631693,
+      "mean_ms": 34.72199974124689,
+      "throughput_rps": 230.14126187227288,
+      "error_rate": 0.0,
+      "cache_hit_rate": 0.49565357175945823,
+      "db_time_ms_per_request": 0.14888539663786104,
+      "mean_non_db_ms": 34.573114344609024,
+      "http_connections_opened_during_measurement": 0,
+      "p95_each_run_ms": [
+        58.36882500007047,
+        62.140210012148565
+      ],
+      "hit_rate_each_run": [
+        0.49601025933314336,
+        0.49529688418577306
+      ]
+    }
+  },
+  "completed_at_utc": "2026-10-28T13:06:14.298206+00:00",
+  "power_verification": {
+    "started_at_utc": "2026-10-28T13:02:06.070703+00:00",
+    "completed_at_utc": "2026-10-28T13:06:14.298206+00:00",
+    "sample_interval_s": 2,
+    "qualified": true,
+    "samples": 125,
+    "samples_not_confirmed_ac": 0,
+    "kernel_power_false_events": 0,
+    "prior_kernel_event_ac_online": true,
+    "kernel_power": {
+      "provider": "Microsoft-Windows-Kernel-Power",
+      "log_name": "System",
+      "query_start_utc": "2026-10-28T13:02:06.0707030+00:00",
+      "query_end_utc": "2026-10-28T13:06:14.2982060+00:00",
+      "latest_event_at_or_before_start": {
+        "record_id": 28342,
+        "event_id": 105,
+        "time_utc": "2026-10-28T06:45:03.6387491+00:00",
+        "time_wib": "2026-10-28T13:45:03.6387491+07:00",
+        "ac_online": true
+      },
+      "events_in_window": []
+    },
+    "collection_failure": null,
+    "scope": "AC samples every 2s and phase guards; prior Kernel-Power105 AC=true and no AC=false event in whole session; not electrical fault instrumentation"
+  },
+  "power_samples": [
+    {
+      "timestamp_utc": "2026-10-28T13:02:06.070703+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:08.544213+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:10.545310+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:12.554647+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:14.569462+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:16.581865+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:18.591493+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:20.605038+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:22.615556+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:24.628018+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:26.649190+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:28.665591+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:30.678294+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:32.695501+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:34.711317+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:36.721562+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:38.731788+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:40.734362+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:42.746900+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:44.752683+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:46.756949+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:48.765474+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:50.770329+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:52.778883+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:54.794671+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:56.806254+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:02:58.825976+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:00.841941+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:02.850580+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:04.869387+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:06.877819+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:08.881776+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:10.893983+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:12.913409+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:14.919421+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:16.936598+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:18.939345+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:20.950179+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:22.960117+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:24.973880+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:26.981943+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:28.988739+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:30.989910+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:33.003552+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:35.008830+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:37.019752+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:39.037522+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:41.047708+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:43.050554+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:45.062286+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:47.078177+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:49.100237+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:51.103539+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:53.111436+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:55.130207+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:57.143780+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:03:59.158517+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:01.160872+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:03.169461+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:05.173369+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:07.187942+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:09.200117+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:11.208158+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:13.228380+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:15.231485+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:17.244424+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:19.252874+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:21.267842+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:23.289070+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:25.325188+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:27.333693+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:29.347513+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:31.366102+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:33.378215+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:35.383638+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:37.392274+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:39.396636+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:41.417440+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:43.427504+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:45.443235+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:47.455757+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:49.464104+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:51.487585+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:53.490736+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:55.497019+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:57.505966+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:04:59.520906+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:01.526824+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:03.533314+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:05.544729+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:07.553786+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:09.562525+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:11.576677+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:13.589040+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:15.607865+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:17.621871+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:19.623056+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:21.630464+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:23.641689+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:25.657749+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:27.666378+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:29.681307+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:31.695260+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:33.703574+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:35.714622+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:37.725091+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:39.737136+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:41.753990+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:43.765813+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:45.775688+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:47.787202+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:49.797053+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:51.811522+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:53.822394+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:55.830190+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:57.837111+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:05:59.847820+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:06:01.866097+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:06:03.874128+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:06:05.888277+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:06:07.895831+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:06:09.901294+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:06:11.908311+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:06:13.937393+00:00",
+      "ac_online": true
+    },
+    {
+      "timestamp_utc": "2026-10-28T13:06:14.298206+00:00",
+      "ac_online": true
+    }
+  ],
+  "raw_location": "results/bench/keyservice_smoke_https_pool_v2 (local; compressed and hash verified)",
+  "recommendation": "https_pool with DEK cache disabled: cache worsened p95 in both smoke cohorts",
+  "limitations": [
+    "Nonofficial 2x30s per variant; not a replacement for B-P-P-B",
+    "2048-key pool and 40s total/run are favorable to cache: no 60s cache expiry during a run",
+    "Both earlier HTTPX and final pool cohorts retained; no unfavorable run excluded"
+  ]
+}

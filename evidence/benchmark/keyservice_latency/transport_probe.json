@@ -1,0 +1,59 @@
+{
+  "started_at_utc": "2026-10-28T12:45:47.393486+00:00",
+  "kind": "bounded_persistent_https_transport_probe",
+  "cases": [
+    {
+      "transport": "httpx",
+      "concurrency": 1,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 2.3027999995974824,
+      "p95_ms": 3.067925020877736,
+      "p99_ms": 4.101594016829035,
+      "mean_ms": 2.378380501031643,
+      "throughput_rps": 419.1057749762597,
+      "elapsed_s": 0.4772064999851864
+    },
+    {
+      "transport": "httpx",
+      "concurrency": 8,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 11.442650007666089,
+      "p95_ms": 21.562315009941802,
+      "p99_ms": 26.07685598923125,
+      "mean_ms": 12.44272899988573,
+      "throughput_rps": 589.6078665077725,
+      "elapsed_s": 0.3392085000232328
+    },
+    {
+      "transport": "stdlib_persistent",
+      "concurrency": 1,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 1.4473500050371513,
+      "p95_ms": 2.0560700257192366,
+      "p99_ms": 2.386521998851093,
+      "mean_ms": 1.5253924997523427,
+      "throughput_rps": 653.4096385062282,
+      "elapsed_s": 0.3060867000021972
+    },
+    {
+      "transport": "stdlib_persistent",
+      "concurrency": 8,
+      "requests": 200,
+      "errors": 0,
+      "error_rate": 0.0,
+      "p50_ms": 4.427600011695176,
+      "p95_ms": 8.1865049796761,
+      "p99_ms": 10.342802995874074,
+      "mean_ms": 4.834675998718012,
+      "throughput_rps": 1576.4031368934395,
+      "elapsed_s": 0.12687109998660162
+    }
+  ],
+  "completed_at_utc": "2026-10-28T12:45:49.211112+00:00"
+}

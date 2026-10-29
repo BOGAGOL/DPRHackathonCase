@@ -2,6 +2,7 @@
 
 import argparse
 import json
+from pathlib import Path
 import sys
 
 from .backup_restore import backup_restore
@@ -26,8 +27,16 @@ def main(argv=None):
     backup.add_argument("--label", choices=["before"], default="before")
     backup.add_argument("--runs", type=int, default=3)
     backup.add_argument("--keep", action="store_true")
+    compare = sub.add_parser("compare")
+    compare.add_argument("--before", type=Path, required=True)
+    compare.add_argument("--after", type=Path, required=True)
+    compare.add_argument("--out", type=Path, required=True)
     args = parser.parse_args(argv)
     try:
+        if args.command == "compare":
+            from .compare import main as compare_main
+            compare_main(["--before", str(args.before), "--after", str(args.after), "--out", str(args.out)])
+            return 0
         if args.command == "run":
             result = baseline_run(args.runs, args.duration, args.concurrency, args.warmup, args.scenario, database=args.db)
         else:
@@ -35,6 +44,11 @@ def main(argv=None):
         print(json.dumps({"status": result["status"], "command": args.command}), flush=True)
         return 0 if result["status"] == "PASSED" else 1
     except Exception:
+        if args.command == "compare":
+            write_json(args.out / "failure.json", {"status": "FAILED", "command": "compare",
+                       "timestamp_utc": utc_now(), "details": "Invalid comparison input; private details withheld"})
+            print("Comparison failed; details withheld.", file=sys.stderr)
+            return 2
         evidence = EVIDENCE if args.db == "baseline_100k" else session_paths(args.db)[1]
         write_json(evidence / "failure.json", {"status": "FAILED", "command": args.command,
                    "timestamp_utc": utc_now(), "details": "Credentials, SQL, row values and driver diagnostics withheld; raw retained"})

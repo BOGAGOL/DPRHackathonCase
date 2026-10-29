@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "gate": 2,
+  "passed": false,
+  "status": "FAILED_PRECONDITION",
+  "checked_at_wib": "2026-10-28T01:57:47.321703+07:00",
+  "branch": "run/overnight-28okt",
+  "git_commit": "07fbf4a47ff0e41258b75ced9d8c91151ef982b5",
+  "required_adapter": "benchmark/adapters/protected.py",
+  "adapter_exists": false,
+  "available_adapter_files": [
+    "benchmark/adapters/__init__.py",
+    "benchmark/adapters/plaintext.py"
+  ],
+  "reason": "Protected DB benchmark adapter is not implemented in the merged branch. Cannot execute business-result parity or measure its db_time. Stop at gate 2; do not claim a parity pass or start later steps.",
+  "databases": {
+    "protected_100k": {
+      "migration_validation_passed": true,
+      "rows_compared": 100000,
+      "read_parity": "NOT_TESTED"
+    },
+    "protected_1m": {
+      "migration_validation_passed": true,
+      "rows_compared": 1000000,
+      "read_parity": "NOT_TESTED"
+    }
+  },
+  "read_scenarios": [
+    "read_by_nik",
+    "read_by_email",
+    "read_profile",
+    "list_page"
+  ],
+  "required_keys_per_scenario_per_dataset": 1000,
+  "actual_parity_requests_executed": 0,
+  "mismatches": null,
+  "db_time": {
+    "status": "NOT_MEASURED",
+    "value": null,
+    "note": "Existing benchmark/diagnose_overhead.py only proposes future pg_stat_statements db_time; there is no protected adapter instrumentation to exercise."
+  },
+  "automatic_retry": false,
+  "automatic_implementation_or_repair": false,
+  "later_steps_started": {
+    "3_target_amendment": false,
+    "4_after_verification": false,
+    "5_paired_benchmark": false
+  },
+  "new_benchmark_runs": 0,
+  "required_next_work": "Implement protected adapter and db_time instrumentation with tests, then obtain instruction to resume the failed parity gate. Existing validated protected_1m must be preserved."
+}

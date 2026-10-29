@@ -1,0 +1,11 @@
+﻿{
+    "launcher_pid":  24456,
+    "started_at_wib":  "2026-10-28T22:50:50.9933502+07:00",
+    "detached":  true,
+    "transport":  "https_pool",
+    "dek_cache_ttl_seconds":  0,
+    "stdout":  "results/bench/bppb_v2/runner.stdout.log",
+    "stderr":  "results/bench/bppb_v2/runner.stderr.log",
+    "polling_interval_seconds":  1200,
+    "completion":  "Worker writes versions summary, verifies integrity, commits and pushes its own results"
+}

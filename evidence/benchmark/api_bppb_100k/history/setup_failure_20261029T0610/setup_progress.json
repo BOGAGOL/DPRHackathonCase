@@ -1,0 +1,7 @@
+{
+  "script": "provision.py",
+  "mode": "plain",
+  "status": "FAIL",
+  "exit_code": 1,
+  "at_utc": "2026-10-28T23:10:25.230054+00:00"
+}

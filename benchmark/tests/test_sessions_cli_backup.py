@@ -44,6 +44,8 @@ def test_initial_session_all_runs_and_aggregate_outputs(monkeypatch,tmp_path,sou
 
 
 def test_environment_without_exposing_inspect_env(monkeypatch,tmp_path):
+    # This is a metadata unit test; host battery state belongs to live preflight.
+    monkeypatch.setattr(runner.psutil, "sensors_battery", lambda: SimpleNamespace(power_plugged=True))
     (tmp_path / "benchmark").mkdir()
     (tmp_path / "benchmark/workloads.yaml").write_text(json.dumps(MANIFEST))
     monkeypatch.setattr(runner,"ROOT",tmp_path)

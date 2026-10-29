@@ -1,0 +1,192 @@
+{
+  "status": "PASSED_FUNCTIONAL_GATES",
+  "completed_at_utc": "2026-10-28T13:09:57.678245+00:00",
+  "branch": "perf/keyservice-latency",
+  "code_base_commit": "c16d3c4ae06d29735c608b93129d24e9856882a9",
+  "production_files_sha256": {
+    "toolkit/dprcrypto/openbao.py": "30883591bbe0d7d140d438c8371521677228cdea4043430e123c9d0e9815b477",
+    "toolkit/dprcrypto/https_pool.py": "742de22c843cf6be1a984d157f5b9e03bfbbc168d711e437a20ea4792f07e3f3",
+    "toolkit/dprcrypto/keys.py": "ecab552cce19cf3206e25afc1993c1fbc9f14e1463b4ec1c169a02f2990b91b8",
+    "toolkit/dprcrypto/bidx.py": "e08a2e7d73849207d63f663ee3447879dec7885468d00b66f5401a66865d2a74",
+    "toolkit/dprcrypto/codec.py": "3f3a4cd9ffe4800923b3dd65209c15cb3c7d5602041f2185c97881bc2f0f81a2",
+    "benchmark/adapters/protected.py": "6205f24519c5c1d879faec41b6ccaefe89ac9f049be6c369cc3027cc146fe7ee",
+    "benchmark/runner.py": "769c0e8d51f374a62c59122f96a41eaf38c4ec9931101d87b8a15d39ec51d765",
+    "benchmark/keyservice_verify.py": "b9a0f957ac46c347b3305eb937e89cbc1d3b7320f0ce1d9c2bc7e3d181770287"
+  },
+  "targets_changed": false,
+  "tests": {
+    "passed": 180,
+    "skipped": 1,
+    "failures": 0,
+    "evidence": "evidence/benchmark/keyservice_tests.xml",
+    "skip_reason": "Optional disposable OpenBao integration; actual lab exercised by real parity, batch equivalence and invalid-CA rejection"
+  },
+  "vectors": {
+    "schema_version": 1,
+    "passed": true,
+    "checked_at_utc": "2026-10-28T13:00:18.984911+00:00",
+    "checks": {
+      "aad": true,
+      "blob_and_roundtrip": true,
+      "tamper_rejected": true,
+      "record_swap_rejected": true,
+      "column_swap_rejected": true,
+      "nonce_randomness_sample": true,
+      "normalization": true,
+      "bidx": true
+    },
+    "vectors_sha256": "513ff178e4be55ac333425da469189f4d995ea562fafa203740c58dfc8291c0d"
+  },
+  "parity": [
+    {
+      "cache_ttl_seconds": 0,
+      "passed": true,
+      "requests": 8000,
+      "mismatches": 0,
+      "evidence": "evidence/benchmark/keyservice_latency/https_pool_v2/parity_cache_0.json"
+    },
+    {
+      "cache_ttl_seconds": 60,
+      "passed": true,
+      "requests": 8000,
+      "mismatches": 0,
+      "evidence": "evidence/benchmark/keyservice_latency/https_pool_v2/parity_cache_60.json"
+    }
+  ],
+  "no_key_gate": {
+    "started_at_utc": "2026-10-28T12:31:31.992229+00:00",
+    "passed": true,
+    "datasets": [
+      {
+        "database": "protected_100k",
+        "passed": true,
+        "ESCE": {
+          "numerator": 0,
+          "denominator": 2449994,
+          "ratio": 0.0
+        },
+        "artifact_sha256": "0169e23bf8d53524b3f831b298d23880baaa465f85f00b52b6c37897f2f137b4"
+      },
+      {
+        "database": "protected_1m",
+        "passed": true,
+        "ESCE": {
+          "numerator": 0,
+          "denominator": 24500005,
+          "ratio": 0.0
+        },
+        "artifact_sha256": "932f89019aa776d51c26ccec597f55ff07c9bceeb6e2ab0181df7dae14c6356f"
+      }
+    ],
+    "completed_at_utc": "2026-10-28T12:38:47.769610+00:00",
+    "reused_evidence_from": "evidence/benchmark/keyservice_latency/no_key_gate.json",
+    "reuse_reason": "Only HTTPS transport changed after full no-key artifact scan; cipher codec, protection profile and immutable artifact hashes unchanged."
+  },
+  "integrity_unchanged": true,
+  "smoke": {
+    "protected_cache_off": {
+      "p50_ms": 29.056250015855767,
+      "p95_ms": 43.446954997489215,
+      "p99_ms": 54.337830489821435,
+      "mean_ms": 30.229347248625295,
+      "throughput_rps": 264.26678806514326,
+      "error_rate": 0.0,
+      "cache_hit_rate": 0.0,
+      "db_time_ms_per_request": 0.16529650894451417,
+      "mean_non_db_ms": 30.064050739680784,
+      "http_connections_opened_during_measurement": 0,
+      "p95_each_run_ms": [
+        43.57866998179814,
+        43.31524001318029
+      ],
+      "hit_rate_each_run": [
+        0.0,
+        0.0
+      ]
+    },
+    "plain": {
+      "p50_ms": 3.595450005377643,
+      "p95_ms": 6.773755006724968,
+      "p99_ms": 9.164609993749755,
+      "mean_ms": 3.901338127609887,
+      "throughput_rps": 2038.26464760823,
+      "error_rate": 0.0,
+      "cache_hit_rate": 0.0,
+      "db_time_ms_per_request": 0.0413431507344576,
+      "mean_non_db_ms": 3.859994976875429,
+      "http_connections_opened_during_measurement": 0,
+      "p95_each_run_ms": [
+        6.487950013251973,
+        7.059560000197962
+      ],
+      "hit_rate_each_run": [
+        0,
+        0
+      ]
+    },
+    "protected_cache_60": {
+      "p50_ms": 33.07234998646891,
+      "p95_ms": 60.25451750610952,
+      "p99_ms": 76.60030900631693,
+      "mean_ms": 34.72199974124689,
+      "throughput_rps": 230.14126187227288,
+      "error_rate": 0.0,
+      "cache_hit_rate": 0.49565357175945823,
+      "db_time_ms_per_request": 0.14888539663786104,
+      "mean_non_db_ms": 34.573114344609024,
+      "http_connections_opened_during_measurement": 0,
+      "p95_each_run_ms": [
+        58.36882500007047,
+        62.140210012148565
+      ],
+      "hit_rate_each_run": [
+        0.49601025933314336,
+        0.49529688418577306
+      ]
+    }
+  },
+  "recommended_variant": "https_pool, DEK cache OFF",
+  "cache_tail_latency_improved": false,
+  "recommended_variant_meets_smoke_p95_targets": false,
+  "official_bppb_rerun_started": false,
+  "official_naive_v1_retained": "c16d3c4",
+  "estimated_official_rerun_hours_per_variant": 2.5,
+  "estimated_both_cache_variants_hours": 5,
+  "alby_review": "toolkit/REVIEW_KEY_SERVICE_LATENCY.md",
+  "nonofficial_smoke_comparisons": {
+    "protected_cache_off": {
+      "scenario": "read_by_nik",
+      "p50_delta_ms": 25.460800010478124,
+      "p95_delta_ms": 36.673199990764246,
+      "p95_ratio": 6.4140133433162525,
+      "p95_absolute_allowance_ms": 5,
+      "P01_ratio_passed": false,
+      "P01_absolute_passed": false,
+      "throughput_ratio": 0.12965283402979247,
+      "P02_passed": false,
+      "P03_passed": true,
+      "before_db_time": null,
+      "after_db_time": null
+    },
+    "protected_cache_60": {
+      "scenario": "read_by_nik",
+      "p50_delta_ms": 29.476899981091265,
+      "p95_delta_ms": 53.480762499384554,
+      "p95_ratio": 8.89529034431995,
+      "p95_absolute_allowance_ms": 5,
+      "P01_ratio_passed": false,
+      "P01_absolute_passed": false,
+      "throughput_ratio": 0.11291039274135896,
+      "P02_passed": false,
+      "P03_passed": true,
+      "before_db_time": null,
+      "after_db_time": null
+    }
+  },
+  "tls_negative": {
+    "checked_at_utc": "2026-10-28T13:11:49.721348+00:00",
+    "passed": true,
+    "scenario": "Untrusted CA, actual HTTPS handshake; no token transmitted",
+    "underlying_error_type": "SSLCertVerificationError"
+  }
+}

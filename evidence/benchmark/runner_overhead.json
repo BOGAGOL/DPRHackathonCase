@@ -1,0 +1,1138 @@
+{
+  "kind": "bounded_diagnostic_not_official_benchmark",
+  "started_at_utc": "2026-10-27T13:00:47.150855+00:00",
+  "code_commit": "27aa9fa08dbcbe0e20199748e15d98cd4e81582f",
+  "instrumentation_worktree": true,
+  "database": "baseline_100k",
+  "tls": false,
+  "scope": "2000 requests TOTAL per concurrency (not per worker), plus 32 warmup requests/worker and 32 EXPLAINs/database",
+  "audit": {
+    "connections": "one per worker, opened before measured loop",
+    "csv": "256 KiB buffered; after latency; no per-request flush/fsync",
+    "validation": "one 30-field tuple comparison; expected tuple constructed per request",
+    "gil": "threaded psycopg; no explicit shared lock in request path"
+  },
+  "measurements": [
+    {
+      "concurrency": 1,
+      "requests": 2000,
+      "errors": 0,
+      "connection_count": 1,
+      "connections_opened_per_request": false,
+      "persistent_backends_verified": true,
+      "prepared_statement_counts": [
+        1
+      ],
+      "components": {
+        "psycopg_execute": {
+          "samples": 2000,
+          "mean_ms": 0.7374826999366633,
+          "p50_ms": 0.6404500018106773,
+          "p95_ms": 1.259925002523232
+        },
+        "psycopg_fetchall": {
+          "samples": 2000,
+          "mean_ms": 0.0060942499549128115,
+          "p50_ms": 0.005399997462518513,
+          "p95_ms": 0.010000003385357559
+        },
+        "runner_adapter_other": {
+          "samples": 2000,
+          "mean_ms": 0.030470200123090763,
+          "p50_ms": 0.028099995688535273,
+          "p95_ms": 0.05000000310246833
+        },
+        "request_latency": {
+          "samples": 2000,
+          "mean_ms": 0.7740471500146668,
+          "p50_ms": 0.6776500013074838,
+          "p95_ms": 1.3092099994537418
+        },
+        "runner_bookkeeping_csv": {
+          "samples": 2000,
+          "mean_ms": 0.012642649999179412,
+          "p50_ms": 0.01134999911300838,
+          "p95_ms": 0.020599997515091673
+        }
+      },
+      "measured_throughput_rps": 1269.7897526542438,
+      "thread_cpu_s": 0.5,
+      "process_cpu_s_including_preparation": 0.5,
+      "wall_s_including_preparation": 1.635010699988925,
+      "gil_conclusion": "No lock profiler used; low overall CPU cannot rule out single-thread/GIL scheduling effects."
+    },
+    {
+      "concurrency": 8,
+      "requests": 2000,
+      "errors": 0,
+      "connection_count": 8,
+      "connections_opened_per_request": false,
+      "persistent_backends_verified": true,
+      "prepared_statement_counts": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "components": {
+        "psycopg_execute": {
+          "samples": 2000,
+          "mean_ms": 3.3099825501194573,
+          "p50_ms": 3.182800006470643,
+          "p95_ms": 5.498499997338512
+        },
+        "psycopg_fetchall": {
+          "samples": 2000,
+          "mean_ms": 0.009216400067089126,
+          "p50_ms": 0.008700008038431406,
+          "p95_ms": 0.011299998732283711
+        },
+        "runner_adapter_other": {
+          "samples": 2000,
+          "mean_ms": 0.04930249962490052,
+          "p50_ms": 0.04639998223865405,
+          "p95_ms": 0.06230499420780688
+        },
+        "request_latency": {
+          "samples": 2000,
+          "mean_ms": 3.368501449811447,
+          "p50_ms": 3.239199999370612,
+          "p95_ms": 5.56947498844238
+        },
+        "runner_bookkeeping_csv": {
+          "samples": 2000,
+          "mean_ms": 0.020302900236856658,
+          "p50_ms": 0.018799997633323073,
+          "p95_ms": 0.02760499191936105
+        }
+      },
+      "measured_throughput_rps": 2331.3245863805428,
+      "thread_cpu_s": 1.1875,
+      "process_cpu_s_including_preparation": 1.34375,
+      "wall_s_including_preparation": 0.9701792999985628,
+      "gil_conclusion": "No lock profiler used; low overall CPU cannot rule out single-thread/GIL scheduling effects."
+    }
+  ],
+  "baseline_100k": {
+    "corpus": {
+      "version": 1,
+      "seed": 42,
+      "sha256": "b38b8f59819b1eee314fac75c510417f7945c8d1b9b4e52f95839bf865e92ea5",
+      "profile_count": 2048,
+      "page_count": 64,
+      "location": "DPR_PRIVATE_DIR/benchmark (not exported)"
+    },
+    "cache_before": {
+      "database": "baseline_100k",
+      "at_utc": "2026-10-27T13:00:47.251498+00:00",
+      "shared_buffers_bytes": 134217728,
+      "table_heap_bytes": 63553536,
+      "total_index_bytes": 32866304,
+      "indexes": [
+        {
+          "name": "anggota_pkey",
+          "bytes": 2260992,
+          "blocks_read": 276,
+          "blocks_hit": 1426,
+          "hit_ratio": 0.8378378378378378
+        },
+        {
+          "name": "idx_anggota_email",
+          "bytes": 10665984,
+          "blocks_read": 1,
+          "blocks_hit": 51,
+          "hit_ratio": 0.9807692307692307
+        },
+        {
+          "name": "idx_anggota_hp",
+          "bytes": 4620288,
+          "blocks_read": 1,
+          "blocks_hit": 51,
+          "hit_ratio": 0.9807692307692307
+        },
+        {
+          "name": "idx_anggota_no_ktp",
+          "bytes": 5595136,
+          "blocks_read": 580,
+          "blocks_hit": 32352587,
+          "hit_ratio": 0.9999820728524043
+        },
+        {
+          "name": "idx_anggota_pengguna",
+          "bytes": 9723904,
+          "blocks_read": 1,
+          "blocks_hit": 51,
+          "hit_ratio": 0.9807692307692307
+        }
+      ],
+      "heap": {
+        "blocks_read": 6536,
+        "blocks_hit": 10822747,
+        "hit_ratio": 0.9993964512701349
+      },
+      "database_cache_hit_ratio": 0.9998227831590234,
+      "stats_reset": "None",
+      "pg_stat_statements_installed": false,
+      "pg_stat_statements_preloaded": null
+    },
+    "cache_after": {
+      "database": "baseline_100k",
+      "at_utc": "2026-10-27T13:00:50.069592+00:00",
+      "shared_buffers_bytes": 134217728,
+      "table_heap_bytes": 63553536,
+      "total_index_bytes": 32866304,
+      "indexes": [
+        {
+          "name": "anggota_pkey",
+          "bytes": 2260992,
+          "blocks_read": 276,
+          "blocks_hit": 1436,
+          "hit_ratio": 0.8387850467289719
+        },
+        {
+          "name": "idx_anggota_email",
+          "bytes": 10665984,
+          "blocks_read": 1,
+          "blocks_hit": 61,
+          "hit_ratio": 0.9838709677419355
+        },
+        {
+          "name": "idx_anggota_hp",
+          "bytes": 4620288,
+          "blocks_read": 1,
+          "blocks_hit": 61,
+          "hit_ratio": 0.9838709677419355
+        },
+        {
+          "name": "idx_anggota_no_ktp",
+          "bytes": 5595136,
+          "blocks_read": 580,
+          "blocks_hit": 32365558,
+          "hit_ratio": 0.9999820800368583
+        },
+        {
+          "name": "idx_anggota_pengguna",
+          "bytes": 9723904,
+          "blocks_read": 1,
+          "blocks_hit": 61,
+          "hit_ratio": 0.9838709677419355
+        }
+      ],
+      "heap": {
+        "blocks_read": 6536,
+        "blocks_hit": 10827069,
+        "hit_ratio": 0.999396692052184
+      },
+      "database_cache_hit_ratio": 0.9998227683582442,
+      "stats_reset": "None",
+      "pg_stat_statements_installed": false,
+      "pg_stat_statements_preloaded": null
+    },
+    "server_explain": {
+      "requests": 32,
+      "instrumentation": "EXPLAIN ANALYZE TIMING ON; separate sample, not a per-request subtraction",
+      "execution": {
+        "samples": 32,
+        "mean_ms": 0.03146875000000001,
+        "p50_ms": 0.0295,
+        "p95_ms": 0.05159999999999999
+      },
+      "planning": {
+        "samples": 32,
+        "mean_ms": 0.08228125000000004,
+        "p50_ms": 0.052,
+        "p95_ms": 0.0933
+      },
+      "sanitized_samples": [
+        {
+          "planning_ms": 0.87,
+          "execution_ms": 0.084,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.073,
+          "execution_ms": 0.037,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.058,
+          "execution_ms": 0.027,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.064,
+          "execution_ms": 0.041,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.058,
+          "execution_ms": 0.028,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.074,
+          "execution_ms": 0.03,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.062,
+          "execution_ms": 0.041,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.061,
+          "execution_ms": 0.029,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.055,
+          "execution_ms": 0.025,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.078,
+          "execution_ms": 0.037,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.082,
+          "execution_ms": 0.056,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.07,
+          "execution_ms": 0.044,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.052,
+          "execution_ms": 0.032,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.049,
+          "execution_ms": 0.032,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.052,
+          "execution_ms": 0.026,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.046,
+          "execution_ms": 0.023,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.041,
+          "execution_ms": 0.019,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.046,
+          "execution_ms": 0.022,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.048,
+          "execution_ms": 0.032,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.046,
+          "execution_ms": 0.02,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.047,
+          "execution_ms": 0.02,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.043,
+          "execution_ms": 0.032,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.043,
+          "execution_ms": 0.019,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.043,
+          "execution_ms": 0.018,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.051,
+          "execution_ms": 0.021,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.047,
+          "execution_ms": 0.039,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.045,
+          "execution_ms": 0.02,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.043,
+          "execution_ms": 0.03,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.04,
+          "execution_ms": 0.024,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.058,
+          "execution_ms": 0.021,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.087,
+          "execution_ms": 0.03,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.101,
+          "execution_ms": 0.048,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        }
+      ]
+    }
+  },
+  "baseline_1m": {
+    "corpus": {
+      "version": 1,
+      "seed": 42,
+      "sha256": "a68899fbfeef09a0f559a75c487e8fd747f0054fe930cb61f9457940b8870cf2",
+      "profile_count": 2048,
+      "page_count": 64,
+      "location": "DPR_PRIVATE_DIR/benchmark (not exported)"
+    },
+    "cache_before": {
+      "database": "baseline_1m",
+      "at_utc": "2026-10-27T13:00:50.179617+00:00",
+      "shared_buffers_bytes": 134217728,
+      "table_heap_bytes": 523952128,
+      "total_index_bytes": 292741120,
+      "indexes": [
+        {
+          "name": "anggota_pkey",
+          "bytes": 22487040,
+          "blocks_read": 133365,
+          "blocks_hit": 6537967,
+          "hit_ratio": 0.980009239534174
+        },
+        {
+          "name": "idx_anggota_email",
+          "bytes": 93315072,
+          "blocks_read": 108769,
+          "blocks_hit": 3025264,
+          "hit_ratio": 0.9652942390842726
+        },
+        {
+          "name": "idx_anggota_hp",
+          "bytes": 46727168,
+          "blocks_read": 46149,
+          "blocks_hit": 1635708,
+          "hit_ratio": 0.9725606873830533
+        },
+        {
+          "name": "idx_anggota_no_ktp",
+          "bytes": 46161920,
+          "blocks_read": 60469,
+          "blocks_hit": 2697369,
+          "hit_ratio": 0.9780737664793944
+        },
+        {
+          "name": "idx_anggota_pengguna",
+          "bytes": 84049920,
+          "blocks_read": 93483,
+          "blocks_hit": 1620464,
+          "hit_ratio": 0.9454574733057673
+        }
+      ],
+      "heap": {
+        "blocks_read": 2725702,
+        "blocks_hit": 7569030,
+        "hit_ratio": 0.7352333212753863
+      },
+      "database_cache_hit_ratio": 0.8798867326692815,
+      "stats_reset": "None",
+      "pg_stat_statements_installed": false,
+      "pg_stat_statements_preloaded": null
+    },
+    "cache_after": {
+      "database": "baseline_1m",
+      "at_utc": "2026-10-27T13:00:50.293539+00:00",
+      "shared_buffers_bytes": 134217728,
+      "table_heap_bytes": 523952128,
+      "total_index_bytes": 292741120,
+      "indexes": [
+        {
+          "name": "anggota_pkey",
+          "bytes": 22487040,
+          "blocks_read": 133366,
+          "blocks_hit": 6537967,
+          "hit_ratio": 0.9800090926356098
+        },
+        {
+          "name": "idx_anggota_email",
+          "bytes": 93315072,
+          "blocks_read": 108770,
+          "blocks_hit": 3025264,
+          "hit_ratio": 0.965293931080518
+        },
+        {
+          "name": "idx_anggota_hp",
+          "bytes": 46727168,
+          "blocks_read": 46150,
+          "blocks_hit": 1635708,
+          "hit_ratio": 0.9725601091174165
+        },
+        {
+          "name": "idx_anggota_no_ktp",
+          "bytes": 46161920,
+          "blocks_read": 60518,
+          "blocks_hit": 2697428,
+          "hit_ratio": 0.978056858256108
+        },
+        {
+          "name": "idx_anggota_pengguna",
+          "bytes": 84049920,
+          "blocks_read": 93484,
+          "blocks_hit": 1620464,
+          "hit_ratio": 0.9454569216802376
+        }
+      ],
+      "heap": {
+        "blocks_read": 2725751,
+        "blocks_hit": 7569032,
+        "hit_ratio": 0.7352298732280224
+      },
+      "database_cache_hit_ratio": 0.8798864811736408,
+      "stats_reset": "None",
+      "pg_stat_statements_installed": false,
+      "pg_stat_statements_preloaded": null
+    },
+    "server_explain": {
+      "requests": 32,
+      "instrumentation": "EXPLAIN ANALYZE TIMING ON; separate sample, not a per-request subtraction",
+      "execution": {
+        "samples": 32,
+        "mean_ms": 1.0762812499999999,
+        "p50_ms": 1.012,
+        "p95_ms": 1.9254
+      },
+      "planning": {
+        "samples": 32,
+        "mean_ms": 0.25768750000000007,
+        "p50_ms": 0.0675,
+        "p95_ms": 0.15444999999999995
+      },
+      "sanitized_samples": [
+        {
+          "planning_ms": 5.824,
+          "execution_ms": 1.124,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 0,
+          "Shared Read Blocks": 4,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.097,
+          "execution_ms": 1.932,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 3,
+          "Shared Read Blocks": 4,
+          "Shared Dirtied Blocks": 1,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.104,
+          "execution_ms": 1.076,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 1,
+          "Shared Read Blocks": 3,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.065,
+          "execution_ms": 1.236,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 1,
+          "Shared Read Blocks": 3,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.188,
+          "execution_ms": 2.525,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 6,
+          "Shared Dirtied Blocks": 1,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.127,
+          "execution_ms": 1.588,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 4,
+          "Shared Dirtied Blocks": 1,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.083,
+          "execution_ms": 1.069,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 1,
+          "Shared Read Blocks": 3,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.068,
+          "execution_ms": 0.762,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 2,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.061,
+          "execution_ms": 0.564,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 2,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.056,
+          "execution_ms": 1.92,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 6,
+          "Shared Dirtied Blocks": 1,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.091,
+          "execution_ms": 1.506,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 5,
+          "Shared Dirtied Blocks": 1,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.066,
+          "execution_ms": 0.622,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 2,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.065,
+          "execution_ms": 0.916,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 1,
+          "Shared Read Blocks": 3,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.061,
+          "execution_ms": 0.982,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 1,
+          "Shared Read Blocks": 3,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.082,
+          "execution_ms": 1.218,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 3,
+          "Shared Read Blocks": 3,
+          "Shared Dirtied Blocks": 1,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.081,
+          "execution_ms": 1.161,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 1,
+          "Shared Read Blocks": 3,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.066,
+          "execution_ms": 0.741,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 2,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.105,
+          "execution_ms": 0.808,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 4,
+          "Shared Read Blocks": 2,
+          "Shared Dirtied Blocks": 1,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.073,
+          "execution_ms": 1.236,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 1,
+          "Shared Read Blocks": 3,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.087,
+          "execution_ms": 1.436,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 5,
+          "Shared Dirtied Blocks": 1,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.07,
+          "execution_ms": 1.113,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 3,
+          "Shared Read Blocks": 3,
+          "Shared Dirtied Blocks": 1,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.104,
+          "execution_ms": 0.867,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 2,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.067,
+          "execution_ms": 1.231,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 3,
+          "Shared Read Blocks": 4,
+          "Shared Dirtied Blocks": 1,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.061,
+          "execution_ms": 1.042,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 2,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.067,
+          "execution_ms": 0.69,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 2,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.056,
+          "execution_ms": 0.535,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 2,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.062,
+          "execution_ms": 0.825,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 3,
+          "Shared Read Blocks": 3,
+          "Shared Dirtied Blocks": 1,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.063,
+          "execution_ms": 0.862,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 1,
+          "Shared Read Blocks": 3,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.06,
+          "execution_ms": 0.518,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 2,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.058,
+          "execution_ms": 0.624,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 2,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.06,
+          "execution_ms": 0.836,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 2,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        },
+        {
+          "planning_ms": 0.068,
+          "execution_ms": 0.876,
+          "node_type": "Index Scan",
+          "index_name": "idx_anggota_no_ktp",
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 2,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Actual Rows": 1.0
+        }
+      ]
+    }
+  },
+  "completed_at_utc": "2026-10-27T13:00:50.298230+00:00",
+  "raw_location": "results/bench/diagnostics/20261027T130047",
+  "official_baselines_changed": false,
+  "implementation_defect_found": false,
+  "limitations": [
+    "Driver execute includes socket wait, libpq and client/server scheduling, not just Python CPU.",
+    "Instrumentation perturbs timings; components add for each request, percentiles do not add.",
+    "Current cumulative cache counters and 32 EXPLAINs cannot reconstruct historical 1M p95 causality.",
+    "pgbench ran inside container; Python uses Windows Docker forwarded port. Transport and result handling differ."
+  ],
+  "proposal": "Report pg_stat_statements interval delta total_exec_time/calls as db_time beside end-to-end latency in future paired before/after; enable consistently before both modes, no global resets; account for other sessions and planning separately.",
+  "server_configuration_admin_read_only": {
+    "shared_preload_libraries": "",
+    "compute_query_id": "auto",
+    "track_io_timing": "off"
+  },
+  "read_only_enforced": true,
+  "preparation_metadata_probes": {
+    "failed": 3,
+    "cause": "restricted SHOW and hidden pg_settings row for bench_user",
+    "before_any_measured_requests": true,
+    "official_benchmark_retries": 0
+  },
+  "conclusion": {
+    "implementation_defect_found": false,
+    "driver_execute_share_of_c8_mean_adapter_latency": 0.9826276162964794,
+    "interpretation": "Expected synchronous driver/transport/client scheduling boundary; not a pure Python CPU estimate. No rerun proposed or performed.",
+    "historical_1m_p95_causality": "Larger working set/cache misses supported by present EXPLAIN; historical exclusive causality not established."
+  },
+  "sources": [
+    "https://www.postgresql.org/docs/18/monitoring-stats.html",
+    "https://www.postgresql.org/docs/18/pgstatstatements.html",
+    "https://www.psycopg.org/psycopg3/docs/advanced/async.html"
+  ],
+  "client_runtime": {
+    "python": "3.11.3",
+    "psycopg": "3.3.6",
+    "libpq_implementation": "binary",
+    "waiting_function_module": "psycopg.waiting",
+    "gil_switch_interval_ms": 5.0
+  },
+  "inspected_code_sha256": {
+    "benchmark/runner.py": "0c44fa5e78dbad3f3201565d1be69fcef1f69c83801f342eac44484d485e9e81",
+    "benchmark/adapters/plaintext.py": "5ff6b7bd06f316fd333bda9549a4ead2dce01565fbef6221470fd098c6236c43",
+    "benchmark/diagnose_overhead.py": "26837dd16c1c988b53da6fbfb4d7b2d96f79094cdc8f1f0f392cbb270d1281ea"
+  }
+}

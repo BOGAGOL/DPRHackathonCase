@@ -1,0 +1,14 @@
+{
+  "provider": "Microsoft-Windows-Kernel-Power",
+  "log_name": "System",
+  "query_start_utc": "2026-10-28T17:42:17.6714720+00:00",
+  "query_end_utc": "2026-10-28T17:43:28.3108260+00:00",
+  "latest_event_at_or_before_start": {
+    "record_id": 29354,
+    "event_id": 105,
+    "time_utc": "2026-10-28T15:41:14.5765334+00:00",
+    "time_wib": "2026-10-28T22:41:14.5765334+07:00",
+    "ac_online": true
+  },
+  "events_in_window": []
+}

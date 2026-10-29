@@ -1,0 +1,278 @@
+{
+    "status":  "READ_SUCCESS",
+    "collected_at_utc":  "2026-10-27T14:00:24.2953855+00:00",
+    "provider":  "Microsoft-Windows-Kernel-Power",
+    "log_name":  "System",
+    "windows_timezone":  "SE Asia Standard Time",
+    "query_start_wib":  "2026-10-27T00:00:00.0000000+07:00",
+    "query_end_wib":  "2026-10-27T20:50:00.0000000+07:00",
+    "scope":  "All event 105 source changes in day window; supporting 506/507/566 only 18:25-19:35 WIB. Computer/user identifiers omitted.",
+    "events":  [
+                   {
+                       "event_id":  105,
+                       "record_id":  25332,
+                       "time_utc":  "2026-10-27T01:47:39.4186988+00:00",
+                       "time_wib":  "2026-10-27T08:47:39.4186988+07:00",
+                       "data":  {
+                                    "AcOnline":  "true",
+                                    "RemainingCapacity":  "4957",
+                                    "FullChargeCapacity":  "26494"
+                                },
+                       "message":  "Power source change."
+                   },
+                   {
+                       "event_id":  105,
+                       "record_id":  25659,
+                       "time_utc":  "2026-10-27T02:53:49.2205360+00:00",
+                       "time_wib":  "2026-10-27T09:53:49.2205360+07:00",
+                       "data":  {
+                                    "AcOnline":  "false",
+                                    "RemainingCapacity":  "24880",
+                                    "FullChargeCapacity":  "26494"
+                                },
+                       "message":  "Power source change."
+                   },
+                   {
+                       "event_id":  105,
+                       "record_id":  25788,
+                       "time_utc":  "2026-10-27T03:12:30.0846753+00:00",
+                       "time_wib":  "2026-10-27T10:12:30.0846753+07:00",
+                       "data":  {
+                                    "AcOnline":  "true",
+                                    "RemainingCapacity":  "20515",
+                                    "FullChargeCapacity":  "26494"
+                                },
+                       "message":  "Power source change."
+                   },
+                   {
+                       "event_id":  105,
+                       "record_id":  26065,
+                       "time_utc":  "2026-10-27T05:45:41.6668596+00:00",
+                       "time_wib":  "2026-10-27T12:45:41.6668596+07:00",
+                       "data":  {
+                                    "AcOnline":  "false",
+                                    "RemainingCapacity":  "26494",
+                                    "FullChargeCapacity":  "26494"
+                                },
+                       "message":  "Power source change."
+                   },
+                   {
+                       "event_id":  105,
+                       "record_id":  26263,
+                       "time_utc":  "2026-10-27T06:55:24.2047070+00:00",
+                       "time_wib":  "2026-10-27T13:55:24.2047070+07:00",
+                       "data":  {
+                                    "AcOnline":  "true",
+                                    "RemainingCapacity":  "6954",
+                                    "FullChargeCapacity":  "26494"
+                                },
+                       "message":  "Power source change."
+                   },
+                   {
+                       "event_id":  105,
+                       "record_id":  26496,
+                       "time_utc":  "2026-10-27T08:44:30.2942878+00:00",
+                       "time_wib":  "2026-10-27T15:44:30.2942878+07:00",
+                       "data":  {
+                                    "AcOnline":  "false",
+                                    "RemainingCapacity":  "26494",
+                                    "FullChargeCapacity":  "26494"
+                                },
+                       "message":  "Power source change."
+                   },
+                   {
+                       "event_id":  105,
+                       "record_id":  26748,
+                       "time_utc":  "2026-10-27T11:15:35.3833550+00:00",
+                       "time_wib":  "2026-10-27T18:15:35.3833550+07:00",
+                       "data":  {
+                                    "AcOnline":  "true",
+                                    "RemainingCapacity":  "11424",
+                                    "FullChargeCapacity":  "26494"
+                                },
+                       "message":  "Power source change."
+                   },
+                   {
+                       "event_id":  105,
+                       "record_id":  27150,
+                       "time_utc":  "2026-10-27T12:18:04.0867490+00:00",
+                       "time_wib":  "2026-10-27T19:18:04.0867490+07:00",
+                       "data":  {
+                                    "AcOnline":  "false",
+                                    "RemainingCapacity":  "25832",
+                                    "FullChargeCapacity":  "26494"
+                                },
+                       "message":  "Power source change."
+                   },
+                   {
+                       "event_id":  566,
+                       "record_id":  27151,
+                       "time_utc":  "2026-10-27T12:18:06.1114624+00:00",
+                       "time_wib":  "2026-10-27T19:18:06.1114624+07:00",
+                       "data":  {
+                                    "BootId":  "8",
+                                    "Reason":  "12",
+                                    "PreviousSessionId":  "28",
+                                    "PreviousSessionType":  "0",
+                                    "PreviousSessionDurationInUs":  "4764219761",
+                                    "PreviousEnergyCapacityAtStart":  "16393",
+                                    "PreviousFullEnergyCapacityAtStart":  "26494",
+                                    "PreviousEnergyCapacityAtEnd":  "25832",
+                                    "PreviousFullEnergyCapacityAtEnd":  "26494",
+                                    "NextSessionId":  "29",
+                                    "NextSessionType":  "1",
+                                    "PowerStateAc":  "false",
+                                    "MonitorReason":  "12"
+                                },
+                       "message":  "The system session has transitioned from 28 to 29.\r\n\r\nReason SessionUnlock \r\n\r\nBootId: 8"
+                   },
+                   {
+                       "event_id":  506,
+                       "record_id":  27152,
+                       "time_utc":  "2026-10-27T12:18:06.1132727+00:00",
+                       "time_wib":  "2026-10-27T19:18:06.1132727+07:00",
+                       "data":  {
+                                    "Reason":  "12",
+                                    "LidOpenState":  "true",
+                                    "ExternalMonitorConnectedState":  "false",
+                                    "ScenarioInstanceId":  "29",
+                                    "BatteryRemainingCapacityOnEnter":  "25832",
+                                    "BatteryFullChargeCapacityOnEnter":  "26494",
+                                    "ScenarioInstanceIdV2":  "29",
+                                    "BootId":  "8"
+                                },
+                       "message":  "The system is entering Modern Standby \r\n\r\nReason: Idle Timeout."
+                   },
+                   {
+                       "event_id":  507,
+                       "record_id":  27164,
+                       "time_utc":  "2026-10-27T12:18:52.2446123+00:00",
+                       "time_wib":  "2026-10-27T19:18:52.2446123+07:00",
+                       "data":  {
+                                    "EnergyDrain":  "15372",
+                                    "ActiveResidencyInUs":  "46133825",
+                                    "NonDripsTimeActivatedInUs":  "0",
+                                    "FirstDripsEntryInUs":  "0",
+                                    "DripsResidencyInUs":  "0",
+                                    "DurationInUs":  "46133825",
+                                    "DripsTransitions":  "0",
+                                    "FullChargeCapacityRatio":  "48",
+                                    "AudioPlaying":  "true",
+                                    "Reason":  "31",
+                                    "AudioPlaybackInUs":  "20480541",
+                                    "NonActivatedCpuInUs":  "0",
+                                    "PowerStateAc":  "false",
+                                    "HwDripsResidencyInUs":  "0",
+                                    "ExitLatencyInUs":  "234854",
+                                    "DisconnectedStandby":  "false",
+                                    "AoAcCompliantNic":  "true",
+                                    "NonAttributedCpuInUs":  "0",
+                                    "ModernSleepEnabledActionsBitmask":  "7",
+                                    "ModernSleepAppliedActionsBitmask":  "0",
+                                    "LidOpenState":  "true",
+                                    "ExternalMonitorConnectedState":  "false",
+                                    "ScenarioInstanceId":  "31",
+                                    "IsCsSessionInProgressOnExit":  "false",
+                                    "BatteryRemainingCapacityOnExit":  "25635",
+                                    "BatteryFullChargeCapacityOnExit":  "26494",
+                                    "ScenarioInstanceIdV2":  "29",
+                                    "BootId":  "8",
+                                    "InputSuppressionActionCount":  "0",
+                                    "NonResiliencyTimeInUs":  "46133825",
+                                    "ResiliencyDripsTimeInUs":  "0",
+                                    "ResiliencyHwDripsTimeInUs":  "0",
+                                    "GdiOnTime":  "0",
+                                    "DwmSyncFlushTime":  "0",
+                                    "MonitorPowerOnTime":  "232985",
+                                    "SleepEntered":  "false",
+                                    "ScreenOffEnergyCapacityAtStart":  "25832",
+                                    "ScreenOffEnergyCapacityAtEnd":  "25635",
+                                    "ScreenOffDurationInUs":  "46133016",
+                                    "SleepEnergyCapacityAtStart":  "0",
+                                    "SleepEnergyCapacityAtEnd":  "0",
+                                    "SleepDurationInUs":  "0",
+                                    "ScreenOffFullEnergyCapacityAtStart":  "26494",
+                                    "ScreenOffFullEnergyCapacityAtEnd":  "26494",
+                                    "SleepFullEnergyCapacityAtStart":  "0",
+                                    "SleepFullEnergyCapacityAtEnd":  "0",
+                                    "PowerSchemeInfo":  "20",
+                                    "PowerButtonSuppressionActionCount":  "0",
+                                    "ScreenOffSwDripsResidencyInUs":  "0",
+                                    "ScreenOffHwDripsResidencyInUs":  "0",
+                                    "SleepSwDripsResidencyInUs":  "0",
+                                    "SleepHwDripsResidencyInUs":  "0"
+                                },
+                       "message":  "The system is exiting Modern Standby \r\n\r\nReason: Input Keyboard."
+                   },
+                   {
+                       "event_id":  566,
+                       "record_id":  27165,
+                       "time_utc":  "2026-10-27T12:18:52.2457361+00:00",
+                       "time_wib":  "2026-10-27T19:18:52.2457361+07:00",
+                       "data":  {
+                                    "BootId":  "8",
+                                    "Reason":  "31",
+                                    "PreviousSessionId":  "29",
+                                    "PreviousSessionType":  "1",
+                                    "PreviousSessionDurationInUs":  "46133016",
+                                    "PreviousEnergyCapacityAtStart":  "25832",
+                                    "PreviousFullEnergyCapacityAtStart":  "26494",
+                                    "PreviousEnergyCapacityAtEnd":  "25635",
+                                    "PreviousFullEnergyCapacityAtEnd":  "26494",
+                                    "NextSessionId":  "31",
+                                    "NextSessionType":  "0",
+                                    "PowerStateAc":  "false",
+                                    "MonitorReason":  "31"
+                                },
+                       "message":  "The system session has transitioned from 29 to 31.\r\n\r\nReason InputAccelerometer \r\n\r\nBootId: 8"
+                   },
+                   {
+                       "event_id":  105,
+                       "record_id":  27177,
+                       "time_utc":  "2026-10-27T12:27:03.4603409+00:00",
+                       "time_wib":  "2026-10-27T19:27:03.4603409+07:00",
+                       "data":  {
+                                    "AcOnline":  "true",
+                                    "RemainingCapacity":  "22988",
+                                    "FullChargeCapacity":  "26494"
+                                },
+                       "message":  "Power source change."
+                   },
+                   {
+                       "event_id":  105,
+                       "record_id":  27192,
+                       "time_utc":  "2026-10-27T12:54:24.3820776+00:00",
+                       "time_wib":  "2026-10-27T19:54:24.3820776+07:00",
+                       "data":  {
+                                    "AcOnline":  "false",
+                                    "RemainingCapacity":  "25914",
+                                    "FullChargeCapacity":  "26494"
+                                },
+                       "message":  "Power source change."
+                   },
+                   {
+                       "event_id":  105,
+                       "record_id":  27210,
+                       "time_utc":  "2026-10-27T13:00:55.2882676+00:00",
+                       "time_wib":  "2026-10-27T20:00:55.2882676+07:00",
+                       "data":  {
+                                    "AcOnline":  "true",
+                                    "RemainingCapacity":  "24381",
+                                    "FullChargeCapacity":  "26494"
+                                },
+                       "message":  "Power source change."
+                   },
+                   {
+                       "event_id":  105,
+                       "record_id":  27216,
+                       "time_utc":  "2026-10-27T13:28:00.9528018+00:00",
+                       "time_wib":  "2026-10-27T20:28:00.9528018+07:00",
+                       "data":  {
+                                    "AcOnline":  "false",
+                                    "RemainingCapacity":  "26494",
+                                    "FullChargeCapacity":  "26494"
+                                },
+                       "message":  "Power source change."
+                   }
+               ]
+}

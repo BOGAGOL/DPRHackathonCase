@@ -1,0 +1,196 @@
+{
+  "schema_version": 2,
+  "gate": 3,
+  "passed": true,
+  "started_at_utc": "2026-10-28T06:32:45.074391+00:00",
+  "measurement_kind": "correctness_only",
+  "official_benchmark_executed": false,
+  "samples_required_per_read_scenario_per_dataset": 1000,
+  "datasets": [
+    {
+      "baseline": "baseline_100k",
+      "protected": "protected_100k",
+      "samples_per_read": 1000,
+      "baseline_key_corpus": {
+        "version": 1,
+        "seed": 42,
+        "sha256": "b38b8f59819b1eee314fac75c510417f7945c8d1b9b4e52f95839bf865e92ea5",
+        "profile_count": 2048,
+        "page_count": 64,
+        "location": "DPR_PRIVATE_DIR/benchmark (not exported)"
+      },
+      "authorized_record_count": 50489,
+      "scenarios": {
+        "read_by_nik": {
+          "passed": true,
+          "requests": 1000,
+          "distinct_lookup_keys": 1000,
+          "mismatches": 0,
+          "business_rows_compared": 1000,
+          "db_time": {
+            "source": "pg_stat_statements",
+            "calls": 1000,
+            "requests": 1000,
+            "total_exec_time_ms": 6301.646049000008,
+            "db_time_ms_per_request": 6.301646049000008,
+            "db_time_ms_per_sql_call": 6.301646049000008,
+            "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+            "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+          }
+        },
+        "read_by_email": {
+          "passed": true,
+          "requests": 1000,
+          "distinct_lookup_keys": 1000,
+          "mismatches": 0,
+          "business_rows_compared": 1000,
+          "db_time": {
+            "source": "pg_stat_statements",
+            "calls": 1000,
+            "requests": 1000,
+            "total_exec_time_ms": 408.365114,
+            "db_time_ms_per_request": 0.40836511400000003,
+            "db_time_ms_per_sql_call": 0.40836511400000003,
+            "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+            "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+          }
+        },
+        "read_profile": {
+          "passed": true,
+          "requests": 1000,
+          "distinct_lookup_keys": 1000,
+          "mismatches": 0,
+          "business_rows_compared": 1000,
+          "db_time": {
+            "source": "pg_stat_statements",
+            "calls": 1000,
+            "requests": 1000,
+            "total_exec_time_ms": 127.26370999999997,
+            "db_time_ms_per_request": 0.12726370999999997,
+            "db_time_ms_per_sql_call": 0.12726370999999997,
+            "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+            "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+          }
+        },
+        "list_page": {
+          "passed": true,
+          "requests": 1000,
+          "distinct_lookup_keys": 1000,
+          "mismatches": 0,
+          "business_rows_compared": 50000,
+          "db_time": {
+            "source": "pg_stat_statements",
+            "calls": 1000,
+            "requests": 1000,
+            "total_exec_time_ms": 21162.343291999998,
+            "db_time_ms_per_request": 21.162343292,
+            "db_time_ms_per_sql_call": 21.162343292,
+            "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+            "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+          }
+        }
+      },
+      "write_rollback_probes": {
+        "update_contact": "PASS",
+        "insert_member": "PASS"
+      },
+      "passed": true
+    },
+    {
+      "baseline": "baseline_1m",
+      "protected": "protected_1m",
+      "samples_per_read": 1000,
+      "baseline_key_corpus": {
+        "version": 1,
+        "seed": 42,
+        "sha256": "a68899fbfeef09a0f559a75c487e8fd747f0054fe930cb61f9457940b8870cf2",
+        "profile_count": 2048,
+        "page_count": 64,
+        "location": "DPR_PRIVATE_DIR/benchmark (not exported)"
+      },
+      "authorized_record_count": 50952,
+      "scenarios": {
+        "read_by_nik": {
+          "passed": true,
+          "requests": 1000,
+          "distinct_lookup_keys": 1000,
+          "mismatches": 0,
+          "business_rows_compared": 1000,
+          "db_time": {
+            "source": "pg_stat_statements",
+            "calls": 1000,
+            "requests": 1000,
+            "total_exec_time_ms": 24455.336914000003,
+            "db_time_ms_per_request": 24.455336914000004,
+            "db_time_ms_per_sql_call": 24.455336914000004,
+            "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+            "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+          }
+        },
+        "read_by_email": {
+          "passed": true,
+          "requests": 1000,
+          "distinct_lookup_keys": 1000,
+          "mismatches": 0,
+          "business_rows_compared": 1000,
+          "db_time": {
+            "source": "pg_stat_statements",
+            "calls": 1000,
+            "requests": 1000,
+            "total_exec_time_ms": 611.6988460000001,
+            "db_time_ms_per_request": 0.6116988460000001,
+            "db_time_ms_per_sql_call": 0.6116988460000001,
+            "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+            "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+          }
+        },
+        "read_profile": {
+          "passed": true,
+          "requests": 1000,
+          "distinct_lookup_keys": 1000,
+          "mismatches": 0,
+          "business_rows_compared": 1000,
+          "db_time": {
+            "source": "pg_stat_statements",
+            "calls": 1000,
+            "requests": 1000,
+            "total_exec_time_ms": 158.92240100000015,
+            "db_time_ms_per_request": 0.15892240100000016,
+            "db_time_ms_per_sql_call": 0.15892240100000016,
+            "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+            "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+          }
+        },
+        "list_page": {
+          "passed": true,
+          "requests": 1000,
+          "distinct_lookup_keys": 1000,
+          "mismatches": 0,
+          "business_rows_compared": 50000,
+          "db_time": {
+            "source": "pg_stat_statements",
+            "calls": 1000,
+            "requests": 1000,
+            "total_exec_time_ms": 30239.97428799998,
+            "db_time_ms_per_request": 30.239974287999978,
+            "db_time_ms_per_sql_call": 30.239974287999978,
+            "scope": "Top-level SQL for the workload role/database only; execution, excluding planning, network and crypto",
+            "percentiles": "NOT_AVAILABLE: cumulative execution counters do not provide p50/p95"
+          }
+        }
+      },
+      "write_rollback_probes": {
+        "update_contact": "PASS",
+        "insert_member": "PASS"
+      },
+      "passed": true
+    }
+  ],
+  "dek_cache_ttl_seconds": 0,
+  "workload_role": "app_user",
+  "rls_bypassed": false,
+  "monitoring": "separate admin connection; no workload role grants",
+  "values_withheld": true,
+  "status": "PASSED",
+  "completed_at_utc": "2026-10-28T06:36:54.971714+00:00"
+}

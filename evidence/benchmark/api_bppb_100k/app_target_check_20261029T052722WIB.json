@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "status": "STOPPED_APP_TARGET_ALLOWLIST",
+  "checked_at_wib": "2026-10-29T05:27:22.438250+07:00",
+  "code_commit": "b77142d1d198a9606c45070663004b2c8bd0cf1b",
+  "method": "static AST inspection of actual app configuration and setup CLI; no mocked service or live runtime claim",
+  "cases": [
+    {
+      "mode": "plain",
+      "target": "api_plain_100k",
+      "in_mode_allowlist": false,
+      "matches_disposable_prefix": false,
+      "static_analysis": "rejected_even_with_DPR_ALLOW_DISPOSABLE_DATABASE_1"
+    },
+    {
+      "mode": "protected",
+      "target": "api_protected_100k",
+      "in_mode_allowlist": false,
+      "matches_disposable_prefix": false,
+      "static_analysis": "rejected_even_with_DPR_ALLOW_DISPOSABLE_DATABASE_1"
+    }
+  ],
+  "runtime_allowlist": {
+    "plain": [
+      "baseline_100k",
+      "baseline_1m"
+    ],
+    "protected": [
+      "protected_100k",
+      "protected_1m",
+      "protected_734"
+    ],
+    "disposable_prefix": "dpr_b_test_",
+    "restored_database_exception": "protected only; dpr_restore_ followed by exactly 32 hex characters; cannot accept api_*"
+  },
+  "setup_cli_database_choices": [
+    "baseline_100k",
+    "baseline_1m",
+    "protected_100k",
+    "protected_734",
+    "protected_1m"
+  ],
+  "setup_mode_dispatch": "startswith protected_ selects protected control schema; api_protected_100k would require an explicit dispatch update as well as allowlist support",
+  "source_references": [
+    {
+      "file": "app/backend/service_app/config.py",
+      "lines": [
+        33,
+        37,
+        45,
+        46,
+        47
+      ],
+      "sha256": "d9aa78c7ae6085842d1d434d21a1b2e4eb1cfd2f61db66c2c29fcb834bdfaa60"
+    },
+    {
+      "file": "app/scripts/schema.py",
+      "lines": [
+        46,
+        49,
+        53
+      ],
+      "sha256": "a9b766a01a46dd1b5ed01dba9dc0976590fdaba8b9e25c5881186d2b465405be"
+    }
+  ],
+  "runtime_probe": {
+    "status": "NOT_EXECUTED",
+    "reason": "root venv lacks sqlalchemy; import stopped before Settings could execute; app venv not installed. No application dependencies installed after source-level blocker was found."
+  },
+  "initial_gate_evidence": "evidence/benchmark/api_bppb_100k/preflight_20261029T052428WIB.json",
+  "app_code_modified": false,
+  "copies_created": false,
+  "app_started": false,
+  "parity_requests": 0,
+  "benchmark_runs": 0,
+  "official_database_changes_attempted": false,
+  "root_token_accessed": false,
+  "token_issued": false,
+  "production_server_contacted": false,
+  "required_owner": "Modul B / Zhafif",
+  "next_step": "Support the explicitly requested clone targets in runtime validation and setup mode dispatch, or obtain revised clone-name/setup instructions; do not bypass testing/TLS/allowlist gates. App-code changes are not authorized for Modul C."
+}

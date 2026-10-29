@@ -1,0 +1,34 @@
+{
+  "kind": "intermediate_httpx_dispatch_transport_probe",
+  "provenance": "Exact component aggregates retained from captured command output before direct request_bytes fast path; original timestamp unavailable",
+  "cases": [
+    {
+      "transport": "httpx",
+      "concurrency": 1,
+      "requests": 200,
+      "mean_ms": 2.2888549994968344,
+      "p95_ms": 3.273694976815022
+    },
+    {
+      "transport": "httpx",
+      "concurrency": 8,
+      "requests": 200,
+      "mean_ms": 9.633273999788798,
+      "p95_ms": 16.311345006397456
+    },
+    {
+      "transport": "https_pool_via_httpx_dispatch",
+      "concurrency": 1,
+      "requests": 200,
+      "mean_ms": 1.80529600038426,
+      "p95_ms": 2.6019050186732784
+    },
+    {
+      "transport": "https_pool_via_httpx_dispatch",
+      "concurrency": 8,
+      "requests": 200,
+      "mean_ms": 7.651059499185067,
+      "p95_ms": 14.361855019524226
+    }
+  ]
+}

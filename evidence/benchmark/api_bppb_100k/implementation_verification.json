@@ -1,0 +1,42 @@
+{
+  "status": "PASSED",
+  "at_wib": "2026-10-29T06:47:38.756175+07:00",
+  "core_tests": {
+    "passed": 262,
+    "skipped": 2,
+    "evidence": "all_tests.xml",
+    "skips": [
+      "optional disposable OpenBao",
+      "explicit opt-in k6 TLS fixture (Windows user trust store)"
+    ]
+  },
+  "real_k6_tls_fixture": {
+    "passed": 1,
+    "evidence": "k6_fixture_tests.xml",
+    "fixture_duration_seconds": 2,
+    "production_duration_seconds": 60,
+    "scope": "invented local TLS data; no PostgreSQL/OpenBao"
+  },
+  "initial_failure": {
+    "evidence": "implementation_initial_failure.xml",
+    "reason": "Windows fsync requires writable descriptor; corrected rb to r+b before any database mutation."
+  },
+  "initial_fixture_aborted": {
+    "reason": "First 60s synthetic fixture produced 835666619 bytes; interrupted during fixture cleanup. Owned fixture processes stopped and fixture CA removed. Test then bounded to 2s and TLS accept made cancellation safe; passed.",
+    "official_data_or_benchmark_activity": false
+  },
+  "windows_process_guard": "Track actual Python server children and parent identities; stop all owned processes and require port closed before restoring database names.",
+  "runtime_gate": "Original OID/content/control/sequence preserved; unknown copy OID refused; restore_failed stops without automatic retry.",
+  "copy_preparation_regressions": {
+    "passed": 26,
+    "evidence": "implementation_tests.xml"
+  },
+  "latest_fixture_attempt": {
+    "status": "ABORTED_BEFORE_K6",
+    "reason": "Windows CurrentUser Root certificate Add subprocess did not return; stopped only owned test processes. Fixture CA not present afterwards. Historical successful fixture result retained; production load.js unchanged.",
+    "fixture_ca_in_store_after_cleanup": false,
+    "fixture_ca_thumbprint": "05AE63A4B31F4744231E6F5033FA2F6DCAA23D39",
+    "official_database_activity": false,
+    "future_test_requirement": "DPR_RUN_K6_TLS_FIXTURE=1; certificate subprocesses now bounded to30s"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "synthetic_inputs": true,
+  "columns_compared": 3,
+  "batch_rpc_count": 1,
+  "serial_rpc_count": 3,
+  "values_exported": false,
+  "timestamp_utc": "2026-10-28T13:02:05.100667+00:00"
+}

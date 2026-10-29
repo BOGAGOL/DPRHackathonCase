@@ -1,0 +1,2841 @@
+{
+  "schema_version": 1,
+  "task": "Audit read-only Modul A/B berbasis kode/evidence/unit test",
+  "started_at_wib": "2026-10-28T15:14:04+07:00",
+  "completed_inspection_at_wib": "2026-10-28T15:35:27.235356+07:00",
+  "deadline_at_wib": "2026-10-28T15:54:04+07:00",
+  "audit_branch": "run/overnight-28okt",
+  "audited_main_commit": "ed88ecde71107ae3180b055eecefed3b9ad1f60b",
+  "audited_run_commit_before_report": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+  "module_heads": {
+    "A": "b8e999815f205d44b6fc90bdc58b4376cc544fd8",
+    "B": "9029b77ee468afd26d1de240ae8477bca0966183"
+  },
+  "allowed_statuses": [
+    "SELESAI+BUKTI",
+    "SELESAI TANPA BUKTI",
+    "SEBAGIAN",
+    "BELUM",
+    "TIDAK DITEMUKAN"
+  ],
+  "method": {
+    "fetch": "git fetch --all --prune; success",
+    "remote_access": "git show/log/diff, gh read-only; detached worktree main",
+    "worktree": "C:\\dev\\dpr-audit-20261028",
+    "services_accessed": false,
+    "database_or_openbao_writes": false,
+    "benchmark_executed": false,
+    "migration_restore_rotation_executed": false,
+    "files_authorized_for_commit": [
+      "evidence/integration/team_status_20261028.json",
+      "docs/team_status_20261028.md"
+    ],
+    "limitations": [
+      "Runtime laptop dikutip dari evidence terakhir, bukan query layanan saat audit.",
+      "Evidence lab Alby/Zhafif/disposable dibedakan dari pg-dpr resmi.",
+      "event_at_wib null: tidak ada timestamp event; waktu commit bukan waktu pengujian.",
+      "Tidak menjalankan integration Docker, restore/retention/rotation/migration, app startup/provision atau browser karena dapat menulis layanan."
+    ],
+    "main_reference": "main pada temuan audit berarti origin/main ed88ecd; local main tetap 5ab5248, tidak disentuh."
+  },
+  "branches": [
+    {
+      "branch": "origin/HEAD",
+      "commit": "ed88ecde71107ae3180b055eecefed3b9ad1f60b",
+      "author": "japippppp",
+      "authored_at_wib": "2026-10-28T10:18:27+07:00",
+      "committed_at_wib": "2026-10-28T10:18:27+07:00"
+    },
+    {
+      "branch": "origin/feat/crypto-infra-tls",
+      "commit": "549e6db7525e888c9d0222432a2ad3bb0b7282f0",
+      "author": "albyarto",
+      "authored_at_wib": "2026-10-26T22:48:42+07:00",
+      "committed_at_wib": "2026-10-26T22:48:42+07:00"
+    },
+    {
+      "branch": "origin/feat/crypto-migration",
+      "commit": "b8e999815f205d44b6fc90bdc58b4376cc544fd8",
+      "author": "Muhammad Albyarto Ghazali",
+      "authored_at_wib": "2026-10-28T01:10:13+07:00",
+      "committed_at_wib": "2026-10-28T01:10:13+07:00"
+    },
+    {
+      "branch": "origin/feat/crypto-toolkit",
+      "commit": "86df826d55efd9c87bad7d462364d5a9cdc69f13",
+      "author": "albyarto",
+      "authored_at_wib": "2026-10-26T23:29:08+07:00",
+      "committed_at_wib": "2026-10-26T23:29:08+07:00"
+    },
+    {
+      "branch": "origin/feat/scanner",
+      "commit": "3d2d1f9ad0d04b6a98ac2908f327b6dc95bf57db",
+      "author": "AhmadDzulfikar",
+      "authored_at_wib": "2026-10-26T20:45:46+07:00",
+      "committed_at_wib": "2026-10-26T20:45:46+07:00"
+    },
+    {
+      "branch": "origin/feat/service-app",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "author": "favianzhafif26",
+      "authored_at_wib": "2026-10-28T09:51:38+07:00",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00"
+    },
+    {
+      "branch": "origin/feat/verify-bench",
+      "commit": "fbeff98c1748a24db1b759afa41f54e589cbaf7d",
+      "author": "AhmadDzulfikar",
+      "authored_at_wib": "2026-10-27T22:25:12+07:00",
+      "committed_at_wib": "2026-10-27T22:25:12+07:00"
+    },
+    {
+      "branch": "origin/fix/tls-baseline-exception",
+      "commit": "7dcdd9e701791810ea6471a17e5f8f7f90fed87d",
+      "author": "AhmadDzulfikar",
+      "authored_at_wib": "2026-10-28T00:46:36+07:00",
+      "committed_at_wib": "2026-10-28T00:46:36+07:00"
+    },
+    {
+      "branch": "origin/main",
+      "commit": "ed88ecde71107ae3180b055eecefed3b9ad1f60b",
+      "author": "japippppp",
+      "authored_at_wib": "2026-10-28T10:18:27+07:00",
+      "committed_at_wib": "2026-10-28T10:18:27+07:00"
+    },
+    {
+      "branch": "origin/run/overnight-28okt",
+      "commit": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+      "author": "AhmadDzulfikar",
+      "authored_at_wib": "2026-10-28T15:05:37+07:00",
+      "committed_at_wib": "2026-10-28T15:05:37+07:00"
+    }
+  ],
+  "merge_checks": [
+    {
+      "branch": "origin/feat/crypto-infra-tls",
+      "merge_base": "549e6db7525e888c9d0222432a2ad3bb0b7282f0",
+      "returncode": 0,
+      "conflict_markers": false,
+      "ancestor_of_main": true,
+      "method": "git 2.37 merge-tree <merge-base> origin/main branch; output inspected without changing worktree",
+      "changed_section_count": 0,
+      "conflict_paths": []
+    },
+    {
+      "branch": "origin/feat/crypto-migration",
+      "merge_base": "b8e999815f205d44b6fc90bdc58b4376cc544fd8",
+      "returncode": 0,
+      "conflict_markers": false,
+      "ancestor_of_main": true,
+      "method": "git 2.37 merge-tree <merge-base> origin/main branch; output inspected without changing worktree",
+      "changed_section_count": 0,
+      "conflict_paths": []
+    },
+    {
+      "branch": "origin/feat/crypto-toolkit",
+      "merge_base": "86df826d55efd9c87bad7d462364d5a9cdc69f13",
+      "returncode": 0,
+      "conflict_markers": false,
+      "ancestor_of_main": true,
+      "method": "git 2.37 merge-tree <merge-base> origin/main branch; output inspected without changing worktree",
+      "changed_section_count": 0,
+      "conflict_paths": []
+    },
+    {
+      "branch": "origin/feat/scanner",
+      "merge_base": "3d2d1f9ad0d04b6a98ac2908f327b6dc95bf57db",
+      "returncode": 0,
+      "conflict_markers": false,
+      "ancestor_of_main": true,
+      "method": "git 2.37 merge-tree <merge-base> origin/main branch; output inspected without changing worktree",
+      "changed_section_count": 0,
+      "conflict_paths": []
+    },
+    {
+      "branch": "origin/feat/service-app",
+      "merge_base": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "returncode": 0,
+      "conflict_markers": false,
+      "ancestor_of_main": true,
+      "method": "git 2.37 merge-tree <merge-base> origin/main branch; output inspected without changing worktree",
+      "changed_section_count": 0,
+      "conflict_paths": []
+    },
+    {
+      "branch": "origin/feat/verify-bench",
+      "merge_base": "27aa9fa08dbcbe0e20199748e15d98cd4e81582f",
+      "returncode": 0,
+      "conflict_markers": true,
+      "ancestor_of_main": false,
+      "method": "git 2.37 merge-tree <merge-base> origin/main branch; output inspected without changing worktree",
+      "conflict_paths": [
+        "verify/NOTES.md"
+      ],
+      "changed_section_count": 70
+    },
+    {
+      "branch": "origin/fix/tls-baseline-exception",
+      "merge_base": "7dcdd9e701791810ea6471a17e5f8f7f90fed87d",
+      "returncode": 0,
+      "conflict_markers": false,
+      "ancestor_of_main": true,
+      "method": "git 2.37 merge-tree <merge-base> origin/main branch; output inspected without changing worktree",
+      "changed_section_count": 0,
+      "conflict_paths": []
+    },
+    {
+      "branch": "origin/run/overnight-28okt",
+      "merge_base": "ed88ecde71107ae3180b055eecefed3b9ad1f60b",
+      "returncode": 0,
+      "conflict_markers": false,
+      "ancestor_of_main": false,
+      "method": "git 2.37 merge-tree <merge-base> origin/main branch; output inspected without changing worktree",
+      "changed_section_count": 172,
+      "conflict_paths": []
+    }
+  ],
+  "prs": [
+    {
+      "headRefName": "feat/service-app",
+      "mergeCommit": {
+        "oid": "20e08f39bffe160049a6f9414325702e56fa5342"
+      },
+      "mergedAt": "2026-10-27T07:10:28Z",
+      "mergedBy": {
+        "id": "MDQ6VXNlcjcxOTUwMjQw",
+        "is_bot": false,
+        "login": "favianzhafif26",
+        "name": "japippppp"
+      },
+      "number": 1,
+      "reviewDecision": "",
+      "reviews": [],
+      "state": "MERGED",
+      "url": "https://github.com/BOGAGOL/juara1onno/pull/1",
+      "merged_at_wib": "2026-10-27T14:10:28+07:00"
+    },
+    {
+      "headRefName": "feat/crypto-migration",
+      "mergeCommit": {
+        "oid": "324caa9bfff9f3a77204c9a2d9c5a48a0d0a09a9"
+      },
+      "mergedAt": "2026-10-27T14:48:20Z",
+      "mergedBy": {
+        "id": "U_kgDOCNDfPA",
+        "is_bot": false,
+        "login": "albyarto",
+        "name": "Muhammad Albyarto Ghazali"
+      },
+      "number": 2,
+      "reviewDecision": "",
+      "reviews": [],
+      "state": "MERGED",
+      "url": "https://github.com/BOGAGOL/juara1onno/pull/2",
+      "merged_at_wib": "2026-10-27T21:48:20+07:00"
+    },
+    {
+      "headRefName": "feat/crypto-migration",
+      "mergeCommit": {
+        "oid": "0360af8a556a6b4293ea0850fe5064fc6ca3f196"
+      },
+      "mergedAt": "2026-10-27T15:49:03Z",
+      "mergedBy": {
+        "id": "U_kgDOCNDfPA",
+        "is_bot": false,
+        "login": "albyarto",
+        "name": "Muhammad Albyarto Ghazali"
+      },
+      "number": 3,
+      "reviewDecision": "",
+      "reviews": [],
+      "state": "MERGED",
+      "url": "https://github.com/BOGAGOL/juara1onno/pull/3",
+      "merged_at_wib": "2026-10-27T22:49:03+07:00"
+    },
+    {
+      "headRefName": "feat/crypto-migration",
+      "mergeCommit": {
+        "oid": "5ab5248f499bae988fefebb774e7ed8e62e8cd87"
+      },
+      "mergedAt": "2026-10-27T16:44:32Z",
+      "mergedBy": {
+        "id": "U_kgDOCNDfPA",
+        "is_bot": false,
+        "login": "albyarto",
+        "name": "Muhammad Albyarto Ghazali"
+      },
+      "number": 4,
+      "reviewDecision": "",
+      "reviews": [],
+      "state": "MERGED",
+      "url": "https://github.com/BOGAGOL/juara1onno/pull/4",
+      "merged_at_wib": "2026-10-27T23:44:32+07:00"
+    },
+    {
+      "headRefName": "feat/crypto-migration",
+      "mergeCommit": {
+        "oid": "b8e999815f205d44b6fc90bdc58b4376cc544fd8"
+      },
+      "mergedAt": "2026-10-27T18:10:13Z",
+      "mergedBy": {
+        "id": "U_kgDOCNDfPA",
+        "is_bot": false,
+        "login": "albyarto",
+        "name": "Muhammad Albyarto Ghazali"
+      },
+      "number": 5,
+      "reviewDecision": "",
+      "reviews": [],
+      "state": "MERGED",
+      "url": "https://github.com/BOGAGOL/juara1onno/pull/5",
+      "merged_at_wib": "2026-10-28T01:10:13+07:00"
+    },
+    {
+      "headRefName": "feat/service-app",
+      "mergeCommit": {
+        "oid": "ed88ecde71107ae3180b055eecefed3b9ad1f60b"
+      },
+      "mergedAt": "2026-10-28T03:18:27Z",
+      "mergedBy": {
+        "id": "MDQ6VXNlcjcxOTUwMjQw",
+        "is_bot": false,
+        "login": "favianzhafif26",
+        "name": "japippppp"
+      },
+      "number": 6,
+      "reviewDecision": "",
+      "reviews": [],
+      "state": "MERGED",
+      "url": "https://github.com/BOGAGOL/juara1onno/pull/6",
+      "merged_at_wib": "2026-10-28T10:18:27+07:00"
+    }
+  ],
+  "secret_diff_scans": [
+    {
+      "scope": "A_unmerged",
+      "base": "origin/main",
+      "head": "origin/feat/crypto-migration",
+      "changed_files": 39,
+      "added_lines_scanned": 479,
+      "candidates": [],
+      "tracked_sensitive_names": [],
+      "interpretation": "two-dot tree comparison includes already-merged history; not a list of unmerged commits",
+      "actual_unmerged_files_three_dot": []
+    },
+    {
+      "scope": "B_unmerged",
+      "base": "origin/main",
+      "head": "origin/feat/service-app",
+      "changed_files": 0,
+      "added_lines_scanned": 0,
+      "candidates": [],
+      "tracked_sensitive_names": [],
+      "interpretation": "two-dot tree comparison includes already-merged history; not a list of unmerged commits",
+      "actual_unmerged_files_three_dot": []
+    },
+    {
+      "scope": "A_merged_PR2_to5",
+      "base": "324caa9^1",
+      "head": "b8e9998",
+      "changed_files": 203,
+      "added_lines_scanned": 13558,
+      "candidates": [],
+      "tracked_sensitive_names": []
+    },
+    {
+      "scope": "B_merged_PR1_and6",
+      "base": "20e08f3^1",
+      "head": "9029b77",
+      "changed_files": 368,
+      "added_lines_scanned": 50835,
+      "candidates": [
+        {
+          "path": "app/README.md",
+          "line": 60,
+          "type": "credential_url",
+          "value": "[MASKED]",
+          "classification": "interpolated README placeholder"
+        },
+        {
+          "path": "app/web/tests/ui.spec.ts",
+          "line": 12,
+          "type": "credential_url",
+          "value": "[MASKED]",
+          "classification": "random-generated synthetic fixture URL; not a committed live credential"
+        },
+        {
+          "path": "benchmark/tests/test_1m_crosscheck.py",
+          "line": 29,
+          "type": "credential_url",
+          "value": "[MASKED]",
+          "classification": "synthetic test fixture URL, no active credential established"
+        },
+        {
+          "path": "benchmark/tests/test_1m_crosscheck.py",
+          "line": 30,
+          "type": "credential_url",
+          "value": "[MASKED]",
+          "classification": "synthetic test fixture URL, no active credential established"
+        }
+      ],
+      "tracked_sensitive_names": []
+    }
+  ],
+  "sensitive_tracked_names_main": [],
+  "report_draft_search": {
+    "ref": "origin/main",
+    "patterns": [
+      "laporan",
+      "chapter",
+      "bab7",
+      "bab_7",
+      "bab-7",
+      "report"
+    ],
+    "matches": [],
+    "note": "report matches are machine evidence/scanner HTML/reference templates, not chapter drafts"
+  },
+  "items": [
+    {
+      "id": "A1",
+      "module": "A",
+      "question": "Backup terproteksi, restore, tamper, retention",
+      "status": "SEBAGIAN",
+      "summary": "Streaming/HMAC, restore dua mode, tamper/retention PASS lab Alby; pemulihan HTTP belum terbukti.",
+      "notes": "pg_dump stdout langsung ke encrypt_stream tanpa dump plaintext temporer; manifest canonical HMAC dengan kunci terpisah, digest dan semua frame AEAD diperiksa sebelum CREATE DATABASE baru. Mode tanpa OpenBao tetap perlu kunci artefak backup, tetapi field tetap ciphertext. Restore 734/100k PASS di clone development Alby, bukan laptop benchmark. Dengan OpenBao: ACL/RLS dan smoke 16 record/392 field non-null PASS, tetapi app_users/access_scope kosong dan HTTP service recovery belum diuji. Retention membuktikan anggota sintetis hilang dari backup baru (735->734), bukan pemusnahan backup lama/scheduler purge.",
+      "commit": "b8e999815f205d44b6fc90bdc58b4376cc544fd8",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "scripts/backup/runner.py",
+          "ref": "origin/main",
+          "line": 53,
+          "sha256_git_blob": "391470a0c65ec8e29569a92de717061c308a21204ce763f444bb0dd1b7a3749d",
+          "commit": "50e55b0d15256fdc9bcb203a5eadfab5e4e18fca",
+          "committed_at_wib": "2026-10-27T23:29:26+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "scripts/backup/crypto.py",
+          "ref": "origin/main",
+          "line": 106,
+          "sha256_git_blob": "68bb59ce92387abdfcd909480b90a76f4fba978e6e568674fd6cfed183e1719a",
+          "commit": "e08ff7e84dc44722b80f7da680ca66b49718b5ad",
+          "committed_at_wib": "2026-10-27T23:20:54+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "scripts/backup/postgres.py",
+          "ref": "origin/main",
+          "line": 111,
+          "sha256_git_blob": "bc07341a6589deb6c623bfad3016f803109a58011f4fc3947aa69aa2c739652c",
+          "commit": "50e55b0d15256fdc9bcb203a5eadfab5e4e18fca",
+          "committed_at_wib": "2026-10-27T23:29:26+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "scripts/backup/drills.py",
+          "ref": "origin/main",
+          "line": 75,
+          "sha256_git_blob": "3aab773c5718d36bf8583cafb29e784c2d1590beef9f59fdd15a881cf4217418",
+          "commit": "50e55b0d15256fdc9bcb203a5eadfab5e4e18fca",
+          "committed_at_wib": "2026-10-27T23:29:26+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "evidence/backup/local-protected_734.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "1a18e0c51b6b617abb1f7f7a2747bc8ab4dc790ca54d065b3b60a72ed62aa24a",
+          "commit": "a5993af97728fc71a0e58ef76a15516356d7f2b9",
+          "committed_at_wib": "2026-10-27T23:36:15+07:00",
+          "event_at_wib": null,
+          "reported_result": true
+        },
+        {
+          "path": "evidence/backup/local-protected_100k.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "7caf54ca6a41c5eb4288056952ea181e931cfa0538950a6330c0613dbbf9112f",
+          "commit": "a5993af97728fc71a0e58ef76a15516356d7f2b9",
+          "committed_at_wib": "2026-10-27T23:36:15+07:00",
+          "event_at_wib": null,
+          "reported_result": true
+        },
+        {
+          "path": "evidence/backup/tamper.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "8441357a23378a6ad68ca75c19394700c96c730a7799a982875c5b4d0a225397",
+          "commit": "a5993af97728fc71a0e58ef76a15516356d7f2b9",
+          "committed_at_wib": "2026-10-27T23:36:15+07:00",
+          "event_at_wib": "2026-10-27T23:31:31.137747+07:00",
+          "reported_result": true
+        },
+        {
+          "path": "evidence/backup/retention.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "cc3bbb44a3e169a374ae8d49ead59156d5349a3301b9962d801e596de50c327d",
+          "commit": "a5993af97728fc71a0e58ef76a15516356d7f2b9",
+          "committed_at_wib": "2026-10-27T23:36:15+07:00",
+          "event_at_wib": "2026-10-27T23:31:36.766043+07:00",
+          "reported_result": true
+        },
+        {
+          "path": "evidence/backup/integration.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "6fec3ad3d7de36d356956611190914bbb21361eae5d731012c8c03155dec764d",
+          "commit": "5ad93f9ee4c4d5b4543020fa6ac839676f46612b",
+          "committed_at_wib": "2026-10-28T01:09:03+07:00",
+          "event_at_wib": null,
+          "reported_result": true
+        }
+      ],
+      "target_mapping": {
+        "F04": "SEBAGIAN: DB+ACL/RLS+decrypt smoke PASS; pemulihan HTTP belum diuji",
+        "F05": "PASS retention drill pada clone sendiri",
+        "S07": "PASS tamper/HMAC/AEAD, unit audit PASS"
+      },
+      "results": {
+        "backup734_at_wib": "2026-10-27T23:31:25.701160+07:00",
+        "tamper_at_wib": "2026-10-27T23:31:31.137747+07:00",
+        "retention_at_wib": "2026-10-27T23:31:36.766043+07:00",
+        "restore100k_with_openbao_at_wib": "2026-10-27T23:32:24.973399+07:00",
+        "tamper": "PASS 1 byte diubah, ditolak sebelum CREATE DB",
+        "retention": "PASS 3 scratch DB dibersihkan"
+      },
+      "audit_test_reference": "tests.audit_A_pure_unit"
+    },
+    {
+      "id": "A2",
+      "module": "A",
+      "question": "Rotasi KEK dan rewrap",
+      "status": "SELESAI+BUKTI",
+      "summary": "PII KEK1->2, rewrap100734, full validation dan backup pra-rotasi PASS di lab Alby.",
+      "notes": "Rotasi PII 1->2, rewrap 734+100000 baris. Percobaan pertama berhenti, resume menyelesaikan 45400 sisa; evidence jelas mencatat resumed. Semua plaintext/DEK, ciphertext FIN/bidx/REF dan jumlah baris tetap; full validation 734/100k PASS. Finance/search tetap v1, min_decryption_version tidak dinaikkan. Backup sebelum rotasi masih dapat dipulihkan/didekripsi. Bukan rotasi di laptop benchmark.",
+      "commit": "b8e999815f205d44b6fc90bdc58b4376cc544fd8",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "infra/rotation/runner.py",
+          "ref": "origin/main",
+          "line": 1,
+          "sha256_git_blob": "e66d47c131817727e98a11aba31c2d40200ca0a344a524fa41a108e5b1c5c878",
+          "commit": "1c71760f470ade59ffd01d5bb55d21ef833fc3c9",
+          "committed_at_wib": "2026-10-27T23:58:37+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "evidence/keys/rotation-first-attempt.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "52149c64304ecb56b5a1332e8c7187b1ff4eb0afa7a94e18ede693f281d37c29",
+          "commit": "11c36f97fa64a33d9c96adbfbf4303d759652a6a",
+          "committed_at_wib": "2026-10-28T00:12:33+07:00",
+          "event_at_wib": "2026-10-27T23:59:35.396476+07:00",
+          "reported_result": false
+        },
+        {
+          "path": "evidence/keys/rotation.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "3fe78afdfbaaccf94145219bd2d451d1159f284eeff4c19f4aacf6f3acdb51ec",
+          "commit": "11c36f97fa64a33d9c96adbfbf4303d759652a6a",
+          "committed_at_wib": "2026-10-28T00:12:33+07:00",
+          "event_at_wib": "2026-10-28T00:03:58.751751+07:00",
+          "reported_result": true
+        },
+        {
+          "path": "evidence/keys/post-rotation-validation.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "efd243f9121307f2480ac1258fce5448943a098b861b6f340c8f69ce2fd7b674",
+          "commit": "11c36f97fa64a33d9c96adbfbf4303d759652a6a",
+          "committed_at_wib": "2026-10-28T00:12:33+07:00",
+          "event_at_wib": null,
+          "reported_result": true
+        },
+        {
+          "path": "evidence/keys/backup-compatibility.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "cab87d7c4ef653a62b185c238873f2e3ad225571faeb877ce71b6c591de00492",
+          "commit": "11c36f97fa64a33d9c96adbfbf4303d759652a6a",
+          "committed_at_wib": "2026-10-28T00:12:33+07:00",
+          "event_at_wib": "2026-10-28T00:06:41.430652+07:00",
+          "reported_result": true
+        },
+        {
+          "path": "evidence/keys/source-preservation.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "4279f710fe4882e77532e13865e46e3967110ace700907ef72cb28f492e212ba",
+          "commit": "11c36f97fa64a33d9c96adbfbf4303d759652a6a",
+          "committed_at_wib": "2026-10-28T00:12:33+07:00",
+          "event_at_wib": null,
+          "reported_result": true
+        }
+      ]
+    },
+    {
+      "id": "A3",
+      "module": "A",
+      "question": "Vector kontrak dan test toolkit",
+      "status": "SELESAI+BUKTI",
+      "summary": "Vector ada; verifier dan test toolkit dijalankan audit PASS.",
+      "notes": "Vector test_only berisi kasus sintetis; tidak dicetak. test_shared_vector_file_and_corrupted_expectation dijalankan pada detached worktree main dan PASS dalam suite68. Evidence verifier A/B memiliki SHA256 vector yang sama dan delapan check PASS: AAD, blob/roundtrip, tamper, record/column swap, nonce, normalisasi, bidx.",
+      "commit": "b8e999815f205d44b6fc90bdc58b4376cc544fd8",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "docs/contracts/test_vectors.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "aeda21815755209a09190a39ab1dc5fc04410d2859e7c69f7e22e2d408686566",
+          "commit": "86df826d55efd9c87bad7d462364d5a9cdc69f13",
+          "committed_at_wib": "2026-10-26T23:29:08+07:00",
+          "event_at_wib": null,
+          "reported_result": null
+        },
+        {
+          "path": "toolkit/tests/test_vectors.py",
+          "ref": "origin/main",
+          "line": 14,
+          "sha256_git_blob": "18f0e0f19dad13452b0858f044652c1197d719a3c1eaaee9884924da3c1d5034",
+          "commit": "86df826d55efd9c87bad7d462364d5a9cdc69f13",
+          "committed_at_wib": "2026-10-26T23:29:08+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "evidence/crypto/vectors.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "dec2eaabf19d2f183409427b5f3bce2cca9ff9cc1f4226003639e6b5c0f9807e",
+          "commit": "86df826d55efd9c87bad7d462364d5a9cdc69f13",
+          "committed_at_wib": "2026-10-26T23:29:08+07:00",
+          "event_at_wib": "2026-10-26T23:25:53.226112+07:00",
+          "reported_result": true
+        }
+      ],
+      "audit_test_reference": "tests.audit_A_pure_unit"
+    },
+    {
+      "id": "A4",
+      "module": "A",
+      "question": "S04 bit tamper, swap record dan kolom",
+      "status": "SELESAI+BUKTI",
+      "summary": "8 parameter tamper/swap fail-closed dijalankan audit PASS.",
+      "notes": "test_tamper_and_swap_fail_closed meliputi key, record UUID, column, protection_version, format, nonce, ciphertext, tag. Bit dibalik pada format/nonce/ciphertext/tag; konteks record/kolom berubah dengan DEK tetap menguji AAD. Semua memicu DecryptionError. Tidak mengubah ciphertext database selama audit.",
+      "commit": "b8e999815f205d44b6fc90bdc58b4376cc544fd8",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "toolkit/tests/test_codec.py",
+          "ref": "origin/main",
+          "line": 33,
+          "sha256_git_blob": "dc1e2e0b56712d24da0dd5a7cc858e967d2814f7d18f03a290302cd7edf5b512",
+          "commit": "86df826d55efd9c87bad7d462364d5a9cdc69f13",
+          "committed_at_wib": "2026-10-26T23:29:08+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "toolkit/dprcrypto/codec.py",
+          "ref": "origin/main",
+          "line": 49,
+          "sha256_git_blob": "f9f4f03132273bbc35c35515ec72f43a83cbd70da272006056302d1d499843f1",
+          "commit": "86df826d55efd9c87bad7d462364d5a9cdc69f13",
+          "committed_at_wib": "2026-10-26T23:29:08+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "evidence/crypto/vectors.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "dec2eaabf19d2f183409427b5f3bce2cca9ff9cc1f4226003639e6b5c0f9807e",
+          "commit": "86df826d55efd9c87bad7d462364d5a9cdc69f13",
+          "committed_at_wib": "2026-10-26T23:29:08+07:00",
+          "event_at_wib": "2026-10-26T23:25:53.226112+07:00",
+          "reported_result": true
+        }
+      ],
+      "target_mapping": {
+        "S04": "PASS unit/vector"
+      },
+      "audit_test_reference": "tests.audit_A_pure_unit"
+    },
+    {
+      "id": "A5",
+      "module": "A",
+      "question": "Analyst view/agregat dan suppression k>=5",
+      "status": "SEBAGIAN",
+      "summary": "DB analyst masih melihat REF per record; GROUP BY tanpa suppression; test menerima total3.",
+      "notes": "analyst_view SELECT REF+age_band per record; analyst_age_summary GROUP BY tanpa HAVING/suppression. analyst_user memang tidak bisa SELECT tabel dasar, tetapi diberi SELECT view tersebut. Test integrasi mengharapkan tiga baris dan total agregat tiga, bukan penolakan small-cell. Tidak ditemukan test suppression SQL k>=5. Kontrol endpoint B tidak menutup akses langsung analyst_user.",
+      "commit": "b8e999815f205d44b6fc90bdc58b4376cc544fd8",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "sql/protected/01_schema.sql",
+          "ref": "origin/main",
+          "line": 202,
+          "sha256_git_blob": "4eee97cdd45df914b6c08a29af94816d629cece6e6ebb37a859d004d036918af",
+          "commit": "0e0f94900f7db85fa1a3fce54b7f63651088bb3c",
+          "committed_at_wib": "2026-10-27T12:07:09+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "sql/roles/01_roles.sql",
+          "ref": "origin/main",
+          "line": 113,
+          "sha256_git_blob": "0d25142e99598e9d322ee2fa554abe3805e18a05153282dd1237ad8e2f1ec3f1",
+          "commit": "0e8233d6d83cf13582f5122ca1fa02cdf8ca52bf",
+          "committed_at_wib": "2026-10-27T18:47:22+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "infra/tests/test_protected_schema_integration.py",
+          "ref": "origin/main",
+          "line": 101,
+          "sha256_git_blob": "a1197fbd50614f6bcda8b53f27ab3dcc308182c588e5759bf79f92e27b20e930",
+          "commit": "0e0f94900f7db85fa1a3fce54b7f63651088bb3c",
+          "committed_at_wib": "2026-10-27T12:07:09+07:00",
+          "event_at_wib": null
+        }
+      ]
+    },
+    {
+      "id": "A6",
+      "module": "A",
+      "question": "Revoke migration, NOLOGIN dan protected_734",
+      "status": "SEBAGIAN",
+      "summary": "Lab A: revoke+NOLOGIN+734 PASS. Laptop benchmark: NOLOGIN, protected_734 masih pending.",
+      "notes": "completion development Alby membuktikan protected_734 734 dan protected_100k 100000, revokasi token ditolak dan validasi sesudah revokasi, migration_user NOLOGIN. Laptop benchmark terakhir14:48:49 WIB juga NOLOGIN, tetapi TLS evidence mencatat protected_734 pending prepare. Token yang dicabut adalah token migrasi pada sesi itu; jangan klaim seluruh token svc-migration yang diterbitkan kemudian sudah dicabut. Tidak ada lookup token/query live saat audit.",
+      "commit": "b8e999815f205d44b6fc90bdc58b4376cc544fd8",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "evidence/migration/completion.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "c8ab1c403cdbb89e55c94c89cf2330dcb4ebe4aeeacfa8b5d85f4d46dce8581e",
+          "commit": "80d73cb5861459ca733a0fe537cb19be0080c662",
+          "committed_at_wib": "2026-10-27T21:16:18+07:00",
+          "event_at_wib": "2026-10-27T21:12:59.604635+07:00",
+          "reported_result": true
+        },
+        {
+          "path": "evidence/migration/validation-protected_734.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "c68b7ca2e0bb1d851826c7ebfd0c2924850d1f13853f19d98411ae5596d5a274",
+          "commit": "80d73cb5861459ca733a0fe537cb19be0080c662",
+          "committed_at_wib": "2026-10-27T21:16:18+07:00",
+          "event_at_wib": "2026-10-27T21:10:57.482469+07:00",
+          "reported_result": true
+        },
+        {
+          "path": "evidence/migration/revocation.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "b84bb7eeed4e2139a90f69f9133119149adfd82470e022e76e73465375d46bff",
+          "commit": "7dcdd9e701791810ea6471a17e5f8f7f90fed87d",
+          "committed_at_wib": "2026-10-28T00:46:36+07:00",
+          "event_at_wib": "2026-10-28T00:41:23.075311+07:00",
+          "reported_result": true
+        },
+        {
+          "path": "migration/README.md",
+          "ref": "origin/main",
+          "line": 3,
+          "sha256_git_blob": "281d9a280c067c6d9edbe88c19a01394de050dc933a01b09e896faa7da986612",
+          "commit": "5fe6799182894712567ba4d9d6f68033c3cd47fd",
+          "committed_at_wib": "2026-10-27T22:47:19+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "evidence/overnight/final_runtime_20261028.json",
+          "ref": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+          "line": null,
+          "sha256_git_blob": "4830dd3861edde84ac35747273e31cc27295009a4a86fdb9597e6094b4618b94",
+          "commit": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+          "committed_at_wib": "2026-10-28T15:05:37+07:00",
+          "event_at_wib": "2026-10-28T14:48:49.297634+07:00",
+          "reported_result": true
+        },
+        {
+          "path": "evidence/overnight/pg_stat_statements_20261028/tls_verify.json",
+          "ref": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+          "line": null,
+          "sha256_git_blob": "d3e1261f796728810d26717899157575c2061e91d4363fa2ca6251d0ce35530d",
+          "commit": "a4a8844986751bf00d0ed2b1863fbd1c5402d429",
+          "committed_at_wib": "2026-10-28T14:16:01+07:00",
+          "event_at_wib": "2026-10-28T13:26:04.622938+07:00",
+          "reported_result": true
+        }
+      ]
+    },
+    {
+      "id": "A7",
+      "module": "A",
+      "question": "Deploy server, port, TLS dan unseal",
+      "status": "SEBAGIAN",
+      "summary": "Bao localhost8200/TLS; PG18 bootstrap localhost5433->5432; paket server terpadu belum ditemukan.",
+      "notes": "infra/compose.yaml hanya Bao2.5.5 bind127.0.0.1:8200. Listener0.0.0.0 ada di dalam container dan TLS aktif. Skrip development menyediakan PG18 publish127.0.0.1:5433->5432, bukan host0.0.0.0:5432. verify-full punya evidence PASS. Manual unseal threshold2/3 dengan dua kustodian terdokumentasi; bootstrap lab masih menyimpan shares/root bersama di luar repo sementara, dengan peringatan pemisahan. Belum ditemukan paket deploy fresh server terpadu PG+Bao. Scan terbatas tidak menemukan secret aktif, bukan jaminan seluruh history.",
+      "commit": "b8e999815f205d44b6fc90bdc58b4376cc544fd8",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "infra/compose.yaml",
+          "ref": "origin/main",
+          "line": 12,
+          "sha256_git_blob": "2878d855b2fc646c4db5844848b80a28456990e1ea684665a5f3a2cc41d41ff5",
+          "commit": "9d05ad3379373b3a67023c44fb2dafada69f1537",
+          "committed_at_wib": "2026-10-27T11:19:48+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "infra/openbao/openbao.hcl",
+          "ref": "origin/main",
+          "line": 9,
+          "sha256_git_blob": "77d79bd6273c63095107bd1d435b35f30e54cf36bfc43816715f5aab9be4dc12",
+          "commit": "70cbc1f1c1393563345b390fd00d490357d1bebc",
+          "committed_at_wib": "2026-10-26T22:30:59+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "infra/postgres/development.py",
+          "ref": "origin/main",
+          "line": 60,
+          "sha256_git_blob": "27ade835b5dc09b2ae868fdf945f43de760e8e7727d8b2a3ee8db3282f359eca",
+          "commit": "9d05ad3379373b3a67023c44fb2dafada69f1537",
+          "committed_at_wib": "2026-10-27T11:19:48+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "infra/README.md",
+          "ref": "origin/main",
+          "line": 24,
+          "sha256_git_blob": "e5bb81b749685a81636a059ccaa52d40530e51c22790930839019059afd6de34",
+          "commit": "5ad93f9ee4c4d5b4543020fa6ac839676f46612b",
+          "committed_at_wib": "2026-10-28T01:09:03+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "infra/postgres/README.md",
+          "ref": "origin/main",
+          "line": 1,
+          "sha256_git_blob": "83a6fc7d4b252f5cd97fdc936fc32555a25dcd9409166cea9a369ad3b34c5570",
+          "commit": "5ad93f9ee4c4d5b4543020fa6ac839676f46612b",
+          "committed_at_wib": "2026-10-28T01:09:03+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "evidence/infra/postgres-tls.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "347b556029b8a79f85340b109110e78cf65a6d4c43d173748fc6a2a1bdf278d8",
+          "commit": "7dcdd9e701791810ea6471a17e5f8f7f90fed87d",
+          "committed_at_wib": "2026-10-28T00:46:36+07:00",
+          "event_at_wib": "2026-10-28T00:43:07.609318+07:00",
+          "reported_result": true
+        },
+        {
+          "path": "evidence/infra/openbao.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "16df3f50fd988324f2b042104ab812d137e6e7cfc872264275e2a819380c318e",
+          "commit": "80d73cb5861459ca733a0fe537cb19be0080c662",
+          "committed_at_wib": "2026-10-27T21:16:18+07:00",
+          "event_at_wib": "2026-10-27T21:06:33.463914+07:00",
+          "reported_result": true
+        }
+      ]
+    },
+    {
+      "id": "A8",
+      "module": "A",
+      "question": "Draf bab laporan Modul A",
+      "status": "TIDAK DITEMUKAN",
+      "summary": "Draf bab A tidak ditemukan; yang ada runbook/NOTES/evidence.",
+      "notes": "Tracked tree main/branch A yang sudah ancestor main dan pencarian path laporan/chapter/bab pada history remote tidak menemukan draf bab. Tidak menganggap README/NOTES sebagai narasi laporan.",
+      "commit": "b8e999815f205d44b6fc90bdc58b4376cc544fd8",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "docs/TEAM_PLAN.md",
+          "ref": "origin/main",
+          "line": 34,
+          "sha256_git_blob": "541e8dce131fbe6acf00624e5c3b49d430d0d67ba4a96afcea189998b0c42334",
+          "commit": "3e8ae798ebec02e4dc5d5b629d9d924a7e1a635a",
+          "committed_at_wib": "2026-10-26T21:15:27+07:00",
+          "event_at_wib": null
+        }
+      ],
+      "search": {
+        "refs": [
+          "origin/main",
+          "origin/feat/crypto-migration",
+          "all fetched remote history"
+        ],
+        "matches": []
+      }
+    },
+    {
+      "id": "B1",
+      "module": "B",
+      "question": "PR1, reviewer dan konflik",
+      "status": "SEBAGIAN",
+      "summary": "PR1 dan PR6 MERGED, branch B bersih; review anggota lain tidak tercatat.",
+      "notes": "PR1 merge20e08f3 pada27 Okt14:10:28 WIB, PR6 mergeed88ecd pada28 Okt10:18:27 WIB. Keduanya mergedBy favianzhafif26 (pembuat PR). GitHub reviews=[] dan reviewDecision kosong; tidak ada reviewer formal yang dapat disebut. Branch B9029b77 ancestor main, dry merge bersih. Ini tidak membuktikan tidak pernah ada review di luar GitHub.",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [],
+      "github_pr_numbers": [
+        1,
+        6
+      ],
+      "github_evidence": [
+        {
+          "headRefName": "feat/service-app",
+          "mergeCommit": {
+            "oid": "20e08f39bffe160049a6f9414325702e56fa5342"
+          },
+          "mergedAt": "2026-10-27T07:10:28Z",
+          "mergedBy": {
+            "id": "MDQ6VXNlcjcxOTUwMjQw",
+            "is_bot": false,
+            "login": "favianzhafif26",
+            "name": "japippppp"
+          },
+          "number": 1,
+          "reviewDecision": "",
+          "reviews": [],
+          "state": "MERGED",
+          "url": "https://github.com/BOGAGOL/juara1onno/pull/1",
+          "merged_at_wib": "2026-10-27T14:10:28+07:00"
+        },
+        {
+          "headRefName": "feat/service-app",
+          "mergeCommit": {
+            "oid": "ed88ecde71107ae3180b055eecefed3b9ad1f60b"
+          },
+          "mergedAt": "2026-10-28T03:18:27Z",
+          "mergedBy": {
+            "id": "MDQ6VXNlcjcxOTUwMjQw",
+            "is_bot": false,
+            "login": "favianzhafif26",
+            "name": "japippppp"
+          },
+          "number": 6,
+          "reviewDecision": "",
+          "reviews": [],
+          "state": "MERGED",
+          "url": "https://github.com/BOGAGOL/juara1onno/pull/6",
+          "merged_at_wib": "2026-10-28T10:18:27+07:00"
+        }
+      ]
+    },
+    {
+      "id": "B2",
+      "module": "B",
+      "question": "Pakai toolkit A asli, lulus vector",
+      "status": "SELESAI+BUKTI",
+      "summary": "Runtime mengimpor dprcrypto; vector B PASS8 checks, sama dengan A.",
+      "notes": "ToolkitAdapter memakai importlib.import_module(dprcrypto), OpenBaoClient, KeyManager, BlindIndexer dan encrypt/decrypt A. Tidak ada AES/HMAC runtime sendiri di app/backend/service_app; FakeCrypto hanya app/tests. Evidence vector28 Okt09:39:42 WIB PASS8 check. test_actual_module_a_vectors_pass tercatat PASS. Verifier vector yang sama dijalankan audit pada A.",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "app/backend/service_app/crypto.py",
+          "ref": "origin/main",
+          "line": 46,
+          "sha256_git_blob": "b966c8e346420afcab0b3c342d600638c6fedad1932f8ce99bfabfa77229478b",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/tests/conftest.py",
+          "ref": "origin/main",
+          "line": 33,
+          "sha256_git_blob": "6bdd95560b433df8a297b53e2095319c687f8549caca83c413c0b72e606ddec8",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/tests/test_protected_scope.py",
+          "ref": "origin/main",
+          "line": 43,
+          "sha256_git_blob": "33e31b1af9f605fcf31c7d60200dede03d3bbce20a5dbb6afa944b1efcbbbbb9",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/evidence/access-control/crypto-vectors.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "19215af7c7ea82c36472cba2383b59f103e5e764ad9af2d445e2f150c64def03",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": "2026-10-28T09:39:42.727175+07:00",
+          "reported_result": true
+        }
+      ]
+    },
+    {
+      "id": "B3",
+      "module": "B",
+      "question": "Protected app pada dataset migrasi asli pg-dpr",
+      "status": "BELUM",
+      "summary": "Migrated protected_734/100k resmi NOT TESTED; PASS hanya disposable nyata dan plain lab Zhafif.",
+      "notes": "readiness secara eksplisit menyebut migrated_protected_datasets NOT TESTED. protected-integration PASS memakai schema/toolkit A dan PG18/Bao/TLS asli, tetapi database/project disposable dan fixture kecil. baseline-100k PASS MODE=plain lab Zhafif. DB adapter C parity pada target nyata bukan bukti Service App B.",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "app/evidence/access-control/protected-integration.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "d3049e12dc45a68bda45c470e49c3df55153ab6fd99efc43e839a0ffcd457a19",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": "2026-10-28T09:38:02.305007+07:00",
+          "reported_result": "PASSED"
+        },
+        {
+          "path": "app/evidence/access-control/readiness.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "fa5e55b71ab00cf3ba2961ec7fc78be01c9472f26b3368525c7111292151cf18",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": "2026-10-28T09:51:17.884929+07:00",
+          "reported_result": "PARTIAL: migrated protected datasets and official API benchmark remain NOT TESTED"
+        },
+        {
+          "path": "app/evidence/access-control/baseline-100k.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "234b29aaec6df818e17e06bd7a8f59f09c483e39a1b4148517dd5145d59edc2b",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": "2026-10-28T09:40:26.857742+07:00",
+          "reported_result": "PASSED"
+        },
+        {
+          "path": "evidence/benchmark/adapter_parity.json",
+          "ref": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+          "line": null,
+          "sha256_git_blob": "b2b578f21e3e08210fcc18a40288639f5274a30961cb326d0dac5859aaa381c4",
+          "commit": "a4a8844986751bf00d0ed2b1863fbd1c5402d429",
+          "committed_at_wib": "2026-10-28T14:16:01+07:00",
+          "event_at_wib": null,
+          "reported_result": true
+        }
+      ]
+    },
+    {
+      "id": "B4",
+      "module": "B",
+      "question": "Small-cell suppression analytics",
+      "status": "SEBAGIAN",
+      "summary": "Jumlah<5 disensor dan diuji, tetapi label kelompok kecil tetap dikirim/ditampilkan.",
+      "notes": "count1-4 menjadi <5, secondary suppression/null dan total disembunyikan untuk menghambat pengurangan. Threshold1/4/5/6, filter dan secondary test tercatat PASS kedua mode; live disposable filtered_count_suppressed PASS. Namun group.dimension/value tetap dikirim dan UI merender kelompok itu. Jadi syarat literal kelompok<5 tidak tampil belum dipenuhi; yang ditutup hanya jumlah persis. Tidak ada jaminan differencing antar-query.",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "app/backend/service_app/analytics.py",
+          "ref": "origin/main",
+          "line": 5,
+          "sha256_git_blob": "f0a96dbb424985dafe9c91ffbafa3c7e4bdc54d1898a377e51141d91c37889c4",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/tests/test_analytics_suppression.py",
+          "ref": "origin/main",
+          "line": 8,
+          "sha256_git_blob": "78cb5bd9bbd989de0a026cf620a0aec861d32f05ae2f4a1636a73c336dcd0a12",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/web/src/app/(service)/analytics/page.tsx",
+          "ref": "origin/main",
+          "line": 37,
+          "sha256_git_blob": "cfebbc4f073ec9f52b520a175fc2e2fb3a1db6ca19c888b28f523d598e569162",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/evidence/access-control/unit-tests.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "5ab7e22f8763159f0880a7fbbb2e2a7c23413c17bc180106aae2ddedeb2d9862",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": "2026-10-28T09:51:17.572851+07:00",
+          "reported_result": "PASSED"
+        },
+        {
+          "path": "app/evidence/access-control/protected-integration.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "d3049e12dc45a68bda45c470e49c3df55153ab6fd99efc43e839a0ffcd457a19",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": "2026-10-28T09:38:02.305007+07:00",
+          "reported_result": "PASSED"
+        }
+      ]
+    },
+    {
+      "id": "B5",
+      "module": "B",
+      "question": "Fail-closed HTTP500 dan authorized parity",
+      "status": "SEBAGIAN",
+      "summary": "HTTP500 generik/swap PASS disposable; parity aplikasi target nyata belum terbukti.",
+      "notes": "CryptoUnavailable menjadi HTTP500 generik tanpa plaintext; swap test protected PASS dan real_AAD_swap_generic_500 PASS di disposable. Matriks role/field diuji terhadap expected invented values di plain dan protected FakeCrypto. Belum ada paired parity aplikasi seluruh field/peran di dataset migrasi. Evidence unit mengaku dirty worktree; source snapshot hash tidak cocok HEAD audited pada raw/CRLF maupun git-blob/LF. Belum diketahui apakah perbedaan hanya dokumentasi.",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "app/backend/service_app/main.py",
+          "ref": "origin/main",
+          "line": 155,
+          "sha256_git_blob": "68cd0b3ad321211e3922e8e3e370a9b736fe4bb5e46ec5874d674c5870324189",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/tests/test_access_control.py",
+          "ref": "origin/main",
+          "line": 97,
+          "sha256_git_blob": "264603ca96159386d3c7221207e7148d868207d2a105027b0a35e31450bdabe4",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/tests/test_access_control.py",
+          "ref": "origin/main",
+          "line": 274,
+          "sha256_git_blob": "264603ca96159386d3c7221207e7148d868207d2a105027b0a35e31450bdabe4",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/evidence/access-control/unit-tests.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "5ab7e22f8763159f0880a7fbbb2e2a7c23413c17bc180106aae2ddedeb2d9862",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": "2026-10-28T09:51:17.572851+07:00",
+          "reported_result": "PASSED"
+        },
+        {
+          "path": "app/evidence/access-control/protected-integration.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "d3049e12dc45a68bda45c470e49c3df55153ab6fd99efc43e839a0ffcd457a19",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": "2026-10-28T09:38:02.305007+07:00",
+          "reported_result": "PASSED"
+        }
+      ]
+    },
+    {
+      "id": "B6",
+      "module": "B",
+      "question": "Kesiapan benchmark API",
+      "status": "SEBAGIAN",
+      "summary": "Endpoint7 ada; DTO/scope tidak sama dengan DB; rollback tulis protected/1M belum tersedia.",
+      "notes": "Dua launcher dengan MODE/port/env berbeda bisa disiapkan. Scope staff protected contoh hanya1,2 perlu disamakan dengan key pool2048. Search mengembalikan locator+nama, list tidak jenis_kelamin, detail sesuai role bukan seluruh29 field; definisikan workload API terpisah dan sama antar-mode. POST/PATCH commit per request. cleanup local_lab hanya satu insert baseline100k, bukan protokol rollback/reset benchmark protected/1M. Jangan mutasi artefak kondisi awal; strategi fixture/reset harus diotorisasi terpisah.",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "app/scripts/serve.py",
+          "ref": "origin/main",
+          "line": 17,
+          "sha256_git_blob": "99370ca6b73f16f89952e18e5ff97595c52111dbe52e970d5c19768416ff4da9",
+          "commit": "b36a9ac512612985938fee612fbe40d34fe6ef44",
+          "committed_at_wib": "2026-10-27T10:44:37+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/backend/service_app/main.py",
+          "ref": "origin/main",
+          "line": 292,
+          "sha256_git_blob": "68cd0b3ad321211e3922e8e3e370a9b736fe4bb5e46ec5874d674c5870324189",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/backend/service_app/main.py",
+          "ref": "origin/main",
+          "line": 318,
+          "sha256_git_blob": "68cd0b3ad321211e3922e8e3e370a9b736fe4bb5e46ec5874d674c5870324189",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/backend/service_app/repository.py",
+          "ref": "origin/main",
+          "line": 107,
+          "sha256_git_blob": "b4ce25fd3c927e6ce0aebcbce7f86f48bdd335e378329a28f0c3a6a43f558ac2",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/scripts/provision.py",
+          "ref": "origin/main",
+          "line": 55,
+          "sha256_git_blob": "b9e8018432a27393139bd6d3bd30ff21c2052a91c47c2656c0a0a4641672810e",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/scripts/local_lab.py",
+          "ref": "origin/main",
+          "line": 364,
+          "sha256_git_blob": "3e68da93505988addeeeafb8ed4e76e5813593eaeac98ebc40fc01c2ac9eb7bd",
+          "commit": "427cad41609d3a0bb6ade0a2a7c0bdaf24214420",
+          "committed_at_wib": "2026-10-27T13:54:32+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "benchmark/workloads.yaml",
+          "ref": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+          "line": 6,
+          "sha256_git_blob": "8a658dbd88ab37f748dcef48f62e50a4c5d3930eb0d82ee754c209760fe6c98f",
+          "commit": "776d420845d17ace5d96aacf702a17d7e562d0d4",
+          "committed_at_wib": "2026-10-27T10:42:51+07:00",
+          "event_at_wib": null
+        }
+      ],
+      "processes": [
+        {
+          "mode": "plain",
+          "database": "baseline_100k",
+          "API_PORT": 8100,
+          "WEB_PORT": 3443,
+          "APP_ORIGIN": "https://localhost:3443"
+        },
+        {
+          "mode": "protected",
+          "database": "protected_100k",
+          "API_PORT": 8101,
+          "WEB_PORT": 3444,
+          "APP_ORIGIN": "https://localhost:3444"
+        }
+      ],
+      "env": [
+        "MODE",
+        "DATABASE_URL:app_user verify-full+CA",
+        "ANALYST_DATABASE_URL",
+        "AUDITOR_DATABASE_URL",
+        "APP_ORIGIN",
+        "API_PORT",
+        "TLS_CERT_FILE",
+        "TLS_KEY_FILE",
+        "WEB_PORT",
+        "API_INTERNAL_URL",
+        "NODE_EXTRA_CA_CERTS",
+        "OPENBAO_ADDR/CACERT/TOKEN protected"
+      ],
+      "accounts": "operator.demo, privileged_officer.demo, finance_officer.demo, analyst.demo, auditor.demo, anggota.demo; password random hanya file privat; cookie jar per mode",
+      "endpoints": {
+        "read_by_nik": "GET /anggota/search?no_ktp=",
+        "read_by_email": "GET /anggota/search?email=",
+        "read_profile": "GET /anggota/{legacy_id}",
+        "list_page": "GET /anggota?page=; 50",
+        "update_contact": "PATCH /anggota/{id}/kontak; CSRF; commit",
+        "insert_member": "POST /anggota; privileged+insert scope; commit",
+        "mixed": "20/20/20/10/15/15"
+      }
+    },
+    {
+      "id": "B7",
+      "module": "B",
+      "question": "Deploy app, akun demo, HTTPS",
+      "status": "SEBAGIAN",
+      "summary": "HTTPS launcher/password random ada; Dockerfile/compose deploy app final belum ada.",
+      "notes": "serve.py dan web/server.mjs wajib cert/key/HTTPS, default bindloopback; real HTTPS fixture PASS. provision secrets.token_urlsafe(24), hash Argon2id dan exclusive file privat, tanpa hardcoded demo password. app/ tidak memiliki Dockerfile/compose deploy final; compose B hanya integration/local-lab PG. apps/* Dockerfile dan root compose menunjuk implementasi lama, PG17, opsi crypto lokal dan insecure cookie default. Jangan dianggap paket B final. Reverse-proxy/server deployment belum dibuktikan.",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "app/scripts/serve.py",
+          "ref": "origin/main",
+          "line": 13,
+          "sha256_git_blob": "99370ca6b73f16f89952e18e5ff97595c52111dbe52e970d5c19768416ff4da9",
+          "commit": "b36a9ac512612985938fee612fbe40d34fe6ef44",
+          "committed_at_wib": "2026-10-27T10:44:37+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/web/server.mjs",
+          "ref": "origin/main",
+          "line": 1,
+          "sha256_git_blob": "8a5b20f398f7ab9da50f55f9bc83a0d399314361363aa87888051b27fd134165",
+          "commit": "b36a9ac512612985938fee612fbe40d34fe6ef44",
+          "committed_at_wib": "2026-10-27T10:44:37+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/scripts/provision.py",
+          "ref": "origin/main",
+          "line": 68,
+          "sha256_git_blob": "b9e8018432a27393139bd6d3bd30ff21c2052a91c47c2656c0a0a4641672810e",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/scripts/integration.compose.yaml",
+          "ref": "origin/main",
+          "line": 1,
+          "sha256_git_blob": "03318681681a80bd428aa155f792bcf077365e8a016b49371e6c92df5493b402",
+          "commit": "b36a9ac512612985938fee612fbe40d34fe6ef44",
+          "committed_at_wib": "2026-10-27T10:44:37+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "docker-compose.yml",
+          "ref": "origin/main",
+          "line": 35,
+          "sha256_git_blob": "b4c6f4258442b97249b0fb19faff87d3af5ba8ce6a07976e47de3cbc6d036432",
+          "commit": "1f9186a666825941aa84e3d041757ccfecc8b808",
+          "committed_at_wib": "2026-10-23T15:31:27+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "apps/api/Dockerfile",
+          "ref": "origin/main",
+          "line": 1,
+          "sha256_git_blob": "a8a7a034f16890ac36a9af902761a32e7f09aa1332bb61bf346dfcbcaf0f41a4",
+          "commit": "1f9186a666825941aa84e3d041757ccfecc8b808",
+          "committed_at_wib": "2026-10-23T15:31:27+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/evidence/access-control/protected-integration.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "d3049e12dc45a68bda45c470e49c3df55153ab6fd99efc43e839a0ffcd457a19",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": "2026-10-28T09:38:02.305007+07:00",
+          "reported_result": "PASSED"
+        }
+      ]
+    },
+    {
+      "id": "B8",
+      "module": "B",
+      "question": "Draf Bab7 laporan B",
+      "status": "TIDAK DITEMUKAN",
+      "summary": "Draf Bab7/narasi laporan B tidak ditemukan.",
+      "notes": "Tidak ditemukan pada tracked branch B/main. README/ACCESS_MATRIX/NOTES/INTEGRATION_A dan evidence tersedia sebagai bahan, bukan draf bab.",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "app/docs/INTEGRATION_A.md",
+          "ref": "origin/main",
+          "line": 1,
+          "sha256_git_blob": "daf101bf2a2ec5ac2b67073dc7f55237e00fcac30ea512be531df2c28b634556",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "docs/TEAM_PLAN.md",
+          "ref": "origin/main",
+          "line": 34,
+          "sha256_git_blob": "541e8dce131fbe6acf00624e5c3b49d430d0d67ba4a96afcea189998b0c42334",
+          "commit": "3e8ae798ebec02e4dc5d5b629d9d924a7e1a635a",
+          "committed_at_wib": "2026-10-26T21:15:27+07:00",
+          "event_at_wib": null
+        }
+      ]
+    },
+    {
+      "id": "C1",
+      "module": "C",
+      "question": "Konsistensi kontrak A/B/C",
+      "status": "SELESAI+BUKTI",
+      "summary": "Blob/AAD/normalisasi/bidx cocok; proyeksi API vs DB berbeda dan harus dipisahkan.",
+      "notes": "A blob0x01+nonce12+ciphertext/tag16; AAD nama kolom sumber, UUID lowercase, protection_version. B/C memanggil codec sama dengan UUID internal, legacy_row_id hanya locator. NIK digit ASCII/nol awal, email trim+lower, pengguna trim case-sensitive. HMAC message bidx|v1|kolom|normalized, key_version1; Transit vault:v1:BASE64 -> bytes32 DB. bidx:v1:HEX internal B hanya binding akun, bukan format respons Transit. C mengonversi date/int, B JSON sesuai role; bukan mismatch crypto.",
+      "commit": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "docs/contracts/CONTRACT.md",
+          "ref": "origin/main",
+          "line": 101,
+          "sha256_git_blob": "e4dfef9d4d72b3acbb15792aec93f95da173e1ed3d4ccaf72bb32340a1b48bb5",
+          "commit": "cf2d2ccd786066ad9ea3c56ec2999987feda73ac",
+          "committed_at_wib": "2026-10-27T12:38:13+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "docs/contracts/CONTRACT.md",
+          "ref": "origin/main",
+          "line": 110,
+          "sha256_git_blob": "e4dfef9d4d72b3acbb15792aec93f95da173e1ed3d4ccaf72bb32340a1b48bb5",
+          "commit": "cf2d2ccd786066ad9ea3c56ec2999987feda73ac",
+          "committed_at_wib": "2026-10-27T12:38:13+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "toolkit/dprcrypto/codec.py",
+          "ref": "origin/main",
+          "line": 21,
+          "sha256_git_blob": "f9f4f03132273bbc35c35515ec72f43a83cbd70da272006056302d1d499843f1",
+          "commit": "86df826d55efd9c87bad7d462364d5a9cdc69f13",
+          "committed_at_wib": "2026-10-26T23:29:08+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "toolkit/dprcrypto/codec.py",
+          "ref": "origin/main",
+          "line": 43,
+          "sha256_git_blob": "f9f4f03132273bbc35c35515ec72f43a83cbd70da272006056302d1d499843f1",
+          "commit": "86df826d55efd9c87bad7d462364d5a9cdc69f13",
+          "committed_at_wib": "2026-10-26T23:29:08+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "toolkit/dprcrypto/bidx.py",
+          "ref": "origin/main",
+          "line": 8,
+          "sha256_git_blob": "d5dc5f2bca4901c52c512c35938119fda3f24121b5e7101d9d34d7520aae3949",
+          "commit": "86df826d55efd9c87bad7d462364d5a9cdc69f13",
+          "committed_at_wib": "2026-10-26T23:29:08+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "toolkit/dprcrypto/openbao.py",
+          "ref": "origin/main",
+          "line": 267,
+          "sha256_git_blob": "554fa866fce82c4d93e89076d218d5943f2921b6a165a8eb8135ab7c65c5ee91",
+          "commit": "7b4c4670e4a5801e8318b7eb07ba4770883f6d43",
+          "committed_at_wib": "2026-10-27T23:47:11+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/backend/service_app/crypto.py",
+          "ref": "origin/main",
+          "line": 46,
+          "sha256_git_blob": "b966c8e346420afcab0b3c342d600638c6fedad1932f8ce99bfabfa77229478b",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/backend/service_app/repository.py",
+          "ref": "origin/main",
+          "line": 15,
+          "sha256_git_blob": "b4ce25fd3c927e6ce0aebcbce7f86f48bdd335e378329a28f0c3a6a43f558ac2",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/backend/service_app/repository.py",
+          "ref": "origin/main",
+          "line": 82,
+          "sha256_git_blob": "b4ce25fd3c927e6ce0aebcbce7f86f48bdd335e378329a28f0c3a6a43f558ac2",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "benchmark/adapters/protected.py",
+          "ref": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+          "line": 48,
+          "sha256_git_blob": "17f352a5572f96782ffed95d391d6d277b29d93f3b2993722d96473193386151",
+          "commit": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+          "committed_at_wib": "2026-10-28T15:05:37+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "benchmark/adapters/protected.py",
+          "ref": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+          "line": 77,
+          "sha256_git_blob": "17f352a5572f96782ffed95d391d6d277b29d93f3b2993722d96473193386151",
+          "commit": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+          "committed_at_wib": "2026-10-28T15:05:37+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "evidence/benchmark/adapter_parity.json",
+          "ref": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+          "line": null,
+          "sha256_git_blob": "b2b578f21e3e08210fcc18a40288639f5274a30961cb326d0dac5859aaa381c4",
+          "commit": "a4a8844986751bf00d0ed2b1863fbd1c5402d429",
+          "committed_at_wib": "2026-10-28T14:16:01+07:00",
+          "event_at_wib": null,
+          "reported_result": true
+        }
+      ],
+      "differences": [
+        "Tidak ditemukan mismatch blob/AAD/normalisasi/bidx pada source yang diperiksa",
+        "Proyeksi/serialisasi bisnis API berbeda dari adapter DB; workload API terpisah diperlukan"
+      ],
+      "audit_test_reference": "tests.audit_A_pure_unit"
+    },
+    {
+      "id": "C2",
+      "module": "C",
+      "question": "Scan secret pada diff A/B",
+      "status": "SELESAI+BUKTI",
+      "summary": "Regex scope diff selesai; tidak ada secret aktif terkonfirmasi. Bukan full-history S05.",
+      "notes": "gitleaks tidak terpasang. Regex added-lines: private-key header, GitHub/Bao token, credential URL, quoted secret assignment. Diff3titik main...A/B kosong karena sudah merged. Diff2titik main..A berisi tree historis39 file, bukan pending commit. Scan tambahan merged ranges mencakup inherited team changes. Empat kandidat hanyalah README interpolation, random UI synthetic fixture, dua URL sintetis test C. Tidak ada .env/private-key/credential/init-material ter-track di main. Test vector keys sintetis; dataset panitia PRIVATE sesuai pengecualian, tidak diekspor. Tidak memindai seluruh history/log; bukan klaim S05 global.",
+      "commit": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "app/README.md",
+          "ref": "origin/main",
+          "line": 60,
+          "sha256_git_blob": "ec511d9995002a748bfc9ae63db0cfb62d56be4651da190f174382acf6d3347f",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/web/tests/ui.spec.ts",
+          "ref": "origin/main",
+          "line": 13,
+          "sha256_git_blob": "b68230b19f84ccb9fdcf704b463ab65a8acebcc71e0dabcdddbf1ee9c5031546",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "benchmark/tests/test_1m_crosscheck.py",
+          "ref": "origin/main",
+          "line": 29,
+          "sha256_git_blob": "69508b1ee7feec59828b43a2c6d054c4ee6d751c56b37fd03c9263f2adfb19ec",
+          "commit": "cfd703b8080a1c7bd6b574779e6e8e1dc9441a32",
+          "committed_at_wib": "2026-10-27T18:29:54+07:00",
+          "event_at_wib": null
+        }
+      ]
+    },
+    {
+      "id": "C3",
+      "module": "C",
+      "question": "Blocker sebelum freeze20:00",
+      "status": "SEBAGIAN",
+      "summary": "A/B sudah main; run gabungan bersih; suppression, integrasi app dan review masih menghalangi klaim selesai.",
+      "notes": "A/B ancestor main dan dry merge bersih. Branch C lama konflik verify/NOTES.md; run/overnight-28okt memuat main dan seluruh C, dry merge bersih. Tidak ada merge audit. Blocker klaim selesai: DB suppression/kelompok kecil UI, belum ada target app protected/parity/rollback API, review formal lintas anggota. Draf bab dan paket server final belum ada. Gunakan branch gabungan yang sudah menyelesaikan konflik, bukan merge ulang branch C lama.",
+      "commit": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+      "inspected_at_wib": "2026-10-28T15:35:27.235356+07:00",
+      "evidence": [
+        {
+          "path": "docs/PROJECT_CONTEXT.md",
+          "ref": "origin/main",
+          "line": 156,
+          "sha256_git_blob": "5eda56d1e7d11edebf07cd89e0ade9e6c95f3bf22d7bafc668f2d23f4be6f4d5",
+          "commit": "a3f9b4377327db012f0335399037b937ce0a164e",
+          "committed_at_wib": "2026-10-26T21:57:36+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "docs/TEAM_PLAN.md",
+          "ref": "origin/main",
+          "line": 34,
+          "sha256_git_blob": "541e8dce131fbe6acf00624e5c3b49d430d0d67ba4a96afcea189998b0c42334",
+          "commit": "3e8ae798ebec02e4dc5d5b629d9d924a7e1a635a",
+          "committed_at_wib": "2026-10-26T21:15:27+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "sql/protected/01_schema.sql",
+          "ref": "origin/main",
+          "line": 202,
+          "sha256_git_blob": "4eee97cdd45df914b6c08a29af94816d629cece6e6ebb37a859d004d036918af",
+          "commit": "0e0f94900f7db85fa1a3fce54b7f63651088bb3c",
+          "committed_at_wib": "2026-10-27T12:07:09+07:00",
+          "event_at_wib": null
+        },
+        {
+          "path": "app/evidence/access-control/readiness.json",
+          "ref": "origin/main",
+          "line": null,
+          "sha256_git_blob": "fa5e55b71ab00cf3ba2961ec7fc78be01c9472f26b3368525c7111292151cf18",
+          "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+          "committed_at_wib": "2026-10-28T09:51:38+07:00",
+          "event_at_wib": "2026-10-28T09:51:17.884929+07:00",
+          "reported_result": "PARTIAL: migrated protected datasets and official API benchmark remain NOT TESTED"
+        }
+      ]
+    }
+  ],
+  "top_blockers": [
+    {
+      "priority": 1,
+      "ids": [
+        "A5",
+        "B4"
+      ],
+      "blocker": "Suppression belum utuh: analyst DB masih per record/agregat tanpa k>=5; label kelompok kecil B masih terlihat.",
+      "next_action": "A batasi interface analyst dan suppression SQL; B selaraskan penghilangan kelompok kecil; tambahkan negative test."
+    },
+    {
+      "priority": 2,
+      "ids": [
+        "B3",
+        "B5",
+        "B6",
+        "A1",
+        "A6"
+      ],
+      "blocker": "Integrasi Service App pada migrated target, paired parity, recovery HTTP dan rollback workload API belum terbukti; protected_734 resmi pending.",
+      "next_action": "Jadwalkan pengujian yang diizinkan pada target/fixture terpisah; samakan scope/DTO dan strategi reset tanpa mengubah artefak awal. Jangan benchmark tanpa instruksi."
+    },
+    {
+      "priority": 3,
+      "ids": [
+        "B1",
+        "C3"
+      ],
+      "blocker": "PR1-6 tidak memiliki review formal anggota lain; branch gabungan C belum masuk main.",
+      "next_action": "Review lintas anggota terhadap source/evidence final dan PR run/overnight-28okt. Audit tidak membuka atau merge PR."
+    }
+  ],
+  "downgrade_to_plan_before_2000": [
+    {
+      "ids": [
+        "A1"
+      ],
+      "claim": "Pemulihan HTTP service end-to-end dari backup",
+      "fallback": "Rencana; restore DB/ACL/RLS/dekripsi sampel tetap tercatat Diimplementasikan+Diuji."
+    },
+    {
+      "ids": [
+        "A5",
+        "B4"
+      ],
+      "claim": "Analyst aggregate-only end-to-end dan kelompok<5 sepenuhnya tidak tampil",
+      "fallback": "Rencana untuk gap SQL/label; suppression jumlah HTTP yang diuji dicatat terpisah."
+    },
+    {
+      "ids": [
+        "B3",
+        "B5"
+      ],
+      "claim": "App protected target migrasi dan full authorized parity",
+      "fallback": "Rencana; disposable real crypto dan policy mock bukan target migrasi."
+    },
+    {
+      "ids": [
+        "B6"
+      ],
+      "claim": "Benchmark API resmi tujuh skenario dan rollback aman",
+      "fallback": "Rencana/BELUM DIUJI; hasil DB tidak menggantikan API."
+    },
+    {
+      "ids": [
+        "A7",
+        "B7"
+      ],
+      "claim": "Paket deploy server terpadu final",
+      "fallback": "Rencana; runbook/launcher lokal TLS/HTTPS memiliki bukti dengan scope terbatas."
+    },
+    {
+      "ids": [
+        "A8",
+        "B8"
+      ],
+      "claim": "Draf bab laporan A/B tersedia",
+      "fallback": "Rencana; pemilik menulis draf, README tidak dianggap bab."
+    }
+  ],
+  "evidence_manifest": [
+    {
+      "path": "scripts/backup/runner.py",
+      "ref": "origin/main",
+      "line": 53,
+      "sha256_git_blob": "391470a0c65ec8e29569a92de717061c308a21204ce763f444bb0dd1b7a3749d",
+      "commit": "50e55b0d15256fdc9bcb203a5eadfab5e4e18fca",
+      "committed_at_wib": "2026-10-27T23:29:26+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "scripts/backup/crypto.py",
+      "ref": "origin/main",
+      "line": 106,
+      "sha256_git_blob": "68bb59ce92387abdfcd909480b90a76f4fba978e6e568674fd6cfed183e1719a",
+      "commit": "e08ff7e84dc44722b80f7da680ca66b49718b5ad",
+      "committed_at_wib": "2026-10-27T23:20:54+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "scripts/backup/postgres.py",
+      "ref": "origin/main",
+      "line": 111,
+      "sha256_git_blob": "bc07341a6589deb6c623bfad3016f803109a58011f4fc3947aa69aa2c739652c",
+      "commit": "50e55b0d15256fdc9bcb203a5eadfab5e4e18fca",
+      "committed_at_wib": "2026-10-27T23:29:26+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "scripts/backup/drills.py",
+      "ref": "origin/main",
+      "line": 75,
+      "sha256_git_blob": "3aab773c5718d36bf8583cafb29e784c2d1590beef9f59fdd15a881cf4217418",
+      "commit": "50e55b0d15256fdc9bcb203a5eadfab5e4e18fca",
+      "committed_at_wib": "2026-10-27T23:29:26+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "evidence/backup/local-protected_734.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "1a18e0c51b6b617abb1f7f7a2747bc8ab4dc790ca54d065b3b60a72ed62aa24a",
+      "commit": "a5993af97728fc71a0e58ef76a15516356d7f2b9",
+      "committed_at_wib": "2026-10-27T23:36:15+07:00",
+      "event_at_wib": null,
+      "reported_result": true
+    },
+    {
+      "path": "evidence/backup/local-protected_100k.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "7caf54ca6a41c5eb4288056952ea181e931cfa0538950a6330c0613dbbf9112f",
+      "commit": "a5993af97728fc71a0e58ef76a15516356d7f2b9",
+      "committed_at_wib": "2026-10-27T23:36:15+07:00",
+      "event_at_wib": null,
+      "reported_result": true
+    },
+    {
+      "path": "evidence/backup/tamper.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "8441357a23378a6ad68ca75c19394700c96c730a7799a982875c5b4d0a225397",
+      "commit": "a5993af97728fc71a0e58ef76a15516356d7f2b9",
+      "committed_at_wib": "2026-10-27T23:36:15+07:00",
+      "event_at_wib": "2026-10-27T23:31:31.137747+07:00",
+      "reported_result": true
+    },
+    {
+      "path": "evidence/backup/retention.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "cc3bbb44a3e169a374ae8d49ead59156d5349a3301b9962d801e596de50c327d",
+      "commit": "a5993af97728fc71a0e58ef76a15516356d7f2b9",
+      "committed_at_wib": "2026-10-27T23:36:15+07:00",
+      "event_at_wib": "2026-10-27T23:31:36.766043+07:00",
+      "reported_result": true
+    },
+    {
+      "path": "evidence/backup/integration.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "6fec3ad3d7de36d356956611190914bbb21361eae5d731012c8c03155dec764d",
+      "commit": "5ad93f9ee4c4d5b4543020fa6ac839676f46612b",
+      "committed_at_wib": "2026-10-28T01:09:03+07:00",
+      "event_at_wib": null,
+      "reported_result": true
+    },
+    {
+      "path": "infra/rotation/runner.py",
+      "ref": "origin/main",
+      "line": 1,
+      "sha256_git_blob": "e66d47c131817727e98a11aba31c2d40200ca0a344a524fa41a108e5b1c5c878",
+      "commit": "1c71760f470ade59ffd01d5bb55d21ef833fc3c9",
+      "committed_at_wib": "2026-10-27T23:58:37+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "evidence/keys/rotation-first-attempt.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "52149c64304ecb56b5a1332e8c7187b1ff4eb0afa7a94e18ede693f281d37c29",
+      "commit": "11c36f97fa64a33d9c96adbfbf4303d759652a6a",
+      "committed_at_wib": "2026-10-28T00:12:33+07:00",
+      "event_at_wib": "2026-10-27T23:59:35.396476+07:00",
+      "reported_result": false
+    },
+    {
+      "path": "evidence/keys/rotation.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "3fe78afdfbaaccf94145219bd2d451d1159f284eeff4c19f4aacf6f3acdb51ec",
+      "commit": "11c36f97fa64a33d9c96adbfbf4303d759652a6a",
+      "committed_at_wib": "2026-10-28T00:12:33+07:00",
+      "event_at_wib": "2026-10-28T00:03:58.751751+07:00",
+      "reported_result": true
+    },
+    {
+      "path": "evidence/keys/post-rotation-validation.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "efd243f9121307f2480ac1258fce5448943a098b861b6f340c8f69ce2fd7b674",
+      "commit": "11c36f97fa64a33d9c96adbfbf4303d759652a6a",
+      "committed_at_wib": "2026-10-28T00:12:33+07:00",
+      "event_at_wib": null,
+      "reported_result": true
+    },
+    {
+      "path": "evidence/keys/backup-compatibility.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "cab87d7c4ef653a62b185c238873f2e3ad225571faeb877ce71b6c591de00492",
+      "commit": "11c36f97fa64a33d9c96adbfbf4303d759652a6a",
+      "committed_at_wib": "2026-10-28T00:12:33+07:00",
+      "event_at_wib": "2026-10-28T00:06:41.430652+07:00",
+      "reported_result": true
+    },
+    {
+      "path": "evidence/keys/source-preservation.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "4279f710fe4882e77532e13865e46e3967110ace700907ef72cb28f492e212ba",
+      "commit": "11c36f97fa64a33d9c96adbfbf4303d759652a6a",
+      "committed_at_wib": "2026-10-28T00:12:33+07:00",
+      "event_at_wib": null,
+      "reported_result": true
+    },
+    {
+      "path": "docs/contracts/test_vectors.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "aeda21815755209a09190a39ab1dc5fc04410d2859e7c69f7e22e2d408686566",
+      "commit": "86df826d55efd9c87bad7d462364d5a9cdc69f13",
+      "committed_at_wib": "2026-10-26T23:29:08+07:00",
+      "event_at_wib": null,
+      "reported_result": null
+    },
+    {
+      "path": "toolkit/tests/test_vectors.py",
+      "ref": "origin/main",
+      "line": 14,
+      "sha256_git_blob": "18f0e0f19dad13452b0858f044652c1197d719a3c1eaaee9884924da3c1d5034",
+      "commit": "86df826d55efd9c87bad7d462364d5a9cdc69f13",
+      "committed_at_wib": "2026-10-26T23:29:08+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "evidence/crypto/vectors.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "dec2eaabf19d2f183409427b5f3bce2cca9ff9cc1f4226003639e6b5c0f9807e",
+      "commit": "86df826d55efd9c87bad7d462364d5a9cdc69f13",
+      "committed_at_wib": "2026-10-26T23:29:08+07:00",
+      "event_at_wib": "2026-10-26T23:25:53.226112+07:00",
+      "reported_result": true
+    },
+    {
+      "path": "toolkit/tests/test_codec.py",
+      "ref": "origin/main",
+      "line": 33,
+      "sha256_git_blob": "dc1e2e0b56712d24da0dd5a7cc858e967d2814f7d18f03a290302cd7edf5b512",
+      "commit": "86df826d55efd9c87bad7d462364d5a9cdc69f13",
+      "committed_at_wib": "2026-10-26T23:29:08+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "toolkit/dprcrypto/codec.py",
+      "ref": "origin/main",
+      "line": 43,
+      "sha256_git_blob": "f9f4f03132273bbc35c35515ec72f43a83cbd70da272006056302d1d499843f1",
+      "commit": "86df826d55efd9c87bad7d462364d5a9cdc69f13",
+      "committed_at_wib": "2026-10-26T23:29:08+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "sql/protected/01_schema.sql",
+      "ref": "origin/main",
+      "line": 202,
+      "sha256_git_blob": "4eee97cdd45df914b6c08a29af94816d629cece6e6ebb37a859d004d036918af",
+      "commit": "0e0f94900f7db85fa1a3fce54b7f63651088bb3c",
+      "committed_at_wib": "2026-10-27T12:07:09+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "sql/roles/01_roles.sql",
+      "ref": "origin/main",
+      "line": 113,
+      "sha256_git_blob": "0d25142e99598e9d322ee2fa554abe3805e18a05153282dd1237ad8e2f1ec3f1",
+      "commit": "0e8233d6d83cf13582f5122ca1fa02cdf8ca52bf",
+      "committed_at_wib": "2026-10-27T18:47:22+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "infra/tests/test_protected_schema_integration.py",
+      "ref": "origin/main",
+      "line": 101,
+      "sha256_git_blob": "a1197fbd50614f6bcda8b53f27ab3dcc308182c588e5759bf79f92e27b20e930",
+      "commit": "0e0f94900f7db85fa1a3fce54b7f63651088bb3c",
+      "committed_at_wib": "2026-10-27T12:07:09+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "evidence/migration/completion.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "c8ab1c403cdbb89e55c94c89cf2330dcb4ebe4aeeacfa8b5d85f4d46dce8581e",
+      "commit": "80d73cb5861459ca733a0fe537cb19be0080c662",
+      "committed_at_wib": "2026-10-27T21:16:18+07:00",
+      "event_at_wib": "2026-10-27T21:12:59.604635+07:00",
+      "reported_result": true
+    },
+    {
+      "path": "evidence/migration/validation-protected_734.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "c68b7ca2e0bb1d851826c7ebfd0c2924850d1f13853f19d98411ae5596d5a274",
+      "commit": "80d73cb5861459ca733a0fe537cb19be0080c662",
+      "committed_at_wib": "2026-10-27T21:16:18+07:00",
+      "event_at_wib": "2026-10-27T21:10:57.482469+07:00",
+      "reported_result": true
+    },
+    {
+      "path": "evidence/migration/revocation.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "b84bb7eeed4e2139a90f69f9133119149adfd82470e022e76e73465375d46bff",
+      "commit": "7dcdd9e701791810ea6471a17e5f8f7f90fed87d",
+      "committed_at_wib": "2026-10-28T00:46:36+07:00",
+      "event_at_wib": "2026-10-28T00:41:23.075311+07:00",
+      "reported_result": true
+    },
+    {
+      "path": "migration/README.md",
+      "ref": "origin/main",
+      "line": 3,
+      "sha256_git_blob": "281d9a280c067c6d9edbe88c19a01394de050dc933a01b09e896faa7da986612",
+      "commit": "5fe6799182894712567ba4d9d6f68033c3cd47fd",
+      "committed_at_wib": "2026-10-27T22:47:19+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "evidence/overnight/final_runtime_20261028.json",
+      "ref": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+      "line": null,
+      "sha256_git_blob": "4830dd3861edde84ac35747273e31cc27295009a4a86fdb9597e6094b4618b94",
+      "commit": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+      "committed_at_wib": "2026-10-28T15:05:37+07:00",
+      "event_at_wib": "2026-10-28T14:48:49.297634+07:00",
+      "reported_result": true
+    },
+    {
+      "path": "evidence/overnight/pg_stat_statements_20261028/tls_verify.json",
+      "ref": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+      "line": null,
+      "sha256_git_blob": "d3e1261f796728810d26717899157575c2061e91d4363fa2ca6251d0ce35530d",
+      "commit": "a4a8844986751bf00d0ed2b1863fbd1c5402d429",
+      "committed_at_wib": "2026-10-28T14:16:01+07:00",
+      "event_at_wib": "2026-10-28T13:26:04.622938+07:00",
+      "reported_result": true
+    },
+    {
+      "path": "infra/compose.yaml",
+      "ref": "origin/main",
+      "line": 12,
+      "sha256_git_blob": "2878d855b2fc646c4db5844848b80a28456990e1ea684665a5f3a2cc41d41ff5",
+      "commit": "9d05ad3379373b3a67023c44fb2dafada69f1537",
+      "committed_at_wib": "2026-10-27T11:19:48+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "infra/openbao/openbao.hcl",
+      "ref": "origin/main",
+      "line": 9,
+      "sha256_git_blob": "77d79bd6273c63095107bd1d435b35f30e54cf36bfc43816715f5aab9be4dc12",
+      "commit": "70cbc1f1c1393563345b390fd00d490357d1bebc",
+      "committed_at_wib": "2026-10-26T22:30:59+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "infra/postgres/development.py",
+      "ref": "origin/main",
+      "line": 60,
+      "sha256_git_blob": "27ade835b5dc09b2ae868fdf945f43de760e8e7727d8b2a3ee8db3282f359eca",
+      "commit": "9d05ad3379373b3a67023c44fb2dafada69f1537",
+      "committed_at_wib": "2026-10-27T11:19:48+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "infra/README.md",
+      "ref": "origin/main",
+      "line": 24,
+      "sha256_git_blob": "e5bb81b749685a81636a059ccaa52d40530e51c22790930839019059afd6de34",
+      "commit": "5ad93f9ee4c4d5b4543020fa6ac839676f46612b",
+      "committed_at_wib": "2026-10-28T01:09:03+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "infra/postgres/README.md",
+      "ref": "origin/main",
+      "line": 1,
+      "sha256_git_blob": "83a6fc7d4b252f5cd97fdc936fc32555a25dcd9409166cea9a369ad3b34c5570",
+      "commit": "5ad93f9ee4c4d5b4543020fa6ac839676f46612b",
+      "committed_at_wib": "2026-10-28T01:09:03+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "evidence/infra/postgres-tls.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "347b556029b8a79f85340b109110e78cf65a6d4c43d173748fc6a2a1bdf278d8",
+      "commit": "7dcdd9e701791810ea6471a17e5f8f7f90fed87d",
+      "committed_at_wib": "2026-10-28T00:46:36+07:00",
+      "event_at_wib": "2026-10-28T00:43:07.609318+07:00",
+      "reported_result": true
+    },
+    {
+      "path": "evidence/infra/openbao.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "16df3f50fd988324f2b042104ab812d137e6e7cfc872264275e2a819380c318e",
+      "commit": "80d73cb5861459ca733a0fe537cb19be0080c662",
+      "committed_at_wib": "2026-10-27T21:16:18+07:00",
+      "event_at_wib": "2026-10-27T21:06:33.463914+07:00",
+      "reported_result": true
+    },
+    {
+      "path": "docs/TEAM_PLAN.md",
+      "ref": "origin/main",
+      "line": 34,
+      "sha256_git_blob": "541e8dce131fbe6acf00624e5c3b49d430d0d67ba4a96afcea189998b0c42334",
+      "commit": "3e8ae798ebec02e4dc5d5b629d9d924a7e1a635a",
+      "committed_at_wib": "2026-10-26T21:15:27+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "app/backend/service_app/crypto.py",
+      "ref": "origin/main",
+      "line": 46,
+      "sha256_git_blob": "b966c8e346420afcab0b3c342d600638c6fedad1932f8ce99bfabfa77229478b",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "app/tests/conftest.py",
+      "ref": "origin/main",
+      "line": 33,
+      "sha256_git_blob": "6bdd95560b433df8a297b53e2095319c687f8549caca83c413c0b72e606ddec8",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "app/tests/test_protected_scope.py",
+      "ref": "origin/main",
+      "line": 43,
+      "sha256_git_blob": "33e31b1af9f605fcf31c7d60200dede03d3bbce20a5dbb6afa944b1efcbbbbb9",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "app/evidence/access-control/crypto-vectors.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "19215af7c7ea82c36472cba2383b59f103e5e764ad9af2d445e2f150c64def03",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": "2026-10-28T09:39:42.727175+07:00",
+      "reported_result": true
+    },
+    {
+      "path": "app/evidence/access-control/protected-integration.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "d3049e12dc45a68bda45c470e49c3df55153ab6fd99efc43e839a0ffcd457a19",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": "2026-10-28T09:38:02.305007+07:00",
+      "reported_result": "PASSED"
+    },
+    {
+      "path": "app/evidence/access-control/readiness.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "fa5e55b71ab00cf3ba2961ec7fc78be01c9472f26b3368525c7111292151cf18",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": "2026-10-28T09:51:17.884929+07:00",
+      "reported_result": "PARTIAL: migrated protected datasets and official API benchmark remain NOT TESTED"
+    },
+    {
+      "path": "app/evidence/access-control/baseline-100k.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "234b29aaec6df818e17e06bd7a8f59f09c483e39a1b4148517dd5145d59edc2b",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": "2026-10-28T09:40:26.857742+07:00",
+      "reported_result": "PASSED"
+    },
+    {
+      "path": "evidence/benchmark/adapter_parity.json",
+      "ref": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+      "line": null,
+      "sha256_git_blob": "b2b578f21e3e08210fcc18a40288639f5274a30961cb326d0dac5859aaa381c4",
+      "commit": "a4a8844986751bf00d0ed2b1863fbd1c5402d429",
+      "committed_at_wib": "2026-10-28T14:16:01+07:00",
+      "event_at_wib": null,
+      "reported_result": true
+    },
+    {
+      "path": "app/backend/service_app/analytics.py",
+      "ref": "origin/main",
+      "line": 5,
+      "sha256_git_blob": "f0a96dbb424985dafe9c91ffbafa3c7e4bdc54d1898a377e51141d91c37889c4",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "app/tests/test_analytics_suppression.py",
+      "ref": "origin/main",
+      "line": 8,
+      "sha256_git_blob": "78cb5bd9bbd989de0a026cf620a0aec861d32f05ae2f4a1636a73c336dcd0a12",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "app/web/src/app/(service)/analytics/page.tsx",
+      "ref": "origin/main",
+      "line": 37,
+      "sha256_git_blob": "cfebbc4f073ec9f52b520a175fc2e2fb3a1db6ca19c888b28f523d598e569162",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "app/evidence/access-control/unit-tests.json",
+      "ref": "origin/main",
+      "line": null,
+      "sha256_git_blob": "5ab7e22f8763159f0880a7fbbb2e2a7c23413c17bc180106aae2ddedeb2d9862",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": "2026-10-28T09:51:17.572851+07:00",
+      "reported_result": "PASSED"
+    },
+    {
+      "path": "app/backend/service_app/main.py",
+      "ref": "origin/main",
+      "line": 318,
+      "sha256_git_blob": "68cd0b3ad321211e3922e8e3e370a9b736fe4bb5e46ec5874d674c5870324189",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "app/tests/test_access_control.py",
+      "ref": "origin/main",
+      "line": 274,
+      "sha256_git_blob": "264603ca96159386d3c7221207e7148d868207d2a105027b0a35e31450bdabe4",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "app/scripts/serve.py",
+      "ref": "origin/main",
+      "line": 13,
+      "sha256_git_blob": "99370ca6b73f16f89952e18e5ff97595c52111dbe52e970d5c19768416ff4da9",
+      "commit": "b36a9ac512612985938fee612fbe40d34fe6ef44",
+      "committed_at_wib": "2026-10-27T10:44:37+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "app/backend/service_app/repository.py",
+      "ref": "origin/main",
+      "line": 82,
+      "sha256_git_blob": "b4ce25fd3c927e6ce0aebcbce7f86f48bdd335e378329a28f0c3a6a43f558ac2",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "app/scripts/provision.py",
+      "ref": "origin/main",
+      "line": 68,
+      "sha256_git_blob": "b9e8018432a27393139bd6d3bd30ff21c2052a91c47c2656c0a0a4641672810e",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "app/scripts/local_lab.py",
+      "ref": "origin/main",
+      "line": 364,
+      "sha256_git_blob": "3e68da93505988addeeeafb8ed4e76e5813593eaeac98ebc40fc01c2ac9eb7bd",
+      "commit": "427cad41609d3a0bb6ade0a2a7c0bdaf24214420",
+      "committed_at_wib": "2026-10-27T13:54:32+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "benchmark/workloads.yaml",
+      "ref": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+      "line": 6,
+      "sha256_git_blob": "8a658dbd88ab37f748dcef48f62e50a4c5d3930eb0d82ee754c209760fe6c98f",
+      "commit": "776d420845d17ace5d96aacf702a17d7e562d0d4",
+      "committed_at_wib": "2026-10-27T10:42:51+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "app/web/server.mjs",
+      "ref": "origin/main",
+      "line": 1,
+      "sha256_git_blob": "8a5b20f398f7ab9da50f55f9bc83a0d399314361363aa87888051b27fd134165",
+      "commit": "b36a9ac512612985938fee612fbe40d34fe6ef44",
+      "committed_at_wib": "2026-10-27T10:44:37+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "app/scripts/integration.compose.yaml",
+      "ref": "origin/main",
+      "line": 1,
+      "sha256_git_blob": "03318681681a80bd428aa155f792bcf077365e8a016b49371e6c92df5493b402",
+      "commit": "b36a9ac512612985938fee612fbe40d34fe6ef44",
+      "committed_at_wib": "2026-10-27T10:44:37+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "docker-compose.yml",
+      "ref": "origin/main",
+      "line": 35,
+      "sha256_git_blob": "b4c6f4258442b97249b0fb19faff87d3af5ba8ce6a07976e47de3cbc6d036432",
+      "commit": "1f9186a666825941aa84e3d041757ccfecc8b808",
+      "committed_at_wib": "2026-10-23T15:31:27+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "apps/api/Dockerfile",
+      "ref": "origin/main",
+      "line": 1,
+      "sha256_git_blob": "a8a7a034f16890ac36a9af902761a32e7f09aa1332bb61bf346dfcbcaf0f41a4",
+      "commit": "1f9186a666825941aa84e3d041757ccfecc8b808",
+      "committed_at_wib": "2026-10-23T15:31:27+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "app/docs/INTEGRATION_A.md",
+      "ref": "origin/main",
+      "line": 1,
+      "sha256_git_blob": "daf101bf2a2ec5ac2b67073dc7f55237e00fcac30ea512be531df2c28b634556",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "docs/contracts/CONTRACT.md",
+      "ref": "origin/main",
+      "line": 110,
+      "sha256_git_blob": "e4dfef9d4d72b3acbb15792aec93f95da173e1ed3d4ccaf72bb32340a1b48bb5",
+      "commit": "cf2d2ccd786066ad9ea3c56ec2999987feda73ac",
+      "committed_at_wib": "2026-10-27T12:38:13+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "toolkit/dprcrypto/bidx.py",
+      "ref": "origin/main",
+      "line": 8,
+      "sha256_git_blob": "d5dc5f2bca4901c52c512c35938119fda3f24121b5e7101d9d34d7520aae3949",
+      "commit": "86df826d55efd9c87bad7d462364d5a9cdc69f13",
+      "committed_at_wib": "2026-10-26T23:29:08+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "toolkit/dprcrypto/openbao.py",
+      "ref": "origin/main",
+      "line": 267,
+      "sha256_git_blob": "554fa866fce82c4d93e89076d218d5943f2921b6a165a8eb8135ab7c65c5ee91",
+      "commit": "7b4c4670e4a5801e8318b7eb07ba4770883f6d43",
+      "committed_at_wib": "2026-10-27T23:47:11+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "benchmark/adapters/protected.py",
+      "ref": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+      "line": 77,
+      "sha256_git_blob": "17f352a5572f96782ffed95d391d6d277b29d93f3b2993722d96473193386151",
+      "commit": "ed9e1f01634ca0bb2a3c393d138f5a979b603d3f",
+      "committed_at_wib": "2026-10-28T15:05:37+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "app/README.md",
+      "ref": "origin/main",
+      "line": 60,
+      "sha256_git_blob": "ec511d9995002a748bfc9ae63db0cfb62d56be4651da190f174382acf6d3347f",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "app/web/tests/ui.spec.ts",
+      "ref": "origin/main",
+      "line": 13,
+      "sha256_git_blob": "b68230b19f84ccb9fdcf704b463ab65a8acebcc71e0dabcdddbf1ee9c5031546",
+      "commit": "9029b77ee468afd26d1de240ae8477bca0966183",
+      "committed_at_wib": "2026-10-28T09:51:38+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "benchmark/tests/test_1m_crosscheck.py",
+      "ref": "origin/main",
+      "line": 29,
+      "sha256_git_blob": "69508b1ee7feec59828b43a2c6d054c4ee6d751c56b37fd03c9263f2adfb19ec",
+      "commit": "cfd703b8080a1c7bd6b574779e6e8e1dc9441a32",
+      "committed_at_wib": "2026-10-27T18:29:54+07:00",
+      "event_at_wib": null
+    },
+    {
+      "path": "docs/PROJECT_CONTEXT.md",
+      "ref": "origin/main",
+      "line": 156,
+      "sha256_git_blob": "5eda56d1e7d11edebf07cd89e0ade9e6c95f3bf22d7bafc668f2d23f4be6f4d5",
+      "commit": "a3f9b4377327db012f0335399037b937ce0a164e",
+      "committed_at_wib": "2026-10-26T21:57:36+07:00",
+      "event_at_wib": null
+    }
+  ],
+  "tests": {
+    "audit_A_pure_unit": {
+      "status": "PASS",
+      "returncode": 0,
+      "passed": 68,
+      "deselected": 1,
+      "seconds": 1.84,
+      "executed_at_wib": "2026-10-28T15:21:16.412692+07:00",
+      "audited_ref": "ed88ecde71107ae3180b055eecefed3b9ad1f60b",
+      "command": [
+        "C:\\dev\\juara1onno\\.venv\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-p",
+        "no:cacheprovider",
+        "--tb=no",
+        "-q",
+        "toolkit/tests/test_vectors.py",
+        "toolkit/tests/test_codec.py",
+        "toolkit/tests/test_bidx_masking.py",
+        "-k",
+        "not remote_hmac",
+        "scripts/backup/tests/test_crypto.py",
+        "scripts/backup/tests/test_cli.py",
+        "--basetemp",
+        "C:\\dev\\dpr-audit-tmp-pure-20261028",
+        "--junitxml",
+        "C:\\dev\\dpr-audit-20261028\\audit-tests-a-pure.xml"
+      ],
+      "raw_local_junit": "C:\\dev\\dpr-audit-20261028\\audit-tests-a-pure.xml",
+      "junit_sha256": "6e462bc48c8a50a4a7895433f0545c389e13da41084f2e2623ad2b76b15e6703",
+      "test_cases": [
+        {
+          "name": "test_shared_vector_file_and_corrupted_expectation",
+          "suite": "toolkit.tests.test_vectors",
+          "passed": true
+        },
+        {
+          "name": "test_generator_is_synthetic_exclusive_and_cli_writes_evidence",
+          "suite": "toolkit.tests.test_vectors",
+          "passed": true
+        },
+        {
+          "name": "test_exact_blob_and_roundtrip[None]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_exact_blob_and_roundtrip[]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_exact_blob_and_roundtrip[Anggota Uji \\u03a9]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_exact_blob_and_roundtrip[001122]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_exact_blob_and_roundtrip[1985-06-17]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_exact_blob_and_roundtrip[42]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_exact_aad_and_random_nonces",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_tamper_and_swap_fail_closed[key]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_tamper_and_swap_fail_closed[record]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_tamper_and_swap_fail_closed[column]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_tamper_and_swap_fail_closed[protection_version]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_tamper_and_swap_fail_closed[format]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_tamper_and_swap_fail_closed[nonce]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_tamper_and_swap_fail_closed[ciphertext]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_tamper_and_swap_fail_closed[tag]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_invalid_blob_never_becomes_plaintext[]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_invalid_blob_never_becomes_plaintext[xxxxxxxxxxxxxxxxxxxxxxxxxxxx]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_invalid_blob_never_becomes_plaintext[\\x02xxxxxxxxxxxxxxxxxxxxxxxxxxxx]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_invalid_blob_never_becomes_plaintext[plaintext]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_invalid_blob_never_becomes_plaintext[1]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_invalid_context[email|injected-not-uuid-1]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_invalid_context[email-not-uuid-1]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_invalid_context[jenis_kelamin-542331d5-2312-44f3-afa7-78b542228c1a-1]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_invalid_context[email-937c9b02-1dcf-48ae-ac30-d3b647dbd86b-0]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_invalid_context[email-2d0feba2-c016-49d6-a9a2-008f1b7377a4-True]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_invalid_context[email-19987170-190d-423b-a411-9b6627f79d08-32768]",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_invalid_input_key_and_authenticated_invalid_utf8",
+          "suite": "toolkit.tests.test_codec",
+          "passed": true
+        },
+        {
+          "name": "test_exact_normalization_and_domain_message[no_ktp- 00-12 34 -001234]",
+          "suite": "toolkit.tests.test_bidx_masking",
+          "passed": true
+        },
+        {
+          "name": "test_exact_normalization_and_domain_message[no_ktp-000000-000000]",
+          "suite": "toolkit.tests.test_bidx_masking",
+          "passed": true
+        },
+        {
+          "name": "test_exact_normalization_and_domain_message[no_ktp--]",
+          "suite": "toolkit.tests.test_bidx_masking",
+          "passed": true
+        },
+        {
+          "name": "test_exact_normalization_and_domain_message[email-  UJI@Example.TEST  -uji@example.test]",
+          "suite": "toolkit.tests.test_bidx_masking",
+          "passed": true
+        },
+        {
+          "name": "test_exact_normalization_and_domain_message[email- Stra\\xdfe@EXAMPLE.TEST -stra\\xdfe@example.test]",
+          "suite": "toolkit.tests.test_bidx_masking",
+          "passed": true
+        },
+        {
+          "name": "test_exact_normalization_and_domain_message[pengguna-  AbC_001  -AbC_001]",
+          "suite": "toolkit.tests.test_bidx_masking",
+          "passed": true
+        },
+        {
+          "name": "test_exact_normalization_and_domain_message[email-None-None]",
+          "suite": "toolkit.tests.test_bidx_masking",
+          "passed": true
+        },
+        {
+          "name": "test_required_masks[mask_name-Onno Purbo-On*** Pu***]",
+          "suite": "toolkit.tests.test_bidx_masking",
+          "passed": true
+        },
+        {
+          "name": "test_required_masks[mask_nik-3174000011111234-3174********1234]",
+          "suite": "toolkit.tests.test_bidx_masking",
+          "passed": true
+        },
+        {
+          "name": "test_required_masks[mask_phone-081212347890-0812****7890]",
+          "suite": "toolkit.tests.test_bidx_masking",
+          "passed": true
+        },
+        {
+          "name": "test_required_masks[mask_email-onno@example.com-on***@example.com]",
+          "suite": "toolkit.tests.test_bidx_masking",
+          "passed": true
+        },
+        {
+          "name": "test_required_masks[mask_account-0000111122224567-************4567]",
+          "suite": "toolkit.tests.test_bidx_masking",
+          "passed": true
+        },
+        {
+          "name": "test_short_values_do_not_leak_complete_identifiers",
+          "suite": "toolkit.tests.test_bidx_masking",
+          "passed": true
+        },
+        {
+          "name": "test_roundtrip_unique_nonces_and_no_plaintext[0]",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_roundtrip_unique_nonces_and_no_plaintext[1]",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_roundtrip_unique_nonces_and_no_plaintext[511]",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_roundtrip_unique_nonces_and_no_plaintext[1048576]",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_roundtrip_unique_nonces_and_no_plaintext[1048589]",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_roundtrip_unique_nonces_and_no_plaintext[2097152]",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_each_structure_tamper_fails[0]",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_each_structure_tamper_fails[8]",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_each_structure_tamper_fails[24]",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_each_structure_tamper_fails[28]",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_each_structure_tamper_fails[32]",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_each_structure_tamper_fails[44]",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_each_structure_tamper_fails[100]",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_each_structure_tamper_fails[-1]",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_truncation_trailing_reorder_and_wrong_key",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_no_unauthenticated_plaintext_is_released",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_manifest_key_separation_and_canonicalization",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_bounded_read_for_hostile_frame",
+          "suite": "scripts.backup.tests.test_crypto",
+          "passed": true
+        },
+        {
+          "name": "test_parser_requires_safe_options",
+          "suite": "scripts.backup.tests.test_cli",
+          "passed": true
+        },
+        {
+          "name": "test_cli_writes_machine_reports_without_secrets[init-keys]",
+          "suite": "scripts.backup.tests.test_cli",
+          "passed": true
+        },
+        {
+          "name": "test_cli_writes_machine_reports_without_secrets[backup]",
+          "suite": "scripts.backup.tests.test_cli",
+          "passed": true
+        },
+        {
+          "name": "test_cli_writes_machine_reports_without_secrets[restore]",
+          "suite": "scripts.backup.tests.test_cli",
+          "passed": true
+        },
+        {
+          "name": "test_cli_writes_machine_reports_without_secrets[tamper-test]",
+          "suite": "scripts.backup.tests.test_cli",
+          "passed": true
+        },
+        {
+          "name": "test_cli_writes_machine_reports_without_secrets[retention-test]",
+          "suite": "scripts.backup.tests.test_cli",
+          "passed": true
+        },
+        {
+          "name": "test_cli_failure_redacts_arbitrary_errors",
+          "suite": "scripts.backup.tests.test_cli",
+          "passed": true
+        },
+        {
+          "name": "test_manifest_validation_schema_and_hmac",
+          "suite": "scripts.backup.tests.test_cli",
+          "passed": true
+        }
+      ]
+    },
+    "broader_A_attempts": [
+      {
+        "status": "INVALID_AUDIT_SETUP",
+        "passed": 64,
+        "failed": 9,
+        "errors": 58,
+        "cause": "Basetemp keliru berada di worktree; ditolak external_directory. Kesalahan setup audit, bukan kesimpulan cacat A."
+      },
+      {
+        "status": "ENVIRONMENT_BLOCKED",
+        "passed": 72,
+        "failed": 1,
+        "errors": 58,
+        "cause": "Basetemp sudah eksternal; Windows ACL fixture CA/DPAPI tidak dapat direstriksi. Tidak ada secret layanan dimuat; bukan semua test A lulus."
+      }
+    ],
+    "B_rerun": {
+      "status": "NOT_RUN",
+      "reason": "Venv temporer luar repo; instalasi app/requirements.txt gagal: pydantic==2.12.5 tidak tersedia pada index sesi. Tidak mengubah pin/environment repo; existing evidence dipakai dengan batas cakupan."
+    },
+    "B_existing_evidence": {
+      "counts": {
+        "passed": 276,
+        "failed": 0,
+        "skipped": 1
+      },
+      "event_at_wib": "2026-10-28T09:51:17.572851+07:00",
+      "source_hash_matches": false,
+      "computed": "c88df5e256a618dd34dd73779697e39b396126b951cd708afdbb28636a9036fd",
+      "recorded": "9d031ae61c8e30fefe2f6fcdaa7e7fe7d9bccb1a36c178f89c72c200754d1d13",
+      "relevant_tests": [
+        [
+          "test_role_endpoint_field_matrix_raw_json[plain-operator]",
+          "PASSED"
+        ],
+        [
+          "test_role_endpoint_field_matrix_raw_json[plain-privileged_officer]",
+          "PASSED"
+        ],
+        [
+          "test_role_endpoint_field_matrix_raw_json[plain-finance_officer]",
+          "PASSED"
+        ],
+        [
+          "test_role_endpoint_field_matrix_raw_json[plain-analyst]",
+          "PASSED"
+        ],
+        [
+          "test_role_endpoint_field_matrix_raw_json[plain-auditor]",
+          "PASSED"
+        ],
+        [
+          "test_role_endpoint_field_matrix_raw_json[plain-anggota]",
+          "PASSED"
+        ],
+        [
+          "test_role_endpoint_field_matrix_raw_json[protected-operator]",
+          "PASSED"
+        ],
+        [
+          "test_role_endpoint_field_matrix_raw_json[protected-privileged_officer]",
+          "PASSED"
+        ],
+        [
+          "test_role_endpoint_field_matrix_raw_json[protected-finance_officer]",
+          "PASSED"
+        ],
+        [
+          "test_role_endpoint_field_matrix_raw_json[protected-analyst]",
+          "PASSED"
+        ],
+        [
+          "test_role_endpoint_field_matrix_raw_json[protected-auditor]",
+          "PASSED"
+        ],
+        [
+          "test_role_endpoint_field_matrix_raw_json[protected-anggota]",
+          "PASSED"
+        ],
+        [
+          "test_decrypt_swap_fails_generic_and_audited[plain]",
+          "SKIPPED"
+        ],
+        [
+          "test_decrypt_swap_fails_generic_and_audited[protected]",
+          "PASSED"
+        ],
+        [
+          "test_small_cohort_never_sends_exact_count[plain]",
+          "PASSED"
+        ],
+        [
+          "test_small_cohort_never_sends_exact_count[protected]",
+          "PASSED"
+        ],
+        [
+          "test_threshold_after_kppn_and_profession_filter[plain-1]",
+          "PASSED"
+        ],
+        [
+          "test_threshold_after_kppn_and_profession_filter[plain-4]",
+          "PASSED"
+        ],
+        [
+          "test_threshold_after_kppn_and_profession_filter[plain-5]",
+          "PASSED"
+        ],
+        [
+          "test_threshold_after_kppn_and_profession_filter[plain-6]",
+          "PASSED"
+        ],
+        [
+          "test_threshold_after_kppn_and_profession_filter[protected-1]",
+          "PASSED"
+        ],
+        [
+          "test_threshold_after_kppn_and_profession_filter[protected-4]",
+          "PASSED"
+        ],
+        [
+          "test_threshold_after_kppn_and_profession_filter[protected-5]",
+          "PASSED"
+        ],
+        [
+          "test_threshold_after_kppn_and_profession_filter[protected-6]",
+          "PASSED"
+        ],
+        [
+          "test_subtraction_cannot_recover_lone_small_cell_from_siblings[plain]",
+          "PASSED"
+        ],
+        [
+          "test_subtraction_cannot_recover_lone_small_cell_from_siblings[protected]",
+          "PASSED"
+        ],
+        [
+          "test_actual_module_a_vectors_pass",
+          "PASSED"
+        ]
+      ],
+      "lf_git_blob_source_sha256": "560ca53fcadda5dc96648b2f330e5cf688bc4d7b25c1bab6f80728a0d7a0691d",
+      "note": "Source hash tidak cocok raw/CRLF maupun LF/git-blob; evidence mengaku dirty worktree. Tidak mengikat seluruh HEAD yang diaudit."
+    }
+  },
+  "local_main_commit_unchanged": "5ab5248f499bae988fefebb774e7ed8e62e8cd87"
+}

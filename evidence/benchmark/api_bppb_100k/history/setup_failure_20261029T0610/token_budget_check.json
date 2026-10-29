@@ -1,0 +1,10 @@
+{
+  "policy": "svc-app",
+  "ttl_seconds": 9417,
+  "minimum_ttl_seconds": 1,
+  "new_4h_token_issued": false,
+  "automatic_issuance": false,
+  "at_utc": "2026-10-28T23:47:05.392154+00:00",
+  "required_session_budget_seconds": 10400,
+  "session_budget_passed": false
+}

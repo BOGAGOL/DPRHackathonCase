@@ -99,3 +99,8 @@ Hasil akhir 26 Oktober 2026:
 - Semua container/volume uji disposable dibersihkan. Tidak menjalankan migrasi
   atau query ke database asli/baseline. Tahap 1 telah di-merge fast-forward ke
   main (392b1ac) atas instruksi pengguna; Tahap 2 di branch feat/crypto-toolkit.
+
+
+## 28 Oktober 2026 ? usulan perf/keyservice-latency untuk review Alby
+
+Atas instruksi Delf, branch ini menambahkan batas pool HTTP eksplisit, API HMAC batch lintas kolom dengan format v1 tetap, dan statistik agregat cache DEK yang sudah ada. Cache default toolkit tidak diubah; benchmark menyediakan varian cache-off dan opt-in TTL60. Tidak mengubah policy, key material, TLS verify, ciphertext, AAD atau bidx. Diagnosis membuktikan koneksi lama sudah persisten; tidak mengklaim handshake per request. Lihat REVIEW_KEY_SERVICE_LATENCY.md dan evidence/benchmark/keyservice_diagnosis.json; jangan merge sebelum review Modul A.

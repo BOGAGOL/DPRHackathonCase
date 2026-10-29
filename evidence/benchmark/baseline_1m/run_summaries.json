@@ -59,7 +59,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 0.0
+    }
   },
   {
     "requests": 79710,
@@ -121,7 +126,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 0.0
+    }
   },
   {
     "requests": 85253,
@@ -183,7 +193,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 0.0
+    }
   },
   {
     "requests": 83407,
@@ -245,7 +260,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 0.0
+    }
   },
   {
     "requests": 127367,
@@ -307,7 +327,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 0.0
+    }
   },
   {
     "requests": 128361,
@@ -369,7 +394,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 0.0
+    }
   },
   {
     "requests": 129155,
@@ -431,7 +461,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 0.0
+    }
   },
   {
     "requests": 130204,
@@ -493,7 +528,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 0.0
+    }
   },
   {
     "requests": 129818,
@@ -555,7 +595,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 0.0
+    }
   },
   {
     "requests": 170691,
@@ -617,7 +662,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 0.0
+    }
   },
   {
     "requests": 169768,
@@ -679,7 +729,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 0.0
+    }
   },
   {
     "requests": 171286,
@@ -741,7 +796,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 0.0
+    }
   },
   {
     "requests": 80405,
@@ -803,7 +863,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 0.0
+    }
   },
   {
     "requests": 78124,
@@ -865,7 +930,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 60.005381
+    }
   },
   {
     "requests": 74499,
@@ -927,7 +997,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 60.005028
+    }
   },
   {
     "requests": 49581,
@@ -989,7 +1064,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 60.027645
+    }
   },
   {
     "requests": 50338,
@@ -1051,7 +1131,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 60.024323
+    }
   },
   {
     "requests": 49380,
@@ -1113,7 +1198,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 60.019044
+    }
   },
   {
     "requests": 88907,
@@ -1180,7 +1270,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 60.004789
+    }
   },
   {
     "requests": 84008,
@@ -1247,7 +1342,12 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 60.004969
+    }
   },
   {
     "requests": 92388,
@@ -1314,6 +1414,11 @@
     },
     "data_and_sequence_unchanged": true,
     "telemetry_complete": true,
-    "valid": true
+    "valid": true,
+    "post_run_power_audit": {
+      "incident_file": "evidence/benchmark/baseline_1m/power_incident.json",
+      "confirmed_battery_overlap_s": 0.0,
+      "reported_uncertain_window_overlap_s": 60.005251
+    }
   }
 ]

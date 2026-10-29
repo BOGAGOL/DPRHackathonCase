@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "checked_at_utc": "2026-10-28T06:14:24.641071+00:00",
+  "checks": {
+    "a_baseline_bench_scanner_without_tls": true,
+    "b_other_roles_baseline_without_tls_rejected": true,
+    "c_app_protected_without_tls_rejected": true,
+    "d_app_protected_verify_full": true
+  },
+  "scope": {
+    "baselines": [
+      "baseline_100k",
+      "baseline_1m"
+    ],
+    "protected": [
+      "protected_100k",
+      "protected_1m"
+    ]
+  },
+  "baseline_client_address": "172.17.0.1",
+  "same_container": true,
+  "no_postmaster_restart": true,
+  "database_oids_unchanged": true,
+  "protected_734_status": "NOT_CREATED_NOT_IN_REQUESTED_MATRIX",
+  "all_five_database_matrix_complete": false,
+  "configuration": "main PR #5 b8e9998, merged together with PR #6 via origin/main ed88ecd",
+  "overnight_configuration": "fix/tls-baseline-exception: same intended baseline non-TLS exception and protected TLS requirement; final implementation uses hostnossl to preserve encrypted authentication rule precedence"
+}

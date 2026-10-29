@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "checked_at_utc": "2026-10-27T18:59:30.074518+00:00",
+  "scope": "Exact current scanner/bench password, bootstrap/token/share and private-key literal audit of changed/untracked outputs and Docker logs since 2026-10-27T18:11:20Z; not a full S06 repo/history/host scan.",
+  "files_scanned": 21,
+  "sensitive_literals_checked": 16,
+  "matched_files": [],
+  "server_logs": {
+    "pg-dpr": {
+      "bytes_scanned": 5152,
+      "active_secret_literal_found": false
+    },
+    "dpr-infra-openbao-1": {
+      "bytes_scanned": 160,
+      "active_secret_literal_found": false
+    }
+  }
+}

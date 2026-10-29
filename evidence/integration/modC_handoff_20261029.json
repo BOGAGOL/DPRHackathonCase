@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "status": "PASSED_WITH_OPTIONAL_SKIPS",
+  "checked_at_wib": "2026-10-29T04:56:05.349319+07:00",
+  "branch": "perf/keyservice-latency",
+  "merged_main_commit": "a746c6ce01523ed04b7989b8da0a2f79c36fac7b",
+  "merge_commit": "f370e13a8c5cc7a3f5dd889f239bc8fbdef3e0dd",
+  "merge_conflicts": [],
+  "tests": [
+    {
+      "command": ".\\.venv\\Scripts\\python.exe -m pytest toolkit/tests benchmark/tests verify/tests -q",
+      "junit": "evidence/integration/modC_pr_core_20261029.xml",
+      "sha256": "807552a0337ea388ee92ff720ddf873a1b45c8b68b57f088726c8de5b1c81351",
+      "modules": {
+        "toolkit": {
+          "passed": 108,
+          "skipped": 1
+        },
+        "benchmark": {
+          "passed": 96
+        },
+        "verify": {
+          "passed": 32
+        }
+      },
+      "skip_reasons": [
+        "Set DPR_CRYPTO_INTEGRATION=1 for a disposable TLS OpenBao integration test"
+      ]
+    },
+    {
+      "command": ".\\scanner\\.venv\\Scripts\\python.exe -m pytest scanner/tests -q",
+      "junit": "evidence/integration/modC_pr_scanner_20261029.xml",
+      "sha256": "80f9c47f1fd40e32ef1516e764cc23fbc4f2edbf068cf8c39e74559392930392",
+      "modules": {
+        "scanner": {
+          "passed": 193,
+          "skipped": 1
+        }
+      },
+      "skip_reasons": [
+        "SCANNER_TEST_DATABASE_URL belum diatur"
+      ]
+    }
+  ],
+  "totals": {
+    "passed": 429,
+    "skipped": 2,
+    "failures": 0,
+    "errors": 0
+  },
+  "initial_failure": {
+    "junit": "evidence/integration/modC_pr_core_20261029_initial_failure.xml",
+    "failed": 1,
+    "passed": 235,
+    "skipped": 1,
+    "reason": "Historical production-manifest test assumed current HEAD still equals 8a11ff7; main advances protection profile for A5. Test now exercises frozen measured Git snapshot and rejects subsequent edits. Runtime gate unchanged."
+  },
+  "handoff": "docs/handoff/MODUL_C_UNTUK_TIM.md",
+  "toolkit_changed_files": [
+    "toolkit/NOTES.md",
+    "toolkit/REVIEW_KEY_SERVICE_LATENCY.md",
+    "toolkit/dprcrypto/bidx.py",
+    "toolkit/dprcrypto/https_pool.py",
+    "toolkit/dprcrypto/keys.py",
+    "toolkit/dprcrypto/openbao.py",
+    "toolkit/tests/test_https_pool.py",
+    "toolkit/tests/test_latency_features.py"
+  ],
+  "live_benchmark_migration_database_or_openbao_mutations_in_this_task": false,
+  "app_live_integration_rerun": false,
+  "merge_to_main_authorized": false,
+  "requested_reviewer": "albyarto",
+  "measured_benchmark_snapshot": "6077b10f22b6d5507a224bd157963778071c4293",
+  "measured_production_commit": "8a11ff7dd39d66317a9802a7224d5ab044210798"
+}

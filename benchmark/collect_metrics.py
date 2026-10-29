@@ -22,20 +22,25 @@ def memory_bytes(value):
     return int(float(match[1]) * units[match[2]])
 
 
-def docker_sample():
-    result = subprocess.run(["docker", "stats", "--no-stream", "--format", "{{json .}}", "pg-dpr"],
+def docker_sample(containers=None):
+    result = subprocess.run(["docker", "stats", "--no-stream", "--format", "{{json .}}", *(containers or ["pg-dpr"])],
                             capture_output=True, text=True, timeout=10, check=True)
-    data = json.loads(result.stdout)
-    return {"db_cpu_percent_one_core": float(data["CPUPerc"].rstrip("%")),
-            "db_ram_bytes": memory_bytes(data["MemUsage"].split("/")[0])}
+    samples = {}
+    for line in result.stdout.splitlines():
+        data = json.loads(line)
+        prefix = "openbao" if data.get("Name") == "dpr-infra-openbao-1" else "db"
+        samples.update({prefix + "_cpu_percent_one_core": float(data["CPUPerc"].rstrip("%")),
+                        prefix + "_ram_bytes": memory_bytes(data["MemUsage"].split("/")[0])})
+    return samples
 
 
 class Collector:
-    def __init__(self, path, interval=2):
+    def __init__(self, path, interval=2, containers=None):
         self.path, self.interval = path, interval
         self.stop = threading.Event()
         self.samples = []
         self.thread = None
+        self.containers = containers
 
     def start(self):
         self.thread = threading.Thread(target=self.collect, daemon=True)
@@ -46,13 +51,15 @@ class Collector:
         process.cpu_percent(None)
         fields = ("timestamp_utc", "db_cpu_percent_one_core", "db_ram_bytes", "client_cpu_percent_one_core",
                   "client_ram_bytes", "ok")
+        if self.containers:
+            fields += ("openbao_cpu_percent_one_core", "openbao_ram_bytes")
         with self.path.open("x", encoding="utf-8", newline="") as handle:
             writer = csv.DictWriter(handle, fieldnames=fields)
             writer.writeheader()
             while not self.stop.is_set():
                 sample = {"timestamp_utc": utc_now(), "ok": True}
                 try:
-                    sample.update(docker_sample())
+                    sample.update(docker_sample(self.containers) if self.containers else docker_sample())
                     sample.update(client_cpu_percent_one_core=process.cpu_percent(None),
                                   client_ram_bytes=process.memory_info().rss)
                 except Exception:
@@ -67,6 +74,8 @@ class Collector:
         self.thread.join(timeout=15)
         good = [s for s in self.samples if s["ok"]]
         fields = ("db_cpu_percent_one_core", "db_ram_bytes", "client_cpu_percent_one_core", "client_ram_bytes")
+        if self.containers:
+            fields += ("openbao_cpu_percent_one_core", "openbao_ram_bytes")
         return {"samples": len(self.samples), "failed_samples": len(self.samples) - len(good),
                 **{key + "_median": statistics.median(s[key] for s in good) if good else None for key in fields},
                 **{key + "_peak": max(s[key] for s in good) if good else None for key in fields}}

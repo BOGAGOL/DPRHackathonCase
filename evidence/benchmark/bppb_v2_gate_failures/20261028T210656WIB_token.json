@@ -1,0 +1,19 @@
+{
+  "checked_at_utc": "2026-10-28T14:06:56.323586+00:00",
+  "checked_at_wib": "2026-10-28T21:06:56+07:00",
+  "openbao_initialized": true,
+  "openbao_sealed": false,
+  "minimum_ttl_seconds": 10800,
+  "token_issued": false,
+  "policy": [
+    "svc-app"
+  ],
+  "ttl_seconds": 10509,
+  "explicit_max_ttl": 14400,
+  "passed": false,
+  "expires_at_wib": "2026-10-29T00:02:05.361247+07:00",
+  "method": "Read-only auth/token/lookup-self; no token value/accessor exported",
+  "background_worker_started": false,
+  "official_runs_started": false,
+  "reason": "Existing token TTL below user-required 3 hours; stop without issuing or renewing"
+}

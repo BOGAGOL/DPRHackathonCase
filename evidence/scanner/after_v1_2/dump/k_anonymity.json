@@ -1,0 +1,8088 @@
+[
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 49995,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "action"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 2,
+    "k_min": 1,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "migrated_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 14827,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 1000,
+    "groups": 100,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 49867,
+    "groups": 2,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 17294,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 14442,
+    "groups": 6,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 100000,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 1000,
+    "groups": 100,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "actor_role"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 200982,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 100000,
+    "groups": 2,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "decision"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 200982,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "effective_role"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 100000,
+    "groups": 2,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "field_class"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 2,
+    "groups": 3,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "action"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "actor_role"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "decision"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "effective_role"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "field_class"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "agama_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "status_kawin_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_lahir_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tempat_lahir_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "agama_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "agama_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "status_kawin_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "tanggal_pernikahan_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "agama_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "status_kawin_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "agama_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "status_kawin_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_lahir_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_pernikahan_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_pernikahan_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 49995,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 49999,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50094,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 49996,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 49999,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50094,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "action",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 2,
+    "k_min": 1,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "action",
+      "decision"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 2,
+    "k_min": 1,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "action",
+      "field_class"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 2,
+    "k_min": 1,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "actor_role",
+      "action"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 2,
+    "k_min": 1,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "effective_role",
+      "action"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 2,
+    "k_min": 1,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "batch_count",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "batch_count",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "batch_count",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "batch_count",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "migrated_rows",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "migrated_rows",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "migrated_rows",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "migrated_rows",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "migrated_rows",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "migrated_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "source_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "source_sha256"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "migrated_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "profile_sha256"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_identity"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_sha256"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "migrated_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "profile_sha256"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "source_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "source_sha256"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "migrated_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "migrated_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "source_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "started_at",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "started_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "status",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "status",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "status",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "updated_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "age_band",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 118,
+    "groups": 500,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "age_band",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 2551,
+    "groups": 25,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "age_band",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 2149,
+    "groups": 30,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "age_band",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 118,
+    "groups": 500,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "created_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 160,
+    "groups": 500,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "created_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 133,
+    "groups": 600,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "created_at",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 1000,
+    "groups": 100,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "jenis_kelamin",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 7394,
+    "groups": 10,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "jenis_kelamin",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 479,
+    "groups": 200,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "jenis_kelamin",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 7489,
+    "groups": 10,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "jenis_kelamin",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 6946,
+    "groups": 12,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "jenis_kelamin",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 479,
+    "groups": 200,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 2180,
+    "groups": 30,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 14827,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 1000,
+    "groups": 100,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 49867,
+    "groups": 2,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 17294,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 14442,
+    "groups": 6,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 1000,
+    "groups": 100,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "updated_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 160,
+    "groups": 500,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "updated_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 133,
+    "groups": 600,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "actor_role",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 100000,
+    "groups": 2,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "actor_role",
+      "decision"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 200982,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "actor_role",
+      "effective_role"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 100000,
+    "groups": 2,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "actor_role",
+      "field_class"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 2,
+    "groups": 3,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "decision",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 100000,
+    "groups": 2,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "effective_role",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 100000,
+    "groups": 2,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "effective_role",
+      "decision"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 100000,
+    "groups": 2,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "effective_role",
+      "field_class"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 2,
+    "groups": 3,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "field_class",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 2,
+    "groups": 3,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "field_class",
+      "decision"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 2,
+    "groups": 3,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "action",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "action",
+      "decision"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "action",
+      "field_class"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "actor_role",
+      "action"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "actor_role",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "actor_role",
+      "decision"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "actor_role",
+      "effective_role"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "actor_role",
+      "field_class"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "decision",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "effective_role",
+      "action"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "effective_role",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "effective_role",
+      "decision"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "effective_role",
+      "field_class"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "field_class",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "occurred_at",
+      "field_class",
+      "decision"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 200982,
+    "k_min": 1,
+    "groups": 200982,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "age_band",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "age_band",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "age_band",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "age_band",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "created_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "created_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "created_at",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "jenis_kelamin",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "jenis_kelamin",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "jenis_kelamin",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "jenis_kelamin",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "jenis_kelamin",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "updated_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "agama_ct",
+      "updated_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "agama_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "agama_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "agama_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "agama_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "agama_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "agama_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "status_kawin_ct",
+      "agama_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "status_kawin_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "status_kawin_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "status_kawin_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "status_kawin_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "status_kawin_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "status_kawin_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_lahir_ct",
+      "agama_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_lahir_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_lahir_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_lahir_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_lahir_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_lahir_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_lahir_ct",
+      "status_kawin_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_lahir_ct",
+      "tanggal_pernikahan_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_lahir_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_pernikahan_ct",
+      "agama_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_pernikahan_ct",
+      "status_kawin_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tempat_lahir_ct",
+      "agama_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tempat_lahir_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tempat_lahir_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tempat_lahir_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tempat_lahir_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tempat_lahir_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tempat_lahir_ct",
+      "status_kawin_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tempat_lahir_ct",
+      "tanggal_lahir_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tempat_lahir_ct",
+      "tanggal_pernikahan_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tempat_lahir_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "agama_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "agama_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "agama_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "agama_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "agama_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "agama_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "age_band",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "age_band",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "age_band",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "age_band",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "created_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "created_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "created_at",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "jenis_kelamin",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "jenis_kelamin",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "jenis_kelamin",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "jenis_kelamin",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "jenis_kelamin",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "updated_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "status_kawin_ct",
+      "updated_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "agama_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "agama_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "agama_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "agama_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "agama_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "agama_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "age_band",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "age_band",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "age_band",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "age_band",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "created_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "created_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "created_at",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "jenis_kelamin",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "jenis_kelamin",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "jenis_kelamin",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "jenis_kelamin",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "jenis_kelamin",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "status_kawin_ct",
+      "agama_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "status_kawin_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "status_kawin_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "status_kawin_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "status_kawin_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "status_kawin_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "status_kawin_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "tanggal_pernikahan_ct",
+      "agama_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "tanggal_pernikahan_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "tanggal_pernikahan_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "tanggal_pernikahan_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "tanggal_pernikahan_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "tanggal_pernikahan_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "tanggal_pernikahan_ct",
+      "status_kawin_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "tanggal_pernikahan_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "updated_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_lahir_ct",
+      "updated_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "agama_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "agama_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "agama_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "agama_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "agama_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "agama_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "status_kawin_ct",
+      "agama_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "status_kawin_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "status_kawin_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "status_kawin_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "status_kawin_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "status_kawin_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "status_kawin_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "agama_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "agama_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "agama_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "agama_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "agama_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "agama_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "age_band",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "age_band",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "age_band",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "age_band",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "created_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "created_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "created_at",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "jenis_kelamin",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "jenis_kelamin",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "jenis_kelamin",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "jenis_kelamin",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "jenis_kelamin",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "status_kawin_ct",
+      "agama_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "status_kawin_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "status_kawin_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "status_kawin_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "status_kawin_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "status_kawin_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "status_kawin_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_lahir_ct",
+      "agama_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_lahir_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_lahir_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_lahir_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_lahir_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_lahir_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_lahir_ct",
+      "status_kawin_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_lahir_ct",
+      "tanggal_pernikahan_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_lahir_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_pernikahan_ct",
+      "agama_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_pernikahan_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_pernikahan_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_pernikahan_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_pernikahan_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_pernikahan_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_pernikahan_ct",
+      "status_kawin_ct"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "tanggal_pernikahan_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "updated_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tempat_lahir_ct",
+      "updated_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 100000,
+    "k_min": 1,
+    "groups": 100000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_pernikahan_ct",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 49999,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_pernikahan_ct",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50094,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_pernikahan_ct",
+      "jenis_kelamin"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 49996,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_pernikahan_ct",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 49999,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_pernikahan_ct",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "tanggal_pernikahan_ct",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50094,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "age_band",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50494,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "age_band",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50019,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "age_band",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50024,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "age_band",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50494,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "created_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50494,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "created_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50594,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "created_at",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50094,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "jenis_kelamin",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50004,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "jenis_kelamin",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50194,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "jenis_kelamin",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50004,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "jenis_kelamin",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50006,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "jenis_kelamin",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50194,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50024,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "updated_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50494,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "tanggal_pernikahan_ct",
+      "updated_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 49994,
+    "k_min": 1,
+    "groups": 50594,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "action",
+      "decision",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 2,
+    "k_min": 1,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "action",
+      "field_class",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 2,
+    "k_min": 1,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "action",
+      "field_class",
+      "decision"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 2,
+    "k_min": 1,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "actor_role",
+      "action",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 2,
+    "k_min": 1,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "actor_role",
+      "action",
+      "decision"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 2,
+    "k_min": 1,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "actor_role",
+      "action",
+      "field_class"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 2,
+    "k_min": 1,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "actor_role",
+      "effective_role",
+      "action"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 2,
+    "k_min": 1,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "effective_role",
+      "action",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 2,
+    "k_min": 1,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "effective_role",
+      "action",
+      "decision"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 2,
+    "k_min": 1,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "effective_role",
+      "action",
+      "field_class"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 2,
+    "k_min": 1,
+    "groups": 5,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "batch_count",
+      "started_at",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "batch_count",
+      "started_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "batch_count",
+      "status",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "batch_count",
+      "status",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "batch_count",
+      "status",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "batch_count",
+      "updated_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "migrated_rows",
+      "batch_count",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "migrated_rows",
+      "batch_count",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "migrated_rows",
+      "batch_count",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "migrated_rows",
+      "batch_count",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "migrated_rows",
+      "started_at",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "migrated_rows",
+      "started_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "migrated_rows",
+      "status",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "migrated_rows",
+      "status",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "migrated_rows",
+      "status",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "migrated_rows",
+      "updated_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "batch_count",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "batch_count",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "batch_count",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "batch_count",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "migrated_rows",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "migrated_rows",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "migrated_rows",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "migrated_rows",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "migrated_rows",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "source_rows",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "source_rows",
+      "migrated_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "source_rows",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "source_rows",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "source_rows",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "source_rows",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "source_sha256",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "source_sha256",
+      "migrated_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "source_sha256",
+      "source_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "source_sha256",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "source_sha256",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "source_sha256",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "source_sha256",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "started_at",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "started_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "status",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "status",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "status",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "profile_sha256",
+      "updated_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "batch_count",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "batch_count",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "batch_count",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "batch_count",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "migrated_rows",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "migrated_rows",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "migrated_rows",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "migrated_rows",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "migrated_rows",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "profile_sha256",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "profile_sha256",
+      "migrated_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "profile_sha256",
+      "source_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "profile_sha256",
+      "source_sha256"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "profile_sha256",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "profile_sha256",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "profile_sha256",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "profile_sha256",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_identity",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_identity",
+      "migrated_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_identity",
+      "profile_sha256"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_identity",
+      "source_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_identity",
+      "source_sha256"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_identity",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_identity",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_identity",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_identity",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_rows",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_rows",
+      "migrated_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_rows",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_rows",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_rows",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_rows",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_sha256",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_sha256",
+      "migrated_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_sha256",
+      "source_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_sha256",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_sha256",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_sha256",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "source_sha256",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "started_at",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "started_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "status",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "status",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "status",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_database",
+      "updated_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "batch_count",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "batch_count",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "batch_count",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "batch_count",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "migrated_rows",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "migrated_rows",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "migrated_rows",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "migrated_rows",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "migrated_rows",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "profile_sha256",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "profile_sha256",
+      "migrated_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "profile_sha256",
+      "source_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "profile_sha256",
+      "source_sha256"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "profile_sha256",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "profile_sha256",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "profile_sha256",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "profile_sha256",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "source_rows",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "source_rows",
+      "migrated_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "source_rows",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "source_rows",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "source_rows",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "source_rows",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "source_sha256",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "source_sha256",
+      "migrated_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "source_sha256",
+      "source_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "source_sha256",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "source_sha256",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "source_sha256",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "source_sha256",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "started_at",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "started_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "status",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "status",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "status",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_identity",
+      "updated_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "batch_count",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "batch_count",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "batch_count",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "batch_count",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "migrated_rows",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "migrated_rows",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "migrated_rows",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "migrated_rows",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "migrated_rows",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "started_at",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "started_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "status",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "status",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "status",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_rows",
+      "updated_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "batch_count",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "batch_count",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "batch_count",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "batch_count",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "migrated_rows",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "migrated_rows",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "migrated_rows",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "migrated_rows",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "migrated_rows",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "source_rows",
+      "batch_count"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "source_rows",
+      "migrated_rows"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "source_rows",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "source_rows",
+      "status"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "source_rows",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "source_rows",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "started_at",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "started_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "status",
+      "started_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "status",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "status",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "source_sha256",
+      "updated_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "started_at",
+      "updated_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "status",
+      "started_at",
+      "updated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "status",
+      "started_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.migration_jobs",
+    "columns": [
+      "status",
+      "updated_at",
+      "validated_at"
+    ],
+    "total_rows": 1,
+    "unique_rows": 1,
+    "k_min": 1,
+    "groups": 1,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "age_band",
+      "created_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 15,
+    "groups": 2500,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "age_band",
+      "created_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 10,
+    "groups": 3000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "age_band",
+      "created_at",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 118,
+    "groups": 500,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "age_band",
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 300,
+    "groups": 150,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "age_band",
+      "updated_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 15,
+    "groups": 2500,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "age_band",
+      "updated_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 10,
+    "groups": 3000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "created_at",
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 16,
+    "groups": 3000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "created_at",
+      "updated_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 160,
+    "groups": 500,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "created_at",
+      "updated_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 133,
+    "groups": 600,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "jenis_kelamin",
+      "age_band",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 48,
+    "groups": 1000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "jenis_kelamin",
+      "age_band",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 1068,
+    "groups": 50,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "jenis_kelamin",
+      "age_band",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 1019,
+    "groups": 60,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "jenis_kelamin",
+      "age_band",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 48,
+    "groups": 1000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "jenis_kelamin",
+      "created_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 65,
+    "groups": 1000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "jenis_kelamin",
+      "created_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 60,
+    "groups": 1200,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "jenis_kelamin",
+      "created_at",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 479,
+    "groups": 200,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "jenis_kelamin",
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 681,
+    "groups": 60,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "jenis_kelamin",
+      "updated_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 65,
+    "groups": 1000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "jenis_kelamin",
+      "updated_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 60,
+    "groups": 1200,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "age_band",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 118,
+    "groups": 500,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "age_band",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 2551,
+    "groups": 25,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "age_band",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 2149,
+    "groups": 30,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "age_band",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 118,
+    "groups": 500,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "created_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 160,
+    "groups": 500,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "created_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 133,
+    "groups": 600,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "created_at",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 1000,
+    "groups": 100,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "jenis_kelamin",
+      "age_band"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 7394,
+    "groups": 10,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "jenis_kelamin",
+      "created_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 479,
+    "groups": 200,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "jenis_kelamin",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 7489,
+    "groups": 10,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "jenis_kelamin",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 6946,
+    "groups": 12,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "jenis_kelamin",
+      "updated_at"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 479,
+    "groups": 200,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 2180,
+    "groups": 30,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "updated_at",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 160,
+    "groups": 500,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "protection_version",
+      "updated_at",
+      "pekerjaan_terakhir"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 133,
+    "groups": 600,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.anggota_protected",
+    "columns": [
+      "updated_at",
+      "pekerjaan_terakhir",
+      "nama_kppn"
+    ],
+    "total_rows": 100000,
+    "unique_rows": 0,
+    "k_min": 16,
+    "groups": 3000,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "actor_role",
+      "decision",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 100000,
+    "groups": 2,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "actor_role",
+      "effective_role",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 100000,
+    "groups": 2,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "actor_role",
+      "effective_role",
+      "decision"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 100000,
+    "groups": 2,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "actor_role",
+      "effective_role",
+      "field_class"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 2,
+    "groups": 3,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "actor_role",
+      "field_class",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 2,
+    "groups": 3,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "actor_role",
+      "field_class",
+      "decision"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 2,
+    "groups": 3,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "effective_role",
+      "decision",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 100000,
+    "groups": 2,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "effective_role",
+      "field_class",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 2,
+    "groups": 3,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "effective_role",
+      "field_class",
+      "decision"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 2,
+    "groups": 3,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  },
+  {
+    "table": "public.audit_log",
+    "columns": [
+      "field_class",
+      "decision",
+      "database_user"
+    ],
+    "total_rows": 200982,
+    "unique_rows": 0,
+    "k_min": 2,
+    "groups": 3,
+    "scope": "full_dump_aggregate",
+    "null_policy": "NULL values form a group; no row values exported"
+  }
+]

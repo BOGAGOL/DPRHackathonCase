@@ -1,0 +1,65 @@
+[
+  {
+    "file": "requests_worker_0.csv.gz",
+    "uncompressed_sha256": "e5cda47ec7e2a4e2604be78181e22331e93e6413273cc334a890ca4a5623abe8",
+    "compressed_sha256": "01c65436f47cdfc407e381ac889e3870cc6e62a79d4e69784785a9f9ebfb5bbb",
+    "uncompressed_bytes": 553056,
+    "compressed_bytes": 110919
+  },
+  {
+    "file": "requests_worker_1.csv.gz",
+    "uncompressed_sha256": "03a1641fd75052ca8d76d184a9b75519fbdc7924f46fc8341dd9fc8191c56a94",
+    "compressed_sha256": "01176f96838355aa9c0cede8e9ffd89e71313bb8634c28f91f3c1a8bf962a6e1",
+    "uncompressed_bytes": 547585,
+    "compressed_bytes": 109662
+  },
+  {
+    "file": "requests_worker_2.csv.gz",
+    "uncompressed_sha256": "5b6a68df3eb146470f0b1d3870fb8a0b5edfdb8992c346aab6be66d2546e9df3",
+    "compressed_sha256": "5e9f786521d0fd2c61bfa0f73e4fc4a25655f6c4dfc153bdb552014281db69b8",
+    "uncompressed_bytes": 574055,
+    "compressed_bytes": 114820
+  },
+  {
+    "file": "requests_worker_3.csv.gz",
+    "uncompressed_sha256": "0e470ed252ad4b6bc6e69f41804237ce2a030aed9a05c7ef41bd930c5b98ff58",
+    "compressed_sha256": "108700bd3c89d3341b7c2576dc4dcef41c53dd0b1f639162cf9d674bebe71aed",
+    "uncompressed_bytes": 564845,
+    "compressed_bytes": 113019
+  },
+  {
+    "file": "requests_worker_4.csv.gz",
+    "uncompressed_sha256": "d092c940f8aa5053d4501e0358f7f763cd8b87500b5438715516e6c1c3fb5d18",
+    "compressed_sha256": "c5995bedc9adc7f7ea6919f32f69afe17d5bd7dedad3d28997458aa233afedce",
+    "uncompressed_bytes": 547381,
+    "compressed_bytes": 109631
+  },
+  {
+    "file": "requests_worker_5.csv.gz",
+    "uncompressed_sha256": "1f485def1dd585f9fc849940e7eac1e8a5aac767f348bee1fe12dba369220186",
+    "compressed_sha256": "45608ca4cbe368668387a11d3dd9f9dd9fb553474d2bcd6f24136f853d0c7142",
+    "uncompressed_bytes": 545153,
+    "compressed_bytes": 108993
+  },
+  {
+    "file": "requests_worker_6.csv.gz",
+    "uncompressed_sha256": "2ba49699f9be7146495fe18bf326fb2782f99899daf967dfbe7ce417285a3239",
+    "compressed_sha256": "8850581cdaffae8edc9d9a4d505fd5ac24a3f81eb4cb155c6406da53ac1ee571",
+    "uncompressed_bytes": 572885,
+    "compressed_bytes": 114164
+  },
+  {
+    "file": "requests_worker_7.csv.gz",
+    "uncompressed_sha256": "09d4afc5cd56230e2a4d3223e94e5c3ebae4d29a4818187535f5a6cac71e744c",
+    "compressed_sha256": "1276b57bb87d753d6636b4d310e20b77aa9f4f6b4af8b4ac2a284502d1fd3dec",
+    "uncompressed_bytes": 575184,
+    "compressed_bytes": 114760
+  },
+  {
+    "file": "resources.csv.gz",
+    "uncompressed_sha256": "8a0b928338bde3b87408bd5d7cefd932ceee02b68b6bed84b702684084b38701",
+    "compressed_sha256": "c6c79a021fcf6f8b67bf397855542f599356c480699e68c5f143a27622fa921e",
+    "uncompressed_bytes": 1349,
+    "compressed_bytes": 563
+  }
+]
