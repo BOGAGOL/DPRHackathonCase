@@ -1,0 +1,52 @@
+{
+  "at_utc": "2026-10-29T01:19:10.592715+00:00",
+  "read_only": true,
+  "database_catalog": [
+    {
+      "database": "baseline_100k",
+      "oid": 57392,
+      "allow_connections": true
+    },
+    {
+      "database": "baseline_100k__official",
+      "oid": 32768,
+      "allow_connections": false
+    },
+    {
+      "database": "baseline_1m",
+      "oid": 33000,
+      "allow_connections": true
+    },
+    {
+      "database": "postgres",
+      "oid": 5,
+      "allow_connections": true
+    },
+    {
+      "database": "protected_100k",
+      "oid": 57393,
+      "allow_connections": true
+    },
+    {
+      "database": "protected_100k__official",
+      "oid": 41230,
+      "allow_connections": false
+    },
+    {
+      "database": "protected_1m",
+      "oid": 41487,
+      "allow_connections": true
+    }
+  ],
+  "sessions": [
+    {
+      "database": "baseline_100k",
+      "role": "app_user",
+      "state": "idle",
+      "count": 1
+    }
+  ],
+  "restoration_retried": false,
+  "official_originals_remain_archived_and_connection_disabled": true,
+  "next_step": "Operator authorization required to retry recovery after fixing owned-conhost handling; no benchmark retry."
+}

@@ -2,7 +2,7 @@
   "status": "PASSED",
   "at_wib": "2026-10-29T06:47:38.756175+07:00",
   "core_tests": {
-    "passed": 265,
+    "passed": 266,
     "skipped": 2,
     "evidence": "all_tests.xml"
   },
@@ -24,7 +24,7 @@
   "windows_process_guard": "Track actual Python server children and parent identities; stop all owned processes and require port closed before restoring database names.",
   "runtime_gate": "Original OID/content/control/sequence preserved; unknown copy OID refused; restore_failed stops without automatic retry.",
   "copy_preparation_regressions": {
-    "passed": 29,
+    "passed": 30,
     "evidence": "implementation_tests.xml"
   },
   "latest_fixture_attempt": {
@@ -35,7 +35,7 @@
     "official_database_activity": false,
     "future_test_requirement": "DPR_RUN_K6_TLS_FIXTURE=1; certificate subprocesses now bounded to30s"
   },
-  "latest_validation_at_utc": "2026-10-29T00:40:10.610067+00:00",
+  "latest_validation_at_utc": "2026-10-29T01:23:16.014095+00:00",
   "operator_ca_guard": {
     "passed": true,
     "test": "test_detached_launcher_rejects_untrusted_ca_before_credentials_or_worker",
@@ -58,5 +58,15 @@
       "reject path injection before writing evidence"
     ],
     "live_lab_ca_removed_during_tests": false
+  },
+  "conhost_cleanup_fix": {
+    "unit_test_passed": true,
+    "live_recovery_retried": false
+  },
+  "ca_live_cleanup": {
+    "status": "OPERATOR_REMOVAL_REQUIRED",
+    "absence_verified": false,
+    "initial_noninteractive_failure": "InvalidOperationException",
+    "forced_removal_rejected_by_automatic_review": true
   }
 }

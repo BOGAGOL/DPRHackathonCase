@@ -204,7 +204,13 @@ def stop_owned_app(identity):
     for record in records:
         if record['pid'] in seen or not psutil.pid_exists(record['pid']):continue
         seen.add(record['pid']);p=psutil.Process(record['pid'])
-        if p.create_time()!=record['created'] or not any('serve.py' in a for a in p.cmdline()):
+        if p.create_time()!=record['created']:
+            raise RuntimeError('api_process_identity_mismatch')
+        # Windows may attach a console host alongside the venv's actual server.
+        # It is not a service Python process; stopping its parent closes it.
+        if p.name().lower()=='conhost.exe' and record['pid']!=identity['pid']:
+            continue
+        if not any('serve.py' in a for a in p.cmdline()):
             raise RuntimeError('api_process_identity_mismatch')
         p.terminate();stopped.append(p)
     _,alive=psutil.wait_procs(stopped,timeout=10)

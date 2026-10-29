@@ -56,7 +56,7 @@ try {
         if($cBranch -ne 'perf/keyservice-latency'){throw 'Refuse CA evidence publication on another branch'}
         & git -C $cRoot add -- benchmark/NOTES.md evidence/benchmark/api_bppb_100k evidence/benchmark/api_bppb_compare.json
         if($LASTEXITCODE -ne 0){throw 'CA evidence git add failed'}
-        & git -C $cRoot commit --only -m 'evidence: operator lab CA removed and absence verified after API session' -- benchmark/NOTES.md evidence/benchmark/api_bppb_100k evidence/benchmark/api_bppb_compare.json
+        & git -C $cRoot commit --only -m ('evidence: API CA cleanup status '+$cLifecycle.status) -- benchmark/NOTES.md evidence/benchmark/api_bppb_100k evidence/benchmark/api_bppb_compare.json
         if($LASTEXITCODE -ne 0){throw 'CA evidence git commit failed'}
         & git -C $cRoot push origin HEAD:refs/heads/perf/keyservice-latency
         if($LASTEXITCODE -ne 0){throw 'CA evidence git push failed'}

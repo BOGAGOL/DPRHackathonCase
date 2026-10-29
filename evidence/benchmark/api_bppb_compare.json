@@ -1,5 +1,5 @@
 {
-  "status": "PLANNED_AFTER_OPERATOR_CA_IMPORT",
+  "status": "STOPPED_RESTORE_FAILED_NO_AUTOMATIC_RETRY",
   "level": "API",
   "scale": "100k",
   "design_change": {
@@ -15,5 +15,10 @@
     "limitation": "Two repetitions per mode are below the original three-run minimum; reduced API evidence must be reported with this limitation."
   },
   "scenarios": [],
-  "declared_at_utc": "2026-10-29T00:39:10.528896+00:00"
+  "declared_at_utc": "2026-10-29T00:39:10.528896+00:00",
+  "measured_runs": 0,
+  "parity_complete": false,
+  "original_database_restoration_passed": false,
+  "ca_removal_verified": false,
+  "failure_evidence": "evidence/benchmark/api_bppb_100k/session_outcome.json"
 }

@@ -197,6 +197,25 @@ def test_copy_connection_grants_never_apply_to_official_oid(monkeypatch):
     assert connect.call_count==1
 
 
+def test_owned_windows_console_child_does_not_block_server_cleanup(monkeypatch):
+    parent=MagicMock();parent.pid=10;parent.create_time.return_value=1;parent.name.return_value='python.exe';parent.cmdline.return_value=['python','app/scripts/serve.py']
+    console=MagicMock();console.pid=20;console.create_time.return_value=2;console.name.return_value='conhost.exe';console.cmdline.return_value=['conhost.exe','--headless']
+    server=MagicMock();server.pid=30;server.create_time.return_value=3;server.name.return_value='python.exe';server.cmdline.return_value=['python','app/scripts/serve.py']
+    parent.children.return_value=[console,server]
+    processes={10:parent,20:console,30:server}
+    monkeypatch.setattr(r.psutil,'pid_exists',lambda pid:True)
+    monkeypatch.setattr(r.psutil,'Process',lambda pid:processes[pid])
+    order=[]
+    for pid,p in processes.items():p.terminate.side_effect=lambda pid=pid:order.append(pid)
+    monkeypatch.setattr(r.psutil,'wait_procs',lambda p,timeout:(p,[]))
+    monkeypatch.setattr(r.psutil,'net_connections',lambda **k:[])
+    identity={'pid':10,'created':1,'children':[{'pid':20,'created':2},{'pid':30,'created':3}]}
+    r.stop_owned_app(identity)
+    assert order==[30,10];console.terminate.assert_not_called()
+    identity['children'][0]['created']=999
+    with pytest.raises(RuntimeError,match='identity_mismatch'):r.stop_owned_app(identity)
+
+
 def test_resources_use_only_measurement_window_and_retain_failures():
     rows=[{'timestamp_utc':f'2026-10-29T00:00:0{i}Z','ok':i!=2,'app_rss_bytes':v}
           for i,v in enumerate([9000,10,20,30,9999])]

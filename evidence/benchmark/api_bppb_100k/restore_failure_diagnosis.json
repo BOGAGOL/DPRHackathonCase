@@ -1,0 +1,36 @@
+{
+  "at_utc": "2026-10-29T01:18:25.374815+00:00",
+  "read_only": true,
+  "processes": [
+    {
+      "pid": 28196,
+      "recorded_create_time": 1793234514.4079497,
+      "alive": true,
+      "name": "python.exe",
+      "actual_create_time": 1793234514.4079497,
+      "parent_pid": 31012,
+      "command_matches_serve_py": true
+    },
+    {
+      "pid": 352,
+      "recorded_create_time": 1793234514.418032,
+      "alive": true,
+      "name": "conhost.exe",
+      "actual_create_time": 1793234514.418032,
+      "parent_pid": 28196,
+      "command_matches_serve_py": false
+    },
+    {
+      "pid": 26552,
+      "recorded_create_time": 1793234514.440889,
+      "alive": true,
+      "name": "python.exe",
+      "actual_create_time": 1793234514.440889,
+      "parent_pid": 28196,
+      "command_matches_serve_py": true
+    }
+  ],
+  "database_restoration_retried": false,
+  "journal_status": "restore_failed",
+  "diagnosis": "Recorded Windows console helper lacks serve.py argument; stop_owned_app checks all child processes as service Python, causing cleanup to abort before SQL restoration."
+}

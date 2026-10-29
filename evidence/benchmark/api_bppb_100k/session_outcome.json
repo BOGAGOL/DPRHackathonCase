@@ -1,0 +1,64 @@
+{
+  "at_utc": "2026-10-29T01:23:15.995589+00:00",
+  "status": "STOPPED_RESTORE_FAILED_NO_AUTOMATIC_RETRY",
+  "code_commit_measured": "a44523ea616088d3562489b69c153611b775599b",
+  "design_change": {
+    "authorized_on_wib_date": "2026-10-29",
+    "reason": "Operator time limit; explicitly reduced from two B-P-P-B blocks to one before measurement.",
+    "previous_blocks": 2,
+    "blocks": 1,
+    "previous_runs_per_mode_per_endpoint": 4,
+    "runs_per_mode_per_endpoint": 2,
+    "median_over_runs": 2,
+    "total_runs": 16,
+    "targets_changed": false,
+    "limitation": "Two repetitions per mode are below the original three-run minimum; reduced API evidence must be reported with this limitation."
+  },
+  "measured_runs": 0,
+  "api_metrics_status": "BELUM DIUJI",
+  "parity_complete": false,
+  "original_databases_restored": false,
+  "journal_status": "restore_failed",
+  "all_five_final_checksums_verified": false,
+  "originals_archived": [
+    {
+      "database": "baseline_100k__official",
+      "oid": 32768,
+      "allow_connections": false
+    },
+    {
+      "database": "protected_100k__official",
+      "oid": 41230,
+      "allow_connections": false
+    }
+  ],
+  "temporary_copies_present": [
+    {
+      "database": "baseline_100k",
+      "oid": 57392,
+      "allow_connections": true
+    },
+    {
+      "database": "protected_100k",
+      "oid": 57393,
+      "allow_connections": true
+    }
+  ],
+  "app_processes_may_remain": true,
+  "root_cause": "C cleanup included recorded conhost.exe child in Python serve.py command validation; aborts before SQL restore. Fix is unit-tested but live recovery was not retried per stop-on-restore-failure instruction.",
+  "ca_status": "OPERATOR_REMOVAL_REQUIRED",
+  "ca_absence_verified": false,
+  "operator_required": [
+    "Explicit resume instruction for database recovery after reviewing conhost fix",
+    "Interactive CA removal if still present; automatic approval review blocked forced removal"
+  ],
+  "tests": {
+    "core_passed": 266,
+    "skipped": 2,
+    "focused_passed": 30
+  },
+  "benchmark_retried": false,
+  "database_restore_retried": false,
+  "root_token_accessed": false,
+  "token_issued": false
+}

@@ -1,0 +1,15 @@
+﻿{
+    "thumbprint":  "FC95F6CA26E050CAB0C16B17B3F4A20441FA8440",
+    "store":  "CurrentUser/Root",
+    "operator_reported_import":  true,
+    "import_observed_at_wib":  "2026-10-29T07:39:09.8236427+07:00",
+    "trusted_before_run":  true,
+    "operator_authorized_removal":  true,
+    "cleanup_started_at_wib":  "2026-10-29T07:43:02.5742130+07:00",
+    "removal_command":  "Remove-Item Cert:\\CurrentUser\\Root\\FC95F6CA26E050CAB0C16B17B3F4A20441FA8440",
+    "status":  "REMOVAL_FAILED",
+    "removal_verified":  false,
+    "present_before_removal":  true,
+    "error_type":  "InvalidOperationException",
+    "cleanup_completed_at_wib":  "2026-10-29T07:43:02.7294886+07:00"
+}

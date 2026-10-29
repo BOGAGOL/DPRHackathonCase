@@ -7,9 +7,12 @@
     "operator_authorized_removal":  true,
     "cleanup_started_at_wib":  "2026-10-29T07:43:02.5742130+07:00",
     "removal_command":  "Remove-Item Cert:\\CurrentUser\\Root\\FC95F6CA26E050CAB0C16B17B3F4A20441FA8440",
-    "status":  "REMOVAL_FAILED",
+    "status":  "OPERATOR_REMOVAL_REQUIRED",
     "removal_verified":  false,
     "present_before_removal":  true,
     "error_type":  "InvalidOperationException",
-    "cleanup_completed_at_wib":  "2026-10-29T07:43:02.7294886+07:00"
+    "cleanup_completed_at_wib":  "2026-10-29T08:23:15.5043568+07:00",
+    "current_store_presence":  true,
+    "automatic_review_rejection":  "Remove-Item -Force rejected: blocked by policy; command was not executed",
+    "initial_attempt_evidence":  "ca_cleanup_initial_failure.json"
 }

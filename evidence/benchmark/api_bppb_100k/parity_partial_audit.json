@@ -1,0 +1,28 @@
+{
+  "at_utc": "2026-10-29T01:21:46.695184+00:00",
+  "read_only": true,
+  "scope": "aggregate metadata from disposable copy only; no personal values or account identifiers",
+  "plain_copy_audit_actions": [
+    {
+      "action": "detail",
+      "decision": "allowed",
+      "rows": 200
+    },
+    {
+      "action": "list",
+      "decision": "allowed",
+      "rows": 200
+    },
+    {
+      "action": "login",
+      "decision": "allowed",
+      "rows": 1
+    },
+    {
+      "action": "search",
+      "decision": "allowed",
+      "rows": 400
+    }
+  ],
+  "business_parity_not_completed": true
+}
