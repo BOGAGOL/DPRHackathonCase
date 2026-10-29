@@ -123,7 +123,9 @@ def source_names(root):
             dirs[:] = [
                 name
                 for name in dirs
-                if name.lower() not in PRIVATE_PARTS
+                if (name.lower() not in PRIVATE_PARTS or
+                    (Path(base) / name).relative_to(root).as_posix() == "evidence/secrets")
+                and not name.lower().endswith((".egg-info", ".dist-info"))
                 and not (Path(base) / name)
                 .relative_to(root)
                 .as_posix()
@@ -169,7 +171,8 @@ def allowed(name):
     base = parts[-1]
     # One reviewed metadata-only scan receipt lives under a directory called
     # 'secrets'. Do not admit arbitrary neighbours or private operational folders.
-    if any(part in PRIVATE_PARTS and not (name in PUBLIC_REPORTS and part == "secrets") for part in parts) or base in PRIVATE_NAMES:
+    if any((part in PRIVATE_PARTS and not (name in PUBLIC_REPORTS and part == "secrets")) or
+           part.endswith((".egg-info", ".dist-info")) for part in parts) or base in PRIVATE_NAMES:
         return False
     if name.startswith(EXCLUDE_PREFIXES) or name == "sql/baseline/02_data.sql":
         return False

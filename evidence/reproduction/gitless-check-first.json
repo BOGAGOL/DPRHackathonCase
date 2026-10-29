@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "passed": false,
+  "checks": {
+    "active_sources_present": true,
+    "obsolete_runtime_absent": true,
+    "document_links_valid": false,
+    "required_working_documents_present": true,
+    "no_credential_patterns_in_selected_files": true,
+    "sbom_inputs_current": true
+  },
+  "selected_files": 3766,
+  "broken_links": [
+    {
+      "document": "docs/evidence_index.md",
+      "target": "../evidence/secrets/plaintext-scan.json",
+      "reason": "target_excluded_from_package"
+    }
+  ],
+  "missing_paths": [],
+  "secret_findings": [],
+  "release_status": "REVIEW_REQUIRED",
+  "pending_deliverables": [
+    "D03",
+    "D04",
+    "D05",
+    "D10",
+    "D11",
+    "D15"
+  ],
+  "scope": "Source/documentation packaging checks only; no full Git-history/PII/CVE/runtime audit or submission-completion certification"
+}

@@ -233,3 +233,14 @@ def test_docker_tls_apply_refuses_unowned_container(tmp_path, monkeypatch, scope
     else:
         owned.start_docker()
         assert applied == [(owned.root, "disabled")]
+
+
+def test_gitless_export_preserves_public_receipt_but_not_installed_metadata(tmp_path):
+    from infra.submission.inventory import candidates
+    for name in ("evidence/secrets/plaintext-scan.json", "evidence/secrets/private.json",
+                 "toolkit/dprcrypto.egg-info/PKG-INFO", "toolkit/pkg.dist-info/METADATA",
+                 ".venv-assessment/private.json", "infra/reproduce/__init__.py"):
+        path = tmp_path / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("{}", encoding="utf-8")
+    assert candidates(tmp_path) == ["evidence/secrets/plaintext-scan.json", "infra/reproduce/__init__.py"]

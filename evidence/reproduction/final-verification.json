@@ -57,7 +57,7 @@
       "skipped": 1
     },
     "latest_launcher_profile_packaging_targeted": {
-      "passed": 75,
+      "passed": 76,
       "skipped": 0
     }
   },
@@ -91,5 +91,12 @@
   "no_claim_of_full_submission_completion": true,
   "zip_created": false,
   "owned_native_clusters_still_running": 0,
-  "contract_schema_crypto_runtime_unchanged_from_main": true
+  "contract_schema_crypto_runtime_unchanged_from_main": true,
+  "gitless_source_check": {
+    "passed": true,
+    "git_present": false,
+    "dataset_present": false,
+    "report": "gitless-check-final.json",
+    "scope": "Curated source files copied to a new directory without Git/config/cache/dependencies; source check, not a second fresh dependency installation"
+  }
 }

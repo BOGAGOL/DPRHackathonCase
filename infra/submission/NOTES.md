@@ -20,3 +20,8 @@ Pembaruan final 29 Okt: denylist mencakup environment assessment/benchmark baru
 dan accounts.md. Satu exception path persis evidence/secrets/plaintext-scan.json
 mengikutsertakan receipt metadata S06 yang direview; sibling secrets lainnya tetap
 ditolak. Content screen tetap berjalan. Composer reproduksi ikut freshness SBOM.
+
+Pemeriksaan salinan tanpa Git mengungkap pruner melewati receipt S06 yang sudah
+direview. Pruner kini hanya memasuki path evidence/secrets untuk allowlist file
+persis tersebut; file privat sibling tetap ditolak. Metadata instalasi egg-info/
+dist-info juga ditolak pada export setelah setup. Gitless final check PASS.
