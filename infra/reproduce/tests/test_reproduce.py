@@ -253,3 +253,13 @@ def test_gitless_export_preserves_public_receipt_but_not_installed_metadata(tmp_
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text("{}", encoding="utf-8")
     assert candidates(tmp_path) == ["evidence/secrets/plaintext-scan.json", "infra/reproduce/__init__.py"]
+
+
+def test_product_tree_has_one_entry_guide_and_keeps_evaluator_accounts():
+    from infra.distribution.inventory import candidates, allowed
+    names = candidates(bootstrap.ROOT)
+    assert [name for name in names if Path(name).name == 'README.md'] == ['README.md']
+    assert 'accounts.md' in names
+    for prefix in ('docs/report/', 'docs/presentation/', 'docs/ai-prompts/', 'docs/submission/', 'archive/'):
+        assert not any(name.startswith(prefix) for name in names)
+    assert not allowed('app/README.md')

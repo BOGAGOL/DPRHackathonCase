@@ -94,7 +94,8 @@ PRIVATE_SUFFIXES = {
     ".pid",
     ".sock",
 }
-EXCLUDE_PREFIXES = ("docs/reference/", "evidence/distribution/generated/", "evidence/reproduction/generated/")
+EXCLUDE_PREFIXES = ("docs/reference/", "evidence/distribution/generated/", "evidence/reproduction/generated/",
+                    "docs/report/", "docs/presentation/", "docs/ai-prompts/", "docs/submission/")
 PUBLIC_REPORTS = {"evidence/secrets/plaintext-scan.json"}
 
 
@@ -169,6 +170,8 @@ def allowed(name):
         return False
     parts = tuple(part.lower() for part in path.parts)
     base = parts[-1]
+    if base == "readme.md" and name != "README.md":
+        return False
     # One reviewed metadata-only scan receipt lives under a directory called
     # 'secrets'. Do not admit arbitrary neighbours or private operational folders.
     if any((part in PRIVATE_PARTS and not (name in PUBLIC_REPORTS and part == "secrets")) or
