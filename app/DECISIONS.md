@@ -136,3 +136,31 @@ Evidence fix-F01-duplicate-identity.json adalah laporan VM asli; f01-smoke.json
 berisi65check; f01-initial-attempt.json menjaga kegagalan pertama; ringkasan/provenance
 ada di f01-deployment-verification.json. F-01 siap retest independen, belum diberi
 status Closed oleh pentester. Token tetap berdurasi pendek; ikuti runbook lifecycle.
+
+## 29 Oktober 2026 — identitas layanan otomatis
+
+Instruksi Zhafif mengganti refresh token svc-app manual berulang. Pertahankan
+maximum lifetime4jam; login ulang AppRole sebelum expiry, jangan memperpanjang
+umur token tanpa batas atau menjadwalkan root bootstrap di cron. Root-owned
+broker stdlib/systemd terpisah hanya memiliki AppRole svc-app. Root bootstrap
+dipakai sekali untuk setup mount auth terpisah; policy/kunci A tidak ditulis ulang.
+
+Tidak mengubah private API toolkit A untuk hot reload. Backend memuat sink saat
+startup dan broker restart hanya API setelah token tervalidasi, readiness lalu
+revokasi token lama. Jeda reload diterima untuk demo; sesi tetap dalam DB. Token
+sehat tidak menyebabkan restart pada setiap tick. API sengaja inactive tidak
+dihidupkan otomatis. Kegagalan TLS/auth/decrypt tetap fail closed.
+
+Unattended auth membutuhkan SecretID jangka panjang root-only, yang bisa dicabut
+terpisah; kompromi credential ini tidak dibatasi empat jam. Tidak auto-unseal dan
+tidak menjanjikan operasi tanpa gangguan saat OpenBao/host mati. Laporan lokal
+dan native TLS dibedakan dari evidence VM yang belum dijalankan.
+
+
+### Revisi guard CRLF
+
+Installer awal menolak serve.py karena arsip F-01 menyimpan CRLF sedangkan Git
+memakai LF. Guard hanya menormalkan newline untuk launcher existing; payload
+tetap diverifikasi byte-for-byte.45tes PASS, termasuk penolakan edit kode dan
+payload. Guard juga lulus terhadap launcher dari arsip F-01 aktual. Tidak ada
+perubahan VM dari percobaan gagal; tunggu hasil installer revisi.

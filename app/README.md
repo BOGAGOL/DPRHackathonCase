@@ -267,3 +267,12 @@ POST anggota menolak KTP non-NULL yang sudah terdaftar dengan409 generik. Normal
 format mempertahankan nol awal dan identitas sintetis14digit. Protected wajib
 menerapkan sql/protected/04_identity_unique.sql sesudah reset golden resmi. Detail
 migrasi, pengujian race/RLS dan pemulihan: [F01_DUPLICATE_IDENTITY.md](docs/F01_DUPLICATE_IDENTITY.md).
+
+## Token aplikasi otomatis
+
+Paket operator satu kali memasang AppRole svc-app dan timer lima menit. Token tetap
+berumur maksimal empat jam; token baru dipasang sebelum sisa TTL satu jam, lalu hanya
+API dimuat ulang. Tidak memakai root token dalam tugas rutin, tidak mengubah akun/data,
+dan tidak restart database/OpenBao. Ada jeda singkat saat API restart. Cara pasang,
+lokasi credential privat, status, batasan, dan pencabutan:
+[TOKEN_AUTOREFRESH.md](docs/TOKEN_AUTOREFRESH.md).

@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "checks": {
+    "configure_approle": true,
+    "config_is_root_only": true,
+    "idempotent_setup": true,
+    "first_automatic_login": true,
+    "token_policy_and_four_hour_cap": true,
+    "application_cannot_manage_auth": true,
+    "healthy_token_no_restart": true,
+    "rejected_token_automatic_recovery": true,
+    "fresh_token_after_rejection": true,
+    "force_rotation": true,
+    "previous_token_revoked_after_reload": true,
+    "startup_reads_new_sink": true,
+    "bad_credential_keeps_last_token": true,
+    "publicly_readable_sink_rejected": true,
+    "wrong_ca_rejected": true
+  },
+  "openbao_version": "2.5.5",
+  "transport": "verified HTTPS, private disposable container",
+  "systemd_callbacks": "test doubles; actual VM service activation NOT TESTED",
+  "team_database_or_vm_accessed": false,
+  "credential_values_in_report": false
+}
