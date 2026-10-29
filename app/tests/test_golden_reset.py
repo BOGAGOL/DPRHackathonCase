@@ -66,14 +66,17 @@ def fake_vm(monkeypatch, tmp_path):
     monkeypatch.setattr(golden, "export_audit", lambda root, directory: {"metadata_only": True, "events": 3})
     monkeypatch.setattr(golden, "smoke", lambda: smoke_calls.append(True) or {"passed": True})
     monkeypatch.setattr(golden, "wait_and_smoke", lambda: {"passed": True})
+    identity_checks = []
+    monkeypatch.setattr(golden, "apply_identity_unique", lambda connection: identity_checks.append(True) or {"unique_index_valid": True})
     return SimpleNamespace(catalogue=catalogue, actions=actions, smoke_calls=smoke_calls,
-                           root=tmp_path / "module-a", private=tmp_path / "pentest")
+                           root=tmp_path / "module-a", private=tmp_path / "pentest", identity_checks=identity_checks)
 
 
 def test_create_immutable_template_and_reset_once(fake_vm):
     vm = fake_vm
     created = golden.operate("create", vm.root, vm.private)
     assert created["passed"] and vm.actions == ["stop", "start"]
+    assert vm.identity_checks == []
     assert vm.catalogue.databases[golden.GOLDEN][1] is False
     old_bytes = (vm.private / "golden-template.json").read_bytes()
     again = golden.operate("create", vm.root, vm.private)
@@ -82,12 +85,25 @@ def test_create_immutable_template_and_reset_once(fake_vm):
     vm.smoke_calls.clear()
     reset = golden.operate("reset", vm.root, vm.private)
     assert reset["passed"] and reset["members"] == 734
+    assert vm.identity_checks == [True] and reset['identity_uniqueness']['unique_index_valid']
     assert vm.smoke_calls == []  # damaged pentest app must still be resettable
     assert vm.actions == ["stop", "start", "stop", "start"]
     assert vm.catalogue.databases[golden.TARGET][0] == 30
     document = golden.read_private(vm.private / "golden-template.json")
     assert document["live_oid"] == 30 and document["golden_oid"] == 20
     assert sum(query.startswith("DROP DATABASE") for query, _ in vm.catalogue.statements) == 1
+
+
+def test_reset_does_not_restart_app_when_identity_migration_fails(fake_vm, monkeypatch):
+    vm = fake_vm
+    golden.operate('create', vm.root, vm.private)
+    def failed(connection):
+        raise ValueError('Identity migration failed')
+    monkeypatch.setattr(golden, 'apply_identity_unique', failed)
+    vm.actions.clear()
+    with pytest.raises(ValueError, match='Identity migration failed'):
+        golden.operate('reset', vm.root, vm.private)
+    assert vm.actions == ['stop']
 
 
 @pytest.mark.parametrize("change", ["live_oid", "golden_oid", "marker", "system", "target", "allowed_connections"])

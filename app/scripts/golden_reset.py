@@ -24,6 +24,7 @@ from infra.security import external_directory, secure_directory, write_private
 from infra.vm.operator import database_parameters
 from pentest_prepare import TARGET, read_private, setup_url
 from pentest_smoke import smoke
+from f01_identity import apply_identity_unique
 from service_app.config import Settings
 
 GOLDEN = "protected_734_golden"
@@ -204,6 +205,10 @@ def operate(command, root, directory):
             metadata["live_oid"] = admin.execute("SELECT oid FROM pg_database WHERE datname=%s", (TARGET,)).fetchone()[0]
             metadata["last_reset_at"] = datetime.now(timezone.utc).isoformat()
             save_metadata(metadata_file, metadata, replace=True)
+        if command == "reset":
+            # A pre-F-01 template must never reopen an unprotected write path.
+            with psycopg.connect(**database_parameters(root, TARGET)) as restored:
+                report["identity_uniqueness"] = apply_identity_unique(restored)
         control_app("start")
         after = wait_and_smoke()
         report.update(passed=bool(after.get("passed")), members=734, smoke=after,

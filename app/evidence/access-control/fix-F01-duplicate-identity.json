@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "tests_passed": 482,
+  "tests_skipped": 3,
+  "failed": 0,
+  "native_postgres_race": "PASS: two HTTP requests -> one 201, one 409; exact search cardinality 1",
+  "native_postgres_rls": "PASS: hidden existing identity rejected",
+  "native_migration": "PASS: duplicate refusal, wrong index refusal, idempotence, nullable source identities",
+  "scope": "Invented fixtures; marked disposable PostgreSQL18 cluster, no external services or team dataset",
+  "vm_status": "PENDING"
+}

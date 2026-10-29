@@ -1,7 +1,7 @@
 from datetime import datetime, timezone
 import uuid
 
-from sqlalchemy import JSON, Boolean, Column, Date, DateTime, ForeignKey, Integer, LargeBinary, SmallInteger, String, Table, Text, Uuid
+from sqlalchemy import JSON, Boolean, Column, Date, DateTime, ForeignKey, Index, Integer, LargeBinary, SmallInteger, String, Table, Text, Uuid
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 SOURCE_FIELDS = "nama nama_lengkap nama_tanpa_gelar jenis_kelamin tempat_lahir tanggal_lahir tanggal_pernikahan no_ktp pekerjaan_terakhir alamat_jakarta telpon_jakarta alamat_daerah telpon_daerah handphone email ruangan status_kawin jumlah_anak jumlah_tanggungan jumlah_jiwa rekening nama_rekening npwp nama_kppn nip_kppn nama_bank kode_bank pengguna agama".split()
@@ -35,6 +35,7 @@ protected_members = Table("anggota_protected", Base.metadata,
     *(Column(f, Text) for f in sorted(REF | {"age_band"})),
     *(Column(f + "_bidx", LargeBinary, index=True) for f in ["no_ktp", "email", "pengguna"]),
     Column("created_at", DateTime, default=utcnow), Column("updated_at", DateTime, default=utcnow))
+Index("uq_anggota_protected_no_ktp_bidx", protected_members.c.no_ktp_bidx, unique=True)
 
 
 class User(Base):
