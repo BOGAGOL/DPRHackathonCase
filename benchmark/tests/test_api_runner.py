@@ -1,5 +1,6 @@
 import json
 import os
+import subprocess
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import MagicMock
@@ -203,3 +204,19 @@ def test_resources_use_only_measurement_window_and_retain_failures():
     assert report=={'samples':3,'failed_samples':1,'app_rss_bytes_median':20,'app_rss_bytes_peak':30}
     assert r.summarize_resources(rows)['app_rss_bytes_peak']==9999
     assert r.summarize_resources([],None,None)=={'samples':0,'failed_samples':0}
+
+
+@pytest.mark.skipif(os.name!='nt',reason='Windows read-only certificate store gate')
+def test_detached_launcher_rejects_untrusted_ca_before_credentials_or_worker(tmp_path):
+    from infra.tls.make_ca import make_ca
+    ca=tmp_path/'invented';make_ca(ca)
+    script=tmp_path/'benchmark/api/launch.ps1';script.parent.mkdir(parents=True)
+    script.write_bytes((r.ROOT/'benchmark/api/launch.ps1').read_bytes())
+    result=subprocess.run(['powershell.exe','-NoProfile','-NonInteractive','-File',str(script),
+        '-Detached','-LabCaFile',str(ca/'ca.crt')],capture_output=True,timeout=15)
+    out=tmp_path/'results/bench/api_bppb_100k'
+    assert result.returncode!=0
+    assert b'Operator must trust' in result.stderr
+    record=json.loads((out/'ca_trust.json').read_text(encoding='utf-8-sig'))
+    assert record['status']=='OPERATOR_CA_TRUST_REQUIRED' and not record['added_by_launcher']
+    assert not (out/'launcher.json').exists() and not (out/'worker.stdout.log').exists()

@@ -1,0 +1,7 @@
+{
+  "at_utc": "2026-10-29T00:24:49.348273+00:00",
+  "scope": "Lab CA only; no database operation",
+  "method": "certutil -user -f -addstore Root",
+  "passed": false,
+  "error": "bounded_ca_import_timeout"
+}

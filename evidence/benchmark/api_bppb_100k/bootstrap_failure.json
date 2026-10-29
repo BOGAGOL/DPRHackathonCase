@@ -1,0 +1,50 @@
+{
+  "status": "STOPPED_BOOTSTRAP_OPERATOR_CA_TRUST_REQUIRED",
+  "at_utc": "2026-10-29T00:29:24.350550+00:00",
+  "design_change": {
+    "authorized_on_wib_date": "2026-10-29",
+    "reason": "Operator time limit; explicitly reduced from two B-P-P-B blocks to one before measurement.",
+    "previous_blocks": 2,
+    "blocks": 1,
+    "previous_runs_per_mode_per_endpoint": 4,
+    "runs_per_mode_per_endpoint": 2,
+    "median_over_runs": 2,
+    "total_runs": 16,
+    "targets_changed": false,
+    "limitation": "Two repetitions per mode are below the original three-run minimum; reduced API evidence must be reported with this limitation."
+  },
+  "cause": "Hidden launcher blocked in Windows Security Warning while adding lab CA to CurrentUser/Root; bounded certutil import also timed out. No automatic trust modification remains.",
+  "worker_started": false,
+  "swap_started": false,
+  "parity_started": false,
+  "measured_runs": 0,
+  "original_name_and_data_integrity_passed": true,
+  "root_token_accessed": false,
+  "token_issued": false,
+  "owned_launcher_stopped": true,
+  "archived_local_receipts": [
+    {
+      "file": "launcher.json",
+      "sha256": "d4ee8da3cb776f7ba73b156c811f7246280768d2460b276a347b69dd31a9535a"
+    },
+    {
+      "file": "worker.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "worker.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "ca_import_probe": "ca_import_probe.json",
+  "verification": "bootstrap_integrity.json",
+  "windows_window_title": "Security Warning",
+  "lab_ca_trusted_at_diagnosis": false,
+  "lab_ca_thumbprint": "FC95F6CA26E050CAB0C16B17B3F4A20441FA8440",
+  "launcher_readonly_ca_gate_test_passed": true,
+  "core_tests": {
+    "passed": 263,
+    "skipped": 2
+  },
+  "operator_action_required": "Interactive lab CA import after matching thumbprint; then repeat complete initial gates."
+}

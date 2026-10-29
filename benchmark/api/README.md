@@ -49,8 +49,10 @@ K6 tags URL/error-message dinonaktifkan, nama request diset label endpoint; body
 respons dibuang. Custom latency hanya sampel terukur, blocked+duration. K6 logs
 dinonaktifkan agar error transport tidak mencetak query NIK/email. Raw JSON gzip,
 status HTTP, metadata, resource app/server PID asli, k6, PG dan OpenBao disimpan.
-TLS k6 di Windows memakai CurrentUser/Root: launcher menambah lab CA sementara bila
-belum dipercaya dan menghapus hanya certificate yang ditambahnya saat selesai.
+TLS k6 di Windows memakai CurrentUser/Root. Operator harus mempercayai CA lab di sana
+sebelum peluncuran detached. Launcher hanya memeriksa trust secara read-only dan
+menolak start bila belum dipercaya; tidak menambah/menghapus CA. Ini menghindari
+dialog Windows Security Warning tersembunyi. Recovery tidak bergantung trust k6.
 Receipt CA dan log supervisor di results/bench/api_bppb_100k; tidak ada private key/token.
 
 ```powershell
