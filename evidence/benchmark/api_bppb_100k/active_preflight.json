@@ -1,0 +1,237 @@
+{
+  "started_at_utc": "2026-10-29T00:40:16.226121+00:00",
+  "passed": true,
+  "code_commit": "a44523ea616088d3562489b69c153611b775599b",
+  "power": {
+    "passed": true,
+    "sample": {
+      "timestamp_utc": "2026-10-29T00:40:16.293724+00:00",
+      "ac_online": true
+    },
+    "kernel_power": {
+      "provider": "Microsoft-Windows-Kernel-Power",
+      "log_name": "System",
+      "query_start_utc": "2026-10-29T00:40:16.2937240+00:00",
+      "query_end_utc": "2026-10-29T00:40:16.2937240+00:00",
+      "latest_event_at_or_before_start": {
+        "record_id": 29544,
+        "event_id": 105,
+        "time_utc": "2026-10-28T22:02:34.5166798+00:00",
+        "time_wib": "2026-10-29T05:02:34.5166798+07:00",
+        "ac_online": true
+      },
+      "events_in_window": []
+    },
+    "effective_overlay_guid": "ded574b5-45a0-4f42-8737-46345c09c238",
+    "power_mode": "Best performance",
+    "sleep_ac_seconds": 0
+  },
+  "token": {
+    "policy": "svc-app",
+    "ttl_seconds": 11756,
+    "minimum_ttl_seconds": 7200,
+    "new_4h_token_issued": false,
+    "automatic_issuance": false,
+    "at_utc": "2026-10-29T00:40:17.167646+00:00"
+  },
+  "session_token_budget": {
+    "policy": "svc-app",
+    "ttl_seconds": 11756,
+    "minimum_ttl_seconds": 7200,
+    "new_4h_token_issued": false,
+    "automatic_issuance": false,
+    "at_utc": "2026-10-29T00:40:17.178952+00:00"
+  },
+  "design_change": {
+    "authorized_on_wib_date": "2026-10-29",
+    "reason": "Operator time limit; explicitly reduced from two B-P-P-B blocks to one before measurement.",
+    "previous_blocks": 2,
+    "blocks": 1,
+    "previous_runs_per_mode_per_endpoint": 4,
+    "runs_per_mode_per_endpoint": 2,
+    "median_over_runs": 2,
+    "total_runs": 16,
+    "targets_changed": false,
+    "limitation": "Two repetitions per mode are below the original three-run minimum; reduced API evidence must be reported with this limitation."
+  },
+  "before": {
+    "postgres": {
+      "rows": 734,
+      "rows_match": true,
+      "checksum_sha256": "5113038953aea9383f600de725b4267ecbf93de47c2a603a68bde6ad7e5c17e8",
+      "sequence": {
+        "last_value": 734,
+        "is_called": true
+      },
+      "database_bytes": 8640191,
+      "all_control_tables": {},
+      "all_sequences": [
+        [
+          "public",
+          "anggota_id_seq",
+          734
+        ]
+      ]
+    },
+    "baseline_100k": {
+      "rows": 100000,
+      "rows_match": true,
+      "checksum_sha256": "e6cdc975a397e1e1d2020bc476a51103d1799c38e28a1c35f6284564aef698ff",
+      "sequence": {
+        "last_value": 100000,
+        "is_called": true
+      },
+      "database_bytes": 114521791,
+      "all_control_tables": {},
+      "all_sequences": [
+        [
+          "public",
+          "anggota_id_seq",
+          100000
+        ]
+      ]
+    },
+    "baseline_1m": {
+      "rows": 1000000,
+      "rows_match": true,
+      "checksum_sha256": "39812166a18ed61a6c45787d8af1a84a61c561c44955855c4681c9c02c5186f0",
+      "sequence": {
+        "last_value": 1000000,
+        "is_called": true
+      },
+      "database_bytes": 906376895,
+      "all_control_tables": {},
+      "all_sequences": [
+        [
+          "public",
+          "anggota_id_seq",
+          1000000
+        ]
+      ]
+    },
+    "protected_100k": {
+      "rows": 100000,
+      "rows_match": true,
+      "ciphertext_rows_binary_sha256": "def969d165c8047dcc9ac30f5c02c52253978bae0e0c64bbf0d9e2beff398d04",
+      "control_counts": {
+        "app_users": 0,
+        "access_scope": 0,
+        "audit_log": 656846
+      },
+      "database_bytes": 452605631,
+      "all_control_tables": {
+        "access_scope": {
+          "sha256": "62a74fd0e2d1e3a59b88b5b71c06ca8d43662c6787430c516b8e0bc28bbbda02",
+          "rows": 0
+        },
+        "app_users": {
+          "sha256": "62a74fd0e2d1e3a59b88b5b71c06ca8d43662c6787430c516b8e0bc28bbbda02",
+          "rows": 0
+        },
+        "audit_log": {
+          "sha256": "8f2c2f04a06b4d89801c1f7fdf59b872978c754fb087559f5827d0aa8e7364f6",
+          "rows": 656846
+        },
+        "migration_jobs": {
+          "sha256": "e76499861aa3719b179d710fdec89a64365ef19b0efcd36ec2bb81016d330ab7",
+          "rows": 1
+        }
+      },
+      "all_sequences": [
+        [
+          "public",
+          "access_scope_scope_id_seq",
+          425954
+        ],
+        [
+          "public",
+          "audit_log_event_id_seq",
+          1076764
+        ]
+      ]
+    },
+    "protected_1m": {
+      "rows": 1000000,
+      "rows_match": true,
+      "ciphertext_rows_binary_sha256": "b3b1a927aa9b5121d9e93fe9a7ac48de05b635a92e8b22a9958aed367a2d1cfc",
+      "control_counts": {
+        "app_users": 0,
+        "access_scope": 0,
+        "audit_log": 1530622
+      },
+      "database_bytes": 2879698623,
+      "all_control_tables": {
+        "access_scope": {
+          "sha256": "62a74fd0e2d1e3a59b88b5b71c06ca8d43662c6787430c516b8e0bc28bbbda02",
+          "rows": 0
+        },
+        "app_users": {
+          "sha256": "62a74fd0e2d1e3a59b88b5b71c06ca8d43662c6787430c516b8e0bc28bbbda02",
+          "rows": 0
+        },
+        "audit_log": {
+          "sha256": "9f2f5881043a9d9ec178be96279daf2b2a798f5acdde7f771da433bef0df27d2",
+          "rows": 1530622
+        },
+        "migration_jobs": {
+          "sha256": "62e2e8bd31f6b01c224cf5b437bddfe94b7dcec230fae638d39f9db49e8321c1",
+          "rows": 1
+        }
+      },
+      "all_sequences": [
+        [
+          "public",
+          "access_scope_scope_id_seq",
+          403975
+        ],
+        [
+          "public",
+          "audit_log_event_id_seq",
+          1931934
+        ]
+      ]
+    }
+  },
+  "production_sha256": {
+    "app/backend/service_app/__init__.py": "cff9bf9692ebf78bef86dd9f70d8669a07f1b7578732cf9427343e1210693b61",
+    "app/backend/service_app/analytics.py": "d514e4622d3d252a0b5bed411c777ab16ea503c9de68e964710ae107e61302d8",
+    "app/backend/service_app/config.py": "d9aa78c7ae6085842d1d434d21a1b2e4eb1cfd2f61db66c2c29fcb834bdfaa60",
+    "app/backend/service_app/crypto.py": "026f3177757bea47ea225996e95c921f6fbafdd3c0da5fab09d0d3ff0a002ed8",
+    "app/backend/service_app/main.py": "edabbba759393296da9d358f6a7b963a36119779f0f6fbed54a8bdb4410012fd",
+    "app/backend/service_app/models.py": "88b7317fb7d67d3877fa6a6be277a6763809ed604ddb33aedd9c187069781a45",
+    "app/backend/service_app/policy.py": "85532741e8389d32290c08b87b0b2ab9a96a558a64b5e233d0272b59859f549b",
+    "app/backend/service_app/protected_control.py": "e08c19f6958caa93491c82da87dfcf17b3b88e1dc3746a71d62430798be04048",
+    "app/backend/service_app/recovery.py": "c107d9d6b361b7acc9053d181179b9aa199c1a473af04f4d851ed727d94bcc29",
+    "app/backend/service_app/repository.py": "f6c3956d2a2d493984c742b8bec09a8aa959669cfebbb59def3820457927dd8c",
+    "app/backend/service_app/schemas.py": "e67308b8cf11bbbdd56049dbff1e1331239103cfe21c5400fcc2fbb5c1c1a2b3",
+    "app/scripts/check_ready.py": "bcfede7bff383160ab318fa66da4c2e4dfa5a26c50b9773e445bf4f55ed7757b",
+    "app/scripts/golden_reset.py": "5203050941ea3aed5e7e6d6405975cbd198ed2fc20bafb7f85d5e32cf1f19cad",
+    "app/scripts/integration_probe.py": "1e7fc94a8e3977950f8a52a9127e0991a532c13633dc3b5e6d79269e648651df",
+    "app/scripts/local_lab.py": "775dbb2defafba31e85f3704cb8f30d75c8440fc974871fb24134810bb45d4d1",
+    "app/scripts/pentest_inventory.py": "9b72e0ea0926cf708ca8f3a998d764198b5df1c646912ba8074d240327d79b54",
+    "app/scripts/pentest_prepare.py": "220f0a78ae8c6c2fb1036ba9deffe660f0918594ee3d687e70eacf84d4ef265c",
+    "app/scripts/pentest_smoke.py": "f5bd1a2dc19bf6ed8960e8fc3a0c2d25cab3d173246c8803ed18cb79202f296f",
+    "app/scripts/protected_probe.py": "678a42074e6a768faeb27021d6b9507618ef98b11b852beeb32d38064bfb2e61",
+    "app/scripts/provision.py": "501b1193aa15995105f3f18ff2f4453fbe7174f8cc88cf64084525c4586d3929",
+    "app/scripts/schema.py": "a9b766a01a46dd1b5ed01dba9dc0976590fdaba8b9e25c5881186d2b465405be",
+    "app/scripts/serve.py": "1a778dc3d718d7142f51f24115c50ed324d8a42b4f14b76a2a85cbdd17cbec68",
+    "benchmark/api/__init__.py": "47de092e16a8b61e4e79872f569b5912be0f8ebd1b32796644d1edc91af4dfb6",
+    "benchmark/api/__main__.py": "982976b5921afbc741885fea6bf3377366cd60bec745f35f456b973dc67f08cd",
+    "benchmark/api/client.py": "5bca343ba25cd6522c61036222b3c41fa9aa2cb9586f759de2376b66dc864558",
+    "benchmark/api/db_swap.py": "b62207e7a5ae22329f00bc52c7aa0990c1f4b49288d4170e0fcec688de6fd58e",
+    "benchmark/api/load.js": "e8fc64803068a0b4d7342f0ea9cffe4114f6da2ed4e1c6708eafd991945e0c9a",
+    "benchmark/api/runner.py": "8e68b13655272a3e791196f05a271998cef9eed57092c000b709e3dbeadd4abb",
+    "docs/targets.md": "204f5b91cfc86c4cf479daaac3e79b1bde08f78ec5133d701070fe0ac8ece272",
+    "policy/protection_profile.yaml": "2d4a710cc4817113b29026d49c8e8e0cac550a6a6e7158c2d64d3cd231b3dddb",
+    "toolkit/dprcrypto/__init__.py": "1b1ba2df145a66223af6431ccb947a8e18f554752313f91d8a82c45ed8542d84",
+    "toolkit/dprcrypto/bidx.py": "e08a2e7d73849207d63f663ee3447879dec7885468d00b66f5401a66865d2a74",
+    "toolkit/dprcrypto/codec.py": "3f3a4cd9ffe4800923b3dd65209c15cb3c7d5602041f2185c97881bc2f0f81a2",
+    "toolkit/dprcrypto/errors.py": "36f2b085846fb6642ef7c30200cd407bad9a71ac71bbfd7b30563ad22901bd56",
+    "toolkit/dprcrypto/https_pool.py": "742de22c843cf6be1a984d157f5b9e03bfbbc168d711e437a20ea4792f07e3f3",
+    "toolkit/dprcrypto/keys.py": "ecab552cce19cf3206e25afc1993c1fbc9f14e1463b4ec1c169a02f2990b91b8",
+    "toolkit/dprcrypto/masking.py": "346c859f7240153b7d1770c10149c0116326724477490451e50247900e29fa16",
+    "toolkit/dprcrypto/openbao.py": "30883591bbe0d7d140d438c8371521677228cdea4043430e123c9d0e9815b477",
+    "toolkit/dprcrypto/vectors.py": "bb4905e764507d60449ccc226da1903fd5555961326607648e9aae012c9710cd"
+  },
+  "disk_free_bytes": 51744567296
+}

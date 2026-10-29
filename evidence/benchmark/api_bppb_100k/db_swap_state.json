@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "started_at_utc": "2026-10-29T00:41:27.822754+00:00",
+  "originals": {
+    "baseline_100k": {
+      "oid": 32768,
+      "allow_connections": true
+    },
+    "protected_100k": {
+      "oid": 41230,
+      "allow_connections": true
+    }
+  },
+  "copies": {
+    "baseline_100k": 57392,
+    "protected_100k": 57393
+  },
+  "events": [
+    {
+      "action": "original_renamed",
+      "database": "baseline_100k",
+      "at_utc": "2026-10-29T00:41:27.839616+00:00"
+    },
+    {
+      "action": "original_renamed",
+      "database": "protected_100k",
+      "at_utc": "2026-10-29T00:41:27.855250+00:00"
+    }
+  ],
+  "app": {
+    "pid": 28196,
+    "created": 1793234514.4079497,
+    "children": [
+      {
+        "pid": 352,
+        "created": 1793234514.418032
+      },
+      {
+        "pid": 26552,
+        "created": 1793234514.440889
+      }
+    ],
+    "server_pid": 26552
+  },
+  "verification": null,
+  "status": "restore_failed",
+  "updated_at_utc": "2026-10-29T00:42:58.230531+00:00"
+}

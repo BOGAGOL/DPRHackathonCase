@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "official_cli": true,
+  "demo_accounts_per_mode": 6,
+  "benchmark_accounts_used_per_mode": 1,
+  "role": "privileged_officer",
+  "protected_read_scope_rows": 100000,
+  "scope_reason": "Full population required for list total/page parity with plain; includes entire fixed DB key pool.",
+  "key_profiles": 2048,
+  "pages": 64,
+  "seed": 42,
+  "source_corpus_sha256": "b38b8f59819b1eee314fac75c510417f7945c8d1b9b4e52f95839bf865e92ea5",
+  "db_tls_both_modes": "verify-full",
+  "app_versions": {
+    "fastapi": "0.134.0",
+    "uvicorn": "0.41.0",
+    "starlette": "1.10.0",
+    "pydantic": "2.12.5",
+    "SQLAlchemy": "2.0.47",
+    "psycopg": "3.3.3",
+    "cryptography": "46.0.7",
+    "httpx": "0.28.1"
+  },
+  "client": {
+    "httpx": "0.28.1",
+    "psutil": "7.2.2"
+  },
+  "at_utc": "2026-10-29T00:41:54.399789+00:00"
+}
