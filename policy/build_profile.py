@@ -62,7 +62,8 @@ def assessment(row: dict) -> dict:
     if not math.isfinite(confidence) or not 0 <= confidence <= 100 or not math.isfinite(priority) or priority < 0:
         raise ValueError("Invalid scanner score")
     actions = row["recommendation"].split("+")
-    if not actions or any(action not in {"encrypt", "blind_index", "mask", "retain", "delete", "hash", "tokenize", "review"} for action in actions):
+    if not actions or any(action not in {"encrypt", "blind_index", "mask", "retain", "delete", "hash", "tokenize", "review",
+                                         "generalize_for_analyst", "mask_for_analyst", "review_minimization"} for action in actions):
         raise ValueError("Unrecognized scanner recommendation")
     if row["risk_level"] not in {"rendah", "sedang", "tinggi", "kritis"}:
         raise ValueError("Unrecognized risk level")
@@ -71,7 +72,7 @@ def assessment(row: dict) -> dict:
             "risk_level": row["risk_level"], "confidence": confidence, "priority_score": priority,
             "triage": row["triage"], "recommendation": row["recommendation"],
             "candidate_aead": "encrypt" in actions, "candidate_bidx": "blind_index" in actions,
-            "minimization_candidate": "delete" in actions}
+            "minimization_candidate": "delete" in actions or "review_minimization" in actions}
 
 
 def build(inventory: Path, overrides: Path, contract: Path) -> dict:

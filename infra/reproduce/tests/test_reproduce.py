@@ -175,3 +175,15 @@ def test_make_shortcuts_and_compose_are_scoped():
     compose = (root / "infra/reproduce/compose.yaml").read_text()
     assert "127.0.0.1::5432" in compose and "openbao/openbao:2.5.5" in compose
     assert "POSTGRES_PASSWORD_FILE" in compose and "tls_disable" not in compose
+
+
+@pytest.mark.parametrize("recommendation,minimize", [
+    ("generalize_for_analyst", False), ("retain+mask_for_analyst", False), ("review_minimization", True),
+])
+def test_current_scanner_recommendations_keep_contract_override(recommendation, minimize):
+    from policy.build_profile import assessment
+    finding = assessment({"confidence": "80", "priority_score": "20", "recommendation": recommendation,
+                          "risk_level": "tinggi", "detected_type": "invented", "triage": "review"})
+    assert finding["recommendation"] == recommendation
+    assert finding["candidate_aead"] is False and finding["candidate_bidx"] is False
+    assert finding["minimization_candidate"] == minimize
