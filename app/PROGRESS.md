@@ -102,3 +102,21 @@ Gunakan lagi docs/DEPLOY_ANALYTICS_UI.md; cukup rebuild dan restart frontend.
 - First-party requirements diselaraskan; data, akun, format crypto tidak diubah.
 - VM awal46.0.7/9.0.2, services active, deployment arsip tanpa Git.
 - PENDING: penerapan VM, smoke65/14akun dan SBOM/audit environment final.
+
+## Dependency release — hasil VM dan SBOM terkonfirmasi
+
+Main merge4fdd7aa dipush; VM memakai arsip source terverifikasi159file karena
+instalasi existing tanpa Git. Commit awal null/unknown; commit_after adalah
+identitas manifest rilis, bukan klaim git checkout atau penggantian build frontend.
+Selesai29Okt11:41:01WIB: crypto46.0.7→50.0.2, pytest9.0.2→9.0.3, pip checkPASS,
+dpr-api/dpr-web active. Smoke sebelum dan sesudah65/65 pada14akun; rollback tidak
+diperlukan/dijalankan. Backup kode dan venv persis disimpan privat di VM.
+PG/OpenBao tidak direstart; tidak provisioning akun, reset database atau rotasi kunci.
+
+SBOM docs/sbom diregenerasi dari main4fdd7aa pada venv laptopPython3.12.10. Tiga
+pip-audit requirements: app0/31dependency, benchmark0/22, infra0/16; skipped0.
+Npm audit package-lock:0finding. Ada9JSON SBOM/audit; hash/tool/version/scope di
+app/evidence/access-control/dependency-upgrade-sbom-20261029.json. Inventory
+Windows app+infra+toolkit+audit tools bukan dump seluruh dependency VM; ranged
+requirements BOM merekam deklarasi, environment BOM merekam versi terpasang.
+VM siap diserahkan ke pentest Delf; hasil upgrade/smoke bukan kesimpulan pentest.

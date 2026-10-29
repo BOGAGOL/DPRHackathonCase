@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "created_at_wib": "2026-10-29T11:42:09.994085+07:00",
+  "source_commit": "4fdd7aa5a87e553f8da1e1397d5d5a772c80a402",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.10",
+  "environment_versions": {
+    "cryptography": "50.0.2",
+    "pytest": "9.0.3",
+    "cyclonedx-bom": "7.6.0",
+    "pip-audit": "2.10.1",
+    "dprcrypto": "0.1.0"
+  },
+  "python_requirement_audits": {
+    "app": {
+      "dependencies": 31,
+      "findings": 0,
+      "affected_packages": 0,
+      "skipped_packages": 0
+    },
+    "benchmark": {
+      "dependencies": 22,
+      "findings": 0,
+      "affected_packages": 0,
+      "skipped_packages": 0
+    },
+    "infra": {
+      "dependencies": 16,
+      "findings": 0,
+      "affected_packages": 0,
+      "skipped_packages": 0
+    }
+  },
+  "npm_audit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "scope": "Laptop Windows: app + infra + editable toolkit and SBOM/audit tooling. Requirement audits resolved separately; not a dump of the VM environment. Requirement BOMs describe declarations; environment BOM records installed versions.",
+  "files": {
+    "app-python-audit.json": "329bdf9be29dd1e74fa0b70fd439d553179bb09b36108b956b79dfd0169c4f3a",
+    "app-python.cdx.json": "b364feccd9b05c8cb96d08254de1f4661c13abd61a7e879cdf2e7acf2267a06f",
+    "app-web-audit.json": "13d1b15dd56bf152c97828fff2754bf1879c080832f44d790363181c36219c95",
+    "app-web.cdx.json": "be6153fa1522a8716fc0ce8da64baf6d5dbcd89194c1d56368569ee2e0dd84d2",
+    "benchmark-python-audit.json": "16e43431d0d7adf00c881cf1c277c68b95f5ad693afdafc4a9f98cd6f714bc57",
+    "benchmark-python.cdx.json": "4cb1bce0421151f983fc86dd0c7052b2ccf0d4b3035500e113d3be0d554d18be",
+    "infra-python-audit.json": "3ae7e8f6dccbaf1ab6507f7e22ac07de24fb21b096502631a5bdc5e642f11320",
+    "infra-python.cdx.json": "b34f8ce2fd9d2bd153668823e519ffd81de4d275a07161195e675c39114a8d09",
+    "python-env.cdx.json": "4c4c5d214b39a2e5e1f468752110b1379a8bf8b6e3ca43bca967b32d29184694"
+  }
+}

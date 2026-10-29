@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "phase": "completed",
+  "time_wib": "2026-10-29T11:40:32.763157+07:00",
+  "commit_before": null,
+  "commit_after": "4fdd7aa5a87e553f8da1e1397d5d5a772c80a402",
+  "versions_before": {
+    "cryptography": "46.0.7",
+    "pytest": "9.0.2"
+  },
+  "versions_after": {
+    "cryptography": "50.0.2",
+    "pytest": "9.0.3"
+  },
+  "services": {
+    "dpr-api.service": "active",
+    "dpr-web.service": "active"
+  },
+  "smoke": {
+    "passed": true,
+    "passed_checks": 65,
+    "total_checks": 65,
+    "accounts": 14,
+    "report": "app/evidence/access-control/vm-pentest-smoke.json"
+  },
+  "source_before": "UNVERSIONED_ARCHIVE",
+  "rollback_attempted": false,
+  "member_or_account_provisioning": false,
+  "database_or_openbao_restart": false,
+  "release_commit": "4fdd7aa5a87e553f8da1e1397d5d5a772c80a402",
+  "release_scope": "Verified source subset; frontend build and private configuration preserved",
+  "release_manifest_sha256": "fef75249b5105c28c3a19f3944b1ccba317302e01abb9dbb0287758bef4fb7e1",
+  "before_smoke": {
+    "passed": true,
+    "passed_checks": 65,
+    "total_checks": 65,
+    "accounts": 14
+  },
+  "source_before_sha256": "c4ae8ce505574fc4d68ed8ac716e4fddde6757fc5f7907d5cdd7e40d8c9b8565",
+  "pip_check": "PASSED",
+  "source_manifest_verified": true,
+  "commit_after_kind": "RELEASE_MANIFEST_NOT_GIT_CHECKOUT",
+  "completed_at_wib": "2026-10-29T11:41:01.727581+07:00"
+}
