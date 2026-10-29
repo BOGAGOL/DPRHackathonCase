@@ -4,6 +4,7 @@ mode="${1:-}"
 case "$mode" in api|web) ;; *) echo 'Use api or web' >&2; exit 2 ;; esac
 dpr_repo="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd)"
 exec env -i HOME="$HOME" PATH="$HOME/dpr-demo-zhafif/runtime/node/bin:/usr/local/bin:/usr/bin:/bin" \
+  DPR_APP_TOKEN_FILE="${DPR_APP_TOKEN_FILE:-}" \
   DPR_SECRETS_DIR="$HOME/dpr-demo-zhafif/private/module-a" \
   bash --noprofile --norc -c '
     set -euo pipefail
@@ -16,6 +17,7 @@ exec env -i HOME="$HOME" PATH="$HOME/dpr-demo-zhafif/runtime/node/bin:/usr/local
       web)
         unset MODE DATABASE_URL AUTH_DATABASE_URL ANALYST_DATABASE_URL AUDITOR_DATABASE_URL
         unset OPENBAO_ADDR OPENBAO_CACERT OPENBAO_TOKEN DPR_CRYPTO_FACTORY
+        unset DPR_APP_TOKEN_FILE
         cd "$2/app/web"; exec npm start ;;
     esac
   ' _ "$mode" "$dpr_repo"

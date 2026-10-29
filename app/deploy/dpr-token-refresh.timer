@@ -1,0 +1,12 @@
+# DPR_SERVICE_APP_TOKEN_REFRESH_V1
+[Unit]
+Description=Check DPR Service App token every five minutes
+
+[Timer]
+OnBootSec=45s
+OnUnitInactiveSec=5min
+AccuracySec=10s
+Unit=dpr-token-refresh.service
+
+[Install]
+WantedBy=timers.target

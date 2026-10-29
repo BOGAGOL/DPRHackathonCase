@@ -1,0 +1,22 @@
+# DPR_SERVICE_APP_TOKEN_REFRESH_V1
+[Unit]
+Description=DPR Service App token refresh (svc-app only)
+After=network-online.target docker.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+Group=ubuntu
+ExecStart=/usr/bin/python3 -I /usr/local/lib/dpr-service-app/token_refresh.py tick
+RuntimeDirectory=dpr-service-app
+RuntimeDirectoryMode=0750
+RuntimeDirectoryPreserve=yes
+UMask=0077
+TimeoutStartSec=120
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths=/run/dpr-service-app
+InaccessiblePaths=-/home/ubuntu/dpr-demo-zhafif/private/module-a/openbao -/home/ubuntu/dpr-demo-zhafif/private/module-a/database-credentials.json -/home/ubuntu/dpr-demo-zhafif/private/module-a/operator.env -/home/ubuntu/dpr-demo-zhafif/private/module-a/migration.env -/home/ubuntu/dpr-demo-zhafif/private/module-a/handoff/setup.env -/home/ubuntu/dpr-demo-zhafif/private/service-b

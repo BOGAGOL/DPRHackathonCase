@@ -457,3 +457,20 @@ Evidence fix-F01-duplicate-identity.json adalah laporan VM asli; f01-smoke.json
 berisi65check; f01-initial-attempt.json menjaga kegagalan pertama; ringkasan/provenance
 ada di f01-deployment-verification.json. F-01 siap retest independen, belum diberi
 status Closed oleh pentester. Token tetap berdurasi pendek; ikuti runbook lifecycle.
+
+## Token otomatis — 29 Oktober 2026
+
+Instruksi Zhafif: hilangkan pembaruan token manual berulang. Implementasi hanya
+app/: AppRole mount terpisah, policy svc-app existing, token TTL/explicit_max_ttl4jam,
+timer5menit dan ambang1jam. Bootstrap dibaca saat setup operator saja; root-owned
+broker stdlib memakai SecretID khusus, bukan root token. API membaca sink privat
+saat startup; hanya API restart, ada jeda singkat. Crypto toolkit/format v1 tidak
+diubah. Inactive maintenance dipertahankan dan outage tetap fail closed.
+
+Tradeoff unattended login: SecretID root-only berumur tak terbatas. Kebocoran
+RoleID+SecretID dapat menerbitkan token svc-app sampai dicabut; tidak mengklaim
+batas empat jam untuk pencurian credential bootstrap AppRole. Tidak auto-unseal.
+Timer tidak menyegarkan handoff A atau token CLI lain; hanya runtime web API B.
+
+Penerapan VM memerlukan upload/installer sekali karena SSH key id_ardi ditolak
+pada koneksi non-interaktif. Jangan menandai VM DONE sebelum laporan mesin actual.

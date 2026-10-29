@@ -176,3 +176,19 @@ Evidence fix-F01-duplicate-identity.json adalah laporan VM asli; f01-smoke.json
 berisi65check; f01-initial-attempt.json menjaga kegagalan pertama; ringkasan/provenance
 ada di f01-deployment-verification.json. F-01 siap retest independen, belum diberi
 status Closed oleh pentester. Token tetap berdurasi pendek; ikuti runbook lifecycle.
+
+## Otomatisasi token svc-app — 29 Oktober 2026
+
+- IMPLEMENTED hanya app/: AppRole khusus, token max4jam, timer5menit, refresh saat
+  sisa<=1jam, sink atomik root:ubuntu0640, startup API membaca sink baru.
+- Root token hanya setup operator; timer memakai credential AppRole root-only.
+  Tidak mengubah policy Transit/kunci/format crypto/database/akun. Restart hanya API;
+  inactive maintenance dipertahankan, ada jeda saat reload, tidak auto-unseal.
+- TESTED: regresi app+35tes awal508PASS/12SKIP; tes final mekanisme40PASS dan
+  toolkit108PASS/1SKIP. Skipped integrasi existing opt-in/disposable PG tidak dijalankan.
+- TESTED native OpenBao2.5.5 TLS:15checkPASS, AppRole/TTL/policy, rejected-token
+  recovery, rotation/revocation, filepermission, startup sink dan CA salah.
+  Callback systemd disimulasikan; ini bukan bukti penerapan VM.
+- PENDING: installer VM, timer aktif dan smoke65/65/14akun. SSH key noninteraktif
+  ditolak; paket satu kali disiapkan untuk dijalankan dalam sesi SSH operator.
+- Keputusan/risiko credential jangka panjang dan runbook: app/docs/TOKEN_AUTOREFRESH.md.
