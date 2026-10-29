@@ -1,0 +1,274 @@
+{
+  "scope": [
+    "toolkit",
+    "infra",
+    "scripts",
+    "app",
+    "migration",
+    "benchmark"
+  ],
+  "pattern": "PolicyBuilder|x509\\.verification|pkcs7",
+  "grep_exit_code": 1,
+  "grep_matches": [],
+  "additional_verify_python_files_included": true,
+  "python_files_ast_parsed": 210,
+  "risky_cryptography_imports": [],
+  "cryptography_imports": [
+    {
+      "path": "app/scripts/integration_probe.py",
+      "line": 307,
+      "module": "cryptography",
+      "names": [
+        "x509"
+      ]
+    },
+    {
+      "path": "app/scripts/integration_probe.py",
+      "line": 308,
+      "module": "cryptography.hazmat.primitives.serialization",
+      "names": [
+        "Encoding",
+        "PublicFormat"
+      ]
+    },
+    {
+      "path": "infra/acceptance/browser.py",
+      "line": 11,
+      "module": "cryptography",
+      "names": [
+        "x509"
+      ]
+    },
+    {
+      "path": "infra/acceptance/browser.py",
+      "line": 12,
+      "module": "cryptography.hazmat.primitives.serialization",
+      "names": [
+        "Encoding",
+        "PublicFormat"
+      ]
+    },
+    {
+      "path": "infra/postgres/enable_tls.py",
+      "line": 20,
+      "module": "cryptography",
+      "names": [
+        "x509"
+      ]
+    },
+    {
+      "path": "infra/postgres/enable_tls.py",
+      "line": 21,
+      "module": "cryptography.hazmat.primitives",
+      "names": [
+        "hashes"
+      ]
+    },
+    {
+      "path": "infra/postgres/make_cert.py",
+      "line": 9,
+      "module": "cryptography",
+      "names": [
+        "x509"
+      ]
+    },
+    {
+      "path": "infra/postgres/make_cert.py",
+      "line": 10,
+      "module": "cryptography.hazmat.primitives",
+      "names": [
+        "hashes",
+        "serialization"
+      ]
+    },
+    {
+      "path": "infra/postgres/make_cert.py",
+      "line": 11,
+      "module": "cryptography.hazmat.primitives.asymmetric",
+      "names": [
+        "rsa"
+      ]
+    },
+    {
+      "path": "infra/postgres/make_cert.py",
+      "line": 12,
+      "module": "cryptography.x509.oid",
+      "names": [
+        "ExtendedKeyUsageOID",
+        "NameOID"
+      ]
+    },
+    {
+      "path": "infra/tests/test_postgres_tls.py",
+      "line": 9,
+      "module": "cryptography",
+      "names": [
+        "x509"
+      ]
+    },
+    {
+      "path": "infra/tests/test_postgres_tls.py",
+      "line": 10,
+      "module": "cryptography.hazmat.primitives",
+      "names": [
+        "serialization"
+      ]
+    },
+    {
+      "path": "infra/tests/test_postgres_tls.py",
+      "line": 11,
+      "module": "cryptography.hazmat.primitives.asymmetric",
+      "names": [
+        "padding"
+      ]
+    },
+    {
+      "path": "infra/tests/test_tls.py",
+      "line": 5,
+      "module": "cryptography",
+      "names": [
+        "x509"
+      ]
+    },
+    {
+      "path": "infra/tests/test_tls.py",
+      "line": 6,
+      "module": "cryptography.hazmat.primitives",
+      "names": [
+        "serialization"
+      ]
+    },
+    {
+      "path": "infra/tests/test_tls.py",
+      "line": 7,
+      "module": "cryptography.hazmat.primitives.asymmetric",
+      "names": [
+        "padding"
+      ]
+    },
+    {
+      "path": "infra/tls/make_ca.py",
+      "line": 8,
+      "module": "cryptography",
+      "names": [
+        "x509"
+      ]
+    },
+    {
+      "path": "infra/tls/make_ca.py",
+      "line": 9,
+      "module": "cryptography.hazmat.primitives",
+      "names": [
+        "hashes",
+        "serialization"
+      ]
+    },
+    {
+      "path": "infra/tls/make_ca.py",
+      "line": 10,
+      "module": "cryptography.hazmat.primitives.asymmetric",
+      "names": [
+        "rsa"
+      ]
+    },
+    {
+      "path": "infra/tls/make_ca.py",
+      "line": 11,
+      "module": "cryptography.x509.oid",
+      "names": [
+        "ExtendedKeyUsageOID",
+        "NameOID"
+      ]
+    },
+    {
+      "path": "migration/tests/test_model.py",
+      "line": 8,
+      "module": "cryptography.hazmat.primitives.ciphers.aead",
+      "names": [
+        "AESGCM"
+      ]
+    },
+    {
+      "path": "scripts/backup.py",
+      "line": 13,
+      "module": "cryptography.hazmat.primitives.ciphers.aead",
+      "names": [
+        "AESGCM"
+      ]
+    },
+    {
+      "path": "scripts/backup/crypto.py",
+      "line": 14,
+      "module": "cryptography.exceptions",
+      "names": [
+        "InvalidTag"
+      ]
+    },
+    {
+      "path": "scripts/backup/crypto.py",
+      "line": 15,
+      "module": "cryptography.hazmat.primitives",
+      "names": [
+        "hashes"
+      ]
+    },
+    {
+      "path": "scripts/backup/crypto.py",
+      "line": 16,
+      "module": "cryptography.hazmat.primitives.ciphers.aead",
+      "names": [
+        "AESGCM"
+      ]
+    },
+    {
+      "path": "scripts/backup/crypto.py",
+      "line": 17,
+      "module": "cryptography.hazmat.primitives.kdf.hkdf",
+      "names": [
+        "HKDF"
+      ]
+    },
+    {
+      "path": "toolkit/dprcrypto/codec.py",
+      "line": 6,
+      "module": "cryptography.exceptions",
+      "names": [
+        "InvalidTag"
+      ]
+    },
+    {
+      "path": "toolkit/dprcrypto/codec.py",
+      "line": 7,
+      "module": "cryptography.hazmat.primitives.ciphers.aead",
+      "names": [
+        "AESGCM"
+      ]
+    },
+    {
+      "path": "toolkit/dprcrypto/vectors.py",
+      "line": 12,
+      "module": "cryptography.hazmat.primitives.ciphers.aead",
+      "names": [
+        "AESGCM"
+      ]
+    },
+    {
+      "path": "toolkit/tests/conftest.py",
+      "line": 8,
+      "module": "cryptography.hazmat.primitives.ciphers.aead",
+      "names": [
+        "AESGCM"
+      ]
+    },
+    {
+      "path": "toolkit/tests/test_codec.py",
+      "line": 4,
+      "module": "cryptography.hazmat.primitives.ciphers.aead",
+      "names": [
+        "AESGCM"
+      ]
+    }
+  ],
+  "conclusion": "No direct affected API use found in reviewed tracked code; static review does not prove all transitive/dynamic behavior unreachable",
+  "base_commit": "845ee93f4f130f56cb20264a541b469a89b5d769"
+}
