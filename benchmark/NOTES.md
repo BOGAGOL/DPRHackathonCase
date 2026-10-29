@@ -963,3 +963,9 @@ Progres diperiksa paling cepat30menit (1800s), maksimal3baris pembaruan. Satu bl
 ## API B-P-P-B 100k — 2026-10-29T00:42:58.291424+00:00
 
 Status RESTORE_FAILED. Clone bernama baseline_100k/protected_100k karena allowlist app; originals diarsip sementara __official dan dilindungi OID/ALLOW_CONNECTIONS. Journal db_swap_state.json wajib restored setelah count/checksum/control/sequence/TLS bench+scanner lolos. App asli tanpa edit, TLS verify-full kedua mode, 8VU/60s, warmup30s per start, cooldown login310s agar satu akun tidak kena limiter10/5menit. Raw/summary/parity/metadata di evidence/benchmark/api_bppb_100k. Tidak mengganti hasil DB.
+
+
+## API CA lifecycle (operator instruction29Oct)
+
+Operator imported lab CA FC95F6CA26E050CAB0C16B17B3F4A20441FA8440; first observed 2026-10-29T07:39:09.8236427+07:00. After supervisor/DB cleanup, Remove-Item targeted only that certificate in CurrentUser/Root. Status REMOVAL_FAILED, absence verified False, completed 2026-10-29T07:43:02.7294886+07:00. Evidence: evidence/benchmark/api_bppb_100k/ca_lifecycle.json. No root token, issuance or TLS downgrade.
+
