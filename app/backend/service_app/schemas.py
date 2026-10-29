@@ -92,7 +92,12 @@ def phone_check(value):
 
 
 def ktp_check(value):
-    if value is not None and not re.fullmatch(r"(?:[0-9]{14}|[0-9]{16})", value):
+    if value is None:
+        return None
+    if not isinstance(value, str) or not re.fullmatch(r"[0-9 .-]+", value.strip()):
+        raise ValueError("Invalid identifier format")
+    value = "".join(c for c in value if c in "0123456789")
+    if not re.fullmatch(r"(?:[0-9]{14}|[0-9]{16})", value):
         raise ValueError("Expected synthetic 14-digit or 16-digit identifier")
     return value
 
@@ -142,7 +147,7 @@ class MemberInsert(Strict):
     agama: str | None = Field(default=None, max_length=20)
     _email = field_validator("email")(email_check)
     _phone = field_validator("handphone", "telpon_jakarta", "telpon_daerah")(phone_check)
-    _ktp = field_validator("no_ktp")(ktp_check)
+    _ktp = field_validator("no_ktp", mode="before")(ktp_check)
 
     @model_validator(mode="after")
     def valid_birth_date(self):

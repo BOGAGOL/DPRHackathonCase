@@ -260,3 +260,10 @@ yang sama. CLI schema/provision mendukung clone, setup memberi CONNECT/USAGE ter
 dan runtime memeriksa metadata/marker/schema/RLS sebelum melayani request.
 Lihat [handoff benchmark untuk Delf](docs/BENCHMARK_CLONES.md). Default database demo
 tetap sama. Fitur ini tidak menjalankan benchmark atau mengubah runner/cleanup C.
+
+## Perbaikan F-01 — 29 Oktober 2026
+
+POST anggota menolak KTP non-NULL yang sudah terdaftar dengan409 generik. Normalisasi
+format mempertahankan nol awal dan identitas sintetis14digit. Protected wajib
+menerapkan sql/protected/04_identity_unique.sql sesudah reset golden resmi. Detail
+migrasi, pengujian race/RLS dan pemulihan: [F01_DUPLICATE_IDENTITY.md](docs/F01_DUPLICATE_IDENTITY.md).
