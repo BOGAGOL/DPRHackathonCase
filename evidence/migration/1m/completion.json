@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "checked_at_wib": "2026-10-28T01:56:14.811032+07:00",
+  "source": "baseline_1m",
+  "target": "protected_1m",
+  "rows_compared": 1000000,
+  "validation_file": "evidence/migration/validation-protected_1m.json",
+  "migration_database_role_nologin": true,
+  "migration_token_revoked_and_rejected": true,
+  "source_checks": {
+    "postgres": {
+      "rows": true,
+      "postmaster_started": true,
+      "database_oid": true,
+      "table_oid": true,
+      "relfilenode": true,
+      "inserted": true,
+      "updated": true,
+      "deleted": true
+    },
+    "baseline_100k": {
+      "rows": true,
+      "postmaster_started": true,
+      "database_oid": true,
+      "table_oid": true,
+      "relfilenode": true,
+      "inserted": true,
+      "updated": true,
+      "deleted": true
+    },
+    "baseline_1m": {
+      "rows": true,
+      "postmaster_started": true,
+      "database_oid": true,
+      "table_oid": true,
+      "relfilenode": true,
+      "inserted": true,
+      "updated": true,
+      "deleted": true
+    }
+  },
+  "database_size_bytes": {
+    "postgres": 8640191,
+    "baseline_100k": 104732351,
+    "baseline_1m": 825194175,
+    "protected_100k": 230012607,
+    "protected_1m": 2210617023
+  },
+  "protected_to_baseline_1m_ratio": 2.6789052685690615,
+  "free_disk_bytes": 58459795456,
+  "benchmarks_executed": 0
+}

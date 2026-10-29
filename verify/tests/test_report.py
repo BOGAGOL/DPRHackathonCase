@@ -18,7 +18,9 @@ def test_report_contains_measured_results_and_explicit_limits():
     assert "bukan waktu respons web publik" in rendered
     assert "https://43.156.157.247/login" in rendered
     assert "accounts.md" in rendered
-    assert "Login browser deployment belum lulus" in rendered
+    assert ("Login browser deployment belum lulus" in rendered) == (data['deployed_accounts']['status'] != 'PASSED')
+    assert "bukan median benchmark tiga run" in rendered
+    assert "Biaya penyimpanan" in rendered
     assert "95% permintaan" in rendered and "scope" in rendered
     assert "<script" not in rendered
 
