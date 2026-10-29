@@ -7,6 +7,9 @@ pengguna yang sah tetap dapat memakai aplikasi dan layanan dapat dipulihkan.
 **Login evaluator:** [accounts.md](accounts.md) ·
 **Lihat hasil:** buka [docs/RESULTS.html](docs/RESULTS.html) di browser.
 
+**Akses web saat ini:** login browser memerlukan penyelarasan Origin di VM
+(HTTP403). Demo lokal dan halaman hasil dapat digunakan terpisah.
+
 ## Apa yang dikerjakan sistem?
 
 1. **Assessment:** scanner memeriksa nama, isi, pola dan hubungan kolom untuk
