@@ -375,6 +375,9 @@ di `docs/sbom/` beserta cakupan dan hasil auditnya.
 - [Operasi dan pemulihan](docs/OPERATIONS.md): instalasi permanen, konfigurasi
   privat, TLS, init/unseal manual, role, migrasi, startup aplikasi, backup/restore,
   rotasi kunci, dan penanganan Origin. Gunakan prosedur ini untuk penerapan instansi.
+- [Refresh token aplikasi](docs/TOKEN_REFRESH.md): pemasangan broker AppRole dan
+  timer opsional pada deployment systemd; masa berlaku token tetap dibatasi dan
+  unseal tetap manual. Penerapan pada VM memerlukan verifikasi tersendiri.
 - [Spesifikasi teknis](docs/contracts/CONTRACT.md): format ciphertext, AAD,
   normalisasi, skema dan antarmuka antarservice.
 

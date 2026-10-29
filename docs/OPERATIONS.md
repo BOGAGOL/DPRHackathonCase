@@ -112,7 +112,10 @@ Launcher menolak HTTP dan TLS tanpa material lengkap.
 
 Untuk memperbarui token svc-app, operator menggunakan `python -m infra.vm refresh-app`
 dengan custody bootstrap yang sah. Restart hanya service yang memerlukan env token
-baru. Aplikasi tidak mengambil root otomatis atau memperpanjang token sendiri.
+baru. API tidak mengambil root token secara otomatis. Untuk instalasi systemd,
+[refresh token opsional](TOKEN_REFRESH.md) memakai broker AppRole terpisah yang
+menerbitkan token svc-app berbatas TTL lalu merestart API. Fitur perlu dipasang
+operator; pull kode tidak mengaktifkannya. Unseal tetap manual.
 
 ## Backup dan restore
 

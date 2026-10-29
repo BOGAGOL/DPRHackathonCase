@@ -65,7 +65,7 @@ def test():
     """Local regression suites; external service integrations remain explicit."""
     jobs = [
         (python_bin(ROOT / ".venv"), ["-m", "pytest", "-q", "--tb=short"]),
-        (python_bin(ROOT / ".venv"), ["-m", "pytest", "-c", "app/pytest.ini", "app/tests", "-q", "--tb=short"]),
+        (python_bin(ROOT / ".venv"), ["-m", "pytest", "-c", "app/pytest.ini", "app/tests", "app/deploy/tests", "-q", "--tb=short"]),
         (python_bin(ROOT / ".venv-assessment"), ["-m", "pytest", "scanner/tests", "datagen/tests", "-q", "--import-mode=importlib", "--tb=short"]),
     ]
     results = []

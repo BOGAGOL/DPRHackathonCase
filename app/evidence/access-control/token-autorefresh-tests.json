@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "runs": {
+    "regression": {
+      "tests": 520,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 12,
+      "passed": 508,
+      "junit_sha256": "c43d9d685bfc321a463fa8df88968b43064a22fabe8658fd46a24bbb58b1b664"
+    },
+    "focused_token_and_toolkit": {
+      "tests": 149,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "passed": 148,
+      "junit_sha256": "837d180059e61d77471a6732f3319c20ebe764050b389b92192c260223deb9b3"
+    }
+  },
+  "dedicated_token_tests_final": 40,
+  "native_tls_checks": 15,
+  "vm_status": "NOT TESTED: requires one-time operator installer; SSH key rejected",
+  "scope": "Synthetic tests only; no team DB, keys, accounts, or VM changes",
+  "checked_at_wib": "2026-10-29T20:29:13.442933+07:00"
+}

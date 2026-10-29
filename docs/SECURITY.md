@@ -63,7 +63,10 @@ merupakan rekomendasi yang memerlukan keputusan pemilik data.
 8. Bukti 734, 100k, 1M, lab native, browser deployment dan benchmark mempunyai scope
    berbeda. Pencapaian target kinerja belum terbukti; seri benchmark API belum lengkap.
 9. Token workload berbatas TTL; unseal, pembaruan sertifikat, custody dan revokasi
-   membutuhkan operator. OpenBao single node bukan arsitektur HA.
+   membutuhkan operator. Broker [refresh token opsional](TOKEN_REFRESH.md) memakai
+   SecretID AppRole jangka panjang; pencurian RoleID dan SecretID memungkinkan
+   penerbitan token svc-app sampai kredensial tersebut dicabut. TTL token tidak
+   membatasi umur SecretID. OpenBao single node bukan arsitektur HA.
 10. Inventaris dependency/audit tidak mencakup seluruh OS/image/CPython SSL; tag
     PostgreSQL18 belum mengunci digest. Lihat [dependency inventory](DEPENDENCIES.md).
 
