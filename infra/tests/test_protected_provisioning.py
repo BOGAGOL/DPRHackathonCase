@@ -23,7 +23,7 @@ def test_profile_rejects_stale_decisions(tmp_path):
 
 @pytest.mark.parametrize("line_endings",[b"\n",b"\r\n"])
 def test_profile_input_provenance_survives_checkout_only(tmp_path,monkeypatch,line_endings):
-    paths=("evidence/scanner/before_v1/inventory.csv","policy/overrides.yaml","docs/contracts/CONTRACT.md")
+    paths=("evidence/scanner/before_v1/inventory.csv","policy/overrides.yaml","policy/protocol-v1.txt")
     profile_path=tmp_path/"policy/protection_profile.yaml"
     original=yaml.safe_load((REPO/"policy/protection_profile.yaml").read_text())
     for name in paths:

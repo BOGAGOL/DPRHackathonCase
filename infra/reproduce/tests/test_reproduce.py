@@ -196,13 +196,22 @@ def test_contract_vectors_are_utf8_independent_of_windows_default_codec():
     assert len(checks) == 8 and all(checks.values())
 
 
+def test_human_specification_and_immutable_profile_protocol_agree():
+    from policy.build_profile import contract_columns, text_hashes
+    immutable = bootstrap.ROOT / 'policy/protocol-v1.txt'
+    public = bootstrap.ROOT / 'docs/contracts/CONTRACT.md'
+    assert contract_columns(immutable) == contract_columns(public)
+    profile = apply.load_profile(bootstrap.ROOT / 'policy/protection_profile.yaml')
+    assert profile['provenance']['contract_sha256'] in text_hashes(immutable)
+
+
 def test_reproduction_compose_is_in_sbom_freshness_inputs():
-    from infra.submission.sbom import inputs
+    from infra.distribution.sbom import inputs
     assert "infra/reproduce/compose.yaml" in inputs(bootstrap.ROOT)
 
 
 def test_only_reviewed_plaintext_scan_receipt_can_use_secrets_directory():
-    from infra.submission.inventory import allowed
+    from infra.distribution.inventory import allowed
     assert allowed("evidence/secrets/plaintext-scan.json")
     assert not allowed("evidence/secrets/credentials.json")
     assert not allowed("evidence/secrets/another-report.json")
@@ -236,7 +245,7 @@ def test_docker_tls_apply_refuses_unowned_container(tmp_path, monkeypatch, scope
 
 
 def test_gitless_export_preserves_public_receipt_but_not_installed_metadata(tmp_path):
-    from infra.submission.inventory import candidates
+    from infra.distribution.inventory import candidates
     for name in ("evidence/secrets/plaintext-scan.json", "evidence/secrets/private.json",
                  "toolkit/dprcrypto.egg-info/PKG-INFO", "toolkit/pkg.dist-info/METADATA",
                  ".venv-assessment/private.json", "infra/reproduce/__init__.py"):

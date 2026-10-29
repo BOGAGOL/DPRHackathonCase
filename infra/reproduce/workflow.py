@@ -98,7 +98,7 @@ def assess(stack, passwords, output):
     call([str(scanner), "-m", "scanner", "db", "--sample", "1000", "--label", "before", "--out", str(destination)], env=env)
     call([str(scanner), "-m", "scanner", "evaluate", "--pred", str(destination / "inventory.csv"),
           "--truth", "scanner/ground_truth_eval.csv", "--out", str(destination / "evaluation.json")], env=clean_environment())
-    profile = build(destination / "inventory.csv", ROOT / "policy/overrides.yaml", ROOT / "docs/contracts/CONTRACT.md")
+    profile = build(destination / "inventory.csv", ROOT / "policy/overrides.yaml", ROOT / "policy/protocol-v1.txt")
     path = output / "protection_profile.yaml"
     path.write_text(yaml.safe_dump(profile, sort_keys=False, allow_unicode=True), encoding="utf-8")
     # Apply the profile from THIS scan, including its verified provenance.
@@ -380,6 +380,15 @@ def run(args):
             report["stages"][stage]["status"] = "FAIL"
     finally:
         save(output / "summary.json", report)
+        from verify.report import run_page
+        (output / "report.html").write_text(run_page(report), encoding="utf-8")
+        labels = {"setup": "Persiapan layanan", "import": "Import 734 record", "assessment": "Assessment data",
+                  "hardening": "Migrasi dan validasi", "service_application": "Enam akun aplikasi",
+                  "security_verification": "Keamanan dan pemulihan"}
+        print("\nHasil: " + ("LULUS" if report["passed"] else "GAGAL"))
+        for name, result in report["stages"].items():
+            print("  " + labels.get(name, name) + ": " + result["status"])
+        print("Buka hasil di browser: " + str(output / "report.html"))
         print(json.dumps({"passed": report["passed"], "report": str((output / "summary.json").relative_to(ROOT)),
                           "failed_stage": report.get("failed_stage")}))
     return 0 if report["passed"] else 1

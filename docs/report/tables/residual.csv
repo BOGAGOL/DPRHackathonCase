@@ -1,7 +1,0 @@
-dataset,population,projections_measured,max_attributes_per_projection,k_min_over_projections,max_singleton_rows_in_one_projection
-protected_100k,all,41,3,136,0
-protected_100k,source_734,41,3,1,11
-protected_100k,synthetic,41,3,135,0
-protected_1m,all,41,3,1362,0
-protected_1m,source_734,41,3,1,11
-protected_1m,synthetic,41,3,1361,0

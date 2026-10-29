@@ -122,7 +122,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--inventory", type=Path, default=Path("evidence/scanner/before_v1/inventory.csv"))
     parser.add_argument("--overrides", type=Path, default=Path("policy/overrides.yaml"))
-    parser.add_argument("--contract", type=Path, default=Path("docs/contracts/CONTRACT.md"))
+    parser.add_argument("--contract", type=Path, default=Path("policy/protocol-v1.txt"))
     parser.add_argument("--output", type=Path, default=Path("policy/protection_profile.yaml"))
     args = parser.parse_args()
     report = {"schema_version": 1, "passed": False, "checked_at_utc": datetime.now(timezone.utc).isoformat()}

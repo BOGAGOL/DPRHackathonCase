@@ -416,7 +416,7 @@ def verify_restored(swap, before):
 def publish(report):
     if subprocess.check_output(['git','branch','--show-current'],cwd=ROOT,text=True).strip()!='perf/keyservice-latency':
         raise RuntimeError('api_publication_branch_changed')
-    with (ROOT/'benchmark/NOTES.md').open('a',encoding='utf-8') as h:
+    with (ROOT/'evidence/benchmark/run-notes.md').open('a',encoding='utf-8') as h:
         h.write('\n\n## API B-P-P-B 100k — '+utc_now()+'\n\nStatus '+report['status']+
             '. Clone bernama baseline_100k/protected_100k karena allowlist app; originals diarsip sementara __official dan dilindungi OID/ALLOW_CONNECTIONS. '
             'Journal db_swap_state.json wajib restored setelah count/checksum/control/sequence/TLS bench+scanner lolos. '
@@ -430,7 +430,7 @@ def publish(report):
             for r in comparison['scenarios']:
                 b,p=r['before'],r['after'];statuses='/'.join('LULUS' if r[k] else 'GAGAL' for k in ('P01_ratio_passed','P01_absolute_passed','P02_passed','P03_passed'))
                 h.write(f"| {r['endpoint']} | {b['p50_ms']:.3f}/{p['p50_ms']:.3f} | {b['p95_ms']:.3f}/{p['p95_ms']:.3f} | {b['throughput_rps']:.2f}/{p['throughput_rps']:.2f} | {r['p95_ratio']:.3f} | {statuses} |\n")
-    paths=['benchmark/NOTES.md','evidence/benchmark/api_bppb_100k','evidence/benchmark/bppb_versions_summary.md']
+    paths=['evidence/benchmark/run-notes.md','evidence/benchmark/api_bppb_100k','evidence/benchmark/bppb_versions_summary.md']
     if (ROOT/'evidence/benchmark/api_bppb_compare.json').exists():paths.append('evidence/benchmark/api_bppb_compare.json')
     subprocess.run(['git','add','--',*paths],cwd=ROOT,check=True,capture_output=True)
     subprocess.run(['git','commit','--only','-m','evidence: API read-path B-P-P-B ('+report['status']+')','--',*paths],cwd=ROOT,check=True,capture_output=True)

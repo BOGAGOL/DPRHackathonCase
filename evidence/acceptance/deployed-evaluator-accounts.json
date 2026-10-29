@@ -1,0 +1,15 @@
+{
+  "status": "FAILED",
+  "checks": {
+    "privileged_officer:https_login_page": true,
+    "privileged_officer:strict_csp": true
+  },
+  "coverage": {
+    "stage": "role:privileged_officer"
+  },
+  "error_type": "TimeoutError",
+  "checked_at_utc": "2026-10-29T11:03:46.495654+00:00",
+  "scope": "Deployed HTTPS application; six evaluator accounts from accounts.md; member data read-only; normal login/logout audit/session writes only",
+  "origin": "https://43.156.157.247",
+  "server_configuration_changed": false
+}

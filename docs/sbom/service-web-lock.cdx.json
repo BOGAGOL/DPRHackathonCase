@@ -2,7 +2,7 @@
   "$schema": "https://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:b0203b36-e763-5b1a-a1ab-c729e030d505",
+  "serialNumber": "urn:uuid:0c5e2c86-6804-5c14-976d-b9cab700544e",
   "version": 1,
   "metadata": {
     "component": {
@@ -18,7 +18,7 @@
       },
       {
         "name": "dpr:input-sha256-lf",
-        "value": "{\"app/requirements.txt\": \"278f1a35d18259e3f2e70fb210f1a63e6cc46dd82774e7bf03eabbf820bc522b\", \"app/web/package-lock.json\": \"0fe5b23a861095b033e8ec1755ab2ee6b530bccb8459b3b65d731048682ea2da\", \"benchmark/requirements.txt\": \"b5d9e7d5daceb516eeacc801384215d040eb0027bd55238578fbcaf3cb593def\", \"datagen/requirements.txt\": \"89993d01fe0af6f12a87dadcb3168900ea05698381f6eb8fa518536b61447a6c\", \"infra/compose.yaml\": \"2878d855b2fc646c4db5844848b80a28456990e1ea684665a5f3a2cc41d41ff5\", \"infra/reproduce/compose.yaml\": \"6dabd5cbf0e685c1376ab00293b9bf368fb96d7a82d48f533384da86ce0ffe41\", \"infra/requirements.txt\": \"4cab30d10323c26e3f802243ac6cb93ee50a43e00e39524d4b6a220949e89800\", \"infra/submission/requirements.txt\": \"7e1c5884438d533e8f05d6cfc5b973f9e251efb63329d9fe69579e58fcd4d823\", \"infra/tests/compose.postgres.yaml\": \"7686613708c67c8175562e70cc0fa2d342785a969b012653a257f457211b3cb3\", \"infra/vm/compose.yaml\": \"21d4c882419302c39dee3e65ed822b9eda9f92c12944741b8357dbf4540a0dbc\", \"scanner/requirements.txt\": \"4e02b32f8865afe10194d59063bdd60fbc23acb0320fec2cfb42f3d53366b611\", \"toolkit/pyproject.toml\": \"f7770271240d3812f11d55ca568a9865884d0a04a43ef0300217d5d7e3b5e178\", \"verify/requirements.txt\": \"5086bbedaf9cf4ec9f0aff8a3dab6583474331db2ff557b7639e99956657dceb\"}"
+        "value": "{\"app/requirements.txt\": \"278f1a35d18259e3f2e70fb210f1a63e6cc46dd82774e7bf03eabbf820bc522b\", \"app/web/package-lock.json\": \"0fe5b23a861095b033e8ec1755ab2ee6b530bccb8459b3b65d731048682ea2da\", \"benchmark/requirements.txt\": \"b5d9e7d5daceb516eeacc801384215d040eb0027bd55238578fbcaf3cb593def\", \"datagen/requirements.txt\": \"89993d01fe0af6f12a87dadcb3168900ea05698381f6eb8fa518536b61447a6c\", \"infra/compose.yaml\": \"2878d855b2fc646c4db5844848b80a28456990e1ea684665a5f3a2cc41d41ff5\", \"infra/distribution/requirements.txt\": \"7e1c5884438d533e8f05d6cfc5b973f9e251efb63329d9fe69579e58fcd4d823\", \"infra/reproduce/compose.yaml\": \"6dabd5cbf0e685c1376ab00293b9bf368fb96d7a82d48f533384da86ce0ffe41\", \"infra/requirements.txt\": \"4cab30d10323c26e3f802243ac6cb93ee50a43e00e39524d4b6a220949e89800\", \"infra/tests/compose.postgres.yaml\": \"7686613708c67c8175562e70cc0fa2d342785a969b012653a257f457211b3cb3\", \"infra/vm/compose.yaml\": \"21d4c882419302c39dee3e65ed822b9eda9f92c12944741b8357dbf4540a0dbc\", \"scanner/requirements.txt\": \"4e02b32f8865afe10194d59063bdd60fbc23acb0320fec2cfb42f3d53366b611\", \"toolkit/pyproject.toml\": \"f7770271240d3812f11d55ca568a9865884d0a04a43ef0300217d5d7e3b5e178\", \"verify/requirements.txt\": \"5086bbedaf9cf4ec9f0aff8a3dab6583474331db2ff557b7639e99956657dceb\"}"
       }
     ]
   },

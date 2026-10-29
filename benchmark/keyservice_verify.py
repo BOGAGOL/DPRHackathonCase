@@ -46,7 +46,7 @@ def verify_leak():
     for scale in ('100k', '1m'):
         private = Path(os.environ['DPR_PRIVATE_DIR']) / 'verify'
         artifact = private / 'after_20261028' / f'protected_{scale}.dump'
-        expected = json.loads((ROOT / 'evidence/overnight/after_artifacts_20261028.json').read_text())
+        expected = json.loads((ROOT / 'evidence/migration/after-artifacts-20261028.json').read_text())
         fingerprint = file_hash(artifact)
         if fingerprint != expected['stages'][f'protected_{scale}']['sha256']:
             raise RuntimeError('Immutable dump fingerprint changed')

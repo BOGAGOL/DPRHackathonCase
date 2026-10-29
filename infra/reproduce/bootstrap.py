@@ -32,7 +32,7 @@ def setup():
     if version < (20, 9):
         raise ValueError("Node.js >=20.9 required")
     for directory, requirements in (
-        (".venv", ("infra/requirements.txt", "app/requirements.txt", "infra/submission/requirements.txt")),
+        (".venv", ("infra/requirements.txt", "app/requirements.txt", "infra/distribution/requirements.txt")),
         (".venv-assessment", ("scanner/requirements.txt", "datagen/requirements.txt")),
     ):
         environment = ROOT / directory

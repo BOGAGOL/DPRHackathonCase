@@ -1,3 +1,0 @@
-scale,naive_p95_protected_ms,v2_p95_protected_ms,reduction_percent,comparison_scope
-100k,78.18119000075966,37.733697499334085,51.735580516275796,different declared sessions; not causal isolation
-1m,78.96651500632287,38.623677499890604,51.08853734168464,different declared sessions; not causal isolation

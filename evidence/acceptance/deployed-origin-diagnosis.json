@@ -1,0 +1,22 @@
+{
+  "checked_at_utc": "2026-10-29T11:05:56.429754+00:00",
+  "origin": "https://43.156.157.247",
+  "scope": "Origin/CSRF diagnosis only; missing-Origin request is a non-browser diagnostic, not a browser acceptance pass",
+  "checks": [
+    {
+      "browser_origin_present": true,
+      "csrf_cookie_present": true,
+      "csrf_length_at_least_32": true,
+      "login_status": 403
+    },
+    {
+      "browser_origin_present": false,
+      "csrf_cookie_present": true,
+      "csrf_length_at_least_32": true,
+      "login_status": 200,
+      "identity_matches": true,
+      "logout_status": 200
+    }
+  ],
+  "server_configuration_changed": false
+}

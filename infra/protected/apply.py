@@ -27,9 +27,9 @@ REF = ("jenis_kelamin", "pekerjaan_terakhir", "nama_kppn", "nama_bank", "age_ban
 def load_profile(path: Path) -> dict:
     profile = yaml.safe_load(path.read_text(encoding="utf-8"))
     inventory = REPO / profile["provenance"]["inventory"]
-    rebuilt = build(inventory, REPO / "policy/overrides.yaml", REPO / "docs/contracts/CONTRACT.md")
+    rebuilt = build(inventory, REPO / "policy/overrides.yaml", REPO / "policy/protocol-v1.txt")
     for key,input_path in (("inventory_sha256",inventory),("overrides_sha256",REPO/"policy/overrides.yaml"),
-                           ("contract_sha256",REPO/"docs/contracts/CONTRACT.md")):
+                           ("contract_sha256",REPO/"policy/protocol-v1.txt")):
         if profile["provenance"][key] not in text_hashes(input_path):
             raise ValueError("Protection profile inputs changed")
         rebuilt["provenance"][key] = profile["provenance"][key]

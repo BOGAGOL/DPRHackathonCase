@@ -1,0 +1,20 @@
+{
+  "required_paths": [
+    "README.md",
+    "app/backend/service_app/main.py",
+    "infra/reproduce/__main__.py",
+    "docs/contracts/CONTRACT.md",
+    "docs/contracts/test_vectors.json",
+    "docs/RESULTS.html",
+    "docs/OPERATIONS.md",
+    "docs/SECURITY.md",
+    "docs/METHODOLOGY.md",
+    "docs/architecture/architecture.svg",
+    "docs/data/inventory-report.csv",
+    "docs/data/risk-matrix.csv",
+    "migration/cli.py",
+    "scripts/backup/runner.py",
+    "benchmark/__main__.py",
+    "docs/sbom/index.json"
+  ]
+}

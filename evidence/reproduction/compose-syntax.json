@@ -1,5 +1,0 @@
-{
-  "passed": true,
-  "engine_contacted": false,
-  "scope": "Compose V2 syntax/interpolation only; Docker engine runtime unavailable (500)"
-}

@@ -1,4 +1,0 @@
-target,source,passed,rows_compared,comparison,checked_at_utc,evidence
-protected_734,postgres,True,734,all_rows_all_fields,2026-10-27T14:10:57.482469+00:00,evidence/migration/validation-protected_734.json
-protected_100k,baseline_100k,True,100000,all_rows_all_fields,2026-10-27T17:41:23.031513+00:00,evidence/migration/validation-protected_100k.json
-protected_1m,baseline_1m,True,1000000,all_rows_all_fields,2026-10-27T18:53:45.311582+00:00,evidence/migration/validation-protected_1m.json

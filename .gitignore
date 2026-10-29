@@ -30,7 +30,6 @@ playwright-report/
 .acceptance-private/
 creds.json
 credentials.json
-accounts.md
 .pgpass
 pgpass.conf
 .netrc
@@ -73,7 +72,7 @@ dummy_palmerah.zip
 /results/*
 !/results/README.md
 evidence/raw/
-/evidence/submission/generated/
+/evidence/distribution/generated/
 /evidence/reproduction/generated/
 _incoming/
 

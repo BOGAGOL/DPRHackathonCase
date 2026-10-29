@@ -1,0 +1,46 @@
+{
+  "checked_at_utc": "2026-10-29T11:04:49.555394+00:00",
+  "origin": "https://43.156.157.247",
+  "scope": "Authentication and identity only, no member mutation; secrets omitted",
+  "checks": [
+    {
+      "role": "analyst",
+      "csrf_status": 200,
+      "login_status": 403
+    },
+    {
+      "role": "anggota",
+      "csrf_status": 200,
+      "login_status": 403
+    },
+    {
+      "role": "auditor",
+      "csrf_status": 200,
+      "login_status": 403
+    },
+    {
+      "role": "finance_officer",
+      "csrf_status": 200,
+      "login_status": 403
+    },
+    {
+      "role": "operator",
+      "csrf_status": 200,
+      "login_status": 403
+    },
+    {
+      "role": "privileged_officer",
+      "csrf_status": 200,
+      "login_status": 403
+    }
+  ],
+  "same_credentials_as_prior_demo": {
+    "analyst": true,
+    "anggota": true,
+    "auditor": true,
+    "finance_officer": true,
+    "operator": true,
+    "privileged_officer": true
+  },
+  "passed": false
+}

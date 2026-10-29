@@ -17,6 +17,10 @@ verify:
 test:
 	$(PYTHON) -m infra.reproduce test
 
+.PHONY: results
+results:
+	$(PYTHON) -m infra.reproduce results
+
 .PHONY: scanner-install scan scan-dump scan-eval scanner-test
 scanner-install:
 	$(PYTHON) -m pip install -r scanner/requirements.txt
@@ -41,12 +45,12 @@ test-core:
 test-service:
 	$(PYTHON) -m pytest -c app/pytest.ini app/tests -q
 
-.PHONY: submission-check submission-sbom submission-build
-submission-check:
-	$(PYTHON) -m infra.submission check
+.PHONY: source-check source-sbom source-build
+source-check:
+	$(PYTHON) -m infra.distribution check
 
-submission-sbom:
-	$(PYTHON) -m infra.submission sbom
+source-sbom:
+	$(PYTHON) -m infra.distribution sbom
 
-submission-build:
-	$(PYTHON) -m infra.submission build --output dist/submission
+source-build:
+	$(PYTHON) -m infra.distribution build --output dist/source

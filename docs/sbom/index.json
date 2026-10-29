@@ -8,7 +8,7 @@
     "datagen/requirements.txt": "89993d01fe0af6f12a87dadcb3168900ea05698381f6eb8fa518536b61447a6c",
     "benchmark/requirements.txt": "b5d9e7d5daceb516eeacc801384215d040eb0027bd55238578fbcaf3cb593def",
     "verify/requirements.txt": "5086bbedaf9cf4ec9f0aff8a3dab6583474331db2ff557b7639e99956657dceb",
-    "infra/submission/requirements.txt": "7e1c5884438d533e8f05d6cfc5b973f9e251efb63329d9fe69579e58fcd4d823",
+    "infra/distribution/requirements.txt": "7e1c5884438d533e8f05d6cfc5b973f9e251efb63329d9fe69579e58fcd4d823",
     "toolkit/pyproject.toml": "f7770271240d3812f11d55ca568a9865884d0a04a43ef0300217d5d7e3b5e178",
     "app/web/package-lock.json": "0fe5b23a861095b033e8ec1755ab2ee6b530bccb8459b3b65d731048682ea2da",
     "infra/compose.yaml": "2878d855b2fc646c4db5844848b80a28456990e1ea684665a5f3a2cc41d41ff5",
@@ -20,17 +20,17 @@
     "python-declared.cdx.json": {
       "components": 22,
       "scope": "Declared direct/runtime/build/test requirements only; ranges remain unresolved; no transitive/deployed-environment completeness claim",
-      "sha256_lf": "f055f31872a73afc82173a409ce21ce5f5bcf98a4a60e16f14897f2c6e3b904a"
+      "sha256_lf": "882a913ee3af845b70095ed6cf7f593d710022fc24890264c4468dbe3ca59b61"
     },
     "service-web-lock.cdx.json": {
       "components": 114,
       "scope": "All packages in the active frontend npm lockfile, including development/optional entries; integrity is declared by the lockfile, not independently fetched",
-      "sha256_lf": "3aa047def56c0be05dc871daee4fbd89ea2da9e83f5a12984fe5ac79522b9904"
+      "sha256_lf": "406ac841d9a743bd283ba51cff37779a02a49f5e8da44b87adcf53b18bf373c5"
     },
     "infrastructure.cdx.json": {
       "components": 2,
       "scope": "Compose image references; container OS packages and resolved image digests are not inventoried",
-      "sha256_lf": "5df67fdc3213c5478d8ba49d0a19f526bd350e6a857707552542df985c6405ba"
+      "sha256_lf": "1c932d1f8c032d0e4af1fe631963ccede2fe83782414064862199604ffd6d71e"
     }
   }
 }

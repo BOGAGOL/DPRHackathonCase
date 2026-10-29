@@ -8,8 +8,7 @@
 - Dokumen soal/detail dan logo panitia mengikuti hak pemiliknya. Paket ini tidak
   menyertakan salinan atau mengklaim afiliasi sebagai sistem resmi DPR RI.
 - PostgreSQL, OpenBao, FastAPI, cryptography, Next.js, React, dan seluruh dependency
-  lain mengikuti lisensi masing-masing. [SBOM](docs/sbom/README.md) mencatat metadata
+  lain mengikuti lisensi masing-masing. [SBOM](docs/DEPENDENCIES.md) mencatat metadata
   yang tersedia, tanpa menebak lisensi paket yang belum diverifikasi.
 - Penggunaan AI membantu penulisan kode/dokumen dan verifikasi; tanggung jawab hasil,
-  validasi manusia, data, atribusi dan klaim tetap pada tim. Rincian di
-  [pernyataan penggunaan AI](docs/submission/AI_USAGE.md).
+  validasi manusia, data, atribusi dan klaim tetap pada tim.

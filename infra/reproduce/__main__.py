@@ -10,7 +10,7 @@ from .bootstrap import ROOT, setup, test
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=("setup", "demo", "verify", "test"))
+    parser.add_argument("command", choices=("setup", "demo", "verify", "test", "results"))
     parser.add_argument("--data", type=Path, default=os.environ.get("DPR_DEMO_DATA", str(ROOT / "sql/baseline/02_data.sql")))
     parser.add_argument("--native-pg-bin", type=Path)
     parser.add_argument("--native-bao-bin", type=Path)
@@ -25,6 +25,9 @@ def main(argv=None):
             setup()
         elif args.command == "test":
             return test()
+        elif args.command == "results":
+            from verify.report import main as results
+            return results([])
         else:
             # The initial interpreter may not have the project dependencies.
             from .bootstrap import python_bin
