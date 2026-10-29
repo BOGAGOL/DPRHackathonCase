@@ -104,3 +104,15 @@ Hasil akhir 26 Oktober 2026:
 ## 28 Oktober 2026 ? usulan perf/keyservice-latency untuk review Alby
 
 Atas instruksi Delf, branch ini menambahkan batas pool HTTP eksplisit, API HMAC batch lintas kolom dengan format v1 tetap, dan statistik agregat cache DEK yang sudah ada. Cache default toolkit tidak diubah; benchmark menyediakan varian cache-off dan opt-in TTL60. Tidak mengubah policy, key material, TLS verify, ciphertext, AAD atau bidx. Diagnosis membuktikan koneksi lama sudah persisten; tidak mengklaim handshake per request. Lihat REVIEW_KEY_SERVICE_LATENCY.md dan evidence/benchmark/keyservice_diagnosis.json; jangan merge sebelum review Modul A.
+
+## 29 Oktober 2026 — pembaruan dependency keamanan
+
+cryptography infra/toolkit kini >=50.0.2,<51; pin konsumen benchmark/verify juga
+diselaraskan agar install baru tidak konflik. Format kontrak v1, shared vectors,
+kode runtime dan hasil benchmark historis tidak berubah. Pemeriksaan statis
+tidak menemukan pemakaian langsung API tiga CVE yang dilaporkan; wheel baru
+tetap diuji untuk advisory OpenSSL. Toolkit108PASS/1SKIP dan verifier8checksPASS
+dalam environment terisolasi. Runtime existing/deployment belum di-upgrade.
+
+Rincian keberlakuan, sumber primer, hasil156test gabungan dan langkah operator:
+[review dependency](../docs/security/CRYPTOGRAPHY_20261029.md).

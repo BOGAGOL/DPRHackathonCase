@@ -948,3 +948,11 @@ Riwayat percobaan setup gagal dengan pemulihan PASS dipindahkan utuh ke evidence
 Unit test environment memakai sensor baterai buatan sendiri untuk kasus charger
 tersambung dan tidak tersambung. Guard charger pada runtime tetap diuji menolak
 kondisi tidak tersambung; benchmark aktual dan angka evidence tidak berubah.
+
+## 29 Oktober 2026 - pemulihan nama database resmi selesai
+
+Atas instruksi operator, proses app API dihentikan dengan pemeriksaan PID dan waktu pembuatan; tidak ada app/worker API tersisa. Gate keempat OID persis cocok sebelum DROP: salinan baseline_100k=57392 dan protected_100k=57393, arsip resmi masing-masing 32768 dan 41230. Hanya dua salinan tersebut dihapus; kedua arsip mendapat kembali nama resmi dan ALLOW_CONNECTIONS=true. Waktu selesai WIB: 2026-10-29T10:41:44.137401+07:00.
+
+Verifikasi read-only membandingkan lima database terhadap official_before dari sesi API: count 734/100000/1000000/100000/1000000, checksum member, hash/jumlah tabel kontrol dan sequence semuanya identik. Empat koneksi bench_user/scanner_user ke baseline_100k dan baseline_1m tanpa TLS berhasil. Evidence lengkap (termasuk before/after) berada di evidence/benchmark/api_bppb_100k/db_swap_state.json, status restored. Tiga test cleanup dan empat test guard OID/entrypoint lulus; tidak menjalankan benchmark, migrasi, pembaruan data anggota, ataupun akses/penerbitan token OpenBao.
+
+Hasil S02 di evidence/access-control/db-roles.json tetap merupakan uji historis pada salinan API protected_100k OID 57393 sebelum pemulihan, termasuk dua kegagalan analis. Hasil tersebut tidak dilabel ulang sebagai uji database resmi; S02 resmi belum diulang.

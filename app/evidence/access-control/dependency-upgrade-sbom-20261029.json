@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "created_at_wib": "2026-10-29T11:42:09.994085+07:00",
+  "source_commit": "4fdd7aa5a87e553f8da1e1397d5d5a772c80a402",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.10",
+  "environment_versions": {
+    "cryptography": "50.0.2",
+    "pytest": "9.0.3",
+    "cyclonedx-bom": "7.6.0",
+    "pip-audit": "2.10.1",
+    "dprcrypto": "0.1.0"
+  },
+  "python_requirement_audits": {
+    "app": {
+      "dependencies": 31,
+      "findings": 0,
+      "affected_packages": 0,
+      "skipped_packages": 0
+    },
+    "benchmark": {
+      "dependencies": 22,
+      "findings": 0,
+      "affected_packages": 0,
+      "skipped_packages": 0
+    },
+    "infra": {
+      "dependencies": 16,
+      "findings": 0,
+      "affected_packages": 0,
+      "skipped_packages": 0
+    }
+  },
+  "npm_audit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "scope": "Laptop Windows: app + infra + editable toolkit and SBOM/audit tooling. Requirement audits resolved separately; not a dump of the VM environment. Requirement BOMs describe declarations; environment BOM records installed versions.",
+  "files": {
+    "app-python-audit.json": "0f0f17492073474139aefe98346695751d7b6b7cbd7e96b33e4f2df2fa0fb3a0",
+    "app-python.cdx.json": "5e5a7311f66539109473e1d66b9556cac6e476e319ff0daac4a137d8f538b5fc",
+    "app-web-audit.json": "13d1b15dd56bf152c97828fff2754bf1879c080832f44d790363181c36219c95",
+    "app-web.cdx.json": "be6153fa1522a8716fc0ce8da64baf6d5dbcd89194c1d56368569ee2e0dd84d2",
+    "benchmark-python-audit.json": "73f49ee04801b0ff6728990bf2504096b76c42b0af64c9bbe4c5968f5ac11012",
+    "benchmark-python.cdx.json": "cf553449fc53401bac4281ad541b108319fef6d8bc4f60ca9350f2820660fa15",
+    "infra-python-audit.json": "e5f88232ac1845a2fe160d93ac506a0ea8e6863389f2b710871525a4b93c0f09",
+    "infra-python.cdx.json": "900c0daf9992cace4d506bd8503829e0d2d86983f4b1a95d08622eb24cb2e543",
+    "python-env.cdx.json": "5e2e5b4d388c238df9fd298852437564245f6a92db7ef9b65de9a396081df1b3"
+  },
+  "artifact_hash_encoding": "SHA-256 over UTF-8 bytes with CRLF normalized to LF, matching committed Git blobs"
+}

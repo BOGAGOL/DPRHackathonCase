@@ -1,0 +1,290 @@
+{
+  "schema_version": 1,
+  "target": "S02",
+  "at_wib": "2026-10-29T10:01:28.816347+07:00",
+  "source_commit": "bcf4957ab7ff254dcbb09b74b5a7bf1d7a8c0249",
+  "execution_code_commit": "10e4cc8837d5274d9efbaa1a6ffcb4a54e1aef58",
+  "database": "protected_100k",
+  "database_inventory": [
+    {
+      "name": "baseline_100k",
+      "oid": 57392,
+      "allow_connections": true
+    },
+    {
+      "name": "baseline_100k__official",
+      "oid": 32768,
+      "allow_connections": false
+    },
+    {
+      "name": "protected_100k",
+      "oid": 57393,
+      "allow_connections": true
+    },
+    {
+      "name": "protected_100k__official",
+      "oid": 41230,
+      "allow_connections": false
+    }
+  ],
+  "target_kind": "temporary_API_copy",
+  "official_database_tested": false,
+  "limitations": [
+    "The official protected_100k remains renamed to protected_100k__official with connections disabled. Tests target the currently connectable API copy; they do not certify the archived official database.",
+    "Non-TLS rejection tested using every available role credential, not every possible PostgreSQL role.",
+    "DML uses WHERE false: no row triggers or sequence allocation; every DML/DDL transaction rolled back. DROP targets schema-owner migration_jobs, never the member table."
+  ],
+  "before": {
+    "rows": 100000,
+    "ciphertext_binary_sha256": "def969d165c8047dcc9ac30f5c02c52253978bae0e0c64bbf0d9e2beff398d04",
+    "control_counts": {
+      "app_users": 6,
+      "access_scope": 100403,
+      "audit_log": 757255
+    }
+  },
+  "after": {
+    "rows": 100000,
+    "ciphertext_binary_sha256": "def969d165c8047dcc9ac30f5c02c52253978bae0e0c64bbf0d9e2beff398d04",
+    "control_counts": {
+      "app_users": 6,
+      "access_scope": 100403,
+      "audit_log": 757255
+    }
+  },
+  "data_unchanged": true,
+  "tests": [
+    {
+      "role": "analyst_user",
+      "test": "select_base",
+      "expected": "ditolak",
+      "at_wib": "2026-10-29T10:01:26.513376+07:00",
+      "sql": "SELECT 1 FROM public.anggota_protected LIMIT 0",
+      "actual": "ditolak",
+      "sqlstate": "42501",
+      "error_kind": "InsufficientPrivilege",
+      "status": "PASS",
+      "rolled_back": true
+    },
+    {
+      "role": "analyst_user",
+      "test": "select_per_record_view",
+      "expected": "ditolak",
+      "at_wib": "2026-10-29T10:01:26.541534+07:00",
+      "sql": "SELECT 1 FROM public.analyst_view LIMIT 0",
+      "actual": "diterima",
+      "status": "FAIL",
+      "rolled_back": true
+    },
+    {
+      "role": "analyst_user",
+      "test": "select_aggregate_summary",
+      "expected": "diterima",
+      "at_wib": "2026-10-29T10:01:26.567663+07:00",
+      "sql": "SELECT 1 FROM public.analyst_summary LIMIT 1",
+      "actual": "error_lain",
+      "sqlstate": "42P01",
+      "error_kind": "UndefinedTable",
+      "status": "FAIL",
+      "rolled_back": true
+    },
+    {
+      "role": "auditor_user",
+      "test": "select_base",
+      "expected": "ditolak",
+      "at_wib": "2026-10-29T10:01:26.590630+07:00",
+      "sql": "SELECT 1 FROM public.anggota_protected LIMIT 0",
+      "actual": "ditolak",
+      "sqlstate": "42501",
+      "error_kind": "InsufficientPrivilege",
+      "status": "PASS",
+      "rolled_back": true
+    },
+    {
+      "role": "backup_user",
+      "test": "update_base",
+      "expected": "ditolak",
+      "at_wib": "2026-10-29T10:01:26.622784+07:00",
+      "sql": "UPDATE public.anggota_protected SET protection_version=protection_version WHERE false",
+      "actual": "ditolak",
+      "sqlstate": "42501",
+      "error_kind": "InsufficientPrivilege",
+      "status": "PASS",
+      "rolled_back": true
+    },
+    {
+      "role": "backup_user",
+      "test": "delete_base",
+      "expected": "ditolak",
+      "at_wib": "2026-10-29T10:01:26.654657+07:00",
+      "sql": "DELETE FROM public.anggota_protected WHERE false",
+      "actual": "ditolak",
+      "sqlstate": "42501",
+      "error_kind": "InsufficientPrivilege",
+      "status": "PASS",
+      "rolled_back": true
+    },
+    {
+      "role": "app_user",
+      "test": "create_table",
+      "expected": "ditolak",
+      "at_wib": "2026-10-29T10:01:26.683027+07:00",
+      "sql": "CREATE TABLE public.modc_s02_rollback_probe_20261029 (probe integer)",
+      "actual": "ditolak",
+      "sqlstate": "42501",
+      "error_kind": "InsufficientPrivilege",
+      "status": "PASS",
+      "rolled_back": true
+    },
+    {
+      "role": "app_user",
+      "test": "drop_table",
+      "expected": "ditolak",
+      "at_wib": "2026-10-29T10:01:26.713591+07:00",
+      "sql": "DROP TABLE public.migration_jobs",
+      "actual": "ditolak",
+      "sqlstate": "42501",
+      "error_kind": "InsufficientPrivilege",
+      "status": "PASS",
+      "rolled_back": true
+    },
+    {
+      "role": "scanner_user",
+      "test": "insert_base",
+      "expected": "ditolak",
+      "at_wib": "2026-10-29T10:01:26.746047+07:00",
+      "sql": "INSERT INTO public.anggota_protected SELECT * FROM public.anggota_protected WHERE false",
+      "actual": "ditolak",
+      "sqlstate": "42501",
+      "error_kind": "InsufficientPrivilege",
+      "status": "PASS",
+      "rolled_back": true
+    },
+    {
+      "role": "migration_user",
+      "test": "login",
+      "expected": "ditolak",
+      "catalog_rolcanlogin": false,
+      "actual": "ditolak",
+      "reason": "role_nologin",
+      "sqlstate": null,
+      "status": "PASS"
+    },
+    {
+      "role": "admin_user",
+      "test": "non_tls_connection",
+      "expected": "ditolak",
+      "actual": "ditolak",
+      "reason": "hostnossl_rejected",
+      "sqlstate": null,
+      "status": "PASS"
+    },
+    {
+      "role": "analyst_user",
+      "test": "non_tls_connection",
+      "expected": "ditolak",
+      "actual": "ditolak",
+      "reason": "hostnossl_rejected",
+      "sqlstate": null,
+      "status": "PASS"
+    },
+    {
+      "role": "app_user",
+      "test": "non_tls_connection",
+      "expected": "ditolak",
+      "actual": "ditolak",
+      "reason": "hostnossl_rejected",
+      "sqlstate": null,
+      "status": "PASS"
+    },
+    {
+      "role": "auditor_user",
+      "test": "non_tls_connection",
+      "expected": "ditolak",
+      "actual": "ditolak",
+      "reason": "hostnossl_rejected",
+      "sqlstate": null,
+      "status": "PASS"
+    },
+    {
+      "role": "backup_user",
+      "test": "non_tls_connection",
+      "expected": "ditolak",
+      "actual": "ditolak",
+      "reason": "hostnossl_rejected",
+      "sqlstate": null,
+      "status": "PASS"
+    },
+    {
+      "role": "bench_user",
+      "test": "non_tls_connection",
+      "expected": "ditolak",
+      "actual": "ditolak",
+      "reason": "hostnossl_rejected",
+      "sqlstate": null,
+      "status": "PASS"
+    },
+    {
+      "role": "migration_user",
+      "test": "non_tls_connection",
+      "expected": "ditolak",
+      "actual": "ditolak",
+      "reason": "hostnossl_rejected",
+      "sqlstate": null,
+      "status": "PASS"
+    },
+    {
+      "role": "postgres",
+      "test": "non_tls_connection",
+      "expected": "ditolak",
+      "actual": "ditolak",
+      "reason": "hostnossl_rejected",
+      "sqlstate": null,
+      "status": "PASS"
+    },
+    {
+      "role": "scanner_user",
+      "test": "non_tls_connection",
+      "expected": "ditolak",
+      "actual": "ditolak",
+      "reason": "hostnossl_rejected",
+      "sqlstate": null,
+      "status": "PASS"
+    }
+  ],
+  "counts": {
+    "PASS": 17,
+    "FAIL": 2
+  },
+  "status": "INCOMPLETE_OR_FAILED",
+  "credential_authentication": "Existing per-role DPAPI credentials; actual role logins, no SET ROLE, no new password or credential changes. New scanner credential loaded from DPR_PRIVATE_DIR/scanner_user.credential.xml.",
+  "verification_helper": {
+    "local_ignored_path": "results/s02_s06_audit.py",
+    "sha256": "5b0a180465fd58c3796f81ab1f2ad6adb8762cc01f49e7c6e9aae2cda29cf610",
+    "unit_tests": {
+      "passed": 5,
+      "failed": 0
+    }
+  },
+  "supplementary_catalog_check": {
+    "connection_role": "postgres",
+    "transaction": "READ ONLY; ROLLBACK",
+    "analyst_user_has_select_on_analyst_view": true,
+    "analyst_summary_exists": false,
+    "scanner_user_has_insert_on_anggota_protected": false
+  },
+  "notes": [
+    "No OpenBao access, workload benchmark, migration, restore or database-name recovery performed. Existing API-copy naming state preserved.",
+    "DML/DDL probes explicitly BEGIN READ WRITE then ROLLBACK, so scanner INSERT tests ACL despite its read-only role default.",
+    "All ACL denials use SQLSTATE 42501, including DROP ownership denial. Missing relation 42P01 counts as failure, not an access denial."
+  ],
+  "recovery_context": {
+    "at_utc": "2026-10-29T03:41:44.182902+00:00",
+    "database_name_recovery_status": "restored",
+    "historical_S02_target": "temporary API copy protected_100k, OID 57393, before name recovery",
+    "official_restored_oid": 41230,
+    "S02_retested_after_recovery": false,
+    "note": "All existing S02 results and failures are historical results on the API copy. Official databases have now regained their names; these results must not be relabeled as tests on the official database.",
+    "verification_evidence": "evidence/benchmark/api_bppb_100k/db_swap_state.json"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "release_commit": "4fdd7aa5a87e553f8da1e1397d5d5a772c80a402",
+  "transport": "git archive source subset; existing VM has no .git",
+  "source_files": 159,
+  "source_archive_sha256": "9b4c74b13de53811b233f19622bebe34c51e1fced18e0f46b422a1e9eb98ab41",
+  "manifest_sha256": "fef75249b5105c28c3a19f3944b1ccba317302e01abb9dbb0287758bef4fb7e1",
+  "package_sha256": "a284515c7529990b8f82cc45ed3358a3719f5ddccd8feeafb19ddcf41bc0e5e5",
+  "operator_script_sha256": "e62da890cd4ce60a26959ea12024bf6d7493d39f80bf7833290125fdeffadb34",
+  "vm_report": "vm-dependency-upgrade-20261029.json",
+  "smoke_report": "vm-pentest-smoke.json",
+  "vm_completed_at_wib": "2026-10-29T11:41:01.727581+07:00",
+  "old_commit_known": false,
+  "frontend_build_replaced": false,
+  "database_or_openbao_restart": false,
+  "rollback_exercised": false
+}

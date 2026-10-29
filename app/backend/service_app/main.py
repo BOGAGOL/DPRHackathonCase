@@ -15,7 +15,7 @@ from fastapi import Depends, FastAPI, HTTPException, Query, Request, Response
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from sqlalchemy import create_engine, delete, func, select, text
-from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import sessionmaker
 
 from .config import Settings
@@ -24,8 +24,9 @@ from .models import AuditLog, Session as PlainSession, User as PlainUser, protec
 from .protected_control import ProtectedUser, ProtectedSession, audit_table
 from .analytics import summary
 from .recovery import verify_restore_target
+from .benchmark_target import verify_benchmark_target
 from .policy import ROLES, can_access, detail_policy, mask, mask_list_name
-from .repository import MemberRepository, normalized
+from .repository import DuplicateIdentity, MemberRepository, identity_conflict, normalized
 from .schemas import (Analytics, AuditDTO, AuditPage, ContactPatch, FinanceDetail, Login, MemberDetail,
                       MemberInsert, MemberPage, Message, OperatorDetail, PrivilegedDetail, UserDTO, AnalyticsFilters, email_check, ktp_check)
 
@@ -84,16 +85,20 @@ def create_app(settings=None, crypto=None):
     auth_engine = engine_for(settings.auth_database_url or settings.database_url)
     analyst_engine = engine_for(settings.analyst_database_url or (settings.database_url if settings.testing else None))
     auditor_engine = engine_for(settings.auditor_database_url or (settings.auth_database_url or settings.database_url if settings.testing else None))
-    if settings.restored_database and not settings.testing:
+    if (settings.restored_database or settings.benchmark_database) and not settings.testing:
         try:
             with data_engine.begin() as connection:
-                verify_restore_target(connection, settings.restored_database)
+                if settings.benchmark_database:
+                    verify_benchmark_target(connection, settings.benchmark_database, settings.mode)
+                else:
+                    verify_restore_target(connection, settings.restored_database)
         except Exception:
             for engine in engines.values():
                 engine.dispose()
             if protection is not None:
                 protection.close()
-            raise ValueError("Verified service restore target unavailable") from None
+            message = "Verified benchmark clone unavailable" if settings.benchmark_database else "Verified service restore target unavailable"
+            raise ValueError(message) from None
     data_factory = sessionmaker(data_engine, expire_on_commit=False)
     auth_factory = sessionmaker(auth_engine, expire_on_commit=False)
     @asynccontextmanager
@@ -175,6 +180,16 @@ def create_app(settings=None, crypto=None):
     @app.exception_handler(SQLAlchemyError)
     async def db_failure(request, exc):
         return JSONResponse({"detail": "Layanan data tidak tersedia"}, status_code=503)
+
+    @app.exception_handler(DuplicateIdentity)
+    @app.exception_handler(IntegrityError)
+    async def duplicate_identity(request, exc):
+        # Endpoint's Session context has rolled back before this handler runs.
+        # Do not inspect/return driver messages, bidx, SQL, or existing record IDs.
+        if isinstance(exc, DuplicateIdentity) or identity_conflict(exc):
+            audit(request, getattr(request.state, "user", None), "insert", "denied", classes=["PII"])
+            return JSONResponse({"detail": "Data tidak dapat dibuat karena konflik identitas"}, status_code=409)
+        return await db_failure(request, exc)
 
     def principal(db, user):
         if db.bind.dialect.name == "postgresql":

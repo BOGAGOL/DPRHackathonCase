@@ -2,7 +2,7 @@
 from datetime import date
 import uuid
 
-from sqlalchemy import func, select, update
+from sqlalchemy import func, select, text, update
 
 from .crypto import CryptoUnavailable, checked_result
 from .models import FIN, PII, REF, SOURCE_FIELDS, baseline_members, protected_members, utcnow
@@ -10,6 +10,19 @@ from .policy import owns_only
 from .protected_control import scopes
 
 PLAIN_TABLE, PROTECTED_TABLE = baseline_members, protected_members
+
+
+class DuplicateIdentity(Exception):
+    """The plain API write invariant; never carry identity values in this error."""
+
+
+def identity_conflict(error):
+    """Recognize only F-01's index, not unrelated integrity/database failures."""
+    original = error.orig
+    if getattr(original, "sqlstate", None) == "23505":
+        return getattr(getattr(original, "diag", None), "constraint_name", None) == "uq_anggota_protected_no_ktp_bidx"
+    return (getattr(original, "sqlite_errorname", None) == "SQLITE_CONSTRAINT_UNIQUE"
+            and str(original) == "UNIQUE constraint failed: anggota_protected.no_ktp_bidx")
 
 
 def normalized(column, value):
@@ -137,6 +150,15 @@ class MemberRepository:
     def insert(self, db, payload, user=None):
         source = {f: payload.get(f) for f in SOURCE_FIELDS}
         if self.mode == "plain":
+            if source["no_ktp"] is not None:
+                source["no_ktp"] = normalized("no_ktp", source["no_ktp"])
+                if db.bind.dialect.name == "postgresql":
+                    # Baseline schema belongs to C: serialize API writers for this
+                    # identity without changing it or granting runtime DDL rights.
+                    db.execute(text("SELECT pg_advisory_xact_lock(hashtextextended(:identity, 0))"),
+                               {"identity": source["no_ktp"]})
+                if db.scalar(select(self.identifier).where(self.table.c.no_ktp == source["no_ktp"]).limit(1)) is not None:
+                    raise DuplicateIdentity()
             # Actual team's baseline stores dates/integers in native PostgreSQL types.
             if db.bind.dialect.name != "postgresql":
                 source = {k: text_value(v) for k, v in source.items()}
@@ -147,7 +169,6 @@ class MemberRepository:
         # A's RLS hides unassigned IDs: MAX(id) cannot allocate a globally unique locator.
         # B's setup creates this separate sequence after migration, never resets an existing one.
         if db.bind.dialect.name == "postgresql":
-            from sqlalchemy import text
             identifier = db.scalar(text("SELECT nextval('service_legacy_id_seq')"))
         else:
             identifier = db.scalar(select(func.coalesce(func.max(self.identifier), 0) + 1))

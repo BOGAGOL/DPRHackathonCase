@@ -337,3 +337,123 @@ menolak akses non-loopback ke127.0.0.1 ports5433/8200. Cloud SG tetap NOT VERIFI
 Certificate Let's Encrypt YE2 aktif sampai4Nov09:03:49WIB. Private custody/renewal
 end-to-end dan pentest penuh Delf bukan hasil kit. Jangan disable pt sebelum pentest;
 disable terakhir sesudah restore. Frontend tidak diubah, npm build tidak diperlukan.
+
+## Target clone benchmark API — 29 Oktober 2026
+
+Permintaan Zhafif berdasarkan kendala benchmark Delf: app sudah membaca DATABASE_URL
+tetapi allowlist nama membuat clone api_* ditolak; C memakai swap nama original.
+Review sumber/evidence commit10e4cc8 juga menemukan k6 trust-store dan cleanup conhost;
+keduanya milik C. Laporan historis tersebut menyatakan measured_runs0/restore_failed,
+bukan keadaan live yang diverifikasi pada pekerjaan ini. Tidak ada recovery/retry DB.
+
+Perbaikan B menambahkan DPR_BENCHMARK_DATABASE untuk satu exact api_ name (ASCII
+lowercase/digit/underscore, maksimum63), terpisah dari recovery. Guard default tidak
+dilonggarkan. Seluruh URL runtime harus clone/host/port sama, role minimal, verify-full
+dan CA file. Startup mengecek metadata read-only, marker setup/mode, tanpa role/DDL
+berlebih, tabel B lengkap dan owner/FORCE RLS protected. Tidak fallback ke original.
+
+CLI schema memilih cabang dari MODE untuk clone, memeriksa target/tabel anggota/TLS,
+memberi CONNECT database dan USAGE schema kepada tiga role runtime serta marker setup.
+CLI provision kedua mode memakai URL admin clone yang terverifikasi; akun existing
+tetap ditolak, password random Argon2id di direktori privat per clone. Marker tidak
+membuktikan integritas atau asal data: checksum/OID/HBA/cleanup tetap A/C.
+
+Perubahan hanya app/. Repo utama sedang merge modul lain, sehingga pengerjaan di
+worktree terpisah fix/service-b-benchmark-targets. Index/merge utama tidak disentuh.
+Tes backend437 passed/1 skipped, termasuk47 tes target baru; fixture sintetis dan
+mock metadata. Koneksi native clone/PostgreSQL18, provisioning/live benchmark dan
+performa: NOT TESTED. Source C, target performa, dataset dan VM demo tidak diubah.
+Handoff app/docs/BENCHMARK_CLONES.md menjelaskan env runner, CA file, origin, role,
+TLS/HBA dan perlunya verifikasi recovery lama sebelum eksperimen baru.
+
+## Upgrade dependency — 29 Oktober 2026
+
+Permintaan eksplisit Zhafif mencakup requirements lintas modul, merge/push main,
+VM dan regenerasi SBOM. Pekerjaan dilakukan di worktree terpisah; checkout pengguna
+serta arsip untracked tidak disentuh. Integrasi a8adeb6 dengan main74f6205 bersih.
+Pytest first-party menjadi9.0.3 (infra/toolkit rentang>=9.0.3,<10); cryptography
+app/toolkit/infra dan prototipe>=50.0.2,<51; benchmark/verify50.0.2. Referensi buku
+historis tidak diubah. Prototipe apps/api hanya deklarasi dependency, belum diuji.
+
+Environment baru Python3.12: cryptography50.0.2, pytest9.0.3, pip check bersih;
+toolkit108PASS/1SKIP, shared vectors8PASS, app437PASS/1SKIP. Skip integrasi opt-in;
+ini bukan pentest atau benchmark. Laporan lokal di app/evidence/access-control/.
+VM sebelum upgrade dikonfirmasi operator:46.0.7/9.0.2, dua service active; source
+berasal dari arsip tanpa .git sehingga commit awal tidak diketahui. Deployment
+memakai arsip rilis terverifikasi dan backup untuk rollback, bukan git pull palsu.
+Status VM dan audit/SBOM masih PENDING sampai laporan nyata diterima. Jangan
+restart PG/OpenBao, memprovision akun, merotasi kunci atau reset database.
+
+## Dependency release — hasil VM dan SBOM terkonfirmasi
+
+Main merge4fdd7aa dipush; VM memakai arsip source terverifikasi159file karena
+instalasi existing tanpa Git. Commit awal null/unknown; commit_after adalah
+identitas manifest rilis, bukan klaim git checkout atau penggantian build frontend.
+Selesai29Okt11:41:01WIB: crypto46.0.7→50.0.2, pytest9.0.2→9.0.3, pip checkPASS,
+dpr-api/dpr-web active. Smoke sebelum dan sesudah65/65 pada14akun; rollback tidak
+diperlukan/dijalankan. Backup kode dan venv persis disimpan privat di VM.
+PG/OpenBao tidak direstart; tidak provisioning akun, reset database atau rotasi kunci.
+
+SBOM docs/sbom diregenerasi dari main4fdd7aa pada venv laptopPython3.12.10. Tiga
+pip-audit requirements: app0/31dependency, benchmark0/22, infra0/16; skipped0.
+Npm audit package-lock:0finding. Ada9JSON SBOM/audit; hash/tool/version/scope di
+app/evidence/access-control/dependency-upgrade-sbom-20261029.json. Inventory
+Windows app+infra+toolkit+audit tools bukan dump seluruh dependency VM; ranged
+requirements BOM merekam deklarasi, environment BOM merekam versi terpasang.
+VM siap diserahkan ke pentest Delf; hasil upgrade/smoke bukan kesimpulan pentest.
+
+## F-01 — KTP unik, 29 Oktober 2026
+
+Instruksi Zhafif menetapkan satu no_ktp non-NULL hanya satu record anggota. Tambah
+sql/protected/04_identity_unique.sql, unique index bidx global/nondeferrable tanpa
+plaintext, penolakan duplikat sebelum DDL dan verifikasi indeks existing agar tidak
+salah menerima indeks nonunique/partial. NULL sumber tetap dapat berulang; tidak
+mengubah format v1, normalisasi toolkit, ciphertext atau sumber734. Email/pengguna
+belum memiliki aturan bisnis unik eksplisit sehingga tidak ikut diberi unique.
+
+API menangkap hanya unique violation indeks KTP yang diharapkan, rollback sebelum
+audit denied, balas409 generik tanpa ID/nilai/bidx. Integrity error lain tetap503.
+Form POST menormalisasi digit/spasi/titik/tanda hubung sebelum validasi14/16digit;
+nol awal dipertahankan. Plain API cek atomik dengan advisory transaction lock
+per identitas pada PG, tanpa mengubah schema/data baseline milik C. Proteksi
+persistensi terhadap semua writer ditegakkan pada protected; raw SQL baseline
+bukan jalur layanan dan tidak mendapatkan constraint baru.
+
+Tes482PASS/3SKIP, termasuk9native PG18 pada cluster disposable bertanda khusus:
+request HTTP bersamaan menghasilkan201+409 dan search1, konflik tetap ditolak
+meski record tersembunyi oleh RLS, migrasi fail closed/idempotent dan NULL terjaga.
+Skipped: satu integrasi existing opt-in dan dua kasus RLS yang tidak berlaku plain.
+Uji native memakai transport lokal disposable dan crypto test double; tidak mengaku
+menguji TLS/OpenBao nyata lewat test tersebut. Evidence VM masih PENDING.
+
+Reset golden lama sekarang memasang ulang indeks F-01 sebelum start aplikasi;
+kegagalan migrasi menjaga service berhenti. Golden tidak dimodifikasi. Restore
+backup lama Modul A juga harus menerapkan SQL04 sebelum membuka write API kembali.
+Penerapan VM yang diminta: simpan metadata/audit, reset golden resmi, pasang SQL04
+serta kode, restart hanya dpr-api/dpr-web dan smoke65. Akun pt tetap aktif sampai
+retest Delf; disable paling akhir. Baseline benchmark/hasil historis tidak diubah.
+
+## F-01 — penerapan VM terkonfirmasi, 29 Oktober 2026 14:08 WIB
+
+Source fix5e643b1 dipasang melalui arsip terverifikasi29file; VM bukan checkoutGit.
+Before737anggota/1kelompokduplikat/ID735&737ada/indexbelumunique. Reset resmi
+berhasil734 dan mengekspor9774audit event ke file privat, tetapi smoke awal53/65:
+akses record gagal karena token svc-app ditolak403. OpenBao200/unsealed, scope pt
+staff5 dan anggota1 benar. Tidak menganggap kegagalan itu kerusakan database/reset.
+
+Zhafif memberi izin eksplisit khusus refresh token svc-app4jam dan runtime handoff
+melalui CLI resmi A. Tidak restart OpenBao/PG, rotasi kunci, perubahanpolicy, atau
+provisioning akun. Resume memverifikasi token200/TTL14280detik dan state734 tanpa
+reset kedua; pasang SQL04/kode dan restart hanya dua service aplikasi.
+
+Final14:08:54WIB:734record, ID735&737tidakada, duplicate group0, unique indexvalid;
+POST canonical409/format409 dengan response generik, exact search1. Tidak membuat
+anggota baru di VM untuk retest; race dibuktikan pada PG disposable lokal. VM
+smoke65/65 pada14akun, dpr-api/dpr-web active. Crypto50.0.2/pytest9.0.3 dipertahankan.
+Akun pt tetap aktif; disable paling akhir setelah retestDelf. PR17 siap review,
+belum merge main; kode VM adalah commit fix yang diuji, bukan klaim main terbaru.
+
+Evidence fix-F01-duplicate-identity.json adalah laporan VM asli; f01-smoke.json
+berisi65check; f01-initial-attempt.json menjaga kegagalan pertama; ringkasan/provenance
+ada di f01-deployment-verification.json. F-01 siap retest independen, belum diberi
+status Closed oleh pentester. Token tetap berdurasi pendek; ikuti runbook lifecycle.

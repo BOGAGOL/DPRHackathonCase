@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "checked_at_utc": "2026-10-29T03:49:00.071395+00:00",
+  "status": "PASSED_FOR_LOCAL_UPGRADE_SCOPE",
+  "branch": "fix/cryptography-security",
+  "base_commit": "845ee93f4f130f56cb20264a541b469a89b5d769",
+  "advisories": [
+    {
+      "id": "CVE-2026-69248",
+      "ghsa": "GHSA-m2h6-j472-rp4c",
+      "fixed_in": "49.0.0",
+      "direct_affected_api_use_found": false,
+      "version_fix_present_in_tested_50_0_2": true,
+      "source": "https://github.com/pyca/cryptography/security/advisories/GHSA-m2h6-j472-rp4c"
+    },
+    {
+      "id": "CVE-2026-69247",
+      "ghsa": "GHSA-g6cj-pr64-35w5",
+      "fixed_in": "50.0.0",
+      "direct_affected_api_use_found": false,
+      "version_fix_present_in_tested_50_0_2": true,
+      "source": "https://github.com/pyca/cryptography/security/advisories/GHSA-g6cj-pr64-35w5"
+    },
+    {
+      "id": "CVE-2026-69249",
+      "ghsa": "GHSA-jwv3-5hgf-82ww",
+      "fixed_in": "49.0.0",
+      "direct_affected_api_use_found": false,
+      "version_fix_present_in_tested_50_0_2": true,
+      "source": "https://github.com/pyca/cryptography/security/advisories/GHSA-jwv3-5hgf-82ww"
+    },
+    {
+      "id": "GHSA-537c-gmf6-5ccf",
+      "ghsa": "GHSA-537c-gmf6-5ccf",
+      "fixed_in": "48.0.1",
+      "reachability_from_grep_alone": "NOT_CLAIMED",
+      "version_fix_present_in_tested_50_0_2": true,
+      "source": "https://github.com/pyca/cryptography/security/advisories/GHSA-537c-gmf6-5ccf"
+    }
+  ],
+  "static_api_review": {
+    "grep_matches": 0,
+    "python_files_ast_parsed": 210,
+    "evidence": "evidence/crypto/cryptography-api-review.json",
+    "limitation": "No direct affected API use found in reviewed tracked code; static review does not prove all transitive/dynamic behavior unreachable"
+  },
+  "tested_environment": {
+    "python": "3.11.5",
+    "cryptography": "50.0.2",
+    "wheel_openssl": "OpenSSL 4.0.3 29 Sep 2026",
+    "stdlib_ssl": "OpenSSL 3.0.9 30 May 2023",
+    "isolated_outside_repository": true
+  },
+  "declared_constraints": {
+    "infra/requirements.txt": "cryptography>=50.0.2,<51",
+    "toolkit/pyproject.toml": "cryptography>=50.0.2,<51",
+    "benchmark/requirements.txt": "cryptography==50.0.2",
+    "verify/requirements.txt": "cryptography==50.0.2"
+  },
+  "tests": {
+    "toolkit_tls_backup_crypto": {
+      "tests": 157,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "passed": 156
+    },
+    "migration_rotation_vectors": {
+      "tests": 26,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "passed": 25
+    },
+    "toolkit_subset": {
+      "passed": 108,
+      "skipped": 1
+    },
+    "note": "Some vector tests overlap; suites are not summed as unique cases"
+  },
+  "contract_vectors": {
+    "passed": true,
+    "checks": 8,
+    "vectors_sha256": "513ff178e4be55ac333425da469189f4d995ea562fafa203740c58dfc8291c0d"
+  },
+  "dependency_resolution": {
+    "pip_check_passed": true,
+    "combined_infra_benchmark_verify_toolkit_dry_run_passed": true,
+    "planned_packages": [
+      {
+        "name": "pytest",
+        "version": "8.4.2"
+      },
+      {
+        "name": "Jinja2",
+        "version": "3.1.6"
+      },
+      {
+        "name": "dprcrypto",
+        "version": "0.1.0"
+      },
+      {
+        "name": "MarkupSafe",
+        "version": "3.0.4"
+      }
+    ]
+  },
+  "code_crypto_contract_changed": false,
+  "benchmark_results_changed": false,
+  "existing_runtime_or_deployment_upgraded": false,
+  "database_or_openbao_state_changed": false,
+  "full_service_acceptance_rerun": false,
+  "legacy_apps_and_book_reference_in_scope": false,
+  "full_sbom_regenerated": false,
+  "remaining_work": [
+    "Review/merge dependency fix",
+    "Install in the actual runtime and restart/retest under operator control",
+    "Regenerate SBOM for new build; preserve historical measured versions",
+    "Review Python ssl/container/Bao/PostgreSQL dependencies independently"
+  ]
+}

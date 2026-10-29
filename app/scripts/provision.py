@@ -18,6 +18,7 @@ from service_app.models import User as PlainUser, protected_members
 from service_app.protected_control import ProtectedUser, bindings, scopes
 from service_app.policy import ROLES
 from service_app.crypto import ToolkitAdapter
+from service_app.benchmark_target import benchmark_setup_url
 from infra.security import external_directory, secure_directory
 
 
@@ -29,13 +30,15 @@ def main():
     directory = secure_directory(base / "service-b")
     output = directory / f"service-b-{settings.mode}-accounts.json"
     url = settings.auth_database_url or settings.database_url
-    if settings.mode == "protected":
+    if settings.mode == "protected" or settings.benchmark_database:
         url = os.environ["APP_SETUP_DATABASE_URL"]
         setup, runtime = make_url(url), make_url(settings.database_url)
         if (setup.host, setup.port, setup.database) != (runtime.host, runtime.port, runtime.database):
             raise ValueError("Protected provisioning must use the same authorized target")
         if not settings.testing and (setup.query.get("sslmode") != "verify-full" or not setup.query.get("sslrootcert")):
             raise ValueError("Verified setup TLS required")
+        if settings.benchmark_database:
+            url = benchmark_setup_url(settings, url)
     engine = create_engine(url, hide_parameters=True)
     accounts = []
     with Session(engine) as db:
