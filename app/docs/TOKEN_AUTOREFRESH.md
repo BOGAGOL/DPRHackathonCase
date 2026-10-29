@@ -19,7 +19,9 @@ bash /home/ubuntu/dpr-token-autorefresh/apply.sh
 ```
 
 Periksa SHA256 arsip terhadap hasil builder sebelum extract. Installer memverifikasi
-delapan checksum payload dan dua launcher existing sebelum mengganti kode. Perubahan
+delapan checksum payload dan dua launcher existing sebelum mengganti kode. Perbandingan
+launcher menormalkan hanya CRLF ke LF, karena arsip F-01 membawa Python sebagai CRLF;
+checksum payload tetap byte-for-byte. Perubahan
 orang lain ditolak. Backup launcher disimpan privat di
 `~/dpr-demo-zhafif/private/service-b/token-autorefresh-backup/`.
 

@@ -25,13 +25,17 @@ expected={'app/scripts/serve.py','app/scripts/run_runtime.sh','app/backend/servi
           'app/deploy/dpr-token-refresh.timer','app/deploy/token-auto.conf',
           'app/deploy/install_token_refresh.sh'}
 if set(manifest['files']) != expected: raise SystemExit('Unexpected release contents')
+if set(manifest['base_files']) != {'app/scripts/serve.py','app/scripts/run_runtime.sh'}:
+    raise SystemExit('Unexpected launcher guard contents')
 for name,digest in manifest['files'].items():
     path=stage/name
     if path.is_symlink() or hashlib.sha256(path.read_bytes()).hexdigest()!=digest:
         raise SystemExit('Release checksum mismatch')
 for name,digest in manifest['base_files'].items():
     path=repo/name
-    if path.is_symlink() or hashlib.sha256(path.read_bytes()).hexdigest() not in (digest,manifest['files'][name]):
+    # The verified F-01 archive carried Python launchers as CRLF. Compare only
+    # canonical line endings, never ignore whitespace, statements or other edits.
+    if path.is_symlink() or hashlib.sha256(path.read_bytes().replace(b'\r\n',b'\n')).hexdigest() not in (digest,manifest['files'][name]):
         raise SystemExit('Runtime source changed; refusing replacement: '+name)
 print('Release and current launchers verified.')
 PY

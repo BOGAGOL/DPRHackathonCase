@@ -5,6 +5,8 @@ import os
 from pathlib import Path
 import secrets
 import stat
+import subprocess
+import sys
 from types import SimpleNamespace
 
 import pytest
@@ -300,3 +302,39 @@ def test_release_archive_is_only_allowlisted_runtime_files(broker):
     installer = (APP / "deploy/install_token_refresh.sh").read_text()
     assert "sha256" in installer and "Release checksum mismatch" in installer
     assert "docker compose" not in installer and "golden_reset" not in installer
+
+
+@pytest.mark.parametrize("line_ending,change_code,change_payload,expected_code", [
+    ("LF", False, False, 0), ("CRLF", False, False, 0),
+    ("LF", True, False, 1), ("CRLF", True, False, 1),
+    ("CRLF", False, True, 1),
+])
+def test_real_installer_guard_accepts_only_line_ending_differences(tmp_path, line_ending, change_code, change_payload, expected_code):
+    import hashlib
+    stage, repo = tmp_path / "stage", tmp_path / "repo"
+    builder = load(APP / "scripts/build_token_refresh_release.py", "guard_release_files")
+    launcher = b"# invented launcher\nsetting = 123\n"
+    payload = {name: b"# invented package content\n" for name in builder.FILES}
+    digest = lambda value: hashlib.sha256(value).hexdigest()
+    for name, value in payload.items():
+        path = stage / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(value)
+    for name in builder.BASE_FILES:
+        path = repo / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        value = launcher.replace(b"123", b"456") if change_code else launcher
+        path.write_bytes(value.replace(b"\n", b"\r\n") if line_ending == "CRLF" else value)
+    manifest = {"files": {name: digest(value) for name, value in payload.items()},
+                "base_files": {name: digest(launcher) for name in builder.BASE_FILES}}
+    (stage / "manifest.json").write_text(json.dumps(manifest))
+    if change_payload:
+        (stage / builder.FILES[0]).write_bytes(b"# altered payload\n")
+    installer = (APP / "deploy/install_token_refresh.sh").read_text()
+    guard = installer.split("<<'PY'\n", 1)[1].split("\nPY\n", 1)[0]
+    result = subprocess.run([sys.executable, "-c", guard, str(stage), str(repo)], capture_output=True, text=True)
+    assert result.returncode == expected_code
+    if change_code:
+        assert "Runtime source changed" in result.stderr
+    if change_payload:
+        assert "Release checksum mismatch" in result.stderr

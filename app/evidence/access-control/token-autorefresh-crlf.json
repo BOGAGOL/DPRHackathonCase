@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "previous_vm_install_stopped_before_changes": true,
+  "prior_release": "dpr-f01-5e643b1.tar",
+  "launcher_metadata": {
+    "app/scripts/serve.py": {
+      "raw_sha256": "1a778dc3d718d7142f51f24115c50ed324d8a42b4f14b76a2a85cbdd17cbec68",
+      "canonical_sha256": "99370ca6b73f16f89952e18e5ff97595c52111dbe52e970d5c19768416ff4da9",
+      "crlf_count": 21
+    },
+    "app/scripts/run_runtime.sh": {
+      "raw_sha256": "e3194909530152640e64e462c557c5ac3fb00bbe76f4308142a4803351f72a0d",
+      "canonical_sha256": "e3194909530152640e64e462c557c5ac3fb00bbe76f4308142a4803351f72a0d",
+      "crlf_count": 0
+    }
+  },
+  "actual_previous_release_guard": "PASS",
+  "tests": 45,
+  "failures": 0,
+  "payload_hashes_remain_exact": true,
+  "vm_status": "PENDING revised installer",
+  "checked_at_wib": "2026-10-29T21:03:15.106120+07:00"
+}

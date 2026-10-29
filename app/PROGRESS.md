@@ -192,3 +192,12 @@ status Closed oleh pentester. Token tetap berdurasi pendek; ikuti runbook lifecy
 - PENDING: installer VM, timer aktif dan smoke65/65/14akun. SSH key noninteraktif
   ditolak; paket satu kali disiapkan untuk dijalankan dalam sesi SSH operator.
 - Keputusan/risiko credential jangka panjang dan runbook: app/docs/TOKEN_AUTOREFRESH.md.
+
+### Installer VM: CRLF launcher F-01
+
+Pemasangan pertama berhenti pada guard sebelum perubahan VM: serve.py di arsip
+F-01 memiliki21CRLF (839byte), canonical Git818byte/LF, isi sama. Guard sekarang
+menormalkan hanya CRLF->LF untuk launcher existing. Checksum payload tetap exact.
+Tambahkan lima tes terhadap potongan guard installer sebenarnya: LF/CRLF diterima,
+perubahan kode pada keduanya dan perubahan payload ditolak. Penerapan VM tetap
+PENDING sampai installer revisi dan smoke aktual berhasil; tidak bypass hash guard.

@@ -474,3 +474,12 @@ Timer tidak menyegarkan handoff A atau token CLI lain; hanya runtime web API B.
 
 Penerapan VM memerlukan upload/installer sekali karena SSH key id_ardi ditolak
 pada koneksi non-interaktif. Jangan menandai VM DONE sebelum laporan mesin actual.
+
+
+### Revisi guard CRLF
+
+Installer awal menolak serve.py karena arsip F-01 menyimpan CRLF sedangkan Git
+memakai LF. Guard hanya menormalkan newline untuk launcher existing; payload
+tetap diverifikasi byte-for-byte.45tes PASS, termasuk penolakan edit kode dan
+payload. Guard juga lulus terhadap launcher dari arsip F-01 aktual. Tidak ada
+perubahan VM dari percobaan gagal; tunggu hasil installer revisi.
