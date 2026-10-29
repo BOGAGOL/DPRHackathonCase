@@ -1,6 +1,7 @@
 {
   "required_paths": [
     "README.md",
+    "accounts.md",
     "app/backend/service_app/main.py",
     "infra/reproduce/__main__.py",
     "docs/contracts/CONTRACT.md",

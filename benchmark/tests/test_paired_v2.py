@@ -5,10 +5,37 @@ from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import MagicMock
 from uuid import UUID
+from datetime import datetime, timezone
 
 import pytest
 
 from benchmark import paired, paired_v2 as v2
+
+
+def test_measurement_does_not_publish_results_without_explicit_operator_setting(monkeypatch, tmp_path):
+    monkeypatch.setattr(v2, 'ROOT', tmp_path)
+    output = tmp_path / 'evidence/benchmark'
+    output.mkdir(parents=True)
+    monkeypatch.setattr(v2, 'OUT', output)
+    (output / 'bppb_v2_preflight.json').write_text(json.dumps({
+        'passed': True, 'completed_at_utc': datetime.now(timezone.utc).isoformat()}))
+    for name in ('benchmark/paired.py', 'benchmark/paired_v2.py', 'benchmark/start_bppb_v2.ps1'):
+        path = tmp_path / name
+        path.parent.mkdir(exist_ok=True)
+        path.write_text('# invented worker input')
+    monkeypatch.setenv('DPR_OPENBAO_HTTP_TRANSPORT', 'https_pool')
+    monkeypatch.setenv('DPR_BENCH_DEK_CACHE_TTL', '0')
+    monkeypatch.delenv('DPR_BENCH_PUBLISH_RESULTS', raising=False)
+    monkeypatch.setattr(v2, 'production_manifest', lambda: {})
+    monkeypatch.setattr(v2, 'power_snapshot', lambda: {'passed': True})
+    monkeypatch.setattr(v2.paired, 'ensure_token', lambda **kw: {})
+    monkeypatch.setattr(v2, 'git', lambda *a: 'a' * 40)
+    monkeypatch.setattr(v2.paired, 'execute', lambda **kw: {'status': 'COMPLETED', 'datasets_unchanged': True})
+    monkeypatch.setattr(v2, 'versions_summary', lambda: None)
+    publish = MagicMock(side_effect=AssertionError('Measurement must not publish implicitly'))
+    monkeypatch.setattr(v2, 'publish', publish)
+    assert v2.run()['status'] == 'COMPLETED'
+    publish.assert_not_called()
 
 
 def test_measured_snapshot_is_accepted_and_later_edits_are_rejected(monkeypatch,tmp_path):

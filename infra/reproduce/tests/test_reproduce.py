@@ -263,3 +263,18 @@ def test_product_tree_has_one_entry_guide_and_keeps_evaluator_accounts():
     for prefix in ('docs/report/', 'docs/presentation/', 'docs/ai-prompts/', 'docs/submission/', 'archive/'):
         assert not any(name.startswith(prefix) for name in names)
     assert not allowed('app/README.md')
+
+
+def test_dispatch_uses_virtualenv_prefix_even_if_executable_path_matches(tmp_path, monkeypatch):
+    import infra.reproduce.__main__ as cli
+    monkeypatch.setattr(cli, 'ROOT', tmp_path)
+    runtime = bootstrap.python_bin(tmp_path / '.venv')
+    runtime.parent.mkdir(parents=True)
+    runtime.touch()
+    monkeypatch.setattr(cli.sys, 'executable', str(runtime))
+    monkeypatch.setattr(cli.sys, 'prefix', str(tmp_path / 'system-python'))
+    calls = []
+    monkeypatch.setattr(subprocess, 'call', lambda cmd, **kw: calls.append(cmd) or 7)
+    monkeypatch.setattr(workflow, 'run', lambda _: pytest.fail('Workflow must run in the project venv'))
+    assert cli.main(['verify']) == 7
+    assert calls == [[str(runtime), '-m', 'infra.reproduce', 'verify']]

@@ -34,7 +34,9 @@ def main(argv=None):
             runtime = python_bin(ROOT / ".venv")
             if not runtime.is_file():
                 raise RuntimeError("Run python -m infra.reproduce setup first")
-            if Path(sys.executable).resolve() != runtime.resolve():
+            # On Linux both executables may resolve to the same /usr/bin/python
+            # through venv symlinks. The environment prefix identifies the venv.
+            if Path(sys.prefix).resolve() != (ROOT / ".venv").resolve():
                 import subprocess
                 return subprocess.call([str(runtime), "-m", "infra.reproduce", *(sys.argv[1:] if argv is None else argv)], cwd=ROOT)
             from .workflow import run

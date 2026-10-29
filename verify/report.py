@@ -1,7 +1,7 @@
 """Readable, offline results generated from recorded measurements; no services queried."""
 import argparse
 import csv
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from html import escape
 import json
 from pathlib import Path
@@ -94,9 +94,13 @@ def render(data):
                     for scale in ('100k', '1m')]
     browser_count = good_runs[-1]['browser_checks'] if good_runs else 0
     deployed = data['deployment']
+    checked_at = datetime.fromisoformat(deployed['checked_at_utc'].replace('Z', '+00:00')).astimezone(
+        timezone(timedelta(hours=7))).strftime('%d-%m-%Y %H:%M WIB')
+    deployment_badge = '<p class="warn"><strong>Web evaluator: login menunggu penyelarasan Origin pada VM.</strong> <a href="#service">Lihat status akses</a>.</p>' if data['deployed_accounts']['status'] != 'PASSED' else ''
     deployment_status = '<p class="warn"><strong>Login browser deployment belum lulus pada pemeriksaan terbaru.</strong> Halaman HTTPS tersedia, tetapi autentikasi dengan Origin URL publik ditolak HTTP403. Diagnostik non-browser dengan akun yang sama berhasil; indikasi ketidakcocokan Origin runtime. Operator perlu menyamakan APP_ORIGIN dengan URL akses dan me-restart layanan terkait. Ini bukan hasil gagal kredensial dan tidak diatasi dengan mematikan CSRF/TLS. <a href="../evidence/acceptance/deployed-origin-diagnosis.json">Bukti diagnostik</a>.</p>' if data['deployed_accounts']['status'] != 'PASSED' else '<p class="good"><strong>Uji enam akun deployment terbaru lulus.</strong></p>'
     parts = ['<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Hasil Pelindungan Data Pribadi</title><style>', STYLE, '</style></head><body><main>',
              '<small>HASIL TEKNIS • TIM BOGAGOL</small><h1>Data bocor, nilai sensitif<br>tetap dibatasi.</h1><p class="lead">Sistem menemukan data pribadi, mengenkripsi field sensitif, melayani pengguna sesuai kewenangan, dan memulihkan layanan dari backup. Halaman ini menjelaskan hasil pengujian beserta batasnya.</p>',
+             deployment_badge,
              '<nav><a href="#security">Keamanan</a><a href="#service">Aplikasi</a><a href="#performance">Kinerja</a><a href="#limits">Keterbatasan</a><a href="../README.md">Panduan penggunaan</a></nav>',
              '<div class="grid"><div class="card"><small>DATA SUMBER</small><span class="metric">734 record</span>29 kolom, tanpa menghapus field sumber</div><div class="card"><small>PERLINDUNGAN</small><span class="metric">25 field</span>AES-256-GCM; 3 blind index untuk exact lookup</div><div class="card"><small>AKSES PENGGUNA</small><span class="metric">6 peran</span>Record dan field dibatasi oleh backend</div></div>',
              '<section><h2>Cara kerja sistem</h2><div class="flow"><span>1. Assessment</span><span>2. Profile perlindungan</span><span>3. Migrasi terenkripsi</span><span>4. Aplikasi HTTPS</span><span>5. Verifikasi & pemulihan</span></div><p>Database menyimpan ciphertext untuk identitas dan keuangan. Kunci disimpan terpisah di OpenBao. Pengguna sah menerima field yang sesuai perannya; analis menerima agregat berukuran minimal 5.</p></section>',
@@ -105,7 +109,7 @@ def render(data):
              '<p class="muted">Tanpa kunci, field AEAD tidak berhasil dipulihkan pada skenario yang diuji. Kebocoran kapabilitas PII/FIN/search meningkatkan paparan sesuai domain; search memungkinkan serangan kamus pada nilai sintetis yang diketahui. Kolom REF, pola NULL, panjang dan equality tetap dapat terlihat.</p>',
              '<h3>Ukuran dan waktu backup/restore</h3><p>Uji operasional ' + str(data['backup']['source_rows']) + ' record: backup terenkripsi <strong>' + number(data['backup']['backup_seconds']) + ' detik</strong>, restore <strong>' + number(data['restore']['restore_seconds']) + ' detik</strong>, artefak <strong>' + number(data['backup']['size_bytes']/1048576) + ' MiB</strong>. Ini satu pengujian operasional, bukan median benchmark tiga run. <a href="../evidence/backup/restore-report.json">Hasil restore</a>.</p>',
              '<h3>Ketepatan assessment</h3><p>Precision ' + number(scanner['precision']*100) + '%, recall ' + number(scanner['recall']*100) + '%, F1 ' + number(scanner['f1']*100) + '%. Evaluasi in-sample terhadap 29 kolom; bukan jaminan akurasi pada semua database.</p></section>',
-             '<section id="service"><h2>Aplikasi dan enam akun</h2><p><a href="https://43.156.157.247/login">Buka aplikasi HTTPS yang dideploy</a> · <a href="../accounts.md">Akun evaluator</a></p><p>Halaman login terakhir diperiksa: ' + escape(deployed['checked_at_utc']) + '; HTTP ' + str(deployed.get('http_status','tidak tersedia')) + ', TLS ' + ('terverifikasi' if deployed.get('tls_verified') else 'belum terverifikasi') + '. Ini pemeriksaan halaman login, bukan pengujian ulang seluruh role VM.</p>',
+             '<section id="service"><h2>Aplikasi dan enam akun</h2><p><a href="https://43.156.157.247/login">Buka aplikasi HTTPS yang dideploy</a> · <a href="../accounts.md">Akun evaluator</a></p><p>Halaman login terakhir diperiksa: ' + escape(checked_at) + '; HTTP ' + str(deployed.get('http_status','tidak tersedia')) + ', TLS ' + ('terverifikasi' if deployed.get('tls_verified') else 'belum terverifikasi') + '. Ini pemeriksaan halaman login, bukan pengujian ulang seluruh role VM.</p>',
              deployment_status,
              '<p>Acceptance lokal memakai PostgreSQL 18/OpenBao nyata dengan TLS serta Chrome, termasuk aplikasi di atas database hasil restore. Pemeriksaan browser pada run lulus terakhir: <strong>' + str(browser_count) + '</strong>. Uji deployment dan uji lab mempunyai lingkungan berbeda.</p>', table(('Run', 'Hasil', 'Lingkungan', 'Check browser'), run_rows),
              '<p>Peran evaluator: operator (identitas dimasking), privileged officer (PII sesuai scope), finance officer (FIN sesuai scope), anggota (record sendiri), analyst (agregat), auditor (metadata audit). <a href="ACCESS_CONTROL.md">Rincian izin</a>.</p></section>',

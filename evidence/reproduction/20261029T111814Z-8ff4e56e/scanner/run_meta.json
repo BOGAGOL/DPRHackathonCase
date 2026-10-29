@@ -1,0 +1,142 @@
+{
+  "label": "before",
+  "timestamp": "2026-10-29T11:18:38.807353+00:00",
+  "scanner_version": "1.2.0",
+  "change_summary": [
+    "v1.2: functional hanya konsistensi 1.0 dan rasio unik sumber <=0.8; kecocokan komponen teks dicatat terpisah.",
+    "NIK nonstandar dengan bukti isi; kategori, tanggal pernikahan, hitungan keluarga, dan surrogate ID dibedakan.",
+    "Sensitivitas dan dampak per jenis dari impact.yaml; tiga faktor lingkungan tetap terpisah.",
+    "Functional dependency mengecualikan sumber hampir unik dan melaporkannya sebagai quasi-identifier.",
+    "Turunan memakai review_minimization dan consistent_protection_with; rekomendasi nama/tanggal diperbarui.",
+    "K-anonymity diurutkan minimal; superset berlebihan disembunyikan dan HTML dibatasi 15 kombinasi.",
+    "Laporan memiliki tabel ringkas dan tata cetak A4 landscape.",
+    "Evaluasi taksonomi independen melalui label_map.yaml, normalisasi kelas/boolean, F2, dan pengecualian kolom tidak berlabel.",
+    "Kategori institusi memerlukan bukti isi; regex_only memakai kecocokan regex tanpa analisis relasi atau agregat k-anonymity."
+  ],
+  "source": {
+    "mode": "db",
+    "host": "127.0.0.1",
+    "port": "54123",
+    "database": "postgres",
+    "table_counts": {
+      "public.anggota": {
+        "total_rows": 734,
+        "sample_rows": 734
+      }
+    },
+    "environment_factors": {
+      "volume": 3,
+      "exposure": 5,
+      "recovery": 5
+    },
+    "type_priority_policy": {
+      "default": {
+        "sensitivity": 3,
+        "impact": 3
+      },
+      "types": {
+        "nik": {
+          "sensitivity": 5,
+          "impact": 5
+        },
+        "rekening": {
+          "sensitivity": 5,
+          "impact": 5
+        },
+        "npwp": {
+          "sensitivity": 5,
+          "impact": 5
+        },
+        "kesehatan": {
+          "sensitivity": 5,
+          "impact": 5
+        },
+        "biometrik": {
+          "sensitivity": 5,
+          "impact": 5
+        },
+        "genetika": {
+          "sensitivity": 5,
+          "impact": 5
+        },
+        "kejahatan": {
+          "sensitivity": 5,
+          "impact": 5
+        },
+        "password": {
+          "sensitivity": 5,
+          "impact": 5
+        },
+        "alamat": {
+          "sensitivity": 4,
+          "impact": 4
+        },
+        "telepon": {
+          "sensitivity": 4,
+          "impact": 4
+        },
+        "email": {
+          "sensitivity": 4,
+          "impact": 4
+        },
+        "tanggal_lahir": {
+          "sensitivity": 3,
+          "impact": 3
+        },
+        "tanggal_pernikahan": {
+          "sensitivity": 3,
+          "impact": 3
+        },
+        "tempat_lahir": {
+          "sensitivity": 3,
+          "impact": 3
+        },
+        "agama": {
+          "sensitivity": 3,
+          "impact": 3
+        },
+        "keluarga": {
+          "sensitivity": 3,
+          "impact": 3
+        },
+        "status_perkawinan": {
+          "sensitivity": 3,
+          "impact": 3
+        },
+        "nama": {
+          "sensitivity": 2,
+          "impact": 2
+        },
+        "identifier_lain": {
+          "sensitivity": 4,
+          "impact": 4
+        },
+        "kategori": {
+          "sensitivity": 1,
+          "impact": 1
+        },
+        "operasional": {
+          "sensitivity": 1,
+          "impact": 1
+        }
+      }
+    },
+    "legacy_environment_impact_ignored": false,
+    "quasi_limits": {
+      "max_quasi_candidates": 12,
+      "max_combinations": 300
+    }
+  },
+  "sample_limit_per_table": 1000,
+  "duration_seconds": 2.772,
+  "method": "combined",
+  "review_state": "raw_before_human_review",
+  "inventory_columns": 30,
+  "table_counts": {
+    "public.anggota": {
+      "total_rows": 734,
+      "sample_rows": 734
+    }
+  },
+  "privacy": "Only masked samples and aggregate features are exported."
+}

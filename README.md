@@ -98,7 +98,7 @@ lingkungan sementara ini. Instalasi permanen menggunakan unseal manual dan custo
 terpisah sebagaimana [panduan operasi](docs/OPERATIONS.md).
 
 Sertifikat demo berasal dari CA lokal. Browser manual perlu mempercayai CA run
-tersebut pada profil uji. Uji Chrome otomatis mem-pin tepat sertifikat lokal yang
+tersebut melalui mekanisme trust browser/OS. Tidak ada pemasangan CA otomatis. Uji Chrome otomatis mem-pin tepat sertifikat lokal yang
 dibuat, tanpa menonaktifkan verifikasi TLS global. Jangan melewati kegagalan TLS.
 
 Jika Docker tidak dapat dipakai, sediakan binary PostgreSQL **18** dan OpenBao

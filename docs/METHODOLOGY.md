@@ -81,3 +81,29 @@ HEAD berbeda. Seri benchmark API belum lengkap; percobaan setup bukan angka late
 terhadap summary asli, lalu membuat docs/RESULTS.html. Tidak ada benchmark/DB/web
 request pada generator ini. Raw gagal target tetap dipertahankan; halaman tidak
 menyatakan semua kewajiban atau keamanan universal telah dipenuhi.
+
+### Command pengukuran
+
+Dengan dataset dan credential workload/operator sudah disiapkan secara privat,
+baseline awal dapat dijalankan sebagai sesi baru:
+
+```powershell
+.venv-benchmark/Scripts/python -m benchmark run --db baseline_100k --label before --adapter plain --scenario all --runs 3 --duration 60 --concurrency 8 --warmup 10
+```
+
+Runner berpasangan tersimpan pada benchmark.paired dan benchmark.paired_v2.
+Untuk replay v2, siapkan checkout/env sesuai fingerprint sesi, lalu:
+
+```powershell
+.venv-benchmark/Scripts/python -m benchmark.paired_v2 preflight
+.venv-benchmark/Scripts/python -m benchmark.paired_v2 run
+```
+
+Preflight harus lulus: revision/branch sesi, hash produksi/protokol, power, runtime
+cache/transport, service dan tidak ada workload lain. Jangan melewati guard untuk
+memaksakan pengujian pada environment yang berbeda. Output sesi existing ditolak;
+pilih workspace/sesi baru dan pertahankan catatan hasil sebelumnya.
+
+Pengukuran tidak otomatis push hasil ke Git. Publication hanya opt-in operator;
+tidak diperlukan untuk membaca/menghasilkan hasil lokal. Wrapper PowerShell menerima
+path launcher credential secara eksplisit, tanpa default path laptop penulis.

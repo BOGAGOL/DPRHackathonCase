@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "artifact_id": "baed9e9d-79ee-4c99-bf9b-7e4347405937",
+  "created_at": "2026-10-29T11:18:51.977818+00:00",
+  "database": "dpr_restore_e8a60c0163ae48c09d75c89e02216855",
+  "mode": "with_openbao",
+  "source_database": "protected_734",
+  "table_rows": {
+    "access_scope": 13,
+    "anggota_protected": 734,
+    "app_users": 6,
+    "audit_log": 753,
+    "migration_jobs": 1,
+    "service_member_bindings": 1,
+    "service_sessions": 0
+  },
+  "source_rows": 734,
+  "manifest_hmac_verified": true,
+  "sha256_verified": true,
+  "all_frames_authenticated_before_restore": true,
+  "security": {
+    "schema_owner_and_forced_rls": true,
+    "app_has_no_ddl": true,
+    "analyst_cannot_select_base": true,
+    "backup_can_select_base": true,
+    "app_principal_rls_present": true,
+    "public_database_connect_revoked": true,
+    "analyst_no_per_record_select": true,
+    "analyst_can_select_aggregate": true,
+    "analyst_aggregate_owner_and_barrier": true,
+    "analyst_aggregate_contract_columns": true,
+    "service_tables_owned_by_schema_owner": true,
+    "service_table_grants_minimal": true,
+    "service_locator_sequence_safe": true,
+    "service_locator_sequence_grants": true
+  },
+  "decryption_smoke": {
+    "performed": true,
+    "records": 16,
+    "authenticated_non_null_fields": 392,
+    "domains": [
+      "PII",
+      "FIN"
+    ],
+    "plaintext_written": false
+  },
+  "size_bytes": 1253094,
+  "backup_seconds": 0.615851,
+  "restore_seconds": 2.502094,
+  "created_database": {
+    "name": "dpr_restore_e8a60c0163ae48c09d75c89e02216855",
+    "oid": 16860,
+    "marker": "dpr-service-restore-v1:baed9e9d-79ee-4c99-bf9b-7e4347405937"
+  },
+  "plaintext_dump_files": 0,
+  "service_schema_restored": true,
+  "service_recovery_environment": {
+    "DPR_RESTORED_DATABASE": "dpr_restore_e8a60c0163ae48c09d75c89e02216855"
+  },
+  "service_scope": "database, ACL/RLS and optional field decryption; HTTP app integration is separate"
+}

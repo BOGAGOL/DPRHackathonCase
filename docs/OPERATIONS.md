@@ -175,3 +175,26 @@ Operator VM perlu:
 Tidak ada perubahan konfigurasi VM pada pemeriksaan ini. Bukti diagnostik di
 `evidence/acceptance/deployed-origin-diagnosis.json`. Akses anggota tetap read-only;
 login/logout hanya menghasilkan metadata sesi/audit normal.
+
+## Interface CLI backup mandiri
+
+Variabel koneksi: PGHOST, PGPORT, PGSSLROOTCERT, DPR_BACKUP_PASSWORD (backup_user),
+DPR_RESTORE_USER dan DPR_RESTORE_PASSWORD (operator restore). Kunci terpisah:
+DPR_BACKUP_KEY_B64 dan DPR_BACKUP_HMAC_KEY_B64, masing-masing base64 dari32byte acak.
+Store: DPR_BACKUP_DIR, folder privat di luar repo. Akses decrypt opsional memakai
+OPENBAO_ADDR, OPENBAO_CACERT dan OPENBAO_VALIDATION_TOKEN dengan policy svc-app.
+Sediakan nilai melalui secret injection; tidak dicantumkan literal dalam command.
+
+Setelah variabel privat tersedia, gunakan direktori evidence baru agar hasil lama
+utuh. Berikut urutan perintah; ganti path manifest dengan output backup tersebut:
+
+```powershell
+python -m scripts.backup --container pg-dpr --evidence-dir evidence/backup-session backup --source protected_734
+python -m scripts.backup --container pg-dpr --evidence-dir evidence/restore-session restore --manifest "C:/private/archives/ARTIFACT.manifest.json"
+python -m scripts.backup --container pg-dpr --evidence-dir evidence/restore-key-session restore --manifest "C:/private/archives/ARTIFACT.manifest.json" --with-openbao
+python -m scripts.backup --container pg-dpr --evidence-dir evidence/tamper-session tamper-test --manifest "C:/private/archives/ARTIFACT.manifest.json"
+```
+
+Nama container dan path di atas adalah pilihan operator, bukan target otomatis.
+Jangan menjalankannya pada instance lain tanpa otorisasi. Di Linux gunakan path
+Linux. Alur734 pada launcher melakukan operasi setara secara otomatis di stack baru.

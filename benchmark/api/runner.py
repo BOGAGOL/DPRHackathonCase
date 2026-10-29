@@ -512,7 +512,8 @@ def run():
             if swap.state is not None:swap.save('restore_failed')
         store.close()
         report['completed_at_utc']=utc_now();write_json(OUT/'session.json',report)
-        publish(report)
+        if os.environ.get('DPR_BENCH_PUBLISH_RESULTS') == '1':
+            publish(report)
     return report
 
 

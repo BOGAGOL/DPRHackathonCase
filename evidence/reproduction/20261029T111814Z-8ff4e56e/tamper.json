@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "passed": true,
+  "created_at": "2026-10-29T11:18:52.018272+00:00",
+  "artifact_id": "baed9e9d-79ee-4c99-bf9b-7e4347405937",
+  "modified_bytes": 1,
+  "restore_rejected": true,
+  "rejection": "encrypted_artifact_digest_mismatch",
+  "rejected_before_database_creation": true,
+  "original_unchanged": true
+}

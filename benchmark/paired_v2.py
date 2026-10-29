@@ -233,9 +233,12 @@ def run():
             '; produksi8a11ff7, https_pool, DEK cache OFF. Gate, count/checksum lima DB, resource dan AC per run disimpan di evidence/benchmark/bppb_v2_*. '
             'Metode/run sama dengan naive_v1; hanya direktori/metadata dan publikasi otomatis ditambahkan pada orchestration. '
             'Seluruh hasil naive_v1 dipertahankan. Tabel lengkap: evidence/benchmark/bppb_versions_summary.md. '
-            'Integritas akhir: '+str(session.get('datasets_unchanged','BELUM LENGKAP'))+'. Tidak merge ke main.\n')
+            'Integritas akhir: '+str(session.get('datasets_unchanged','BELUM LENGKAP'))+'.\n')
     try:
-        receipt = publish(session)
+        # A reproduced measurement remains local unless its operator explicitly
+        # enables publication. Running the product never implicitly pushes Git.
+        receipt = publish(session) if os.environ.get('DPR_BENCH_PUBLISH_RESULTS') == '1' else {
+            'status': 'LOCAL_ONLY', 'published': False, 'reports': 'evidence/benchmark'}
         print(json.dumps({'status':session['status'],'publication':receipt}),flush=True)
     except Exception as error:
         write_json(raw/'publication_failure.json',{'error_type':type(error).__name__,'at_utc':utc_now(),
