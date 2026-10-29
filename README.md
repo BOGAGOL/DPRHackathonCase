@@ -372,6 +372,8 @@ di `docs/sbom/` beserta cakupan dan hasil auditnya.
 - [Metodologi](docs/METHODOLOGY.md): pembuatan dataset sintetis 100k/1M dengan seed
   tetap, perintah pengukuran, urutan B-P-P-B, target, serta lokasi hasil mentah.
   Benchmark besar dipisahkan dari demo dan tidak dijalankan otomatis.
+- [Reproduksi dataset besar dan simulasi kebocoran](docs/METHODOLOGY.md#reproduksi-dataset-besar-dan-simulasi-kebocoran):
+  urutan datagen, snapshot privat, before, empat skenario protected, dan budget after.
 - [Operasi dan pemulihan](docs/OPERATIONS.md): instalasi permanen, konfigurasi
   privat, TLS, init/unseal manual, role, migrasi, startup aplikasi, backup/restore,
   rotasi kunci, dan penanganan Origin. Gunakan prosedur ini untuk penerapan instansi.
