@@ -1,0 +1,26 @@
+{
+  "status": "PASSED",
+  "time_wib": "2026-10-29T11:30:15.568260+07:00",
+  "versions": {
+    "cryptography": "50.0.2",
+    "pytest": "9.0.3",
+    "dprcrypto": "0.1.0"
+  },
+  "tests": {
+    "toolkit": {
+      "passed": 108,
+      "failed": 0,
+      "skipped": 1
+    },
+    "app": {
+      "passed": 437,
+      "failed": 0,
+      "skipped": 1
+    }
+  },
+  "shared_vector_checks": 8,
+  "shared_vectors_sha256": "513ff178e4be55ac333425da469189f4d995ea562fafa203740c58dfc8291c0d",
+  "pip_check": "PASSED",
+  "vm_upgrade": "PENDING",
+  "scope": "Local isolated dependency environment; no VM, database or account changes"
+}

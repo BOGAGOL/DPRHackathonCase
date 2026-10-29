@@ -5,8 +5,8 @@ SQLAlchemy==2.0.47
 alembic==1.18.4
 psycopg[binary]==3.3.3
 argon2-cffi==25.1.0
-cryptography==46.0.5
+cryptography>=50.0.2,<51
 httpx==0.28.1
 python-dotenv==1.2.1
-pytest==9.0.2
+pytest==9.0.3
 psutil==7.2.2

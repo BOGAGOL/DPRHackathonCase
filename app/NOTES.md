@@ -365,3 +365,21 @@ mock metadata. Koneksi native clone/PostgreSQL18, provisioning/live benchmark da
 performa: NOT TESTED. Source C, target performa, dataset dan VM demo tidak diubah.
 Handoff app/docs/BENCHMARK_CLONES.md menjelaskan env runner, CA file, origin, role,
 TLS/HBA dan perlunya verifikasi recovery lama sebelum eksperimen baru.
+
+## Upgrade dependency — 29 Oktober 2026
+
+Permintaan eksplisit Zhafif mencakup requirements lintas modul, merge/push main,
+VM dan regenerasi SBOM. Pekerjaan dilakukan di worktree terpisah; checkout pengguna
+serta arsip untracked tidak disentuh. Integrasi a8adeb6 dengan main74f6205 bersih.
+Pytest first-party menjadi9.0.3 (infra/toolkit rentang>=9.0.3,<10); cryptography
+app/toolkit/infra dan prototipe>=50.0.2,<51; benchmark/verify50.0.2. Referensi buku
+historis tidak diubah. Prototipe apps/api hanya deklarasi dependency, belum diuji.
+
+Environment baru Python3.12: cryptography50.0.2, pytest9.0.3, pip check bersih;
+toolkit108PASS/1SKIP, shared vectors8PASS, app437PASS/1SKIP. Skip integrasi opt-in;
+ini bukan pentest atau benchmark. Laporan lokal di app/evidence/access-control/.
+VM sebelum upgrade dikonfirmasi operator:46.0.7/9.0.2, dua service active; source
+berasal dari arsip tanpa .git sehingga commit awal tidak diketahui. Deployment
+memakai arsip rilis terverifikasi dan backup untuk rollback, bukan git pull palsu.
+Status VM dan audit/SBOM masih PENDING sampai laporan nyata diterima. Jangan
+restart PG/OpenBao, memprovision akun, merotasi kunci atau reset database.
