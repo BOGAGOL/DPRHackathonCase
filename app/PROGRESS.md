@@ -94,3 +94,11 @@ Gunakan lagi docs/DEPLOY_ANALYTICS_UI.md; cukup rebuild dan restart frontend.
 - NOT TESTED: clone PostgreSQL18 nyata, pengukuran API/performa dan C integration.
   VM demo tetap menggunakan konfigurasi existing; belum ada deployment patch ini.
 - WORKTREE: fix/service-b-benchmark-targets, terpisah dari merge root pengguna.
+
+## Upgrade dependency — 29 Oktober 2026
+
+- PASS lokal: toolkit108/1skip, vector kontrak8, backend437/1skip, pip check bersih.
+- cryptography50.0.2 dan pytest9.0.3 pada environment pengujian baru.
+- First-party requirements diselaraskan; data, akun, format crypto tidak diubah.
+- VM awal46.0.7/9.0.2, services active, deployment arsip tanpa Git.
+- PENDING: penerapan VM, smoke65/14akun dan SBOM/audit environment final.

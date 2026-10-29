@@ -69,3 +69,14 @@ Marker mode menyatakan setup disetujui, bukan pengganti verifikasi clone milik C
 Load generator CA file, lifecycle token dan cleanup tetap tanggung jawab A/C;
 tidak mengubah TLS agar benchmark lolos. Gunakan checkout terpisah karena root
 pengguna sedang merge; commit patch hanya app/.
+
+## 29 Oktober 2026 — dependency security release
+
+Upgrade memakai worktree terpisah dan venv baru agar environment lama tetap utuh.
+Rentang cryptography50.x berasal dari review Modul A; pytest dipin9.0.3 pada
+requirements aplikasi/tooling. Tidak mengubah dependency referensi buku historis.
+VM bukan Git checkout: commit sebelum deployment harus null/unknown, bukan ditebak.
+Rilis dikaitkan ke commit main melalui manifest hash subset source yang dipasang.
+Backup kode dan venv lama wajib tersedia sebelum mutasi; hanya dua service DPR
+boleh di-restart. Smoke existing harus lulus sebelum dan sesudah upgrade; tidak
+menggunakan provisioning, reset database atau rotasi kunci untuk menutupi kegagalan.
