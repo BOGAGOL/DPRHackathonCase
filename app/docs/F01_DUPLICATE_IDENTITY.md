@@ -84,3 +84,28 @@ Pengukuran benchmark historis tidak diubah seolah sudah memakai patch ini.
 
 Evidence akhir: `app/evidence/access-control/fix-F01-duplicate-identity.json`;
 detail lokal: `app/evidence/access-control/f01-local-tests.json`.
+
+## Hasil VM terkonfirmasi
+
+Source commit `5e643b1` dipasang lewat arsip terverifikasi, tanpa Git checkout.
+Selesai 29 Oktober 2026 pukul 14:08:54 WIB. Sebelum perbaikan ada 737 anggota,
+satu kelompok KTP duplikat dan ID735/737 masih ada. Sesudahnya ada 734 anggota,
+tidak ada kelompok duplikat/ID735/737, dan indeks unique terverifikasi valid.
+
+Reset database pertama berhasil, tetapi smoke awal hanya 53/65. Diagnosis
+baca-saja menunjukkan OpenBao sehat/unsealed, scope pt benar, dan token runtime
+ditolak403. Dengan izin tambahan eksplisit Zhafif, token svc-app saja diterbitkan
+ulang selama empat jam melalui CLI A dan runtime handoff diperbarui. Tidak ada
+rotasi kunci/perubahan policy/restart OpenBao atau PostgreSQL. Resume memakai
+database yang sudah dipulihkan, **tanpa reset kedua**.
+
+Smoke akhir65/65 pada14akun; dua service aktif. Uji HTTP di VM melalui pt fixture
+existing: canonical409, berformat409, search1, jumlah anggota tetap734. Tidak ada
+anggota baru yang disisipkan untuk uji paralel di VM; race sudah diuji di PG18
+disposable lokal. Akun pt tetap aktif untuk retest independen Delf.
+
+Laporan percobaan awal tetap disimpan sebagai `f01-initial-attempt.json`, bukan
+dihapus agar hasil tampak selalu lulus. `f01-deployment-verification.json` mencatat
+provenance rilis, pemulihan token yang diizinkan, dan hasil final. F-01 siap retest;
+status Closed tetap ditentukan pentester setelah retest. PR17 menunggu review tim
+sebelum merge main; VM menjalankan fix commit tersebut.

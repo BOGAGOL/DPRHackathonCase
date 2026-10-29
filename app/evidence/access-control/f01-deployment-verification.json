@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "finding": "F-01",
+  "passed": true,
+  "source_commit": "5e643b1556728ed2836a10e451d7e5f6cb11c60f",
+  "source_transport": "Verified source subset from Git archive, not a Git checkout",
+  "source_archive_sha256": "0b8d3064661bf87c0b1ce35818f4c8db8cc99ef9ae9a759edb40fff4c26070a9",
+  "manifest_sha256": "b28e95df032d9c23a63f274a26fe5f32bc7753145c9b1bf6b37a395ace4f92e7",
+  "source_files": 29,
+  "initial_package_sha256": "63d3c0cc2a204ba02c468ae356fe1f9cfea6236aa27c34734102529d4bbd08e0",
+  "resume_package_sha256": "54311ba48e2251460f5e081ce66fc069d0dbbbc2c9b0f34ba36175ee4bc29515",
+  "read_only_diagnosis": {
+    "openbao_health_http": 200,
+    "sealed": false,
+    "app_token_lookup_http": 403,
+    "pt_staff_record_scopes": 5,
+    "pt_member_record_scopes": 1
+  },
+  "token_refresh": {
+    "explicit_user_approval": true,
+    "command": "infra.vm refresh-app --ttl-seconds 14400; infra.vm handoff --app-origin https://dprsecured.my.id",
+    "scope": "Only svc-app token and runtime handoff; no key/policy rotation or daemon restart",
+    "token_value_recorded": false,
+    "post_refresh_lookup_http": 200,
+    "post_refresh_ttl_seconds": 14280
+  },
+  "initial_reset_smoke": {
+    "passed": false,
+    "passed_checks": 53,
+    "total_checks": 65,
+    "database_reset_completed": true
+  },
+  "reset_repeated": false,
+  "raw_vm_report": "fix-F01-duplicate-identity.json",
+  "raw_vm_smoke": "f01-smoke.json",
+  "initial_failed_attempt": "f01-initial-attempt.json",
+  "completed_at_wib": "2026-10-29T14:08:54.553300+07:00",
+  "ready_for_independent_delf_retest": true,
+  "finding_closed_by_pentester": false
+}

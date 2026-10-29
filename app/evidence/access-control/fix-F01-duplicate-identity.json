@@ -7,5 +7,81 @@
   "native_postgres_rls": "PASS: hidden existing identity rejected",
   "native_migration": "PASS: duplicate refusal, wrong index refusal, idempotence, nullable source identities",
   "scope": "Invented fixtures; marked disposable PostgreSQL18 cluster, no external services or team dataset",
-  "vm_status": "PENDING"
+  "vm_status": "PASSED",
+  "initial_attempt": {
+    "phase": "golden_reset",
+    "error": "CalledProcessError",
+    "completed_at_wib": "2026-10-29T13:57:05.540987+07:00"
+  },
+  "resumed_without_another_reset": true,
+  "finding": "F-01",
+  "phase": "completed",
+  "started_at_wib": "2026-10-29T14:08:48.551727+07:00",
+  "deployed_source_commit": "5e643b1556728ed2836a10e451d7e5f6cb11c60f",
+  "source_transport": "verified archive subset; VM has no Git",
+  "reset_authorized": true,
+  "accounts_disabled": false,
+  "openbao_or_postgres_restarted": false,
+  "member_values_in_evidence": false,
+  "versions": {
+    "cryptography": "50.0.2",
+    "pytest": "9.0.3"
+  },
+  "app_token_preflight": {
+    "http_status": 200,
+    "ttl_seconds": 14280
+  },
+  "before": {
+    "members": 737,
+    "pentest_duplicate_ids_remaining": 2,
+    "duplicate_identity_groups": 1,
+    "unique_index_valid": false
+  },
+  "source_backup_sha256": "ce4a7e4f7186dfa8cbea117b44f692bed67f1f0f88146f5b237f03c23bc5eca8",
+  "golden_reset": {
+    "database_reset_completed": true,
+    "members": 734,
+    "initial_smoke_passed": false,
+    "initial_smoke_passed_checks": 53,
+    "initial_smoke_total_checks": 65,
+    "reset_repeated": false
+  },
+  "after_reset": {
+    "members": 734,
+    "pentest_duplicate_ids_remaining": 0,
+    "duplicate_identity_groups": 0,
+    "unique_index_valid": false
+  },
+  "after_migration": {
+    "members": 734,
+    "pentest_duplicate_ids_remaining": 0,
+    "duplicate_identity_groups": 0,
+    "unique_index_valid": true
+  },
+  "source_manifest_verified": true,
+  "vm_smoke": {
+    "passed": true,
+    "passed_checks": 65,
+    "total_checks": 65,
+    "accounts": 14
+  },
+  "http_retest": {
+    "canonical_duplicate_status": 409,
+    "formatted_duplicate_status": 409,
+    "search_total": 1,
+    "no_existing_record_in_conflict_response": true,
+    "new_test_members_created": 0
+  },
+  "after": {
+    "members": 734,
+    "pentest_duplicate_ids_remaining": 0,
+    "duplicate_identity_groups": 0,
+    "unique_index_valid": true
+  },
+  "services": {
+    "dpr-api.service": "active",
+    "dpr-web.service": "active"
+  },
+  "ready_for_delf_retest": true,
+  "completed_at_wib": "2026-10-29T14:08:54.553300+07:00"
 }

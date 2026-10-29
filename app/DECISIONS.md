@@ -111,3 +111,28 @@ backup lama Modul A juga harus menerapkan SQL04 sebelum membuka write API kembal
 Penerapan VM yang diminta: simpan metadata/audit, reset golden resmi, pasang SQL04
 serta kode, restart hanya dpr-api/dpr-web dan smoke65. Akun pt tetap aktif sampai
 retest Delf; disable paling akhir. Baseline benchmark/hasil historis tidak diubah.
+
+## F-01 — penerapan VM terkonfirmasi, 29 Oktober 2026 14:08 WIB
+
+Source fix5e643b1 dipasang melalui arsip terverifikasi29file; VM bukan checkoutGit.
+Before737anggota/1kelompokduplikat/ID735&737ada/indexbelumunique. Reset resmi
+berhasil734 dan mengekspor9774audit event ke file privat, tetapi smoke awal53/65:
+akses record gagal karena token svc-app ditolak403. OpenBao200/unsealed, scope pt
+staff5 dan anggota1 benar. Tidak menganggap kegagalan itu kerusakan database/reset.
+
+Zhafif memberi izin eksplisit khusus refresh token svc-app4jam dan runtime handoff
+melalui CLI resmi A. Tidak restart OpenBao/PG, rotasi kunci, perubahanpolicy, atau
+provisioning akun. Resume memverifikasi token200/TTL14280detik dan state734 tanpa
+reset kedua; pasang SQL04/kode dan restart hanya dua service aplikasi.
+
+Final14:08:54WIB:734record, ID735&737tidakada, duplicate group0, unique indexvalid;
+POST canonical409/format409 dengan response generik, exact search1. Tidak membuat
+anggota baru di VM untuk retest; race dibuktikan pada PG disposable lokal. VM
+smoke65/65 pada14akun, dpr-api/dpr-web active. Crypto50.0.2/pytest9.0.3 dipertahankan.
+Akun pt tetap aktif; disable paling akhir setelah retestDelf. PR17 siap review,
+belum merge main; kode VM adalah commit fix yang diuji, bukan klaim main terbaru.
+
+Evidence fix-F01-duplicate-identity.json adalah laporan VM asli; f01-smoke.json
+berisi65check; f01-initial-attempt.json menjaga kegagalan pertama; ringkasan/provenance
+ada di f01-deployment-verification.json. F-01 siap retest independen, belum diberi
+status Closed oleh pentester. Token tetap berdurasi pendek; ikuti runbook lifecycle.
