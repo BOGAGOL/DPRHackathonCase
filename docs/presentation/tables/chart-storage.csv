@@ -1,0 +1,5 @@
+scale,database,bytes,GiB,scope
+100k,baseline_100k,104732351,0.09753960277885199,recorded migration-completion snapshot
+100k,protected_100k,230012607,0.21421593334525824,recorded migration-completion snapshot
+1m,baseline_1m,825194175,0.7685219636186957,recorded migration-completion snapshot
+1m,protected_1m,2210617023,2.0587975373491645,recorded migration-completion snapshot

@@ -1,0 +1,213 @@
+{
+  "schema_version": 1,
+  "metadata": {
+    "basis_commit": "f54adf590ceb136ce059141e88f3faa673b45b9c",
+    "report_snapshot_basis_commit": "3bbe7206ff58ce97225153d3a9751342cd366609",
+    "organizer_pdfs": [
+      {
+        "id": "R01",
+        "name": "signed-2026920-SOAL FINAL HACKATHON DPR RI 2026.pdf",
+        "pages": 4,
+        "sha256": "5d4f7e337122dffa1659cef7864293f26cd54e06722f2d8c0fd579e04bc01ac9"
+      },
+      {
+        "id": "R02",
+        "name": "DPR RI_ Detail Hackaton Syarat Peserta, Proses Penjurian.docx.pdf",
+        "pages": 8,
+        "sha256": "b5ae5205fb902fc270b29dabb503fc730be2649a8031c2f93ba7c46509850b83"
+      }
+    ],
+    "measurement_context": {
+      "level": "DB",
+      "concurrency": 8,
+      "duration_s": 60,
+      "warmup_s": 10,
+      "runs_per_mode_scenario": 4,
+      "blocks": 2,
+      "order": [
+        "B",
+        "P",
+        "P",
+        "B"
+      ],
+      "cache": "OFF"
+    },
+    "historical_targets_commit": "8c09a25ccb6d415a231f692b68b9674495c31faf",
+    "historical_production_commit_v2": "8a11ff7dd39d66317a9802a7224d5ab044210798",
+    "historical_completed_at_utc": "2026-10-28T18:08:48.008596+00:00",
+    "scope": "Presentation context and chart data only; no fresh experiments, live login or final deck"
+  },
+  "sources": {
+    "app/backend/service_app/crypto.py": {
+      "sha256": "b966c8e346420afcab0b3c342d600638c6fedad1932f8ce99bfabfa77229478b",
+      "binary": false,
+      "local_copy": null
+    },
+    "app/backend/service_app/policy.py": {
+      "sha256": "34956063405df95be23b8929d90dd6adf5f5ad7d3310e412bdda34a7a68f66e7",
+      "binary": false,
+      "local_copy": null
+    },
+    "app/evidence/access-control/vm-pentest-summary.json": {
+      "sha256": "55941e3e1eb57f2d925f8f9d81be38a0e3da1676a82df02df681dd57f271b999",
+      "binary": false,
+      "local_copy": null
+    },
+    "docs/contracts/CONTRACT.md": {
+      "sha256": "e27925fcb157fa013436aa504ac617ababdd778d2c80961b2111495bc823c6cc",
+      "binary": false,
+      "local_copy": null
+    },
+    "docs/report/01_KETENTUAN_DAN_LUARAN.md": {
+      "sha256": "e2766fcbb41437764558ef7f1b47d22ab6e0a4c3646e85dc082496c54bde8996",
+      "binary": false,
+      "local_copy": null
+    },
+    "docs/report/DELIVERABLES_AUDIT.md": {
+      "sha256": "fde2f32a13acad388aecdbffc6b94af1c9431b161654c26f41c3465f8978c2a9",
+      "binary": false,
+      "local_copy": null
+    },
+    "docs/report/appendix_manifest.json": {
+      "sha256": "c0b303207f78f5c31964f841ef85735de09660ffbef28958bc7fd55556d1f056",
+      "binary": false,
+      "local_copy": null
+    },
+    "docs/report/assets/architecture.mmd": {
+      "sha256": "d0888fd08f7534a771774411c21fe94692f66b70d48707b3c84229c5871a1f54",
+      "binary": false,
+      "local_copy": "assets/architecture.mmd"
+    },
+    "docs/report/assets/architecture.png": {
+      "sha256": "c9ef0a3fccbaa0ec086320681c3caa2e33bcaa9b919d5d909e08021f4c7b6d7b",
+      "binary": true,
+      "local_copy": "assets/architecture.png"
+    },
+    "docs/report/assets/architecture.svg": {
+      "sha256": "fefc11c6a1ad6e7d9e07590add74e58c63fc9815bbd1289d3847ce69d3993eb7",
+      "binary": false,
+      "local_copy": "assets/architecture.svg"
+    },
+    "docs/report/assets/data-lifecycle.mmd": {
+      "sha256": "ebafac27c5eb47d2d2a0139c3198b46edc4a6a34fa0dba970cf4547081b1d2dd",
+      "binary": false,
+      "local_copy": "assets/data-lifecycle.mmd"
+    },
+    "docs/report/evidence_snapshot.json": {
+      "sha256": "5d94b7ead745c0727bc4cb85875f8cfe80e2caa1f00d87c2a94228981b333271",
+      "binary": false,
+      "local_copy": null
+    },
+    "docs/report/source_manifest.json": {
+      "sha256": "c5b2578f71717b688b19bf4422632f46efd0bdad72fd128b386c2f7e0d0ef758",
+      "binary": false,
+      "local_copy": null
+    },
+    "docs/report/tables/column-matrix.csv": {
+      "sha256": "24d98405342ad1c685bee881fc584af282e8c7b8d49f517649707f8d314e8a68",
+      "binary": false,
+      "local_copy": "tables/column-matrix.csv"
+    },
+    "docs/report/tables/db-benchmark.csv": {
+      "sha256": "3f081f7d25bd5ad44ff5ac9b29972a6d26cf17efeb07c30bf440d6e737e78dca",
+      "binary": false,
+      "local_copy": "tables/db-benchmark.csv"
+    },
+    "docs/report/tables/leakage.csv": {
+      "sha256": "4f3778e5ee0dcc691fc6bb5324d4d18cc24c4a8bcb9c5ebdeb54d7a2a4375080",
+      "binary": false,
+      "local_copy": "tables/leakage.csv"
+    },
+    "docs/report/tables/residual.csv": {
+      "sha256": "425e5db07f481ac734017177d81d92add0521e62543dfbfeb3db58757b7d2f13",
+      "binary": false,
+      "local_copy": "tables/residual.csv"
+    },
+    "docs/report/tables/v2-resources.csv": {
+      "sha256": "de9b1a95f9a64a4aaa60fb2d55cb943f71eb42969c21c3b19e5e1cd44321f4e2",
+      "binary": false,
+      "local_copy": "tables/v2-resources.csv"
+    },
+    "evidence/acceptance/deployed-browser.json": {
+      "sha256": "2e0ed6256d22aca42075abba55322279c5206479f2b1458548daa1e1b981b115",
+      "binary": false,
+      "local_copy": null
+    },
+    "evidence/access-control/analyst_suppression.json": {
+      "sha256": "ef93b511364349aa324c5c5cc51b8fc25471f4fe3c89dcc7c9e7434e397aca29",
+      "binary": false,
+      "local_copy": null
+    },
+    "evidence/backup/restore-report.json": {
+      "sha256": "392763c5513885a7549c8657f5c59f1ae5abcc22c875b3c6ed09e9e2af52f208",
+      "binary": false,
+      "local_copy": null
+    },
+    "evidence/backup/retention.json": {
+      "sha256": "cc3bbb44a3e169a374ae8d49ead59156d5349a3301b9962d801e596de50c327d",
+      "binary": false,
+      "local_copy": null
+    },
+    "evidence/backup/service-recovery-integration.json": {
+      "sha256": "21cd3e4c1f9657ad87b01a5386ecc6caf529c64663e585b0ce0af808a166ba51",
+      "binary": false,
+      "local_copy": null
+    },
+    "evidence/benchmark/api_bppb_compare.json": {
+      "sha256": "8368f0e2fd207f0bba0b10cd67a60ff84c22751b86f69c6fa7723909aa792e1c",
+      "binary": false,
+      "local_copy": null
+    },
+    "evidence/benchmark/bppb_compare.json": {
+      "sha256": "2f66b29d069936708d8c290f89cd707affe21d2fbcb3089f1a272948422a3748",
+      "binary": false,
+      "local_copy": null
+    },
+    "evidence/benchmark/bppb_v2_compare.json": {
+      "sha256": "207dd53801c69756225651443cb30eafa911ee80409c28e62e1b9c191d653f1a",
+      "binary": false,
+      "local_copy": null
+    },
+    "evidence/keys/rotation.json": {
+      "sha256": "3fe78afdfbaaccf94145219bd2d451d1159f284eeff4c19f4aacf6f3acdb51ec",
+      "binary": false,
+      "local_copy": null
+    },
+    "evidence/leakage/after_summary.json": {
+      "sha256": "ac2ffc2b5c1e5090c96bf6c413b2d3ecdd3d58dac8c50e74c197bdd1411947de",
+      "binary": false,
+      "local_copy": null
+    },
+    "evidence/leakage/protected_1m/residual_after.json": {
+      "sha256": "67d0b138338ce9445f5b0bbaf4b71adb2c6e2d459b9906ab1911bb4fa7305990",
+      "binary": false,
+      "local_copy": null
+    },
+    "evidence/migration/validation-protected_1m.json": {
+      "sha256": "aa14bc5fba8c575c5678a483b7936acea88c7e2d2ea6febb155fb51af7d45d3c",
+      "binary": false,
+      "local_copy": null
+    },
+    "evidence/overnight/migration_1m/completion.json": {
+      "sha256": "40c427f55177e939a0e061a329f8dcfe70b190b607b77c47c70ba136ba11a077",
+      "binary": false,
+      "local_copy": null
+    },
+    "evidence/scanner/evaluation_regex_only.json": {
+      "sha256": "c33b79820e6a9b50f1db7698965d50c6f8b61b18a9332e3c2a7074d74cfb9218",
+      "binary": false,
+      "local_copy": null
+    },
+    "evidence/scanner/evaluation_v1_2.json": {
+      "sha256": "d5805484c6a8416769a1525e526ea6bda011ca8069569c7fc3fea5f5109dca10",
+      "binary": false,
+      "local_copy": null
+    },
+    "policy/protection_profile.yaml": {
+      "sha256": "b4b9c492dfb5f43cae7617f76815bca0f02773f1b603bb01f3d2394ba56de748",
+      "binary": false,
+      "local_copy": null
+    }
+  },
+  "text_hash_mode": "SHA256 after CRLF to LF normalization; PNG hash is byte-exact"
+}

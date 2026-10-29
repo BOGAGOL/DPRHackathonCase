@@ -1,0 +1,614 @@
+{
+  "schema_version": 1,
+  "metadata": {
+    "basis_commit": "f54adf590ceb136ce059141e88f3faa673b45b9c",
+    "report_snapshot_basis_commit": "3bbe7206ff58ce97225153d3a9751342cd366609",
+    "organizer_pdfs": [
+      {
+        "id": "R01",
+        "name": "signed-2026920-SOAL FINAL HACKATHON DPR RI 2026.pdf",
+        "pages": 4,
+        "sha256": "5d4f7e337122dffa1659cef7864293f26cd54e06722f2d8c0fd579e04bc01ac9"
+      },
+      {
+        "id": "R02",
+        "name": "DPR RI_ Detail Hackaton Syarat Peserta, Proses Penjurian.docx.pdf",
+        "pages": 8,
+        "sha256": "b5ae5205fb902fc270b29dabb503fc730be2649a8031c2f93ba7c46509850b83"
+      }
+    ],
+    "measurement_context": {
+      "level": "DB",
+      "concurrency": 8,
+      "duration_s": 60,
+      "warmup_s": 10,
+      "runs_per_mode_scenario": 4,
+      "blocks": 2,
+      "order": [
+        "B",
+        "P",
+        "P",
+        "B"
+      ],
+      "cache": "OFF"
+    },
+    "historical_targets_commit": "8c09a25ccb6d415a231f692b68b9674495c31faf",
+    "historical_production_commit_v2": "8a11ff7dd39d66317a9802a7224d5ab044210798",
+    "historical_completed_at_utc": "2026-10-28T18:08:48.008596+00:00",
+    "scope": "Presentation context and chart data only; no fresh experiments, live login or final deck"
+  },
+  "cards": {
+    "K01": {
+      "data": {
+        "source_rows": 734,
+        "source_columns": 29,
+        "target_scales": [
+          100000,
+          1000000
+        ]
+      },
+      "sources": [
+        "docs/contracts/CONTRACT.md",
+        "evidence/migration/validation-protected_1m.json"
+      ],
+      "limit": "Synthetic competition case; not real DPR operations"
+    },
+    "K02": {
+      "data": {
+        "combined": {
+          "in_sample": true,
+          "method": "combined",
+          "precision": 0.9629629629629629,
+          "recall": 1.0,
+          "f1": 0.9811320754716981,
+          "detected_type_accuracy": 0.896551724137931,
+          "pdp_class_accuracy": 0.9655172413793104,
+          "confusion_matrix": {
+            "tp": 26,
+            "fp": 1,
+            "fn": 0,
+            "tn": 2
+          }
+        },
+        "regex_only": {
+          "in_sample": true,
+          "method": "regex_only",
+          "precision": 1.0,
+          "recall": 0.4230769230769231,
+          "f1": 0.5945945945945946,
+          "detected_type_accuracy": 0.3103448275862069,
+          "pdp_class_accuracy": 0.6896551724137931,
+          "confusion_matrix": {
+            "tp": 11,
+            "fp": 0,
+            "fn": 15,
+            "tn": 3
+          }
+        }
+      },
+      "sources": [
+        "evidence/scanner/evaluation_v1_2.json",
+        "evidence/scanner/evaluation_regex_only.json"
+      ],
+      "limit": "29 labels; in-sample before final human sign-off"
+    },
+    "K03": {
+      "data": {
+        "aead": 25,
+        "pii": 21,
+        "fin": 4,
+        "ref": 4,
+        "bidx": 3
+      },
+      "sources": [
+        "policy/protection_profile.yaml"
+      ],
+      "limit": "Source fields, not all operational database columns"
+    },
+    "K04": {
+      "data": {
+        "cipher": "AES-256-GCM",
+        "field_format_version": 1,
+        "nonce_bytes": 12,
+        "dek_bytes": 32,
+        "app_cache": "OFF"
+      },
+      "sources": [
+        "docs/contracts/CONTRACT.md",
+        "app/backend/service_app/crypto.py"
+      ],
+      "limit": "Local AEAD; memory/OS and shared app-key compromise remain limits"
+    },
+    "K05": {
+      "data": [
+        {
+          "scale": "100k",
+          "mode": "baseline",
+          "esce_percent": 100.0,
+          "numerator": 2449994,
+          "denominator": 2449994,
+          "scope": "25 AEAD non-NULL fields only"
+        },
+        {
+          "scale": "100k",
+          "mode": "protected_no_key",
+          "esce_percent": 0.0,
+          "numerator": 0,
+          "denominator": 2449994,
+          "scope": "25 AEAD non-NULL fields only"
+        },
+        {
+          "scale": "1m",
+          "mode": "baseline",
+          "esce_percent": 100.0,
+          "numerator": 24500005,
+          "denominator": 24500005,
+          "scope": "25 AEAD non-NULL fields only"
+        },
+        {
+          "scale": "1m",
+          "mode": "protected_no_key",
+          "esce_percent": 0.0,
+          "numerator": 0,
+          "denominator": 24500005,
+          "scope": "25 AEAD non-NULL fields only"
+        }
+      ],
+      "sources": [
+        "evidence/leakage/after_summary.json"
+      ],
+      "limit": "ESCE on 25 AEAD non-NULL fields; not all data or inference"
+    },
+    "K06": {
+      "data": {
+        "leakage": [
+          {
+            "dataset": "baseline_100k",
+            "scenario": "baseline_dump",
+            "ESCE_numerator": 2449994,
+            "ESCE_denominator": 2449994,
+            "ESCE_percent": 100.0,
+            "DIE_numerator": 100000,
+            "DIE_denominator": 100000,
+            "DIE_percent": 100.0
+          },
+          {
+            "dataset": "protected_100k",
+            "scenario": "protected_dump_no_key",
+            "ESCE_numerator": 0,
+            "ESCE_denominator": 2449994,
+            "ESCE_percent": 0.0,
+            "DIE_numerator": 0,
+            "DIE_denominator": 100000,
+            "DIE_percent": 0.0
+          },
+          {
+            "dataset": "protected_100k",
+            "scenario": "protected_dump_with_pii_key",
+            "ESCE_numerator": 2049994,
+            "ESCE_denominator": 2449994,
+            "ESCE_percent": 83.6734294043169,
+            "DIE_numerator": 100000,
+            "DIE_denominator": 100000,
+            "DIE_percent": 100.0
+          },
+          {
+            "dataset": "protected_100k",
+            "scenario": "protected_dump_with_finance_key",
+            "ESCE_numerator": 400000,
+            "ESCE_denominator": 2449994,
+            "ESCE_percent": 16.32657059568309,
+            "DIE_numerator": 100000,
+            "DIE_denominator": 100000,
+            "DIE_percent": 100.0
+          },
+          {
+            "dataset": "protected_100k",
+            "scenario": "protected_dump_with_search_key",
+            "ESCE_numerator": 300000,
+            "ESCE_denominator": 2449994,
+            "ESCE_percent": 12.244927946762319,
+            "DIE_numerator": 100000,
+            "DIE_denominator": 100000,
+            "DIE_percent": 100.0
+          },
+          {
+            "dataset": "baseline_1m",
+            "scenario": "baseline_dump",
+            "ESCE_numerator": 24500005,
+            "ESCE_denominator": 24500005,
+            "ESCE_percent": 100.0,
+            "DIE_numerator": 1000000,
+            "DIE_denominator": 1000000,
+            "DIE_percent": 100.0
+          },
+          {
+            "dataset": "protected_1m",
+            "scenario": "protected_dump_no_key",
+            "ESCE_numerator": 0,
+            "ESCE_denominator": 24500005,
+            "ESCE_percent": 0.0,
+            "DIE_numerator": 0,
+            "DIE_denominator": 1000000,
+            "DIE_percent": 0.0
+          },
+          {
+            "dataset": "protected_1m",
+            "scenario": "protected_dump_with_pii_key",
+            "ESCE_numerator": 20500005,
+            "ESCE_denominator": 24500005,
+            "ESCE_percent": 83.67347271969945,
+            "DIE_numerator": 1000000,
+            "DIE_denominator": 1000000,
+            "DIE_percent": 100.0
+          },
+          {
+            "dataset": "protected_1m",
+            "scenario": "protected_dump_with_finance_key",
+            "ESCE_numerator": 4000000,
+            "ESCE_denominator": 24500005,
+            "ESCE_percent": 16.326527280300553,
+            "DIE_numerator": 1000000,
+            "DIE_denominator": 1000000,
+            "DIE_percent": 100.0
+          },
+          {
+            "dataset": "protected_1m",
+            "scenario": "protected_dump_with_search_key",
+            "ESCE_numerator": 3000000,
+            "ESCE_denominator": 24500005,
+            "ESCE_percent": 12.244895460225417,
+            "DIE_numerator": 1000000,
+            "DIE_denominator": 1000000,
+            "DIE_percent": 100.0
+          }
+        ],
+        "residual": [
+          {
+            "dataset": "protected_100k",
+            "population": "all",
+            "projections_measured": 41,
+            "max_attributes_per_projection": 3,
+            "k_min_over_projections": 136,
+            "max_singleton_rows_in_one_projection": 0
+          },
+          {
+            "dataset": "protected_100k",
+            "population": "source_734",
+            "projections_measured": 41,
+            "max_attributes_per_projection": 3,
+            "k_min_over_projections": 1,
+            "max_singleton_rows_in_one_projection": 11
+          },
+          {
+            "dataset": "protected_100k",
+            "population": "synthetic",
+            "projections_measured": 41,
+            "max_attributes_per_projection": 3,
+            "k_min_over_projections": 135,
+            "max_singleton_rows_in_one_projection": 0
+          },
+          {
+            "dataset": "protected_1m",
+            "population": "all",
+            "projections_measured": 41,
+            "max_attributes_per_projection": 3,
+            "k_min_over_projections": 1362,
+            "max_singleton_rows_in_one_projection": 0
+          },
+          {
+            "dataset": "protected_1m",
+            "population": "source_734",
+            "projections_measured": 41,
+            "max_attributes_per_projection": 3,
+            "k_min_over_projections": 1,
+            "max_singleton_rows_in_one_projection": 11
+          },
+          {
+            "dataset": "protected_1m",
+            "population": "synthetic",
+            "projections_measured": 41,
+            "max_attributes_per_projection": 3,
+            "k_min_over_projections": 1361,
+            "max_singleton_rows_in_one_projection": 0
+          }
+        ]
+      },
+      "sources": [
+        "evidence/leakage/after_summary.json",
+        "evidence/leakage/protected_1m/residual_after.json"
+      ],
+      "limit": "FIN/search may expose identifiers; source734 k=1; full synthetic dictionary is upper-bound model"
+    },
+    "K07": {
+      "data": {
+        "checks": 31,
+        "threshold": 5,
+        "passed": true
+      },
+      "sources": [
+        "evidence/access-control/analyst_suppression.json"
+      ],
+      "limit": "Isolated SQL fixture; marginal suppression, not DP"
+    },
+    "K08": {
+      "data": {
+        "checks": 143,
+        "rows": 17,
+        "passed": true
+      },
+      "sources": [
+        "evidence/backup/service-recovery-integration.json"
+      ],
+      "limit": "17 invented rows; disposable PG18/OpenBao TLS, actual A+B seven-table schema, live HTTPS backend; not official migrated datasets or benchmark"
+    },
+    "K09": {
+      "data": {
+        "web_checks": 100,
+        "web_status": "PASSED",
+        "vm_operator": {
+          "status": "PASSED",
+          "scope": "Module B pentest preparation and one actual guarded golden reset on VM; not Delf's full pentest or a production-security claim",
+          "provenance": "Operator executed reviewed kit in authenticated SSH; downloaded public metadata reports via SCP",
+          "database": "protected_734",
+          "members": 734,
+          "migration_status": "validated",
+          "pentest_accounts": 8,
+          "demo_login_roles": 6,
+          "demo_accounts_preserved": true,
+          "setup_member_data_modified": false,
+          "a5_checks": {
+            "analyst_no_per_record_select": true,
+            "analyst_can_select_aggregate": true,
+            "analyst_aggregate_owner_and_barrier": true,
+            "analyst_aggregate_contract_columns": true
+          },
+          "actual_reset_test": "PASSED",
+          "reset_smoke_checks": 65,
+          "reset_smoke_all_passed": true,
+          "not_verified": [
+            "Provider cloud security-group rules",
+            "Split recovery-key custody",
+            "Certificate auto-renewal end-to-end",
+            "Complete application log audit",
+            "Full whitebox pentest by Delf"
+          ]
+        }
+      },
+      "sources": [
+        "evidence/acceptance/deployed-browser.json",
+        "app/evidence/access-control/vm-pentest-summary.json"
+      ],
+      "limit": "Separate web/operator evidence; not full pentest or a combined check population"
+    },
+    "K10": {
+      "data": [
+        {
+          "variant": "v2",
+          "scale": "100k",
+          "scenario": "read_by_nik",
+          "runs_per_mode": 4,
+          "B_p50_ms": 2.965925000353309,
+          "B_p95_ms": 5.494492500520208,
+          "B_throughput_rps": 2492.097301693016,
+          "B_error_rate": 0.0,
+          "B_db_time_ms_per_request": 0.03338551942811394,
+          "B_non_db_mean_ms": 3.152774589055003,
+          "P_p50_ms": 25.67342499969527,
+          "P_p95_ms": 37.733697499334085,
+          "P_throughput_rps": 300.45438604596234,
+          "P_error_rate": 0.0,
+          "P_db_time_ms_per_request": 0.1419858269190163,
+          "P_non_db_mean_ms": 26.45058269952941,
+          "p95_ratio": 6.867549185982424,
+          "p95_delta_ms": 32.239204998813875,
+          "throughput_ratio": 0.12056286319231896,
+          "P01_ratio_passed": false,
+          "P01_absolute_passed": false,
+          "P02_passed": false,
+          "P03_passed": true
+        },
+        {
+          "variant": "v2",
+          "scale": "1m",
+          "scenario": "read_by_nik",
+          "runs_per_mode": 4,
+          "B_p50_ms": 3.296149999187037,
+          "B_p95_ms": 6.063700000595418,
+          "B_throughput_rps": 2260.05682554593,
+          "B_error_rate": 0.0,
+          "B_db_time_ms_per_request": 0.03978059119605441,
+          "B_non_db_mean_ms": 3.496884023606536,
+          "P_p50_ms": 26.257100000293576,
+          "P_p95_ms": 38.623677499890604,
+          "P_throughput_rps": 293.6116509661824,
+          "P_error_rate": 0.0,
+          "P_db_time_ms_per_request": 0.18015086703390776,
+          "P_non_db_mean_ms": 27.030534851304804,
+          "p95_ratio": 6.369655077938882,
+          "p95_delta_ms": 32.55997749929519,
+          "throughput_ratio": 0.1299133931711026,
+          "P01_ratio_passed": false,
+          "P01_absolute_passed": false,
+          "P02_passed": false,
+          "P03_passed": true
+        }
+      ],
+      "sources": [
+        "evidence/benchmark/bppb_v2_compare.json"
+      ],
+      "limit": "DB NIK example; all14 scale/scenario combinations fail P01/P01A/P02 and pass P03"
+    },
+    "K11": {
+      "data": [
+        {
+          "scale": "100k",
+          "naive_p95_protected_ms": 78.18119000075966,
+          "v2_p95_protected_ms": 37.733697499334085,
+          "reduction_percent": 51.735580516275796,
+          "comparison_scope": "different declared sessions; not causal isolation"
+        },
+        {
+          "scale": "1m",
+          "naive_p95_protected_ms": 78.96651500632287,
+          "v2_p95_protected_ms": 38.623677499890604,
+          "reduction_percent": 51.08853734168464,
+          "comparison_scope": "different declared sessions; not causal isolation"
+        }
+      ],
+      "sources": [
+        "evidence/benchmark/bppb_compare.json",
+        "evidence/benchmark/bppb_v2_compare.json"
+      ],
+      "limit": "Between-session improvement; targets still fail"
+    },
+    "K12": {
+      "data": {
+        "status": "PLANNED",
+        "level": "API",
+        "scale": "100k",
+        "target_commit": "8c09a25ccb6d415a231f692b68b9674495c31faf",
+        "design_change": {
+          "authorized_on_wib_date": "2026-10-29",
+          "reason": "Operator time limit; explicitly reduced from two B-P-P-B blocks to one before measurement.",
+          "previous_blocks": 2,
+          "blocks": 1,
+          "previous_runs_per_mode_per_endpoint": 4,
+          "runs_per_mode_per_endpoint": 2,
+          "median_over_runs": 2,
+          "total_runs": 16,
+          "targets_changed": false,
+          "limitation": "Two repetitions per mode are below the original three-run minimum; reduced API evidence must be reported with this limitation."
+        },
+        "scenarios": [],
+        "declared_at_utc": "2026-10-28T23:59:06.430385+00:00",
+        "scope": "GET read paths only; write/mixed API targets remain untested"
+      },
+      "sources": [
+        "evidence/benchmark/api_bppb_compare.json"
+      ],
+      "limit": "PLANNED with no measured scenarios in this snapshot; proposed two repetitions below minimum3"
+    },
+    "K13": {
+      "data": [
+        {
+          "scale": "100k",
+          "database": "baseline_100k",
+          "bytes": 104732351,
+          "GiB": 0.09753960277885199,
+          "scope": "recorded migration-completion snapshot"
+        },
+        {
+          "scale": "100k",
+          "database": "protected_100k",
+          "bytes": 230012607,
+          "GiB": 0.21421593334525824,
+          "scope": "recorded migration-completion snapshot"
+        },
+        {
+          "scale": "1m",
+          "database": "baseline_1m",
+          "bytes": 825194175,
+          "GiB": 0.7685219636186957,
+          "scope": "recorded migration-completion snapshot"
+        },
+        {
+          "scale": "1m",
+          "database": "protected_1m",
+          "bytes": 2210617023,
+          "GiB": 2.0587975373491645,
+          "scope": "recorded migration-completion snapshot"
+        }
+      ],
+      "sources": [
+        "evidence/overnight/migration_1m/completion.json"
+      ],
+      "limit": "Storage snapshot; not production cost/SLA"
+    },
+    "K14": {
+      "data": {
+        "evidence/backup/backup-report.json": {
+          "passed": true,
+          "source_database": "protected_100k",
+          "source_rows": 100000,
+          "size_bytes": 165999475,
+          "backup_seconds": 11.376413,
+          "encryption": "AES-256-GCM-framed-HKDF-SHA256-v1",
+          "dump_role": "backup_user"
+        },
+        "evidence/backup/restore-report.json": {
+          "passed": true,
+          "mode": "with_openbao",
+          "source_rows": 100000,
+          "size_bytes": 165999475,
+          "restore_seconds": 16.415305,
+          "manifest_hmac_verified": true,
+          "sha256_verified": true,
+          "all_frames_authenticated_before_restore": true,
+          "plaintext_dump_files": 0,
+          "decryption_smoke": {
+            "authenticated_non_null_fields": 392,
+            "domains": [
+              "PII",
+              "FIN"
+            ],
+            "performed": true,
+            "plaintext_written": false,
+            "records": 16
+          },
+          "service_scope": "database, ACL/RLS and optional field decryption; HTTP app integration is separate"
+        },
+        "evidence/backup/tamper.json": {
+          "passed": true,
+          "modified_bytes": 1,
+          "original_unchanged": true,
+          "rejected_before_database_creation": true,
+          "rejection": "encrypted_artifact_digest_mismatch",
+          "restore_rejected": true
+        },
+        "evidence/backup/retention.json": {
+          "passed": true,
+          "scope": "new invented member in invocation-owned restore clone only",
+          "original_source_not_modified": true,
+          "new_backup_restore_member_absent": true,
+          "old_backup_still_contains_member_until_expiry": true,
+          "physical_secure_erasure_claimed": false
+        },
+        "evidence/keys/rotation.json": {
+          "passed": true,
+          "status": "complete",
+          "target_version": 2,
+          "overall_rewrapped_rows": {
+            "protected_100k": 100000,
+            "protected_734": 734
+          },
+          "overall_before_versions": {
+            "protected_100k": {
+              "1": 100000
+            },
+            "protected_734": {
+              "1": 734
+            }
+          },
+          "validation": "all records, all PII/FIN fields, private in-memory comparisons",
+          "resumed": true,
+          "minimum_key_versions_changed": false,
+          "plaintext_or_deks_written": false
+        },
+        "evidence/backup/service-recovery-integration.json": {
+          "status": null,
+          "passed": true,
+          "checks": 143,
+          "all_checks_passed": true,
+          "scope": "17 invented rows; disposable PG18/OpenBao TLS, actual A+B seven-table schema, live HTTPS backend; not official migrated datasets or benchmark"
+        }
+      },
+      "sources": [
+        "evidence/keys/rotation.json",
+        "evidence/backup/restore-report.json",
+        "evidence/backup/retention.json"
+      ],
+      "limit": "Operational/lab evidence; not all-scale key rotation or full key-plane DR"
+    }
+  }
+}

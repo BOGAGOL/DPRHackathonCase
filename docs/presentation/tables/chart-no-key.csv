@@ -1,0 +1,5 @@
+scale,mode,esce_percent,numerator,denominator,scope
+100k,baseline,100.0,2449994,2449994,25 AEAD non-NULL fields only
+100k,protected_no_key,0.0,0,2449994,25 AEAD non-NULL fields only
+1m,baseline,100.0,24500005,24500005,25 AEAD non-NULL fields only
+1m,protected_no_key,0.0,0,24500005,25 AEAD non-NULL fields only
