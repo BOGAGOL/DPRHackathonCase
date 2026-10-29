@@ -277,5 +277,14 @@
     "No OpenBao access, workload benchmark, migration, restore or database-name recovery performed. Existing API-copy naming state preserved.",
     "DML/DDL probes explicitly BEGIN READ WRITE then ROLLBACK, so scanner INSERT tests ACL despite its read-only role default.",
     "All ACL denials use SQLSTATE 42501, including DROP ownership denial. Missing relation 42P01 counts as failure, not an access denial."
-  ]
+  ],
+  "recovery_context": {
+    "at_utc": "2026-10-29T03:41:44.182902+00:00",
+    "database_name_recovery_status": "restored",
+    "historical_S02_target": "temporary API copy protected_100k, OID 57393, before name recovery",
+    "official_restored_oid": 41230,
+    "S02_retested_after_recovery": false,
+    "note": "All existing S02 results and failures are historical results on the API copy. Official databases have now regained their names; these results must not be relabeled as tests on the official database.",
+    "verification_evidence": "evidence/benchmark/api_bppb_100k/db_swap_state.json"
+  }
 }

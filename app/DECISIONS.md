@@ -55,3 +55,17 @@ docs/deploy/ dan scripts/deploy/ berasal dari permintaan eksplisit terbaru pengg
 Golden mengembalikan pt aktif; disable terakhir sesudah restore. Bukti unit dan
 VM dipisahkan: operator kemudian menjalankan satu reset nyata PASSED dan metadata
 diunduh; vm-golden-reset.json menjadi bukti, bukan test fake catalogue.
+
+## 29 Oktober 2026 — exact opt-in target clone benchmark
+
+Tambahkan DPR_BENCHMARK_DATABASE, bukan menerima sembarang DATABASE_URL atau
+mengganti nama database original untuk memenuhi allowlist. Namespace api_ hanya
+aktif jika dipilih operator; seluruh koneksi harus target sama dan tidak bisa
+digabung dengan recovery override. Format crypto/DTO/otorisasi/target performa tetap.
+
+Setup resmi B memberi hak koneksi/schema pada clone saja; runtime tetap app_user
+verify-full, tanpa DDL, dengan gate metadata read-only dan FORCE RLS protected.
+Marker mode menyatakan setup disetujui, bukan pengganti verifikasi clone milik C.
+Load generator CA file, lifecycle token dan cleanup tetap tanggung jawab A/C;
+tidak mengubah TLS agar benchmark lolos. Gunakan checkout terpisah karena root
+pengguna sedang merge; commit patch hanya app/.
