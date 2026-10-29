@@ -1,0 +1,323 @@
+{
+  "status": "PASSED",
+  "total": 47,
+  "counts": {
+    "passed": 47,
+    "failed": 0,
+    "skipped": 0
+  },
+  "cases": [
+    {
+      "test": "test_exact_clone_opt_in_preserves_role_and_tls_guards[plain]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.004
+    },
+    {
+      "test": "test_exact_clone_opt_in_preserves_role_and_tls_guards[protected]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_reserved_names_only_and_no_source_override[postgres]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_reserved_names_only_and_no_source_override[baseline_100k]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_reserved_names_only_and_no_source_override[protected_734]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_reserved_names_only_and_no_source_override[api_]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_reserved_names_only_and_no_source_override[api_Caps]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.002
+    },
+    {
+      "test": "test_reserved_names_only_and_no_source_override[api_bad-name]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_reserved_names_only_and_no_source_override[api_x;DROP DATABASE x]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.002
+    },
+    {
+      "test": "test_reserved_names_only_and_no_source_override[api_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_recovery_and_disposable_flags_cannot_expand_benchmark_selection",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.002
+    },
+    {
+      "test": "test_every_connection_stays_on_the_exact_clone[database-auth_database_url-app_user]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_every_connection_stays_on_the_exact_clone[database-analyst_database_url-analyst_user]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_every_connection_stays_on_the_exact_clone[database-auditor_database_url-auditor_user]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.004
+    },
+    {
+      "test": "test_every_connection_stays_on_the_exact_clone[host-auth_database_url-app_user]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.004
+    },
+    {
+      "test": "test_every_connection_stays_on_the_exact_clone[host-analyst_database_url-analyst_user]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.004
+    },
+    {
+      "test": "test_every_connection_stays_on_the_exact_clone[host-auditor_database_url-auditor_user]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_every_connection_stays_on_the_exact_clone[port-auth_database_url-app_user]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.004
+    },
+    {
+      "test": "test_every_connection_stays_on_the_exact_clone[port-analyst_database_url-analyst_user]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.004
+    },
+    {
+      "test": "test_every_connection_stays_on_the_exact_clone[port-auditor_database_url-auditor_user]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.004
+    },
+    {
+      "test": "test_target_loaded_from_environment",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_setup_url_requires_matching_admin_target[None]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_setup_url_requires_matching_admin_target[role]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_setup_url_requires_matching_admin_target[host]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_setup_url_requires_matching_admin_target[port]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_setup_url_requires_matching_admin_target[database]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_setup_url_requires_matching_admin_target[tls]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_setup_url_requires_matching_admin_target[ca]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_prepare_grants_only_clone_connect_and_schema_usage[plain]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.004
+    },
+    {
+      "test": "test_prepare_grants_only_clone_connect_and_schema_usage[protected]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.004
+    },
+    {
+      "test": "test_prepare_refuses_wrong_target_before_any_grants[database]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.005
+    },
+    {
+      "test": "test_prepare_refuses_wrong_target_before_any_grants[tls]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.004
+    },
+    {
+      "test": "test_prepare_refuses_wrong_target_before_any_grants[schema]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_startup_gate_is_read_only_metadata[plain]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.004
+    },
+    {
+      "test": "test_startup_gate_is_read_only_metadata[protected]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_startup_gate_rejects_unsafe_state[0-protected_734]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.004
+    },
+    {
+      "test": "test_startup_gate_rejects_unsafe_state[1-postgres]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_startup_gate_rejects_unsafe_state[2-False]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_startup_gate_rejects_unsafe_state[3-missing_marker]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_startup_gate_rejects_unsafe_state[4-True]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_startup_gate_rejects_unsafe_state[5-True]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_startup_refuses_incomplete_schema_or_unforced_rls",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.003
+    },
+    {
+      "test": "test_schema_cli_routes_api_named_clone_by_mode[plain]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.008
+    },
+    {
+      "test": "test_schema_cli_routes_api_named_clone_by_mode[protected]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.006
+    },
+    {
+      "test": "test_provisioning_uses_clone_setup_guard_in_both_modes[plain]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.005
+    },
+    {
+      "test": "test_provisioning_uses_clone_setup_guard_in_both_modes[protected]",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.005
+    },
+    {
+      "test": "test_failed_startup_gate_closes_dependencies",
+      "suite": "tests.test_benchmark_target",
+      "status": "PASSED",
+      "seconds": 0.004
+    }
+  ],
+  "checked_at_utc": "2026-10-29T03:10:09.113920+00:00",
+  "source_commit": "3f1a97e389bb2bb29a315efdc92d1edeb6e07274",
+  "app_worktree_dirty": true,
+  "app_source_sha256_at_export": "745d11f77b2e58a8ae01c7f6ec2cdd3ff50c5a59fa7068a3efd2a3a4aed8a99e",
+  "command": "python -m pytest -c app/pytest.ini app/tests -q --junitxml=app/.local/security-tests.xml",
+  "scope": "Isolated invented SQLite fixtures; protected policy uses opaque-reference test double; shared Module A vectors additionally verified when installed",
+  "not_tested": [
+    "Live PostgreSQL/OpenBao integration (reported separately)",
+    "Live baseline_100k or migrated datasets (reported separately)",
+    "Browser XSS and transport TLS (reported separately)",
+    "Native api_ PostgreSQL clone setup/provision/startup",
+    "Module C load generator/CA/cleanup integration",
+    "Live API benchmark performance; no database touched by this run"
+  ],
+  "skipped_scope": "Plain-mode ciphertext-swap test is not applicable; protected-mode swap is exercised",
+  "privacy": "No failure messages, request bodies, response values, cookies, credentials or crypto material exported",
+  "change_scope": "Explicit exact api_ clone selection, same-target URL guards, schema/provision routing and read-only startup metadata gate",
+  "new_benchmark_target_tests": {
+    "passed": 47,
+    "failed": 0
+  },
+  "full_backend_suite": {
+    "total": 438,
+    "counts": {
+      "passed": 437,
+      "failed": 0,
+      "skipped": 1
+    }
+  },
+  "raw_junit_sha256": "60ace79ed27905c8bdab3cd8d251862c676183c2590d02a88252f0f96628a60b"
+}

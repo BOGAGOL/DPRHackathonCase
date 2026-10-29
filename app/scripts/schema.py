@@ -12,6 +12,8 @@ from psycopg import sql
 import psycopg
 from service_app.models import AuditLog, Session, User
 from service_app.protected_control import ProtectedSession, bindings
+from service_app.config import Settings
+from service_app.benchmark_target import benchmark_setup_url, prepare_benchmark_target
 
 
 def setup_protected(engine):
@@ -42,15 +44,28 @@ def setup_protected(engine):
 
 
 def main():
+    benchmark = Settings.from_env() if os.getenv("DPR_BENCHMARK_DATABASE") else None
+    allowed = ["baseline_100k", "baseline_1m", "protected_100k", "protected_734", "protected_1m"]
+    if benchmark:
+        allowed = [benchmark.benchmark_database]
     parser = argparse.ArgumentParser()
-    parser.add_argument("--database", choices=["baseline_100k", "baseline_1m", "protected_100k", "protected_734", "protected_1m"], required=True)
+    parser.add_argument("--database", choices=allowed, required=True)
     args = parser.parse_args()
     url = make_url(os.environ["APP_SETUP_DATABASE_URL"])
     if url.database != args.database or url.query.get("sslmode") != "verify-full" or not url.query.get("sslrootcert"):
         raise ValueError("Setup requires the explicit authorized database and verify-full TLS")
+    if benchmark:
+        url = benchmark_setup_url(benchmark, os.environ["APP_SETUP_DATABASE_URL"])
     # Role creation and source/protected RLS policies belong to A; never grant broader roles here.
     engine = create_engine(url, hide_parameters=True)
-    if args.database.startswith("protected_"):
+    if benchmark:
+        try:
+            prepare_benchmark_target(engine, benchmark)
+        except Exception:
+            engine.dispose()
+            raise
+    protected = benchmark.mode == "protected" if benchmark else args.database.startswith("protected_")
+    if protected:
         setup_protected(engine)
         engine.dispose()
         print("Module B protected session/binding/locator objects ready; A accounts/audit/RLS retained.")
@@ -65,7 +80,7 @@ def main():
                           "GRANT SELECT ON audit_log TO auditor_user"]:
             connection.execute(text(statement))
         # Baseline table exists and belongs to C; only its approved service grants are added.
-        if args.database in {"baseline_100k", "baseline_1m"}:
+        if args.database in {"baseline_100k", "baseline_1m"} or benchmark:
             connection.execute(text("GRANT SELECT, INSERT, UPDATE ON anggota TO app_user"))
             sequence = connection.execute(text("SELECT c.oid FROM pg_class c WHERE c.oid=pg_get_serial_sequence('anggota','id')::regclass")).scalar()
             if sequence:

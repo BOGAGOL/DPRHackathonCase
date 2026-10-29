@@ -337,3 +337,31 @@ menolak akses non-loopback ke127.0.0.1 ports5433/8200. Cloud SG tetap NOT VERIFI
 Certificate Let's Encrypt YE2 aktif sampai4Nov09:03:49WIB. Private custody/renewal
 end-to-end dan pentest penuh Delf bukan hasil kit. Jangan disable pt sebelum pentest;
 disable terakhir sesudah restore. Frontend tidak diubah, npm build tidak diperlukan.
+
+## Target clone benchmark API — 29 Oktober 2026
+
+Permintaan Zhafif berdasarkan kendala benchmark Delf: app sudah membaca DATABASE_URL
+tetapi allowlist nama membuat clone api_* ditolak; C memakai swap nama original.
+Review sumber/evidence commit10e4cc8 juga menemukan k6 trust-store dan cleanup conhost;
+keduanya milik C. Laporan historis tersebut menyatakan measured_runs0/restore_failed,
+bukan keadaan live yang diverifikasi pada pekerjaan ini. Tidak ada recovery/retry DB.
+
+Perbaikan B menambahkan DPR_BENCHMARK_DATABASE untuk satu exact api_ name (ASCII
+lowercase/digit/underscore, maksimum63), terpisah dari recovery. Guard default tidak
+dilonggarkan. Seluruh URL runtime harus clone/host/port sama, role minimal, verify-full
+dan CA file. Startup mengecek metadata read-only, marker setup/mode, tanpa role/DDL
+berlebih, tabel B lengkap dan owner/FORCE RLS protected. Tidak fallback ke original.
+
+CLI schema memilih cabang dari MODE untuk clone, memeriksa target/tabel anggota/TLS,
+memberi CONNECT database dan USAGE schema kepada tiga role runtime serta marker setup.
+CLI provision kedua mode memakai URL admin clone yang terverifikasi; akun existing
+tetap ditolak, password random Argon2id di direktori privat per clone. Marker tidak
+membuktikan integritas atau asal data: checksum/OID/HBA/cleanup tetap A/C.
+
+Perubahan hanya app/. Repo utama sedang merge modul lain, sehingga pengerjaan di
+worktree terpisah fix/service-b-benchmark-targets. Index/merge utama tidak disentuh.
+Tes backend437 passed/1 skipped, termasuk47 tes target baru; fixture sintetis dan
+mock metadata. Koneksi native clone/PostgreSQL18, provisioning/live benchmark dan
+performa: NOT TESTED. Source C, target performa, dataset dan VM demo tidak diubah.
+Handoff app/docs/BENCHMARK_CLONES.md menjelaskan env runner, CA file, origin, role,
+TLS/HBA dan perlunya verifikasi recovery lama sebelum eksperimen baru.
