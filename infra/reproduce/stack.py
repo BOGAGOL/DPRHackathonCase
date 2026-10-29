@@ -75,9 +75,10 @@ class Stack:
             raise ValueError("PostgreSQL binary unavailable")
         return str(path)
 
-    def command(self, command, *, timeout=180, input=None, env=None):
+    def command(self, command, *, timeout=180, input=None, env=None, quiet=False):
+        output = {"stdout": subprocess.DEVNULL, "stderr": subprocess.DEVNULL} if quiet else {"capture_output": True}
         result = subprocess.run(command, input=input, env=env or self.child_env,
-                                capture_output=True, timeout=timeout)
+                                **output, timeout=timeout)
         if result.returncode:
             raise RuntimeError("Owned stack command failed; details withheld")
         return result.stdout
@@ -137,7 +138,9 @@ class Stack:
             "hostssl all all 127.0.0.1/32 scram-sha-256\nhostnossl all all 127.0.0.1/32 reject\n"
             "hostssl all all ::1/128 scram-sha-256\nhostnossl all all ::1/128 reject\n", encoding="utf-8")
         self.pg_started = True
-        self.command([self.executable("pg_ctl"), "-D", str(self.root / "pgdata"), "-l", str(self.root / "postgres.log"), "-w", "start"])
+        # The postmaster inherits pipe handles on Windows: capturing its stdout
+        # can wait forever even after pg_ctl exits. Server log is private instead.
+        self.command([self.executable("pg_ctl"), "-D", str(self.root / "pgdata"), "-l", str(self.root / "postgres.log"), "-w", "start"], quiet=True)
         address = f"https://127.0.0.1:{self.bao_port}"
         configuration = {"disable_mlock": True, "ui": False, "api_addr": address,
                          "storage": {"file": {"path": str(self.root / "bao-storage")}},

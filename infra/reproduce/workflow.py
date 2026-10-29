@@ -314,8 +314,8 @@ def run(args):
         for name in ("setup", "import", "assessment", "hardening", "service_application", "security_verification"):
             report["stages"][name] = {"status": "NOT_RUN"}
         print("Fresh demo only: bootstrap recovery material stays outside Git; auto-unseal is confined to the NEW disposable key plane.", flush=True)
+        stage = "setup"
         with Stack(private, pg_bin=args.native_pg_bin, bao_bin=args.native_bao_bin) as stack:
-            stage = "setup"
             report["stages"][stage] = {"status": "PASS"}
             passwords = {role: secrets.token_urlsafe(36) for role in ROLES}
             stage = "import"
@@ -364,6 +364,9 @@ def run(args):
         report["passed"] = False
         report["failed_stage"] = stage
         report["error_type"] = type(error).__name__
+        import traceback
+        report["error_locations"] = [{"file": Path(item.filename).name, "function": item.name, "line": item.lineno}
+                                     for item in traceback.extract_tb(error.__traceback__)[-5:]]
         report["details"] = "withheld; no DSN, SQL values or credentials emitted"
         if stage in report["stages"]:
             report["stages"][stage]["status"] = "FAIL"
