@@ -3,7 +3,7 @@
 Source: merge main `4fdd7aa5a87e553f8da1e1397d5d5a772c80a402`.
 Environment laptop Windows, Python 3.12.10, cryptography 50.0.2, pytest 9.0.3.
 Generator: cyclonedx-bom 7.6.0 dan pip-audit 2.10.1. Versi alat, hash sembilan
-JSON, waktu WIB, dan ringkasan audit ada di
+JSON (UTF-8, line ending dinormalisasi ke LF agar sesuai Git blob), waktu WIB, dan ringkasan audit ada di
 `app/evidence/access-control/dependency-upgrade-sbom-20261029.json`.
 
 | Audit | Dependency yang diperiksa | Temuan | Dependency dilewati |

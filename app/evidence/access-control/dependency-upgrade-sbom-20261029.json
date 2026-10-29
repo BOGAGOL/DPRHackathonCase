@@ -41,14 +41,15 @@
   },
   "scope": "Laptop Windows: app + infra + editable toolkit and SBOM/audit tooling. Requirement audits resolved separately; not a dump of the VM environment. Requirement BOMs describe declarations; environment BOM records installed versions.",
   "files": {
-    "app-python-audit.json": "329bdf9be29dd1e74fa0b70fd439d553179bb09b36108b956b79dfd0169c4f3a",
-    "app-python.cdx.json": "b364feccd9b05c8cb96d08254de1f4661c13abd61a7e879cdf2e7acf2267a06f",
+    "app-python-audit.json": "0f0f17492073474139aefe98346695751d7b6b7cbd7e96b33e4f2df2fa0fb3a0",
+    "app-python.cdx.json": "5e5a7311f66539109473e1d66b9556cac6e476e319ff0daac4a137d8f538b5fc",
     "app-web-audit.json": "13d1b15dd56bf152c97828fff2754bf1879c080832f44d790363181c36219c95",
     "app-web.cdx.json": "be6153fa1522a8716fc0ce8da64baf6d5dbcd89194c1d56368569ee2e0dd84d2",
-    "benchmark-python-audit.json": "16e43431d0d7adf00c881cf1c277c68b95f5ad693afdafc4a9f98cd6f714bc57",
-    "benchmark-python.cdx.json": "4cb1bce0421151f983fc86dd0c7052b2ccf0d4b3035500e113d3be0d554d18be",
-    "infra-python-audit.json": "3ae7e8f6dccbaf1ab6507f7e22ac07de24fb21b096502631a5bdc5e642f11320",
-    "infra-python.cdx.json": "b34f8ce2fd9d2bd153668823e519ffd81de4d275a07161195e675c39114a8d09",
-    "python-env.cdx.json": "4c4c5d214b39a2e5e1f468752110b1379a8bf8b6e3ca43bca967b32d29184694"
-  }
+    "benchmark-python-audit.json": "73f49ee04801b0ff6728990bf2504096b76c42b0af64c9bbe4c5968f5ac11012",
+    "benchmark-python.cdx.json": "cf553449fc53401bac4281ad541b108319fef6d8bc4f60ca9350f2820660fa15",
+    "infra-python-audit.json": "e5f88232ac1845a2fe160d93ac506a0ea8e6863389f2b710871525a4b93c0f09",
+    "infra-python.cdx.json": "900c0daf9992cace4d506bd8503829e0d2d86983f4b1a95d08622eb24cb2e543",
+    "python-env.cdx.json": "5e2e5b4d388c238df9fd298852437564245f6a92db7ef9b65de9a396081df1b3"
+  },
+  "artifact_hash_encoding": "SHA-256 over UTF-8 bytes with CRLF normalized to LF, matching committed Git blobs"
 }
