@@ -46,6 +46,13 @@ def save(path, value):
     path.write_text(json.dumps(value, indent=2) + "\n", encoding="utf-8")
 
 
+def contract_checks():
+    # JSON vectors contain non-ASCII test plaintext. Never use the Windows ANSI
+    # default codec; ciphertext/AAD and the shared vector file remain unchanged.
+    document = json.loads((ROOT / "docs/contracts/test_vectors.json").read_bytes().decode("utf-8"))
+    return {"vector:" + key: value for key, value in verify_document(document).items()}
+
+
 def call(command, *, env, timeout=300):
     result = subprocess.run(command, cwd=ROOT, env=env, capture_output=True, timeout=timeout)
     if result.returncode:
@@ -339,7 +346,7 @@ def run(args):
             report["stages"][stage] = {"status": "PASS", "accounts": len(accounts)}
             stage = "security_verification"
             checks = database_checks(stack, passwords)
-            checks.update({"vector:" + key: value for key, value in verify_document(json.loads((ROOT / "docs/contracts/test_vectors.json").read_text())).items()})
+            checks.update(contract_checks())
             checks.update(verify_services(stack, passwords, tokens, profile_path, accounts, output))
             with stack.connection("postgres", "scanner_user", passwords["scanner_user"], row_factory=dict_row) as source:
                 checks["source_734_unchanged"] = source_summary(source, profile)["sha256"] == migrated["source_sha256"]

@@ -187,3 +187,8 @@ def test_current_scanner_recommendations_keep_contract_override(recommendation, 
     assert finding["recommendation"] == recommendation
     assert finding["candidate_aead"] is False and finding["candidate_bidx"] is False
     assert finding["minimization_candidate"] == minimize
+
+
+def test_contract_vectors_are_utf8_independent_of_windows_default_codec():
+    checks = workflow.contract_checks()
+    assert len(checks) == 8 and all(checks.values())
