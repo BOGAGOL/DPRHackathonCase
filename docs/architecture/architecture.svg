@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900" role="img" aria-labelledby="title desc">
-<title id="title">Arsitektur prototipe pelindungan data BOGAGOL</title>
+<title id="title">Arsitektur sistem pelindungan data pribadi</title>
 <desc id="desc">Browser melalui HTTPS ke Next.js dan FastAPI. Backend memakai dprcrypto, PostgreSQL 18 melalui TLS, dan OpenBao Transit. Backup memakai enkripsi streaming; sumber baseline lab dan material recovery mempunyai batas terpisah.</desc>
 <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10" fill="none" stroke="#47627a" stroke-width="1.6" /></marker>
 </defs>
 <rect width="1400" height="900" fill="#ffffff" />
 <text x="50" y="55" font-family="Arial, Helvetica, sans-serif" fill="#152c43" font-size="30" font-weight="700">Pelindungan data ketika database bocor</text>
-<text x="50" y="85" font-family="Arial, Helvetica, sans-serif" fill="#52697c" font-size="16">Tim BOGAGOL · PostgreSQL 18 + OpenBao 2.5.5 · Arsitektur aktif, bukan klaim seluruh VM telah diaudit</text>
+<text x="50" y="85" font-family="Arial, Helvetica, sans-serif" fill="#52697c" font-size="16">PostgreSQL 18 + OpenBao 2.5.5 · Arsitektur aktif, bukan klaim seluruh VM telah diaudit</text>
 <rect x="370" y="120" width="970" height="210" fill="#f4f8fc" stroke="#c9d6e1" stroke-width="1.5" rx="18" />
 <text x="395" y="153" font-family="Arial, Helvetica, sans-serif" fill="#52697c" font-size="16">APPLICATION PLANE</text>
 <rect x="50" y="175" width="250" height="125" fill="white" stroke="#7596b4" stroke-width="1.6" rx="12" />
