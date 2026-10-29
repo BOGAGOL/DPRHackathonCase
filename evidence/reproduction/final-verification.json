@@ -24,18 +24,18 @@
   },
   "e2e_runs": {
     "20261029T094522Z-44664b0c": {
-      "summary_sha256": "450ba777b4d97e91222f096e695a4647a91122cc14fec95b3b873ecaab14c5b7",
       "passed": true,
       "rows_compared": 734,
       "stages": 6,
-      "browser_checks": 100
+      "browser_checks": 100,
+      "summary_sha256_lf": "450ba777b4d97e91222f096e695a4647a91122cc14fec95b3b873ecaab14c5b7"
     },
     "20261029T094825Z-ecd290d1": {
-      "summary_sha256": "5fef3ac326fc3ec9bbbd7b71812438c9e9cb94c96812d2c4289cc9e218ae4690",
       "passed": true,
       "rows_compared": 734,
       "stages": 6,
-      "browser_checks": 100
+      "browser_checks": 100,
+      "summary_sha256_lf": "5fef3ac326fc3ec9bbbd7b71812438c9e9cb94c96812d2c4289cc9e218ae4690"
     }
   },
   "regression": {
